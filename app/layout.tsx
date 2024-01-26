@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import Nav from "@components/Navbar";
 
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 
 export const metadata = {
   title: "SIPE",
@@ -12,13 +12,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <div className="main">
-          <div className="gradient" />
-        </div>
-        <main className="app">
-          <Nav />
-          {children}
-        </main>
+        <Suspense>
+          <div className="main">
+            <div className="gradient" />
+          </div>
+          <main className="app">
+            <Nav />
+            {children}
+          </main>
+        </Suspense>
       </body>
     </html>
   );
