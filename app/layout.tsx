@@ -1,9 +1,10 @@
 import "@/styles/globals.css";
 import Nav from "@components/Navbar";
+import { Metadata } from "next";
 
 import { ReactNode, Suspense } from "react";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "SIPE",
   description: "Legal AI assistant. Easing legal processes and counseling through AI",
 };
