@@ -9,8 +9,8 @@ const Home = () => {
         </span>
       </h1>
       <p className="desc text-center">
-        Counseling for the average person. High focus on the individual&apos;s rights in insurance
-        cases
+        Counseling for the average person and high focus on the individual&apos;s rights in
+        insurance cases
       </p>
     </section>
   );
