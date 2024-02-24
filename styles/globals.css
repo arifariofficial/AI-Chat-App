@@ -4,10 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
-  Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
-*/
-
 .main {
   width: 100vw;
   min-height: 100vh;
@@ -163,4 +159,55 @@
 
 .flex-between {
   @apply flex justify-between items-center;
+}
+
+.question {
+  margin-top: 50px;
+  padding: 10px;
+  width: 80%;
+  max-width: 600px;
+  height: auto;
+  box-shadow: 0 0 2px teal;
+}
+
+.question > section:nth-child(1) {
+  display: flex;
+  justify-content: space-between;
+}
+
+.question > section > h2 {
+  font-size: large;
+  font-weight: 700;
+}
+
+.question button {
+  border: 1px solid gray;
+  margin: 5px 10px;
+  width: 60px;
+  font-size: small;
+  border-radius: 5px;
+}
+
+.question button:hover {
+  background-color: aliceblue;
+  box-shadow: 0.5px 0px 2px teal;
+}
+
+.question button:active {
+  background-color: lightblue;
+  opacity: 0.9;
+}
+
+.question button:disabled {
+  background-color: inherit;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.question > button {
+  justify-self: end;
+}
+
+.selected {
+  background-color: lightblue;
 }
