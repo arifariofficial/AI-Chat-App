@@ -78,7 +78,7 @@
 }
 
 .head_text {
-  @apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl;
+  @apply mt-0 text-4xl font-extrabold leading-[1.15] text-black sm:text-6xl sm:mt-5;
 }
 
 .orange_gradient {
@@ -179,6 +179,9 @@
   font-size: large;
   font-weight: 700;
 }
+.question > section > button {
+  height: 20px;
+}
 
 .question button {
   border: 1px solid gray;
@@ -202,10 +205,6 @@
   background-color: inherit;
   cursor: not-allowed;
   box-shadow: none;
-}
-
-.question > button {
-  justify-self: end;
 }
 
 .selected {
