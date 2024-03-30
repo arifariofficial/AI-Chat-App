@@ -15,3 +15,7 @@
 body {
   background: #f9fafc;
 }
+
+button {
+  @apply h-[50px] w-[200px] rounded-md border border-transparent bg-gray-600 font-medium text-white hover:bg-gray-500 active:bg-gray-400;
+}
