@@ -162,18 +162,14 @@ const Questionary: React.FC = () => {
   return (
     <>
       {!finalAnswer && (
-        <div className="relative left-32 grid h-[100px] w-[800px]">
-          <h1 className="h-[50px]  text-3xl font-semibold text-slate-800">
+        <div className="md:left-18 relative m-10 grid">
+          <h1 className="text-2xl font-semibold text-slate-800">
             {!finalAnswer && currentQuestion?.question}
           </h1>
-          <div className="flex gap-3">
+          <div className="mt-5 flex flex-col items-center justify-center gap-3 md:flex-row">
             {currentQuestion?.answers &&
               currentQuestion?.answers.map((answer) => (
-                <button
-                  className=""
-                  key={answer.text}
-                  onClick={() => handleAnswer(answer)}
-                >
+                <button key={answer.text} onClick={() => handleAnswer(answer)}>
                   {answer.text}
                 </button>
               ))}
@@ -181,7 +177,7 @@ const Questionary: React.FC = () => {
         </div>
       )}
       {finalAnswer && (
-        <div className="flex w-[600px] place-content-center text-xl font-semibold">
+        <div className="mx-10 flex max-w-[500px] place-content-center text-xl font-semibold">
           {currentQuestion?.statement}
         </div>
       )}
