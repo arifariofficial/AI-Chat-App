@@ -1,7 +1,7 @@
-import Nav from "@app/ui/Navbar";
+import Nav from "@components/Navbar";
 import Head from "next/head";
 import { Metadata } from "next";
-import "./ui/globals.css";
+import "@./styles/globals.css";
 
 import { ReactNode, Suspense } from "react";
 

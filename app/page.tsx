@@ -2,12 +2,12 @@ import Link from "next/link";
 
 const Home = () => {
   return (
-    <main className="grid h-screen place-content-center gap-3">
+    <main>
       <Link href="/query">
         <button>Quick query</button>
       </Link>
-      <Link href="/agent">
-        <button>Agent</button>
+      <Link href="/chat">
+        <button>Chat</button>
       </Link>
     </main>
   );
