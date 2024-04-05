@@ -6,8 +6,8 @@ const Home = () => {
       <Link href="/query">
         <button>Quick query</button>
       </Link>
-      <Link href="/agent">
-        <button>Agent</button>
+      <Link href="/chat">
+        <button>Chat</button>
       </Link>
     </main>
   );
