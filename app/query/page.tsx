@@ -1,8 +1,8 @@
-import Questionary from "@app/components/Questionary";
+import Questionary from "@components/Questionary";
 
 export default function QuestionaryComponent() {
   return (
-    <div className="h-screen grid place-content-center">
+    <div className="grid h-screen place-content-center">
       <Questionary />
     </div>
   );

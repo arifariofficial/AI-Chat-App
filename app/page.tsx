@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Home = () => {
   return (
-    <main className="grid h-screen place-content-center gap-3">
+    <main>
       <Link href="/query">
         <button>Quick query</button>
       </Link>
