@@ -4,6 +4,8 @@ import { Metadata } from "next";
 import "@./styles/globals.css";
 
 import { ReactNode, Suspense } from "react";
+import SessionProvider from "@./components/SessionProvider";
+import { getServerSession } from "next-auth";
 
 export const metadata: Metadata = {
   title: "SIPE",
@@ -11,7 +13,13 @@ export const metadata: Metadata = {
   icons: "/favicon.ico",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const session = await getServerSession();
+
   return (
     <html lang="en">
       <Head>
@@ -39,8 +47,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta name="theme-color" content="#ffffff" />
       </Head>
       <body>
-        <Nav />
-        {children}
+        <SessionProvider session={session}>
+          <Nav />
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );

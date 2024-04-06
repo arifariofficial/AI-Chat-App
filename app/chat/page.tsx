@@ -2,7 +2,10 @@
 
 import ChatDisplay from "@components/ChatDisplay";
 import ChatInput from "@components/ChatInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
 
 interface Message {
   author: string;

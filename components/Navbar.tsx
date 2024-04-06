@@ -1,5 +1,47 @@
+"use client";
+
 import Link from "next/link";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useState } from "react";
+import Image from "next/image";
+
+function AuthButton() {
+  const { data: session } = useSession();
+  const [toggleDropdown, setToggleDropdown] = useState(false);
+
+  if (session) {
+    return (
+      <>
+        <Image
+          src={session.user?.image || ""}
+          alt="profile pic"
+          width={25}
+          height={25}
+          className="rounded-full"
+        />
+        <button
+          onClick={() => signOut()}
+          className=" text-top m-0 flex h-[20px] w-[70px] items-center  justify-center  bg-inherit text-xs"
+        >
+          Sign out
+        </button>
+      </>
+    );
+  }
+  return (
+    <>
+      <AccountCircleIcon />
+      <button
+        onClick={() => signIn()}
+        className=" text-top m-0 flex h-[20px] w-[70px] items-center  justify-center  bg-inherit text-base"
+      >
+        Sign in
+      </button>
+    </>
+  );
+}
 
 const Nav = () => {
   return (
@@ -15,10 +57,10 @@ const Nav = () => {
             </h1>
           </Link>
         </section>
-        <section className="flex items-center text-xl font-semibold text-[#F5EFD1] hover:opacity-90">
-          <Link href={`/signup`} className="px-3">
-            Sign up
-          </Link>
+        <section className="mr-3 flex items-center text-xl font-semibold text-[#F5EFD1] hover:opacity-90">
+          <div className="mr-4 flex flex-col items-center">
+            <AuthButton />
+          </div>
         </section>
       </nav>
     </div>
