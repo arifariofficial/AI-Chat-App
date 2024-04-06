@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
+import { signIn, useSession } from "next-auth/react";
 
 interface Message {
   author: string;
@@ -13,7 +14,16 @@ interface Message {
 }
 
 export default function Page() {
+  const { data: session, status } = useSession();
   const [messages, setMessages] = useState<Message[]>([]);
+  const loading = status === "loading";
+
+  useEffect(() => {
+    if (!loading && !session) {
+      alert("You need to sign in to access this page.");
+      signIn();
+    }
+  }, [session, loading]);
 
   const handleSendMessage = (newMessage: Message) => {
     setMessages([...messages, newMessage]);

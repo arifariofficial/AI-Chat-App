@@ -14,13 +14,17 @@ function AuthButton() {
   if (session) {
     return (
       <>
-        <Image
-          src={session.user?.image || ""}
-          alt="profile pic"
-          width={25}
-          height={25}
-          className="rounded-full"
-        />
+        {session.user?.image ? (
+          <Image
+            src={session.user.image}
+            alt="profile"
+            width={30}
+            height={30}
+            className="rounded-full"
+          />
+        ) : (
+          <AccountCircleIcon fontSize="large" />
+        )}
         <button
           onClick={() => signOut()}
           className=" text-top m-0 flex h-[20px] w-[70px] items-center  justify-center  bg-inherit text-xs"
@@ -35,7 +39,7 @@ function AuthButton() {
       <AccountCircleIcon />
       <button
         onClick={() => signIn()}
-        className=" text-top m-0 flex h-[20px] w-[70px] items-center  justify-center  bg-inherit text-base"
+        className=" text-top m-0 flex h-[20px] w-[70px] items-center  justify-center  bg-inherit text-xs "
       >
         Sign in
       </button>
