@@ -3,10 +3,9 @@
 import ChatDisplay from "@components/ChatDisplay";
 import ChatInput from "@components/ChatInput";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
-import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
-import { signIn, useSession } from "next-auth/react";
 
 interface Message {
   author: string;
@@ -16,23 +15,25 @@ interface Message {
 export default function Page() {
   const { data: session, status } = useSession();
   const [messages, setMessages] = useState<Message[]>([]);
-  const loading = status === "loading";
+
+
+  const router = useRouter();
 
   useEffect(() => {
-    if (!loading && !session) {
+    if (!session) {
       alert("You need to sign in to access this page.");
-      signIn();
+      router.push("/api/auth/signin");
     }
-  }, [session, loading]);
+  }, [session, router]);
 
   const handleSendMessage = (newMessage: Message) => {
-    setMessages([...messages, newMessage]);
+    setMessages(prevMessages => [...prevMessages, newMessage]);
   };
 
   return (
-    <main className="grid h-screen place-content-center">
-      <div className=" h-[500px] w-[800px]">
-        <ChatDisplay messages={messages} />
+    <main className=" container mx-auto flex  max-w-[500px] sm:max-w-[700px] md:max-w-[1000px] items-center justify-center p-4  ">
+      <div className="flex w-full flex-col drop-shadow-lg  rounded-3xl border ">
+        <ChatDisplay  messages={messages} />
         <ChatInput onSendMessage={handleSendMessage} />
       </div>
     </main>

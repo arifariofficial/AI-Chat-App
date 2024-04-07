@@ -10,19 +10,33 @@ type Data = {
 
 export async function POST(req: Request) {
   const data = await req.json();
-  const { id, email, password } = data;
+  const { email, password } = data;
 
   const saltRounds = 10;
 
   try {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    const user = await prisma.user.create({
+
+    const user = await prisma.user.findUnique({
+      where: { email: email },
+    });
+
+    if (user) {
+      return NextResponse.json({
+        message: "User already exists",
+      });
+    }
+
+    const newUser = await prisma.user.create({
       data: {
         email: email,
         password: hashedPassword,
       },
     });
-    return NextResponse.json({ message: "User created successfully" });
+    return NextResponse.json({
+      user: newUser,
+      message: "User created successfully",
+    });
   } catch (error) {
     if (error instanceof Error) {
       console.error("Error saving user:", error);

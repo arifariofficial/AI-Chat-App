@@ -25,15 +25,27 @@ const SignUpPage = () => {
       if (response.ok) {
         const result = await response.json();
         alert(result.message);
-        signIn("credentials", {
+
+        const signInResponse = await signIn("credentials", {
+          redirect: false,
           email,
           password,
           callbackUrl: "/",
         });
+
+        if (signInResponse?.error) {
+          console.error(signInResponse.error);
+        } else {
+          router.push(signInResponse?.url || "/");
+        }
       } else {
         const errorResult = await response.json();
+
+        console.error(errorResult.error);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -75,12 +87,12 @@ const SignUpPage = () => {
             Retype password:
           </label>
           <input
-            id="password"
+            id="passwordRetype"
             type="password"
-            name="password"
+            name="passwordRetype"
             className="mt-1 block w-[300px] rounded-md border border-gray-300 bg-gray-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={passwordRetype}
+            onChange={(e) => setPasswordRetype(e.target.value)}
             required
           />
         </div>
