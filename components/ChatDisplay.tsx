@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 interface Message {
@@ -24,13 +25,16 @@ const ChatDisplay: React.FC<{ messages: Message[]; }> = ({ messages }) => {
       {messages.map((message, index) => (
         <div key={index} className={`flex ${message.author === "SIPE" ? "justify-end" : "justify-start"} items-end space-x-2`}>
           <div className="flex flex-col">{message.author !== "SIPE" && (
+          session?.user?.image ? (
             <Image
               src={session?.user?.image || "/profile-placeholder.png"}
               alt="profile"
               width={30}
               height={30}
               className="rounded-full"
-            />
+            /> ): (
+              <AccountCircleIcon fontSize="large"  className="bg-[#2d4242] text-[#F5EFD1] rounded-full m-auto p-1 "/>
+            )
             
           )}
           </div>
