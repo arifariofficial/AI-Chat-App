@@ -7,10 +7,10 @@ const Home = () => {
     <Suspense fallback={<MainPageSkeleton />}>
       <main>
         <Link href="/query">
-          <button>Quick query</button>
+          <button className="btn-primary">Quick query</button>
         </Link>
         <Link href="/chat">
-          <button>Chat</button>
+          <button className="btn-primary">Chat</button>
         </Link>
       </main>
     </Suspense>
