@@ -49,7 +49,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className="flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
         className="mx-auto mt-8 flex w-full max-w-md flex-col items-center space-y-4 rounded-lg border border-gray-200 bg-white p-12 shadow-lg"
@@ -99,7 +99,7 @@ const SignUpPage = () => {
         <input
           type="submit"
           value="Sign up"
-          className="h-[50px] w-[200px] rounded-md border border-transparent bg-gray-600 font-semibold text-[#F5EFD1]  hover:bg-gray-500 active:bg-gray-400"
+          className="btn-primary"
         />
       </form>
     </div>

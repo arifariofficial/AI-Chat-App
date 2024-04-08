@@ -36,10 +36,12 @@ const SigninPage = () => {
   };
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center">
+    <div className="flex flex-col my-6 sm:my-16 items-center justify-center">
+
+      {/* Sign in form container */}
       <form
         onSubmit={handleCredentialsSubmit}
-        className="mx-auto mt-8 flex w-[300px] max-w-md flex-col items-center space-y-4 rounded-lg border border-gray-200 bg-white p-12 shadow-lg md:w-full"
+        className="mx-auto  p-4 flex w-[300px] max-w-md flex-col items-center space-y-4 rounded-lg border  bg-white md:p-12 shadow-lg md:w-full border-color-primary"
       >
         <div className="flex flex-col space-y-2">
           <label htmlFor="email" className="text-lg font-semibold">
@@ -72,14 +74,14 @@ const SigninPage = () => {
         <input
           type="submit"
           value="Sign in"
-          className="h-[50px] w-[200px] rounded-md border border-transparent bg-gray-600 font-semibold text-[#F5EFD1] hover:bg-gray-500  active:bg-gray-400 md:w-[300px]"
+          className="btn-primary"
         />
         <div className="text-center">
-          <p className="text-md text-gray-600">
+          <p className=" font-semibold text-gray-700">
             Don&apos;t have an account?
             <Link
               href="/signup"
-              className="pl-1 font-medium text-blue-600 hover:text-blue-500"
+              className="pl-1 font-bold text-blue-600 hover:text-blue-500 hover:drop-shadow-lg"
             >
               Sign up
             </Link>
@@ -88,11 +90,11 @@ const SigninPage = () => {
       </form>
 
       {/* Google and Facebook button */}
-      <div className="mx-auto mt-8 flex w-[300px] max-w-md flex-col items-center space-y-4 rounded-lg border border-gray-200 bg-white p-12 shadow-2xl md:w-full ">
+      <div className="mx-auto mt-8 flex w-[300px] max-w-md flex-col items-center space-y-4 rounded-lg border  bg-white p-12 shadow-2xl md:w-full border-color-primary">
         <button
           type="button"
           onClick={() => handleOAuthSignIn("google")}
-          className="flex items-center justify-center rounded-md md:h-[50px] md:w-[300px] "
+          className="btn-primary"
         >
           <GoogleIcon />
           <p className="ml-3">Sign in with Google</p>
@@ -100,7 +102,7 @@ const SigninPage = () => {
         <button
           type="button"
           onClick={() => handleOAuthSignIn("facebook")}
-          className="flex items-center justify-center rounded-md md:h-[50px] md:w-[300px] "
+          className="btn-primary"
         >
           <FacebookIcon />
           <p className="ml-3">Sign in with Facebook</p>
