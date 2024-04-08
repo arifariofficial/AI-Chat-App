@@ -1,8 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-<<<<<<< HEAD
+  url      = env("POSTGRES_URL")
 }
 
 generator client {
@@ -41,15 +39,8 @@ model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
-  emailVerified DateTime?
-=======
-}
-
-model User {
-  id            String       @default(cuid()) @id
-  email         String    @unique
->>>>>>> main
   password      String
+  emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
