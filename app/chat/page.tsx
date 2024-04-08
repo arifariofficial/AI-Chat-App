@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-
 interface Message {
   author: string;
   text: string;
@@ -15,7 +14,6 @@ interface Message {
 export default function Page() {
   const { data: session, status } = useSession();
   const [messages, setMessages] = useState<Message[]>([]);
-
 
   const router = useRouter();
 
@@ -27,13 +25,13 @@ export default function Page() {
   }, [session, router]);
 
   const handleSendMessage = (newMessage: Message) => {
-    setMessages(prevMessages => [...prevMessages, newMessage]);
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
   };
 
   return (
-    <main className=" container mx-auto flex  max-w-[500px] sm:max-w-[700px] md:max-w-[1000px] items-center justify-center p-4  ">
-      <div className="flex w-full flex-col drop-shadow-lg  rounded-3xl border ">
-        <ChatDisplay  messages={messages} />
+    <main className=" w-responsive container mx-auto  flex max-w-[500px] items-center justify-center p-4 sm:max-w-[700px] md:max-w-[1000px] ">
+      <div className="flex w-full flex-col rounded-3xl  border drop-shadow-lg ">
+        <ChatDisplay messages={messages} />
         <ChatInput onSendMessage={handleSendMessage} />
       </div>
     </main>
