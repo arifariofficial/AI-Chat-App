@@ -40,7 +40,7 @@ const questions: Question[] = [
         </h4>
         <div className="grid place-content-center pt-8">
           <Link href="/">
-            <button>Home</button>
+            <button className="btn-primary">Home</button>
           </Link>
         </div>
       </div>
@@ -62,7 +62,7 @@ const questions: Question[] = [
         </h4>
         <div className="grid place-content-center pt-8">
           <Link href="/">
-            <button>Home</button>
+            <button className="btn-primary">Home</button>
           </Link>
         </div>
       </div>
@@ -72,18 +72,18 @@ const questions: Question[] = [
     id: 4,
     question: "",
     statement: (
-      <div>
+      <>
         <h4>
           You should contact the customer service of Kela, municipal social
           services and your insurance company for more detailed instructions and
           to start the claim process.
         </h4>
-        <div className="grid place-content-center pt-8">
+        <div>
           <Link href="/">
-            <button>Home</button>
+            <button className="btn-primary">Home</button>
           </Link>
         </div>
-      </div>
+      </>
     ),
   },
   {
@@ -91,11 +91,11 @@ const questions: Question[] = [
     question: "",
     statement: (
       <div className="">
-        <h4 className="">
+        <h4 className="pb-4 text-left">
           The insurance of the vehicle may cover all costs caused by the
           accident, including:
         </h4>
-        <ol className="ml-5 list-decimal text-left text-base">
+        <ol className="ml-5 flex list-decimal flex-col gap-2 text-left text-base">
           <li>
             Treatment costs: Reimbures the costs of treatment required in a
             traffic accident.
@@ -120,7 +120,7 @@ const questions: Question[] = [
         </ol>
         <div className="grid place-content-center pt-8">
           <Link href="/">
-            <button>Home</button>
+            <button className="btn-primary">Home</button>
           </Link>
         </div>
       </div>
@@ -166,10 +166,14 @@ const Questionary: React.FC = () => {
           <h1 className="text-2xl font-semibold text-slate-800">
             {!finalAnswer && currentQuestion?.question}
           </h1>
-          <div className="mt-5 flex flex-col items-center justify-center gap-3 md:flex-row">
+          <div className="mt-5 flex flex-col items-center justify-center gap-3 ">
             {currentQuestion?.answers &&
               currentQuestion?.answers.map((answer) => (
-                <button key={answer.text} onClick={() => handleAnswer(answer)}>
+                <button
+                  className="btn-primary"
+                  key={answer.text}
+                  onClick={() => handleAnswer(answer)}
+                >
                   {answer.text}
                 </button>
               ))}
@@ -177,7 +181,7 @@ const Questionary: React.FC = () => {
         </div>
       )}
       {finalAnswer && (
-        <div className="mx-10 flex max-w-[500px] place-content-center text-xl font-semibold">
+        <div className="w-responsive mx-auto flex max-w-[500px] flex-col items-center justify-center gap-4 text-center text-xl font-semibold ">
           {currentQuestion?.statement}
         </div>
       )}

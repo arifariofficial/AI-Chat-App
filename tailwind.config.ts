@@ -15,7 +15,7 @@ module.exports = {
         "primary-orange": "#FF5722",
       },
       width: {
-        responsive: "calc(100% - 2rem)", // This will create a width that is 100% of the parent minus 2rem
+        responsive: "calc(100% - 3rem)",
       },
     },
   },

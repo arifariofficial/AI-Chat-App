@@ -52,7 +52,7 @@ const SignUpPage = () => {
     <div className="flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="mx-auto mt-8 flex w-full max-w-md flex-col items-center space-y-4 rounded-lg border border-gray-200 bg-white p-12 shadow-lg"
+        className="w-responsive mx-auto mt-16 flex max-w-md flex-col items-center space-y-4 rounded-lg border border-gray-200 bg-white py-10 shadow-lg "
       >
         <div className="flex flex-col space-y-2">
           <label htmlFor="email" className="text-lg font-semibold">
@@ -62,7 +62,7 @@ const SignUpPage = () => {
             id="email"
             type="email"
             name="email"
-            className="mt-1 block w-[300px] rounded-md border border-gray-300 bg-gray-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+            className="mt-1 block rounded-md border border-gray-300 bg-gray-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -76,7 +76,7 @@ const SignUpPage = () => {
             id="password"
             type="password"
             name="password"
-            className="mt-1 block w-[300px] rounded-md border border-gray-300 bg-gray-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+            className="mt-1 block rounded-md border border-gray-300 bg-gray-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -90,17 +90,13 @@ const SignUpPage = () => {
             id="passwordRetype"
             type="password"
             name="passwordRetype"
-            className="mt-1 block w-[300px] rounded-md border border-gray-300 bg-gray-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+            className="mt-1 block rounded-md border border-gray-300 bg-gray-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 "
             value={passwordRetype}
             onChange={(e) => setPasswordRetype(e.target.value)}
             required
           />
         </div>
-        <input
-          type="submit"
-          value="Sign up"
-          className="btn-primary"
-        />
+        <input type="submit" value="Sign up" className="btn-primary" />
       </form>
     </div>
   );
