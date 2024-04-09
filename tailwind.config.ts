@@ -5,6 +5,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+
   theme: {
     extend: {
       fontFamily: {
@@ -15,9 +16,10 @@ module.exports = {
         "primary-orange": "#FF5722",
       },
       width: {
-        responsive: "calc(100% - 3rem)",
+        responsive: "calc(100% - 2rem)",
       },
     },
   },
+
   plugins: [],
 };

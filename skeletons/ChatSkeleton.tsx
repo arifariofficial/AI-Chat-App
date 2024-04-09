@@ -1,15 +1,116 @@
-const ChatSkeleton = () => (
-  <div className="flex w-full max-w-md flex-col p-4">
-    <div className="flex-1 animate-pulse space-y-4 rounded-t-lg bg-gray-100 p-6">
-      <div className="h-12 rounded-md bg-gray-300"></div>
-      <div className="h-12 rounded-md bg-gray-300"></div>
-      <div className="h-12 rounded-md bg-gray-300"></div>
-    </div>
-    <div className="flex w-full rounded-b-lg bg-white p-4">
-      <div className="flex-1 rounded-l-lg border-2 border-gray-300 bg-gray-200 p-2"></div>
-      <div className="h-10 w-24 rounded-r-lg bg-gray-300"></div>
-    </div>
-  </div>
-);
+"use client";
+import React from "react";
+import styled, { keyframes } from "styled-components";
 
-export default ChatSkeleton;
+const pulse = keyframes`
+  0%, 100% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const Container = styled.div`
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+`;
+
+const Messages = styled.div`
+  flex-grow: 1;
+  overflow-y: hidden;
+`;
+
+const Message = styled.div`
+  margin-bottom: 1rem;
+  animation: ${pulse} 2s infinite;
+  border-radius: 0.25rem;
+  background-color: #d4d4d4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 3rem;
+  border-radius: 1rem 1rem 0 0;
+`;
+const InnerMessage = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+  animation: ${pulse} 1s infinite;
+  border-radius: 0.25rem;
+  background-color: #c4c4c4;
+  width: 50%;
+  color: #999;
+  text-align: left;
+  padding: 1rem;
+  margin-left: 20px;
+  flex-grow: 1;
+  font-size: 0.75rem;
+`;
+const Input = styled.div`
+  padding: 1rem;
+  animation: ${pulse} 2s infinite;
+  border-radius: 0.25rem;
+  background-color: #d4d4d4;
+  margin-top: -15px;
+  color: #999;
+  border-radius: 0 0 1rem 1rem;
+`;
+
+const ChatPageSkeleton = () => {
+  return (
+    <Container className="w-responsive rounded-3xl">
+      <Messages className=" drop-shadow-xl">
+        <Message>
+          <InnerMessage style={{ width: "30%" }}>Hey there</InnerMessage>
+          <InnerMessage style={{ alignSelf: "end", marginRight: "20px" }}>
+            Hello! How can i help?
+          </InnerMessage>
+          <InnerMessage style={{ marginLeft: "20px", width: "50%" }}>
+            what were the top shows in houston in june
+          </InnerMessage>
+          <InnerMessage style={{ alignSelf: "end", marginRight: "20px" }}>
+            The top 5 events in the month of June in the city of Houston were 1,
+            Allman Brothers Band; 2, Girl Talk; 3, Goo Goo Dolls; 4, Commodores;
+            and 5, Dropkick Murphys.{" "}
+          </InnerMessage>
+          <InnerMessage>
+            compare sales for allman brothers band and goo goo dolls
+          </InnerMessage>
+          <InnerMessage style={{ alignSelf: "end", marginRight: "20px" }}>
+            In the month of June, in the city of Houston, sales for Allman
+            Brothers Band were 35% higher than for Goo Goo Dolls; $35,996 as
+            opposed to $26,590.
+          </InnerMessage>
+        </Message>
+        <Input className="padding-10 flex justify-between shadow-md drop-shadow-sm">
+          <div
+            className="flex items-center rounded-md border text-left "
+            style={{ width: "65%", paddingLeft: "20px" }}
+          >
+            Type a message...
+          </div>
+          <button
+            className="btn-primary p-5"
+            style={{ opacity: 0.2, width: "30%" }}
+          >
+            Send
+          </button>
+        </Input>
+      </Messages>
+    </Container>
+  );
+};
+
+export default ChatPageSkeleton;
