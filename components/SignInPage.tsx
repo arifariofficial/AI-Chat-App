@@ -11,7 +11,6 @@ import {
   Box,
   Button,
   Checkbox,
-  Container,
   CssBaseline,
   FormControlLabel,
   Grid,
@@ -22,6 +21,7 @@ import {
 } from "@mui/material";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import theme from "@providers/theme";
+import { useEffect, useState } from "react";
 
 interface SignInFormValues {
   email: string;
@@ -41,7 +41,6 @@ const SigninPage = () => {
     });
 
     if (result?.error) {
-      // Handle the error
       console.log(result.error);
     } else {
       router.push("/");
@@ -57,135 +56,125 @@ const SigninPage = () => {
       email: "",
       password: "",
     },
+
     validationSchema: Yup.object({
       email: Yup.string().email("Invalid email address").required("Required"),
       password: Yup.string().required("Required"),
     }),
-    onSubmit: (values: SignInFormValues, actions: FormikHelpers<SignInFormValues>) => {
-      /* handleCredentialsSubmit(values); */
+
+    onSubmit: (
+      values: SignInFormValues,
+      actions: FormikHelpers<SignInFormValues>,
+    ) => {
+      handleCredentialsSubmit(values);
       actions.setSubmitting(false);
     },
   });
 
   return (
-    <ThemeProvider theme={theme}>
-
-     
-          <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <Box
+    <div className="flex flex-col items-center justify-center mt-8 drop-shadow-xl h-screen">
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="mx-auto flex w-[300px] max-w-md flex-col items-center rounded-md  border border-gray-400 bg-white px-12 py-4 shadow-md drop-shadow-sm boarder md:w-full">
+          <Avatar sx={{ mb: 1, bgcolor: "secondary.main" }}>
+            <LockPersonIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={formik.handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              type="email"
+              id="email"
+              name="email"
+              label="Email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              autoComplete="email"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
               sx={{
-                marginTop: 0,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
+                mt: 1,
+                mb: 2,
+                height: "50px",
               }}
             >
-              <Avatar sx={{ mb: 1, bgcolor: "secondary.main" }}>
-                <LockPersonIcon />
-              </Avatar>
-              <Typography component="h1" variant="h5">
-                Sign in
-              </Typography>
-              <Box
-                component="form"
-                onSubmit={formik.handleSubmit}
-                sx={{ padding: 3, paddingTop: 0 }}
-              >
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  type="email"
-                  id="email"
-                  name="email"
-                  label="Email"
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                  autoComplete="current-email"
-                  autoFocus
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  value={formik.values.password}
-                  onChange={formik.handleChange}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{
-                    mt: 1,
-                    mb: 2,
-                    height: "50px",
-                    width: "100%",
-                  }}
-                >
-                  Sign in
-                </Button>
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Forgot password?
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link href="#" variant="body2">
-                      {"Don't have an account? Sign Up"}
-                    </Link>
-                  </Grid>
-                </Grid>
-              </Box>
-            </Box>
-      
-  
+              Sign in
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/signup" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </div>
 
-            <Box display="flex" alignItems="center" width="100%" margin="1em 0">
-  <Box flexGrow={1} borderBottom={1} borderColor="divider" />
-  <Typography variant="body1" margin="1px">
-    OR
-  </Typography>
-  <Box flexGrow={1} borderBottom={1} borderColor="divider" />
-</Box>
-          <Box>
-
+        <div className="mx-auto mt-8 flex w-[300px] max-w-md flex-col items-center border-gray-400 rounded-lg gap-4 border bg-white p-12 shadow-xl md:w-full">
           <Button
+            fullWidth
             type="button"
-            sx={{ height: "50px", width: "100%" }}
+            sx={{ height: "50px" }}
             onClick={() => handleOAuthSignIn("google")}
-            >
+          >
             <GoogleIcon />
-            <p className="ml-3">SIGN IN WITH GOOGLE</p>
+            <p className="ml-5">SIGN IN WITH GOOGLE</p>
           </Button>
           <Button
             type="button"
-            sx={{ height: "50px", width: "100%" }}
+            fullWidth
+            sx={{ height: "50px" }}
             onClick={() => handleOAuthSignIn("facebook")}
             variant="contained"
-            >
+          >
             <FacebookIcon />
-            <p className="ml-3">SIGN IN WITH FACEBOOK</p>
+            <p className="ml-3"> SIGN IN WITH FACEBOOK</p>
           </Button>
-          </Box>
-          </Container>
-    </ThemeProvider>
+        </div>
+      </ThemeProvider>
+    </div>
   );
 };
 
