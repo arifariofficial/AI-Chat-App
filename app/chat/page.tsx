@@ -23,7 +23,7 @@ export default function Page() {
     if (!session) {
       setTimeout(() => {
         setShowModal(true);
-      }, 800);
+      }, 400);
     }
   }, [session, router]);
 
@@ -38,10 +38,10 @@ export default function Page() {
 
   if (!session) {
     return (
-      <main className=" mx-auto flex h-[70vh]  w-responsive max-w-[500px] items-center justify-center  p-4 sm:max-w-[700px] md:max-w-[1000px]  ">
+      <main className=" mx-auto flex max-w-screen-md h-[40vh] md:h-[90vh] w-responsive items-center justify-center">
         <ChatSkeleton />
         {showModal && (
-          <div className=" left-50 absolute flex  h-[100vh]  w-full items-center justify-center font-semibold ">
+          <div className=" left-50 absolute flex bottom-60 md:mt-auto w-full items-center justify-center font-semibold ">
             <div className="border-bg-[#2e4342] flex  w-[50%] max-w-[400px] flex-col items-center justify-center rounded-xl border border-gray-300 bg-[#ecfeff] p-4 text-[#F5EFD1] shadow-2xl">
               <p className="p-3 text-[#2e4342]">Please sign in</p>
               <button
@@ -59,8 +59,8 @@ export default function Page() {
 
   return (
     <>
-      <main className="mx-auto flex w-responsive max-w-[500px] items-center justify-center p-4 sm:max-w-[700px] md:max-w-[1000px]">
-        <div className=" flex w-full flex-col rounded-lg border border-gray-400 bg-[#f5f3e8] drop-shadow-2xl">
+      <main className="mx-auto mt-12  w-full flex max-w-[500px] items-center justify-center p-4 sm:max-w-[700px] md:max-w-[1000px]">
+        <div className=" flex w-full flex-col rounded-lg border border-gray-400  drop-shadow-2xl">
           <ChatDisplay messages={messages} />
           <ChatInput onSendMessage={handleSendMessage} />
         </div>

@@ -25,6 +25,8 @@ const Container = styled.div`
   display: flex;
   width: 90%;
   flex-direction: column;
+  border: 1px solid #d4d4d4;
+  broder-radius: 2rem;
 `;
 
 const Messages = styled.div`
@@ -41,7 +43,6 @@ const Message = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   padding-top: 3rem;
-  border-radius: 1rem 1rem 0 0;
 `;
 const InnerMessage = styled.div`
   display: flex;
@@ -66,13 +67,12 @@ const Input = styled.div`
   background-color: #d4d4d4;
   margin-top: -15px;
   color: #999;
-  border-radius: 0 0 1rem 1rem;
 `;
 
 const ChatPageSkeleton = () => {
   return (
-    <Container className="w-responsive rounded-3xl shadow-2xl">
-      <Messages className=" drop-shadow-xl">
+    <Container className="w-responsive  shadow-2xl rounded-b-xl">
+      <Messages className=" drop-shadow-xl ">
         <Message>
           <InnerMessage style={{ width: "30%" }}>Hey there</InnerMessage>
           <InnerMessage style={{ alignSelf: "end", marginRight: "20px" }}>

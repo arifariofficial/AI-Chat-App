@@ -55,7 +55,7 @@ function AuthButton() {
 const Nav = () => {
   return (
     <div className="sticky top-0 bg-[#2d4242] drop-shadow-xl z-10">
-      <nav className="page-max-width flex justify-between border">
+      <nav className="flex justify-between  max-w-screen-xl mx-auto">
         <section>
           <Link href={`/`}>
             <h1 className="flex p-4 font-satoshi text-2xl font-extrabold tracking-wide text-[#F5EFD1]">

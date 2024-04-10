@@ -12,6 +12,7 @@ const ChatInput: React.FC<{
 
     // Send the user's message to the chat
     onSendMessage({ text: message, author: "user" });
+    setMessage("");
 
     try {
       const response = await axios.post("/api/chat", {
@@ -24,24 +25,26 @@ const ChatInput: React.FC<{
     } catch (error) {
       console.error("Error while sending message:", error);
     }
-
-    setMessage("");
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className=" flex w-full flex-col items-center gap-3 rounded-b-lg  bg-gray-100 p-4 drop-shadow-lg  md:flex-row md:p-8"
+      className=" flex w-full flex-col items-center gap-3 rounded-b-lg  bg-gray-100 p-4 drop-shadow-lg  md:flex-row  "
     >
       <input
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Type a message..."
-        className="w-[250px] flex-1 rounded-lg border border-gray-400 py-3 pl-4 text-left   focus:border-gray-700 focus:outline-none sm:w-[350px] md:w-[300px] md:rounded-l-lg"
+        className="w-full flex-1 rounded-lg border border-gray-400 py-3 pl-4 text-left  focus:border-gray-700 focus:outline-none sm:w-[350px] md:w-[300px] md:rounded-l-lg"
       />
 
-      <button type="submit" className="btn-primary ">
+      <button
+        type="submit"
+        className="btn-primary"
+        style={{ width: "100%", maxWidth: "350px" }}
+      >
         Send
       </button>
     </form>

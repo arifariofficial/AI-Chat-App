@@ -4,15 +4,7 @@
 
 @layer utilities {
   body {
-    @apply antialiased;
-  }
-
-  .page-max-width {
-    @apply container mx-auto min-w-96 max-w-[1440px];
-  }
-
-  .border-color-primary {
-    @apply border-[#2e434278];
+    @apply antialiased min-w-[300px];
   }
 
   .btn-primary {

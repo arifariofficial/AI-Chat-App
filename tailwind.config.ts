@@ -16,7 +16,7 @@ module.exports = {
         "primary-orange": "#FF5722",
       },
       width: {
-        responsive: "calc(100% - 2rem)",
+        responsive: "calc(100% - 3rem)",
       },
     },
   },
