@@ -1,8 +1,9 @@
-import SignInPage from "@components/SignIn";
+import SignInPage from "@components/SignInPage";
+import { Suspense } from "react";
 
 export default function page() {
   return (
-    <div className="page-max-width">
+    <div>
       <SignInPage />
     </div>
   );

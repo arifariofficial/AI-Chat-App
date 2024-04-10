@@ -38,11 +38,11 @@ export default function Page() {
 
   if (!session) {
     return (
-      <main className=" mx-auto flex h-[70vh]  w-responsive max-w-[500px] items-center justify-center  p-4 sm:max-w-[700px] md:max-w-[1000px] ">
+      <main className=" mx-auto flex h-[70vh]  w-responsive max-w-[500px] items-center justify-center  p-4 sm:max-w-[700px] md:max-w-[1000px]  ">
         <ChatSkeleton />
         {showModal && (
-          <div className=" left-50 absolute flex  h-[100vh]  w-full items-center justify-center font-semibold">
-            <div className="border-bg-[#2e4342] flex  w-[50%] max-w-[400px] flex-col items-center justify-center rounded-md border bg-[#ecfeff] p-4 text-[#F5EFD1] shadow-2xl">
+          <div className=" left-50 absolute flex  h-[100vh]  w-full items-center justify-center font-semibold ">
+            <div className="border-bg-[#2e4342] flex  w-[50%] max-w-[400px] flex-col items-center justify-center rounded-xl border border-gray-300 bg-[#ecfeff] p-4 text-[#F5EFD1] shadow-2xl">
               <p className="p-3 text-[#2e4342]">Please sign in</p>
               <button
                 className="m-2 flex  w-[100px] max-w-[200px] cursor-pointer items-center justify-center  rounded-md bg-gray-600 p-2 text-sm shadow-xl hover:bg-gray-700 hover:shadow-2xl active:bg-gray-500 md:w-[300px]"

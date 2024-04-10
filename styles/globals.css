@@ -8,7 +8,7 @@
   }
 
   .page-max-width {
-    @apply container mx-auto min-w-96 max-w-6xl;
+    @apply container mx-auto min-w-96 max-w-[1440px];
   }
 
   .border-color-primary {
@@ -18,8 +18,4 @@
   .btn-primary {
     @apply flex h-[50px]  w-[250px] cursor-pointer items-center  justify-center rounded-md border bg-gray-600 font-bold text-[#F5EFD1] shadow-md hover:bg-gray-700 hover:shadow-2xl active:bg-gray-500 md:w-[300px];
   }
-}
-
-main {
-  @apply grid h-screen place-content-center gap-3;
 }
