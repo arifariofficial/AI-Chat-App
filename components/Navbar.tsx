@@ -4,7 +4,7 @@ import Link from "next/link";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 
 function AuthButton() {

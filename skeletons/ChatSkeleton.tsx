@@ -4,23 +4,24 @@ import styled, { keyframes } from "styled-components";
 
 const pulse = keyframes`
   0%, 100% {
-    opacity: 1;
+    opacity: 0.3;
   }
   25% {
-    opacity: 0.25;
-  }
-  50% {
     opacity: 0.5;
   }
+  50% {
+    opacity: 0.8;
+  }
   75% {
-    opacity: 0.75;
+    opacity: 0.4;
   }
   100% {
-    opacity: 1;
+    opacity: 0.3;
   }
 `;
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   width: 90%;
   flex-direction: column;
@@ -70,7 +71,7 @@ const Input = styled.div`
 
 const ChatPageSkeleton = () => {
   return (
-    <Container className="w-responsive rounded-3xl">
+    <Container className="w-responsive rounded-3xl shadow-2xl">
       <Messages className=" drop-shadow-xl">
         <Message>
           <InnerMessage style={{ width: "30%" }}>Hey there</InnerMessage>
