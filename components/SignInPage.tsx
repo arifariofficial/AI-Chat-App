@@ -100,9 +100,7 @@ const SigninPage = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               autoComplete="email"
-              InputLabelProps={{
-                shrink: true,
-              }}
+              autoFocus
             />
             <TextField
               variant="outlined"
@@ -117,9 +115,6 @@ const SigninPage = () => {
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              InputLabelProps={{
-                shrink: true,
-              }}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
