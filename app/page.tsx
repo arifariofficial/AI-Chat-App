@@ -1,30 +1,40 @@
 'use client'
 import Link from 'next/link'
-import { Button, Container, Grid, ThemeProvider } from '@mui/material'
+import { Box, Button, Container, Grid, ThemeProvider } from '@mui/material'
 import theme from '@providers/theme'
 
 const Home = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Grid
-        container
-        className="flex h-screen flex-col items-center justify-center border"
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="100vh"
       >
-        <Grid item className="border">
-          <Link href="/query" passHref>
-            <Button variant="contained" color="primary" sx={{ width: 300 }}>
-              Quick query
-            </Button>
-          </Link>
+        <Grid
+          container
+          justifyContent={'center'}
+          alignItems={'center'}
+          flexDirection={'column'}
+          spacing={1}
+        >
+          <Grid item xs>
+            <Link href="/query" passHref>
+              <Button variant="contained" color="primary" sx={{ width: 300 }}>
+                Quick query
+              </Button>
+            </Link>
+          </Grid>
+          <Grid item xs>
+            <Link href="/chat" passHref>
+              <Button variant="contained" color="primary" sx={{ width: 300 }}>
+                Chat
+              </Button>
+            </Link>
+          </Grid>
         </Grid>
-        <Grid item className="border">
-          <Link href="/chat" passHref>
-            <Button variant="contained" color="primary" sx={{ width: 300 }}>
-              Chat
-            </Button>
-          </Link>
-        </Grid>
-      </Grid>
+      </Box>
     </ThemeProvider>
   )
 }
