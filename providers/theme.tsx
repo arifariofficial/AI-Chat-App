@@ -10,7 +10,7 @@ let theme = createTheme({
       main: "#4B5568",
     },
     error: {
-      main: "#red",
+      main: "#ff0000",
     },
     background: {
       default: "#fff",
@@ -20,6 +20,7 @@ let theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
+          textTransform: "none",
           backgroundColor: "#4b5563",
           fontWeight: "bold",
           color: "#F5EFD1",

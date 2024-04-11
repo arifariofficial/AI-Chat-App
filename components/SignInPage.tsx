@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   Avatar,
   Box,
@@ -16,12 +16,13 @@ import {
   Typography,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useFormik } from "formik";
+import { FormikHelpers, useFormik } from "formik";
 import * as Yup from "yup";
-import { signIn } from "next-auth/react";
-import GoogleIcon from "@mui/icons-material/Google";
-import FacebookIcon from "@mui/icons-material/Facebook";
+import { SignInResponse, signIn } from "next-auth/react";
 import theme from "@providers/theme";
+import { useRouter } from "next/navigation";
+import FacebookIcon from "@public/images/FacebookIcon";
+import GoogleIcon from "@public/images/GoogleIcon";
 
 interface SignInFormValues {
   email: string;
@@ -34,25 +35,46 @@ const signInSchema = Yup.object({
 });
 
 const SignInPage: React.FC = () => {
+  const router = useRouter();
+
+  const handleCredentialsSubmit = async (values: SignInFormValues) => {
+    const { email, password } = values;
+
+    const result: SignInResponse | undefined = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
+
+    if (result?.error) {
+      console.log(result.error);
+    } else {
+      router.push("/");
+    }
+  };
+
+  const handleOAuthSignIn = async (provider: string) => {
+    await signIn(provider, { callbackUrl: "/" });
+  };
+
   const formik = useFormik<SignInFormValues>({
     initialValues: {
       email: "",
       password: "",
     },
     validationSchema: signInSchema,
-    onSubmit: async (values) => {
-      // Perform sign-in logic here
-      // For example, using NextAuth signIn function
-      await signIn("credentials", {
-        email: values.email,
-        password: values.password,
-      });
-      // Handle success or failure accordingly
+    onSubmit: (
+      values: SignInFormValues,
+      actions: FormikHelpers<SignInFormValues>,
+    ) => {
+      handleCredentialsSubmit(values);
+      actions.setSubmitting(false);
     },
   });
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Container
         component="main"
         maxWidth="xs"
@@ -63,7 +85,6 @@ const SignInPage: React.FC = () => {
           marginTop: 8,
         }}
       >
-        <CssBaseline />
         <Paper
           elevation={3}
           style={{
@@ -73,6 +94,7 @@ const SignInPage: React.FC = () => {
             flexDirection: "column",
             alignItems: "center",
           }}
+          className="rounded-lg border border-teal-400 shadow-md shadow-teal-400"
         >
           <Avatar sx={{ bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
@@ -128,7 +150,6 @@ const SignInPage: React.FC = () => {
                     <Checkbox
                       value="remember"
                       color="primary"
-                      defaultChecked
                       sx={{ "& .MuiSvgIcon-root": { fontSize: 20 } }}
                     />
                   }
@@ -136,7 +157,7 @@ const SignInPage: React.FC = () => {
                 />
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2" underline="none">
+                <Link href="/password-reset" variant="body2" underline="none">
                   Forgot password?
                 </Link>
               </Grid>
@@ -145,35 +166,68 @@ const SignInPage: React.FC = () => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 2, mb: 2 }}
             >
               Sign in
             </Button>
 
-            <Grid container justifyContent="center" style={{ marginTop: 16 }}>
-              <Typography variant="body2">Or continue with</Typography>
+            <Grid container justifyContent="center" sx={{ mb: 2 }}>
+              <Link href="/signup" variant="body2">
+                {"Dont't have an account? Sign Up"}
+              </Link>
+            </Grid>
+
+            <Grid container alignItems="center" sx={{ mb: 2 }}>
+              <Grid item xs>
+                <hr />
+              </Grid>
+              <Grid item>
+                <Typography variant="body2" px={2}>
+                  Or continue with
+                </Typography>
+              </Grid>
+              <Grid item xs>
+                <hr />
+              </Grid>
             </Grid>
             <Grid
               container
               spacing={2}
-              justifyContent="center"
+              justifyContent="space-around"
               style={{ marginBottom: 8 }}
             >
-              <Grid item>
-                <Button variant="outlined" startIcon={<GoogleIcon />}>
+              <Grid item xs={6}>
+                <Button
+                  variant="outlined"
+                  startIcon={<GoogleIcon />}
+                  fullWidth
+                  onClick={() => handleOAuthSignIn("google")}
+                  sx={{
+                    bgcolor: "white",
+                    color: "primary.main",
+                    ":hover ": { bgcolor: "#ccced2" },
+                    ".MuiTouchRipple-child ": { bgcolor: "#4b5563" },
+                  }}
+                >
                   Google
                 </Button>
               </Grid>
-              <Grid item>
-                <Button variant="outlined" startIcon={<FacebookIcon />}>
+              <Grid item xs={6}>
+                <Button
+                  variant="outlined"
+                  fullWidth
+                  onClick={() => handleOAuthSignIn("facebook")}
+                  startIcon={<FacebookIcon />}
+                  sx={{
+                    bgcolor: "white",
+                    color: "primary.main",
+                    ":hover ": { bgcolor: "#ccced2" },
+                    ".MuiTouchRipple-child ": { bgcolor: "#4b5563" },
+                  }}
+                >
                   Facebook
                 </Button>
               </Grid>
-            </Grid>
-            <Grid container justifyContent="center">
-              <Link href="#" variant="body2">
-                {"Not a member? Start a 14 day free trial"}
-              </Link>
             </Grid>
           </Box>
         </Paper>

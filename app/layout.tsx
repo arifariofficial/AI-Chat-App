@@ -5,10 +5,8 @@ import SessionProvider from "@providers/SessionProvider";
 import { getServerSession } from "next-auth";
 import Nav from "@components/Navbar";
 
-import CssBaseline from "@mui/material/CssBaseline";
-
 export const metadata: Metadata = {
-  title: "SIPE",
+  title: "SIPE | AI assistant",
   description: "Legal AI assistant",
   icons: "/favicon.ico",
 };

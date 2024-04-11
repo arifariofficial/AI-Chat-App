@@ -42,6 +42,8 @@ model User {
   password      String
   emailVerified DateTime?
   image         String?
+  resetPasswordToken   String? @default("")
+  resetPasswordExpires DateTime?
   accounts      Account[]
   sessions      Session[]
 }

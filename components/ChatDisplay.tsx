@@ -19,7 +19,7 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
   }, [messages]);
 
   return (
-    <div className="relative border mb-[1px] shadow-lg flex max-h-[800px] min-h-[450px] flex-col space-y-2 overflow-auto rounded-t-lg bg-gray-100 p-4 drop-shadow-2xl">
+    <div className="relative mb-[1px] flex max-h-[800px] min-h-[450px] flex-col space-y-2 overflow-auto rounded-t-lg border bg-gray-100 p-4 shadow-lg drop-shadow-2xl">
       {messages.map((message, index) => (
         <div
           key={index}
@@ -51,7 +51,6 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
             </p>
           </div>
           {message.author === "SIPE" && (
-            // Placeholder for AI's Profile Picture
             <LocalLibraryIcon
               fontSize="large"
               className="m-auto rounded-full bg-[#2d4242] p-1 text-[#F5EFD1]"

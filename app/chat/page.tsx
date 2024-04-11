@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import ChatSkeleton from "@skeletons/ChatSkeleton";
+import { Metadata } from "next";
 
 interface Message {
   author: string;
@@ -31,6 +32,12 @@ export default function Page() {
     setMessages((prevMessages) => [...prevMessages, newMessage]);
   };
 
+  const metadata = {
+    title: "SIPE | Chat",
+    description: "Chat with the AI assistant.",
+    icons: "/favicon.ico",
+  };
+
   const handleModalClose = () => {
     setShowModal(false);
     router.push("/api/auth/signin");
@@ -38,10 +45,10 @@ export default function Page() {
 
   if (!session) {
     return (
-      <main className=" mx-auto flex max-w-screen-md h-[40vh] md:h-[90vh] w-responsive items-center justify-center">
+      <main className=" mx-auto flex h-[40vh] w-responsive max-w-screen-md items-center justify-center md:h-[90vh]">
         <ChatSkeleton />
         {showModal && (
-          <div className=" left-50 absolute flex bottom-60 md:mt-auto w-full items-center justify-center font-semibold ">
+          <div className=" left-50 absolute  flex w-full items-center justify-center font-semibold md:mt-auto ">
             <div className="border-bg-[#2e4342] flex  w-[50%] max-w-[400px] flex-col items-center justify-center rounded-xl border border-gray-300 bg-[#ecfeff] p-4 text-[#F5EFD1] shadow-2xl">
               <p className="p-3 text-[#2e4342]">Please sign in</p>
               <button
@@ -59,7 +66,7 @@ export default function Page() {
 
   return (
     <>
-      <main className="mx-auto mt-12  w-full flex max-w-[500px] items-center justify-center p-4 sm:max-w-[700px] md:max-w-[1000px]">
+      <main className="mx-auto mt-12  flex w-full max-w-[500px] items-center justify-center p-4 sm:max-w-[700px] md:max-w-[1000px]">
         <div className=" flex w-full flex-col rounded-lg border border-gray-400  drop-shadow-2xl">
           <ChatDisplay messages={messages} />
           <ChatInput onSendMessage={handleSendMessage} />

@@ -4,7 +4,6 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import prisma from "@lib/prisma";
 import bcrypt from "bcrypt";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 const handler = NextAuth({
   providers: [
