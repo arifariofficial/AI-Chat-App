@@ -1,17 +1,32 @@
-import MainPageSkeleton from "@skeletons/MainPageSkeleton";
-import Link from "next/link";
+'use client'
+import Link from 'next/link'
+import { Button, Container, Grid, ThemeProvider } from '@mui/material'
+import theme from '@providers/theme'
 
 const Home = () => {
   return (
-    <main className="flex flex-col items-center justify-center gap-2 border h-[calc(100vh-67px)]">
-      <Link href="/query">
-        <button className="btn-primary">Quick query</button>
-      </Link>
-      <Link href="/chat">
-        <button className="btn-primary">Chat</button>
-      </Link>
-    </main>
-  );
-};
+    <ThemeProvider theme={theme}>
+      <Grid
+        container
+        className="flex h-screen flex-col items-center justify-center border"
+      >
+        <Grid item className="border">
+          <Link href="/query" passHref>
+            <Button variant="contained" color="primary" sx={{ width: 300 }}>
+              Quick query
+            </Button>
+          </Link>
+        </Grid>
+        <Grid item className="border">
+          <Link href="/chat" passHref>
+            <Button variant="contained" color="primary" sx={{ width: 300 }}>
+              Chat
+            </Button>
+          </Link>
+        </Grid>
+      </Grid>
+    </ThemeProvider>
+  )
+}
 
-export default Home;
+export default Home
