@@ -13,10 +13,7 @@ const CustomSnackbar: React.FC<SnackbarProps> = ({
   autoHideDuration,
   handleClose,
 }) => {
-  const handleCloseSnackbar = (
-    event: React.SyntheticEvent | Event,
-    reason?: string,
-  ) => {
+  const handleCloseSnackbar = (event: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === "clickaway") {
       return;
     }

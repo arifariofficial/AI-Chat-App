@@ -61,10 +61,7 @@ const SigninPage = () => {
       password: Yup.string().required("Required"),
     }),
 
-    onSubmit: (
-      values: SignInFormValues,
-      actions: FormikHelpers<SignInFormValues>,
-    ) => {
+    onSubmit: (values: SignInFormValues, actions: FormikHelpers<SignInFormValues>) => {
       handleCredentialsSubmit(values);
       actions.setSubmitting(false);
     },

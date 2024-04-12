@@ -1,22 +1,17 @@
-'use client'
-import Link from 'next/link'
-import { Box, Button, Container, Grid, ThemeProvider } from '@mui/material'
-import theme from '@providers/theme'
+"use client";
+import Link from "next/link";
+import { Box, Button, Container, Grid, ThemeProvider } from "@mui/material";
+import theme from "@providers/theme";
 
 const Home = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
-      >
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
         <Grid
           container
-          justifyContent={'center'}
-          alignItems={'center'}
-          flexDirection={'column'}
+          justifyContent={"center"}
+          alignItems={"center"}
+          flexDirection={"column"}
           spacing={1}
         >
           <Grid item xs>
@@ -36,7 +31,7 @@ const Home = () => {
         </Grid>
       </Box>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

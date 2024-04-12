@@ -1,5 +1,7 @@
 "use client";
 
+import { ThemeProvider } from "@mui/material";
+import theme from "@providers/theme";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -35,8 +37,8 @@ const questions: Question[] = [
     statement: (
       <div>
         <h4>
-          We advise you to contact the insurance company of the vehicle in case
-          any harm is recognized later.
+          We advise you to contact the insurance company of the vehicle in case any harm
+          is recognized later.
         </h4>
         <div className="grid place-content-center pt-8">
           <Link href="/">
@@ -56,9 +58,9 @@ const questions: Question[] = [
     statement: (
       <div>
         <h4>
-          Contact your Work/School insurance. You should aslo contact your
-          private insurance company to find out what compensation you can
-          receive in relation to the car and any personal injuries.
+          Contact your Work/School insurance. You should aslo contact your private
+          insurance company to find out what compensation you can receive in relation to
+          the car and any personal injuries.
         </h4>
         <div className="grid place-content-center pt-8">
           <Link href="/">
@@ -74,9 +76,9 @@ const questions: Question[] = [
     statement: (
       <>
         <h4>
-          You should contact the customer service of Kela, municipal social
-          services and your insurance company for more detailed instructions and
-          to start the claim process.
+          You should contact the customer service of Kela, municipal social services and
+          your insurance company for more detailed instructions and to start the claim
+          process.
         </h4>
         <div>
           <Link href="/">
@@ -92,30 +94,30 @@ const questions: Question[] = [
     statement: (
       <div className="">
         <h4 className="pb-4 text-left">
-          The insurance of the vehicle may cover all costs caused by the
-          accident, including:
+          The insurance of the vehicle may cover all costs caused by the accident,
+          including:
         </h4>
         <ol className="ml-5 flex list-decimal flex-col gap-2 text-left text-base">
           <li>
-            Treatment costs: Reimbures the costs of treatment required in a
-            traffic accident.
+            Treatment costs: Reimbures the costs of treatment required in a traffic
+            accident.
           </li>
           <li>Loss of earnings: Comensates for income lost due to injury.</li>
           <li>
-            Rehabilitation allowances: Covers rehabilitation need to restore or
-            imporve functional capacity after an injury.
+            Rehabilitation allowances: Covers rehabilitation need to restore or imporve
+            functional capacity after an injury.
           </li>
           <li>
-            Compensation for permanent handicap: Paid if the traffic accident
-            leaves permanent harm.
+            Compensation for permanent handicap: Paid if the traffic accident leaves
+            permanent harm.
           </li>
           <li>
-            Personal injury compensation (compensatin for suffering):
-            Compensation for suffering caused by personal injury.
+            Personal injury compensation (compensatin for suffering): Compensation for
+            suffering caused by personal injury.
           </li>
           <li>
-            Reimbursement of expenses: Reimbursement of allowances incurred as a
-            result of a traffic accident.
+            Reimbursement of expenses: Reimbursement of allowances incurred as a result of
+            a traffic accident.
           </li>
         </ol>
         <div className="grid place-content-center pt-8">
@@ -161,30 +163,32 @@ const Questionary: React.FC = () => {
 
   return (
     <>
-      {!finalAnswer && (
-        <div className="md:left-18 relative m-10 grid">
-          <h1 className="text-2xl font-semibold text-slate-800">
-            {!finalAnswer && currentQuestion?.question}
-          </h1>
-          <div className="mt-5 flex flex-col items-center justify-center gap-3 ">
-            {currentQuestion?.answers &&
-              currentQuestion?.answers.map((answer) => (
-                <button
-                  className="btn-primary"
-                  key={answer.text}
-                  onClick={() => handleAnswer(answer)}
-                >
-                  {answer.text}
-                </button>
-              ))}
+      <ThemeProvider theme={theme}>
+        {!finalAnswer && (
+          <div className="md:left-18 relative m-10 grid">
+            <h1 className="text-2xl font-semibold text-slate-800">
+              {!finalAnswer && currentQuestion?.question}
+            </h1>
+            <div className="mt-5 flex flex-col items-center justify-center gap-3 ">
+              {currentQuestion?.answers &&
+                currentQuestion?.answers.map((answer) => (
+                  <button
+                    className="btn-primary"
+                    key={answer.text}
+                    onClick={() => handleAnswer(answer)}
+                  >
+                    {answer.text}
+                  </button>
+                ))}
+            </div>
           </div>
-        </div>
-      )}
-      {finalAnswer && (
-        <div className="w-responsive mx-auto flex max-w-[500px] flex-col items-center justify-center gap-4 text-center text-xl font-semibold ">
-          {currentQuestion?.statement}
-        </div>
-      )}
+        )}
+        {finalAnswer && (
+          <div className="w-responsive mx-auto flex max-w-[500px] flex-col items-center justify-center gap-4 text-center text-xl font-semibold ">
+            {currentQuestion?.statement}
+          </div>
+        )}
+      </ThemeProvider>
     </>
   );
 };

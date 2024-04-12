@@ -20,10 +20,7 @@ const handler = NextAuth({
           where: { email: credentials.email },
         });
 
-        if (
-          user &&
-          (await bcrypt.compare(credentials.password, user.password))
-        ) {
+        if (user && (await bcrypt.compare(credentials.password, user.password))) {
           // Return user object without the password
           const { password, ...userWithoutPassword } = user;
           return userWithoutPassword;

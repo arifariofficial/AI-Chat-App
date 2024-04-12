@@ -4,10 +4,8 @@ import theme from "@providers/theme";
 
 export default function QuestionaryComponent() {
   return (
-    <ThemeProvider theme={theme}>
-      <div className="grid h-screen place-content-center">
-        <Questionary />
-      </div>
-    </ThemeProvider>
+    <div className="grid h-screen place-content-center">
+      <Questionary />
+    </div>
   );
 }

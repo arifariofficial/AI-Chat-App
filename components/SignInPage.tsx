@@ -1,5 +1,5 @@
-'use client'
-import React, { useState } from 'react'
+"use client";
+import React, { useState } from "react";
 import {
   Avatar,
   Box,
@@ -16,136 +16,123 @@ import {
   Snackbar,
   TextField,
   ThemeProvider,
-  Typography
-} from '@mui/material'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import { FormikHelpers, useFormik } from 'formik'
-import * as Yup from 'yup'
-import { SignInResponse, signIn } from 'next-auth/react'
-import theme from '@providers/theme'
-import { useRouter } from 'next/navigation'
-import FacebookIcon from '@public/images/FacebookIcon'
-import GoogleIcon from '@public/images/GoogleIcon'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import CustomSnackbar from './CustomSnackbar'
+  Typography,
+} from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { FormikHelpers, useFormik } from "formik";
+import * as Yup from "yup";
+import { SignInResponse, signIn } from "next-auth/react";
+import theme from "@providers/theme";
+import { useRouter } from "next/navigation";
+import FacebookIcon from "@public/images/FacebookIcon";
+import GoogleIcon from "@public/images/GoogleIcon";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import CustomSnackbar from "./CustomSnackbar";
 
 interface SignInFormValues {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
 const signInSchema = Yup.object({
-  email: Yup.string().email('Invalid email address').required('Required'),
-  password: Yup.string().required('Required')
-})
+  email: Yup.string().email("Invalid email address").required("Required"),
+  password: Yup.string().required("Required"),
+});
 
 const SignInPage: React.FC = () => {
-  const router = useRouter()
-  const [showPassword, setShowPassword] = useState<boolean>(false)
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
-  const [open, setOpen] = useState<boolean>(false)
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleCredentialsSubmit = async (values: SignInFormValues) => {
-    const { email, password } = values
+    const { email, password } = values;
 
     try {
-      const result: SignInResponse | undefined = await signIn('credentials', {
+      const result: SignInResponse | undefined = await signIn("credentials", {
         redirect: false,
         email,
-        password
-      })
+        password,
+      });
 
       if (result?.error) {
-        console.log(result.error)
+        console.log(result.error);
         if (result.status === 401) {
           // Handle unauthorized error
-          setErrorMessage('Invalid credentials')
-          setOpen(true)
+          setErrorMessage("Invalid credentials");
+          setOpen(true);
         }
       } else {
-        router.push('/')
+        router.push("/");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const handleClose = (
     event: Event | React.SyntheticEvent<any, Event>,
     reason?: string
   ) => {
-    if (reason === 'clickaway') {
-      return
+    if (reason === "clickaway") {
+      return;
     }
 
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const handleOAuthSignIn = async (provider: string) => {
-    await signIn(provider, { callbackUrl: '/' })
-  }
+    await signIn(provider, { callbackUrl: "/" });
+  };
 
   const formik = useFormik<SignInFormValues>({
     initialValues: {
-      email: '',
-      password: ''
+      email: "",
+      password: "",
     },
     validationSchema: signInSchema,
-    onSubmit: (
-      values: SignInFormValues,
-      actions: FormikHelpers<SignInFormValues>
-    ) => {
-      handleCredentialsSubmit(values)
-      actions.setSubmitting(false)
-    }
-  })
+    onSubmit: (values: SignInFormValues, actions: FormikHelpers<SignInFormValues>) => {
+      handleCredentialsSubmit(values);
+      actions.setSubmitting(false);
+    },
+  });
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <CustomSnackbar
-        open={open}
-        message={errorMessage}
-        handleClose={handleClose}
-      />
+      <CustomSnackbar open={open} message={errorMessage} handleClose={handleClose} />
 
       <Container
         component="main"
         maxWidth="xs"
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          marginTop: 4
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          marginTop: 4,
         }}
       >
         <Paper
           elevation={3}
           style={{
             padding: 32,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            boxShadow:
-              '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)',
-            transform: 'perspective(1px) translateZ(0)',
-            transition: 'transform 0.3s ease-in-out'
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)",
+            transform: "perspective(1px) translateZ(0)",
+            transition: "transform 0.3s ease-in-out",
           }}
           className="rounded-xl border border-gray-400 "
         >
-          <Avatar sx={{ bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in to your account
           </Typography>
-          <Box
-            component="form"
-            onSubmit={formik.handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -167,7 +154,7 @@ const SignInPage: React.FC = () => {
               fullWidth
               name="password"
               label="Password"
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               id="password"
               autoComplete="current-password"
               value={formik.values.password}
@@ -182,21 +169,13 @@ const SignInPage: React.FC = () => {
                       aria-label="toggle password visibility"
                       onClick={() => setShowPassword(!showPassword)}
                     >
-                      {showPassword ? (
-                        <VisibilityIcon />
-                      ) : (
-                        <VisibilityOffIcon />
-                      )}
+                      {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                     </IconButton>
                   </InputAdornment>
-                )
+                ),
               }}
             />
-            <Grid
-              container
-              justifyContent="space-between"
-              alignItems={'center'}
-            >
+            <Grid container justifyContent="space-between" alignItems={"center"}>
               <Grid item>
                 <FormControlLabel
                   sx={{ fontSize: 20 }}
@@ -204,7 +183,7 @@ const SignInPage: React.FC = () => {
                     <Checkbox
                       value="remember"
                       color="primary"
-                      sx={{ '& .MuiSvgIcon-root': { fontSize: 20 } }}
+                      sx={{ "& .MuiSvgIcon-root": { fontSize: 20 } }}
                     />
                   }
                   label="Remember me"
@@ -216,12 +195,7 @@ const SignInPage: React.FC = () => {
                 </Link>
               </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 2, mb: 2 }}
-            >
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 2, mb: 2 }}>
               Sign in
             </Button>
 
@@ -255,12 +229,12 @@ const SignInPage: React.FC = () => {
                   variant="outlined"
                   startIcon={<GoogleIcon />}
                   fullWidth
-                  onClick={() => handleOAuthSignIn('google')}
+                  onClick={() => handleOAuthSignIn("google")}
                   sx={{
-                    bgcolor: 'white',
-                    color: 'primary.main',
-                    ':hover ': { bgcolor: '#ccced2' },
-                    '.MuiTouchRipple-child ': { bgcolor: '#4b5563' }
+                    bgcolor: "white",
+                    color: "primary.main",
+                    ":hover ": { bgcolor: "#ccced2" },
+                    ".MuiTouchRipple-child ": { bgcolor: "#4b5563" },
                   }}
                 >
                   Google
@@ -270,13 +244,13 @@ const SignInPage: React.FC = () => {
                 <Button
                   variant="outlined"
                   fullWidth
-                  onClick={() => handleOAuthSignIn('facebook')}
+                  onClick={() => handleOAuthSignIn("facebook")}
                   startIcon={<FacebookIcon />}
                   sx={{
-                    bgcolor: 'white',
-                    color: 'primary.main',
-                    ':hover ': { bgcolor: '#ccced2' },
-                    '.MuiTouchRipple-child ': { bgcolor: '#4b5563' }
+                    bgcolor: "white",
+                    color: "primary.main",
+                    ":hover ": { bgcolor: "#ccced2" },
+                    ".MuiTouchRipple-child ": { bgcolor: "#4b5563" },
                   }}
                 >
                   Facebook
@@ -287,7 +261,7 @@ const SignInPage: React.FC = () => {
         </Paper>
       </Container>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default SignInPage
+export default SignInPage;

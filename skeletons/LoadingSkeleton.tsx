@@ -4,8 +4,7 @@ export default function LoadingSkeleton() {
       <div className="flex w-full animate-pulse flex-col space-y-4">
         <div className="h-10 rounded bg-gray-300"></div> {/* Email input */}
         <div className="h-10 rounded bg-gray-300"></div> {/* Password input */}
-        <div className="h-12 rounded-md bg-gray-400"></div>{" "}
-        {/* Sign-in button */}
+        <div className="h-12 rounded-md bg-gray-400"></div> {/* Sign-in button */}
       </div>
     </div>
   );
