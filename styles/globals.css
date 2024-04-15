@@ -8,6 +8,6 @@
   }
 
   .btn-primary {
-    @apply flex h-[50px]  w-[250px] cursor-pointer items-center  justify-center rounded-md border bg-gray-600 font-bold text-[#F5EFD1] shadow-md hover:bg-gray-700 hover:shadow-2xl active:bg-gray-500 md:w-[300px];
+    @apply flex h-[50px] w-[250px] cursor-pointer items-center  justify-center rounded-md border bg-[#4F6E70] font-bold text-[#F5EFD1] shadow-md hover:bg-[#3C5254] hover:shadow-2xl active:bg-gray-500 md:w-[300px];
   }
 }

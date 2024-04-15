@@ -4,8 +4,11 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import prisma from "@lib/prisma";
 import bcrypt from "bcrypt";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 
 const handler = NextAuth({
+  secret: process.env.NEXTAUTH_SECRET,
+  adapter: PrismaAdapter(prisma) as any,
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -20,7 +23,11 @@ const handler = NextAuth({
           where: { email: credentials.email },
         });
 
-        if (user && (await bcrypt.compare(credentials.password, user.password))) {
+        if (
+          user &&
+          user.password &&
+          (await bcrypt.compare(credentials.password, user.password))
+        ) {
           // Return user object without the password
           const { password, ...userWithoutPassword } = user;
           return userWithoutPassword;
@@ -41,6 +48,22 @@ const handler = NextAuth({
 
   pages: {
     signIn: "/auth/signin",
+  },
+  session: {
+    strategy: "jwt",
+  },
+  events: {
+    signIn: async ({ user }) => {
+      if (user.email) {
+        await prisma.loginHistory.create({
+          data: {
+            userId: user.id,
+            email: user.email,
+            timestamp: new Date().toISOString(),
+          },
+        });
+      }
+    },
   },
 });
 

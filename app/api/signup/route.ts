@@ -10,8 +10,7 @@ type Data = {
 
 export async function POST(req: Request) {
   const data = await req.json();
-  const { email, password } = data;
-
+  const { email, password, name } = data;
   const saltRounds = 10;
 
   try {
@@ -28,6 +27,7 @@ export async function POST(req: Request) {
     } else {
       await prisma.user.create({
         data: {
+          name: name,
           email: email,
           password: hashedPassword,
         },
