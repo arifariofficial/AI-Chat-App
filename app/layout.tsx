@@ -3,7 +3,7 @@ import "@./styles/globals.css";
 import { ReactNode } from "react";
 import SessionProvider from "@providers/SessionProvider";
 import { getServerSession } from "next-auth";
-import Nav from "@components/Navbar";
+import Nav from "@components/navbar/Navbar";
 
 export const metadata: Metadata = {
   title: "SIPE | AI assistant",
@@ -13,8 +13,6 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const session = await getServerSession();
-
-  console.log(session);
 
   return (
     <html lang="en">

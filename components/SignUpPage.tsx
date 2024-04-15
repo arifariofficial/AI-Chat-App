@@ -19,7 +19,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { FormikHelpers, useFormik } from "formik";
 import * as Yup from "yup";
 import { signIn } from "next-auth/react";
-import theme from "@providers/theme";
+import theme from "@components/theme";
 import { useRouter } from "next/navigation";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";

@@ -1,11 +1,11 @@
 "use client";
 
-import ChatDisplay from "@components/ChatDisplay";
-import ChatInput from "@components/ChatInput";
+import ChatDisplay from "@components/chat/ChatDisplay";
+import ChatInput from "@components/chat/ChatInput";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import ChatSkeleton from "@skeletons/ChatSkeleton";
+import ChatSkeleton from "@components/skeletons/ChatSkeleton";
 import { Metadata } from "next";
 
 interface Message {

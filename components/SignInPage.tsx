@@ -22,7 +22,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { FormikHelpers, useFormik } from "formik";
 import * as Yup from "yup";
 import { SignInResponse, signIn } from "next-auth/react";
-import theme from "@providers/theme";
+import theme from "@components/theme";
 import { useRouter } from "next/navigation";
 import FacebookIcon from "@public/images/FacebookIcon";
 import GoogleIcon from "@public/images/GoogleIcon";

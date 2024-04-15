@@ -12,7 +12,7 @@ import {
 import { ThemeProvider } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import theme from "@providers/theme";
+import theme from "@components/theme";
 import { useRouter } from "next/navigation";
 
 const validationSchema = Yup.object({

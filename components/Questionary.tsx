@@ -1,7 +1,7 @@
 "use client";
 
 import { ThemeProvider } from "@mui/material";
-import theme from "@providers/theme";
+import theme from "@components/theme";
 import Link from "next/link";
 import React, { useState } from "react";
 

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Box, Button, Container, Grid, ThemeProvider } from "@mui/material";
-import theme from "@providers/theme";
+import theme from "@components/theme";
 
 const Home = () => {
   return (
