@@ -110,13 +110,13 @@ const SignInPage: React.FC = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          marginTop: 4,
+          marginTop: 32,
         }}
       >
         <Paper
           elevation={3}
           style={{
-            padding: 32,
+            padding: 40,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
