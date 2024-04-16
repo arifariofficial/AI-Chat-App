@@ -2,57 +2,9 @@
 
 import Link from "next/link";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { useRef, useState } from "react";
-import Image from "next/image";
+import AuthButton from "./auth-button";
 
-function AuthButton() {
-  const { data: session, status } = useSession();
-  const loading = status === "loading";
-  const [toggleDropdown, setToggleDropdown] = useState(false);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (session) {
-    return (
-      <>
-        {session.user?.image ? (
-          <Image
-            src={session.user.image}
-            alt="profile"
-            width={30}
-            height={30}
-            className="rounded-full"
-          />
-        ) : (
-          <AccountCircleIcon fontSize="large" />
-        )}
-        <button
-          onClick={() => signOut()}
-          className=" text-top m-0 flex h-[20px] w-[70px] items-center  justify-center  bg-inherit text-xs"
-        >
-          Sign out
-        </button>
-      </>
-    );
-  }
-  return (
-    <>
-      <AccountCircleIcon />
-      <button
-        onClick={() => signIn()}
-        className=" text-top m-0 flex h-[20px] w-[70px] items-center  justify-center  bg-inherit text-xs "
-      >
-        Sign in
-      </button>
-    </>
-  );
-}
-
-const Nav = () => {
+const NavBar = () => {
   return (
     <div className="sticky top-0 z-10  rounded-bl-md rounded-br-md bg-[#2d4242] shadow-sm shadow-teal-800">
       <nav className="mx-auto flex  max-w-screen-xl justify-between">
@@ -76,4 +28,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default NavBar;

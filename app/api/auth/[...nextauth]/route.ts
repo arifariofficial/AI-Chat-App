@@ -46,9 +46,6 @@ const handler = NextAuth({
     }),
   ],
 
-  pages: {
-    signIn: "/auth/signin",
-  },
   session: {
     strategy: "jwt",
   },
