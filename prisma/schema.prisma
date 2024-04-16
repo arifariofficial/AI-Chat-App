@@ -1,11 +1,10 @@
 datasource db {
   provider = "postgresql"
-  url      = env("LOCAL_POSTGRES_URL")
+  url      = env("POSTGRES_URL")
 }
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["referentialActions"] // You won't need this in Prisma 3.X or higher.
 }
 
 model Account {
