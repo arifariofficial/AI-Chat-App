@@ -13,7 +13,6 @@ import {
   InputAdornment,
   Link,
   Paper,
-  Snackbar,
   TextField,
   ThemeProvider,
   Typography,
@@ -83,7 +82,11 @@ const SignInPage: React.FC = () => {
   };
 
   const handleOAuthSignIn = async (provider: string) => {
-    await signIn(provider, { callbackUrl: "/" });
+    try {
+      await signIn(provider, { callbackUrl: "/" });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const formik = useFormik<SignInFormValues>({
