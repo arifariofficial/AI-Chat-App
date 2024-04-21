@@ -10,7 +10,7 @@ const NavBar = () => {
       <nav className="mx-auto flex  max-w-screen-xl justify-between">
         <section>
           <Link href={`/`}>
-            <h1 className="flex p-4 font-satoshi text-2xl font-extrabold tracking-wide text-[#F5EFD1]">
+            <h1 className="font-satoshi flex p-4 text-2xl font-extrabold tracking-wide text-[#F5EFD1]">
               <div className="px-1 ">
                 <LocalLibraryIcon fontSize="large" />
               </div>

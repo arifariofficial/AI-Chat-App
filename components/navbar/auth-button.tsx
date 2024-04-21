@@ -7,13 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function AuthButton() {
-  const { data: session, status } = useSession();
-  const loading = status === "loading";
-  const [toggleDropdown, setToggleDropdown] = useState(false);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  const { data: session } = useSession();
 
   if (session) {
     return (
@@ -45,7 +39,7 @@ export default function AuthButton() {
   return (
     <>
       <AccountCircleIcon />
-      <Link href="/api/auth/signin">
+      <Link href="/auth/login">
         <p className=" text-top m-0 flex h-[20px] w-[70px] items-center  justify-center  bg-inherit text-xs ">
           Sign in
         </p>

@@ -1,14 +1,6 @@
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
 
-interface ChatMessageRequestBody {
-  message: string;
-}
-
-interface ChatMessageResponseData {
-  aiResponse: string;
-}
-
 export async function POST(req: Request) {
   const data = await req.json();
 
@@ -21,7 +13,7 @@ export async function POST(req: Request) {
     model: "gpt-3.5-turbo",
   });
 
-  console.log(completion.choices[0].message.content);
-
-  return NextResponse.json({ aiResponse: completion.choices[0].message.content });
+  return NextResponse.json({
+    aiResponse: completion.choices[0].message.content,
+  });
 }
