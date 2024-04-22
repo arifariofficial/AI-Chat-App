@@ -11,10 +11,14 @@ export const Social = () => {
   const [pendingGoogle, setPendingGoogle] = useState(false);
   const [pendingFacebook, setPendingFacebook] = useState(false);
 
-  const onClick = (provider: "facebook" | "google") => {
+  const onClick = async (provider: "facebook" | "google") => {
     provider === "facebook" ? setPendingFacebook(true) : setPendingGoogle(true);
 
-    signIn(provider);
+    try {
+      await signIn(provider, { callbackUrl: "/" });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

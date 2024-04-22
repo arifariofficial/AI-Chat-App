@@ -14,6 +14,7 @@ declare module "next-auth" {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  debug: true,
   ...authConfig,
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },

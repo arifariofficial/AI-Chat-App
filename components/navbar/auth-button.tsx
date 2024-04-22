@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { signOut, useSession } from "next-auth/react";
