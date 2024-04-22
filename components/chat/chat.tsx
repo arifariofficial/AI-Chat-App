@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import ChatSkeleton from "@components/skeletons/ChatSkeleton";
-import { Metadata } from "next";
 
 interface Message {
   author: string;
