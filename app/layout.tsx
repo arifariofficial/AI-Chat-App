@@ -1,9 +1,11 @@
 import { Metadata } from "next";
-import "@./styles/globals.css";
-import { ReactNode } from "react";
-import SessionProvider from "@providers/SessionProvider";
-import { getServerSession } from "next-auth";
+import "@/app/globals.css";
+import { Inter } from "next/font/google";
 import NavBar from "@components/navbar/Navbar";
+import { SessionProvider } from "next-auth/react";
+import { auth } from "@auth";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "SIPE | AI assistant",
@@ -11,15 +13,19 @@ export const metadata: Metadata = {
   icons: "/favicon.ico",
 };
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
-  const session = await getServerSession();
+export default async function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  const session = await auth();
 
   return (
     <html lang="en">
       <body>
         <SessionProvider session={session}>
           <NavBar />
-          <div>{children}</div>
+          {children}
         </SessionProvider>
       </body>
     </html>
