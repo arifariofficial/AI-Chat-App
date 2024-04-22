@@ -31,12 +31,6 @@ export default function Chat() {
     setMessages((prevMessages) => [...prevMessages, newMessage]);
   };
 
-  const metadata = {
-    title: "SIPE | Chat",
-    description: "Chat with the AI assistant.",
-    icons: "/favicon.ico",
-  };
-
   const handleModalClose = () => {
     setShowModal(false);
     router.push("/auth/login");
@@ -44,11 +38,11 @@ export default function Chat() {
 
   if (!session) {
     return (
-      <main className=" w-responsive mx-auto flex h-[40vh] max-w-screen-md items-center justify-center md:h-[90vh]">
+      <main className=" mx-auto flex h-[40vh] max-w-screen-md items-center justify-center md:h-[90vh]">
         <ChatSkeleton />
         {showModal && (
-          <div className=" left-50 absolute  flex w-full items-center justify-center font-semibold md:mt-auto ">
-            <div className="border-bg-[#2e4342] flex  w-[50%] max-w-[400px] flex-col items-center justify-center rounded-xl border border-gray-300 bg-[#ecfeff] p-4 text-[#F5EFD1] shadow-2xl">
+          <div className=" absolute  flex w-full items-center justify-center font-semibold md:mt-auto ">
+            <div className=" flex  w-1/2 max-w-[400px] flex-col items-center justify-center rounded-xl border border-gray-300 bg-[#ecfeff] p-4 text-[#F5EFD1] shadow-2xl">
               <p className="p-3 text-[#2e4342]">Please sign in</p>
               <button
                 className="m-2 flex  w-[100px] max-w-[200px] cursor-pointer items-center justify-center  rounded-md bg-gray-600 p-2 text-sm shadow-xl hover:bg-gray-700 hover:shadow-2xl active:bg-gray-500 md:w-[300px]"

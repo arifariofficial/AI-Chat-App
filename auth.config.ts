@@ -7,7 +7,6 @@ import FacebookProvider from "next-auth/providers/facebook";
 import { getStringFromBuffer } from "./lib/utils";
 
 export const authConfig = {
-  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",

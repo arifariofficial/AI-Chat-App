@@ -71,7 +71,7 @@ const Input = styled.div`
 
 const ChatPageSkeleton = () => {
   return (
-    <Container className="w-responsive  shadow-2xl rounded-b-xl">
+    <Container className="rounded-b-xl shadow-2xl">
       <Messages className=" drop-shadow-xl ">
         <Message>
           <InnerMessage style={{ width: "30%" }}>Hey there</InnerMessage>
@@ -82,26 +82,27 @@ const ChatPageSkeleton = () => {
             what were the top shows in houston in june
           </InnerMessage>
           <InnerMessage style={{ alignSelf: "end", marginRight: "20px" }}>
-            The top 5 events in the month of June in the city of Houston were 1, Allman
-            Brothers Band; 2, Girl Talk; 3, Goo Goo Dolls; 4, Commodores; and 5, Dropkick
-            Murphys.{" "}
+            The top 5 events in the month of June in the city of Houston were 1,
+            Allman Brothers Band; 2, Girl Talk; 3, Goo Goo Dolls; 4, Commodores;
+            and 5, Dropkick Murphys.{" "}
           </InnerMessage>
           <InnerMessage>
             compare sales for allman brothers band and goo goo dolls
           </InnerMessage>
           <InnerMessage style={{ alignSelf: "end", marginRight: "20px" }}>
-            In the month of June, in the city of Houston, sales for Allman Brothers Band
-            were 35% higher than for Goo Goo Dolls; $35,996 as opposed to $26,590.
+            In the month of June, in the city of Houston, sales for Allman
+            Brothers Band were 35% higher than for Goo Goo Dolls; $35,996 as
+            opposed to $26,590.
           </InnerMessage>
         </Message>
-        <Input className="padding-10 flex justify-between shadow-md drop-shadow-sm">
+        <Input className="flex justify-between shadow-md drop-shadow-sm">
           <div
             className="flex items-center rounded-md border text-left "
             style={{ width: "65%", paddingLeft: "20px" }}
           >
             Type a message...
           </div>
-          <button className="btn-primary p-5" style={{ opacity: 0.2, width: "30%" }}>
+          <button className="p-5" style={{ opacity: 0.2, width: "30%" }}>
             Send
           </button>
         </Input>

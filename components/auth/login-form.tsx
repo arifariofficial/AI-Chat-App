@@ -10,34 +10,28 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "../ui/form";
-import { Input } from "../ui/input";
 import { FormError } from "../form-error";
 import { FormSusscess } from "../form-success";
-import { useEffect, useState, useTransition } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useTransition } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
   Box,
   Button,
   Container,
-  CssBaseline,
   IconButton,
   InputAdornment,
   Paper,
   TextField,
-  ThemeProvider,
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import theme from "@components/theme";
 import { Button as MyButton } from "@components/ui/button";
-import { useFormState, useFormStatus } from "react-dom";
 import IconSpinner from "@components/ui/icons";
 import { getMessageFromCode } from "@lib/utils";
-import { toast } from "sonner";
+
 import { login } from "@actions/login";
 
 export const LoginForm = () => {
@@ -52,19 +46,6 @@ export const LoginForm = () => {
   const [success, setSuccess] = useState<string | undefined>("");
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
-  const router = useRouter();
-
-  /*   useEffect(() => {
-    if (result) {
-      if (result.type === "error") {
-        toast.error(getMessageFromCode(result.resultCode));
-      } else {
-        toast.success(getMessageFromCode(result.resultCode));
-        router.refresh();
-      }
-    }
-  }, [result, router]); */
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -102,44 +83,72 @@ export const LoginForm = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Container
-        component="main"
-        maxWidth="xs"
+    <Container
+      component="main"
+      maxWidth="xs"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        margin: "0",
+      }}
+    >
+      <Paper
+        elevation={3}
         sx={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          margin: "0",
         }}
+        className="rounded-xl border border-gray-300"
       >
-        <Paper
-          elevation={3}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-          className="rounded-xl border border-gray-300"
+        <CardWrapper
+          headerLabel="Welcome back"
+          backButtonLabel="Dont't have an account?"
+          backButtonHref="/auth/register"
+          showLocal
         >
-          <CardWrapper
-            headerLabel="Welcome back"
-            backButtonLabel="Dont't have an account?"
-            backButtonHref="/auth/register"
-            showLocal
-          >
-            <Form {...form}>
-              <Box
-                component="form"
-                onSubmit={form.handleSubmit(onSubmit)}
-                noValidate
-              >
-                <div className="space-y-4">
-                  {showTwoFactor && (
+          <Form {...form}>
+            <Box
+              component="form"
+              onSubmit={form.handleSubmit(onSubmit)}
+              noValidate
+            >
+              <div className="space-y-4">
+                {showTwoFactor && (
+                  <FormField
+                    control={form.control}
+                    name="code"
+                    render={({ field: { value, onChange, onBlur, ref } }) => (
+                      <FormItem>
+                        <FormControl>
+                          <TextField
+                            disabled={isPending}
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="code"
+                            name="code"
+                            type="number"
+                            label="Two Factor Code"
+                            autoFocus
+                            value={value}
+                            onChange={onChange}
+                            onBlur={onBlur}
+                            ref={ref}
+                            InputLabelProps={{ shrink: true }}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
+                {!showTwoFactor && (
+                  <>
                     <FormField
                       control={form.control}
-                      name="code"
+                      name="email"
                       render={({ field: { value, onChange, onBlur, ref } }) => (
                         <FormItem>
                           <FormControl>
@@ -148,11 +157,10 @@ export const LoginForm = () => {
                               margin="normal"
                               required
                               fullWidth
-                              id="code"
-                              name="code"
-                              type="number"
-                              label="Two Factor Code"
+                              id="email"
+                              label="Email Address"
                               autoFocus
+                              autoComplete="current-email"
                               value={value}
                               onChange={onChange}
                               onBlur={onBlur}
@@ -164,116 +172,82 @@ export const LoginForm = () => {
                         </FormItem>
                       )}
                     />
-                  )}
-                  {!showTwoFactor && (
-                    <>
-                      <FormField
-                        control={form.control}
-                        name="email"
-                        render={({
-                          field: { value, onChange, onBlur, ref },
-                        }) => (
-                          <FormItem>
-                            <FormControl>
-                              <TextField
-                                disabled={isPending}
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                autoFocus
-                                autoComplete="current-email"
-                                value={value}
-                                onChange={onChange}
-                                onBlur={onBlur}
-                                ref={ref}
-                                InputLabelProps={{ shrink: true }}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="password"
-                        render={({
-                          field: { value, onChange, onBlur, ref },
-                        }) => (
-                          <FormItem>
-                            <FormControl>
-                              <TextField
-                                disabled={isPending}
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                value={value}
-                                onChange={onChange}
-                                onBlur={onBlur}
-                                ref={ref}
-                                type={showPassword ? "text" : "password"}
-                                id="password"
-                                autoComplete="current-password"
-                                InputLabelProps={{ shrink: true }}
-                                InputProps={{
-                                  endAdornment: (
-                                    <InputAdornment position="end">
-                                      <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={() =>
-                                          setShowPassword(!showPassword)
-                                        }
-                                      >
-                                        {showPassword ? (
-                                          <VisibilityIcon />
-                                        ) : (
-                                          <VisibilityOffIcon />
-                                        )}
-                                      </IconButton>
-                                    </InputAdornment>
-                                  ),
-                                }}
-                              />
-                            </FormControl>
-                            <MyButton
-                              size="sm"
-                              variant="link"
-                              asChild
-                              className="px-0 font-normal"
-                            >
-                              <Link href="/auth/reset">Forgot password?</Link>
-                            </MyButton>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </>
-                  )}
-                </div>
-                <FormError message={error || urlError} />
-                <FormSusscess message={success} />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 2, height: 37 }}
-                >
-                  {isPending ? (
-                    <IconSpinner />
-                  ) : showTwoFactor ? (
-                    "Confirm"
-                  ) : (
-                    "Login"
-                  )}
-                </Button>
-              </Box>
-            </Form>
-          </CardWrapper>
-        </Paper>
-      </Container>
-    </ThemeProvider>
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field: { value, onChange, onBlur, ref } }) => (
+                        <FormItem>
+                          <FormControl>
+                            <TextField
+                              disabled={isPending}
+                              margin="normal"
+                              required
+                              fullWidth
+                              name="password"
+                              label="Password"
+                              value={value}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              ref={ref}
+                              type={showPassword ? "text" : "password"}
+                              id="password"
+                              autoComplete="current-password"
+                              InputLabelProps={{ shrink: true }}
+                              InputProps={{
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <IconButton
+                                      aria-label="toggle password visibility"
+                                      onClick={() =>
+                                        setShowPassword(!showPassword)
+                                      }
+                                    >
+                                      {showPassword ? (
+                                        <VisibilityIcon />
+                                      ) : (
+                                        <VisibilityOffIcon />
+                                      )}
+                                    </IconButton>
+                                  </InputAdornment>
+                                ),
+                              }}
+                            />
+                          </FormControl>
+                          <MyButton
+                            size="sm"
+                            variant="link"
+                            asChild
+                            className="px-0 font-normal"
+                          >
+                            <Link href="/auth/reset">Forgot password?</Link>
+                          </MyButton>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </>
+                )}
+              </div>
+              <FormError message={error || urlError} />
+              <FormSusscess message={success} />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 2, height: 37 }}
+              >
+                {isPending ? (
+                  <IconSpinner />
+                ) : showTwoFactor ? (
+                  "Confirm"
+                ) : (
+                  "Login"
+                )}
+              </Button>
+            </Box>
+          </Form>
+        </CardWrapper>
+      </Paper>
+    </Container>
   );
 };

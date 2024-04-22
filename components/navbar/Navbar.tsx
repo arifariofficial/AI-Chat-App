@@ -6,11 +6,11 @@ import AuthButton from "./auth-button";
 
 const NavBar = () => {
   return (
-    <div className="sticky top-0 z-10  rounded-bl-md rounded-br-md bg-[#2d4242] shadow-sm shadow-teal-800">
+    <div className="sticky top-0 z-10  rounded-b-md bg-[#2d4242] shadow-sm shadow-teal-800">
       <nav className="mx-auto flex  max-w-screen-xl justify-between">
         <section>
           <Link href={`/`}>
-            <h1 className="font-satoshi flex p-4 text-2xl font-extrabold tracking-wide text-[#F5EFD1]">
+            <h1 className="flex p-4 text-2xl font-extrabold tracking-wide text-[#F5EFD1]">
               <div className="px-1 ">
                 <LocalLibraryIcon fontSize="large" />
               </div>

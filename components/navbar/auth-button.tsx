@@ -22,13 +22,13 @@ export default function AuthButton() {
               className="rounded-full"
             />
           ) : (
-            <AccountCircleIcon className="h-8 w-8 rounded-full bg-white" />
+            <AccountCircleIcon className="size-8 rounded-full bg-white" />
           )}
         </Link>
 
         <button
           onClick={() => signOut({ callbackUrl: "/auth/logout" })}
-          className=" text-top m-0 flex h-[20px] w-[70px] items-center  justify-center  bg-inherit text-xs"
+          className="m-0 flex h-[20px] w-[70px] items-center  justify-center  bg-inherit text-xs"
         >
           Logout
         </button>
@@ -40,7 +40,7 @@ export default function AuthButton() {
     <>
       <AccountCircleIcon />
       <Link href="/auth/login">
-        <p className=" text-top m-0 flex h-[20px] w-[70px] items-center  justify-center  bg-inherit text-xs ">
+        <p className="m-0 flex h-[20px] w-[70px] items-center  justify-center  bg-inherit text-xs ">
           Login
         </p>
       </Link>

@@ -40,11 +40,7 @@ const ChatInput: React.FC<{
         className="w-full flex-1 rounded-lg border border-gray-400 py-3 pl-4 text-left  focus:border-gray-700 focus:outline-none sm:w-[350px] md:w-[300px] md:rounded-l-lg"
       />
 
-      <button
-        type="submit"
-        className="btn-primary"
-        style={{ width: "100%", maxWidth: "350px" }}
-      >
+      <button type="submit" style={{ width: "100%", maxWidth: "350px" }}>
         Send
       </button>
     </form>
