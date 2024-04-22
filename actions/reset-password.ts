@@ -6,6 +6,7 @@ import { getPasswordResetTokenByToken } from "@/data/password-reset-token";
 import { getUserByEmail } from "@/data/user";
 import bcrypt from "bcryptjs";
 import prisma from "@/lib/prisma";
+import { getStringFromBuffer } from "@lib/utils";
 
 export const resetPassword = async (
   values: z.infer<typeof ResetPasswordSchema>,
@@ -15,12 +16,12 @@ export const resetPassword = async (
     return { error: "Missing token" };
   }
 
-  const validatedFields = ResetPasswordSchema.safeParse(values);
-  if (!validatedFields.success) {
+  const parsedCredentials = ResetPasswordSchema.safeParse(values);
+  if (!parsedCredentials.success) {
     return { error: "Invalid password" };
   }
 
-  const { password } = validatedFields.data;
+  const { password } = parsedCredentials.data;
 
   const existingToken = await getPasswordResetTokenByToken(token);
 
@@ -40,12 +41,21 @@ export const resetPassword = async (
     return { error: "Email not found" };
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const salt = crypto.randomUUID();
+
+  const encoder = new TextEncoder();
+  const saltedPassword = encoder.encode(password + salt);
+  const hashedPasswordBuffer = await crypto.subtle.digest(
+    "SHA-256",
+    saltedPassword,
+  );
+  const hashedPassword = getStringFromBuffer(hashedPasswordBuffer);
 
   await prisma.user.update({
     where: { id: existingUser.id },
     data: {
       password: hashedPassword,
+      salt: salt,
     },
   });
 

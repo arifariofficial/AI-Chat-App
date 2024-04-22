@@ -3,7 +3,7 @@ import Subscription from "./subscription";
 
 export default function UserProfile() {
   return (
-    <div className="flex flex-row h-screen">
+    <div className="mx-auto flex h-screen max-w-screen-xl flex-row">
       <ProfileInfo />
       <Subscription />
     </div>

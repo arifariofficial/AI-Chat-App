@@ -1,8 +1,7 @@
+"use client";
 import React from "react";
-
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { useState } from "react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -22,15 +21,15 @@ export default function AuthButton() {
               className="rounded-full"
             />
           ) : (
-            <AccountCircleIcon fontSize="large" />
+            <AccountCircleIcon className="h-8 w-8 rounded-full bg-white" />
           )}
         </Link>
 
         <button
-          onClick={() => signOut()}
+          onClick={() => signOut({ callbackUrl: "/auth/logout" })}
           className=" text-top m-0 flex h-[20px] w-[70px] items-center  justify-center  bg-inherit text-xs"
         >
-          Sign out
+          Logout
         </button>
       </>
     );
@@ -41,7 +40,7 @@ export default function AuthButton() {
       <AccountCircleIcon />
       <Link href="/auth/login">
         <p className=" text-top m-0 flex h-[20px] w-[70px] items-center  justify-center  bg-inherit text-xs ">
-          Sign in
+          Login
         </p>
       </Link>
     </>

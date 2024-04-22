@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { CheckCircledIcon } from "@radix-ui/react-icons";
 import { useEffect, useState } from "react";
 
@@ -30,9 +31,9 @@ export const FormSusscess = ({ message, time = true }: FormSuccessProps) => {
   if (!visibleMessage) return null;
 
   return (
-    <div className="felx items-center gap-x-2 rounded-md bg-emerald-500/15 p-3 text-sm text-emerald-500">
-      <CheckCircledIcon className="h-4 w-4" />
-      <p>{visibleMessage}</p>
+    <div className="flex flex-row items-center gap-x-2 rounded-md border bg-emerald-500/15  p-3 text-sm text-emerald-500">
+      <CheckCircledIcon />
+      <Typography variant="body2">{visibleMessage}</Typography>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 "use client";
+
 import { useForm } from "react-hook-form";
 import { CardWrapper } from "./card-wrapper";
 import * as z from "zod";
@@ -29,12 +30,17 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import theme from "@components/theme";
+import { redirect, useRouter } from "next/navigation";
+import { getMessageFromCode } from "@lib/utils";
+import IconSpinner from "@components/ui/icons";
 
 export const RegisterForm = () => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -51,12 +57,22 @@ export const RegisterForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      register(values).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
-      });
+      register(values)
+        .then((result) => {
+          if (result?.type === "error") {
+            setError(getMessageFromCode(result.resultCode));
+          }
+          if (result?.type === "success") {
+            setSuccess(getMessageFromCode(result.resultCode));
+            window.location.href = "/";
+          }
+        })
+        .catch((error) => {
+          const message =
+            error.response?.data?.message || "Something went wrong";
+          setError(message);
+        });
     });
-    form.reset();
   };
 
   return (
@@ -100,9 +116,12 @@ export const RegisterForm = () => {
                     <FormItem>
                       <FormControl>
                         <TextField
+                          disabled={isPending}
+                          margin="normal"
                           required
                           fullWidth
                           id="email"
+                          name="email"
                           label="Email Address"
                           autoFocus
                           autoComplete="current-email"
@@ -124,9 +143,11 @@ export const RegisterForm = () => {
                     <FormItem>
                       <FormControl>
                         <TextField
+                          disabled={isPending}
                           margin="normal"
                           required
                           fullWidth
+                          id="password"
                           name="password"
                           label="Password"
                           value={value}
@@ -134,7 +155,6 @@ export const RegisterForm = () => {
                           onBlur={onBlur}
                           ref={ref}
                           type={showPassword ? "text" : "password"}
-                          id="password"
                           autoComplete="current-password"
                           InputLabelProps={{ shrink: true }}
                           InputProps={{
@@ -166,12 +186,13 @@ export const RegisterForm = () => {
                     <FormItem>
                       <FormControl>
                         <TextField
+                          disabled={isPending}
                           margin="normal"
                           required
                           fullWidth
+                          id="confirmPassword"
                           name="confirmPassword"
                           label="Confirm Password"
-                          id="confirmPassword"
                           autoComplete="current-password"
                           value={value}
                           onChange={onChange}
@@ -190,9 +211,9 @@ export const RegisterForm = () => {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 2 }}
+                  sx={{ mt: 2, height: 37 }}
                 >
-                  Create
+                  {isPending ? <IconSpinner /> : "Create"}
                 </Button>
               </Box>
             </Form>

@@ -2,11 +2,16 @@ import Credentials from "next-auth/providers/credentials";
 import type { NextAuthConfig } from "next-auth";
 import { LoginSchema } from "./lib/Schema";
 import { getUserByEmail } from "./data/user";
-import bcrypt from "bcryptjs";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
+import { getStringFromBuffer } from "./lib/utils";
 
-export default {
+export const authConfig = {
+  pages: {
+    signIn: "/auth/login",
+    error: "/auth/error",
+    signOut: "/auth/logout",
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
@@ -18,20 +23,27 @@ export default {
     }),
     Credentials({
       async authorize(credentials) {
-        const validatedFields = LoginSchema.safeParse(credentials);
+        const parsedCredentials = LoginSchema.safeParse(credentials);
 
-        if (validatedFields.success) {
-          const { email, password } = validatedFields.data;
+        if (parsedCredentials.success) {
+          const { email, password } = parsedCredentials.data;
 
           const user = await getUserByEmail(email);
+          if (!user) return null;
 
-          if (!user || !user.password) {
+          const encoder = new TextEncoder();
+          const saltedPassword = encoder.encode(password + user.salt);
+          const hashedPasswordBuffer = await crypto.subtle.digest(
+            "SHA-256",
+            saltedPassword,
+          );
+          const hashedPassword = getStringFromBuffer(hashedPasswordBuffer);
+
+          if (hashedPassword === user.password) {
+            return user;
+          } else {
             return null;
           }
-
-          const passwordMatch = await bcrypt.compare(password, user.password);
-
-          if (passwordMatch) return user;
         }
 
         return null;

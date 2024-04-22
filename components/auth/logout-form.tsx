@@ -1,10 +1,10 @@
 "use client";
+
 import { useForm } from "react-hook-form";
 import { CardWrapper } from "./card-wrapper";
 import * as z from "zod";
 import { LoginSchema } from "@/lib/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import {
   Form,
   FormControl,
@@ -16,7 +16,7 @@ import {
 import { Input } from "../ui/input";
 import { FormError } from "../form-error";
 import { FormSusscess } from "../form-success";
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -34,13 +34,11 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import theme from "@components/theme";
 import { Button as MyButton } from "@components/ui/button";
-import { useFormState, useFormStatus } from "react-dom";
 import IconSpinner from "@components/ui/icons";
-import { getMessageFromCode } from "@lib/utils";
-import { toast } from "sonner";
 import { login } from "@actions/login";
+import { getMessageFromCode } from "@lib/utils";
 
-export const LoginForm = () => {
+export const LogoutForm = () => {
   const searchParams = useSearchParams();
   const urlError =
     searchParams.get("error") === "OAuthAccountNotLinked"
@@ -55,17 +53,6 @@ export const LoginForm = () => {
 
   const router = useRouter();
 
-  /*   useEffect(() => {
-    if (result) {
-      if (result.type === "error") {
-        toast.error(getMessageFromCode(result.resultCode));
-      } else {
-        toast.success(getMessageFromCode(result.resultCode));
-        router.refresh();
-      }
-    }
-  }, [result, router]); */
-
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -74,7 +61,6 @@ export const LoginForm = () => {
       code: "",
     },
   });
-
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
@@ -124,7 +110,7 @@ export const LoginForm = () => {
           className="rounded-xl border border-gray-300"
         >
           <CardWrapper
-            headerLabel="Welcome back"
+            headerLabel="Successfully logged out"
             backButtonLabel="Dont't have an account?"
             backButtonHref="/auth/register"
             showLocal
@@ -181,6 +167,7 @@ export const LoginForm = () => {
                                 required
                                 fullWidth
                                 id="email"
+                                name="email"
                                 label="Email Address"
                                 autoFocus
                                 autoComplete="current-email"
@@ -208,15 +195,15 @@ export const LoginForm = () => {
                                 margin="normal"
                                 required
                                 fullWidth
+                                id="password"
                                 name="password"
                                 label="Password"
+                                autoComplete="current-password"
                                 value={value}
                                 onChange={onChange}
                                 onBlur={onBlur}
                                 ref={ref}
                                 type={showPassword ? "text" : "password"}
-                                id="password"
-                                autoComplete="current-password"
                                 InputLabelProps={{ shrink: true }}
                                 InputProps={{
                                   endAdornment: (
@@ -266,7 +253,7 @@ export const LoginForm = () => {
                   ) : showTwoFactor ? (
                     "Confirm"
                   ) : (
-                    "Login"
+                    "Login again"
                   )}
                 </Button>
               </Box>
