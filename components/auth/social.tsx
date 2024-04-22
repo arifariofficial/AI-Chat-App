@@ -14,9 +14,7 @@ export const Social = () => {
   const onClick = (provider: "facebook" | "google") => {
     provider === "facebook" ? setPendingFacebook(true) : setPendingGoogle(true);
 
-    signIn(provider, {
-      callbackUrl: "/profile",
-    });
+    signIn(provider, { callbackUrl: "/" });
   };
 
   return (

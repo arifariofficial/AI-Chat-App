@@ -7,7 +7,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 import { getStringFromBuffer } from "./lib/utils";
 
 export const authConfig = {
-  secret: process.env.AUTH_SECRET,
+  secret: "RQx354VYXs33QuNycXjr5skBsAriPXD7mvr0J3hpO80=",
   pages: {
     signIn: "/auth/login",
     error: "/auth/error",

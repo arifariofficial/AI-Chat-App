@@ -18,7 +18,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user }) {
       if (typeof user.id === "undefined") {
         console.error("User ID is undefined");
         return false;
