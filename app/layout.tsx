@@ -20,6 +20,8 @@ export default async function RootLayout({
 }>) {
   const session = await auth();
 
+  console.log(process.env.NEXTAUTH_URL);
+
   return (
     <html lang="en">
       <body>
