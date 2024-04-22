@@ -14,7 +14,7 @@ declare module "next-auth" {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: "RQx354VYXs33QuNycXjr5skBsAriPXD7mvr0J3hpO80=",
   ...authConfig,
   pages: {
     signIn: "/auth/login",
