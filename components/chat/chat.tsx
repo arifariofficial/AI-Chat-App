@@ -14,7 +14,7 @@ interface Message {
 }
 
 export default function Chat() {
-  const session = useSession();
+  const { data: session } = useSession();
   const [messages, setMessages] = useState<Message[]>([]);
   const [showModal, setShowModal] = useState(false);
 

@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import { Box, Button, Container, Grid, ThemeProvider } from "@mui/material";
 import theme from "@components/theme";
@@ -6,7 +7,12 @@ import theme from "@components/theme";
 const Home = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="100vh"
+      >
         <Grid
           container
           justifyContent={"center"}
