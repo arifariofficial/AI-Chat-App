@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export default async function SettingsPage() {
   const session = await auth();
+
   return (
     <div className="m-12 flex flex-col">
       <div className=" flex-wrap break-words">{JSON.stringify(session)}</div>

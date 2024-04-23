@@ -25,7 +25,7 @@ export default function VerificationForm() {
         setSuccess(data.success);
         setError(data.error);
       })
-      .catch((err) => {
+      .catch(() => {
         setError("Somthing went wrong");
       });
   }, [token]);

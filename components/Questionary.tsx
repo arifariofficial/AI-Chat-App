@@ -82,7 +82,7 @@ const questions: Question[] = [
         </h4>
         <div>
           <Link href="/">
-            <Button className="btn-primary">Home</Button>
+            <Button>Home</Button>
           </Link>
         </div>
       </>
@@ -165,7 +165,7 @@ const Questionary: React.FC = () => {
     <>
       <ThemeProvider theme={theme}>
         {!finalAnswer && (
-          <div className="md:left-18 relative m-10 grid">
+          <div className=" relative m-10 grid">
             <h1 className="text-2xl font-semibold text-slate-800">
               {!finalAnswer && currentQuestion?.question}
             </h1>
@@ -184,7 +184,7 @@ const Questionary: React.FC = () => {
           </div>
         )}
         {finalAnswer && (
-          <div className="w-responsive mx-auto flex max-w-[500px] flex-col items-center justify-center gap-4 text-center text-xl font-semibold ">
+          <div className="mx-auto flex max-w-[500px] flex-col items-center justify-center gap-4 text-center text-xl font-semibold ">
             {currentQuestion?.statement}
           </div>
         )}

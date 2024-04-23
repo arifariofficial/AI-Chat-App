@@ -3,6 +3,7 @@
 import { Poppins } from "next/font/google";
 import { Avatar, Typography } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { cn } from "@lib/utils";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -15,7 +16,12 @@ interface HeaderProps {
 
 export const Header = ({ label }: HeaderProps) => {
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-y-4">
+    <div
+      className={cn(
+        font,
+        "flex w-full flex-col items-center justify-center gap-y-4",
+      )}
+    >
       <Avatar sx={{ bgcolor: "secondary.main" }}>
         <LockOutlinedIcon />
       </Avatar>

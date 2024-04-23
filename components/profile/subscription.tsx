@@ -1,8 +1,8 @@
-import { Card, CardContent, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 export default function Subscription() {
   return (
-    <div className="flex flex-col p-4 mt-10 w-full">
+    <div className="mt-10 flex w-full flex-col p-4">
       <Typography variant="h6">Subscription Details</Typography>
       <div>
         <Typography color="text.secondary">Plan: Premium</Typography>

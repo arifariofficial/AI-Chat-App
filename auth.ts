@@ -14,11 +14,18 @@ declare module "next-auth" {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  secret: process.env.AUTH_SECRET,
   ...authConfig,
+  pages: {
+    signIn: "/auth/login",
+    signOut: "/auth/logout",
+    newUser: "/auth/register",
+    error: "/auth/error",
+  },
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user }) {
       if (typeof user.id === "undefined") {
         console.error("User ID is undefined");
         return false;

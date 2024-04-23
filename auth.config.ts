@@ -7,11 +7,6 @@ import FacebookProvider from "next-auth/providers/facebook";
 import { getStringFromBuffer } from "./lib/utils";
 
 export const authConfig = {
-  pages: {
-    signIn: "/auth/login",
-    error: "/auth/error",
-    signOut: "/auth/logout",
-  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
