@@ -5,13 +5,7 @@ import { CardWrapper } from "./card-wrapper";
 import * as z from "zod";
 import { RegisterSchema } from "@/lib/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../ui/form";
+import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { FormError } from "../form-error";
 import { FormSusscess } from "../form-success";
 import { useState, useTransition } from "react";
@@ -104,7 +98,7 @@ export const RegisterForm = () => {
               <FormField
                 control={form.control}
                 name="email"
-                render={({ field: { value, onChange, onBlur, ref } }) => (
+                render={({ field: { value, onChange, onBlur, ref, name } }) => (
                   <FormItem>
                     <FormControl>
                       <TextField
@@ -113,7 +107,7 @@ export const RegisterForm = () => {
                         required
                         fullWidth
                         id="email"
-                        name="email"
+                        name={name}
                         label="Email Address"
                         autoFocus
                         autoComplete="current-email"
@@ -122,9 +116,18 @@ export const RegisterForm = () => {
                         onBlur={onBlur}
                         ref={ref}
                         InputLabelProps={{ shrink: true }}
+                        error={
+                          form.getFieldState("email").isTouched &&
+                          Boolean(form.formState.errors.email)
+                        }
+                        helperText={
+                          form.getFieldState("email").isTouched &&
+                          form.formState.errors.email
+                            ? form.formState.errors.email.message
+                            : null
+                        }
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -149,6 +152,16 @@ export const RegisterForm = () => {
                         type={showPassword ? "text" : "password"}
                         autoComplete="current-password"
                         InputLabelProps={{ shrink: true }}
+                        error={
+                          form.getFieldState("password").isTouched &&
+                          Boolean(form.formState.errors.password)
+                        }
+                        helperText={
+                          form.getFieldState("password").isTouched &&
+                          form.formState.errors.password
+                            ? form.formState.errors.password.message
+                            : null
+                        }
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position="end">
@@ -167,7 +180,6 @@ export const RegisterForm = () => {
                         }}
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -191,9 +203,18 @@ export const RegisterForm = () => {
                         onBlur={onBlur}
                         ref={ref}
                         InputLabelProps={{ shrink: true }}
+                        error={
+                          form.getFieldState("confirmPassword").isTouched &&
+                          Boolean(form.formState.errors.confirmPassword)
+                        }
+                        helperText={
+                          form.getFieldState("confirmPassword").isTouched &&
+                          form.formState.errors.confirmPassword
+                            ? form.formState.errors.confirmPassword.message
+                            : null
+                        }
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />

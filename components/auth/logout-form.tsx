@@ -135,9 +135,18 @@ export const LogoutForm = () => {
                             onBlur={onBlur}
                             ref={ref}
                             InputLabelProps={{ shrink: true }}
+                            error={
+                              form.getFieldState("code").isTouched &&
+                              Boolean(form.formState.errors.code)
+                            }
+                            helperText={
+                              form.getFieldState("code").isTouched &&
+                              form.formState.errors.code
+                                ? form.formState.errors.code.message
+                                : null
+                            }
                           />
                         </FormControl>
-                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -165,9 +174,18 @@ export const LogoutForm = () => {
                               onBlur={onBlur}
                               ref={ref}
                               InputLabelProps={{ shrink: true }}
+                              error={
+                                form.getFieldState("email").isTouched &&
+                                Boolean(form.formState.errors.email)
+                              }
+                              helperText={
+                                form.getFieldState("email").isTouched &&
+                                form.formState.errors.email
+                                  ? form.formState.errors.email.message
+                                  : null
+                              }
                             />
                           </FormControl>
-                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -192,6 +210,16 @@ export const LogoutForm = () => {
                               ref={ref}
                               type={showPassword ? "text" : "password"}
                               InputLabelProps={{ shrink: true }}
+                              error={
+                                form.getFieldState("password").isTouched &&
+                                Boolean(form.formState.errors.password)
+                              }
+                              helperText={
+                                form.getFieldState("password").isTouched &&
+                                form.formState.errors.password
+                                  ? form.formState.errors.password.message
+                                  : null
+                              }
                               InputProps={{
                                 endAdornment: (
                                   <InputAdornment position="end">

@@ -116,6 +116,16 @@ export const ResetPasswordForm = () => {
                         ref={ref}
                         autoComplete="current-password"
                         InputLabelProps={{ shrink: true }}
+                        error={
+                          form.getFieldState("password").isTouched &&
+                          Boolean(form.formState.errors.password)
+                        }
+                        helperText={
+                          form.getFieldState("password").isTouched &&
+                          form.formState.errors.password
+                            ? form.formState.errors.password.message
+                            : null
+                        }
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position="end">
@@ -134,7 +144,6 @@ export const ResetPasswordForm = () => {
                         }}
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -159,6 +168,16 @@ export const ResetPasswordForm = () => {
                         onBlur={onBlur}
                         ref={ref}
                         InputLabelProps={{ shrink: true }}
+                        error={
+                          form.getFieldState("confirmPassword").isTouched &&
+                          Boolean(form.formState.errors.confirmPassword)
+                        }
+                        helperText={
+                          form.getFieldState("confirmPassword").isTouched &&
+                          form.formState.errors.confirmPassword
+                            ? form.formState.errors.confirmPassword.message
+                            : null
+                        }
                       />
                     </FormControl>
                     <FormMessage />

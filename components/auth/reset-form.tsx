@@ -5,13 +5,7 @@ import { CardWrapper } from "./card-wrapper";
 import * as z from "zod";
 import { ResetSchema } from "@/lib/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../ui/form";
+import { Form, FormControl, FormField, FormItem } from "../ui/form";
 
 import { FormError } from "../form-error";
 import { FormSusscess } from "../form-success";
@@ -96,10 +90,19 @@ export const ResetForm = () => {
                         onChange={onChange}
                         onBlur={onBlur}
                         ref={ref}
+                        error={
+                          form.getFieldState("email").isTouched &&
+                          Boolean(form.formState.errors.email)
+                        }
+                        helperText={
+                          form.getFieldState("email").isTouched &&
+                          form.formState.errors.email
+                            ? form.formState.errors.email.message
+                            : null
+                        }
                         InputLabelProps={{ shrink: true }}
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
