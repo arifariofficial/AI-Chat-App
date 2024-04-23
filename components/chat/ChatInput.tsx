@@ -1,6 +1,6 @@
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import axios from "axios";
-import { useState, FormEvent, useRef } from "react";
+import { useState, useRef } from "react";
 import SendIcon from "@mui/icons-material/Send";
 
 const ChatInput: React.FC<{

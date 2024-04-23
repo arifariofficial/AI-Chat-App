@@ -61,18 +61,10 @@ const InnerMessage = styled.div`
   flex-grow: 1;
   font-size: 0.75rem;
 `;
-const Input = styled.div`
-  padding: 1rem;
-  animation: ${pulse} 2s infinite;
-  border-radius: 0.25rem;
-  background-color: #d4d4d4;
-  margin-top: -15px;
-  color: #999;
-`;
 
 const ChatPageSkeleton = () => {
   return (
-    <Container className="mx-autoflex w-full max-w-[500px] items-center justify-center rounded-2xl bg-transparent  sm:max-w-[700px] md:max-w-[1000px]">
+    <Container className="mx-auto flex w-full max-w-[500px] items-center justify-center rounded-2xl bg-transparent  sm:max-w-[700px] md:max-w-[1000px]">
       <ChatDisplay />
     </Container>
   );
