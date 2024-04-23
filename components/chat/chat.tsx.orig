@@ -6,7 +6,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import ChatSkeleton from "@components/skeletons/ChatSkeleton";
-import { Button } from "@mui/material";
+<<<<<<< HEAD
+=======
+import { Button, Typography } from "@mui/material";
+>>>>>>> feature/chat
 
 interface Message {
   author: string;
