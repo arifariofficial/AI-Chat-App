@@ -57,8 +57,8 @@ export default function Chat() {
 
   return (
     <>
-      <main className="mx-auto mt-16 flex w-full max-w-[500px] items-center justify-center rounded-2xl bg-transparent  sm:max-w-[700px] md:max-w-[1000px]">
-        <div className=" flex w-full flex-col rounded-2xl border border-gray-200  bg-transparent shadow-lg">
+      <main className="mx-auto flex w-full  items-end justify-center rounded-2xl bg-transparent  p-2  sm:max-w-[700px] md:max-w-[1000px]">
+        <div className=" flex w-full flex-col rounded-2xl border border-gray-200  bg-transparent ">
           <ChatDisplay messages={messages} />
           <ChatInput onSendMessage={handleSendMessage} />
         </div>

@@ -96,6 +96,7 @@ const ChatInput: React.FC<{
         autoCorrect="off"
         multiline
         minRows={2}
+        maxRows={10}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={handleKeyDown}
@@ -104,7 +105,11 @@ const ChatInput: React.FC<{
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <Button onClick={handleButtonClick} type="submit">
+              <Button
+                onClick={handleButtonClick}
+                type="submit"
+                sx={{ boxShadow: 0 }}
+              >
                 <SendIcon className="shadow-sm" />
               </Button>
             </InputAdornment>

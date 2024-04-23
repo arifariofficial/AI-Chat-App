@@ -19,7 +19,7 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
   }, [messages]);
 
   return (
-    <div className="relative m-2 mb-px flex h-[80vh] flex-col space-y-2 overflow-auto rounded-t-xl border  bg-gray-50 p-4 ">
+    <div className="relative m-2 mb-px flex h-[85vh] flex-col justify-end space-y-2 overflow-auto rounded-b-md rounded-t-xl border  bg-gray-50 p-4 ">
       {messages.map((message, index) => (
         <div
           key={index}
