@@ -1,6 +1,8 @@
 "use client";
+import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import SendIcon from "@mui/icons-material/Send";
 
 const pulse = keyframes`
   0%, 100% {
@@ -38,7 +40,6 @@ const Message = styled.div`
   margin-bottom: 1rem;
   animation: ${pulse} 2s infinite;
   border-radius: 0.25rem;
-  background-color: #d4d4d4;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -71,7 +72,57 @@ const Input = styled.div`
 
 const ChatPageSkeleton = () => {
   return (
-    <Container className="rounded-b-xl shadow-2xl">
+    <Container className="mx-autoflex w-full max-w-[500px] items-center justify-center rounded-2xl bg-transparent  sm:max-w-[700px] md:max-w-[1000px]">
+      <ChatDisplay />
+    </Container>
+  );
+};
+
+export default ChatPageSkeleton;
+
+const ChatInput = () => {
+  return (
+    <Box
+      component="form"
+      className="w-full resize-none bg-transparent p-2 opacity-20 focus-within:outline-none sm:text-sm"
+    >
+      <TextField
+        id="message"
+        name="message"
+        type="text"
+        fullWidth
+        autoFocus
+        autoComplete="off"
+        autoCorrect="off"
+        multiline
+        placeholder="Type a message..."
+        className="rounded-2xl"
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <Button>
+                <SendIcon />
+              </Button>
+            </InputAdornment>
+          ),
+        }}
+        sx={{
+          "& .MuiInputBase-root": {
+            alignItems: "end",
+            borderRadius: "12px",
+          },
+          "& .MuiInputAdornment-positionEnd": {
+            marginBottom: "12px",
+          },
+        }}
+      />
+    </Box>
+  );
+};
+
+const ChatDisplay = () => {
+  return (
+    <div>
       <Messages className=" drop-shadow-xl ">
         <Message>
           <InnerMessage style={{ width: "30%" }}>Hey there</InnerMessage>
@@ -95,20 +146,8 @@ const ChatPageSkeleton = () => {
             opposed to $26,590.
           </InnerMessage>
         </Message>
-        <Input className="flex justify-between shadow-md drop-shadow-sm">
-          <div
-            className="flex items-center rounded-md border text-left "
-            style={{ width: "65%", paddingLeft: "20px" }}
-          >
-            Type a message...
-          </div>
-          <button className="p-5" style={{ opacity: 0.2, width: "30%" }}>
-            Send
-          </button>
-        </Input>
+        <ChatInput />
       </Messages>
-    </Container>
+    </div>
   );
 };
-
-export default ChatPageSkeleton;
