@@ -42,11 +42,8 @@ let theme = createTheme({
           fontWeight: "bold",
           color: "#f5efd1",
           backgroundColor: "#4F6E70",
-          transition: "0.3s cubic-bezier(.47,1.64,.41,.8)",
-          boxShadow: "0 4px 6px 0 rgba(0, 0, 0, 0.2)",
           "&:hover": {
             backgroundColor: "#3C5254",
-            boxShadow: "0 7px 14px 0 rgba(0, 0, 0, 0.2)",
           },
         },
       },
@@ -62,10 +59,10 @@ let theme = createTheme({
         },
         action: {
           "& .MuiButton-root": {
-            color: "#2e4342", // button text
-            backgroundColor: "#FFFFFF", //background color of the button
+            color: "#2e4342",
+            backgroundColor: "#FFFFFF",
             "&:hover": {
-              backgroundColor: "#3f6563", //hover background color of the button
+              backgroundColor: "#3f6563",
             },
           },
         },
@@ -80,10 +77,10 @@ let theme = createTheme({
       styleOverrides: {
         root: {
           "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#719ea1", // change as needed
+            borderColor: "#719ea1",
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#719ea1", // change as needed
+            borderColor: "#719ea1",
           },
         },
       },
@@ -92,7 +89,7 @@ let theme = createTheme({
       styleOverrides: {
         root: {
           "&.Mui-error": {
-            color: "#2E4346", // Change this to the color you want
+            color: "#2E4346",
           },
         },
       },

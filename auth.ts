@@ -9,6 +9,7 @@ declare module "next-auth" {
   interface Session {
     user: {
       role: string;
+      isTwoFactorEnabled: boolean;
     } & DefaultSession["user"];
   }
 }
@@ -25,24 +26,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
   callbacks: {
-    async signIn({ user }) {
+    async signIn({ user, account }) {
       if (typeof user.id === "undefined") {
         console.error("User ID is undefined");
         return false;
       }
       const existingUser = await getUserById(user.id);
-      if (existingUser?.isTwoFactorEnabled) {
-        const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
-          existingUser.id,
-        );
-        if (!twoFactorConfirmation) return false;
+      if (account?.provider === "credentials") {
+        if (existingUser?.isTwoFactorEnabled) {
+          const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
+            existingUser.id,
+          );
+          if (!twoFactorConfirmation) return false;
 
-        // Delete two factor confirmation for next sign in
-        await prisma.twoFactorConfirmation.delete({
-          where: {
-            id: twoFactorConfirmation.id,
-          },
-        });
+          // Delete two factor confirmation for next sign in
+          await prisma.twoFactorConfirmation.delete({
+            where: {
+              id: twoFactorConfirmation.id,
+            },
+          });
+        }
       }
       return true;
     },
@@ -52,6 +55,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const existingUser = await getUserById(token.sub);
         if (existingUser && session.user) {
           session.user.role = existingUser.role;
+          session.user.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
         }
       }
       return session;

@@ -5,13 +5,7 @@ import * as z from "zod";
 import { LoginSchema } from "@/lib/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../ui/form";
+import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { FormError } from "../form-error";
 import { FormSusscess } from "../form-success";
 import { useState, useTransition } from "react";
@@ -201,6 +195,7 @@ export const LoginForm = () => {
                               margin="normal"
                               required
                               fullWidth
+                              id="password"
                               name="password"
                               label="Password"
                               value={value}
@@ -208,7 +203,6 @@ export const LoginForm = () => {
                               onBlur={onBlur}
                               ref={ref}
                               type={showPassword ? "text" : "password"}
-                              id="password"
                               autoComplete="current-password"
                               InputLabelProps={{ shrink: true }}
                               error={
@@ -249,7 +243,6 @@ export const LoginForm = () => {
                           >
                             <Link href="/auth/reset">Forgot password?</Link>
                           </MyButton>
-                          <FormMessage />
                         </FormItem>
                       )}
                     />

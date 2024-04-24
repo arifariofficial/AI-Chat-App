@@ -25,11 +25,11 @@ export const Social = () => {
     <div className="flex w-full items-center ">
       <Grid
         container
-        spacing={2}
+        spacing={1}
         justifyContent="space-around"
-        style={{ marginBottom: 8 }}
+        flexDirection="column"
       >
-        <Grid item xs={6}>
+        <Grid item xs>
           <Button
             variant="outlined"
             fullWidth
@@ -40,17 +40,18 @@ export const Social = () => {
               display: "flex",
               bgcolor: "white",
               color: "primary.main",
+              boxShadow: "none",
               ":hover ": { bgcolor: "#ccced2" },
               ".MuiTouchRipple-child ": { bgcolor: "#4b5563" },
             }}
           >
-            <Typography variant="inherit" sx={{ m: 2 }}>
+            <Typography variant="inherit" sx={{ mx: 3 }}>
               Google
             </Typography>
             {pendingGoogle && <IconSpinner />}
           </Button>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs>
           <Button
             variant="outlined"
             fullWidth
@@ -60,12 +61,13 @@ export const Social = () => {
               height: 37,
               display: "flex",
               bgcolor: "white",
+              boxShadow: "none",
               color: "primary.main",
               ":hover ": { bgcolor: "#ccced2" },
               ".MuiTouchRipple-child ": { bgcolor: "#4b5563" },
             }}
           >
-            <Typography variant="inherit" sx={{ m: 2 }}>
+            <Typography variant="inherit" sx={{ mx: 2 }}>
               Facebook
             </Typography>
             {pendingFacebook && <IconSpinner />}

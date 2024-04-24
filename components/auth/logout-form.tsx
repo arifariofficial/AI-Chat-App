@@ -5,13 +5,7 @@ import { CardWrapper } from "./card-wrapper";
 import * as z from "zod";
 import { LoginSchema } from "@/lib/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../ui/form";
+import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { FormError } from "../form-error";
 import { FormSusscess } from "../form-success";
 import { useState, useTransition } from "react";
@@ -248,7 +242,6 @@ export const LogoutForm = () => {
                           >
                             <Link href="/auth/reset">Forgot password?</Link>
                           </MyButton>
-                          <FormMessage />
                         </FormItem>
                       )}
                     />

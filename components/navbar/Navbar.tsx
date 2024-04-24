@@ -7,7 +7,7 @@ import AuthButton from "./auth-button";
 const NavBar = () => {
   return (
     <div className="sticky top-0 z-10  rounded-b-md bg-[#2d4242] shadow-sm shadow-teal-800">
-      <nav className="mx-auto flex  max-w-screen-xl justify-between">
+      <nav className="mx-auto flex  h-16 max-w-screen-xl justify-between">
         <section>
           <Link href={`/`}>
             <h1 className="flex p-4 text-2xl font-extrabold tracking-wide text-[#F5EFD1]">
