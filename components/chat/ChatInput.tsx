@@ -1,4 +1,10 @@
-import { Box, Button, InputAdornment, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
 import axios from "axios";
 import { useState, useRef } from "react";
 import SendIcon from "@mui/icons-material/Send";
@@ -8,10 +14,12 @@ const ChatInput: React.FC<{
 }> = ({ onSendMessage }) => {
   const [message, setMessage] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   //chat-gpt
   const sendAndClearMessage = async () => {
     if (!message.trim()) return;
+    setIsLoading(true);
 
     // Send the user's message to the chat
     onSendMessage({ text: message, author: "user" });
@@ -27,11 +35,14 @@ const ChatInput: React.FC<{
       onSendMessage({ text: aiMessage, author: "SIPE" });
     } catch (error) {
       console.error("Error while sending message:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   /* const sendAndClearMessage = async () => {
     if (!message.trim()) return;
+      setIsLoading(true);
 
     // Send the user's message to the chat
     onSendMessage({ text: message, author: "user" });
@@ -62,6 +73,8 @@ const ChatInput: React.FC<{
       onSendMessage({ text: aiMessage, author: "SIPE" });
     } catch (error) {
       console.error("Error while sending message:", error);
+    }finally {
+      setIsLoading(false);
     }
   }; */
 
@@ -75,8 +88,8 @@ const ChatInput: React.FC<{
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault(); // Prevent the default action to avoid inserting a new line
-      sendAndClearMessage(); // Call sendAndClearMessage directly
+      e.preventDefault();
+      sendAndClearMessage();
     }
   };
 
@@ -84,7 +97,7 @@ const ChatInput: React.FC<{
     <Box
       component="form"
       onSubmit={handleSubmit}
-      className="w-full resize-none bg-transparent p-2 focus-within:outline-none sm:text-sm"
+      className="w-full resize-none bg-transparent  sm:text-sm"
     >
       <TextField
         id="message"
@@ -95,33 +108,57 @@ const ChatInput: React.FC<{
         autoComplete="off"
         autoCorrect="off"
         multiline
-        minRows={2}
-        maxRows={10}
+        minRows={1}
+        maxRows={8}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="Type a message..."
-        className="rounded-2xl"
+        placeholder="Write a Message to SIPE..."
+        className="shadow-inner"
+        helperText={`${message.length}/1000`}
+        inputProps={{
+          maxLength: 1000,
+        }}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
               <Button
                 onClick={handleButtonClick}
                 type="submit"
-                sx={{ boxShadow: 0 }}
+                disabled={!isLoading && !message.trim()}
+                sx={{
+                  borderRadius: "8px",
+                  minWidth: "20px",
+                  padding: "4px 8px",
+                  "& .MuiButton-startIcon": {
+                    boxShadow: "none",
+                  },
+                }}
+                size="small"
               >
-                <SendIcon className="shadow-sm" />
+                {isLoading ? (
+                  <CircularProgress size="20px" className="text-[#f5efd1]" />
+                ) : (
+                  <SendIcon fontSize="small" />
+                )}
               </Button>
             </InputAdornment>
           ),
         }}
         sx={{
           "& .MuiInputBase-root": {
+            minHeight: "50px",
+            display: "flex",
             alignItems: "end",
             borderRadius: "12px",
+            py: 0,
+            "& .MuiInputBase-input": {
+              padding: "2px 16px",
+              marginBottom: "10px",
+            },
           },
           "& .MuiInputAdornment-positionEnd": {
-            marginBottom: "20px",
+            marginBottom: "25px",
           },
         }}
       />

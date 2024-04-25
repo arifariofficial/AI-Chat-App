@@ -1,3 +1,9 @@
+import Subscription from "@components/profile/subscription";
+
 export default function SubscriptionPage() {
-  return <div>SubscriptionPage</div>;
+  return (
+    <div>
+      <Subscription />
+    </div>
+  );
 }

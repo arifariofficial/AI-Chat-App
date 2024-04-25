@@ -1,10 +1,9 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, CircularProgress, Grid, Typography } from "@mui/material";
 import FacebookIcon from "@public/images/FacebookIcon";
 import GoogleIcon from "@public/images/GoogleIcon";
-import IconSpinner from "@components/ui/icons";
 import { useState } from "react";
 
 export const Social = () => {
@@ -48,7 +47,9 @@ export const Social = () => {
             <Typography variant="inherit" sx={{ mx: 3 }}>
               Google
             </Typography>
-            {pendingGoogle && <IconSpinner />}
+            {pendingGoogle && (
+              <CircularProgress size="20px" className="text-[#506e70]" />
+            )}
           </Button>
         </Grid>
         <Grid item xs>
@@ -70,7 +71,9 @@ export const Social = () => {
             <Typography variant="inherit" sx={{ mx: 2 }}>
               Facebook
             </Typography>
-            {pendingFacebook && <IconSpinner />}
+            {pendingFacebook && (
+              <CircularProgress size="20px" className="text-[#506e70]" />
+            )}
           </Button>
         </Grid>
       </Grid>

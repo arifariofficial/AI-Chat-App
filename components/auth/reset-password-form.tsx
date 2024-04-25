@@ -21,6 +21,7 @@ import { resetPassword } from "@/actions/reset-password";
 import {
   Box,
   Button,
+  CircularProgress,
   Container,
   IconButton,
   InputAdornment,
@@ -29,7 +30,6 @@ import {
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import IconSpinner from "@components/ui/icons";
 
 export const ResetPasswordForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -188,7 +188,11 @@ export const ResetPasswordForm = () => {
               <FormError message={error} time={false} />
               <FormSusscess message={success} time={false} />
               <Button type="submit" fullWidth sx={{ mt: 2, height: 37 }}>
-                {isPending ? <IconSpinner /> : "Save"}
+                {isPending ? (
+                  <CircularProgress size="20px" className="text-[#f5efd1]" />
+                ) : (
+                  "Save"
+                )}
               </Button>
             </Box>
           </Form>

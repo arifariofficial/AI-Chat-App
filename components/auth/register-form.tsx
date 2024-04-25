@@ -13,6 +13,7 @@ import { register } from "@/actions/register";
 import {
   Box,
   Button,
+  CircularProgress,
   Container,
   IconButton,
   InputAdornment,
@@ -22,7 +23,6 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { getMessageFromCode } from "@lib/utils";
-import IconSpinner from "@components/ui/icons";
 
 export const RegisterForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -226,7 +226,11 @@ export const RegisterForm = () => {
                 variant="contained"
                 sx={{ mt: 2, height: 37 }}
               >
-                {isPending ? <IconSpinner /> : "Create"}
+                {isPending ? (
+                  <CircularProgress size="20px" className="text-[#f5efd1]" />
+                ) : (
+                  "Create"
+                )}
               </Button>
             </Box>
           </Form>

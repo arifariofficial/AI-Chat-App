@@ -15,11 +15,14 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
   const { data: session } = useSession();
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages]);
 
   return (
-    <div className="relative m-2 mb-px flex h-[85vh] flex-col justify-end space-y-2 overflow-auto rounded-b-md rounded-t-xl border  bg-gray-50 p-4 ">
+    <div className="flex h-full  flex-col-reverse space-y-3  space-y-reverse overflow-y-auto rounded-b-md rounded-t-xl px-6 pb-6 ">
+      <div ref={messagesEndRef} />
       {messages.map((message, index) => (
         <div
           key={index}
@@ -38,14 +41,14 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
               ) : (
                 <AccountCircleIcon
                   fontSize="large"
-                  className="m-auto rounded-full bg-[#2d4242] p-1 text-[#F5EFD1] "
+                  className="m-auto rounded-full bg-[#4F6E70] p-1 text-[#F5EFD1] "
                 />
               ))}
           </div>
 
           <div>
             <p
-              className={`max-w-md rounded-lg p-3 text-sm shadow ${message.author === "SIPE" ? "bg-blue-200 text-blue-900" : "bg-green-200 text-green-900"}`}
+              className={`max-w-md rounded-lg p-3 text-sm  shadow ${message.author === "SIPE" ? "bg-white text-slate-900" : "bg-[#fffef9] text-[#2e4342]"}`}
             >
               {message.text}
             </p>
@@ -53,13 +56,11 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
           {message.author === "SIPE" && (
             <LocalLibraryIcon
               fontSize="large"
-              className="m-auto rounded-full bg-[#2d4242] p-1 text-[#F5EFD1]"
+              className="m-auto rounded-full bg-[#4F6E70] p-1 text-[#F5EFD1]"
             />
           )}
         </div>
       ))}
-
-      <div ref={messagesEndRef} />
     </div>
   );
 };

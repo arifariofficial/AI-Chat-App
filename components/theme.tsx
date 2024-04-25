@@ -45,6 +45,10 @@ let theme = createTheme({
           "&:hover": {
             backgroundColor: "#3C5254",
           },
+          "&.Mui-disabled": {
+            color: "#A8A8A8",
+            backgroundColor: "#e5e5e5",
+          },
         },
       },
       defaultProps: {

@@ -29,7 +29,7 @@ export default function Chat() {
   }, [session, router]);
 
   const handleSendMessage = (newMessage: Message) => {
-    setMessages((prevMessages) => [...prevMessages, newMessage]);
+    setMessages((prevMessages) => [newMessage, ...prevMessages]);
   };
 
   const handleModalClose = () => {
@@ -39,7 +39,7 @@ export default function Chat() {
 
   if (!session) {
     return (
-      <main className=" mx-auto flex h-[40vh] max-w-screen-md items-center justify-center md:h-[90vh]">
+      <main className="mx-auto flex h-[40vh] max-w-screen-md items-center justify-center md:h-[90vh]">
         <ChatSkeleton />
         {showModal && (
           <div className=" absolute  flex w-full items-center justify-center font-semibold md:mt-auto ">
@@ -57,8 +57,8 @@ export default function Chat() {
 
   return (
     <>
-      <main className="mx-auto flex w-full  items-end justify-center rounded-2xl bg-transparent  p-2  sm:max-w-[700px] md:max-w-[1000px]">
-        <div className=" flex w-full flex-col rounded-2xl border border-gray-200  bg-transparent ">
+      <main className="absolute inset-x-0 top-[68px] mx-auto flex h-[calc(100vh-70px)] w-screen max-w-screen-lg bg-transparent">
+        <div className="flex size-full flex-col rounded-2xl px-4 pb-4">
           <ChatDisplay messages={messages} />
           <ChatInput onSendMessage={handleSendMessage} />
         </div>

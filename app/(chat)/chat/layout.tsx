@@ -12,7 +12,7 @@ export default function ChatLayout({
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className="flex h-full justify-end ">{children}</div>
+      {children}
     </ThemeProvider>
   );
 }

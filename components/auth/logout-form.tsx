@@ -14,6 +14,7 @@ import Link from "next/link";
 import {
   Box,
   Button,
+  CircularProgress,
   Container,
   IconButton,
   InputAdornment,
@@ -23,7 +24,6 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Button as MyButton } from "@components/ui/button";
-import IconSpinner from "@components/ui/icons";
 import { login } from "@actions/login";
 import { getMessageFromCode } from "@lib/utils";
 
@@ -257,7 +257,7 @@ export const LogoutForm = () => {
                 sx={{ mt: 2, height: 37 }}
               >
                 {isPending ? (
-                  <IconSpinner />
+                  <CircularProgress size="20px" className="text-[#f5efd1]" />
                 ) : showTwoFactor ? (
                   "Confirm"
                 ) : (
