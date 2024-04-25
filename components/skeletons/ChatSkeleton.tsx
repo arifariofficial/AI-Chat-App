@@ -22,27 +22,12 @@ const pulse = keyframes`
   }
 `;
 
-const Container = styled.div`
-  position: relative;
-  display: flex;
-  width: 90%;
-  flex-direction: column;
-  border: 1px solid #d4d4d4;
-  broder-radius: 2rem;
-`;
-
-const Messages = styled.div`
-  flex-grow: 1;
-  overflow-y: hidden;
-`;
-
 const Message = styled.div`
   margin-bottom: 1rem;
   animation: ${pulse} 2s infinite;
   border-radius: 0.25rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   padding-top: 3rem;
 `;
 const InnerMessage = styled.div`
@@ -64,9 +49,12 @@ const InnerMessage = styled.div`
 
 const ChatPageSkeleton = () => {
   return (
-    <Container className="mx-auto flex w-full max-w-[500px] items-center justify-center rounded-2xl bg-transparent  sm:max-w-[700px] md:max-w-[1000px]">
-      <ChatDisplay />
-    </Container>
+    <main className="absolute inset-x-0 top-[68px] mx-auto flex h-[calc(100vh-70px)] w-screen max-w-screen-lg bg-transparent">
+      <div className="flex size-full animate-pulse flex-col justify-end rounded-2xl px-4 pb-4">
+        <ChatDisplay />
+        <ChatInput />
+      </div>
+    </main>
   );
 };
 
@@ -76,7 +64,7 @@ const ChatInput = () => {
   return (
     <Box
       component="form"
-      className="w-full resize-none bg-transparent p-2 opacity-20 focus-within:outline-none sm:text-sm"
+      className="w-full resize-none bg-transparent  opacity-30 sm:text-sm"
     >
       <TextField
         id="message"
@@ -87,24 +75,46 @@ const ChatInput = () => {
         autoComplete="off"
         autoCorrect="off"
         multiline
-        placeholder="Type a message..."
-        className="rounded-2xl"
+        minRows={1}
+        maxRows={8}
+        placeholder="Write a Message to SIPE..."
+        className="shadow-inner"
+        inputProps={{
+          maxLength: 1000,
+        }}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <Button>
-                <SendIcon />
+              <Button
+                sx={{
+                  borderRadius: "8px",
+                  minWidth: "20px",
+                  padding: "4px 8px",
+                  "& .MuiButton-startIcon": {
+                    boxShadow: "none",
+                  },
+                }}
+                size="small"
+              >
+                <SendIcon fontSize="small" />
               </Button>
             </InputAdornment>
           ),
         }}
         sx={{
           "& .MuiInputBase-root": {
+            minHeight: "50px",
+            display: "flex",
             alignItems: "end",
             borderRadius: "12px",
+            py: 0,
+            "& .MuiInputBase-input": {
+              padding: "2px 16px",
+              marginBottom: "10px",
+            },
           },
           "& .MuiInputAdornment-positionEnd": {
-            marginBottom: "12px",
+            marginBottom: "25px",
           },
         }}
       />
@@ -114,9 +124,17 @@ const ChatInput = () => {
 
 const ChatDisplay = () => {
   return (
-    <div>
-      <Messages className=" drop-shadow-xl ">
+    <div className="flex h-full flex-col  space-y-3 overflow-y-auto rounded-b-md rounded-t-xl px-6 ">
+      <div className=" flex size-full flex-col justify-end rounded-2xl px-4  drop-shadow-xl">
         <Message>
+          <InnerMessage>
+            compare sales for allman brothers band and goo goo dolls
+          </InnerMessage>
+          <InnerMessage style={{ alignSelf: "end", marginRight: "20px" }}>
+            In the month of June, in the city of Houston, sales for Allman
+            Brothers Band were 35% higher than for Goo Goo Dolls; $35,996 as
+            opposed to $26,590.
+          </InnerMessage>
           <InnerMessage style={{ width: "30%" }}>Hey there</InnerMessage>
           <InnerMessage style={{ alignSelf: "end", marginRight: "20px" }}>
             Hello! How can i help?
@@ -137,9 +155,11 @@ const ChatDisplay = () => {
             Brothers Band were 35% higher than for Goo Goo Dolls; $35,996 as
             opposed to $26,590.
           </InnerMessage>
+          <InnerMessage>
+            compare sales for allman brothers band and goo goo dolls
+          </InnerMessage>
         </Message>
-        <ChatInput />
-      </Messages>
+      </div>
     </div>
   );
 };

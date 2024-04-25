@@ -21,44 +21,54 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
   }, [messages]);
 
   return (
-    <div className="flex h-full  flex-col-reverse space-y-3  space-y-reverse overflow-y-auto rounded-b-md rounded-t-xl px-6 pb-6 ">
+    <div className="flex h-full  flex-col-reverse  space-y-10 space-y-reverse overflow-y-auto px-6 pb-6 ">
       <div ref={messagesEndRef} />
       {messages.map((message, index) => (
         <div
           key={index}
-          className={`flex ${message.author === "SIPE" ? "justify-end" : "justify-start"} items-end space-x-2`}
+          className={`flex ${message.author === "SIPE" ? "justify-end" : "justify-start"} items-start`}
         >
-          <div className="flex flex-col">
-            {message.author !== "SIPE" &&
-              (session?.user?.image ? (
-                <Image
-                  src={session?.user?.image || "/profile-placeholder.png"}
-                  alt="profile"
-                  width={30}
-                  height={30}
-                  className="rounded-full"
-                />
-              ) : (
-                <AccountCircleIcon
-                  fontSize="large"
-                  className="m-auto rounded-full bg-[#4F6E70] p-1 text-[#F5EFD1] "
-                />
-              ))}
-          </div>
+          <div className="flex items-start">
+            <div className="flex flex-col">
+              {message.author !== "SIPE" &&
+                (session?.user?.image ? (
+                  <Image
+                    src={session?.user?.image || "/profile-placeholder.png"}
+                    alt="profile"
+                    width={23}
+                    height={23}
+                    className="rounded-full"
+                  />
+                ) : (
+                  <AccountCircleIcon
+                    fontSize="large"
+                    className="rounded-full bg-[#4F6E70] p-1 text-[#F5EFD1] "
+                  />
+                ))}
+            </div>
 
-          <div>
-            <p
-              className={`max-w-md rounded-lg p-3 text-sm  shadow ${message.author === "SIPE" ? "bg-white text-slate-900" : "bg-[#fffef9] text-[#2e4342]"}`}
-            >
-              {message.text}
-            </p>
+            <div className=" flex flex-col ">
+              <p
+                className={`mx-2 text-lg font-bold ${message.author === "SIPE" ? "self-end" : "-mt-1 self-start "}`}
+              >
+                {message.author === "SIPE" ? "Sipe" : "You"}
+              </p>
+
+              <div
+                className={`relative max-w-md text-base  ${message.author === "SIPE" ? "-mr-3 bg-white text-slate-900" : " ml-3 bg-[#fffef9] text-[#2e4342]"}`}
+              >
+                <p>{message.text}</p>
+              </div>
+            </div>
           </div>
-          {message.author === "SIPE" && (
-            <LocalLibraryIcon
-              fontSize="large"
-              className="m-auto rounded-full bg-[#4F6E70] p-1 text-[#F5EFD1]"
-            />
-          )}
+          <div>
+            {message.author === "SIPE" && (
+              <LocalLibraryIcon
+                fontSize="medium"
+                className="m-auto rounded-full bg-[#4F6E70] p-1 text-[#F5EFD1]"
+              />
+            )}
+          </div>
         </div>
       ))}
     </div>

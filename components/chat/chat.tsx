@@ -39,13 +39,13 @@ export default function Chat() {
 
   if (!session) {
     return (
-      <main className="mx-auto flex h-[40vh] max-w-screen-md items-center justify-center md:h-[90vh]">
+      <main className="absolute inset-x-0 top-[68px] mx-auto flex h-[calc(100vh-70px)] w-screen max-w-screen-lg bg-transparent">
         <ChatSkeleton />
         {showModal && (
-          <div className=" absolute  flex w-full items-center justify-center font-semibold md:mt-auto ">
+          <div className=" absolute inset-x-0 top-[68px] flex h-[calc(100vh-70px)] w-full items-center justify-center font-semibold md:mt-auto ">
             <div className=" flex  w-1/2 max-w-[400px] flex-col items-center justify-center rounded-xl border border-gray-300 bg-[#ecfeff] p-4 text-[#F5EFD1] shadow-2xl">
               <p className="p-3 text-[#2e4342]">Please sign in</p>
-              <Button sx={{ width: 200 }} onClick={handleModalClose}>
+              <Button sx={{ width: 200, mb: 4 }} onClick={handleModalClose}>
                 OK
               </Button>
             </div>
