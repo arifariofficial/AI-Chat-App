@@ -108,7 +108,7 @@ export const LoginForm = () => {
               onSubmit={form.handleSubmit(onSubmit)}
               noValidate
             >
-              <div className="space-y-4">
+              <div className="sm:space-y-4">
                 {showTwoFactor && (
                   <FormField
                     control={form.control}

@@ -21,8 +21,8 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
   }, [messages]);
 
   return (
-    <div className="flex h-full  flex-col-reverse  space-y-10 space-y-reverse overflow-y-auto px-6 pb-6 ">
-      <div ref={messagesEndRef} />
+    <div className="flex h-full  flex-col-reverse  space-y-10 space-y-reverse overflow-y-auto pb-6 sm:px-6 ">
+      <div ref={messagesEndRef} /> {/* Due to reverse-col, needs to be here */}
       {messages.map((message, index) => (
         <div
           key={index}
@@ -41,8 +41,8 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
                   />
                 ) : (
                   <AccountCircleIcon
-                    fontSize="large"
-                    className="rounded-full bg-[#4F6E70] p-1 text-[#F5EFD1] "
+                    fontSize="medium"
+                    className="rounded-full bg-[#4F6E70] p-px text-[#F5EFD1] "
                   />
                 ))}
             </div>
@@ -65,7 +65,7 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
             {message.author === "SIPE" && (
               <LocalLibraryIcon
                 fontSize="medium"
-                className="m-auto rounded-full bg-[#4F6E70] p-1 text-[#F5EFD1]"
+                className="m-auto rounded-full bg-[#4F6E70] p-[3px] text-[#F5EFD1]"
               />
             )}
           </div>

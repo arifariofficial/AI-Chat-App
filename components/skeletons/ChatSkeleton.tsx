@@ -49,7 +49,7 @@ const InnerMessage = styled.div`
 
 const ChatPageSkeleton = () => {
   return (
-    <main className="absolute inset-x-0 top-[68px] mx-auto flex h-[calc(100vh-70px)] w-screen max-w-screen-lg bg-transparent">
+    <main className="absolute inset-x-0 mx-auto flex h-[calc(100vh-70px)] w-screen max-w-screen-lg bg-transparent sm:top-[68px]">
       <div className="flex size-full animate-pulse flex-col justify-end rounded-2xl px-4 pb-4">
         <ChatDisplay />
         <ChatInput />
@@ -124,8 +124,8 @@ const ChatInput = () => {
 
 const ChatDisplay = () => {
   return (
-    <div className="flex h-full flex-col  space-y-3 overflow-y-auto rounded-b-md rounded-t-xl px-6 ">
-      <div className=" flex size-full flex-col justify-end rounded-2xl px-4  drop-shadow-xl">
+    <div className="flex size-full flex-col space-y-3 overflow-y-auto rounded-b-md rounded-t-xl sm:px-6 ">
+      <div className=" flex size-full flex-col justify-end rounded-2xl drop-shadow-xl  sm:px-4">
         <Message>
           <InnerMessage>
             compare sales for allman brothers band and goo goo dolls
