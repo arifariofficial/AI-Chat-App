@@ -21,7 +21,7 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
   }, [messages]);
 
   return (
-    <div className="flex h-full  flex-col-reverse  space-y-10 space-y-reverse overflow-y-auto pb-6 sm:px-6 ">
+    <div className="flex h-full flex-col-reverse space-y-10  space-y-reverse overflow-y-auto  pb-6 sm:px-6 ">
       <div ref={messagesEndRef} /> {/* Due to reverse-col, needs to be here */}
       {messages.map((message, index) => (
         <div
@@ -47,15 +47,15 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
                 ))}
             </div>
 
-            <div className=" flex flex-col ">
+            <div className=" flex w-full flex-col">
               <p
-                className={`mx-2 text-lg font-bold ${message.author === "SIPE" ? "self-end" : "-mt-1 self-start "}`}
+                className={`mx-2 w-[40px] text-lg font-bold text-gray-700 ${message.author === "SIPE" ? "self-end" : "-mt-1 self-start "}`}
               >
                 {message.author === "SIPE" ? "Sipe" : "You"}
               </p>
 
               <div
-                className={`relative max-w-md text-base  ${message.author === "SIPE" ? "-mr-3 bg-white text-slate-900" : " ml-3 bg-[#fffef9] text-[#2e4342]"}`}
+                className={`relative mt-1 max-w-3xl rounded-xl bg-white p-4 text-justify text-base shadow ${message.author === "SIPE" ? "mr-2 " : "ml-3 "}`}
               >
                 <p>{message.text}</p>
               </div>

@@ -4,7 +4,6 @@ import * as z from "zod";
 import { ResetPasswordSchema } from "@/lib/Schema";
 import { getPasswordResetTokenByToken } from "@/data/password-reset-token";
 import { getUserByEmail } from "@/data/user";
-import bcrypt from "bcryptjs";
 import prisma from "@/lib/prisma";
 import { getStringFromBuffer } from "@lib/utils";
 

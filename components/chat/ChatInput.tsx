@@ -17,7 +17,7 @@ const ChatInput: React.FC<{
   const [isLoading, setIsLoading] = useState(false);
 
   //chat-gpt
-  const sendAndClearMessage = async () => {
+  /*   const sendAndClearMessage = async () => {
     if (!message.trim()) return;
     setIsLoading(true);
 
@@ -38,22 +38,20 @@ const ChatInput: React.FC<{
     } finally {
       setIsLoading(false);
     }
-  };
+  }; */
 
-  /* const sendAndClearMessage = async () => {
+  const sendAndClearMessage = async () => {
     if (!message.trim()) return;
-      setIsLoading(true);
+    setIsLoading(true);
 
     // Send the user's message to the chat
     onSendMessage({ text: message, author: "user" });
     setMessage("");
 
-    console.log(message);
-
     try {
       // Encode username and password for basic auth
       const username = "ari";
-      const password = "ariful123";
+      const password = "Ariful123";
       const basicAuth = "Basic " + btoa(username + ":" + password);
 
       const response = await axios.post(
@@ -73,10 +71,10 @@ const ChatInput: React.FC<{
       onSendMessage({ text: aiMessage, author: "SIPE" });
     } catch (error) {
       console.error("Error while sending message:", error);
-    }finally {
+    } finally {
       setIsLoading(false);
     }
-  }; */
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

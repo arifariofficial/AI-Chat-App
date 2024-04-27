@@ -4,8 +4,6 @@ import * as z from "zod";
 import { RegisterSchema } from "@/lib/Schema";
 import prisma from "@/lib/prisma";
 import { getUserByEmail } from "../data/user";
-import { sendVerificationEmail } from "@/lib/mail";
-import { generateVerificationToken } from "@/lib/token";
 import { ResultCode, getStringFromBuffer } from "@lib/utils";
 import { signIn } from "@auth";
 import { AuthError } from "next-auth";
@@ -23,7 +21,7 @@ export async function createUser(
       resultCode: ResultCode.UserAlreadyExists,
     };
   } else {
-    const user = await prisma.user.create({
+    await prisma.user.create({
       data: {
         email: email,
         password: hashedPassword,
