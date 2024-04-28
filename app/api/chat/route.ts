@@ -3,9 +3,10 @@ import { NextResponse } from "next/server";
 import axios from "axios";
 
 export async function POST(req: Request) {
-  /*   const data = await req.json();
+  const data = await req.json();
 
-  const openai = new OpenAI({
+  //chatGpt
+  /*   const openai = new OpenAI({
     apiKey: process.env.AI_API_KEY,
   });
 
@@ -18,25 +19,20 @@ export async function POST(req: Request) {
     aiResponse: completion.choices[0].message.content,
   }); */
 
-  const message = await req.json();
-
-  const username = "ari";
-  const password = "Ariful123";
+  //sipe api
+  const username = process.env.USERNAME;
+  const password = process.env.PASSWORD;
   const basicAuth = "Basic " + btoa(username + ":" + password);
 
-  const response = await axios.post(
-    "http://127.0.0.1:8000/sipe/api",
-    {
-      chat: message,
-    },
-    {
-      headers: {
-        Authorization: basicAuth,
-      },
-    },
-  );
-
-  return NextResponse.json({
-    aiResponse: response,
-  });
+  try {
+    const response = await axios.post(
+      "http://ai-api:8000/sipe/api",
+      { chat: data.message },
+      { headers: { Authorization: basicAuth } },
+    );
+    return NextResponse.json({ aiResponse: response.data.chat });
+  } catch (error) {
+    console.error("API request failed", error);
+    return NextResponse.json({ error: "Failed to fetch response from API" });
+  }
 }

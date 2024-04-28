@@ -55,7 +55,7 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
               </p>
 
               <div
-                className={`relative mt-1 max-w-3xl rounded-xl bg-white p-4 text-justify text-base shadow ${message.author === "SIPE" ? "mr-2 " : "ml-3 "}`}
+                className={`relative max-w-sm rounded-md bg-white p-4 text-justify text-base drop-shadow sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl ${message.author === "SIPE" ? "mr-2 " : "ml-3 "}`}
               >
                 <p>{message.text}</p>
               </div>

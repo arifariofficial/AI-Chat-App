@@ -17,7 +17,7 @@ const ChatInput: React.FC<{
   const [isLoading, setIsLoading] = useState(false);
 
   //chat-gpt
-  /*   const sendAndClearMessage = async () => {
+  /* const sendAndClearMessage = async () => {
     if (!message.trim()) return;
     setIsLoading(true);
 
@@ -49,24 +49,11 @@ const ChatInput: React.FC<{
     setMessage("");
 
     try {
-      // Encode username and password for basic auth
-      const username = "ari";
-      const password = "Ariful123";
-      const basicAuth = "Basic " + btoa(username + ":" + password);
+      const response = await axios.post("/api/chat", {
+        message: message,
+      });
 
-      const response = await axios.post(
-        "http://127.0.0.1:8000/sipe/api",
-        {
-          chat: message,
-        },
-        {
-          headers: {
-            Authorization: basicAuth,
-          },
-        },
-      );
-
-      const aiMessage = response.data.chat;
+      const aiMessage = response.data.aiResponse;
 
       onSendMessage({ text: aiMessage, author: "SIPE" });
     } catch (error) {
