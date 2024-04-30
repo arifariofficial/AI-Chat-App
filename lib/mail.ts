@@ -4,7 +4,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 const baseURL =
   process.env.NODE_ENV === "production"
-    ? "https://sipefrontend.vercel.app"
+    ? process.env.BASE_URL
     : "http://localhost:3000";
 
 export const sendVerificationEmail = async (email: string, token: string) => {
