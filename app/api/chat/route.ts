@@ -26,7 +26,7 @@ export async function POST(req: Request) {
 
   try {
     const response = await axios.post(
-      "http://ai-api:8000/sipe/api",
+      "http://sipe-api:8000/sipe/api",
       { chat: data.message },
       { headers: { Authorization: basicAuth } },
     );
