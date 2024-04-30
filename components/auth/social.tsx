@@ -14,7 +14,8 @@ export const Social = () => {
     provider === "facebook" ? setPendingFacebook(true) : setPendingGoogle(true);
 
     try {
-      await signIn(provider, { callbackUrl: "/" });
+      await signIn(provider);
+      window.location.href = "/";
     } catch (error) {
       console.log(error);
     }
