@@ -2,6 +2,7 @@ FROM node:18-alpine AS base
 FROM base AS deps
 
 RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache curl
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
@@ -41,4 +42,4 @@ USER nextjs
 EXPOSE 3000
 
 
-CMD HOSTNAME="0.0.0.0" node server.js
+CMD node server.js
