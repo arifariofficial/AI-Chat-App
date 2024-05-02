@@ -41,4 +41,4 @@ USER nextjs
 
 EXPOSE 3000
 
-CMD node server.js
+CMD HOSTNAME="0.0.0.0" node server.js
