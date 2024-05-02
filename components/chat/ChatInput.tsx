@@ -82,7 +82,7 @@ const ChatInput: React.FC<{
     <Box
       component="form"
       onSubmit={handleSubmit}
-      className="w-full resize-none bg-transparent  sm:text-sm"
+      className="w-full resize-none sm:text-sm"
     >
       <TextField
         id="message"

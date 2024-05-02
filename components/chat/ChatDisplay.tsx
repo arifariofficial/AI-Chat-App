@@ -21,12 +21,12 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
   }, [messages]);
 
   return (
-    <div className="flex h-full flex-col-reverse space-y-10  space-y-reverse overflow-y-auto  pb-6 sm:px-6 ">
+    <div className="flex h-full flex-col-reverse space-y-10 space-y-reverse  overflow-y-auto sm:px-6 ">
       <div ref={messagesEndRef} /> {/* Due to reverse-col, needs to be here */}
       {messages.map((message, index) => (
         <div
           key={index}
-          className={`flex ${message.author === "SIPE" ? "justify-end" : "justify-start"} items-start`}
+          className={`flex ${message.author === "SIPE" ? "justify-start" : "justify-start"} items-start`}
         >
           <div className="flex items-start">
             <div className="flex flex-col">
@@ -47,27 +47,27 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
                 ))}
             </div>
 
+            <div className="">
+              {message.author === "SIPE" && (
+                <LocalLibraryIcon
+                  fontSize="medium"
+                  className="m-auto rounded-full bg-[#4F6E70] p-[3px] text-[#F5EFD1]"
+                />
+              )}
+            </div>
             <div className=" flex w-full flex-col">
               <p
-                className={`mx-2 w-[40px] text-lg font-bold text-gray-700 ${message.author === "SIPE" ? "self-end" : "-mt-1 self-start "}`}
+                className={`mx-2 w-[40px] text-lg font-bold text-gray-700 ${message.author === "SIPE" ? "self-start" : "self-start "}`}
               >
-                {message.author === "SIPE" ? "Sipe" : "You"}
+                {message.author === "SIPE" ? "Sipe" : "Sinä"}
               </p>
 
               <div
-                className={`relative max-w-sm rounded-md bg-white p-4 text-justify text-base drop-shadow sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl ${message.author === "SIPE" ? "mr-2 " : "ml-3 "}`}
+                className={`relative rounded-md bg-gray-50/80  p-3 text-left font-serif text-sm leading-relaxed   md:text-base  ${message.author === "SIPE" ? "-ml-5 " : "-ml-5 "}`}
               >
                 <p>{message.text}</p>
               </div>
             </div>
-          </div>
-          <div>
-            {message.author === "SIPE" && (
-              <LocalLibraryIcon
-                fontSize="medium"
-                className="m-auto rounded-full bg-[#4F6E70] p-[3px] text-[#F5EFD1]"
-              />
-            )}
           </div>
         </div>
       ))}
