@@ -2,13 +2,10 @@ import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Image from "next/image";
 import Link from "next/link";
-import { Session } from "next-auth";
+import { auth } from "@auth";
 
-export default async function AuthButton({
-  session,
-}: {
-  session: Session | null;
-}) {
+export default async function AuthButton() {
+  const session = await auth();
   if (session) {
     return (
       <>

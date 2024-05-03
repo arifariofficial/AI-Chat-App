@@ -9,8 +9,8 @@ import { generateTwoFactorToken } from "@/lib/token";
 import { getTwoFactorTokenByEmail } from "@/data/two-factor-token";
 import prisma from "@/lib/prisma";
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
-import { signIn } from "@auth";
 import { ResultCode } from "@lib/utils";
+import { signIn } from "@auth";
 
 async function handleTwoFactorAuthentication(email: string, code?: string) {
   if (code) {

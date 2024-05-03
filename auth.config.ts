@@ -7,6 +7,13 @@ import FacebookProvider from "next-auth/providers/facebook";
 import { getStringFromBuffer } from "./lib/utils";
 
 export const authConfig = {
+  pages: {
+    signIn: "/auth/login",
+    signOut: "/auth/logout",
+    newUser: "/auth/register",
+    error: "/auth/error",
+  },
+  basePath: "/api/auth",
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
@@ -16,6 +23,7 @@ export const authConfig = {
       clientId: process.env.FACEBOOK_CLIENT_ID || "",
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET || "",
     }),
+
     Credentials({
       async authorize(credentials) {
         const parsedCredentials = LoginSchema.safeParse(credentials);

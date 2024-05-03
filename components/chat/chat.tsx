@@ -55,6 +55,8 @@ export default function Chat() {
     );
   }
 
+  if (!session?.user) return null;
+
   return (
     <>
       <main className="absolute inset-x-0 top-[68px] mx-auto flex h-[calc(100vh-70px)] w-screen max-w-screen-lg bg-transparent">

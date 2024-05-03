@@ -14,15 +14,9 @@ export const Social = () => {
     provider === "facebook" ? setPendingFacebook(true) : setPendingGoogle(true);
 
     try {
-      const result = await signIn(provider, { redirect: false });
-      if (result?.url) {
-        window.location.href = result.url;
-      } else {
-        window.location.href = "/error";
-      }
+      await signIn(provider);
     } catch (error) {
-      console.error(error);
-      window.location.href = "/error";
+      console.log(error);
     }
   };
 

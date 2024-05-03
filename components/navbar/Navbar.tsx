@@ -1,11 +1,10 @@
 import Link from "next/link";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import AuthButton from "./auth-button";
-import { Session } from "next-auth";
 
-const NavBar = ({ session }: { session: Session | null }) => {
+const NavBar = () => {
   return (
-    <div className="sticky top-0 z-10  rounded-b-md bg-[#2d4242] shadow-xl ">
+    <div className="sticky top-0 z-10  rounded-b-md bg-[#344d4d] shadow-md ">
       <nav className="mx-auto flex  h-16 max-w-screen-2xl justify-between">
         <section>
           <Link href={`/`}>
@@ -19,7 +18,7 @@ const NavBar = ({ session }: { session: Session | null }) => {
         </section>
         <section className="mr-3 flex items-center text-xl font-semibold text-[#F5EFD1] hover:opacity-90">
           <div className="flex flex-col items-center">
-            <AuthButton session={session} />
+            <AuthButton />
           </div>
         </section>
       </nav>
