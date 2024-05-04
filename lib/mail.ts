@@ -1,6 +1,15 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// SMTP settings for your email server
+const transporter = nodemailer.createTransport({
+  host: "email-smtp.eu-north-1.amazonaws.com", // SMTP server host
+  port: 465, // SMTP port
+  secure: true, // True if port is 465, otherwise false
+  auth: {
+    user: "AKIAT62YUAOUF4HND24U",
+    pass: "BKdLIVeVVFxp9xYMT1IoUrCUS8doOYEesyu22OoBbQnd",
+  },
+});
 
 const baseURL =
   process.env.NODE_ENV === "production"
@@ -10,28 +19,28 @@ const baseURL =
 export const sendVerificationEmail = async (email: string, token: string) => {
   const confirmLink = `${baseURL}/auth/new-verification?token=${token}`;
 
-  await resend.emails.send({
-    from: "onboarding@resend.dev",
+  await transporter.sendMail({
+    from: '"SIPE" <sipeai6@gmail.com>',
     to: email,
     subject: "Confirm your email",
     html: `
-              <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; text-align: center; padding: 40px; background-color: #f4f4f4;">
-                <div style="max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-                  <h2 style="color: #333; margin-bottom: 20px;">Welcome to Our Service!</h2>
-                  <p style="color: #555; font-size: 16px; margin-bottom: 30px;">Please confirm your email by clicking the button below:</p>
-                  <a href="${confirmLink}" style="background-color: #4CAF50; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block;">Confirm your email</a>
-                  <p style="color: #555; font-size: 16px; margin-top: 30px;">Thank you for joining us!</p>
-                </div>
-              </div>
-            `,
+          <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; text-align: center; padding: 40px; background-color: #f4f4f4;">
+            <div style="max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+              <h2 style="color: #333; margin-bottom: 20px;">Welcome to Our Service!</h2>
+              <p style="color: #555; font-size: 16px; margin-bottom: 30px;">Please confirm your email by clicking the button below:</p>
+              <a href="${confirmLink}" style="background-color: #4CAF50; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block;">Confirm your email</a>
+              <p style="color: #555; font-size: 16px; margin-top: 30px;">Thank you for joining us!</p>
+            </div>
+          </div>
+        `,
   });
 };
 
 export const sendPasswordResetEmail = async (email: string, token: string) => {
   const resetLink = `${baseURL}/auth/reset-password?token=${token}`;
 
-  await resend.emails.send({
-    from: "onboarding@resend.dev",
+  await transporter.sendMail({
+    from: '"SIPE" <sipeai6@gmail.com>',
     to: email,
     subject: "Reset your password",
     html: `
@@ -48,9 +57,10 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
         `,
   });
 };
+
 export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
-  await resend.emails.send({
-    from: "onboarding@resend.dev",
+  await transporter.sendMail({
+    from: '"SIPE" <sipeai6@gmail.com>',
     to: email,
     subject: "2FA Code",
     html: `

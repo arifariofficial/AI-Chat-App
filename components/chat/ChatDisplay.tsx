@@ -21,7 +21,7 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
   }, [messages]);
 
   return (
-    <div className="flex h-full flex-col-reverse space-y-10 space-y-reverse  overflow-y-auto sm:px-6 ">
+    <div className="flex h-full flex-col-reverse space-y-8 space-y-reverse  overflow-y-auto sm:px-6 ">
       <div ref={messagesEndRef} /> {/* Due to reverse-col, needs to be here */}
       {messages.map((message, index) => (
         <div
@@ -35,8 +35,8 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
                   <Image
                     src={session?.user?.image || "/profile-placeholder.png"}
                     alt="profile"
-                    width={23}
-                    height={23}
+                    width={25}
+                    height={25}
                     className="rounded-full"
                   />
                 ) : (
@@ -63,7 +63,7 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
               </p>
 
               <div
-                className={`relative rounded-md  p-3 text-left font-serif text-sm leading-relaxed   md:text-base  ${message.author === "SIPE" ? "-ml-5 " : "-ml-5 "}`}
+                className={`relative rounded-md p-3 pt-1 text-left font-serif text-sm leading-relaxed   md:text-base  ${message.author === "SIPE" ? "-ml-1 " : "-ml-1 "}`}
               >
                 <p>{message.text}</p>
               </div>
