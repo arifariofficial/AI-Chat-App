@@ -16,10 +16,8 @@ import {
   Box,
   Button,
   CircularProgress,
-  Container,
   IconButton,
   InputAdornment,
-  Paper,
   TextField,
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -84,185 +82,160 @@ export const LoginForm = () => {
   };
 
   return (
-    <Container
-      component="main"
-      maxWidth="xs"
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        margin: "0",
-      }}
+    <CardWrapper
+      headerLabel="Welcome back"
+      backButtonLabel="Dont't have an account?"
+      backButtonHref="/auth/register"
+      showLocal={!showTwoFactor}
     >
-      <Paper
-        elevation={3}
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-        className="rounded-xl border border-gray-300"
-      >
-        <CardWrapper
-          headerLabel="Welcome back"
-          backButtonLabel="Dont't have an account?"
-          backButtonHref="/auth/register"
-          showLocal={!showTwoFactor}
-        >
-          <Form {...form}>
-            <Box
-              component="form"
-              onSubmit={form.handleSubmit(onSubmit)}
-              noValidate
-            >
-              <div className="sm:space-y-4">
-                {showTwoFactor && (
-                  <FormField
-                    control={form.control}
-                    name="code"
-                    render={({ field }) => (
-                      <FormItem className="flex justify-center">
-                        <FormControl>
-                          <InputOTP maxLength={6} {...field}>
-                            <InputOTPGroup>
-                              <InputOTPSlot index={0} className="size-12" />
-                              <InputOTPSlot index={1} className="size-12" />
-                              <InputOTPSlot index={2} className="size-12" />
-                            </InputOTPGroup>
-                            <InputOTPSeparator />
-                            <InputOTPGroup>
-                              <InputOTPSlot index={3} className="size-12" />
-                              <InputOTPSlot index={4} className="size-12" />
-                              <InputOTPSlot index={5} className="size-12" />
-                            </InputOTPGroup>
-                          </InputOTP>
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
+      <Form {...form}>
+        <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
+          <div className="sm:space-y-4">
+            {showTwoFactor && (
+              <FormField
+                control={form.control}
+                name="code"
+                render={({ field }) => (
+                  <FormItem className="flex justify-center">
+                    <FormControl>
+                      <InputOTP maxLength={6} {...field}>
+                        <InputOTPGroup>
+                          <InputOTPSlot index={0} className="size-12" />
+                          <InputOTPSlot index={1} className="size-12" />
+                          <InputOTPSlot index={2} className="size-12" />
+                        </InputOTPGroup>
+                        <InputOTPSeparator />
+                        <InputOTPGroup>
+                          <InputOTPSlot index={3} className="size-12" />
+                          <InputOTPSlot index={4} className="size-12" />
+                          <InputOTPSlot index={5} className="size-12" />
+                        </InputOTPGroup>
+                      </InputOTP>
+                    </FormControl>
+                  </FormItem>
                 )}
-                {!showTwoFactor && (
-                  <>
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field: { value, onChange, onBlur, ref } }) => (
-                        <FormItem>
-                          <FormControl>
-                            <TextField
-                              disabled={isPending}
-                              margin="normal"
-                              required
-                              fullWidth
-                              id="email"
-                              label="Email Address"
-                              autoFocus
-                              autoComplete="current-email"
-                              value={value}
-                              onChange={onChange}
-                              onBlur={onBlur}
-                              ref={ref}
-                              InputLabelProps={{ shrink: true }}
-                              error={
-                                form.getFieldState("email").isTouched &&
-                                Boolean(form.formState.errors.email)
-                              }
-                              helperText={
-                                form.getFieldState("email").isTouched &&
-                                form.formState.errors.email
-                                  ? form.formState.errors.email.message
-                                  : null
-                              }
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="password"
-                      render={({ field: { value, onChange, onBlur, ref } }) => (
-                        <FormItem>
-                          <FormControl>
-                            <TextField
-                              disabled={isPending}
-                              margin="normal"
-                              required
-                              fullWidth
-                              id="password"
-                              name="password"
-                              label="Password"
-                              value={value}
-                              onChange={onChange}
-                              onBlur={onBlur}
-                              ref={ref}
-                              type={showPassword ? "text" : "password"}
-                              autoComplete="current-password"
-                              InputLabelProps={{ shrink: true }}
-                              error={
-                                form.getFieldState("password").isTouched &&
-                                Boolean(form.formState.errors.password)
-                              }
-                              helperText={
-                                form.getFieldState("password").isTouched &&
-                                form.formState.errors.password
-                                  ? form.formState.errors.password.message
-                                  : null
-                              }
-                              InputProps={{
-                                endAdornment: (
-                                  <InputAdornment position="end">
-                                    <IconButton
-                                      aria-label="toggle password visibility"
-                                      onClick={() =>
-                                        setShowPassword(!showPassword)
-                                      }
-                                    >
-                                      {showPassword ? (
-                                        <VisibilityIcon />
-                                      ) : (
-                                        <VisibilityOffIcon />
-                                      )}
-                                    </IconButton>
-                                  </InputAdornment>
-                                ),
-                              }}
-                            />
-                          </FormControl>
-                          <MyButton
-                            size="sm"
-                            variant="link"
-                            asChild
-                            className="px-0 font-normal"
-                          >
-                            <Link href="/auth/reset">Forgot password?</Link>
-                          </MyButton>
-                        </FormItem>
-                      )}
-                    />
-                  </>
-                )}
-              </div>
-              <FormError message={error || urlError} />
-              <FormSusscess message={success} />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 2, height: 50 }}
-              >
-                {isPending ? (
-                  <CircularProgress size="20px" className="text-[#f5efd1]" />
-                ) : showTwoFactor ? (
-                  "Confirm"
-                ) : (
-                  "Login"
-                )}
-              </Button>
-            </Box>
-          </Form>
-        </CardWrapper>
-      </Paper>
-    </Container>
+              />
+            )}
+            {!showTwoFactor && (
+              <>
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field: { value, onChange, onBlur, ref } }) => (
+                    <FormItem>
+                      <FormControl>
+                        <TextField
+                          disabled={isPending}
+                          margin="normal"
+                          required
+                          fullWidth
+                          size="small"
+                          id="email"
+                          label="Email Address"
+                          autoFocus
+                          autoComplete="current-email"
+                          value={value}
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          ref={ref}
+                          InputLabelProps={{ shrink: true }}
+                          error={
+                            form.getFieldState("email").isTouched &&
+                            Boolean(form.formState.errors.email)
+                          }
+                          helperText={
+                            form.getFieldState("email").isTouched &&
+                            form.formState.errors.email
+                              ? form.formState.errors.email.message
+                              : null
+                          }
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field: { value, onChange, onBlur, ref } }) => (
+                    <FormItem>
+                      <FormControl>
+                        <TextField
+                          disabled={isPending}
+                          margin="normal"
+                          required
+                          fullWidth
+                          size="small"
+                          id="password"
+                          name="password"
+                          label="Password"
+                          value={value}
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          ref={ref}
+                          type={showPassword ? "text" : "password"}
+                          autoComplete="current-password"
+                          InputLabelProps={{ shrink: true }}
+                          error={
+                            form.getFieldState("password").isTouched &&
+                            Boolean(form.formState.errors.password)
+                          }
+                          helperText={
+                            form.getFieldState("password").isTouched &&
+                            form.formState.errors.password
+                              ? form.formState.errors.password.message
+                              : null
+                          }
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <IconButton
+                                  aria-label="toggle password visibility"
+                                  onClick={() => setShowPassword(!showPassword)}
+                                >
+                                  {showPassword ? (
+                                    <VisibilityIcon />
+                                  ) : (
+                                    <VisibilityOffIcon />
+                                  )}
+                                </IconButton>
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                      </FormControl>
+                      <MyButton
+                        size="sm"
+                        variant="link"
+                        asChild
+                        className="px-0 font-normal"
+                      >
+                        <Link href="/auth/reset">Forgot password?</Link>
+                      </MyButton>
+                    </FormItem>
+                  )}
+                />
+              </>
+            )}
+          </div>
+          <FormError message={error || urlError} />
+          <FormSusscess message={success} />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 2, height: 37 }}
+          >
+            {isPending ? (
+              <CircularProgress size="20px" className="text-[#f5efd1]" />
+            ) : showTwoFactor ? (
+              "Confirm"
+            ) : (
+              "Log in"
+            )}
+          </Button>
+        </Box>
+      </Form>
+    </CardWrapper>
   );
 };

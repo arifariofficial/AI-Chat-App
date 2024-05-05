@@ -22,10 +22,8 @@ import {
   Box,
   Button,
   CircularProgress,
-  Container,
   IconButton,
   InputAdornment,
-  Paper,
   TextField,
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -65,139 +63,116 @@ export const ResetPasswordForm = () => {
   };
 
   return (
-    <Container
-      component="main"
-      maxWidth="xs"
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        margin: "0",
-      }}
+    <CardWrapper
+      headerLabel="Reset your password"
+      backButtonLabel="Back to login"
+      backButtonHref="/auth/login"
     >
-      <Paper
-        elevation={3}
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-        className="rounded-xl border border-gray-300"
-      >
-        <CardWrapper
-          headerLabel="Reset your password"
-          backButtonLabel="Back to login"
-          backButtonHref="/auth/login"
-        >
-          <Form {...form}>
-            <Box
-              component="form"
-              onSubmit={form.handleSubmit(onSubmit)}
-              noValidate
-            >
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field: { value, onChange, onBlur, ref } }) => (
-                  <FormItem>
-                    <FormControl>
-                      <TextField
-                        disabled={isPending}
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="password"
-                        name="password"
-                        label="Password"
-                        type={showPassword ? "text" : "password"}
-                        value={value}
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        ref={ref}
-                        autoComplete="current-password"
-                        InputLabelProps={{ shrink: true }}
-                        error={
-                          form.getFieldState("password").isTouched &&
-                          Boolean(form.formState.errors.password)
-                        }
-                        helperText={
-                          form.getFieldState("password").isTouched &&
-                          form.formState.errors.password
-                            ? form.formState.errors.password.message
-                            : null
-                        }
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={() => setShowPassword(!showPassword)}
-                              >
-                                {showPassword ? (
-                                  <VisibilityIcon />
-                                ) : (
-                                  <VisibilityOffIcon />
-                                )}
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="confirmPassword"
-                render={({ field: { value, onChange, onBlur, ref } }) => (
-                  <FormItem>
-                    <FormControl>
-                      <TextField
-                        disabled={isPending}
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        label="Confirm Password"
-                        type="password"
-                        autoComplete="current-password"
-                        value={value}
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        ref={ref}
-                        InputLabelProps={{ shrink: true }}
-                        error={
-                          form.getFieldState("confirmPassword").isTouched &&
-                          Boolean(form.formState.errors.confirmPassword)
-                        }
-                        helperText={
-                          form.getFieldState("confirmPassword").isTouched &&
-                          form.formState.errors.confirmPassword
-                            ? form.formState.errors.confirmPassword.message
-                            : null
-                        }
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+      <Form {...form}>
+        <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field: { value, onChange, onBlur, ref } }) => (
+              <FormItem>
+                <FormControl>
+                  <TextField
+                    disabled={isPending}
+                    margin="normal"
+                    required
+                    fullWidth
+                    size="small"
+                    id="password"
+                    name="password"
+                    label="Password"
+                    type={showPassword ? "text" : "password"}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    ref={ref}
+                    autoComplete="current-password"
+                    InputLabelProps={{ shrink: true }}
+                    error={
+                      form.getFieldState("password").isTouched &&
+                      Boolean(form.formState.errors.password)
+                    }
+                    helperText={
+                      form.getFieldState("password").isTouched &&
+                      form.formState.errors.password
+                        ? form.formState.errors.password.message
+                        : null
+                    }
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={() => setShowPassword(!showPassword)}
+                          >
+                            {showPassword ? (
+                              <VisibilityIcon />
+                            ) : (
+                              <VisibilityOffIcon />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field: { value, onChange, onBlur, ref } }) => (
+              <FormItem>
+                <FormControl>
+                  <TextField
+                    disabled={isPending}
+                    margin="normal"
+                    required
+                    fullWidth
+                    size="small"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    type="password"
+                    autoComplete="current-password"
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    ref={ref}
+                    InputLabelProps={{ shrink: true }}
+                    error={
+                      form.getFieldState("confirmPassword").isTouched &&
+                      Boolean(form.formState.errors.confirmPassword)
+                    }
+                    helperText={
+                      form.getFieldState("confirmPassword").isTouched &&
+                      form.formState.errors.confirmPassword
+                        ? form.formState.errors.confirmPassword.message
+                        : null
+                    }
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-              <FormError message={error} time={false} />
-              <FormSusscess message={success} time={false} />
-              <Button type="submit" fullWidth sx={{ mt: 2, height: 50 }}>
-                {isPending ? (
-                  <CircularProgress size="20px" className="text-[#f5efd1]" />
-                ) : (
-                  "Save"
-                )}
-              </Button>
-            </Box>
-          </Form>
-        </CardWrapper>
-      </Paper>
-    </Container>
+          <FormError message={error} time={false} />
+          <FormSusscess message={success} time={false} />
+          <Button type="submit" fullWidth sx={{ mt: 2, height: 37 }}>
+            {isPending ? (
+              <CircularProgress size="20px" className="text-[#f5efd1]" />
+            ) : (
+              "Save"
+            )}
+          </Button>
+        </Box>
+      </Form>
+    </CardWrapper>
   );
 };

@@ -11,7 +11,7 @@ import { FormError } from "../form-error";
 import { FormSusscess } from "../form-success";
 import { useState, useTransition } from "react";
 import { reset } from "@/actions/reset";
-import { Box, Button, Container, Paper, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 
 export const ResetForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -40,82 +40,58 @@ export const ResetForm = () => {
   };
 
   return (
-    <Container
-      component="main"
-      maxWidth="xs"
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        margin: "0",
-      }}
+    <CardWrapper
+      headerLabel="Password Reset"
+      backButtonLabel="Back to login"
+      backButtonHref="/auth/login"
     >
-      <Paper
-        elevation={3}
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-        className="rounded-xl border border-gray-300"
-      >
-        <CardWrapper
-          headerLabel="Password Reset"
-          backButtonLabel="Back to login"
-          backButtonHref="/auth/login"
-        >
-          <Form {...form}>
-            <Box
-              component="form"
-              onSubmit={form.handleSubmit(onSubmit)}
-              noValidate
-            >
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field: { value, onChange, onBlur, ref } }) => (
-                  <FormItem>
-                    <FormControl>
-                      <TextField
-                        disabled={isPending}
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        name="email"
-                        label="Email Address"
-                        autoFocus
-                        autoComplete="current-email"
-                        value={value}
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        ref={ref}
-                        error={
-                          form.getFieldState("email").isTouched &&
-                          Boolean(form.formState.errors.email)
-                        }
-                        helperText={
-                          form.getFieldState("email").isTouched &&
-                          form.formState.errors.email
-                            ? form.formState.errors.email.message
-                            : null
-                        }
-                        InputLabelProps={{ shrink: true }}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+      <Form {...form}>
+        <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field: { value, onChange, onBlur, ref } }) => (
+              <FormItem>
+                <FormControl>
+                  <TextField
+                    disabled={isPending}
+                    margin="normal"
+                    required
+                    fullWidth
+                    size="small"
+                    id="email"
+                    name="email"
+                    label="Email Address"
+                    autoFocus
+                    autoComplete="current-email"
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    ref={ref}
+                    error={
+                      form.getFieldState("email").isTouched &&
+                      Boolean(form.formState.errors.email)
+                    }
+                    helperText={
+                      form.getFieldState("email").isTouched &&
+                      form.formState.errors.email
+                        ? form.formState.errors.email.message
+                        : null
+                    }
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
 
-              <FormError message={error} time={false} />
-              <FormSusscess message={success} time={false} />
-              <Button type="submit" fullWidth sx={{ mt: 2, height: 50 }}>
-                Send a reset email
-              </Button>
-            </Box>
-          </Form>
-        </CardWrapper>
-      </Paper>
-    </Container>
+          <FormError message={error} time={false} />
+          <FormSusscess message={success} time={false} />
+          <Button type="submit" fullWidth sx={{ mt: 2, height: 37 }}>
+            Send a reset email
+          </Button>
+        </Box>
+      </Form>
+    </CardWrapper>
   );
 };

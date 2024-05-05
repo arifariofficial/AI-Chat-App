@@ -24,9 +24,9 @@ export default async function UserButton() {
       <DropdownMenu>
         <DropdownMenuTrigger
           asChild
-          className="focus-visible:border-none focus-visible:ring-0"
+          className="text-[#F5EFD1] focus-visible:border-none focus-visible:ring-0"
         >
-          <Button className="h-full gap-2 border-none bg-[#344d4d] px-4 shadow-none hover:bg-[#3f6565] focus-visible:ring-0 active:bg-[#2c3e3e]">
+          <Button className="h-full gap-2 border-none bg-[#344d4d] px-6 shadow-none hover:bg-[#3f6565] focus-visible:ring-0 active:bg-[#2c3e3e]">
             {session.user?.image ? (
               <Image
                 src={session.user.image}
@@ -41,7 +41,7 @@ export default async function UserButton() {
             <DropdownIcon />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56">
+        <DropdownMenuContent className="mr-2 w-56">
           <DropdownMenuLabel className="flex w-full items-center justify-center">
             My Account
           </DropdownMenuLabel>
@@ -73,8 +73,8 @@ export default async function UserButton() {
         href={"/auth/login"}
         className="flex h-full flex-row items-center gap-2 font-bold"
       >
-        <LockIcon />
-        <p className="text-sm ">Log in</p>
+        <LockIcon className="text-[#F5EFD1]" />
+        <p className="text-sm text-[#F5EFD1]">Log in</p>
       </Link>
     </Button>
   );
