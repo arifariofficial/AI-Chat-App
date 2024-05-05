@@ -26,7 +26,9 @@ export const CardWrapper = ({
 }: CardWrapperProps) => {
   return (
     <>
-      <Card className={cn("mx-6 -mt-16 w-full max-w-lg", className)}>
+      <Card
+        className={cn("mx-6 -mt-16 w-full max-w-sm sm:max-w-md", className)}
+      >
         <CardHeader>
           <Header label={headerLabel} />
         </CardHeader>
