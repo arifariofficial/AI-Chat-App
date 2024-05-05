@@ -1,11 +1,11 @@
 "use client";
 
-import { Avatar, Button } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 import React from "react";
-import { MailOutline, PersonOutline } from "@mui/icons-material";
+import { PersonOutline } from "@mui/icons-material";
+import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 
 export default function Account() {
   const { data: session, status } = useSession();
@@ -31,10 +31,17 @@ export default function Account() {
             Profile
           </h2>
           <div className="flex flex-row px-0 py-4">
-            <Avatar
-              src={session.user.image || ""}
-              sx={{ height: "100px", width: "100px", borderRadius: 2 }}
-            />
+            <Avatar className="size-32 rounded-sm border shadow-md">
+              {session.user.image && (
+                <AvatarImage
+                  src={session.user.image}
+                  alt={session.user.name || "Name not available"}
+                />
+              )}
+              <AvatarFallback className="size-32 rounded-none">
+                No Image
+              </AvatarFallback>
+            </Avatar>
           </div>
         </section>
         <section className="mb-10">
@@ -57,9 +64,6 @@ export default function Account() {
             </p>
           </div>
         </section>
-        <Button variant="outlined" startIcon={<MailOutline />} className="">
-          Add email address
-        </Button>
       </div>
     </main>
   );

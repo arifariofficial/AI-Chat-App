@@ -109,7 +109,7 @@ export const ResetForm = () => {
 
               <FormError message={error} time={false} />
               <FormSusscess message={success} time={false} />
-              <Button type="submit" fullWidth sx={{ mt: 2 }}>
+              <Button type="submit" fullWidth sx={{ mt: 2, height: 50 }}>
                 Send a reset email
               </Button>
             </Box>

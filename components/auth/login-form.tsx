@@ -28,6 +28,12 @@ import { Button as MyButton } from "@components/ui/button";
 import { getMessageFromCode } from "@lib/utils";
 
 import { login } from "@actions/login";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@components/ui/input-otp";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -101,7 +107,7 @@ export const LoginForm = () => {
           headerLabel="Welcome back"
           backButtonLabel="Dont't have an account?"
           backButtonHref="/auth/register"
-          showLocal
+          showLocal={!showTwoFactor}
         >
           <Form {...form}>
             <Box
@@ -114,35 +120,22 @@ export const LoginForm = () => {
                   <FormField
                     control={form.control}
                     name="code"
-                    render={({ field: { value, onChange, onBlur, ref } }) => (
-                      <FormItem>
+                    render={({ field }) => (
+                      <FormItem className="flex justify-center">
                         <FormControl>
-                          <TextField
-                            disabled={isPending}
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="code"
-                            name="code"
-                            type="number"
-                            label="Two Factor Code"
-                            autoFocus
-                            value={value}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            ref={ref}
-                            InputLabelProps={{ shrink: true }}
-                            error={
-                              form.getFieldState("code").isTouched &&
-                              Boolean(form.formState.errors.code)
-                            }
-                            helperText={
-                              form.getFieldState("code").isTouched &&
-                              form.formState.errors.code
-                                ? form.formState.errors.code.message
-                                : null
-                            }
-                          />
+                          <InputOTP maxLength={6} {...field}>
+                            <InputOTPGroup>
+                              <InputOTPSlot index={0} className="size-12" />
+                              <InputOTPSlot index={1} className="size-12" />
+                              <InputOTPSlot index={2} className="size-12" />
+                            </InputOTPGroup>
+                            <InputOTPSeparator />
+                            <InputOTPGroup>
+                              <InputOTPSlot index={3} className="size-12" />
+                              <InputOTPSlot index={4} className="size-12" />
+                              <InputOTPSlot index={5} className="size-12" />
+                            </InputOTPGroup>
+                          </InputOTP>
                         </FormControl>
                       </FormItem>
                     )}
@@ -256,7 +249,7 @@ export const LoginForm = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 2, height: 37 }}
+                sx={{ mt: 2, height: 50 }}
               >
                 {isPending ? (
                   <CircularProgress size="20px" className="text-[#f5efd1]" />

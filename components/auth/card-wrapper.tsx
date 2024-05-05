@@ -5,6 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { BackBotton } from "./back-button";
 import { Header } from "./header";
 import { Social } from "./social";
+import { cn } from "@lib/utils";
 
 interface CardWrapperProps {
   children: React.ReactNode;
@@ -12,6 +13,7 @@ interface CardWrapperProps {
   backButtonLabel: string;
   backButtonHref: string;
   showLocal?: boolean;
+  className?: string;
 }
 
 export const CardWrapper = ({
@@ -20,10 +22,11 @@ export const CardWrapper = ({
   backButtonLabel,
   backButtonHref,
   showLocal,
+  className,
 }: CardWrapperProps) => {
   return (
     <>
-      <Card className="mx-12 w-full">
+      <Card className={cn("w-full px-6", className)}>
         <CardHeader>
           <Header label={headerLabel} />
         </CardHeader>

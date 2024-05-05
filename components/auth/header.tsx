@@ -25,7 +25,11 @@ export const Header = ({ label }: HeaderProps) => {
       <Avatar sx={{ bgcolor: "secondary.main" }}>
         <LockOutlinedIcon />
       </Avatar>
-      <Typography component="h1" variant="h5">
+      <Typography
+        component="h1"
+        variant="h4"
+        className="font-bold text-[#2a3d3d]"
+      >
         {label}
       </Typography>
     </div>

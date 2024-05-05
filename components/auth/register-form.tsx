@@ -88,6 +88,7 @@ export const RegisterForm = () => {
           backButtonLabel="Already have an account?"
           backButtonHref="/auth/login"
           showLocal
+          className="mx-12"
         >
           <Form {...form}>
             <Box
@@ -224,7 +225,7 @@ export const RegisterForm = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 2, height: 37 }}
+                sx={{ mt: 2, height: 50 }}
               >
                 {isPending ? (
                   <CircularProgress size="20px" className="text-[#f5efd1]" />

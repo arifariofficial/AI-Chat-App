@@ -57,7 +57,7 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
             </div>
             <div className=" flex w-full flex-col">
               <p
-                className={`mx-2 w-[40px] text-lg font-bold text-gray-700 ${message.author === "SIPE" ? "self-start" : "self-start "}`}
+                className={`mx-2  w-[40px] text-lg font-bold text-gray-700 ${message.author === "SIPE" ? "self-start" : "self-start "}`}
               >
                 {message.author === "SIPE" ? "Sipe" : "Sinä"}
               </p>

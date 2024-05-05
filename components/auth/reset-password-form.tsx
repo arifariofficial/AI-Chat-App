@@ -187,7 +187,7 @@ export const ResetPasswordForm = () => {
 
               <FormError message={error} time={false} />
               <FormSusscess message={success} time={false} />
-              <Button type="submit" fullWidth sx={{ mt: 2, height: 37 }}>
+              <Button type="submit" fullWidth sx={{ mt: 2, height: 50 }}>
                 {isPending ? (
                   <CircularProgress size="20px" className="text-[#f5efd1]" />
                 ) : (

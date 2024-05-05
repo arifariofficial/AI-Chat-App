@@ -254,7 +254,7 @@ export const LogoutForm = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 2, height: 37 }}
+                sx={{ mt: 2, height: 50 }}
               >
                 {isPending ? (
                   <CircularProgress size="20px" className="text-[#f5efd1]" />

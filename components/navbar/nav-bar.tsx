@@ -1,6 +1,6 @@
 import Link from "next/link";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
-import AuthButton from "./auth-button";
+import UserButton from "./user-button";
 
 const NavBar = () => {
   return (
@@ -16,9 +16,9 @@ const NavBar = () => {
             </h1>
           </Link>
         </section>
-        <section className="mr-3 flex items-center text-xl font-semibold text-[#F5EFD1] hover:opacity-90">
-          <div className="flex flex-col items-center">
-            <AuthButton />
+        <section className="mr-3 flex items-center justify-center text-xl font-semibold text-[#F5EFD1] hover:opacity-90 ">
+          <div className="flex h-full flex-col items-center">
+            <UserButton />
           </div>
         </section>
       </nav>

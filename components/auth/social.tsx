@@ -35,7 +35,7 @@ export const Social = () => {
             onClick={() => onClick("google")}
             startIcon={<GoogleIcon />}
             sx={{
-              height: 37,
+              height: 50,
               display: "flex",
               bgcolor: "white",
               color: "primary.main",
@@ -59,7 +59,7 @@ export const Social = () => {
             onClick={() => onClick("facebook")}
             startIcon={<FacebookIcon />}
             sx={{
-              height: 37,
+              height: 50,
               display: "flex",
               bgcolor: "white",
               boxShadow: "none",

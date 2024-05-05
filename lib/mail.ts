@@ -2,12 +2,10 @@ import nodemailer from "nodemailer";
 
 // SMTP settings for your email server
 const transporter = nodemailer.createTransport({
-  host: "email-smtp.eu-north-1.amazonaws.com", // SMTP server host
-  port: 465, // SMTP port
-  secure: true, // True if port is 465, otherwise false
+  service: "Gmail",
   auth: {
-    user: "AKIAT62YUAOUF4HND24U",
-    pass: "BKdLIVeVVFxp9xYMT1IoUrCUS8doOYEesyu22OoBbQnd",
+    user: "sipeai6@gmail.com",
+    pass: "jslg uyyo mopu rymt",
   },
 });
 
