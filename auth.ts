@@ -10,6 +10,7 @@ declare module "next-auth" {
     user: {
       role: string;
       isTwoFactorEnabled: boolean;
+      emailVerified: Date | null;
     } & DefaultSession["user"];
   }
 }
@@ -49,6 +50,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (existingUser && session.user) {
           session.user.role = existingUser.role;
           session.user.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
+          session.user.emailVerified = existingUser.emailVerified;
         }
       }
       return session;
@@ -68,6 +70,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           emailVerified: new Date(),
         },
       });
+    },
+    signIn: async ({ user }) => {
+      if (user.email && user.id) {
+        await prisma.loginHistory.create({
+          data: {
+            userId: user.id,
+            email: user.email,
+            loginAt: new Date().toISOString(),
+          },
+        });
+      }
     },
   },
 });

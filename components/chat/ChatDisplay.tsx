@@ -20,6 +20,16 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
     }
   }, [messages]);
 
+  // Function to split the first word from the rest of the text
+  const splitFirstWord = (text: string) => {
+    const indexOfFirstSpace = text.indexOf(" ");
+    if (indexOfFirstSpace === -1) return [text]; // Return the whole text if it's just one word
+    return [
+      text.substring(0, indexOfFirstSpace),
+      text.substring(indexOfFirstSpace + 1),
+    ];
+  };
+
   return (
     <div className="flex h-full flex-col-reverse space-y-8 space-y-reverse  overflow-y-auto sm:px-6 ">
       <div ref={messagesEndRef} /> {/* Due to reverse-col, needs to be here */}
@@ -57,7 +67,7 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
             </div>
             <div className=" flex w-full flex-col">
               <p
-                className={`mx-2  w-[40px] text-lg font-bold text-gray-700 ${message.author === "SIPE" ? "self-start" : "self-start "}`}
+                className={`mx-2  w-[40px] text-lg font-bold text-slate-800 ${message.author === "SIPE" ? "self-start" : "self-start "}`}
               >
                 {message.author === "SIPE" ? "Sipe" : "Sinä"}
               </p>
@@ -65,7 +75,19 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
               <div
                 className={`relative rounded-md p-3 pt-1 text-left font-serif text-sm leading-relaxed   md:text-base  ${message.author === "SIPE" ? "-ml-1 " : "-ml-1 "}`}
               >
-                <p>{message.text}</p>
+                {/* Splitting and rendering the first word bold */}
+                {message.author === "SIPE" ? (
+                  <>
+                    <strong className="text-slate-800">
+                      {splitFirstWord(message.text)[0]}
+                    </strong>
+                    {splitFirstWord(message.text)[1]
+                      ? ` ${splitFirstWord(message.text)[1]}`
+                      : ""}
+                  </>
+                ) : (
+                  <p>{message.text}</p>
+                )}
               </div>
             </div>
           </div>

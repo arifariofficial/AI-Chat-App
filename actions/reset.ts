@@ -1,10 +1,11 @@
 "use server";
 
-import { ResetSchema } from "@/lib/Schema";
 import * as z from "zod";
 import { getUserByEmail } from "../data/user";
 import { generatePasswordResetToken } from "@/lib/token";
 import { sendPasswordResetEmail } from "@/lib/mail";
+import { setTimeout } from "timers";
+import { ResetSchema } from "@lib/Schema";
 
 export const reset = async (values: z.infer<typeof ResetSchema>) => {
   const parsedCredentials = ResetSchema.safeParse(values);
@@ -18,7 +19,10 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
   const existingUser = await getUserByEmail(email);
 
   if (!existingUser) {
-    return { error: "Email not found" };
+    await new Promise((resolve) => setTimeout(resolve, 600)); // 600ms delay
+    return {
+      success: "An email will be sent if the user is found",
+    };
   }
 
   const passwordResetToken = await generatePasswordResetToken(email);
@@ -28,5 +32,7 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
     passwordResetToken.token,
   );
 
-  return { success: "An email has been sent" };
+  return {
+    success: "An email will be sent if the user is found",
+  };
 };

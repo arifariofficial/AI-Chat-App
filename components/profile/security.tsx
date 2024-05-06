@@ -4,7 +4,14 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { twoFactor } from "@actions/two-factor";
 import { useSession } from "next-auth/react";
-import IconSpinner from "@components/ui/icons";
+import IconSpinner, { InfoIcon } from "@components/ui/icons";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@components/ui/tooltip";
+import { Button } from "@components/ui/button";
 
 export default function Security() {
   const [isTwoFactorEnabled, setIsTwoFactorEnabled] = useState<boolean>(false);
@@ -48,8 +55,24 @@ export default function Security() {
       {error && <div className="mb-2 text-red-500">{error}</div>}
       <form onSubmit={(e) => e.preventDefault()}>
         <section className="flex justify-between">
-          <span className="text-base font-semibold text-gray-700">
+          <span className="flex flex-row text-base  font-semibold text-gray-700">
             Two-Factor Authentication
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" className="ml-1 size-4 p-0">
+                    <InfoIcon className=" text-black" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="top">
+                  <p className="max-w-44">
+                    When this feature is activated, a one-time password (OTP)
+                    will be sent to the user&apos;s email address to facilitate
+                    secure login.
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </span>
           <FormControlLabel
             control={

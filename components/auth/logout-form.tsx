@@ -81,7 +81,7 @@ export const LogoutForm = () => {
     >
       <Form {...form}>
         <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
-          <div className="space-y-4">
+          <div>
             {showTwoFactor && (
               <FormField
                 control={form.control}

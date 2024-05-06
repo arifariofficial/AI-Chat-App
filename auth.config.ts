@@ -27,11 +27,10 @@ export const authConfig = {
     Credentials({
       async authorize(credentials) {
         const parsedCredentials = LoginSchema.safeParse(credentials);
-
         if (parsedCredentials.success) {
           const { email, password } = parsedCredentials.data;
-
           const user = await getUserByEmail(email);
+
           if (!user) return null;
 
           const encoder = new TextEncoder();

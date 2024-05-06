@@ -1,5 +1,38 @@
 import * as z from "zod";
 
+function validateTld(email: string) {
+  const domainPart = email.split("@")[1];
+  const tld = domainPart.split(".").pop() || "";
+  const knownTlds = [
+    "com",
+    "org",
+    "net",
+    "edu",
+    "gov", // Generic TLDs
+    "uk",
+    "de",
+    "br",
+    "ru",
+    "it",
+    "au",
+    "pl",
+    "in",
+    "jp",
+    "cn", // Country code TLDs
+    "info",
+    "biz",
+    "name",
+    "io",
+    "tech", // Newer generic TLDs
+    "agency",
+    "email",
+    "network",
+    "digital",
+    "today", // Niche TLDs
+  ];
+  return knownTlds.includes(tld);
+}
+
 export const LoginSchema = z.object({
   email: z.string().email({ message: "Email is required" }),
   password: z.string().min(1, {
@@ -7,8 +40,12 @@ export const LoginSchema = z.object({
   }),
   code: z.optional(z.string()),
 });
+
 export const ResetSchema = z.object({
-  email: z.string().email({ message: "Email is required" }),
+  email: z
+    .string()
+    .email({ message: "Email is required" })
+    .refine(validateTld, { message: "Invalid email" }),
 });
 
 export const ResetPasswordSchema = z
@@ -34,7 +71,10 @@ export const ResetPasswordSchema = z
 
 export const RegisterSchema = z
   .object({
-    email: z.string().email("Email is required"),
+    email: z
+      .string()
+      .email({ message: "Email is required" })
+      .refine(validateTld, { message: "Invalid email" }),
     password: z
       .string()
       .min(8, { message: "Password must be at least 8 characters long." })

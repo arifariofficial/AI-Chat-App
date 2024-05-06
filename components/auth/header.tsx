@@ -19,7 +19,7 @@ export const Header = ({ label }: HeaderProps) => {
     <div
       className={cn(
         font,
-        "mb-12 flex w-full flex-col items-center justify-center gap-y-6",
+        "mb-2 flex w-full flex-col items-center justify-center gap-4",
       )}
     >
       <Avatar sx={{ bgcolor: "secondary.main" }}>
