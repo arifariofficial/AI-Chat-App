@@ -1,12 +1,12 @@
-import OpenAI from "openai";
+/* import OpenAI from "openai"; */
 import { NextResponse } from "next/server";
-/* import axios from "axios"; */
+import axios from "axios";
 
 export async function POST(req: Request) {
   const data = await req.json();
 
   //chatGpt
-  const openai = new OpenAI({
+  /*   const openai = new OpenAI({
     apiKey: process.env.AI_API_KEY,
   });
 
@@ -17,10 +17,10 @@ export async function POST(req: Request) {
 
   return NextResponse.json({
     aiResponse: completion.choices[0].message.content,
-  });
+  }); */
 
   //sipe api
-  /*   const username = process.env.USERNAME;
+  const username = process.env.USERNAME;
   const password = process.env.PASSWORD;
   const basicAuth = "Basic " + btoa(username + ":" + password);
 
@@ -34,5 +34,5 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error("API request failed", error);
     return NextResponse.json({ error: "Failed to fetch response from API" });
-  } */
+  }
 }
