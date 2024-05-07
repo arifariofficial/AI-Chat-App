@@ -1,8 +1,9 @@
 FROM node:18-alpine AS base
 FROM base AS deps
 
-RUN apk add --no-cache libc6-compat
-RUN apk add --no-cache curl
+RUN apk add --no-cache libc6-compat curl
+RUN apk add --no-cache bind-tools busybox-extras iputils
+
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
