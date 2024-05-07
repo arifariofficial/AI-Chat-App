@@ -12,7 +12,7 @@ import nodemailer from "nodemailer";
 // Create the transporter to use your own mail server
 const transporter = nodemailer.createTransport({
   host: "127.0.0.1", // or the IP address of your mail server
-  port: 25, // Adjust if your server uses a different port (587 for STARTTLS or 465 for SSL)
+  port: 587, // Adjust if your server uses a different port (587 for STARTTLS or 465 for SSL)
   secure: false, // True for port 465 (SSL), false for other ports
   auth: {
     user: "your-username", // Your mail server username
