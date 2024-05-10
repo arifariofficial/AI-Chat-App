@@ -1,16 +1,20 @@
 import nodemailer from "nodemailer";
+/* import { Resend } from "resend"; */
 
-// SMTP settings for your email server
-/* const transporter = nodemailer.createTransport({
+// Gmail settings
+const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
     user: "sipeai6@gmail.com",
     pass: "jslg uyyo mopu rymt",
   },
-}); */
+});
 
-// Create the transporter to use your own mail server
-const transporter = nodemailer.createTransport({
+//Resender settings
+/* const resend = new Resend(process.env.RESEND_API_KEY); */
+
+// Own mail server settings
+/* const transporter = nodemailer.createTransport({
   host: "mailserver", // or the IP address of your mail server
   port: 587, // Adjust if your server uses a different port (587 for STARTTLS or 465 for SSL)
   secure: false, // True for port 465 (SSL), false for other ports
@@ -21,7 +25,7 @@ const transporter = nodemailer.createTransport({
   tls: {
     rejectUnauthorized: false, // Allow self-signed certificates
   },
-});
+}); */
 
 const baseURL =
   process.env.NODE_ENV === "production"
@@ -52,7 +56,7 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
   const resetLink = `${baseURL}/auth/reset-password?token=${token}`;
 
   await transporter.sendMail({
-    from: '"SIPE" <no-reply@sipe.life>',
+    from: '"SIPE" <sipeai6@gmail.com>',
     to: email,
     subject: "Reset your password",
     html: `

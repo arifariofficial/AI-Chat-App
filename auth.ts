@@ -11,6 +11,8 @@ declare module "next-auth" {
       role: string;
       isTwoFactorEnabled: boolean;
       emailVerified: Date | null;
+      name: string | null;
+      balance: number | null;
     } & DefaultSession["user"];
   }
 }
@@ -51,6 +53,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           session.user.role = existingUser.role;
           session.user.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
           session.user.emailVerified = existingUser.emailVerified;
+          session.user.name = existingUser.name;
+          session.user.balance = existingUser.balance;
         }
       }
       return session;

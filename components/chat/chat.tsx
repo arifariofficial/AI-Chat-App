@@ -4,7 +4,7 @@ import ChatDisplay from "@components/chat/ChatDisplay";
 import ChatInput from "@components/chat/ChatInput";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import ChatSkeleton from "@components/skeletons/ChatSkeleton";
 import { Button } from "@mui/material";
 
@@ -21,13 +21,23 @@ export default function Chat() {
   const router = useRouter();
 
   useEffect(() => {
+    const fetchData = async () => {
+      await getSession();
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    let timer: string | number | NodeJS.Timeout | undefined;
     if (!session) {
-      setTimeout(() => {
+      timer = setTimeout(() => {
         setShowModal(true);
       }, 400);
     }
-  }, [session, router]);
 
+    // Cleanup function to clear the timeout if the component unmounts
+    return () => clearTimeout(timer);
+  }, [session]);
   const handleSendMessage = (newMessage: Message) => {
     setMessages((prevMessages) => [newMessage, ...prevMessages]);
   };
@@ -43,7 +53,7 @@ export default function Chat() {
         <ChatSkeleton />
         {showModal && (
           <div className=" absolute inset-x-0 top-[68px] flex h-[calc(100vh-70px)] w-full items-center justify-center font-semibold md:mt-auto ">
-            <div className=" flex  w-1/2 max-w-[400px] flex-col items-center justify-center rounded-xl border border-gray-300 bg-[#ecfeff] p-4 text-[#F5EFD1] shadow-2xl">
+            <div className=" flex w-2/3 max-w-[500px] flex-col items-center justify-center rounded-xl border border-gray-300 bg-[#ecfeff] p-4 text-[#F5EFD1] shadow-2xl sm:w-1/2">
               <p className="p-3 text-[#2e4342]">Please sign in</p>
               <Button sx={{ mb: 4 }} onClick={handleModalClose}>
                 OK

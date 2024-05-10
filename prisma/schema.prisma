@@ -22,12 +22,14 @@ model User {
   role          UserRole  @default(USER)
   emailVerified DateTime?
   image         String?
+  balance       Float     @default(0)
   accounts      Account[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+  userPayment           UserPayment[]
   loginHistory          LoginHistory[]
 }
 
@@ -98,4 +100,16 @@ model LoginHistory {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+}
+
+model UserPayment {
+  id                    String @id @default(uuid())
+  userId                String
+  stripePaymentIntentId String @unique
+  amount                Int
+  paymentStatus         String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map(name: "user_payments")
 }

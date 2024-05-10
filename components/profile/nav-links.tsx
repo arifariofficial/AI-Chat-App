@@ -13,8 +13,8 @@ const links = [
     icon: UserIcon,
   },
   {
-    name: "Subscription",
-    href: "/profile/subscription",
+    name: "Balance",
+    href: "/profile/balance",
     icon: SubscriptionIcon,
   },
   { name: "Security", href: "/profile/security", icon: SecurityIcon },

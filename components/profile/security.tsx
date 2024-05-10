@@ -4,7 +4,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { twoFactor } from "@actions/two-factor";
 import { useSession } from "next-auth/react";
-import IconSpinner, { InfoIcon } from "@components/ui/icons";
 import {
   Tooltip,
   TooltipContent,
@@ -12,6 +11,8 @@ import {
   TooltipTrigger,
 } from "@components/ui/tooltip";
 import { Button } from "@components/ui/button";
+import { GiInfo } from "react-icons/gi";
+import IconSpinner from "@components/ui/icons";
 
 export default function Security() {
   const [isTwoFactorEnabled, setIsTwoFactorEnabled] = useState<boolean>(false);
@@ -61,10 +62,10 @@ export default function Security() {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button variant="ghost" className="ml-1 size-4 p-0">
-                    <InfoIcon className=" text-black" />
+                    <GiInfo />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent side="top">
+                <TooltipContent side="top" className="shadow-md">
                   <p className="max-w-44">
                     When this feature is activated, a one-time password (OTP)
                     will be sent to the user&apos;s email address to facilitate

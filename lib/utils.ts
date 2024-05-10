@@ -38,3 +38,7 @@ export const getMessageFromCode = (resultCode: string) => {
       return "Two-factor authentication required!";
   }
 };
+
+export const absoluteUrl = (path: string) => {
+  return new URL(`${process.env.NEXT_PUBLIC_APP_URL}${path}`).toString();
+};

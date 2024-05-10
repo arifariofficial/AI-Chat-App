@@ -1,9 +1,9 @@
-import Subscription from "@components/profile/subscription";
+import Balance from "@components/profile/balance";
 
 export default function SubscriptionPage() {
   return (
     <div>
-      <Subscription />
+      <Balance />
     </div>
   );
 }

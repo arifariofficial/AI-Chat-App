@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@auth";
 import NavBar from "@components/navbar/nav-bar";
+import { ProModal } from "@components/pro-modals";
+import { Toaster } from "@components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -24,7 +26,9 @@ export default async function RootLayout({
       <body className={inter.className}>
         <SessionProvider basePath="/api/auth" session={session}>
           <NavBar />
+          <ProModal />
           {children}
+          <Toaster />
         </SessionProvider>
       </body>
     </html>

@@ -1,7 +1,17 @@
 import * as z from "zod";
 
 function validateTld(email: string) {
+  // Check if the email contains an "@" symbol
+  if (!email.includes("@")) {
+    return false;
+  }
+
   const domainPart = email.split("@")[1];
+  // Ensure the domain part exists and contains a "."
+  if (!domainPart || !domainPart.includes(".")) {
+    return false;
+  }
+
   const tld = domainPart.split(".").pop() || "";
   const knownTlds = [
     "com",
@@ -30,9 +40,9 @@ function validateTld(email: string) {
     "digital",
     "today", // Niche TLDs
   ];
-  return knownTlds.includes(tld);
-}
 
+  return knownTlds.includes(tld.toLowerCase());
+}
 export const LoginSchema = z.object({
   email: z.string().email({ message: "Email is required" }),
   password: z.string().min(1, {
