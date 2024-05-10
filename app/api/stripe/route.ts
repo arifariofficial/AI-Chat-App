@@ -31,7 +31,7 @@ export async function GET(req: Request) {
     }
 
     const stripeSession = await stripe.checkout.sessions.create({
-      success_url: subscriptionUrl + "?session_id={CHECKOUT_SESSION_ID}",
+      success_url: subscriptionUrl,
       cancel_url: subscriptionUrl,
       payment_method_types: ["card", "mobilepay", "paypal", "klarna"],
       mode: "payment",
