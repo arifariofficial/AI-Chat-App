@@ -1,30 +1,19 @@
 import { updateBalance } from "@actions/balance";
 import prisma from "@lib/prisma";
 import { stripe } from "@lib/stripe";
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { buffer } from "micro";
-import { NextApiRequest } from "next";
 
-export async function POST(req: NextApiRequest) {
-  const signature = req.headers["stripe-signature"];
-
-  // Read the raw body
-  const body = await buffer(req);
-  const rawBody = body.toString();
-
-  if (!signature) {
-    console.log("WEBHOOK_ERROR", "No signature found in request headers");
-    return new NextResponse("Webhook Error: No signature found", {
-      status: 400,
-    });
-  }
+export async function POST(req: Request) {
+  const body = await req.text();
+  const signature = headers().get("stripe-signature") as string;
 
   let event: Stripe.Event;
 
   try {
     event = stripe.webhooks.constructEvent(
-      rawBody,
+      body,
       signature,
       process.env.STRIPE_WEBHOOK_SECRET!,
     );
