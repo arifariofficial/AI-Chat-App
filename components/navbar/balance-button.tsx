@@ -1,13 +1,15 @@
-import { auth } from "@auth";
+"use client";
+
 import { Button } from "@components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@components/ui/dropdown-menu";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
-export default async function Balance() {
-  const session = await auth();
+export default function Balance() {
+  const { data: session } = useSession();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

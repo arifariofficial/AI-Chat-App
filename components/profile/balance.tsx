@@ -22,8 +22,8 @@ type CreditOption = {
 // Credit options
 const creditOptions: CreditOption[] = [
   { value: 1, label: "1 EUR" },
-  { value: 2, label: "2 EUR" },
   { value: 10, label: "10 EUR" },
+  { value: 15, label: "15 EUR" },
   { value: 20, label: "20 EUR" },
 ];
 

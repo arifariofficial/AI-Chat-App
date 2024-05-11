@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 import { useState, useRef } from "react";
 import SendIcon from "@mui/icons-material/Send";
+import { getSession, useSession } from "next-auth/react";
 
 const ChatInput: React.FC<{
   onSendMessage: (message: { text: string; author: string }) => void;
@@ -16,29 +17,8 @@ const ChatInput: React.FC<{
   const formRef = useRef<HTMLFormElement>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  //chat-gpt
-  /* const sendAndClearMessage = async () => {
-    if (!message.trim()) return;
-    setIsLoading(true);
-
-    // Send the user's message to the chat
-    onSendMessage({ text: message, author: "user" });
-    setMessage("");
-
-    try {
-      const response = await axios.post("/api/chat", {
-        message: message,
-      });
-
-      const aiMessage = response.data.aiResponse;
-
-      onSendMessage({ text: aiMessage, author: "SIPE" });
-    } catch (error) {
-      console.error("Error while sending message:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }; */
+  const { data: session } = useSession();
+  const userId = session?.user.id;
 
   const sendAndClearMessage = async () => {
     if (!message.trim()) return;
@@ -51,6 +31,7 @@ const ChatInput: React.FC<{
     try {
       const response = await axios.post("/api/chat", {
         message: message,
+        userId: userId,
       });
 
       const aiMessage = response.data.aiResponse;
@@ -60,6 +41,7 @@ const ChatInput: React.FC<{
       console.error("Error while sending message:", error);
     } finally {
       setIsLoading(false);
+      await getSession();
     }
   };
 

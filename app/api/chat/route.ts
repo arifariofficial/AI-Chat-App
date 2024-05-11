@@ -1,12 +1,21 @@
-/* import OpenAI from "openai"; */
 import { NextResponse } from "next/server";
-import axios from "axios";
+import { checkBalance } from "@actions/balance";
+/* import axios from "axios"; */
+import OpenAI from "openai";
 
 export async function POST(req: Request) {
   const data = await req.json();
 
+  const isBalance = await checkBalance(data.userId);
+
+  if (!isBalance) {
+    return NextResponse.json({
+      aiResponse: "You do not have enough balance, please top up your account.",
+    });
+  }
+
   //chatGpt
-  /*   const openai = new OpenAI({
+  const openai = new OpenAI({
     apiKey: process.env.AI_API_KEY,
   });
 
@@ -17,10 +26,10 @@ export async function POST(req: Request) {
 
   return NextResponse.json({
     aiResponse: completion.choices[0].message.content,
-  }); */
+  });
 
   //sipe api
-  const username = process.env.USERNAME;
+  /*   const username = process.env.USERNAME;
   const password = process.env.PASSWORD;
   const basicAuth = "Basic " + btoa(username + ":" + password);
 
@@ -34,5 +43,5 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error("API request failed", error);
     return NextResponse.json({ error: "Failed to fetch response from API" });
-  }
+  } */
 }
