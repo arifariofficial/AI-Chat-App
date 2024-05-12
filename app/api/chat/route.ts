@@ -33,9 +33,14 @@ export async function POST(req: Request) {
   const password = process.env.PASSWORD;
   const basicAuth = "Basic " + btoa(username + ":" + password);
 
+  const sipeBaseUrl =
+    process.env.NODE_ENV === "production"
+      ? "http://sipe-api:8000/sipe/api"
+      : "http://localhost:8000/sipe/api";
+
   try {
     const response = await axios.post(
-      "http://sipe-api:8000/sipe/api",
+      sipeBaseUrl,
       { chat: data.message },
       { headers: { Authorization: basicAuth } },
     );

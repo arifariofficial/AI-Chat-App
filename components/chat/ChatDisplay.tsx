@@ -1,8 +1,16 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import FormattedText from "./formatSipeText";
+import { CopyIcon, TickIcon } from "@components/ui/icons";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@components/ui/tooltip";
 
 interface Message {
   author: string;
@@ -10,6 +18,7 @@ interface Message {
 }
 
 const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
+  const [copyIcon, setCopyIcon] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { data: session } = useSession();
@@ -20,14 +29,19 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
     }
   }, [messages]);
 
-  // Function to split the first word from the rest of the text
-  const splitFirstWord = (text: string) => {
-    const indexOfFirstSpace = text.indexOf(" ");
-    if (indexOfFirstSpace === -1) return [text]; // Return the whole text if it's just one word
-    return [
-      text.substring(0, indexOfFirstSpace),
-      text.substring(indexOfFirstSpace + 1),
-    ];
+  //Copy sipe text to clipboard
+  const handleCopyText = (text: string) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setCopyIcon(true);
+        setTimeout(() => {
+          setCopyIcon(false);
+        }, 2000);
+      })
+      .catch((err) => {
+        console.log("Failed to copy text: ", err);
+      });
   };
 
   return (
@@ -75,15 +89,28 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
               <div
                 className={`relative rounded-md p-3 pt-1 text-left font-serif text-sm leading-relaxed   md:text-base  ${message.author === "SIPE" ? "-ml-1 " : "-ml-1 "}`}
               >
-                {/* Splitting and rendering the first word bold */}
                 {message.author === "SIPE" ? (
                   <>
-                    <strong className="text-slate-800">
-                      {splitFirstWord(message.text)[0]}
-                    </strong>
-                    {splitFirstWord(message.text)[1]
-                      ? ` ${splitFirstWord(message.text)[1]}`
-                      : ""}
+                    <FormattedText text={message.text} />
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <button
+                            onClick={() => handleCopyText(message.text)}
+                            className="ml-1 mt-1"
+                          >
+                            {!copyIcon ? (
+                              <CopyIcon className="text-gray-400 hover:text-gray-900" />
+                            ) : (
+                              <TickIcon className="text-gray-400" />
+                            )}
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent side="bottom">
+                          <p>Copy</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   </>
                 ) : (
                   <p>{message.text}</p>
