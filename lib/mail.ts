@@ -33,7 +33,7 @@ const baseURL =
     : "http://localhost:3000";
 
 export const sendVerificationEmail = async (email: string, token: string) => {
-  const confirmLink = `${baseURL}/auth/new-verification?token=${token}`;
+  const confirmLink = `${baseURL}/auth/new-verification?token=${encodeURIComponent(token)}`;
 
   await transporter.sendMail({
     from: '"SIPE" <sipeai6@gmail.com>',
@@ -53,7 +53,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
 };
 
 export const sendPasswordResetEmail = async (email: string, token: string) => {
-  const resetLink = `${baseURL}/auth/reset-password?token=${token}`;
+  const resetLink = `${baseURL}/auth/reset-password?token=${encodeURIComponent(token)}`;
 
   await transporter.sendMail({
     from: '"SIPE" <sipeai6@gmail.com>',
@@ -83,7 +83,7 @@ export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
           <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; text-align: center; padding: 40px; background-color: #f4f4f4;">
             <div style="max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
               <h2 style="color: #333; margin-bottom: 20px;">Your Two-Factor Authentication Code</h2>
-              <p style="font-size: 24px; color: #007BFF; margin: 20px;">${token}</p>
+              <p style="font-size: 24px; color: #007BFF; margin: 20px;">${encodeURIComponent(token)}</p>
               <p style="color: #555; font-size: 16px;">Enter this code to complete your sign-in process.</p>
             </div>
           </div>
