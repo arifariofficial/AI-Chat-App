@@ -13,7 +13,6 @@ before_script:
 deploy:
   stage: deploy
   script:
-    - scp -r . $DEPLOY_USER@$DEPLOY_SERVER:/home/sipeai6/sipe-fullstack/sipe-frontend
-    - ssh $DEPLOY_USER@$DEPLOY_SERVER "docker image prune -af && cd /home/sipeai6/sipe-fullstack && docker-compose stop frontend && docker-compose build frontend && docker-compose up frontend -d"
+    - ssh $DEPLOY_USER@$DEPLOY_SERVER "docker image prune -af && cd /home/sipeai6/sipe-fullstack && git pull origin main && docker-compose stop frontend && docker-compose build frontend && docker-compose up frontend -d"
   only:
     - main
