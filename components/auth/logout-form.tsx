@@ -7,7 +7,6 @@ import { LoginSchema } from "@/lib/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { FormError } from "../form-error";
-import { FormSusscess } from "../form-success";
 import { useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -24,6 +23,12 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Button as MyButton } from "@components/ui/button";
 import { login } from "@actions/login";
 import { getMessageFromCode } from "@lib/utils";
+import { FormSucccess } from "@components/form-success";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@components/ui/input-otp";
 
 export const LogoutForm = () => {
   const searchParams = useSearchParams();
@@ -77,7 +82,7 @@ export const LogoutForm = () => {
       headerLabel="Successfully logged out"
       backButtonLabel="Dont't have an account?"
       backButtonHref="/auth/register"
-      showLocal
+      showLocal={!showTwoFactor}
     >
       <Form {...form}>
         <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
@@ -86,35 +91,23 @@ export const LogoutForm = () => {
               <FormField
                 control={form.control}
                 name="code"
-                render={({ field: { value, onChange, onBlur, ref } }) => (
-                  <FormItem>
+                render={({ field }) => (
+                  <FormItem className="mb-4 flex justify-center">
                     <FormControl>
-                      <TextField
-                        disabled={isPending}
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="code"
-                        name="code"
-                        type="number"
-                        label="Two Factor Code"
-                        autoFocus
-                        value={value}
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        ref={ref}
-                        InputLabelProps={{ shrink: true }}
-                        error={
-                          form.getFieldState("code").isTouched &&
-                          Boolean(form.formState.errors.code)
-                        }
-                        helperText={
-                          form.getFieldState("code").isTouched &&
-                          form.formState.errors.code
-                            ? form.formState.errors.code.message
-                            : null
-                        }
-                      />
+                      <InputOTP maxLength={6} {...field}>
+                        <InputOTPGroup>
+                          <InputOTPSlot index={0} className="size-10" />
+                          <InputOTPSlot index={1} className="size-10" />
+                        </InputOTPGroup>
+                        <InputOTPGroup>
+                          <InputOTPSlot index={2} className="size-10" />
+                          <InputOTPSlot index={3} className="size-10" />
+                        </InputOTPGroup>
+                        <InputOTPGroup>
+                          <InputOTPSlot index={4} className="size-10" />
+                          <InputOTPSlot index={5} className="size-10" />
+                        </InputOTPGroup>
+                      </InputOTP>
                     </FormControl>
                   </FormItem>
                 )}
@@ -224,7 +217,7 @@ export const LogoutForm = () => {
             )}
           </div>
           <FormError message={error || urlError} />
-          <FormSusscess message={success} />
+          <FormSucccess message={success} />
           <Button
             type="submit"
             fullWidth

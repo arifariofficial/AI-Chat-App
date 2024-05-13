@@ -6,7 +6,7 @@ import {
   TextField,
 } from "@mui/material";
 import axios from "axios";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import { getSession, useSession } from "next-auth/react";
 
@@ -19,6 +19,14 @@ const ChatInput: React.FC<{
 
   const { data: session } = useSession();
   const userId = session?.user.id;
+
+  useEffect(() => {
+    const inputElement = document.getElementById("message");
+    if (inputElement) {
+      inputElement.setAttribute("spellCheck", "true");
+      inputElement.setAttribute("lang", "fi-FI");
+    }
+  }, []);
 
   const sendAndClearMessage = async () => {
     if (!message.trim()) return;
@@ -76,15 +84,17 @@ const ChatInput: React.FC<{
         autoCorrect="off"
         multiline
         minRows={1}
-        maxRows={8}
+        maxRows={14}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="Write a Message to SIPE..."
         className="shadow-inner"
-        helperText={`${message.length}/1000`}
+        helperText={`${message.length}/5000`}
         inputProps={{
-          maxLength: 1000,
+          maxLength: 5000,
+          spellCheck: true,
+          lang: "fi-FI",
         }}
         InputProps={{
           endAdornment: (

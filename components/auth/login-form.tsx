@@ -5,10 +5,8 @@ import { CardWrapper } from "./card-wrapper";
 import * as z from "zod";
 import { LoginSchema } from "@/lib/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { FormError } from "../form-error";
-import { FormSusscess } from "../form-success";
 import { useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -29,11 +27,13 @@ import { login } from "@actions/login";
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSeparator,
   InputOTPSlot,
 } from "@components/ui/input-otp";
+import { useSession } from "next-auth/react";
+import { FormSucccess } from "@components/form-success";
 
 export const LoginForm = () => {
+  const { data: session } = useSession();
   const searchParams = useSearchParams();
   const urlError =
     searchParams.get("error") === "OAuthAccountNotLinked"
@@ -45,6 +45,10 @@ export const LoginForm = () => {
   const [success, setSuccess] = useState<string | undefined>("");
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  if (session) {
+    window.location.href = "/";
+  }
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -96,19 +100,20 @@ export const LoginForm = () => {
                 control={form.control}
                 name="code"
                 render={({ field }) => (
-                  <FormItem className="flex justify-center">
+                  <FormItem className="mb-4 flex justify-center">
                     <FormControl>
                       <InputOTP maxLength={6} {...field}>
                         <InputOTPGroup>
-                          <InputOTPSlot index={0} className="size-12" />
-                          <InputOTPSlot index={1} className="size-12" />
-                          <InputOTPSlot index={2} className="size-12" />
+                          <InputOTPSlot index={0} className="size-10" />
+                          <InputOTPSlot index={1} className="size-10" />
                         </InputOTPGroup>
-                        <InputOTPSeparator />
                         <InputOTPGroup>
-                          <InputOTPSlot index={3} className="size-12" />
-                          <InputOTPSlot index={4} className="size-12" />
-                          <InputOTPSlot index={5} className="size-12" />
+                          <InputOTPSlot index={2} className="size-10" />
+                          <InputOTPSlot index={3} className="size-10" />
+                        </InputOTPGroup>
+                        <InputOTPGroup>
+                          <InputOTPSlot index={4} className="size-10" />
+                          <InputOTPSlot index={5} className="size-10" />
                         </InputOTPGroup>
                       </InputOTP>
                     </FormControl>
@@ -219,7 +224,7 @@ export const LoginForm = () => {
             )}
           </div>
           <FormError message={error || urlError} />
-          <FormSusscess message={success} />
+          <FormSucccess message={success} />
           <Button
             type="submit"
             fullWidth

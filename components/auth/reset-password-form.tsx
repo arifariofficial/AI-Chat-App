@@ -13,7 +13,6 @@ import {
   FormMessage,
 } from "../ui/form";
 import { FormError } from "../form-error";
-import { FormSusscess } from "../form-success";
 import { useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import { resetPassword } from "@/actions/reset-password";
@@ -28,6 +27,7 @@ import {
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { FormSucccess } from "@components/form-success";
 
 export const ResetPasswordForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -163,7 +163,7 @@ export const ResetPasswordForm = () => {
           />
 
           <FormError message={error} time={false} />
-          <FormSusscess message={success} time={false} />
+          <FormSucccess message={success} time={false} />
           <Button type="submit" fullWidth sx={{ mt: 2, height: 37 }}>
             {isPending ? (
               <CircularProgress size="20px" className="text-[#f5efd1]" />

@@ -7,7 +7,6 @@ import { RegisterSchema } from "@/lib/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { FormError } from "../form-error";
-import { FormSusscess } from "../form-success";
 import { useState, useTransition } from "react";
 import { register } from "@/actions/register";
 import {
@@ -21,6 +20,7 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { getMessageFromCode } from "@lib/utils";
+import { FormSucccess } from "@components/form-success";
 
 export const RegisterForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -197,7 +197,7 @@ export const RegisterForm = () => {
             )}
           />
           <FormError message={error} />
-          <FormSusscess message={success} />
+          <FormSucccess message={success} />
           <Button
             type="submit"
             fullWidth

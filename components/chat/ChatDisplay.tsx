@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FormattedText from "./formatSipeText";
@@ -18,7 +18,7 @@ interface Message {
 }
 
 const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
-  const [copyIcon, setCopyIcon] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { data: session } = useSession();
@@ -30,19 +30,20 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
   }, [messages]);
 
   //Copy sipe text to clipboard
-  const handleCopyText = (text: string) => {
+  const handleCopyText = useCallback((text: string) => {
+    const copyText = text.replace(/\*\*(.*?)\*\*/g, "$1");
     navigator.clipboard
-      .writeText(text)
+      .writeText(copyText)
       .then(() => {
-        setCopyIcon(true);
+        setCopySuccess(true);
         setTimeout(() => {
-          setCopyIcon(false);
+          setCopySuccess(false);
         }, 2000);
       })
       .catch((err) => {
-        console.log("Failed to copy text: ", err);
+        console.error("Failed to copy text: ", err);
       });
-  };
+  }, []);
 
   return (
     <div className="flex h-full flex-col-reverse space-y-8 space-y-reverse  overflow-y-auto sm:px-6 ">
@@ -94,12 +95,12 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
                     <FormattedText text={message.text} />
                     <TooltipProvider>
                       <Tooltip>
-                        <TooltipTrigger>
+                        <TooltipTrigger asChild>
                           <button
                             onClick={() => handleCopyText(message.text)}
                             className="ml-1 mt-1"
                           >
-                            {!copyIcon ? (
+                            {!copySuccess ? (
                               <CopyIcon className="text-gray-400 hover:text-gray-900" />
                             ) : (
                               <TickIcon className="text-gray-400" />

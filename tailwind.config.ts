@@ -52,6 +52,21 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        sipePrimary: {
+          DEFAULT: "hsl(180deg 18.46% 25.49%)",
+          light: "hsl(0, 0%, 70%)",
+          dark: "hsl(0, 0%, 30%)",
+        },
+        sipeButton: {
+          DEFAULT: "hsl(183.64deg 17.28% 37.45%)",
+          light: "hsl(0, 0%, 70%)",
+          dark: "hsl(0, 0%, 30%)",
+        },
+        sipeText: {
+          DEFAULT: "hsl(48.33deg 64.29% 89.02%)",
+          light: "hsl(0, 0%, 70%)",
+          dark: "hsl(0, 0%, 30%)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

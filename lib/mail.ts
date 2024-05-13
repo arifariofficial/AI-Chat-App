@@ -46,6 +46,8 @@ export const sendVerificationEmail = async (email: string, token: string) => {
               <p style="color: #555; font-size: 16px; margin-bottom: 30px;">Please confirm your email by clicking the button below:</p>
               <a href="${confirmLink}" style="background-color: #4F6E70; color: #F5EFD1; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block;">Confirm your email</a>
               <p style="color: #555; font-size: 16px; margin-top: 30px;">Thank you for joining us!</p>
+              <p style="color: #777; font-size: 14px; margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px;">If you're having trouble clicking the "Confirm your email" button, copy and paste the URL below into your web browser:</p>
+              <a href="${confirmLink}" style="color: #007BFF; text-decoration: none; word-break: break-all;">${confirmLink}</a>
             </div>
           </div>
         `,
@@ -74,7 +76,7 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
   });
 };
 
-export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
+export const sendTwoFactorTokenEmail = async (email: string, code: string) => {
   await transporter.sendMail({
     from: '"SIPE" <sipeai6@gmail.com>',
     to: email,
@@ -83,7 +85,7 @@ export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
           <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; text-align: center; padding: 40px; background-color: #f4f4f4;">
             <div style="max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
               <h2 style="color: #333; margin-bottom: 20px;">Your Two-Factor Authentication Code</h2>
-              <p style="font-size: 24px; color: #007BFF; margin: 20px;">${encodeURIComponent(token)}</p>
+              <p style="font-size: 24px; color: #007BFF; margin: 20px;">${encodeURIComponent(code)}</p>
               <p style="color: #555; font-size: 16px;">Enter this code to complete your sign-in process.</p>
             </div>
           </div>

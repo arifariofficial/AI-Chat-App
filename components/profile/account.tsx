@@ -10,12 +10,15 @@ import { Button } from "@components/ui/button";
 import { TextField } from "@mui/material";
 import { updateName } from "@actions/update";
 import { useToast } from "@components/ui/use-toast";
+import { sendNewVerificationEmail } from "@actions/send-verification";
 
 export default function Account() {
   const { data: session, status } = useSession();
 
   const [editName, setEditName] = useState(false);
   const [name, setName] = useState(session?.user.name || "");
+  const [isLoading, setIsLoading] = useState(false);
+  const [verificationSend, setVerificationSend] = useState(false);
 
   const { toast } = useToast();
 
@@ -40,11 +43,13 @@ export default function Account() {
           await getSession();
           setEditName(false);
           toast({
+            variant: "default",
             description: result.message,
           });
         }
       } catch (error) {
         toast({
+          variant: "destructive",
           description:
             error instanceof Error
               ? error.message
@@ -53,6 +58,40 @@ export default function Account() {
       }
     } else {
       console.error("User ID is undefined. Cannot update name.");
+    }
+  };
+
+  const handleSendVerificationEmail = async () => {
+    // Check if email is a string and not empty
+    if (typeof session.user.email === "string" && session.user.email) {
+      try {
+        setIsLoading(true);
+
+        const result = await sendNewVerificationEmail(session.user.email);
+
+        toast({
+          className: "bg-sipeButton text-sipeText",
+          variant: "default",
+          description: result.message,
+        });
+      } catch (error) {
+        toast({
+          variant: "destructive",
+          description:
+            error instanceof Error
+              ? error.message
+              : "Failed to send verification email",
+        });
+      } finally {
+        setIsLoading(false);
+        setVerificationSend(true);
+      }
+    } else {
+      // Handle the case where email is not a valid string
+      toast({
+        variant: "destructive",
+        description: "Cannot send verification email.",
+      });
     }
   };
 
@@ -110,14 +149,26 @@ export default function Account() {
           </div>
         </section>
         <section className="mb-10">
-          <h2 className="border-b  border-gray-200 text-base font-semibold">
-            Email addresses
+          <h2 className="border-b border-gray-200 text-base font-semibold">
+            Email address
           </h2>
           <div className="m-2 flex w-full flex-row items-center justify-between">
             <p className="h-8">{session.user.email}</p>
-            <p className=" m-1 rounded-md bg-gray-200 p-1  text-center text-[9px] font-bold ">
-              Primary
-            </p>
+            {!session.user.emailVerified && (
+              <Button
+                variant="outline"
+                onClick={handleSendVerificationEmail}
+                className="m-1"
+                disabled={verificationSend || isLoading}
+              >
+                Verify Email
+              </Button>
+            )}
+            {session.user.emailVerified && (
+              <p className="m-1 rounded-md bg-gray-200 p-1 text-center text-[9px] font-bold">
+                Verified
+              </p>
+            )}
           </div>
         </section>
       </div>

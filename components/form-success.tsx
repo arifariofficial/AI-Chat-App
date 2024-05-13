@@ -7,7 +7,7 @@ interface FormSuccessProps {
   time?: boolean;
 }
 
-export const FormSusscess = ({ message, time = true }: FormSuccessProps) => {
+export const FormSucccess = ({ message, time = true }: FormSuccessProps) => {
   const [visibleMessage, setVisibleMessage] = useState<string | undefined>(
     message,
   );

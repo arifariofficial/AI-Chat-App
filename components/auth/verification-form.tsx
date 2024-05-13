@@ -1,11 +1,12 @@
 "use client";
+
 import { useSearchParams } from "next/navigation";
 import { CardWrapper } from "./card-wrapper";
 import { BeatLoader } from "react-spinners";
 import { useCallback, useEffect, useState } from "react";
 import { newVerification } from "@/actions/verification";
-import { FormSusscess } from "../form-success";
-import { FormError } from "../form-error";
+import { FormSucccess } from "@components/form-success";
+import { FormError } from "@components/form-error";
 
 export default function VerificationForm() {
   const [error, setError] = useState<string | undefined>("");
@@ -15,35 +16,52 @@ export default function VerificationForm() {
 
   const token = searchParams.get("token");
 
-  const onSubmit = useCallback(() => {
+  //IN DEVELOPMENT MODE ONSUBMIT WILL BE CALLED TWICE IN STRICT MODE
+  const onSubmit = useCallback(async () => {
     if (!token) {
       setError("Missing token");
       return;
     }
-    newVerification(token)
+    await newVerification(token)
       .then((data) => {
-        setSuccess(data.success);
-        setError(data.error);
+        console.log("API Response:", data); // Log the response to see what's included
+        if (data.error) {
+          setError(data.error);
+          setSuccess(undefined); // Ensure success is not set if there's an error
+        } else if (data.success) {
+          setSuccess(data.success);
+          setError(undefined); // Ensure error is not set if operation is successful
+        }
       })
-      .catch(() => {
-        setError("Somthing went wrong");
+      .catch((error) => {
+        console.error("Error during verification:", error);
+        setError("Something went wrong");
+      })
+      .finally(() => {
+        setTimeout(() => {
+          window.location.href = "/profile";
+        }, 2000);
       });
   }, [token]);
 
   useEffect(() => {
-    onSubmit();
-  }, [onSubmit]);
+    if (token) {
+      onSubmit();
+    } else {
+      setError("No verification token found in URL.");
+    }
+  }, [token, onSubmit]);
 
   return (
     <CardWrapper
       headerLabel="Confirming your verification"
-      backButtonLabel="Back to login"
-      backButtonHref="/auth/login"
+      backButtonLabel="Back to Home"
+      backButtonHref="/"
     >
       <div className="flex w-full flex-col items-center justify-center space-y-4">
         {!success && !error && <BeatLoader />}
-        <FormSusscess message={success} time={false} />
-        <FormError message={error} time={false} />
+        {success && <FormSucccess message={success} time={false} />}
+        {error && <FormError message={error} time={false} />}
       </div>
     </CardWrapper>
   );

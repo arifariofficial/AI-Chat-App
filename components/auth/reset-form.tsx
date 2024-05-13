@@ -6,13 +6,12 @@ import * as z from "zod";
 import { ResetSchema } from "@/lib/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
-
 import { FormError } from "../form-error";
-import { FormSusscess } from "../form-success";
 import { useState, useTransition } from "react";
 import { reset } from "@/actions/reset";
 import { Box, Button, TextField } from "@mui/material";
 import IconSpinner from "@components/ui/icons";
+import { FormSucccess } from "@components/form-success";
 
 export const ResetForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -91,7 +90,7 @@ export const ResetForm = () => {
           )}
 
           <FormError message={error} time={false} />
-          <FormSusscess message={success} time={false} />
+          <FormSucccess message={success} time={false} />
           {!isDisable && (
             <Button
               type="submit"
