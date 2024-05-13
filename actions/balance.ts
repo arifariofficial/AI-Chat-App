@@ -41,8 +41,6 @@ export async function checkBalance(userId: string) {
 
   const currentBalance = previousBalance.balance - 0.5;
 
-  console.log(userId);
-
   await prisma.user.update({
     where: { id: userId },
     data: { balance: currentBalance },

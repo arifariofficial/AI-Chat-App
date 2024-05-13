@@ -1,0 +1,19 @@
+stages:
+  - deploy
+
+before_script:
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - ssh-keyscan $DEPLOY_SERVER >> ~/.ssh/known_hosts
+  - chmod 644 ~/.ssh/known_hosts
+
+deploy:
+  stage: deploy
+  script:
+    - scp -r . $DEPLOY_USER@$DEPLOY_SERVER:/home/sipeai6/sipe-fullstack/sipe-frontend
+    - ssh $DEPLOY_USER@$DEPLOY_SERVER "docker image prune -af && cd /home/sipeai6/sipe-fullstack && docker-compose stop frontend && docker-compose build frontend && docker-compose up frontend -d"
+  only:
+    - main
