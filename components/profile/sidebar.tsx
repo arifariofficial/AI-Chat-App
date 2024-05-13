@@ -4,7 +4,7 @@ import NavLinks from "./nav-links";
 
 export default function ProfileSideBar() {
   return (
-    <div className="flex h-[calc(100dvh-4rem)] flex-col border border-l-transparent bg-gray-50 sm:h-[calc(100vh-4rem)] md:w-[250px] lg:w-[350px] ">
+    <div className="flex h-[calc(100dvh-4rem)] flex-col border border-l-transparent bg-gray-50 sm:h-[calc(100vh-3rem)] md:w-[250px] lg:w-[350px] ">
       <div className="mb-2 mt-4 flex h-full grow flex-col justify-between   sm:flex-col ">
         <div>
           <NavLinks />
