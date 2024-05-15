@@ -1,10 +1,50 @@
 version: "3.8"
 services:
-  nextjs:
+  frontend-dev:
     build:
       context: .
       dockerfile: dev.Dockerfile
     ports:
-      - "127.0.0.1:3000:3000"
+      - "3000:3000"
     volumes:
       - .:/app
+      - /app/node_modules
+    environment:
+      DATABASE_URL: "postgresql://sipe:Sipe123!@postgres:5432/sipedb"
+    networks:
+      - sipe-network
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: sipedb
+      POSTGRES_USER: sipe
+      POSTGRES_PASSWORD: Sipe123!
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - sipe-network
+    restart: unless-stopped
+
+  nginx:
+    build:
+      context: ../nginx
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ../nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - sipe-network
+    restart: unless-stopped
+
+networks:
+  sipe-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local

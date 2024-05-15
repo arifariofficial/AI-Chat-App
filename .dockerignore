@@ -1,29 +1,31 @@
-# Dependency directories
+# Node.js dependencies
 node_modules
-jspm_packages
+npm-debug.log
+yarn-error.log
 
-# Build outputs
+# Local development directories
+.next
+out
 dist
-build
-.out
 
 # Logs
+logs
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+*.log.*
 
-# IDE/Editor directories
-.idea
-.vscode
+# Temporary files
 *.swp
 *.swo
+*.tmp
 
 # Operating system files
 .DS_Store
 Thumbs.db
 
-# Optional: Documentation files
-README.md
-CHANGELOG.md
-LICENSE.md
+# Docker-related files
+Dockerfile
+docker-compose.yml
+
+# Git-related files
+.git
+.gitignore

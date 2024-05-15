@@ -22,7 +22,7 @@ model User {
   role          UserRole  @default(USER)
   emailVerified DateTime?
   image         String?
-  balance       Float     @default(0)
+  balance       Float     @default(1)
   accounts      Account[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
