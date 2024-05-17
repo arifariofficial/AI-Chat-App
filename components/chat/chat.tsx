@@ -69,7 +69,7 @@ export default function Chat() {
 
   return (
     <>
-      <main className="absolute inset-x-0 top-[68px] mx-auto flex h-[calc(100vh-70px)] w-screen max-w-screen-lg bg-transparent">
+      <main className="absolute inset-x-0 top-[70px] mx-auto flex h-[calc(100vh-70px)] w-screen max-w-screen-lg bg-transparent dark:bg-[#0e172a] dark:text-white">
         <div className="flex size-full flex-col rounded-2xl px-4 pb-4">
           <ChatDisplay messages={messages} />
           <ChatInput onSendMessage={handleSendMessage} />

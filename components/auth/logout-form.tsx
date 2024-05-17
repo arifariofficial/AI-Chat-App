@@ -12,7 +12,6 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
   Box,
-  Button,
   CircularProgress,
   IconButton,
   InputAdornment,
@@ -20,7 +19,7 @@ import {
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { Button as MyButton } from "@components/ui/button";
+import { Button, Button as MyButton } from "@components/ui/button";
 import { login } from "@actions/login";
 import { getMessageFromCode } from "@lib/utils";
 import { FormSucccess } from "@components/form-success";
@@ -85,7 +84,12 @@ export const LogoutForm = () => {
       showLocal={!showTwoFactor}
     >
       <Form {...form}>
-        <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
+        <Box
+          component="form"
+          onSubmit={form.handleSubmit(onSubmit)}
+          noValidate
+          className="dark:bg-inherit dark:text-white/80"
+        >
           <div>
             {showTwoFactor && (
               <FormField
@@ -136,7 +140,10 @@ export const LogoutForm = () => {
                           onChange={onChange}
                           onBlur={onBlur}
                           ref={ref}
-                          InputLabelProps={{ shrink: true }}
+                          InputLabelProps={{
+                            shrink: true,
+                            className: "dark:text-white",
+                          }}
                           error={
                             form.getFieldState("email").isTouched &&
                             Boolean(form.formState.errors.email)
@@ -173,7 +180,10 @@ export const LogoutForm = () => {
                           onBlur={onBlur}
                           ref={ref}
                           type={showPassword ? "text" : "password"}
-                          InputLabelProps={{ shrink: true }}
+                          InputLabelProps={{
+                            shrink: true,
+                            className: "dark:text-white",
+                          }}
                           error={
                             form.getFieldState("password").isTouched &&
                             Boolean(form.formState.errors.password)
@@ -186,15 +196,19 @@ export const LogoutForm = () => {
                           }
                           InputProps={{
                             endAdornment: (
-                              <InputAdornment position="end">
+                              <InputAdornment
+                                position="end"
+                                className="dark:hover:bg-[#182747]"
+                              >
                                 <IconButton
                                   aria-label="toggle password visibility"
                                   onClick={() => setShowPassword(!showPassword)}
+                                  className="bg-white dark:bg-inherit "
                                 >
                                   {showPassword ? (
-                                    <VisibilityIcon />
+                                    <VisibilityIcon className="dark:text-white/80" />
                                   ) : (
-                                    <VisibilityOffIcon />
+                                    <VisibilityOffIcon className="dark:text-white/80" />
                                   )}
                                 </IconButton>
                               </InputAdornment>
@@ -218,12 +232,7 @@ export const LogoutForm = () => {
           </div>
           <FormError message={error || urlError} />
           <FormSucccess message={success} />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 2, height: 37 }}
-          >
+          <Button type="submit" className="w-full">
             {isPending ? (
               <CircularProgress size="20px" className="text-[#f5efd1]" />
             ) : showTwoFactor ? (

@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   CircularProgress,
   InputAdornment,
   TextField,
@@ -9,6 +8,7 @@ import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import { getSession, useSession } from "next-auth/react";
+import { Button } from "@components/ui/button";
 
 const ChatInput: React.FC<{
   onSendMessage: (message: { text: string; author: string }) => void;
@@ -103,15 +103,6 @@ const ChatInput: React.FC<{
                 onClick={handleButtonClick}
                 type="submit"
                 disabled={!isLoading && !message.trim()}
-                sx={{
-                  borderRadius: "8px",
-                  minWidth: "20px",
-                  padding: "4px 8px",
-                  "& .MuiButton-startIcon": {
-                    boxShadow: "none",
-                  },
-                }}
-                size="small"
               >
                 {isLoading ? (
                   <CircularProgress size="20px" className="text-[#f5efd1]" />
@@ -121,6 +112,7 @@ const ChatInput: React.FC<{
               </Button>
             </InputAdornment>
           ),
+          className: "dark:text-white dark:border dark:border-white/40",
         }}
         sx={{
           "& .MuiInputBase-root": {

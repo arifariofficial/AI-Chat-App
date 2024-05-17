@@ -30,6 +30,7 @@ export const Social = () => {
       >
         <Grid item xs>
           <Button
+            className="dark:bg-[#334155] dark:text-white/90"
             variant="outlined"
             fullWidth
             onClick={() => onClick("google")}
@@ -54,6 +55,7 @@ export const Social = () => {
         </Grid>
         <Grid item xs>
           <Button
+            className="dark:bg-[#334155] dark:text-white/90"
             variant="outlined"
             fullWidth
             onClick={() => onClick("facebook")}

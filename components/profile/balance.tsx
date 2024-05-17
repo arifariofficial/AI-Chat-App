@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import {
-  Button,
   ThemeProvider,
   FormControl,
   InputLabel,
@@ -13,6 +12,7 @@ import {
 import theme from "@components/theme";
 import { useToast } from "@components/ui/use-toast";
 import axios from "axios";
+import { Button } from "@components/ui/button";
 
 type CreditOption = {
   value: number;
@@ -68,31 +68,63 @@ export default function Balance() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="mb-10">
-        <h1 className="mb-1 text-2xl font-semibold text-gray-800">Balance</h1>
-        <p className="text-gray-600">Manage your payment settings</p>
+      <div className="mb-10 dark:bg-inherit dark:text-white/80">
+        <h1 className="mb-1 text-2xl font-semibold text-gray-800 dark:text-white/80">
+          Balance
+        </h1>
+        <p className="text-gray-600 dark:text-white/80">
+          Manage your payment settings
+        </p>
       </div>
-      <div className="flex max-w-md flex-col items-center space-y-4 rounded-xl border bg-white px-8 py-6">
-        <h1 className="text-lg font-semibold text-gray-900">
+      <div className="flex max-w-md flex-col items-center space-y-4 rounded-xl border bg-white px-8 py-6 dark:border-white/30 dark:bg-inherit dark:text-white/80">
+        <h1 className="text-lg font-semibold text-gray-900 dark:text-white/80">
           Top Up Your Sipe Account
         </h1>
         <FormControl fullWidth>
-          <InputLabel id="credit-select-label">Amount</InputLabel>
+          <InputLabel
+            id="credit-select-label"
+            className="mb-2  dark:border-white/30 dark:text-white/80"
+          >
+            Amount
+          </InputLabel>
           <Select
+            size="small"
             labelId="credit-select-label"
             id="credit-select"
             value={credit}
             label="Credits"
             onChange={handleSelectChange}
+            className=" dark:bg-[#0b1322] dark:text-white/80"
+            sx={{
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: "inherit",
+              },
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: "inherit",
+              },
+              "&:hover .MuiOutlinedInput-notchedOutline": {
+                borderColor: "inherit",
+              },
+            }}
+            MenuProps={{
+              PaperProps: {
+                className:
+                  "dark:bg-[#0e172a] dark:text-white/80 dark:border-white/30 dark:border  dark:hover:text-white/",
+              },
+            }}
           >
             {creditOptions.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
+              <MenuItem
+                key={option.value}
+                value={option.value}
+                className="my-1 py-2 dark:hover:bg-[#162444] dark:active:bg-[#0e172a]"
+              >
                 {option.label}
               </MenuItem>
             ))}
           </Select>
         </FormControl>
-        <Button disabled={loading} fullWidth onClick={buyCredits}>
+        <Button disabled={loading} className="w-full" onClick={buyCredits}>
           Purchase
         </Button>
       </div>

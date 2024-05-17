@@ -62,27 +62,27 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
                     alt="profile"
                     width={25}
                     height={25}
-                    className="rounded-full"
+                    className="rounded-full dark:bg-white"
                   />
                 ) : (
                   <AccountCircleIcon
                     fontSize="medium"
-                    className="rounded-full bg-[#4F6E70] p-px text-[#F5EFD1] "
+                    className="rounded-full bg-[#4F6E70] p-px text-[#F5EFD1] dark:bg-white dark:text-[#0e172a]"
                   />
                 ))}
             </div>
 
-            <div className="">
+            <div>
               {message.author === "SIPE" && (
                 <LocalLibraryIcon
                   fontSize="medium"
-                  className="m-auto rounded-full bg-[#4F6E70] p-[3px] text-[#F5EFD1]"
+                  className="m-auto rounded-full bg-[#4F6E70] p-[3px] text-[#F5EFD1] dark:bg-white dark:text-[#0e172a]"
                 />
               )}
             </div>
             <div className=" flex w-full flex-col">
               <p
-                className={`mx-2  w-[40px] text-lg font-bold text-slate-800 ${message.author === "SIPE" ? "self-start" : "self-start "}`}
+                className={`mx-2 w-[40px] text-lg font-bold text-slate-800 dark:text-white/80 ${message.author === "SIPE" ? "self-start" : "self-start "}`}
               >
                 {message.author === "SIPE" ? "Sipe" : "Sinä"}
               </p>

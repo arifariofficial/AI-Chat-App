@@ -12,7 +12,6 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
   Box,
-  Button,
   CircularProgress,
   IconButton,
   InputAdornment,
@@ -20,7 +19,6 @@ import {
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { Button as MyButton } from "@components/ui/button";
 import { getMessageFromCode } from "@lib/utils";
 
 import { login } from "@actions/login";
@@ -31,6 +29,7 @@ import {
 } from "@components/ui/input-otp";
 import { useSession } from "next-auth/react";
 import { FormSucccess } from "@components/form-success";
+import { Button } from "@components/ui/button";
 
 export const LoginForm = () => {
   const { data: session } = useSession();
@@ -130,6 +129,7 @@ export const LoginForm = () => {
                     <FormItem>
                       <FormControl>
                         <TextField
+                          className="dark:text-white"
                           disabled={isPending}
                           margin="normal"
                           required
@@ -143,7 +143,10 @@ export const LoginForm = () => {
                           onChange={onChange}
                           onBlur={onBlur}
                           ref={ref}
-                          InputLabelProps={{ shrink: true }}
+                          InputLabelProps={{
+                            shrink: true,
+                            className: "dark:text-white",
+                          }}
                           error={
                             form.getFieldState("email").isTouched &&
                             Boolean(form.formState.errors.email)
@@ -164,7 +167,7 @@ export const LoginForm = () => {
                   name="password"
                   render={({ field: { value, onChange, onBlur, ref } }) => (
                     <FormItem>
-                      <FormControl>
+                      <FormControl className="dark:border dark:border-white/30">
                         <TextField
                           disabled={isPending}
                           margin="normal"
@@ -180,7 +183,10 @@ export const LoginForm = () => {
                           ref={ref}
                           type={showPassword ? "text" : "password"}
                           autoComplete="current-password"
-                          InputLabelProps={{ shrink: true }}
+                          InputLabelProps={{
+                            shrink: true,
+                            className: "dark:text-white",
+                          }}
                           error={
                             form.getFieldState("password").isTouched &&
                             Boolean(form.formState.errors.password)
@@ -191,17 +197,32 @@ export const LoginForm = () => {
                               ? form.formState.errors.password.message
                               : null
                           }
+                          sx={{
+                            "& .MuiOutlinedInput-notchedOutline": {
+                              borderColor: "inherit",
+                            },
+                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                              borderColor: "inherit",
+                            },
+                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                              borderColor: "inherit",
+                            },
+                          }}
                           InputProps={{
                             endAdornment: (
-                              <InputAdornment position="end">
+                              <InputAdornment
+                                position="end"
+                                className="dark:hover:bg-[#182747]"
+                              >
                                 <IconButton
                                   aria-label="toggle password visibility"
                                   onClick={() => setShowPassword(!showPassword)}
+                                  className="bg-white dark:bg-inherit "
                                 >
                                   {showPassword ? (
-                                    <VisibilityIcon />
+                                    <VisibilityIcon className="dark:text-white/80" />
                                   ) : (
-                                    <VisibilityOffIcon />
+                                    <VisibilityOffIcon className="dark:text-white/80" />
                                   )}
                                 </IconButton>
                               </InputAdornment>
@@ -209,14 +230,14 @@ export const LoginForm = () => {
                           }}
                         />
                       </FormControl>
-                      <MyButton
+                      <Button
                         size="sm"
                         variant="link"
                         asChild
                         className="px-0 font-normal"
                       >
                         <Link href="/auth/reset">Forgot password?</Link>
-                      </MyButton>
+                      </Button>
                     </FormItem>
                   )}
                 />
@@ -225,12 +246,7 @@ export const LoginForm = () => {
           </div>
           <FormError message={error || urlError} />
           <FormSucccess message={success} />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 2, height: 37 }}
-          >
+          <Button type="submit" className="w-full">
             {isPending ? (
               <CircularProgress size="20px" className="text-[#f5efd1]" />
             ) : showTwoFactor ? (

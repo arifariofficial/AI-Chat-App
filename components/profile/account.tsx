@@ -96,10 +96,14 @@ export default function Account() {
   };
 
   return (
-    <main className="rounded-lg bg-white ">
+    <main className="rounded-lg bg-white dark:bg-inherit dark:text-white/90">
       <div className="mb-10">
-        <h1 className="mb-1 text-2xl font-semibold text-gray-800">Account</h1>
-        <p className="text-gray-600">Manage your account settings</p>
+        <h1 className="mb-1 text-2xl font-semibold text-gray-800 dark:text-white/90">
+          Account
+        </h1>
+        <p className="text-gray-600 dark:text-white/90">
+          Manage your account settings
+        </p>
       </div>
 
       <div>
@@ -165,7 +169,7 @@ export default function Account() {
               </Button>
             )}
             {session.user.emailVerified && (
-              <p className="m-1 rounded-md bg-gray-200 p-1 text-center text-[9px] font-bold">
+              <p className="m-1 rounded-md bg-gray-200 p-1 text-center text-[9px] font-bold dark:text-slate-700">
                 Verified
               </p>
             )}

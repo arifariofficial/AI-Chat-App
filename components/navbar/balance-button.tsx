@@ -14,9 +14,9 @@ export default function Balance() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Link href="/profile/balance" className="h-full">
-          <Button className="flex h-full flex-row items-center gap-1 bg-inherit px-4 text-inherit shadow-none hover:bg-[#3f6565] focus-visible:ring-0 active:bg-[#2c3e3e]">
+          <Button variant="nav" className="h-full">
             <p>Balance:</p>
-            <p className="mr-1">{session?.user.balance}€</p>
+            <p className="mx-1">{session?.user.balance}€</p>
           </Button>
         </Link>
       </DropdownMenuTrigger>

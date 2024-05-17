@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Box, Button, Grid, ThemeProvider } from "@mui/material";
+import { Box, Grid, ThemeProvider } from "@mui/material";
 import theme from "@components/theme";
+import { Button } from "@components/ui/button";
 
 const Home = () => {
   return (
@@ -22,16 +23,12 @@ const Home = () => {
         >
           <Grid item xs>
             <Link href="/query" passHref>
-              <Button variant="contained" color="primary" sx={{ width: 300 }}>
-                Quick query
-              </Button>
+              <Button className="w-[300px]">Quick query</Button>
             </Link>
           </Grid>
           <Grid item xs>
             <Link href="/chat" passHref>
-              <Button variant="contained" color="primary" sx={{ width: 300 }}>
-                Chat
-              </Button>
+              <Button className="w-[300px]">Chat</Button>
             </Link>
           </Grid>
         </Grid>

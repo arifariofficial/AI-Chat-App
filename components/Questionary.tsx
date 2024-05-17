@@ -1,9 +1,10 @@
 "use client";
 
-import { Button, ThemeProvider } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 import theme from "@components/theme";
 import Link from "next/link";
 import React, { useState } from "react";
+import { Button } from "./ui/button";
 
 interface Answer {
   text: string;
@@ -64,7 +65,7 @@ const questions: Question[] = [
         </h4>
         <div className="grid place-content-center pt-8">
           <Link href="/">
-            <Button>Home</Button>
+            <Button className="w-[300px]">Home</Button>
           </Link>
         </div>
       </div>
@@ -82,7 +83,7 @@ const questions: Question[] = [
         </h4>
         <div>
           <Link href="/">
-            <Button>Home</Button>
+            <Button className="w-[300px]">Home</Button>
           </Link>
         </div>
       </>
@@ -122,7 +123,7 @@ const questions: Question[] = [
         </ol>
         <div className="grid place-content-center pt-8">
           <Link href="/">
-            <Button>Home</Button>
+            <Button className="w-[300px]">Home</Button>
           </Link>
         </div>
       </div>
@@ -165,17 +166,17 @@ const Questionary: React.FC = () => {
     <>
       <ThemeProvider theme={theme}>
         {!finalAnswer && (
-          <div className=" relative m-10 grid">
-            <h1 className="text-2xl font-semibold text-slate-800">
+          <div className=" relative m-10 grid ">
+            <h1 className="text-2xl font-semibold text-slate-800 dark:text-white/90">
               {!finalAnswer && currentQuestion?.question}
             </h1>
             <div className="mt-5 flex flex-col items-center justify-center gap-1 ">
               {currentQuestion?.answers &&
                 currentQuestion?.answers.map((answer) => (
                   <Button
-                    fullWidth
                     key={answer.text}
                     onClick={() => handleAnswer(answer)}
+                    className="w-[300px]"
                   >
                     {answer.text}
                   </Button>

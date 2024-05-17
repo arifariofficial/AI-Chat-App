@@ -1,9 +1,10 @@
 "use client";
 
 import { Poppins } from "next/font/google";
-import { Avatar, Typography } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { Typography } from "@mui/material";
 import { cn } from "@lib/utils";
+import { Avatar } from "@components/ui/avatar";
+import { LockIcon } from "@components/ui/icons";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -19,16 +20,16 @@ export const Header = ({ label }: HeaderProps) => {
     <div
       className={cn(
         font,
-        "mb-2 flex w-full flex-col items-center justify-center gap-4",
+        "flex w-full flex-col items-center justify-center gap-1",
       )}
     >
-      <Avatar sx={{ bgcolor: "secondary.main" }}>
-        <LockOutlinedIcon />
+      <Avatar className="p-1">
+        <LockIcon />
       </Avatar>
       <Typography
         component="h1"
         variant="h5"
-        className="font-bold text-[#2a3d3d]"
+        className="font-bold text-[#2a3d3d] dark:text-white"
       >
         {label}
       </Typography>

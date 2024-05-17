@@ -48,15 +48,19 @@ export default function Security() {
   };
 
   return (
-    <main>
+    <main className="dark:text-white/80">
       <div className="mb-10">
-        <h1 className="mb-1 text-2xl font-semibold text-gray-800">Security</h1>
-        <p className="text-gray-600">Manage your security settings</p>
+        <h1 className="mb-1 text-2xl font-semibold text-gray-800 dark:text-white/80">
+          Security
+        </h1>
+        <p className="text-gray-600 dark:text-white/80">
+          Manage your security settings
+        </p>
       </div>
       {error && <div className="mb-2 text-red-500">{error}</div>}
       <form onSubmit={(e) => e.preventDefault()}>
         <section className="flex justify-between">
-          <span className="flex flex-row text-base  font-semibold text-gray-700">
+          <span className="flex flex-row text-base  font-semibold text-gray-700 dark:text-white/80">
             Two-Factor Authentication
             <TooltipProvider>
               <Tooltip>
@@ -81,6 +85,8 @@ export default function Security() {
                 checked={isTwoFactorEnabled}
                 onChange={handleToggleChange}
                 disabled={loading}
+                name="two-factor"
+                inputProps={{ "aria-label": "primary checkbox" }}
               />
             }
             label={

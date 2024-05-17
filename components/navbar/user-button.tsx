@@ -27,7 +27,7 @@ export default async function UserButton() {
           asChild
           className="text-[#F5EFD1] focus-visible:border-none focus-visible:ring-0"
         >
-          <Button className="h-14 gap-2 border-none bg-[#344d4d] px-4 shadow-none hover:bg-[#3f6565] focus-visible:ring-0 active:bg-[#2c3e3e]">
+          <Button variant="nav" className=" h-full">
             <Avatar className="size-7">
               {session.user.image && (
                 <AvatarImage
@@ -39,8 +39,7 @@ export default async function UserButton() {
                 <AccountCircleIcon />
               </AvatarFallback>
             </Avatar>
-
-            <DropdownIcon />
+            <DropdownIcon className="ml-1" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mr-2 w-64 rounded-xl shadow-xl">
@@ -65,7 +64,7 @@ export default async function UserButton() {
           <DropdownMenuGroup>
             <DropdownMenuItem asChild>
               <Button
-                variant="ghost"
+                variant="nav"
                 className="h-12 w-full  py-2 focus-visible:ring-0"
               >
                 <a
@@ -81,7 +80,7 @@ export default async function UserButton() {
           <DropdownMenuSeparator />
           <DropdownMenuItem className="gap-4 px-8">
             <LogoutIcon />
-            <SignOut />
+            <SignOut variant="nav" />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -89,13 +88,13 @@ export default async function UserButton() {
   }
 
   return (
-    <Button className="h-full border-none bg-[#344d4d] px-4 shadow-none hover:bg-[#3f6565] active:bg-[#2c3e3e]">
+    <Button variant="nav" className="h-full">
       <Link
         href={"/auth/login"}
         className="flex h-full flex-row items-center gap-2 font-bold"
       >
-        <LockIcon className="text-[#F5EFD1]" />
-        <p className="text-sm text-[#F5EFD1]">Log in</p>
+        <LockIcon className="text-[#F5EFD1] dark:text-inherit " />
+        <p className="text-sm text-[#F5EFD1] dark:text-inherit ">Log in</p>
       </Link>
     </Button>
   );
