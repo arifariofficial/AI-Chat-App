@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession, getSession } from "next-auth/react";
 import ChatSkeleton from "@components/skeletons/ChatSkeleton";
-import { Button } from "@mui/material";
+import { Button } from "@components/ui/button";
 
 interface Message {
   author: string;
@@ -53,9 +53,13 @@ export default function Chat() {
         <ChatSkeleton />
         {showModal && (
           <div className=" absolute inset-x-0 top-[68px] flex h-[calc(100vh-70px)] w-full items-center justify-center font-semibold md:mt-auto ">
-            <div className=" flex w-2/3 max-w-[500px] flex-col items-center justify-center rounded-xl border border-gray-300 bg-[#ecfeff] p-4 text-[#F5EFD1] shadow-2xl sm:w-1/2">
-              <p className="p-3 text-[#2e4342]">Please sign in</p>
-              <Button sx={{ mb: 4 }} onClick={handleModalClose}>
+            <div className=" flex w-2/3 max-w-[500px] flex-col items-center justify-center rounded-xl border border-border bg-background p-4 text-foreground shadow-2xl sm:w-1/2">
+              <p className="p-3 text-foreground">Please sign in</p>
+              <Button
+                variant="outline"
+                className="w-[200px]"
+                onClick={handleModalClose}
+              >
                 OK
               </Button>
             </div>
@@ -69,7 +73,7 @@ export default function Chat() {
 
   return (
     <>
-      <main className="absolute inset-x-0 top-[70px] mx-auto flex h-[calc(100vh-70px)] w-screen max-w-screen-lg bg-transparent dark:bg-[#0e172a] dark:text-white">
+      <main className="absolute inset-x-0 top-[70px] mx-auto flex h-[calc(100vh-70px)] w-screen max-w-screen-lg">
         <div className="flex size-full flex-col rounded-2xl px-4 pb-4">
           <ChatDisplay messages={messages} />
           <ChatInput onSendMessage={handleSendMessage} />

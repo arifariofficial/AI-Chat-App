@@ -4,7 +4,7 @@ import NavLinks from "./nav-links";
 
 export default function ProfileSideBar() {
   return (
-    <div className="flex h-[calc(100dvh-4rem)] flex-col border border-l-transparent bg-gray-50 dark:border-r-white/30 dark:bg-inherit sm:h-[calc(100vh-3rem)] md:w-[250px] lg:w-[350px] ">
+    <div className="flex h-[calc(100dvh-4rem)] flex-col border-r border-r-border/30 bg-background  sm:h-[calc(100vh-3rem)] md:w-[250px] lg:w-[350px] ">
       <div className="mb-2 mt-4 flex h-full grow flex-col justify-between   sm:flex-col ">
         <div>
           <NavLinks />
@@ -16,7 +16,7 @@ export default function ProfileSideBar() {
           }}
           className="m-px"
         >
-          <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-sm p-3 text-sm font-medium text-gray-800  hover:bg-gray-200 hover:text-gray-900 dark:text-white/90 dark:hover:bg-[#172646] sm:flex-none sm:justify-start sm:p-2 sm:px-3">
+          <button className="hover:bg-background-hover flex h-[48px] w-full grow items-center justify-center gap-2 rounded-sm bg-background p-3 text-sm font-medium text-foreground hover:bg-foreground/10 sm:flex-none sm:justify-start sm:p-2 sm:px-3">
             <LogoutIcon className="w-6" />
             <div className="hidden sm:block">Sign Out</div>
           </button>

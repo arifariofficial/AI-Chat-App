@@ -62,27 +62,21 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
                     alt="profile"
                     width={25}
                     height={25}
-                    className="rounded-full dark:bg-white"
+                    className="rounded-full bg-foreground"
                   />
                 ) : (
-                  <AccountCircleIcon
-                    fontSize="medium"
-                    className="rounded-full bg-[#4F6E70] p-px text-[#F5EFD1] dark:bg-white dark:text-[#0e172a]"
-                  />
+                  <AccountCircleIcon className="size-6 rounded-full bg-primary p-[3x] text-primary-foreground" />
                 ))}
             </div>
 
             <div>
               {message.author === "SIPE" && (
-                <LocalLibraryIcon
-                  fontSize="medium"
-                  className="m-auto rounded-full bg-[#4F6E70] p-[3px] text-[#F5EFD1] dark:bg-white dark:text-[#0e172a]"
-                />
+                <LocalLibraryIcon className="m-auto size-6 rounded-full border bg-primary p-[2px] text-primary-foreground" />
               )}
             </div>
             <div className=" flex w-full flex-col">
               <p
-                className={`mx-2 w-[40px] text-lg font-bold text-slate-800 dark:text-white/80 ${message.author === "SIPE" ? "self-start" : "self-start "}`}
+                className={`mx-2 w-[40px] text-lg font-bold text-foreground ${message.author === "SIPE" ? "self-start" : "self-start "}`}
               >
                 {message.author === "SIPE" ? "Sipe" : "Sinä"}
               </p>
@@ -101,9 +95,9 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
                             className="ml-1 mt-1"
                           >
                             {!copySuccess ? (
-                              <CopyIcon className="text-gray-400 hover:text-gray-900" />
+                              <CopyIcon className="text-foreground hover:text-foreground/70" />
                             ) : (
-                              <TickIcon className="text-gray-400" />
+                              <TickIcon className="text-foreground" />
                             )}
                           </button>
                         </TooltipTrigger>
@@ -114,7 +108,7 @@ const ChatDisplay: React.FC<{ messages: Message[] }> = ({ messages }) => {
                     </TooltipProvider>
                   </>
                 ) : (
-                  <p>{message.text}</p>
+                  <p className="text-foreground">{message.text}</p>
                 )}
               </div>
             </div>

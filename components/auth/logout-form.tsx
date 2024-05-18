@@ -182,7 +182,7 @@ export const LogoutForm = () => {
                           type={showPassword ? "text" : "password"}
                           InputLabelProps={{
                             shrink: true,
-                            className: "dark:text-white",
+                            className: "text-foreground",
                           }}
                           error={
                             form.getFieldState("password").isTouched &&
@@ -196,19 +196,16 @@ export const LogoutForm = () => {
                           }
                           InputProps={{
                             endAdornment: (
-                              <InputAdornment
-                                position="end"
-                                className="dark:hover:bg-[#182747]"
-                              >
+                              <InputAdornment position="end">
                                 <IconButton
                                   aria-label="toggle password visibility"
                                   onClick={() => setShowPassword(!showPassword)}
-                                  className="bg-white dark:bg-inherit "
+                                  className="bg-background"
                                 >
                                   {showPassword ? (
-                                    <VisibilityIcon className="dark:text-white/80" />
+                                    <VisibilityIcon className="text-foreground" />
                                   ) : (
-                                    <VisibilityOffIcon className="dark:text-white/80" />
+                                    <VisibilityOffIcon className="text-foreground" />
                                   )}
                                 </IconButton>
                               </InputAdornment>
@@ -220,7 +217,7 @@ export const LogoutForm = () => {
                         size="sm"
                         variant="link"
                         asChild
-                        className="px-0 font-normal"
+                        className="mb-2 px-0 font-normal text-foreground"
                       >
                         <Link href="/auth/reset">Forgot password?</Link>
                       </MyButton>
@@ -232,7 +229,7 @@ export const LogoutForm = () => {
           </div>
           <FormError message={error || urlError} />
           <FormSucccess message={success} />
-          <Button type="submit" className="w-full">
+          <Button type="submit" variant="outline" className="w-full">
             {isPending ? (
               <CircularProgress size="20px" className="text-[#f5efd1]" />
             ) : showTwoFactor ? (

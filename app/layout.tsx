@@ -25,17 +25,20 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(inter.className, "dark:bg-[#0e172a] dark:text-white")}
-      >
-        <SessionProvider basePath="/api/auth" session={session}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <body className={cn(inter.className, "bg-background text-foreground")}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SessionProvider basePath="/api/auth" session={session}>
             <NavBar />
             <ProModal />
             {children}
             <Toaster />
-          </ThemeProvider>
-        </SessionProvider>
+          </SessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

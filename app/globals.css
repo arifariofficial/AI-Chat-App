@@ -11,7 +11,7 @@ body,
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 5%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -19,11 +19,13 @@ body,
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 180 18.46% 25.49%;
+    --primary-foreground: 50 64.29% 89.02%;
+    --primary-hover: 180 18.16% 17.91%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 183.75 16.67% 37.65%;
+    --secondary-foreground: 50 100% 92%;
+    --secondary-hover: 221.74 51.11% 17.65%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -34,25 +36,26 @@ body,
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 180 18.46% 80%;
+    --input: 180 18.46% 25.49%;
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 12%;
+    --foreground: 0 0% 80%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 240 6% 10%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 93%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 217.24 32.58% 17.45%;
+    --primary-foreground: 0deg 0% 70%;
+    --primary-hover: 217.24 32.65% 9.83%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -66,10 +69,11 @@ body,
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
+    --border: 0 0% 50%;
+    --input: 217.2 32.6% 50%;
     --ring: 212.7 26.8% 83.9%;
   }
+
   .safe-bottom {
     padding-bottom: env(safe-area-inset-bottom);
   }

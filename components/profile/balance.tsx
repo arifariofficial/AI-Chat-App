@@ -68,33 +68,27 @@ export default function Balance() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="mb-10 dark:bg-inherit dark:text-white/80">
-        <h1 className="mb-1 text-2xl font-semibold text-gray-800 dark:text-white/80">
-          Balance
-        </h1>
-        <p className="text-gray-600 dark:text-white/80">
-          Manage your payment settings
-        </p>
+      <div className="mb-10 bg-background text-foreground">
+        <h1 className="mb-1 text-2xl font-semibold">Balance</h1>
+        <p>Manage your payment settings</p>
       </div>
-      <div className="flex max-w-md flex-col items-center space-y-4 rounded-xl border bg-white px-8 py-6 dark:border-white/30 dark:bg-inherit dark:text-white/80">
-        <h1 className="text-lg font-semibold text-gray-900 dark:text-white/80">
-          Top Up Your Sipe Account
-        </h1>
-        <FormControl fullWidth>
-          <InputLabel
-            id="credit-select-label"
-            className="mb-2  dark:border-white/30 dark:text-white/80"
-          >
+      <div className="flex max-w-md flex-col items-center space-y-4 rounded-xl border bg-background px-8 py-6">
+        <h1 className="text-lg font-semibold">Top Up Your Sipe Account</h1>
+        <FormControl
+          fullWidth
+          className="text-foreground focus:text-foreground"
+        >
+          <InputLabel id="credit-select-label" className="mb-2 text-foreground">
             Amount
           </InputLabel>
           <Select
-            size="small"
+            size="medium"
             labelId="credit-select-label"
             id="credit-select"
             value={credit}
             label="Credits"
             onChange={handleSelectChange}
-            className=" dark:bg-[#0b1322] dark:text-white/80"
+            className="text-foreground"
             sx={{
               "& .MuiOutlinedInput-notchedOutline": {
                 borderColor: "inherit",
@@ -108,8 +102,7 @@ export default function Balance() {
             }}
             MenuProps={{
               PaperProps: {
-                className:
-                  "dark:bg-[#0e172a] dark:text-white/80 dark:border-white/30 dark:border  dark:hover:text-white/",
+                className: "bg-background text-foreground border",
               },
             }}
           >
@@ -117,7 +110,7 @@ export default function Balance() {
               <MenuItem
                 key={option.value}
                 value={option.value}
-                className="my-1 py-2 dark:hover:bg-[#162444] dark:active:bg-[#0e172a]"
+                className="my-1 py-2 text-foreground hover:bg-primary/30"
               >
                 {option.label}
               </MenuItem>

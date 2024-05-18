@@ -39,7 +39,7 @@ export default async function UserButton() {
                 <AccountCircleIcon />
               </AvatarFallback>
             </Avatar>
-            <DropdownIcon className="ml-1" />
+            <DropdownIcon className="ml-1 hidden sm:block" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mr-2 w-64 rounded-xl shadow-xl">
@@ -64,23 +64,23 @@ export default async function UserButton() {
           <DropdownMenuGroup>
             <DropdownMenuItem asChild>
               <Button
-                variant="nav"
+                variant="ghost"
                 className="h-12 w-full  py-2 focus-visible:ring-0"
               >
-                <a
+                <Link
                   href="/profile"
                   className="relative flex w-full cursor-pointer select-none items-center justify-between rounded-sm py-1.5 pl-4 pr-14 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                 >
                   <UserIcon />
                   <p>Account</p>
-                </a>
+                </Link>
               </Button>
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="gap-4 px-8">
             <LogoutIcon />
-            <SignOut variant="nav" />
+            <SignOut />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

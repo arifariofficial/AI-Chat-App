@@ -105,9 +105,9 @@ const ChatInput: React.FC<{
                 disabled={!isLoading && !message.trim()}
               >
                 {isLoading ? (
-                  <CircularProgress size="20px" className="text-[#f5efd1]" />
+                  <CircularProgress size="20px" className="text-foreground" />
                 ) : (
-                  <SendIcon fontSize="small" />
+                  <SendIcon fontSize="small" className="text-foreground" />
                 )}
               </Button>
             </InputAdornment>

@@ -5,8 +5,8 @@ import { CardWrapper } from "./card-wrapper";
 import * as z from "zod";
 import { LoginSchema } from "@/lib/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem } from "../ui/form";
-import { FormError } from "../form-error";
+import { Form, FormControl, FormField, FormItem } from "@components/ui/form";
+import { FormError } from "@components/form-error";
 import { useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -129,7 +129,6 @@ export const LoginForm = () => {
                     <FormItem>
                       <FormControl>
                         <TextField
-                          className="dark:text-white"
                           disabled={isPending}
                           margin="normal"
                           required
@@ -167,8 +166,9 @@ export const LoginForm = () => {
                   name="password"
                   render={({ field: { value, onChange, onBlur, ref } }) => (
                     <FormItem>
-                      <FormControl className="dark:border dark:border-white/30">
+                      <FormControl>
                         <TextField
+                          className="border border-border/30"
                           disabled={isPending}
                           margin="normal"
                           required
@@ -197,36 +197,22 @@ export const LoginForm = () => {
                               ? form.formState.errors.password.message
                               : null
                           }
-                          sx={{
-                            "& .MuiOutlinedInput-notchedOutline": {
-                              borderColor: "inherit",
-                            },
-                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                              borderColor: "inherit",
-                            },
-                            "&:hover .MuiOutlinedInput-notchedOutline": {
-                              borderColor: "inherit",
-                            },
-                          }}
                           InputProps={{
                             endAdornment: (
-                              <InputAdornment
-                                position="end"
-                                className="dark:hover:bg-[#182747]"
-                              >
+                              <InputAdornment position="end">
                                 <IconButton
                                   aria-label="toggle password visibility"
                                   onClick={() => setShowPassword(!showPassword)}
-                                  className="bg-white dark:bg-inherit "
                                 >
                                   {showPassword ? (
-                                    <VisibilityIcon className="dark:text-white/80" />
+                                    <VisibilityIcon className="text-foreground" />
                                   ) : (
-                                    <VisibilityOffIcon className="dark:text-white/80" />
+                                    <VisibilityOffIcon className="text-foreground" />
                                   )}
                                 </IconButton>
                               </InputAdornment>
                             ),
+                            className: "bg-background",
                           }}
                         />
                       </FormControl>
@@ -234,7 +220,7 @@ export const LoginForm = () => {
                         size="sm"
                         variant="link"
                         asChild
-                        className="px-0 font-normal"
+                        className="mb-2 px-0 font-normal text-foreground"
                       >
                         <Link href="/auth/reset">Forgot password?</Link>
                       </Button>
@@ -246,9 +232,9 @@ export const LoginForm = () => {
           </div>
           <FormError message={error || urlError} />
           <FormSucccess message={success} />
-          <Button type="submit" className="w-full">
+          <Button type="submit" variant="outline" className="w-full">
             {isPending ? (
-              <CircularProgress size="20px" className="text-[#f5efd1]" />
+              <CircularProgress size="20px" className="text-foreground" />
             ) : showTwoFactor ? (
               "Confirm"
             ) : (

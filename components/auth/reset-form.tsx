@@ -9,9 +9,10 @@ import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { FormError } from "../form-error";
 import { useState, useTransition } from "react";
 import { reset } from "@/actions/reset";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import IconSpinner from "@components/ui/icons";
 import { FormSucccess } from "@components/form-success";
+import { Button } from "@components/ui/button";
 
 export const ResetForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -46,6 +47,7 @@ export const ResetForm = () => {
       headerLabel="Password Reset"
       backButtonLabel="Back to login"
       backButtonHref="/auth/login"
+      className="bg-background"
     >
       <Form {...form}>
         <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
@@ -81,7 +83,10 @@ export const ResetForm = () => {
                           ? form.formState.errors.email.message
                           : null
                       }
-                      InputLabelProps={{ shrink: true }}
+                      InputLabelProps={{
+                        shrink: true,
+                        className: "text-foreground",
+                      }}
                     />
                   </FormControl>
                 </FormItem>
@@ -93,10 +98,9 @@ export const ResetForm = () => {
           <FormSucccess message={success} time={false} />
           {!isDisable && (
             <Button
+              variant="outline"
               type="submit"
-              fullWidth
-              sx={{ mt: 2, height: 37 }}
-              className="disabled:bg-gray-300 disabled:text-gray-600"
+              className="w-full disabled:bg-muted disabled:text-muted-foreground"
             >
               {isPending ? <IconSpinner /> : "Send a recovery link"}
             </Button>

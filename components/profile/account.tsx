@@ -96,19 +96,15 @@ export default function Account() {
   };
 
   return (
-    <main className="rounded-lg bg-white dark:bg-inherit dark:text-white/90">
+    <main className="rounded-lg bg-background text-foreground">
       <div className="mb-10">
-        <h1 className="mb-1 text-2xl font-semibold text-gray-800 dark:text-white/90">
-          Account
-        </h1>
-        <p className="text-gray-600 dark:text-white/90">
-          Manage your account settings
-        </p>
+        <h1 className="mb-1 text-2xl font-semibold">Account</h1>
+        <p>Manage your account settings</p>
       </div>
 
       <div>
         <section className="mb-10">
-          <h2 className="border-b  border-gray-200 text-base font-semibold">
+          <h2 className="border-b border-border text-base font-semibold">
             Profile
           </h2>
           <div className="flex flex-row px-0 py-4">
@@ -126,7 +122,7 @@ export default function Account() {
           </div>
         </section>
         <section className="mb-10 h-20">
-          <h2 className="border-b  border-gray-200 text-base font-semibold">
+          <h2 className="border-b  border-border text-base font-semibold">
             Name
           </h2>
           <div className="m-2 flex w-full flex-row justify-between gap-2">
@@ -153,7 +149,7 @@ export default function Account() {
           </div>
         </section>
         <section className="mb-10">
-          <h2 className="border-b border-gray-200 text-base font-semibold">
+          <h2 className="border-b border-border text-base font-semibold">
             Email address
           </h2>
           <div className="m-2 flex w-full flex-row items-center justify-between">
@@ -169,7 +165,7 @@ export default function Account() {
               </Button>
             )}
             {session.user.emailVerified && (
-              <p className="m-1 rounded-md bg-gray-200 p-1 text-center text-[9px] font-bold dark:text-slate-700">
+              <p className="m-1 rounded-md border bg-background p-1 text-center text-[9px] font-bold text-foreground">
                 Verified
               </p>
             )}

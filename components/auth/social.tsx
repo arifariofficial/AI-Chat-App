@@ -1,10 +1,10 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { Button, CircularProgress, Grid, Typography } from "@mui/material";
-import FacebookIcon from "@public/images/FacebookIcon";
-import GoogleIcon from "@public/images/GoogleIcon";
 import { useState } from "react";
+import { Button } from "@components/ui/button";
+import IconSpinner, { FacebookIcon, GoogleIcon } from "@components/ui/icons";
+import { Typography } from "@mui/material";
 
 export const Social = () => {
   const [pendingGoogle, setPendingGoogle] = useState(false);
@@ -21,64 +21,30 @@ export const Social = () => {
   };
 
   return (
-    <div className="flex w-full items-center ">
-      <Grid
-        container
-        spacing={1}
-        justifyContent="space-around"
-        flexDirection="column"
+    <div className="flex w-full flex-col items-center gap-2">
+      <Button
+        variant="outline"
+        className="w-full bg-background text-foreground"
+        onClick={() => onClick("google")}
       >
-        <Grid item xs>
-          <Button
-            className="dark:bg-[#334155] dark:text-white/90"
-            variant="outlined"
-            fullWidth
-            onClick={() => onClick("google")}
-            startIcon={<GoogleIcon />}
-            sx={{
-              height: 37,
-              display: "flex",
-              bgcolor: "white",
-              color: "primary.main",
-              boxShadow: "none",
-              ":hover ": { bgcolor: "#ccced2" },
-              ".MuiTouchRipple-child ": { bgcolor: "#4b5563" },
-            }}
-          >
-            <Typography variant="inherit" sx={{ mx: 3 }}>
-              Google
-            </Typography>
-            {pendingGoogle && (
-              <CircularProgress size="20px" className="text-[#506e70]" />
-            )}
-          </Button>
-        </Grid>
-        <Grid item xs>
-          <Button
-            className="dark:bg-[#334155] dark:text-white/90"
-            variant="outlined"
-            fullWidth
-            onClick={() => onClick("facebook")}
-            startIcon={<FacebookIcon />}
-            sx={{
-              height: 37,
-              display: "flex",
-              bgcolor: "white",
-              boxShadow: "none",
-              color: "primary.main",
-              ":hover ": { bgcolor: "#ccced2" },
-              ".MuiTouchRipple-child ": { bgcolor: "#4b5563" },
-            }}
-          >
-            <Typography variant="inherit" sx={{ mx: 2 }}>
-              Facebook
-            </Typography>
-            {pendingFacebook && (
-              <CircularProgress size="20px" className="text-[#506e70]" />
-            )}
-          </Button>
-        </Grid>
-      </Grid>
+        <GoogleIcon />
+        <Typography variant="inherit" sx={{ mx: 3 }}>
+          Google
+        </Typography>
+        {pendingGoogle && <IconSpinner className="text-foreground" />}
+      </Button>
+
+      <Button
+        variant="outline"
+        className="w-full bg-background text-foreground"
+        onClick={() => onClick("facebook")}
+      >
+        <FacebookIcon />
+        <Typography variant="inherit" sx={{ mx: 2 }}>
+          Facebook
+        </Typography>
+        {pendingFacebook && <IconSpinner className="text-foreground" />}
+      </Button>
     </div>
   );
 };
