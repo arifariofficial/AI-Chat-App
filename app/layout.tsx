@@ -25,7 +25,12 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(inter.className, "bg-background text-foreground")}>
+      <body
+        className={cn(
+          inter.className,
+          "bg-background text-foreground antialiased",
+        )}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

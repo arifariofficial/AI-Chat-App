@@ -45,7 +45,7 @@ body,
 
   .dark {
     --background: 0 0% 12%;
-    --foreground: 0 0% 80%;
+    --foreground: 0 0% 100%;
 
     --card: 240 6% 10%;
     --card-foreground: 210 40% 98%;
@@ -54,11 +54,11 @@ body,
     --popover-foreground: 0 0% 93%;
 
     --primary: 217.24 32.58% 17.45%;
-    --primary-foreground: 0deg 0% 70%;
+    --primary-foreground: 0 0% 100%;
     --primary-hover: 217.24 32.65% 9.83%;
 
     --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary-foreground: 0 0% 98%;
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
