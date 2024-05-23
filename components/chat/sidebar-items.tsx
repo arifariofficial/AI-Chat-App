@@ -4,7 +4,7 @@ import { Chat } from "@/lib/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { SidebarItem } from "./sidebar-item";
 import { SidebarActions } from "./sidebar-actions";
-import { removeChat, shareChat } from "@actions/chat";
+import { removeChat, shareChat } from "@data/chat";
 
 interface SidebarItemsProps {
   chats?: Chat[];

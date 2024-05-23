@@ -2,7 +2,7 @@ import { cache } from "react";
 import { ClearHistory } from "./clear-history";
 import { ThemeToggle } from "./theme-toggle";
 import { SidebarItems } from "./sidebar-items";
-import { clearChats, getChats } from "@actions/chat";
+import { clearChats, getChats } from "@data/chat";
 
 interface SidebarListProps {
   userId?: string;
