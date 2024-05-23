@@ -1,11 +1,13 @@
 import { NextResponse } from "next/server";
-import { checkBalance } from "@actions/balance";
+
 import axios from "axios";
+import { checkBalance } from "@data/balance";
 /* import OpenAI from "openai"; */
 
 export async function POST(req: Request) {
   const data = await req.json();
 
+  console.log(data.userId);
   const isBalance = await checkBalance(data.userId);
 
   if (!isBalance) {
@@ -44,7 +46,8 @@ export async function POST(req: Request) {
       { chat: data.message },
       { headers: { Authorization: basicAuth } },
     );
-    return NextResponse.json({ aiResponse: response.data.chat });
+
+    return NextResponse.json({ aiResponse: response.data });
   } catch (error) {
     console.error("API request failed", error);
     return NextResponse.json({ error: "Failed to fetch response from API" });

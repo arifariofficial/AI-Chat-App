@@ -5,11 +5,14 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@components/ui/dropdown-menu";
-import { useSession } from "next-auth/react";
+import { Session } from "next-auth";
 import Link from "next/link";
 
-export default function Balance() {
-  const { data: session } = useSession();
+interface BalanceProps {
+  session: Session | null;
+}
+
+export default function Balance({ session }: BalanceProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

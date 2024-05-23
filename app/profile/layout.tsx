@@ -6,7 +6,7 @@ export default function ProfileLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="safe-bottom mx-auto  flex max-w-screen-2xl flex-row">
+    <div className="safe-bottom mx-auto flex w-full max-w-screen-2xl flex-row ">
       <div>
         <ProfileSideBar />
       </div>

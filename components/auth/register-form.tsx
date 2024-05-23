@@ -11,7 +11,6 @@ import { useState, useTransition } from "react";
 import { register } from "@/actions/register";
 import {
   Box,
-  Button,
   CircularProgress,
   IconButton,
   InputAdornment,
@@ -21,6 +20,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { getMessageFromCode } from "@lib/utils";
 import { FormSucccess } from "@components/form-success";
+import { Button } from "@components/ui/button";
 
 export const RegisterForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -198,12 +198,7 @@ export const RegisterForm = () => {
           />
           <FormError message={error} />
           <FormSucccess message={success} />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 2, height: 37 }}
-          >
+          <Button type="submit" className="mt-4 w-full">
             {isPending ? (
               <CircularProgress size="20px" className="text-[#f5efd1]" />
             ) : (

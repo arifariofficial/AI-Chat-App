@@ -1,6 +1,6 @@
 import Account from "@components/profile/account";
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
   return (
     <div>
       <Account />

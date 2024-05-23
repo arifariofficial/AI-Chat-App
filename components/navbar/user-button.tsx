@@ -42,7 +42,7 @@ export default async function UserButton() {
             <DropdownIcon className="ml-1 hidden sm:block" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="mr-2 w-64 rounded-xl shadow-xl">
+        <DropdownMenuContent className="mr-2 w-64 rounded-xl border border-border/30 shadow-xl">
           <DropdownMenuLabel className="flex w-full items-center justify-center gap-4">
             <Avatar className="size-12 border shadow-md">
               {session.user.image && (
@@ -62,19 +62,14 @@ export default async function UserButton() {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem asChild>
-              <Button
-                variant="ghost"
-                className="h-12 w-full  py-2 focus-visible:ring-0"
+            <DropdownMenuItem asChild className="gap-4 px-8">
+              <Link
+                className="inline-flex h-12 w-full items-center justify-between whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors hover:cursor-pointer hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                href="/profile"
               >
-                <Link
-                  href="/profile"
-                  className="relative flex w-full cursor-pointer select-none items-center justify-between rounded-sm py-1.5 pl-4 pr-14 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
-                >
-                  <UserIcon />
-                  <p>Account</p>
-                </Link>
-              </Button>
+                <UserIcon className="" />
+                <p className="mr-[45px]">Account</p>
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />

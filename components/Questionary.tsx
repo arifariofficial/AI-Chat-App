@@ -1,7 +1,5 @@
 "use client";
 
-import { ThemeProvider } from "@mui/material";
-import theme from "@components/theme";
 import Link from "next/link";
 import React, { useState } from "react";
 import { Button } from "./ui/button";
@@ -43,7 +41,9 @@ const questions: Question[] = [
         </h4>
         <div className="grid place-content-center pt-8">
           <Link href="/">
-            <Button>Home</Button>
+            <Button variant="outline" className="w-[300px]">
+              Home
+            </Button>
           </Link>
         </div>
       </div>
@@ -65,7 +65,9 @@ const questions: Question[] = [
         </h4>
         <div className="grid place-content-center pt-8">
           <Link href="/">
-            <Button className="w-[300px]">Home</Button>
+            <Button variant="outline" className="w-[300px]">
+              Home
+            </Button>
           </Link>
         </div>
       </div>
@@ -83,7 +85,9 @@ const questions: Question[] = [
         </h4>
         <div>
           <Link href="/">
-            <Button className="w-[300px]">Home</Button>
+            <Button variant="outline" className="w-[300px]">
+              Home
+            </Button>
           </Link>
         </div>
       </>
@@ -123,7 +127,9 @@ const questions: Question[] = [
         </ol>
         <div className="grid place-content-center pt-8">
           <Link href="/">
-            <Button className="w-[300px]">Home</Button>
+            <Button variant="outline" className="w-[300px]">
+              Home
+            </Button>
           </Link>
         </div>
       </div>
@@ -164,7 +170,7 @@ const Questionary: React.FC = () => {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
+      <div>
         {!finalAnswer && (
           <div className=" relative m-10 grid ">
             <h1 className="text-2xl font-semibold text-slate-800 dark:text-white/90">
@@ -174,6 +180,7 @@ const Questionary: React.FC = () => {
               {currentQuestion?.answers &&
                 currentQuestion?.answers.map((answer) => (
                   <Button
+                    variant="outline"
                     key={answer.text}
                     onClick={() => handleAnswer(answer)}
                     className="w-[300px]"
@@ -189,7 +196,7 @@ const Questionary: React.FC = () => {
             {currentQuestion?.statement}
           </div>
         )}
-      </ThemeProvider>
+      </div>
     </>
   );
 };

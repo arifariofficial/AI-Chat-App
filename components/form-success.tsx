@@ -31,7 +31,7 @@ export const FormSucccess = ({ message, time = true }: FormSuccessProps) => {
   if (!visibleMessage) return null;
 
   return (
-    <div className="m-1 flex flex-row items-center gap-x-2 rounded-md border bg-emerald-500/15  p-3 text-sm text-emerald-500">
+    <div className="border/30 mb-4 flex flex-row items-center gap-x-2 rounded-md bg-emerald-500/15  p-3 text-sm text-emerald-500">
       <CheckCircledIcon />
       <Typography variant="body2">{visibleMessage}</Typography>
     </div>

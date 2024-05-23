@@ -1,19 +1,29 @@
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import { Metadata } from "next";
-import "@/app/globals.css";
+import "@/styles/globals.css";
 import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@auth";
 import NavBar from "@components/navbar/nav-bar";
-import { ProModal } from "@components/pro-modals";
-import { Toaster } from "@components/ui/toaster";
-import { ThemeProvider } from "@components/theme-provider";
 import { cn } from "@lib/utils";
+import { Providers } from "@components/providers";
+import { Toaster } from "sonner";
+import { TailwindIndicator } from "@components/tailwind-indicator";
 const inter = Inter({ subsets: ["latin"] });
+import { Toaster as ShadToaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "SIPE | AI assistant",
   description: "Legal AI assistant",
   icons: "/favicon.ico",
+};
+
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
 };
 
 export default async function RootLayout({
@@ -28,22 +38,27 @@ export default async function RootLayout({
       <body
         className={cn(
           inter.className,
-          "bg-background text-foreground antialiased",
+          GeistSans.variable,
+          GeistMono.variable,
+          "bg-background text-foreground antialiased ",
         )}
       >
-        <ThemeProvider
+        <Toaster position="top-center" />
+        <Providers
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
           <SessionProvider basePath="/api/auth" session={session}>
-            <NavBar />
-            <ProModal />
-            {children}
-            <Toaster />
+            <div className="flex h-screen min-h-screen flex-col ">
+              <NavBar session={session} />
+              <main className="flex h-full flex-1  flex-col">{children}</main>
+              <ShadToaster />
+            </div>
+            <TailwindIndicator />
           </SessionProvider>
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

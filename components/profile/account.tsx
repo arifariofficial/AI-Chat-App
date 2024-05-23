@@ -96,7 +96,7 @@ export default function Account() {
   };
 
   return (
-    <main className="rounded-lg bg-background text-foreground">
+    <main className="rounded-lg  bg-background text-foreground">
       <div className="mb-10">
         <h1 className="mb-1 text-2xl font-semibold">Account</h1>
         <p>Manage your account settings</p>

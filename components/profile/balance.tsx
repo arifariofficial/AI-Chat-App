@@ -2,14 +2,13 @@
 
 import React, { useState } from "react";
 import {
-  ThemeProvider,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-import theme from "@components/theme";
+
 import { useToast } from "@components/ui/use-toast";
 import axios from "axios";
 import { Button } from "@components/ui/button";
@@ -67,18 +66,18 @@ export default function Balance() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <div>
       <div className="mb-10 bg-background text-foreground">
         <h1 className="mb-1 text-2xl font-semibold">Balance</h1>
         <p>Manage your payment settings</p>
       </div>
-      <div className="flex max-w-md flex-col items-center space-y-4 rounded-xl border bg-background px-8 py-6">
+      <div className="flex max-w-md flex-col items-center space-y-6 rounded-xl border border-border/30 bg-background px-8 py-6 text-foreground">
         <h1 className="text-lg font-semibold">Top Up Your Sipe Account</h1>
         <FormControl
           fullWidth
           className="text-foreground focus:text-foreground"
         >
-          <InputLabel id="credit-select-label" className="mb-2 text-foreground">
+          <InputLabel id="credit-select-label" className="mb-6">
             Amount
           </InputLabel>
           <Select
@@ -88,39 +87,23 @@ export default function Balance() {
             value={credit}
             label="Credits"
             onChange={handleSelectChange}
-            className="text-foreground"
-            sx={{
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "inherit",
-              },
-              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                borderColor: "inherit",
-              },
-              "&:hover .MuiOutlinedInput-notchedOutline": {
-                borderColor: "inherit",
-              },
-            }}
-            MenuProps={{
-              PaperProps: {
-                className: "bg-background text-foreground border",
-              },
-            }}
           >
             {creditOptions.map((option) => (
-              <MenuItem
-                key={option.value}
-                value={option.value}
-                className="my-1 py-2 text-foreground hover:bg-primary/30"
-              >
+              <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
             ))}
           </Select>
         </FormControl>
-        <Button disabled={loading} className="w-full" onClick={buyCredits}>
+        <Button
+          disabled={loading}
+          variant="outline"
+          className="h-ful my-10 w-2/3 p-5"
+          onClick={buyCredits}
+        >
           Purchase
         </Button>
       </div>
-    </ThemeProvider>
+    </div>
   );
 }

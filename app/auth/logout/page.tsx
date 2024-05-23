@@ -1,5 +1,5 @@
-import { LogoutForm } from "@components/auth/logout-form";
+import { LoginForm } from "@components/auth/login-form";
 
 export default function LogotPage() {
-  return <LogoutForm />;
+  return <LoginForm headerLabel="Logged Out Successfully" />;
 }

@@ -10,9 +10,9 @@ import { FormError } from "../form-error";
 import { useState, useTransition } from "react";
 import { reset } from "@/actions/reset";
 import { Box, TextField } from "@mui/material";
-import IconSpinner from "@components/ui/icons";
 import { FormSucccess } from "@components/form-success";
 import { Button } from "@components/ui/button";
+import { IconSpinner } from "@components/ui/icons";
 
 export const ResetForm = () => {
   const [isPending, startTransition] = useTransition();

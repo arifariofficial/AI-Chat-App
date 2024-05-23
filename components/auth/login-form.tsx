@@ -7,7 +7,7 @@ import { LoginSchema } from "@/lib/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "@components/ui/form";
 import { FormError } from "@components/form-error";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -27,12 +27,15 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@components/ui/input-otp";
-import { useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { FormSucccess } from "@components/form-success";
 import { Button } from "@components/ui/button";
 
-export const LoginForm = () => {
-  const { data: session } = useSession();
+interface LoginFormProps {
+  headerLabel: string;
+}
+
+export const LoginForm = ({ headerLabel }: LoginFormProps) => {
   const searchParams = useSearchParams();
   const urlError =
     searchParams.get("error") === "OAuthAccountNotLinked"
@@ -45,9 +48,16 @@ export const LoginForm = () => {
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  if (session) {
-    window.location.href = "/";
-  }
+  useEffect(() => {
+    const fetchSession = async () => {
+      const session = await getSession();
+      if (session) {
+        window.location.href = "/";
+      }
+      console.log(session);
+    };
+    fetchSession();
+  }, []);
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -70,7 +80,6 @@ export const LoginForm = () => {
           }
           if (result?.type === "success") {
             setSuccess(getMessageFromCode(result.resultCode));
-            window.location.href = "/";
           }
           if (result?.type === "twoFactor") {
             setShowTwoFactor(true);
@@ -80,13 +89,18 @@ export const LoginForm = () => {
           const message =
             error.response?.data?.message || "Something went wrong";
           setError(message);
+        })
+        .finally(() => {
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 1000);
         });
     });
   };
 
   return (
     <CardWrapper
-      headerLabel="Welcome back"
+      headerLabel={headerLabel}
       backButtonLabel="Dont't have an account?"
       backButtonHref="/auth/register"
       showLocal={!showTwoFactor}
@@ -212,7 +226,6 @@ export const LoginForm = () => {
                                 </IconButton>
                               </InputAdornment>
                             ),
-                            className: "bg-background",
                           }}
                         />
                       </FormControl>

@@ -1,24 +1,59 @@
 "use client";
 
-import ChatDisplay from "@components/chat/ChatDisplay";
-import ChatInput from "@components/chat/ChatInput";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useSession, getSession } from "next-auth/react";
-import ChatSkeleton from "@components/skeletons/ChatSkeleton";
-import { Button } from "@components/ui/button";
+import { usePathname, useRouter } from "next/navigation";
+import { getSession } from "next-auth/react";
+import { Session } from "next-auth";
+import { EmptyScreen } from "./empty-screen";
+import { ChatPanel } from "./chat-panel";
+import { useAIState, useUIState } from "ai/rsc";
+import { toast } from "sonner";
+import { useLocalStorage } from "@lib/hooks/use-local-storage";
+import { ChatDisplay } from "./chat-display";
+import { Message } from "@lib/types";
+import ChatModal from "./chat-modal";
 
-interface Message {
-  author: string;
-  text: string;
+export interface ChatProps extends React.ComponentProps<"div"> {
+  id?: string;
+  session?: Session;
+  initialMessages: Message[];
+  missingKeys: string[];
 }
 
-export default function Chat() {
-  const { data: session } = useSession();
-  const [messages, setMessages] = useState<Message[]>([]);
+function Chat({ id, session, missingKeys }: ChatProps) {
   const [showModal, setShowModal] = useState(false);
-
   const router = useRouter();
+  const path = usePathname();
+  const [input, setInput] = useState("");
+  const [messages] = useUIState();
+  const [aiState] = useAIState();
+
+  const [, setNewChatId] = useLocalStorage("newChatId", id);
+
+  useEffect(() => {
+    if (session?.user) {
+      if (!path.includes("chat") && messages.length === 1) {
+        window.history.replaceState({}, "", `/chat/${id}`);
+      }
+    }
+  }, [id, path, session?.user, messages]);
+
+  useEffect(() => {
+    const messagesLength = aiState.messages?.length;
+    if (messagesLength === 2) {
+      router.refresh();
+    }
+  }, [aiState.messages, router]);
+
+  useEffect(() => {
+    setNewChatId(id);
+  });
+
+  useEffect(() => {
+    missingKeys.map((key) => {
+      toast.error(`Missing ${key} environment variable!`);
+    });
+  }, [missingKeys]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,47 +73,30 @@ export default function Chat() {
     // Cleanup function to clear the timeout if the component unmounts
     return () => clearTimeout(timer);
   }, [session]);
-  const handleSendMessage = (newMessage: Message) => {
-    setMessages((prevMessages) => [newMessage, ...prevMessages]);
-  };
 
   const handleModalClose = () => {
     setShowModal(false);
     router.push("/auth/login");
   };
 
+  // Show modal if user is not logged in
   if (!session) {
     return (
-      <main className="absolute inset-x-0 top-0 mx-auto flex  w-screen max-w-screen-lg bg-transparent sm:top-[68px] sm:h-[calc(100vh-70px)]">
-        <ChatSkeleton />
-        {showModal && (
-          <div className=" absolute inset-x-0 top-[68px] flex h-[calc(100vh-70px)] w-full items-center justify-center font-semibold md:mt-auto ">
-            <div className=" flex w-2/3 max-w-[500px] flex-col items-center justify-center rounded-xl border border-border bg-background p-4 text-foreground shadow-2xl sm:w-1/2">
-              <p className="p-3 text-foreground">Please sign in</p>
-              <Button
-                variant="outline"
-                className="w-[200px]"
-                onClick={handleModalClose}
-              >
-                OK
-              </Button>
-            </div>
-          </div>
-        )}
-      </main>
+      <ChatModal showModal={showModal} handleModalClose={handleModalClose} />
     );
   }
 
-  if (!session?.user) return null;
-
   return (
-    <>
-      <main className="absolute inset-x-0 top-[70px] mx-auto flex h-[calc(100vh-70px)] w-screen max-w-screen-lg">
-        <div className="flex size-full flex-col rounded-2xl px-4 pb-4">
+    <div className="absolute inset-x-0 top-0 mx-auto flex h-[calc(100vh-63px)] w-screen max-w-screen-md">
+      <div className="relative mx-auto flex size-full flex-col items-center">
+        {messages.length ? (
           <ChatDisplay messages={messages} />
-          <ChatInput onSendMessage={handleSendMessage} />
-        </div>
-      </main>
-    </>
+        ) : (
+          <EmptyScreen />
+        )}
+        <ChatPanel id={id} input={input} setInput={setInput} />
+      </div>
+    </div>
   );
 }
+export default Chat;

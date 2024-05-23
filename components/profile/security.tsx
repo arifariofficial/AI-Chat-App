@@ -12,7 +12,7 @@ import {
 } from "@components/ui/tooltip";
 import { Button } from "@components/ui/button";
 import { GiInfo } from "react-icons/gi";
-import IconSpinner from "@components/ui/icons";
+import { IconSpinner } from "@components/ui/icons";
 
 export default function Security() {
   const [isTwoFactorEnabled, setIsTwoFactorEnabled] = useState<boolean>(false);

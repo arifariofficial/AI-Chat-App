@@ -2,13 +2,13 @@ import Link from "next/link";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import UserButton from "./user-button";
 import Balance from "./balance-button";
-import { auth } from "@auth";
-import { ModeToggle } from "@components/mode-toggle";
 
-const NavBar = async () => {
-  const session = await auth();
+import { ModeToggle } from "@components/mode-toggle";
+import { Session } from "next-auth";
+
+const NavBar = ({ session }: { session: Session | null }) => {
   return (
-    <nav className="sticky top-0 z-10 rounded-b-md border-b border-b-border/20 bg-primary text-primary-foreground shadow-md">
+    <nav className="sticky top-0 z-50 rounded-b-md border-b border-b-border/20 bg-primary/80 text-primary-foreground backdrop-blur-sm">
       <div className="mx-auto flex  h-14 max-w-screen-2xl justify-between">
         <section className="flex items-center">
           <Link href={`/`}>
@@ -20,7 +20,7 @@ const NavBar = async () => {
         </section>
         <section className="mr-1 flex items-center justify-center text-xl font-semibold hover:opacity-90  ">
           <div className="flex h-full flex-row items-center p-px">
-            {session && <Balance />}
+            {session && <Balance session={session} />}
             <ModeToggle />
             <UserButton />
           </div>
