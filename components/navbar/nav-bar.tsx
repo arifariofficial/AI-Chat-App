@@ -8,7 +8,7 @@ import { Session } from "next-auth";
 
 const NavBar = ({ session }: { session: Session | null }) => {
   return (
-    <nav className="sticky top-0 z-50 rounded-b-md border-b border-b-border/20 bg-primary/80 text-primary-foreground backdrop-blur-sm">
+    <nav className="sticky top-0 z-50 rounded-b-md border-b border-b-border/20 bg-primary/80 text-background backdrop-blur-sm">
       <div className="mx-auto flex  h-14 max-w-screen-2xl justify-between">
         <section className="flex items-center">
           <Link href={`/`}>

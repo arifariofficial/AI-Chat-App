@@ -11,7 +11,7 @@ body,
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 180 18.46% 15%;
+    --foreground: 0 0 0%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -20,7 +20,7 @@ body,
     --popover-foreground: 180 18.46% 15%;
 
     --primary: 180 18.46% 25.49%;
-    --primary-foreground: 50 64.29% 100%;
+    --primary-foreground: 50 64.29% 89.02%;
     --primary-hover: 180 10.05% 48.53%;
 
     --secondary: 183.75 16.67% 37.65%;
