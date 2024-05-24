@@ -1,3 +1,5 @@
+"use client";
+
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export const useScrollAnchor = () => {
@@ -22,6 +24,7 @@ export const useScrollAnchor = () => {
       if (isAtBottom && !isVisible) {
         messagesRef.current.scrollIntoView({
           block: "end",
+          behavior: "smooth",
         });
       }
     }

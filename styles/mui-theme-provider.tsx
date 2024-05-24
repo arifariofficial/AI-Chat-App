@@ -18,7 +18,10 @@ const MUIThemeProvider = ({ children }: { children: React.ReactNode }) => {
           mode,
           primary: {
             main: "hsl(180deg 9.36% 39.8%)",
-            light: "hsl(0deg 0% 100%)",
+            light:
+              mode === "dark"
+                ? "var(--background-dark)"
+                : "var(--background-light)",
             dark:
               mode === "dark"
                 ? "var(--background-dark)"
@@ -34,13 +37,14 @@ const MUIThemeProvider = ({ children }: { children: React.ReactNode }) => {
                     mode === "dark"
                       ? "var(--border-dark)"
                       : "var(--border-light)",
+                  opacity: 0.5,
                 },
                 "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                   borderColor:
                     mode === "dark"
                       ? "var(--border-dark)"
                       : "var(--border-light)",
-                  borderWidth: "1px",
+                  opacity: 0.4,
                 },
                 "& .MuiInputBase-input:-webkit-autofill": {
                   borderColor:

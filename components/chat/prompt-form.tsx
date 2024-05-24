@@ -15,20 +15,31 @@ import { IconArrowElbow, IconPlus } from "@components/ui/icons";
 import { UserMessage } from "./message";
 import { CircularProgress, InputAdornment, TextField } from "@mui/material";
 import { nanoid } from "@lib/utils";
+import { decrement, fetchBalance } from "@lib/store/balanceSlice";
+import { useAppDispatch } from "@lib/store/hook";
 
 export function PromptForm({
   input,
   setInput,
+  isLoading,
+  setIsLoading,
 }: {
   input: string;
   setInput: (value: string) => void;
+  isLoading: boolean;
+  setIsLoading: (value: boolean) => void;
 }) {
   const router = useRouter();
   const { formRef, onKeyDown, handleButtonClick } = useEnterSubmit();
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
   const { submitUserMessage } = useActions();
   const [, setMessages] = useUIState<typeof AI>();
-  const [isLoading, setIsLoading] = React.useState(false);
+
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    dispatch(fetchBalance());
+  }, [dispatch]);
 
   React.useEffect(() => {
     if (inputRef.current) {
@@ -77,6 +88,7 @@ export function PromptForm({
         const responseMessage = await submitUserMessage(value);
         setMessages((currentMessages) => [...currentMessages, responseMessage]);
         setIsLoading(false);
+        dispatch(decrement());
       }}
     >
       <div className="w-full resize-none  sm:text-sm">
@@ -172,14 +184,6 @@ export function PromptForm({
             },
             "& .MuiInputAdornment-positionStart": {
               marginBottom: "29px",
-            },
-            marginBottom: "0px",
-            "& .MuiOutlinedInput-root": {
-              "&.Mui-focused fieldset": {
-                borderColor: "var(--border)",
-                border: "2px solid",
-                opacity: 0.5,
-              },
             },
           }}
         />

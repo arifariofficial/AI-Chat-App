@@ -2,7 +2,7 @@ import LocalLibrary from "@mui/icons-material/LocalLibrary";
 
 export function EmptyScreen() {
   return (
-    <div className="mx-auto -mt-64 flex h-full flex-col items-center justify-center gap-2  px-4">
+    <div className="mx-auto  -mt-64 flex h-full flex-col items-center justify-center gap-2 px-4 sm:-mt-80">
       <LocalLibrary
         fontSize="large"
         className="m-1 rounded-full border border-foreground/70 p-1  text-foreground/70 shadow-sm"

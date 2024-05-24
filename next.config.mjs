@@ -1,4 +1,13 @@
-/** @type {import('next').NextConfig} */
+import bundleAnalyzer from "@next/bundle-analyzer";
+
+const withBundleAnalyzer =
+  typeof bundleAnalyzer === "function"
+    ? bundleAnalyzer
+    : bundleAnalyzer.default;
+
+const bundleAnalyzerConfig = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
 const nextConfig = {
   images: {
@@ -6,18 +15,15 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "platform-lookaside.fbsbx.com",
-        port: "",
         pathname: "/**",
       },
       {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
-        port: "",
         pathname: "/**",
       },
     ],
   },
-
   webpack(config) {
     config.experiments = {
       ...config.experiments,
@@ -29,4 +35,4 @@ const nextConfig = {
   reactStrictMode: false,
 };
 
-export default nextConfig;
+export default bundleAnalyzerConfig(nextConfig);

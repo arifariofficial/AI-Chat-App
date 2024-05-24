@@ -6,7 +6,7 @@ export function FooterText({ className, ...props }: React.ComponentProps<"p">) {
   return (
     <p
       className={cn(
-        "!mt-0 flex px-2 text-center text-xs text-muted-foreground",
+        "!mb-1 !mt-0 flex px-2 text-center text-xs text-muted-foreground",
         className,
       )}
       {...props}

@@ -45,9 +45,20 @@ async function submitUserMessage(content: string) {
       const bytes = new TextEncoder().encode(chunk + " ");
       const decodedString = decoder.decode(bytes); // Decode bytes to string
       textStream.update(decodedString); // Now passing a string as expected
-      await delay(Math.floor(Math.random() * 40) + 10);
+      await delay(Math.floor(Math.random() * 60) + 30);
     }
     textStream.done();
+    history.done({
+      ...history.get(),
+      messages: [
+        ...history.get().messages,
+        {
+          id: nanoid(),
+          role: "assistant",
+          content: fullResponse,
+        },
+      ],
+    });
   };
 
   updateStreamGradually(); // Start the streaming process
@@ -69,7 +80,6 @@ export type UIState = {
 }[];
 
 export const AI = createAI<AIState, UIState>({
-  //Create AI Provider
   actions: {
     submitUserMessage,
   },
@@ -82,7 +92,7 @@ export const AI = createAI<AIState, UIState>({
     const session = await auth();
 
     if (session && session.user) {
-      const history = getAIState(); // Get chat history
+      const history = getAIState();
 
       if (history) {
         const uiState = getUIStateFromAIState(history);
@@ -92,7 +102,7 @@ export const AI = createAI<AIState, UIState>({
       return;
     }
   },
-  onSetAIState: async ({ state, done }) => {
+  onSetAIState: async ({ state }) => {
     "use server";
 
     const session = await auth();
@@ -116,9 +126,7 @@ export const AI = createAI<AIState, UIState>({
         path,
       };
 
-      if (done) {
-        await saveChat(chat);
-      }
+      await saveChat(chat);
     } else {
       return;
     }

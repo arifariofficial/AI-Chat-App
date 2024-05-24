@@ -198,7 +198,7 @@ export const RegisterForm = () => {
           />
           <FormError message={error} />
           <FormSucccess message={success} />
-          <Button type="submit" className="mt-4 w-full">
+          <Button variant="outline" type="submit" className="mt-4 w-full">
             {isPending ? (
               <CircularProgress size="20px" className="text-[#f5efd1]" />
             ) : (

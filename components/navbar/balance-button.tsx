@@ -5,21 +5,27 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@components/ui/dropdown-menu";
-import { Session } from "next-auth";
+import { fetchBalance } from "@lib/store/balanceSlice";
+import { useAppDispatch, useAppSelector } from "@lib/store/hook";
 import Link from "next/link";
+import { useEffect } from "react";
 
-interface BalanceProps {
-  session: Session | null;
-}
+export default function Balance() {
+  const dispatch = useAppDispatch();
 
-export default function Balance({ session }: BalanceProps) {
+  const balance = useAppSelector((state) => state.balance.balance);
+
+  useEffect(() => {
+    dispatch(fetchBalance());
+  }, [dispatch]);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Link href="/profile/balance" className="h-full">
           <Button variant="nav" className="h-full">
             <p className="hidden sm:block">Balance:</p>
-            <p className="mx-1">{session?.user.balance}€</p>
+            <p className="mx-1">{balance}€</p>
           </Button>
         </Link>
       </DropdownMenuTrigger>

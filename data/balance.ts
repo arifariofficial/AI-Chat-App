@@ -1,10 +1,13 @@
 "use server";
 
+import { auth } from "@auth";
 import prisma from "@lib/prisma";
 
-export async function getBalance(userId: string) {
+export async function getBalance() {
+  const session = await auth();
+
   const previousBalance = await prisma.user.findFirst({
-    where: { id: userId },
+    where: { id: session?.user.id },
     select: { balance: true },
   });
 

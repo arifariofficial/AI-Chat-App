@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { getSession } from "next-auth/react";
 import { Session } from "next-auth";
 import { EmptyScreen } from "./empty-screen";
 import { ChatPanel } from "./chat-panel";
@@ -10,13 +9,14 @@ import { useAIState, useUIState } from "ai/rsc";
 import { toast } from "sonner";
 import { useLocalStorage } from "@lib/hooks/use-local-storage";
 import { ChatDisplay } from "./chat-display";
-import { Message } from "@lib/types";
 import ChatModal from "./chat-modal";
+import { useScrollAnchor } from "@lib/hooks/use-scroll-anchor";
+import { Message } from "@lib/types";
 
 export interface ChatProps extends React.ComponentProps<"div"> {
+  initialMessages?: Message[];
   id?: string;
   session?: Session;
-  initialMessages: Message[];
   missingKeys: string[];
 }
 
@@ -47,7 +47,7 @@ function Chat({ id, session, missingKeys }: ChatProps) {
 
   useEffect(() => {
     setNewChatId(id);
-  });
+  }, [id, setNewChatId]);
 
   useEffect(() => {
     missingKeys.map((key) => {
@@ -56,21 +56,12 @@ function Chat({ id, session, missingKeys }: ChatProps) {
   }, [missingKeys]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await getSession();
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    let timer: string | number | NodeJS.Timeout | undefined;
+    let timer: NodeJS.Timeout | undefined;
     if (!session) {
       timer = setTimeout(() => {
         setShowModal(true);
       }, 400);
     }
-
-    // Cleanup function to clear the timeout if the component unmounts
     return () => clearTimeout(timer);
   }, [session]);
 
@@ -78,6 +69,9 @@ function Chat({ id, session, missingKeys }: ChatProps) {
     setShowModal(false);
     router.push("/auth/login");
   };
+
+  const { messagesRef, scrollRef, visibilityRef, isAtBottom, scrollToBottom } =
+    useScrollAnchor();
 
   // Show modal if user is not logged in
   if (!session) {
@@ -87,14 +81,27 @@ function Chat({ id, session, missingKeys }: ChatProps) {
   }
 
   return (
-    <div className="absolute inset-x-0 top-0 mx-auto flex h-[calc(100vh-63px)] w-screen max-w-screen-md">
-      <div className="relative mx-auto flex size-full flex-col items-center">
+    <div
+      className="absolute inset-0 mx-auto flex h-[calc(100dvh-68px)] w-screen max-w-screen-md sm:h-full"
+      ref={scrollRef}
+    >
+      <div
+        className="relative mx-auto flex size-full flex-col items-center justify-center overflow-auto"
+        ref={messagesRef}
+      >
         {messages.length ? (
           <ChatDisplay messages={messages} />
         ) : (
           <EmptyScreen />
         )}
-        <ChatPanel id={id} input={input} setInput={setInput} />
+        <div className="h-px w-full" ref={visibilityRef} />
+        <ChatPanel
+          id={id}
+          input={input}
+          setInput={setInput}
+          isAtBottom={isAtBottom}
+          scrollToBottom={scrollToBottom}
+        />
       </div>
     </div>
   );

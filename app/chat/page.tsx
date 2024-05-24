@@ -4,6 +4,7 @@ import { getMissingKeys } from "@data/chat";
 import { AI } from "@lib/chat/actions";
 import { nanoid } from "@lib/utils";
 import { Metadata } from "next";
+import { Session } from "next-auth";
 
 export const metadata: Metadata = {
   title: "SIPE | Chat",
@@ -13,17 +14,12 @@ export const metadata: Metadata = {
 
 export default async function ChatPage() {
   const id = nanoid();
-  const session = await auth();
+  const session = (await auth()) as Session;
   const missingKeys = await getMissingKeys();
 
   return (
     <AI initialAIState={{ chatId: id, messages: [] }}>
-      <Chat
-        id={id}
-        session={session ?? undefined}
-        missingKeys={missingKeys}
-        initialMessages={[]}
-      />
+      <Chat id={id} session={session} missingKeys={missingKeys} />
     </AI>
   );
 }

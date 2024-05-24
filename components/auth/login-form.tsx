@@ -54,7 +54,6 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
       if (session) {
         window.location.href = "/";
       }
-      console.log(session);
     };
     fetchSession();
   }, []);
@@ -77,23 +76,21 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
         .then((result) => {
           if (result?.type === "error") {
             setError(getMessageFromCode(result.resultCode));
-          }
-          if (result?.type === "success") {
+          } else if (result?.type === "success") {
             setSuccess(getMessageFromCode(result.resultCode));
-          }
-          if (result?.type === "twoFactor") {
+            setTimeout(() => {
+              window.location.href = "/";
+            }, 1000);
+          } else if (result?.type === "twoFactor") {
             setShowTwoFactor(true);
+          } else {
+            setError("Unexpected response from server.");
           }
         })
         .catch((error) => {
           const message =
             error.response?.data?.message || "Something went wrong";
           setError(message);
-        })
-        .finally(() => {
-          setTimeout(() => {
-            window.location.href = "/";
-          }, 1000);
         });
     });
   };
@@ -101,7 +98,7 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
   return (
     <CardWrapper
       headerLabel={headerLabel}
-      backButtonLabel="Dont't have an account?"
+      backButtonLabel="Don't have an account?"
       backButtonHref="/auth/register"
       showLocal={!showTwoFactor}
     >

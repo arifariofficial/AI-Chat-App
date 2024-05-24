@@ -1,34 +1,46 @@
-import * as React from "react";
-
 import { Button } from "@/components/ui/button";
 import { IconShare } from "@/components/ui/icons";
 import { FooterText } from "@components/chat/footer";
-import { useActions, useUIState } from "ai/rsc";
+import { useAIState, useActions, useUIState } from "ai/rsc";
 import { UserMessage } from "./message";
 import { PromptForm } from "./prompt-form";
 import { AI } from "@lib/chat/actions";
 import { nanoid } from "@lib/utils";
-import { getSession } from "next-auth/react";
+import { useAppDispatch } from "@lib/store/hook";
+import { decrement, fetchBalance } from "@lib/store/balanceSlice";
+import { useEffect, useState } from "react";
+import { ChatShareDialog } from "./chat-share-dialog";
+import { shareChat } from "@data/chat";
+import { ButtonScrollToBottom } from "./button-scroll-to-bottom";
 
 export interface ChatPanelProps {
   id?: string;
   title?: string;
   input: string;
   setInput: (value: string) => void;
+  isAtBottom: boolean;
+  scrollToBottom: () => void;
 }
 
-export function ChatPanel({ id, title, input, setInput }: ChatPanelProps) {
+export function ChatPanel({
+  id,
+  title,
+  input,
+  setInput,
+  isAtBottom,
+  scrollToBottom,
+}: ChatPanelProps) {
+  const [aiState] = useAIState();
   const [messages, setMessages] = useUIState<typeof AI>();
   const { submitUserMessage } = useActions();
-  const [, setShareDialogOpen] = React.useState(false);
+  const [shareDialogOpen, setShareDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  React.useEffect(() => {
-    const fetchSession = async () => {
-      await getSession();
-    };
+  const dispatch = useAppDispatch();
 
-    fetchSession();
-  }, [messages]);
+  useEffect(() => {
+    dispatch(fetchBalance());
+  }, [dispatch]);
 
   const exampleMessages = [
     {
@@ -45,6 +57,10 @@ export function ChatPanel({ id, title, input, setInput }: ChatPanelProps) {
 
   return (
     <div className="absolute inset-x-0  bottom-0 w-full bg-transparent">
+      <ButtonScrollToBottom
+        isAtBottom={isAtBottom}
+        scrollToBottom={scrollToBottom}
+      />
       <div className="mx-auto flex max-w-3xl flex-col bg-transparent sm:px-4">
         <div className="mb-4 grid w-full grid-cols-2 gap-4 bg-background px-6 text-center">
           {messages.length === 0 &&
@@ -55,6 +71,7 @@ export function ChatPanel({ id, title, input, setInput }: ChatPanelProps) {
                   index > 1 && "hidden md:block"
                 }`}
                 onClick={async () => {
+                  setIsLoading(true);
                   setMessages((currentMessages) => [
                     ...currentMessages,
                     {
@@ -65,13 +82,14 @@ export function ChatPanel({ id, title, input, setInput }: ChatPanelProps) {
 
                   const responseMessage = await submitUserMessage(
                     example.message,
-                    1,
                   );
 
                   setMessages((currentMessages) => [
                     ...currentMessages,
                     responseMessage,
                   ]);
+                  setIsLoading(false);
+                  dispatch(decrement());
                 }}
               >
                 <div className="text-sm font-semibold text-foreground/90">
@@ -96,6 +114,17 @@ export function ChatPanel({ id, title, input, setInput }: ChatPanelProps) {
                     <IconShare className="mr-2" />
                     Share
                   </Button>
+                  <ChatShareDialog
+                    open={shareDialogOpen}
+                    onOpenChange={setShareDialogOpen}
+                    onCopy={() => setShareDialogOpen(false)}
+                    shareChat={shareChat}
+                    chat={{
+                      id,
+                      title,
+                      messages: aiState.messages,
+                    }}
+                  />
                 </>
               ) : null}
             </div>
@@ -103,7 +132,12 @@ export function ChatPanel({ id, title, input, setInput }: ChatPanelProps) {
         ) : null}
 
         <div className="space-y-2 bg-background px-4 pt-3 shadow-lg sm:rounded-t-xl sm:border sm:border-border/40 ">
-          <PromptForm input={input} setInput={setInput} />
+          <PromptForm
+            input={input}
+            setInput={setInput}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+          />
           <FooterText className="mt-0 hidden sm:block" />
         </div>
       </div>

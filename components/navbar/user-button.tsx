@@ -25,7 +25,7 @@ export default async function UserButton() {
       <DropdownMenu>
         <DropdownMenuTrigger
           asChild
-          className="text-[#F5EFD1] focus-visible:border-none focus-visible:ring-0"
+          className="text-foregroundNav focus-visible:border-none focus-visible:ring-0"
         >
           <Button variant="nav" className=" h-full">
             <Avatar className="size-7">
@@ -88,8 +88,8 @@ export default async function UserButton() {
         href={"/auth/login"}
         className="flex h-full flex-row items-center gap-2 font-bold"
       >
-        <LockIcon className="text-[#F5EFD1] dark:text-inherit " />
-        <p className="text-sm text-[#F5EFD1] dark:text-inherit ">Log in</p>
+        <LockIcon />
+        <p>Log in</p>
       </Link>
     </Button>
   );

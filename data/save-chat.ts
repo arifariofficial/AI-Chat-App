@@ -29,7 +29,7 @@ export async function saveChat(chat: Chat) {
       });
 
       const newMessages = chat.messages.filter(
-        (msg) => !existingChat?.messages.some((exMsg) => exMsg.id === msg.id)
+        (msg) => !existingChat?.messages.some((exMsg) => exMsg.id === msg.id),
       );
 
       const updatedChat = await prisma.chat.upsert({
@@ -82,10 +82,12 @@ export async function saveChat(chat: Chat) {
 
       const result = await pipeline.exec();
       console.log("redis:", result);
-      console.log(`Chat with ID ${chat.id} added/updated in Redis successfully.`);
+      console.log(
+        `Chat with ID ${chat.id} added/updated in Redis successfully.`,
+      );
     });
   } catch (error) {
     console.error(`Failed to save chat: ${error}`);
-    throw error; // Rethrow after logging to handle higher up if needed
+    throw error;
   }
 }
