@@ -14,19 +14,22 @@ import { getSipeResponse } from "@actions/sipe-api";
 async function submitUserMessage(content: string) {
   "use server";
 
-  const history = getMutableAIState<typeof AI>(); //Similar to getAIState()
+  const aiState = getMutableAIState<typeof AI>();
 
-  // Adding the user message to the history
-  history.update({
-    ...history.get(),
-    messages: [
-      ...history.get().messages,
-      {
-        id: nanoid(),
-        role: "user",
-        content,
-      },
-    ],
+  // Adding the user message to the aiState
+  aiState.update((prevState) => {
+    const newState: AIState = {
+      ...prevState,
+      messages: [
+        ...prevState.messages,
+        {
+          id: nanoid(),
+          role: "user",
+          content,
+        } as Message,
+      ],
+    };
+    return newState;
   });
 
   const fullResponse = await getSipeResponse(content);
@@ -44,20 +47,25 @@ async function submitUserMessage(content: string) {
     for (const chunk of chunks) {
       const bytes = new TextEncoder().encode(chunk + " ");
       const decodedString = decoder.decode(bytes); // Decode bytes to string
-      textStream.update(decodedString); // Now passing a string as expected
+      textStream.update(decodedString);
       await delay(Math.floor(Math.random() * 60) + 30);
     }
     textStream.done();
-    history.done({
-      ...history.get(),
-      messages: [
-        ...history.get().messages,
-        {
-          id: nanoid(),
-          role: "assistant",
-          content: fullResponse,
-        },
-      ],
+    // Adding the sipe-api message to the aiState
+    aiState.update((prevState) => {
+      const newState: AIState = {
+        ...prevState,
+        messages: [
+          ...prevState.messages,
+          {
+            id: nanoid(),
+            role: "assistant",
+            content: fullResponse,
+          } as Message,
+        ],
+      };
+
+      return newState;
     });
   };
 
@@ -92,10 +100,10 @@ export const AI = createAI<AIState, UIState>({
     const session = await auth();
 
     if (session && session.user) {
-      const history = getAIState();
+      const aiState = getAIState();
 
-      if (history) {
-        const uiState = getUIStateFromAIState(history);
+      if (aiState) {
+        const uiState = getUIStateFromAIState(aiState);
         return uiState;
       }
     } else {
@@ -133,11 +141,11 @@ export const AI = createAI<AIState, UIState>({
   },
 });
 
-export const getUIStateFromAIState = (history: Chat) => {
-  return history.messages
+export const getUIStateFromAIState = (aiState: Chat) => {
+  return aiState.messages
     .filter((message) => message.role !== "system")
     .map((message, index) => ({
-      id: `${history.chatId}-${index}`,
+      id: `${aiState.chatId}-${index}`,
       display:
         message.role === "user" ? (
           <UserMessage>{message.content as string}</UserMessage>

@@ -32,7 +32,7 @@ const nextConfig = {
     return config;
   },
   output: "standalone",
-  reactStrictMode: false,
+  reactStrictMode: true,
 };
 
 export default bundleAnalyzerConfig(nextConfig);

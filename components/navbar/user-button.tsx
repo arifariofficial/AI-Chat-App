@@ -89,7 +89,7 @@ export default async function UserButton() {
         className="flex h-full flex-row items-center gap-2 font-bold"
       >
         <LockIcon />
-        <p>Log in</p>
+        <p className="text-foregroundNav">Log in</p>
       </Link>
     </Button>
   );
