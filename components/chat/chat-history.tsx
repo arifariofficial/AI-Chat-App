@@ -1,6 +1,4 @@
 import { SidebarList } from "@/components/chat/sidebar-list";
-
-import { SidebarToggle } from "./sidebar-toggle";
 import { Suspense } from "react";
 
 interface ChatHistoryProps {
@@ -12,7 +10,6 @@ export async function ChatHistory({ userId }: ChatHistoryProps) {
     <div className="flex h-full flex-col">
       <div className="flex items-center justify-between p-4">
         <h4 className="text-sm font-medium">Chat History</h4>
-        <SidebarToggle />
       </div>
       <Suspense
         fallback={

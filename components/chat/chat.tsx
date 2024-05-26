@@ -42,7 +42,6 @@ function Chat({ id, session, missingKeys }: ChatProps) {
     const messagesLength = aiState.messages?.length;
     if (messagesLength === 2) {
       router.refresh();
-      console.log("refreshing");
     }
   }, [aiState.messages, router]);
 
@@ -82,10 +81,7 @@ function Chat({ id, session, missingKeys }: ChatProps) {
   }
 
   return (
-    <div
-      className="absolute inset-0 mx-auto flex h-[calc(100dvh-68px)] w-screen max-w-screen-md sm:h-full"
-      ref={scrollRef}
-    >
+    <div className="mx-auto flex w-full max-w-screen-md" ref={scrollRef}>
       <div
         className="relative mx-auto flex size-full flex-col items-center justify-center overflow-auto"
         ref={messagesRef}

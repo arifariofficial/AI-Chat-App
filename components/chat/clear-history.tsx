@@ -32,8 +32,8 @@ export function ClearHistory({
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger asChild>
-        <Button variant="ghost" disabled={!isEnabled || isPending}>
+      <AlertDialogTrigger asChild className="flex w-full self-center">
+        <Button variant="outline" disabled={!isEnabled || isPending}>
           {isPending && <IconSpinner className="mr-2" />}
           Clear history
         </Button>

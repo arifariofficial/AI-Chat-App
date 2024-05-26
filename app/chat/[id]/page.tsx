@@ -2,9 +2,9 @@ import { notFound, redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { AI } from "@/lib/chat/actions";
 import { Session } from "next-auth";
-import Chat from "@components/chat/chat";
 import { getChat } from "@data/get-chat";
 import { getMissingKeys } from "@data/chat";
+import Chat from "@components/chat/chat";
 
 export interface ChatPageProps {
   params: {
@@ -33,12 +33,7 @@ export default async function ChatPage({ params }: ChatPageProps) {
 
   return (
     <AI initialAIState={{ chatId: chat.id, messages: chat.messages }}>
-      <Chat
-        id={chat.id}
-        session={session}
-        initialMessages={chat.messages}
-        missingKeys={missingKeys}
-      />
+      <Chat session={session} missingKeys={missingKeys} />
     </AI>
   );
 }

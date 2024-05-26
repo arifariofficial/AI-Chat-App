@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@components/ui/tooltip";
 import { Button } from "@components/ui/button";
@@ -58,22 +57,20 @@ export default function Security() {
         <section className="flex justify-between">
           <span className="flex flex-row text-base  font-semibold text-foreground">
             Two-Factor Authentication
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" className="ml-1 size-4 p-0">
-                    <GiInfo />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent side="top" className="shadow-md">
-                  <p className="max-w-44">
-                    When this feature is activated, a one-time password (OTP)
-                    will be sent to the user&apos;s email address to facilitate
-                    secure login.
-                  </p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" className="ml-1 size-4 p-0">
+                  <GiInfo />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="shadow-md">
+                <p className="max-w-44">
+                  When this feature is activated, a one-time password (OTP) will
+                  be sent to the user&apos;s email address to facilitate secure
+                  login.
+                </p>
+              </TooltipContent>
+            </Tooltip>
           </span>
           <FormControlLabel
             control={

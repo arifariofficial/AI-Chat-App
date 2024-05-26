@@ -1,18 +1,22 @@
+"use client";
+
 import { Sidebar } from "@/components/chat/sidebar";
-
-import { auth } from "@/auth";
 import { ChatHistory } from "@/components/chat/chat-history";
+import { useSession } from "next-auth/react";
+import { Suspense } from "react";
 
-export async function SidebarDesktop() {
-  const session = await auth();
+export function SidebarDesktop() {
+  const { data: session } = useSession();
 
   if (!session?.user?.id) {
     return null;
   }
 
   return (
-    <Sidebar className="peer absolute inset-y-0 z-30 hidden w-[300px] -translate-x-full border-r border-border/20 bg-muted shadow-xl duration-300 ease-in-out data-[state=open]:translate-x-0 sm:block">
-      <ChatHistory userId={session.user.id} />
+    <Sidebar className="peer w-full -translate-x-full bg-muted ease-in-out data-[state=open]:translate-x-0">
+      <Suspense>
+        <ChatHistory userId={session.user.id} />
+      </Suspense>
     </Sidebar>
   );
 }
