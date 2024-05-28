@@ -5,19 +5,44 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@components/ui/dropdown-menu";
+import { IconSpinner } from "@components/ui/icons";
 import { fetchBalance } from "@lib/store/balanceSlice";
 import { useAppDispatch, useAppSelector } from "@lib/store/hook";
+import { Session } from "next-auth";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export default function Balance() {
+interface BalanceButtonProps {
+  session: Session | null;
+}
+
+export default function Balance({ session }: BalanceButtonProps) {
   const dispatch = useAppDispatch();
-
   const balance = useAppSelector((state) => state.balance.balance);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchBalance());
-  }, [dispatch]);
+    if (session?.user.id) {
+      dispatch(fetchBalance(session.user.id))
+        .then(() => setLoading(false))
+        .catch((error) => {
+          console.error("Failed to fetch balance:", error);
+          setLoading(false);
+        });
+    } else {
+      console.log("Session or User ID is undefined, cannot fetch balance.");
+      setLoading(false);
+    }
+  }, [dispatch, session?.user.id]);
+
+  if (loading) {
+    return (
+      <Button variant="nav" className="h-full">
+        <p className="hidden sm:block">Balance: </p>
+        <IconSpinner />
+      </Button>
+    );
+  }
 
   return (
     <DropdownMenu>

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { AppDispatch } from "./store";
 import { getBalance } from "@data/balance";
 
@@ -17,7 +17,7 @@ export const balanceSlice = createSlice({
     decrement: (state) => {
       state.balance -= 0.5;
     },
-    setBalance: (state, action) => {
+    setBalance: (state, action: PayloadAction<number>) => {
       state.balance = action.payload;
     },
   },
@@ -27,8 +27,19 @@ export const { decrement, setBalance } = balanceSlice.actions;
 
 export default balanceSlice.reducer;
 
-export const fetchBalance = () => async (dispatch: AppDispatch) => {
-  const balance = await getBalance();
+export const fetchBalance =
+  (userId: string) => async (dispatch: AppDispatch) => {
+    try {
+      const balanceData = await getBalance(userId);
 
-  dispatch(setBalance(balance.balance));
-};
+      if (typeof balanceData.balance === "number") {
+        dispatch(setBalance(balanceData.balance));
+      } else {
+        console.error(
+          "Failed to fetch balance: Balance is undefined or request failed",
+        );
+      }
+    } catch (error) {
+      console.error("Failed to fetch balance:", error);
+    }
+  };

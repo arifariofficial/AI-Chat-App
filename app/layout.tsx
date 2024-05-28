@@ -9,7 +9,6 @@ import NavBar from "@components/navbar/nav-bar";
 import { cn } from "@lib/utils";
 import { Providers } from "@components/providers";
 import { Toaster } from "sonner";
-import { TailwindIndicator } from "@components/tailwind-indicator";
 const inter = Inter({ subsets: ["latin"] });
 import { Toaster as ShadToaster } from "@/components/ui/toaster";
 
@@ -56,7 +55,6 @@ export default async function RootLayout({
               <main className="flex h-full flex-1  flex-col">{children}</main>
               <ShadToaster />
             </div>
-            <TailwindIndicator />
           </SessionProvider>
         </Providers>
       </body>

@@ -15,7 +15,7 @@ import { IconArrowElbow, IconPlus } from "@components/ui/icons";
 import { UserMessage } from "./message";
 import { CircularProgress, InputAdornment, TextField } from "@mui/material";
 import { nanoid } from "@lib/utils";
-import { decrement, fetchBalance } from "@lib/store/balanceSlice";
+import { decrement } from "@lib/store/balanceSlice";
 import { useAppDispatch } from "@lib/store/hook";
 
 export function PromptForm({
@@ -36,10 +36,6 @@ export function PromptForm({
   const [, setMessages] = useUIState<typeof AI>();
 
   const dispatch = useAppDispatch();
-
-  React.useEffect(() => {
-    dispatch(fetchBalance());
-  }, [dispatch]);
 
   React.useEffect(() => {
     if (inputRef.current) {

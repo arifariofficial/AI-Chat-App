@@ -1,13 +1,20 @@
 "use server";
 
-import { auth } from "@auth";
 import prisma from "@lib/prisma";
+import redis from "@lib/redis";
 
-export async function getBalance() {
-  const session = await auth();
+export async function getBalance(userId: string) {
+  const cacheKey = `user:balance:${userId}`;
 
+  // Try to get the balance from Redis cache
+  const cachedBalance = await redis.get(cacheKey);
+  if (cachedBalance !== null) {
+    return { balance: Number(cachedBalance) };
+  }
+
+  // If not found in cache, query the database
   const previousBalance = await prisma.user.findFirst({
-    where: { id: session?.user.id },
+    where: { id: userId },
     select: { balance: true },
   });
 
@@ -15,7 +22,12 @@ export async function getBalance() {
     return { error: "User not found" };
   }
 
-  return { success: true, balance: previousBalance.balance };
+  const balance = previousBalance.balance;
+
+  // Save the balance to Redis cache for 5 minutes
+  await redis.setex(cacheKey, 5, balance.toString());
+
+  return { balance };
 }
 
 export async function updateBalance(balance: number, userId: string) {
@@ -42,25 +54,47 @@ export async function updateBalance(balance: number, userId: string) {
 }
 
 export async function checkBalance(userId: string) {
-  const previousBalance = await prisma.user.findFirst({
-    where: { id: userId },
-    select: { balance: true },
-  });
+  const cacheKey = `user:balance:${userId}`;
 
-  if (previousBalance === null) {
-    return { error: "User not found" };
+  // Try to get the balance from Redis cache
+  let balance: number | null = null;
+  const cachedBalance = await redis.get(cacheKey);
+
+  if (cachedBalance !== null) {
+    balance = Number(cachedBalance);
+  } else {
+    // If not found in cache, query the database
+    const previousBalance = await prisma.user.findFirst({
+      where: { id: userId },
+      select: { balance: true },
+    });
+
+    if (previousBalance === null) {
+      return { error: "User not found" };
+    }
+
+    balance = previousBalance.balance;
+
+    // Store the balance in Redis cache with a short expiration time (e.g., 5 minutes)
+    await redis.setex(cacheKey, 300, balance.toString());
   }
 
-  if (previousBalance.balance < 0.5) {
+  // Check if the balance is sufficient
+  if (balance < 0.5) {
     return false;
   }
 
-  const currentBalance = previousBalance.balance - 0.5;
+  // Update the balance
+  const currentBalance = balance - 0.5;
 
-  await prisma.user.update({
+  const updatedUser = await prisma.user.update({
     where: { id: userId },
     data: { balance: currentBalance },
+    select: { balance: true },
   });
+
+  // Invalidate and update the cache with the new balance
+  await redis.setex(cacheKey, 300, updatedUser.balance.toString());
 
   return true;
 }

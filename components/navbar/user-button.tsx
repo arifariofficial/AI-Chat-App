@@ -1,7 +1,6 @@
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Link from "next/link";
-import { auth } from "@auth";
 import { Button } from "@components/ui/button";
 import { DropdownIcon, LockIcon, UserIcon } from "@components/ui/icons";
 import {
@@ -13,13 +12,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@components/ui/dropdown-menu";
-import { SignOut } from "@components/auth/auth-components";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
+import { Session } from "next-auth";
+import SignOutButton from "@components/auth/signout-client";
 
-export default async function UserButton() {
-  const session = await auth();
+interface UserButtonProps {
+  session: Session | null;
+}
 
+export default function UserButton({ session }: UserButtonProps) {
   if (session) {
     return (
       <DropdownMenu>
@@ -75,7 +77,7 @@ export default async function UserButton() {
           <DropdownMenuSeparator />
           <DropdownMenuItem className="gap-4 px-8">
             <LogoutIcon />
-            <SignOut />
+            <SignOutButton />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

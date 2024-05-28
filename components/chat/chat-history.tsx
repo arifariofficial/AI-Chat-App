@@ -1,15 +1,33 @@
+"use client";
+
 import { SidebarList } from "@/components/chat/sidebar-list";
-import { Suspense } from "react";
+import { IconRefresh } from "@components/ui/icons";
+import { useChats } from "@lib/hooks/useChats";
+import { Button } from "@mui/material";
+import { getSession } from "next-auth/react";
+import { Suspense, useEffect } from "react";
 
-interface ChatHistoryProps {
-  userId?: string;
-}
+export function ChatHistory() {
+  const { loadChats } = useChats();
 
-export async function ChatHistory({ userId }: ChatHistoryProps) {
+  useEffect(() => {
+    async function fetchSessionAndLoadChats() {
+      const session = await getSession();
+      if (session?.user?.id) {
+        loadChats(session.user.id);
+      }
+    }
+
+    fetchSessionAndLoadChats();
+  }, [loadChats]);
+
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col ">
       <div className="flex items-center justify-between p-4">
         <h4 className="text-sm font-medium">Chat History</h4>
+        <Button>
+          <IconRefresh />
+        </Button>
       </div>
       <Suspense
         fallback={
@@ -23,7 +41,7 @@ export async function ChatHistory({ userId }: ChatHistoryProps) {
           </div>
         }
       >
-        <SidebarList userId={userId} />
+        <SidebarList />
       </Suspense>
     </div>
   );

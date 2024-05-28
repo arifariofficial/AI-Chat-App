@@ -43,6 +43,7 @@ async function submitUserMessage(content: string) {
 
   const decoder = new TextDecoder();
 
+  // Function to update the stream gradually
   const updateStreamGradually = async () => {
     for (const chunk of chunks) {
       const bytes = new TextEncoder().encode(chunk + " ");
@@ -141,6 +142,7 @@ export const AI = createAI<AIState, UIState>({
   },
 });
 
+// Function to map AI state to UI state
 export const getUIStateFromAIState = (aiState: Chat) => {
   return aiState.messages
     .filter((message) => message.role !== "system")

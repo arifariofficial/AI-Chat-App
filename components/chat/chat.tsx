@@ -6,10 +6,8 @@ import { Session } from "next-auth";
 import { EmptyScreen } from "./empty-screen";
 import { ChatPanel } from "./chat-panel";
 import { useAIState, useUIState } from "ai/rsc";
-import { toast } from "sonner";
 import { useLocalStorage } from "@lib/hooks/use-local-storage";
 import { ChatDisplay } from "./chat-display";
-import ChatModal from "./chat-modal";
 import { useScrollAnchor } from "@lib/hooks/use-scroll-anchor";
 import { Message } from "@lib/types";
 
@@ -17,11 +15,9 @@ export interface ChatProps extends React.ComponentProps<"div"> {
   initialMessages?: Message[];
   id?: string;
   session?: Session;
-  missingKeys: string[];
 }
 
-function Chat({ id, session, missingKeys }: ChatProps) {
-  const [showModal, setShowModal] = useState(false);
+function Chat({ id, session }: ChatProps) {
   const router = useRouter();
   const path = usePathname();
   const [input, setInput] = useState("");
@@ -49,36 +45,8 @@ function Chat({ id, session, missingKeys }: ChatProps) {
     setNewChatId(id);
   }, [id, setNewChatId]);
 
-  useEffect(() => {
-    missingKeys.map((key) => {
-      toast.error(`Missing ${key} environment variable!`);
-    });
-  }, [missingKeys]);
-
-  useEffect(() => {
-    let timer: NodeJS.Timeout | undefined;
-    if (!session) {
-      timer = setTimeout(() => {
-        setShowModal(true);
-      }, 400);
-    }
-    return () => clearTimeout(timer);
-  }, [session]);
-
-  const handleModalClose = () => {
-    setShowModal(false);
-    router.push("/auth/login");
-  };
-
   const { messagesRef, scrollRef, visibilityRef, isAtBottom, scrollToBottom } =
     useScrollAnchor();
-
-  // Show modal if user is not logged in
-  if (!session) {
-    return (
-      <ChatModal showModal={showModal} handleModalClose={handleModalClose} />
-    );
-  }
 
   return (
     <div className="mx-auto flex w-full max-w-screen-md" ref={scrollRef}>

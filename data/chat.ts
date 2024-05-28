@@ -6,33 +6,6 @@ import { auth } from "@/auth";
 import prisma from "@lib/prisma";
 import redis from "@lib/redis";
 
-export async function getChats(userId?: string | null) {
-  if (!userId) {
-    console.log("No user ID provided.");
-    return [];
-  }
-
-  try {
-    const cacheKey = `user:${userId}:chats`;
-    const cachedChats = await redis.get(cacheKey);
-    if (cachedChats) {
-      return JSON.parse(cachedChats);
-    }
-
-    const chats = await prisma.chat.findMany({
-      where: { userId },
-      include: { messages: true },
-      orderBy: { createdAt: "desc" },
-    });
-
-    await redis.set(cacheKey, JSON.stringify(chats), "EX", 60 * 5); // Cache for 5 minutes
-    return chats;
-  } catch (error) {
-    console.error("Error retrieving chats:", error);
-    return [];
-  }
-}
-
 export async function removeChat({ id, path }: { id: string; path: string }) {
   const session = await auth();
 
@@ -68,28 +41,21 @@ export async function clearChats() {
       error: "Unauthorized",
     };
   }
-
-  // Retrieve all chat IDs for the user to clear them from cache
   const userChats = await prisma.chat.findMany({
     where: { userId: session.user.id },
     select: { id: true }, // Only fetch the chat IDs
   });
 
-  // Deleting chats from the database
   await prisma.chat.deleteMany({
     where: { userId: session.user.id },
   });
 
-  // Clear each chat from Redis
   const chatKeys = userChats.map((chat) => `chat:${chat.id}`);
   if (chatKeys.length > 0) {
     await redis.del(chatKeys);
   }
-
-  // Also clear the cached list of chats for the user
   await redis.del(`user:${session.user.id}:chats`);
 
-  // Revalidate paths if needed (specific to your framework or use case)
   revalidatePath("/");
   return redirect("/");
 }
@@ -160,11 +126,4 @@ export async function shareChat(id: string) {
 
 export async function refreshHistory(path: string) {
   redirect(path);
-}
-
-export async function getMissingKeys() {
-  const keysRequired = ["OPENAI_API_KEY"];
-  return keysRequired
-    .map((key) => (process.env[key] ? "" : key))
-    .filter((key) => key !== "");
 }

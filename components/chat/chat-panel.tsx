@@ -7,8 +7,8 @@ import { PromptForm } from "./prompt-form";
 import { AI } from "@lib/chat/actions";
 import { nanoid } from "@lib/utils";
 import { useAppDispatch } from "@lib/store/hook";
-import { decrement, fetchBalance } from "@lib/store/balanceSlice";
-import { useEffect, useState } from "react";
+import { decrement } from "@lib/store/balanceSlice";
+import { useState } from "react";
 import { ChatShareDialog } from "./chat-share-dialog";
 import { shareChat } from "@data/chat";
 import { ButtonScrollToBottom } from "./button-scroll-to-bottom";
@@ -37,10 +37,6 @@ export function ChatPanel({
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchBalance());
-  }, [dispatch]);
 
   const exampleMessages = [
     {

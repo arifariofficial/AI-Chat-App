@@ -1,19 +1,30 @@
-import { cache } from "react";
+"use client";
+
+import React, { useEffect } from "react";
 import { ClearHistory } from "./clear-history";
 import { SidebarItems } from "./sidebar-items";
-import { clearChats, getChats } from "@data/chat";
+import { useChats } from "@lib/hooks/useChats";
+import { clearChats } from "@data/chat";
+import { useSession } from "next-auth/react";
 
-interface SidebarListProps {
-  userId?: string;
-  children?: React.ReactNode;
-}
+export function SidebarList() {
+  const { chats, loadChats } = useChats();
 
-const loadChats = cache(async (userId?: string) => {
-  return await getChats(userId);
-});
+  const { data: session } = useSession();
 
-export async function SidebarList({ userId }: SidebarListProps) {
-  const chats = await loadChats(userId);
+  useEffect(() => {
+    async function fetchSessionAndLoadChats() {
+      if (session?.user.id) {
+        loadChats(session.user.id);
+      }
+    }
+
+    fetchSessionAndLoadChats();
+  }, [loadChats, session?.user.id]);
+
+  if (!chats || !session) {
+    return null;
+  }
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
