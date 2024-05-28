@@ -10,7 +10,7 @@ services:
       - .:/app
       - /app/node_modules
     environment:
-      DATABASE_URL: "postgresql://sipe:Sipe123!@postgres:5432/sipedb"
+      DATABASE_URL: ${DOCKER_POSTGRES_URL}
     networks:
       - sipe-network
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
