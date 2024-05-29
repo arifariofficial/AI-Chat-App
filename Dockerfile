@@ -55,18 +55,14 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Copy entrypoint script and make it executable
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+# Copy Prisma schema
+COPY --from=builder /app/prisma ./prisma
 
 # Switch to non-root user
 USER nextjs
 
 # Expose the application port
 EXPOSE 3000
-
-# Set the default command to run the entrypoint script
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 # Set the default command to run the application
 CMD HOSTNAME="0.0.0.0" node server.js
