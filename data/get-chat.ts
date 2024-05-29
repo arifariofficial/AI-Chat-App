@@ -12,7 +12,7 @@ export async function getChats(userId?: string | null): Promise<Chat[]> {
   const cacheKey = `user:${userId}:chats`;
 
   try {
-    const cachedChats = await redis.get(cacheKey);
+    const cachedChats = await redis?.get(cacheKey);
     if (cachedChats) {
       const parsedChats = JSON.parse(cachedChats);
       return parsedChats.map((chat: Chat) => ({
@@ -40,7 +40,7 @@ export async function getChats(userId?: string | null): Promise<Chat[]> {
       })),
     }));
 
-    await redis.set(cacheKey, JSON.stringify(serializedChats), "EX", 5); // Cache for 5 minutes
+    await redis?.set(cacheKey, JSON.stringify(serializedChats), "EX", 5); // Cache for 5 minutes
 
     return chats;
   } catch (error) {
@@ -84,7 +84,7 @@ async function fetchChatFromDB(id: string, userId: string) {
     }
 
     const chatKey = `chat:${id}`;
-    await redis.hset(chatKey, "details", JSON.stringify(chat));
+    await redis?.hset(chatKey, "details", JSON.stringify(chat));
 
     return chat;
   } catch (error) {
@@ -95,7 +95,7 @@ async function fetchChatFromDB(id: string, userId: string) {
 
 async function getCachedChat(chatKey: string) {
   try {
-    const cachedData = await redis.hget(chatKey, "details");
+    const cachedData = await redis?.hget(chatKey, "details");
     if (cachedData) {
       try {
         return JSON.parse(cachedData);

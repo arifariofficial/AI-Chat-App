@@ -22,8 +22,8 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
     }
 
     await prisma.chat.delete({ where: { id } });
-    await redis.del(`chat:${id}`); // Invalidate cache
-    await redis.del(`user:${session.user.id}:chats`); // Invalidate user's chat list cache
+    await redis?.del(`chat:${id}`); // Invalidate cache
+    await redis?.del(`user:${session.user.id}:chats`); // Invalidate user's chat list cache
 
     revalidatePath("/");
     return revalidatePath(path);
@@ -52,9 +52,9 @@ export async function clearChats() {
 
   const chatKeys = userChats.map((chat) => `chat:${chat.id}`);
   if (chatKeys.length > 0) {
-    await redis.del(chatKeys);
+    await redis?.del(chatKeys);
   }
-  await redis.del(`user:${session.user.id}:chats`);
+  await redis?.del(`user:${session.user.id}:chats`);
 
   revalidatePath("/");
   return redirect("/");
@@ -62,7 +62,7 @@ export async function clearChats() {
 
 export async function getSharedChat(id: string) {
   const cacheKey = `sharedChat:${id}`;
-  const cachedChat = await redis.get(cacheKey);
+  const cachedChat = await redis?.get(cacheKey);
 
   if (cachedChat) {
     const chat = JSON.parse(cachedChat);
@@ -82,7 +82,7 @@ export async function getSharedChat(id: string) {
   }
 
   // Cache the chat if it has a sharePath and was fetched from the database
-  await redis.set(cacheKey, JSON.stringify(chat), "EX", 60 * 30); // Cache for 30 minutes
+  await redis?.set(cacheKey, JSON.stringify(chat), "EX", 60 * 30); // Cache for 30 minutes
 
   return chat;
 }
@@ -116,10 +116,10 @@ export async function shareChat(id: string) {
 
   // Update the cache with the new chat data
   const cacheKey = `chat:${id}`;
-  await redis.set(cacheKey, JSON.stringify(updatedChat), "EX", 60 * 30); // Cache for 30 minutes
+  await redis?.set(cacheKey, JSON.stringify(updatedChat), "EX", 60 * 30); // Cache for 30 minutes
   // Optionally, update a shared chats listing if applicable
   const sharedChatsKey = `sharedChats:${session.user.id}`;
-  await redis.del(sharedChatsKey); // Invalidate the cache of shared chats list
+  await redis?.del(sharedChatsKey); // Invalidate the cache of shared chats list
 
   return updatedChat;
 }

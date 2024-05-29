@@ -7,7 +7,7 @@ export async function getBalance(userId: string) {
   const cacheKey = `user:balance:${userId}`;
 
   // Try to get the balance from Redis cache
-  const cachedBalance = await redis.get(cacheKey);
+  const cachedBalance = await redis?.get(cacheKey);
   if (cachedBalance !== null) {
     return { balance: Number(cachedBalance) };
   }
@@ -25,7 +25,7 @@ export async function getBalance(userId: string) {
   const balance = previousBalance.balance;
 
   // Save the balance to Redis cache for 5 minutes
-  await redis.setex(cacheKey, 5, balance.toString());
+  await redis?.setex(cacheKey, 5, balance.toString());
 
   return { balance };
 }
@@ -58,7 +58,7 @@ export async function checkBalance(userId: string) {
 
   // Try to get the balance from Redis cache
   let balance: number | null = null;
-  const cachedBalance = await redis.get(cacheKey);
+  const cachedBalance = await redis?.get(cacheKey);
 
   if (cachedBalance !== null) {
     balance = Number(cachedBalance);
@@ -76,7 +76,7 @@ export async function checkBalance(userId: string) {
     balance = previousBalance.balance;
 
     // Store the balance in Redis cache with a short expiration time (e.g., 5 minutes)
-    await redis.setex(cacheKey, 300, balance.toString());
+    await redis?.setex(cacheKey, 300, balance.toString());
   }
 
   // Check if the balance is sufficient
@@ -94,7 +94,7 @@ export async function checkBalance(userId: string) {
   });
 
   // Invalidate and update the cache with the new balance
-  await redis.setex(cacheKey, 300, updatedUser.balance.toString());
+  await redis?.setex(cacheKey, 300, updatedUser.balance.toString());
 
   return true;
 }

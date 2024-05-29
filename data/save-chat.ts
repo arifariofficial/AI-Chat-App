@@ -73,12 +73,12 @@ export async function saveChat(chat: Chat) {
       });
 
       const chatKey = `chat:${chat.id}`;
-      const pipeline = redis.pipeline();
-      pipeline.hset(chatKey, "details", JSON.stringify(updatedChat));
-      await redis.expire(chatKey, 5);
-      pipeline.zadd(`user:chat:${chat.userId}`, Date.now(), chatKey);
+      const pipeline = redis?.pipeline();
+      pipeline?.hset(chatKey, "details", JSON.stringify(updatedChat));
+      await redis?.expire(chatKey, 5);
+      pipeline?.zadd(`user:chat:${chat.userId}`, Date.now(), chatKey);
 
-      await pipeline.exec();
+      await pipeline?.exec();
     });
   } catch (error) {
     console.error(`Failed to save chat: ${error}`);
