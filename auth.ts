@@ -4,7 +4,6 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "./lib/prisma";
 import { getUserById } from "./data/user";
 import { getTwoFactorConfirmationByUserId } from "./data/two-factor-confirmation";
-import redis from "@lib/redis";
 
 declare module "next-auth" {
   interface Session {
@@ -57,33 +56,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           session.user.name = existingUser.name;
           session.user.balance = existingUser.balance;
         }
-        await redis.set(
-          `session:${token.sub}`,
-          JSON.stringify(session),
-          "EX",
-          24 * 60 * 60,
-        ); // 24 hours expiration
       }
       return session;
     },
+    async jwt({ token }) {
+      if (!token.sub) return token;
 
-    async jwt({ token, user }) {
-      if (user) {
-        token.sub = user.id;
-      }
-      if (token.sub) {
-        const redisSession = await redis.get(`session:${token.sub}`);
-        if (redisSession) {
-          const parsedSession = JSON.parse(redisSession);
-          token = {
-            ...token,
-            ...parsedSession.user,
-          };
-        }
-      }
       return token;
     },
   },
+
   events: {
     async linkAccount({ user }) {
       await prisma.user.update({

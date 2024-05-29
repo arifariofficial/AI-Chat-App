@@ -1,22 +1,32 @@
-version: "3.8"
 services:
-  frontend-dev:
+  frontend:
     build:
       context: .
-      dockerfile: dev.Dockerfile
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    volumes:
-      - .:/app
-      - /app/node_modules
     environment:
-      DATABASE_URL: ${DOCKER_POSTGRES_URL}
+      DATABASE_URL: ${DATABASE_URL}
+      NODE_ENV: production
+      AUTH_URL: http://localhost:3000
     networks:
       - sipe-network
-    entrypoint: ["/usr/local/bin/entrypoint.sh"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
 
   postgres:
     image: postgres:latest
+    env_file:
+      - .env
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -28,6 +38,16 @@ services:
     networks:
       - sipe-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
 
   adminer:
     image: adminer
@@ -36,6 +56,11 @@ services:
       - 8080:8080
     networks:
       - sipe-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 256M
 
   redis:
     image: redis:latest
@@ -44,6 +69,11 @@ services:
     networks:
       - sipe-network
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 256M
 
   nginx:
     build:
@@ -57,6 +87,11 @@ services:
     networks:
       - sipe-network
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
 
 networks:
   sipe-network:

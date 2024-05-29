@@ -29,3 +29,7 @@ docker-compose.yml
 # Git-related files
 .git
 .gitignore
+
+
+# Build outputs
+build
