@@ -34,7 +34,6 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({
   const loadChats = useCallback(async (userId: string) => {
     try {
       const chatsData = await getChats(userId);
-      console.log(chatsData);
       setChats(chatsData as Chat[]);
     } catch (error) {
       console.error("Failed to load chats:", error);

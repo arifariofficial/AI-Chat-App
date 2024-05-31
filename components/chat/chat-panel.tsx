@@ -10,8 +10,8 @@ import { useAppDispatch } from "@lib/store/hook";
 import { decrement } from "@lib/store/balanceSlice";
 import { useState } from "react";
 import { ChatShareDialog } from "./chat-share-dialog";
-import { shareChat } from "@data/chat";
 import { ButtonScrollToBottom } from "./button-scroll-to-bottom";
+import { shareChat } from "@data/share-chat";
 
 export interface ChatPanelProps {
   id?: string;
@@ -57,8 +57,8 @@ export function ChatPanel({
         isAtBottom={isAtBottom}
         scrollToBottom={scrollToBottom}
       />
-      <div className="mx-auto flex max-w-3xl flex-col bg-transparent sm:px-4">
-        <div className="mb-4 grid w-full grid-cols-2 gap-4 bg-background px-6 text-center">
+      <div className="mx-auto flex max-w-3xl flex-col bg-transparent sm:pr-4">
+        <div className="grid w-full grid-cols-2 bg-transparent px-6 text-center sm:mb-4 sm:gap-4">
           {messages.length === 0 &&
             exampleMessages.map((example, index) => (
               <div
@@ -99,8 +99,8 @@ export function ChatPanel({
         </div>
 
         {messages?.length >= 2 ? (
-          <div className="flex h-12 items-center justify-center">
-            <div className="flex space-x-2 ">
+          <div className="hidden h-12 items-center justify-center">
+            <div className="flex space-x-2">
               {id && title ? (
                 <>
                   <Button

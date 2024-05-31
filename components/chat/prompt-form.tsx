@@ -87,7 +87,7 @@ export function PromptForm({
         dispatch(decrement());
       }}
     >
-      <div className="w-full resize-none  sm:text-sm">
+      <div className="w-full resize-none sm:text-sm">
         <TextField
           id="message"
           name="message"
@@ -173,6 +173,7 @@ export function PromptForm({
               "& .MuiInputBase-input": {
                 padding: "2px 16px",
                 marginBottom: "14px",
+                overflowY: "auto",
               },
             },
             "& .MuiInputAdornment-positionEnd": {

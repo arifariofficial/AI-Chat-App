@@ -1,3 +1,5 @@
+"use server";
+
 import { auth } from "@auth";
 import axios from "axios";
 import { checkBalance } from "../data/balance";
@@ -15,7 +17,6 @@ export async function getSipeResponse(content: string) {
   const session = await auth();
 
   if (!session || !session.user || typeof session.user.id !== "string") {
-    console.log("No valid session or user ID available.");
     return "Session invalid or user ID missing.";
   }
 

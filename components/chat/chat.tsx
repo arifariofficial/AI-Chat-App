@@ -10,6 +10,7 @@ import { useLocalStorage } from "@lib/hooks/use-local-storage";
 import { ChatDisplay } from "./chat-display";
 import { useScrollAnchor } from "@lib/hooks/use-scroll-anchor";
 import { Message } from "@lib/types";
+import { useChats } from "@lib/hooks/useChats";
 
 export interface ChatProps extends React.ComponentProps<"div"> {
   initialMessages?: Message[];
@@ -23,7 +24,7 @@ function Chat({ id, session }: ChatProps) {
   const [input, setInput] = useState("");
   const [messages] = useUIState();
   const [aiState] = useAIState();
-
+  const { loadChats } = useChats();
   const [, setNewChatId] = useLocalStorage("newChatId", id);
 
   useEffect(() => {
@@ -37,9 +38,9 @@ function Chat({ id, session }: ChatProps) {
   useEffect(() => {
     const messagesLength = aiState.messages?.length;
     if (messagesLength === 2) {
-      router.refresh();
+      session?.user.id && loadChats(session?.user?.id);
     }
-  }, [aiState.messages, router]);
+  }, [aiState.messages, loadChats, router, session?.user?.id]);
 
   useEffect(() => {
     setNewChatId(id);

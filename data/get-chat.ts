@@ -55,12 +55,6 @@ export async function getChat(id: string, userId: string) {
     const chat = await getCachedChat(chatKey);
     if (chat && chat.userId === userId) {
       return chat;
-    } else {
-      console.log(
-        `Cache miss or user ID mismatch for chat ${id}. User ID from cache: ${
-          chat ? chat.userId : "No chat"
-        }`,
-      );
     }
   } catch (error) {
     console.error(`Failed to retrieve chat from cache for ${id}:`, error);

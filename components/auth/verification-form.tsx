@@ -48,7 +48,7 @@ export default function VerificationForm() {
     if (token) {
       onSubmit();
     } else {
-      setError("No verification token found in URL.");
+      setError("Token found");
     }
   }, [token, onSubmit]);
 

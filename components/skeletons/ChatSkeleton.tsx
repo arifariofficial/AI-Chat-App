@@ -50,12 +50,12 @@ const InnerMessage = styled.div`
 
 const ChatPageSkeleton = () => {
   return (
-    <main className="inset-x-0 mx-auto flex h-[calc(100vh-70px)] w-screen max-w-screen-lg bg-transparent">
+    <div className="absolute inset-x-0 top-0 mx-auto flex h-[calc(100dvh-4rem)] w-screen max-w-screen-lg bg-transparent sm:h-[calc(100vh-70px)]">
       <div className="flex size-full animate-pulse flex-col justify-end rounded-2xl px-4 pb-4">
         <ChatDisplay />
         <ChatInput />
       </div>
-    </main>
+    </div>
   );
 };
 

@@ -32,7 +32,14 @@ async function submitUserMessage(content: string) {
     return newState;
   });
 
-  const fullResponse = await getSipeResponse(content);
+  // Get the updated AI state to include in the API request
+  const currentState = getAIState();
+
+  const fullConversation = currentState.messages
+    .map((msg: Message) => msg.content)
+    .join("\n");
+
+  const fullResponse = await getSipeResponse(fullConversation);
 
   const chunks = fullResponse.split(" ");
   const textStream = createStreamableValue("");
@@ -53,20 +60,16 @@ async function submitUserMessage(content: string) {
     }
     textStream.done();
     // Adding the sipe-api message to the aiState
-    aiState.update((prevState) => {
-      const newState: AIState = {
-        ...prevState,
-        messages: [
-          ...prevState.messages,
-          {
-            id: nanoid(),
-            role: "assistant",
-            content: fullResponse,
-          } as Message,
-        ],
-      };
-
-      return newState;
+    aiState.done({
+      ...aiState.get(),
+      messages: [
+        ...aiState.get().messages,
+        {
+          id: nanoid(),
+          role: "assistant",
+          content: fullResponse,
+        },
+      ],
     });
   };
 

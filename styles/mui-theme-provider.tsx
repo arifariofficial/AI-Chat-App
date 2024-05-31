@@ -51,7 +51,7 @@ const MUIThemeProvider = ({ children }: { children: React.ReactNode }) => {
                     mode === "dark"
                       ? "var(--border-dark)"
                       : "var(--border-light)",
-                  WebkitBoxShadow: `0 0 0 100px ${mode === "dark" ? "#303030" : "#f5f5f5"} inset`,
+                  WebkitBoxShadow: `0 0 0 100px ${mode === "dark" ? "#1f1f1f" : "#ffffff"} inset`,
                   WebkitTextFillColor:
                     mode === "dark"
                       ? "var(--foreground-dark)"

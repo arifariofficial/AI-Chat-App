@@ -51,3 +51,12 @@ export const getMessageFromCode = (resultCode: string) => {
 export const absoluteUrl = (path: string) => {
   return new URL(`${process.env.NEXT_PUBLIC_APP_URL}${path}`).toString();
 };
+
+export function formatDate(input: string | number | Date): string {
+  const date = new Date(input);
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+}

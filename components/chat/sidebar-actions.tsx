@@ -24,6 +24,8 @@ import {
 } from "@/components/ui/tooltip";
 import { IconShare, IconSpinner, IconTrash } from "@components/ui/icons";
 import { ChatShareDialog } from "./chat-share-dialog";
+import { useChats } from "@lib/hooks/useChats";
+import { useSession } from "next-auth/react";
 
 interface SidebarActionsProps {
   chat: Chat;
@@ -39,6 +41,8 @@ export function SidebarActions({
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
   const [shareDialogOpen, setShareDialogOpen] = React.useState(false);
   const [isRemovePending, startRemoveTransition] = React.useTransition();
+  const { loadChats } = useChats();
+  const { data: session } = useSession();
 
   return (
     <>
@@ -111,6 +115,7 @@ export function SidebarActions({
                   router.refresh();
                   router.push("/chat");
                   toast.success("Chat deleted");
+                  loadChats(session?.user?.id ?? "");
                 });
               }}
             >

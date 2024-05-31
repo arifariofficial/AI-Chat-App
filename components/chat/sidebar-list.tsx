@@ -40,7 +40,11 @@ export function SidebarList() {
         )}
       </div>
       <div className="flex items-center justify-between p-4">
-        <ClearHistory clearChats={clearChats} isEnabled={chats?.length > 0} />
+        <ClearHistory
+          session={session}
+          clearChats={clearChats}
+          isEnabled={chats?.length > 0}
+        />
       </div>
     </div>
   );

@@ -17,8 +17,6 @@ import {
   InputAdornment,
   TextField,
 } from "@mui/material";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { getMessageFromCode } from "@lib/utils";
 
 import { login } from "@actions/login";
@@ -30,6 +28,7 @@ import {
 import { getSession } from "next-auth/react";
 import { FormSucccess } from "@components/form-success";
 import { Button } from "@components/ui/button";
+import { VisibilityIcon, VisibilityOffIcon } from "@components/ui/icons";
 
 interface LoginFormProps {
   headerLabel: string;
@@ -179,7 +178,7 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
                     <FormItem>
                       <FormControl>
                         <TextField
-                          className="border border-border/30"
+                          className="border border-border/30 bg-background"
                           disabled={isPending}
                           margin="normal"
                           required
@@ -216,9 +215,9 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
                                   onClick={() => setShowPassword(!showPassword)}
                                 >
                                   {showPassword ? (
-                                    <VisibilityIcon className="text-foreground" />
+                                    <VisibilityIcon />
                                   ) : (
-                                    <VisibilityOffIcon className="text-foreground" />
+                                    <VisibilityOffIcon />
                                   )}
                                 </IconButton>
                               </InputAdornment>

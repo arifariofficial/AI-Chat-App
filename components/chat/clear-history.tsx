@@ -17,18 +17,25 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { IconSpinner } from "@components/ui/icons";
+import { useRouter } from "next/navigation";
+import { useChats } from "@lib/hooks/useChats";
+import { Session } from "next-auth";
 
 interface ClearHistoryProps {
   isEnabled: boolean;
   clearChats: () => ServerActionResult<void>;
+  session?: Session;
 }
 
 export function ClearHistory({
   isEnabled = false,
   clearChats,
+  session,
 }: ClearHistoryProps) {
   const [open, setOpen] = React.useState(false);
   const [isPending, startTransition] = React.useTransition();
+  const router = useRouter();
+  const { loadChats } = useChats();
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
@@ -60,6 +67,8 @@ export function ClearHistory({
                 }
 
                 setOpen(false);
+                router.push("/chat");
+                loadChats(session?.user?.id ?? "");
               });
             }}
           >

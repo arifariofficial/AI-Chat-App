@@ -8,23 +8,19 @@ import { Session } from "next-auth";
 
 const NavBar = ({ session }: { session: Session | null }) => {
   return (
-    <nav className="sticky top-0 z-50 rounded-b-md border-b border-b-border/20 bg-primary/80 text-background">
+    <nav className="sticky top-0 z-50 rounded-b-md border-b border-b-border/20 bg-primary text-foregroundNav">
       <div className="mx-auto flex  h-14 max-w-screen-2xl justify-between">
         <section className="flex items-center">
           <Link href={`/`}>
-            <div className="flex gap-2 px-4 text-2xl font-extrabold tracking-wide text-foregroundNav">
-              <LocalLibraryIcon
-                fontSize="large"
-                className="text-foregroundNav"
-                sx={{ backgroundColor: "inherit" }}
-              />
-              <p className="mt-1 text-foregroundNav">SIPE</p>
+            <div className="flex gap-2 px-4 text-2xl font-extrabold tracking-wide">
+              <LocalLibraryIcon fontSize="large" aria-label="Library Icon" />
+              <p className="mt-1">SIPE</p>
             </div>
           </Link>
         </section>
         <section className="mr-1 flex items-center justify-center text-xl font-semibold hover:opacity-90  ">
           <div className="flex h-full flex-row items-center p-px">
-            {session && <Balance session={session} />}
+            {session?.user && <Balance session={session} />}
             <ModeToggle />
             <UserButton session={session} />
           </div>
