@@ -66,9 +66,12 @@ export default function UserButtonDesktop({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem className="flex size-full hover:cursor-pointer">
+              <DropdownMenuItem
+                className="flex size-full hover:cursor-pointer"
+                asChild
+              >
                 <Link
-                  className="flex h-[35px] w-full items-center justify-evenly"
+                  className="flex h-[48px] w-full items-center justify-evenly"
                   href="/profile"
                 >
                   <p>Account</p>
