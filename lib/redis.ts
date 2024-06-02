@@ -1,15 +1,16 @@
-import { Redis } from "ioredis";
-import dotenv from "dotenv";
+import Redis from "ioredis";
 
-dotenv.config();
+const isProduction = process.env.NODE_ENV === "production";
+const redisUrl = isProduction
+  ? process.env.REDIS_URL
+  : "redis://localhost:6379";
 
-const redis = new Redis({
-  host: process.env.REDIS_HOST || "localhost",
-  port: Number(process.env.REDIS_PORT) || 6379, // Explicitly parse as number
-});
+let redis;
 
-redis.on("error", (err) => {
-  console.error("Redis connection error:", err);
-});
+if (redisUrl) {
+  redis = new Redis(redisUrl);
+} else {
+  console.error("REDIS_URL environment variable is not set");
+}
 
 export default redis;
