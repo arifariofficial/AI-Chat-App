@@ -47,15 +47,15 @@ export default function Security() {
   };
 
   return (
-    <main className="text-foreground">
-      <div className="mb-10">
+    <main className="flex size-full flex-col text-foreground">
+      <div className="mb-10 h-fit w-full">
         <h1 className="mb-1 text-2xl font-semibold">Security</h1>
         <p>Manage your security settings</p>
       </div>
       {error && <div className="mb-2 text-destructive-foreground">{error}</div>}
-      <form onSubmit={(e) => e.preventDefault()}>
-        <section className="flex justify-between">
-          <span className="flex flex-row text-base  font-semibold text-foreground">
+      <form onSubmit={(e) => e.preventDefault()} className="flex w-full">
+        <section className="flex w-full justify-between">
+          <div className="flex flex-row text-base  font-semibold text-foreground">
             Two-Factor Authentication
             <Tooltip>
               <TooltipTrigger asChild>
@@ -71,7 +71,7 @@ export default function Security() {
                 </p>
               </TooltipContent>
             </Tooltip>
-          </span>
+          </div>
           <FormControlLabel
             control={
               <Switch
@@ -83,7 +83,7 @@ export default function Security() {
               />
             }
             label={
-              <>
+              <div className="-mr-6">
                 {isTwoFactorEnabled ? (
                   loading ? (
                     <IconSpinner />
@@ -93,7 +93,7 @@ export default function Security() {
                 ) : (
                   "Disabled"
                 )}
-              </>
+              </div>
             }
           />
         </section>

@@ -31,6 +31,7 @@ export async function getSipeResponse(content: string) {
     { chat: content },
     { headers: { Authorization: basicAuth } },
   );
+
   const fullText = response.data.chat;
 
   return fullText;

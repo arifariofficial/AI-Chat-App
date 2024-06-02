@@ -14,9 +14,10 @@ import { useEffect, useState } from "react";
 
 interface BalanceButtonProps {
   session: Session | null;
+  className?: string;
 }
 
-export default function Balance({ session }: BalanceButtonProps) {
+export default function Balance({ session, className }: BalanceButtonProps) {
   const dispatch = useAppDispatch();
   const balance = useAppSelector((state) => state.balance.balance);
   const [loading, setLoading] = useState(true);
@@ -45,15 +46,17 @@ export default function Balance({ session }: BalanceButtonProps) {
   }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Link href="/profile/balance" className="h-full">
-          <Button variant="nav" className="h-full">
-            <p className="hidden sm:block">Balance:</p>
-            <p className="mx-1">{balance}€</p>
-          </Button>
-        </Link>
-      </DropdownMenuTrigger>
-    </DropdownMenu>
+    <div className={className}>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Link href="/profile/balance" className="h-full">
+            <Button variant="nav" className="h-full">
+              <p className="hidden sm:block">Balance:</p>
+              <p className="mx-1">{balance}€</p>
+            </Button>
+          </Link>
+        </DropdownMenuTrigger>
+      </DropdownMenu>
+    </div>
   );
 }

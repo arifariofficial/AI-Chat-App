@@ -8,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default async function ProfilePage() {
-  return (
-    <div>
-      <Account />
-    </div>
-  );
+  return <Account />;
 }

@@ -50,11 +50,11 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <SessionProvider basePath="/api/auth" session={session}>
-            <div className="flex h-screen min-h-screen flex-col ">
-              <NavBar session={session} />
-              <main className="flex h-full flex-1  flex-col">{children}</main>
+            <main className="relative flex size-full flex-col">
+              <NavBar />
+              {children}
               <ShadToaster />
-            </div>
+            </main>
           </SessionProvider>
         </Providers>
       </body>

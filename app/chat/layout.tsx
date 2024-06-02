@@ -36,17 +36,17 @@ export default function ChatLayout({ children }: ChatLayoutProps) {
   }
 
   return (
-    <div className="mx-auto flex h-[calc(100dvh-1rem)] w-full flex-row sm:h-full">
+    <div className="mx-auto flex size-full flex-row">
       <div
         className={`hidden items-center bg-muted duration-300 ease-in-out md:block ${isSidebarOpen ? "w-64 md:w-72 lg:w-80" : "w-0"} overflow-hidden `}
       >
         <SidebarDesktop />
       </div>
-      <div className={`flex size-full flex-row duration-300 ease-in-out`}>
+      <div className="flex w-full flex-row duration-300 ease-in-out">
         <div className="hidden items-center border-l border-border/20 md:flex">
           <SidebarToggle />
         </div>
-        <div className="flex w-full">{children}</div>
+        <div className="flex size-full">{children}</div>
       </div>
     </div>
   );

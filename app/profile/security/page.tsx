@@ -8,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function SecurityPage() {
-  return (
-    <div>
-      <Security />
-    </div>
-  );
+  return <Security />;
 }

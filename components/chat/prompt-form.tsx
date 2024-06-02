@@ -53,6 +53,7 @@ export function PromptForm({
 
   return (
     <form
+      className="sm:mt-4"
       ref={formRef}
       onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -159,29 +160,6 @@ export function PromptForm({
                 </Tooltip>
               </InputAdornment>
             ),
-          }}
-          sx={{
-            color: "var(--foreground)",
-
-            "& .MuiInputBase-root": {
-              minHeight: "60px",
-              display: "flex",
-              alignItems: "end",
-              borderRadius: "6px",
-              py: 0,
-
-              "& .MuiInputBase-input": {
-                padding: "2px 16px",
-                marginBottom: "14px",
-                overflowY: "auto",
-              },
-            },
-            "& .MuiInputAdornment-positionEnd": {
-              marginBottom: "29px",
-            },
-            "& .MuiInputAdornment-positionStart": {
-              marginBottom: "29px",
-            },
           }}
         />
       </div>

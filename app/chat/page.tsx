@@ -1,7 +1,7 @@
 import { auth } from "@auth";
 import Chat from "@components/chat/chat";
 import { AI } from "@lib/chat/actions";
-import { nanoid } from "@lib/utils";
+import { nanoid } from "nanoid";
 import { Metadata } from "next";
 import { Session } from "next-auth";
 

@@ -96,13 +96,13 @@ export default function Account() {
   };
 
   return (
-    <main className="rounded-lg  bg-background text-foreground">
-      <div className="mb-10">
+    <main className="mx-auto flex size-full flex-col items-center rounded-lg  bg-background text-foreground">
+      <div className="mb-10 w-full">
         <h1 className="mb-1 text-2xl font-semibold">Account</h1>
         <p>Manage your account settings</p>
       </div>
 
-      <div>
+      <div className="w-full">
         <section className="mb-10">
           <h2 className="border-b border-border text-base font-semibold">
             Profile

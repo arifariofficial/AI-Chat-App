@@ -1,9 +1,15 @@
 import { StreamableValue, readStreamableValue } from "ai/rsc";
 import { useEffect, useState } from "react";
 
-export const useStreamableText = (content: string | StreamableValue<string>) => {
+export const useStreamableText = (
+  content: string | StreamableValue<string>,
+) => {
   const [rawContent, setRawContent] = useState(
-    typeof content === "string" ? content : ""
+    typeof content === "string" ? content : "",
+  );
+
+  const [isStreamingDone, setIsStreamingDone] = useState(
+    typeof content === "string",
   );
 
   useEffect(() => {
@@ -15,9 +21,10 @@ export const useStreamableText = (content: string | StreamableValue<string>) => 
             setRawContent((value = value + delta));
           }
         }
+        setIsStreamingDone(true);
       }
     })();
   }, [content]);
 
-  return rawContent;
+  return { text: rawContent, isStreamingDone };
 };

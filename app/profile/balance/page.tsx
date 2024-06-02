@@ -8,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function SubscriptionPage() {
-  return (
-    <div>
-      <Balance />
-    </div>
-  );
+  return <Balance />;
 }

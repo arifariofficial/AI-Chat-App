@@ -3,7 +3,7 @@ import { Button } from "@components/ui/button";
 
 const Home = () => {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-1">
+    <div className="flex h-screen flex-col items-center justify-center gap-1">
       <Link href="/query" passHref>
         <Button variant="outline" className="w-[300px]">
           Quick query

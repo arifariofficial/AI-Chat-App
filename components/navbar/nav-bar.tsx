@@ -1,12 +1,17 @@
 import Link from "next/link";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
-import UserButton from "./user-button";
 import Balance from "./balance-button";
-
 import { ModeToggle } from "@components/mode-toggle";
-import { Session } from "next-auth";
+import { SidebarMobile } from "@components/chat/sidebar-mobile";
+import { ChatHistory } from "@components/chat/chat-history";
+import { auth } from "@auth";
+import UserButtonDesktop from "./user-button-desktop";
+import UserButtonMobile from "./user-button-mobile";
+import { Button } from "@components/ui/button";
 
-const NavBar = ({ session }: { session: Session | null }) => {
+const NavBar = async () => {
+  const session = await auth();
+
   return (
     <nav className="sticky top-0 z-50 rounded-b-md border-b border-b-border/20 bg-primary text-foregroundNav">
       <div className="mx-auto flex  h-14 max-w-screen-2xl justify-between">
@@ -17,12 +22,32 @@ const NavBar = ({ session }: { session: Session | null }) => {
               <p className="mt-1">SIPE</p>
             </div>
           </Link>
+          <Balance
+            session={session}
+            className="flex size-full items-center justify-center"
+          />
         </section>
         <section className="mr-1 flex items-center justify-center text-xl font-semibold hover:opacity-90  ">
-          <div className="flex h-full flex-row items-center p-px">
-            {session?.user && <Balance session={session} />}
-            <ModeToggle />
-            <UserButton session={session} />
+          <div className="flex size-full flex-row items-center p-px">
+            <div className="flex size-full items-center justify-center">
+              <SidebarMobile className="flex size-full items-center justify-center">
+                <ChatHistory session={session} />
+              </SidebarMobile>
+            </div>
+            <Button variant="nav" className="hidden size-full sm:flex">
+              <p className="text-sm">About</p>
+            </Button>
+            <div className="hidden size-full sm:flex">
+              <ModeToggle />
+            </div>
+            <UserButtonDesktop
+              session={session}
+              className="hidden size-full sm:flex"
+            />
+            <UserButtonMobile
+              session={session}
+              className="flex size-full sm:hidden"
+            />
           </div>
         </section>
       </div>

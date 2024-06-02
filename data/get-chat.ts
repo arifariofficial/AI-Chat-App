@@ -17,7 +17,7 @@ export async function getChats(userId?: string | null): Promise<Chat[]> {
       const parsedChats = JSON.parse(cachedChats);
       return parsedChats.map((chat: Chat) => ({
         ...chat,
-        createdAt: new Date(chat.createdAt),
+        createdAt: chat.createdAt ? new Date(chat.createdAt) : null,
         messages: chat.messages.map((message) => ({
           ...message,
           createdAt: new Date(message.createdAt || Date.now()),
@@ -33,7 +33,7 @@ export async function getChats(userId?: string | null): Promise<Chat[]> {
 
     const serializedChats = chats.map((chat) => ({
       ...chat,
-      createdAt: chat.createdAt.toISOString(),
+      createdAt: chat.createdAt ? chat.createdAt.toISOString() : null,
       messages: chat.messages.map((message) => ({
         ...message,
         createdAt: message.createdAt.toISOString(),

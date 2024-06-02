@@ -8,7 +8,7 @@ export type Message = {
 export interface Chat extends Record<string, unknown> {
   id: string;
   title: string;
-  createdAt: Date;
+  createdAt: Date | null;
   userId: string;
   path: string;
   messages: Message[];

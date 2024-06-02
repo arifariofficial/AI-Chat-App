@@ -66,12 +66,12 @@ export default function Balance() {
   };
 
   return (
-    <div>
-      <div className="mb-10 bg-background text-foreground">
+    <div className="flex size-full flex-col items-center">
+      <div className="mb-10 w-full bg-background text-foreground">
         <h1 className="mb-1 text-2xl font-semibold">Balance</h1>
         <p>Manage your payment settings</p>
       </div>
-      <div className="flex max-w-md flex-col items-center space-y-6 rounded-xl border border-border/30 bg-background px-8 py-6 text-foreground">
+      <div className="flex w-full max-w-md flex-col items-center space-y-6 rounded-xl border border-border/30 bg-background px-8 py-6 text-foreground">
         <h1 className="text-lg font-semibold">Top Up Your Sipe Account</h1>
         <FormControl
           fullWidth

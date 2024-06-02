@@ -9,6 +9,7 @@ import { UserIcon } from "@components/ui/icons";
 import LocalLibrary from "@mui/icons-material/LocalLibrary";
 import { MemoizedReactMarkdown } from "./markdown";
 import { spinner } from "./spinner";
+import { ChatMessageActions } from "./chat-message-actions";
 
 export function UserMessage({ children }: { children: React.ReactNode }) {
   return (
@@ -35,7 +36,7 @@ export function BotMessage({
   content: string | StreamableValue<string>;
   className?: string;
 }) {
-  const text = useStreamableText(content);
+  const { text, isStreamingDone } = useStreamableText(content);
 
   return (
     <div
@@ -52,7 +53,7 @@ export function BotMessage({
           Sipe
         </h1>
       </div>
-      <div className="ml-9 w-full flex-1 space-y-2 overflow-hidden  px-1">
+      <div className="ml-9 w-full flex-col space-y-2 px-1">
         <MemoizedReactMarkdown
           className="prose w-full break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
           remarkPlugins={[remarkGfm, remarkMath]}
@@ -64,6 +65,7 @@ export function BotMessage({
         >
           {text}
         </MemoizedReactMarkdown>
+        {isStreamingDone && <ChatMessageActions message={text} />}
       </div>
     </div>
   );

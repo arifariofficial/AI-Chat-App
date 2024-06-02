@@ -39,7 +39,7 @@ export async function saveChat(chat: Chat) {
         include: { messages: true },
         update: {
           title: chat.title,
-          createdAt: chat.createdAt,
+          updatedAt: chat.createdAt,
           userId: chat.userId,
           path: chat.path,
           messages: {
