@@ -17,11 +17,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-    deploy:
-      resources:
-        limits:
-          cpus: "0.50"
-          memory: 512M
 
   postgres:
     image: postgres:latest
@@ -43,11 +38,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-    deploy:
-      resources:
-        limits:
-          cpus: "0.50"
-          memory: 512M
 
   adminer:
     image: adminer
@@ -56,11 +46,6 @@ services:
       - 8080:8080
     networks:
       - sipe-network
-    deploy:
-      resources:
-        limits:
-          cpus: "0.25"
-          memory: 256M
 
   redis:
     image: redis:latest
@@ -69,11 +54,6 @@ services:
     networks:
       - sipe-network
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: "0.25"
-          memory: 256M
 
   nginx:
     build:
@@ -87,11 +67,6 @@ services:
     networks:
       - sipe-network
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: "0.50"
-          memory: 512M
 
 networks:
   sipe-network:
