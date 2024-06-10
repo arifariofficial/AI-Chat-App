@@ -10,13 +10,8 @@ const redisUrl = isProduction
 let redis: Redis | undefined;
 
 if (redisUrl) {
-  console.log(`Connecting to Redis at ${redisUrl}`);
   try {
     redis = new Redis(redisUrl);
-
-    redis.on("connect", () => {
-      console.log("Connected to Redis");
-    });
 
     redis.on("error", (err) => {
       console.error("Redis error:", err);
