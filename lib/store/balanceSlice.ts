@@ -15,7 +15,9 @@ export const balanceSlice = createSlice({
   initialState,
   reducers: {
     decrement: (state) => {
-      state.balance -= 0.5;
+      if (state.balance > 0) {
+        state.balance -= 0.5;
+      }
     },
     setBalance: (state, action: PayloadAction<number>) => {
       state.balance = action.payload;

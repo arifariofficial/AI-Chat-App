@@ -1,0 +1,64 @@
+{
+  "links": [
+    {
+      "name": "Sosiaaliturvaopas-2018",
+      "link": "https://sosiaaliturvaopas.files.wordpress.com/2018/01/sosiaaliturvaopas-2018.pdf",
+      "type": "pdf_file",
+      "priority": 1
+    },
+    {
+      "name": "Liikennevakuutuslaki",
+      "link": "https://www.finlex.fi/fi/laki/ajantasa/2016/20160460",
+      "type": "web_page",
+      "priority": 2
+    },
+    {
+      "name": "LIIKENNEVAKUUTUKSEN KORVAUSOHJEET 2024",
+      "link": "https://www.liipo.fi/media/liikennevakuutuksen-korvausohjeet-2024.pdf",
+      "type": "pdf_file",
+      "priority": 3
+    },
+    {
+      "name": "Vahingonkorvauslaki",
+      "link": "https://finlex.fi/fi/laki/ajantasa/1974/19740412",
+      "type": "web_page",
+      "priority": 4
+    },
+    {
+      "name": "Vammaispalvelulaki",
+      "link": "https://finlex.fi/fi/laki/alkup/2023/20230675",
+      "type": "web_page",
+      "priority": 5
+    },
+    {
+      "name": "Sairausvakuutuslaki",
+      "link": "https://www.finlex.fi/fi/laki/ajantasa/2004/20041224",
+      "type": "web_page",
+      "priority": 5
+    },
+    {
+      "name": "KELA Korvaukset yksityisestä sairaanhoidosta",
+      "link": "https://www.kela.fi/sairaanhoito",
+      "type": "web_page",
+      "priority": 5
+    },
+    {
+      "name": "Yksityistapaturmavakuutus",
+      "link": "https://www.fine.fi/naissa-asioissa-autamme/henkilovakuutukset/yksityistapaturmavakuutus.html",
+      "type": "web_page",
+      "priority": 5
+    },
+    {
+      "name": "Kansaneläkelaki",
+      "link": "https://www.finlex.fi/fi/laki/ajantasa/2007/20070568",
+      "type": "web_page",
+      "priority": 5
+    },
+    {
+      "name": "Laki tapaturman ja palvelussairauden korvaamisesta kriisinhallintatehtävässä",
+      "link": "https://www.finlex.fi/fi/laki/ajantasa/2016/20161522",
+      "type": "web_page",
+      "priority": 5
+    }
+  ]
+}

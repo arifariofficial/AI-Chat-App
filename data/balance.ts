@@ -82,19 +82,17 @@ export async function checkBalance(userId: string) {
   // Check if the balance is sufficient
   if (balance < 0.5) {
     return false;
+  } else {
+    // Update the balance
+    const currentBalance = balance - 0.5;
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: { balance: currentBalance },
+      select: { balance: true },
+    });
+    // Invalidate and update the cache with the new balance
+    await redis?.setex(cacheKey, 300, updatedUser.balance.toString());
   }
-
-  // Update the balance
-  const currentBalance = balance - 0.5;
-
-  const updatedUser = await prisma.user.update({
-    where: { id: userId },
-    data: { balance: currentBalance },
-    select: { balance: true },
-  });
-
-  // Invalidate and update the cache with the new balance
-  await redis?.setex(cacheKey, 300, updatedUser.balance.toString());
 
   return true;
 }
