@@ -9,7 +9,7 @@ import { auth } from "@/auth";
 import { BotMessage, UserMessage } from "@components/chat/message";
 import { nanoid } from "@lib/utils";
 import { saveChat } from "@data/save-chat";
-import { getSipeResponse } from "@actions/sipe-api";
+import { getSipeResponse } from "./sipe-api";
 
 async function submitUserMessage(content: string) {
   "use server";

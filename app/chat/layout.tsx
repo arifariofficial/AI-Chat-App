@@ -26,7 +26,7 @@ export default function ChatLayout({ children }: ChatLayoutProps) {
 
   const handleModalClose = () => {
     setShowModal(false);
-    router.push("/auth/login");
+    router.push(`/auth/login?callbackUrl=/chat`);
   };
 
   if (!session) {

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "es2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -28,7 +29,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "langchain/migrate.mjs"
+    "langchain/migrate.mjs",
+    "langchain/langchain-prisma.mjs",
+    "langchain/prisma.mjs"
   ],
   "exclude": ["node_modules"]
 }

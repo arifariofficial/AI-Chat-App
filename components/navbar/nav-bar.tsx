@@ -22,10 +22,12 @@ const NavBar = async () => {
               <p className="mt-1">SIPE</p>
             </div>
           </Link>
-          <Balance
-            session={session}
-            className="flex size-full items-center justify-center"
-          />
+          {session && (
+            <Balance
+              session={session}
+              className="flex size-full items-center justify-center"
+            />
+          )}
         </section>
         <section className="mr-1 flex items-center justify-center text-xl font-semibold hover:opacity-90  ">
           <div className="flex size-full flex-row items-center p-px">
@@ -34,9 +36,11 @@ const NavBar = async () => {
                 <ChatHistory session={session} />
               </SidebarMobile>
             </div>
-            <Button variant="nav" className="hidden size-full sm:flex">
-              <p className="text-sm">About</p>
-            </Button>
+            <Link href={`/about`} className="size-full">
+              <Button variant="nav" className="hidden size-full sm:flex">
+                <p className="text-sm">About</p>
+              </Button>
+            </Link>
             <div className="hidden size-full sm:flex">
               <ModeToggle />
             </div>

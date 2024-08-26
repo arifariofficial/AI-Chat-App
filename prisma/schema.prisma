@@ -5,7 +5,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DOCKER_POSTGRES_URL")
+  // url      = env("DOCKER_POSTGRES_URL")
+  url      = env("DATABASE_URL")
 }
 
 enum UserRole {
@@ -22,7 +23,7 @@ model User {
   role                  UserRole               @default(USER)
   emailVerified         DateTime?
   image                 String?
-  balance               Float                  @default(1)
+  balance               Float                  @default(500)
   accounts              Account[]
   createdAt             DateTime               @default(now())
   updatedAt             DateTime               @updatedAt
