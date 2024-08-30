@@ -12,6 +12,14 @@ const BASE_URL = {
   Vahingonkorvauslaki: "https://finlex.fi/fi/laki/ajantasa/1974/19740412",
   LiikennevakuutuksenKorvausohjeet:
     "https://www.liipo.fi/media/liikennevakuutuksen-korvausohjeet-2024.pdf",
+  Vammaispalvelulaki: "https://finlex.fi/fi/laki/alkup/2023/20230675",
+  Sairausvakuutuslaki: "https://www.finlex.fi/fi/laki/ajantasa/2004/20041224",
+  kelaKorvauksetYksityisestaSairaanhoidosta: "https://www.kela.fi/sairaanhoito",
+  Yksityistapaturmavakuutus:
+    "https://www.fine.fi/naissa-asioissa-autamme/henkilovakuutukset/yksityistapaturmavakuutus.html",
+  Kansaneläkelaki: "https://www.finlex.fi/fi/laki/ajantasa/2007/20070568",
+  korvaamiKriisinhallintatehtava:
+    "https://www.finlex.fi/fi/laki/ajantasa/2016/20161522",
 };
 
 const CHUNK_SIZE = 200;
@@ -37,7 +45,7 @@ const getLinksLiikennevakuutuslaki = async (): Promise<Links[]> => {
     // Remove "1 luku - ", "2 luku - ", etc., and "§ - " from section titles in a single line
     title = title.replace(/^\d+\s*[a-zA-Z]?\s*(luku - |§ - )/, "");
 
-    if (linkUrl && linkUrl.startsWith("#L")) {
+    if (linkUrl && linkUrl.startsWith("#")) {
       linksArr.push({ title, url: linkUrl, law: "Liikennevakuutuslaki" });
     }
   });
@@ -66,11 +74,91 @@ const getLinksVahingonkorvauslaki = async (): Promise<Links[]> => {
     // Replace any occurrence of '§' with an empty string and trim extra spaces/newlines
     title = title.replace(/§/g, "").replace(/\s+/g, " ").trim();
 
-    if (linkUrl && linkUrl.startsWith("#L")) {
+    if (linkUrl && linkUrl.startsWith("#")) {
       linksArr.push({
         title,
         url: linkUrl,
         law: "Vahingonkorvauslaki",
+        header,
+      });
+    }
+  });
+
+  return linksArr;
+};
+
+const getLinksVammaispalvelulaki = async (): Promise<Links[]> => {
+  const linksArr: Links[] = [];
+
+  const response = await axios.get(BASE_URL.Vammaispalvelulaki);
+  const $ = cheerio.load(response.data);
+  let header = "";
+  let linkUrl: string | undefined;
+  let title: string | undefined;
+
+  // Find all "a" elements within the div with id="toc"
+  $("#toc a").each((index, element) => {
+    if ($(element).hasClass("h4")) {
+      header = $(element).text();
+    }
+    if ($(element).hasClass("h5")) {
+      linkUrl = $(element).attr("href");
+      title = $(element).text();
+    }
+
+    // Remove "1 luku - ", "2 luku - ", etc., and "§ - " from section titles in a single line
+    header = header.replace(/^\d+\s*[a-zA-Z]?\s*(luku - |§ - )/, "");
+
+    // Replace unwanted characters from title
+    if (title) {
+      title = title.replace(/^\d+\s*§\s*-\s*/, "").trim();
+    }
+
+    if (linkUrl && title && linkUrl.startsWith("#Pidm")) {
+      linksArr.push({
+        title,
+        url: linkUrl,
+        law: "Vammaispalvelulaki",
+        header,
+      });
+    }
+  });
+
+  return linksArr;
+};
+
+const getLinksSairausvakuutuslaki = async (): Promise<Links[]> => {
+  const linksArr: Links[] = [];
+
+  const response = await axios.get(BASE_URL.Sairausvakuutuslaki);
+  const $ = cheerio.load(response.data);
+  let header = "";
+  let linkUrl: string | undefined;
+  let title: string | undefined;
+
+  // Find all "a" elements within the div with id="toc"
+  $("#toc a").each((index, element) => {
+    if ($(element).hasClass("h4")) {
+      header = $(element).text();
+    }
+    if ($(element).hasClass("h5")) {
+      linkUrl = $(element).attr("href");
+      title = $(element).text();
+    }
+
+    // Remove "1 luku - ", "2 luku - ", etc., and "§ - " from section titles in a single line
+    header = header.replace(/^\d+\s*[a-zA-Z]?\s*(luku - |§ - )/, "");
+
+    // Replace unwanted characters from title
+    if (title) {
+      title = title.replace(/^\d+\s*§\s*-\s*/, "").trim();
+    }
+
+    if (linkUrl && title && linkUrl.startsWith("#")) {
+      linksArr.push({
+        title,
+        url: linkUrl,
+        law: "Sairausvakuutuslaki",
         header,
       });
     }
@@ -112,8 +200,8 @@ const getEssaySosiaaliturvaopas = async () => {
 };
 const getEssayLiikennevakuutuksenKorvausohjeet = async () => {
   const essay: SIPEEssay = {
-    title: "",
-    url: "",
+    title: "Liikennevakuutuksen korvausohjeet 2024",
+    url: BASE_URL.LiikennevakuutuksenKorvausohjeet,
     content: "",
     length: 0,
     tokens: 0,
@@ -129,18 +217,17 @@ const getEssayLiikennevakuutuksenKorvausohjeet = async () => {
 
     const pdfData = await pdfParse(response.data);
 
-    (essay.title = "Liikennevakuutuksen korvausohjeet 2024"),
-      (essay.url = BASE_URL.LiikennevakuutuksenKorvausohjeet);
     essay.content = pdfData.text;
 
     return essay;
   } catch (error) {
+    console.error(`Failed to process PDF: ${error}`);
     if (error instanceof Error) {
       throw new Error(
         `Failed to process Liikennevakuutuksen korvausohjeet pdf: ${error.message}`,
       );
     } else {
-      throw new Error("An unknown error occurred while processing pdf file");
+      throw new Error("An unknown error occurred while processing pdf file.");
     }
   }
 };
@@ -236,6 +323,108 @@ const getEssayVahingonkorvauslaki = async (linkObj: {
   // After accumulating sectionText, check if it is not empty
   if (sectionText.trim() !== "") {
     essay.title = header + " " + title;
+    essay.url = fullLink;
+    essay.content = sectionText.trim();
+    essay.length = sectionText.length;
+    essay.tokens = encode(sectionText).length;
+
+    return essay;
+  } else {
+    return null; // Return null if sectionText is empty
+  }
+};
+
+const getEssayVammaispalvelulaki = async (linkObj: {
+  url: string;
+  title: string;
+  law: string;
+  header?: string;
+}) => {
+  const { title, url, header } = linkObj;
+
+  const essay: SIPEEssay = {
+    title: "",
+    url: "",
+    content: "",
+    length: 0,
+    tokens: 0,
+    chunks: [],
+  };
+
+  const fullLink = BASE_URL.Vammaispalvelulaki + url;
+
+  const html = await axios.get(fullLink);
+  const $ = cheerio.load(html.data);
+
+  // Locate the section by the title and extract the following <p> elements
+
+  const sectionHeader = $(`h5.ot:contains('${title}')`);
+  let sectionText = "";
+
+  // Get the next sibling elements until the next header
+  sectionHeader.nextAll().each((index, element) => {
+    if ($(element).is("p.py")) {
+      sectionText += $(element).text().trim() + "\n";
+    }
+    if ($(element).is("h5.ot")) {
+      return false; // Exit the loop if another header is found
+    }
+  });
+
+  // After accumulating sectionText, check if it is not empty
+  if (sectionText.trim() !== "") {
+    essay.title = header + ": " + title;
+    essay.url = fullLink;
+    essay.content = sectionText.trim();
+    essay.length = sectionText.length;
+    essay.tokens = encode(sectionText).length;
+
+    return essay;
+  } else {
+    return null; // Return null if sectionText is empty
+  }
+};
+
+const getEssaySairausvakuutuslaki = async (linkObj: {
+  url: string;
+  title: string;
+  law: string;
+  header?: string;
+}) => {
+  const { title, url, header } = linkObj;
+
+  const essay: SIPEEssay = {
+    title: "",
+    url: "",
+    content: "",
+    length: 0,
+    tokens: 0,
+    chunks: [],
+  };
+
+  const fullLink = BASE_URL.Sairausvakuutuslaki + url;
+
+  const html = await axios.get(fullLink);
+  const $ = cheerio.load(html.data);
+
+  // Locate the section by the title and extract the following <p> elements
+
+  const sectionHeader = $(`h5:contains('${title}')`);
+  let sectionText = "";
+
+  // Get the next sibling elements until the next header
+  sectionHeader.nextAll().each((index, element) => {
+    if ($(element).is("p")) {
+      sectionText += $(element).text().trim() + "\n";
+    }
+    if ($(element).is("h5.ot")) {
+      return false; // Exit the loop if another header is found
+    }
+  });
+
+  // After accumulating sectionText, check if it is not empty
+  if (sectionText.trim() !== "") {
+    essay.title = header + ": " + title;
     essay.url = fullLink;
     essay.content = sectionText.trim();
     essay.length = sectionText.length;
@@ -361,7 +550,36 @@ const chunkEssay = async (essay: SIPEEssay): Promise<SIPEEssay> => {
     );
 
     if (essay) {
-      console.log("Chunking essay...", essay.title);
+      console.log("Chunking essay: ", essay.title);
+      const chunkedEssay = await chunkEssay(essay);
+      essays.push(chunkedEssay);
+    }
+  }
+  console.log("Processing Vammaispalvelulaki...");
+
+  const linksVammaispalvelulaki = await getLinksVammaispalvelulaki();
+
+  for (let i = 0; i < linksVammaispalvelulaki.length; i++) {
+    const essay = await getEssayVammaispalvelulaki(linksVammaispalvelulaki[i]);
+
+    if (essay) {
+      console.log("Chunking essay: ", essay.title);
+      const chunkedEssay = await chunkEssay(essay);
+      essays.push(chunkedEssay);
+    }
+  }
+
+  console.log("Processing Sairausvakuutuslaki...");
+
+  const linksSairausvakuutuslaki = await getLinksSairausvakuutuslaki();
+
+  for (let i = 0; i < linksSairausvakuutuslaki.length; i++) {
+    const essay = await getEssaySairausvakuutuslaki(
+      linksSairausvakuutuslaki[i],
+    );
+
+    if (essay) {
+      console.log("Chunking essay: ", essay.title);
       const chunkedEssay = await chunkEssay(essay);
       essays.push(chunkedEssay);
     }
