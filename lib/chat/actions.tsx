@@ -35,7 +35,12 @@ async function submitUserMessage(content: string) {
     ],
   });
 
-  const searchResponse = await fetch("http://localhost:3000/api/search", {
+  const sipeBaseUrl =
+    process.env.NODE_ENV === "production"
+      ? "http://frontend:3000/api/search"
+      : "http://localhost:3000/api/search";
+
+  const searchResponse = await fetch(sipeBaseUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
