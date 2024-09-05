@@ -169,8 +169,8 @@ const getLinksSairausvakuutuslaki = async (): Promise<Links[]> => {
 
 const getEssaySosiaaliturvaopas = async () => {
   const essay: SIPEEssay = {
-    title: "",
-    url: "",
+    title: "Sosiaaliturvaopas 2018",
+    url: BASE_URL.Sosiaaliturvaopas,
     content: "",
     length: 0,
     tokens: 0,
@@ -183,8 +183,7 @@ const getEssaySosiaaliturvaopas = async () => {
 
     const pdfData = await pdfParse(response.data);
 
-    (essay.title = "Sosiaaliturvaopas 2018"),
-      (essay.url = BASE_URL.Sosiaaliturvaopas);
+    // Populate essay fields
     essay.content = pdfData.text;
 
     return essay;
@@ -198,6 +197,7 @@ const getEssaySosiaaliturvaopas = async () => {
     }
   }
 };
+
 const getEssayLiikennevakuutuksenKorvausohjeet = async () => {
   const essay: SIPEEssay = {
     title: "Liikennevakuutuksen korvausohjeet 2024",

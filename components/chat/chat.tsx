@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Session } from "next-auth";
 import { EmptyScreen } from "./empty-screen";
 import { ChatPanel } from "./chat-panel";
@@ -19,6 +19,7 @@ export interface ChatProps extends React.ComponentProps<"div"> {
 }
 
 function Chat({ id, session }: ChatProps) {
+  const router = useRouter();
   const path = usePathname();
   const [input, setInput] = useState("");
   const [messages] = useUIState();
@@ -29,16 +30,16 @@ function Chat({ id, session }: ChatProps) {
   useEffect(() => {
     if (session?.user) {
       if (!path.includes("/chat/") && messages.length === 1) {
-        window.history.replaceState({}, "/chat/", `/chat/${id}`);
+        window.history.replaceState({}, "/chat", `/chat/${id}`);
       }
     }
   }, [id, path, session?.user, messages.length]);
 
   useEffect(() => {
     if (aiState.messages?.length === 2 && session?.user?.id) {
-      loadChats(session.user.id);
+      router.refresh();
     }
-  }, [aiState.messages, loadChats, session?.user?.id]);
+  }, [aiState.messages, loadChats, router, session?.user?.id]);
 
   useEffect(() => {
     setNewChatId(id);

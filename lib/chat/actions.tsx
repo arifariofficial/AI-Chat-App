@@ -3,81 +3,102 @@ import {
   createStreamableValue,
   getAIState,
   getMutableAIState,
+  streamUI,
 } from "ai/rsc";
+import { openai } from "@ai-sdk/openai";
 import { Chat, Message } from "../types";
 import { auth } from "@/auth";
 import { BotMessage, UserMessage } from "@components/chat/message";
 import { nanoid } from "@lib/utils";
 import { saveChat } from "@data/save-chat";
-import { getSipeResponse } from "./sipe-api";
+import { loadEnvConfig } from "@next/env";
+import { SIPEChunk } from "@types";
+
+loadEnvConfig("");
+
+const apiKey = process.env.OPENAI_API_KEY;
 
 async function submitUserMessage(content: string) {
   "use server";
 
   const aiState = getMutableAIState<typeof AI>();
 
-  // Adding the user message to the aiState
-  aiState.update((prevState) => {
-    const newState: AIState = {
-      ...prevState,
-      messages: [
-        ...prevState.messages,
-        {
-          id: nanoid(),
-          role: "user",
-          content,
-        } as Message,
-      ],
-    };
-    return newState;
+  aiState.update({
+    ...aiState.get(),
+    messages: [
+      ...aiState.get().messages,
+      {
+        id: nanoid(),
+        role: "user",
+        content,
+      } as Message,
+    ],
   });
 
-  // Get the updated AI state to include in the API request
-  const currentState = getAIState();
+  const searchResponse = await fetch("http://localhost:3000/api/search", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ query: content, apiKey, matches: 3 }),
+  });
 
-  const fullConversation = currentState.messages
-    .map((msg: Message) => msg.content)
-    .join("\n");
+  const results: SIPEChunk[] = await searchResponse.json();
+  const prompt = `
+  Olet sosiaaliturva-asiantuntija, joka on erikoistunut pitkäaikaissairaiden ja vammaisten henkilöiden oikeuksiin. Vastatessasi käyttäjän kysymykseen "${content}", pyri ensin ymmärtämään tarkasti käyttäjän tilanne kysymällä tarvittavia lisätietoja. Tämä auttaa antamaan lyhyen, selkeän ja tarkasti kohdennetun vastauksen.
 
-  const fullResponse = await getSipeResponse(fullConversation);
+  Kysy käyttäjältä aina erityisiä lisätietoja, jos tarvittavat tiedot puuttuvat, ja vastaa vasta sen jälkeen. Vastaa lyhyesti ja ystävällisesti, ja varmista, että jokainen vastaus tuntuu osalta keskustelua ihmisen kanssa.
 
-  const chunks = fullResponse.split(" ");
-  const textStream = createStreamableValue("");
+  Konteksti:
+  ${results?.map((d) => d.content).join("\n\n")}
 
-  // Function to simulate typing delay
-  const delay = (ms: number | undefined) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
+  Aloita kysymällä ystävällisesti tarkentavia kysymyksiä tilanteesta, jotta voit antaa juuri oikeanlaisen vastauksen käyttäjän tarpeisiin. Älä anna koko vastausta heti, vaan keskity yhteen asiaan kerrallaan. Vastauksiesi tulee olla selkeitä, mutta tarvittaessa kysy lisätietoja, jos jokin asia ei ole täysin selvä.
+`;
 
-  const decoder = new TextDecoder();
+  let textStream: undefined | ReturnType<typeof createStreamableValue<string>>;
+  let textNode: undefined | React.ReactNode;
+  const result = await streamUI({
+    model: openai("gpt-4o"),
+    system: prompt,
+    temperature: 0.5,
+    messages: [
+      ...aiState.get().messages.map((message: Message) => ({
+        role: message.role,
+        content: message.content,
+        name: message.name,
+      })),
+    ],
+    text: ({ content, done, delta }) => {
+      if (!textStream) {
+        textStream = createStreamableValue("");
+        textNode = <BotMessage content={textStream.value} />;
+      }
 
-  // Function to update the stream gradually
-  const updateStreamGradually = async () => {
-    for (const chunk of chunks) {
-      const bytes = new TextEncoder().encode(chunk + " ");
-      const decodedString = decoder.decode(bytes); // Decode bytes to string
-      textStream.update(decodedString);
-      await delay(Math.floor(Math.random() * 60) + 30);
-    }
-    textStream.done();
-    // Adding the sipe-api message to the aiState
-    aiState.done({
-      ...aiState.get(),
-      messages: [
-        ...aiState.get().messages,
-        {
-          id: nanoid(),
-          role: "assistant",
-          content: fullResponse,
-        },
-      ],
-    });
-  };
+      if (done) {
+        textStream.done();
+        aiState.done({
+          ...aiState.get(),
+          messages: [
+            ...aiState.get().messages,
+            {
+              id: nanoid(),
+              role: "assistant",
+              content,
+              name: "",
+            },
+          ],
+        });
+      } else {
+        textStream.update(delta);
+      }
 
-  updateStreamGradually(); // Start the streaming process
+      return textNode;
+    },
+  });
 
   return {
     id: nanoid(),
-    display: <BotMessage content={textStream.value} />,
+    display: result.value,
   };
 }
 

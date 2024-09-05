@@ -29,6 +29,9 @@ const NavBar = async () => {
             />
           )}
         </section>
+        <section className="flex h-full items-center justify-center text-3xl">
+          <p className="justify-center font-bold text-yellow-500">New</p>
+        </section>
         <section className="mr-1 flex items-center justify-center text-xl font-semibold hover:opacity-90  ">
           <div className="flex size-full flex-row items-center p-px">
             <div className="flex size-full items-center justify-center">
