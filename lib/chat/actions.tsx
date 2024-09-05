@@ -62,11 +62,14 @@ async function submitUserMessage(content: string) {
     system: prompt,
     temperature: 0.5,
     messages: [
-      ...aiState.get().messages.map((message: Message) => ({
-        role: message.role,
-        content: message.content,
-        name: message.name,
-      })),
+      ...aiState.get().messages.map(
+        (message: Message) =>
+          ({
+            role: message.role,
+            content: message.content,
+            name: message.name,
+          }) as Message,
+      ),
     ],
     text: ({ content, done, delta }) => {
       if (!textStream) {

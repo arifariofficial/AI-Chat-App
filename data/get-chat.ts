@@ -42,7 +42,14 @@ export async function getChats(userId?: string | null): Promise<Chat[]> {
 
     await redis?.set(cacheKey, JSON.stringify(serializedChats), "EX", 5); // Cache for 5 minutes
 
-    return chats;
+    return chats.map((chat) => ({
+      ...chat,
+      createdAt: chat.createdAt ? new Date(chat.createdAt) : null,
+      messages: chat.messages.map((message) => ({
+        ...message,
+        createdAt: new Date(message.createdAt || Date.now()),
+      })),
+    }));
   } catch (error) {
     console.error("Error retrieving chats:", error);
     return [];

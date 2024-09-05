@@ -138,7 +138,6 @@ enum Role {
   user
   system
   assistant
-  tool
 }
 
 model Message {
