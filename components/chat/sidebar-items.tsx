@@ -30,7 +30,10 @@ export function SidebarItems({ chats }: SidebarItemsProps) {
                 <SidebarActions
                   chat={chat}
                   removeChat={removeChat}
-                  shareChat={shareChat}
+                  shareChat={async (id: string) => {
+                    const result = await shareChat(id);
+                    return result as Chat | { error: string };
+                  }}
                 />
               </SidebarItem>
             </motion.div>
