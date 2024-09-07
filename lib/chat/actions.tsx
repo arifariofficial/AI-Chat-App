@@ -68,7 +68,7 @@ async function submitUserMessage(content: string) {
   ### Konteksti:
   ${results?.map((d) => d.content).join("\n\n")}
   
-  Palauta vastaus tai yksi tarkentava kysymys, joka liittyy suoraan käyttäjän tilanteeseen. Jos kysymys ei liity ohjeisiin, **älä vastaa kysymykseen**.
+  Palauta vastaus tai yksi tarkentava kysymys, joka liittyy suoraan käyttäjän tilanteeseen. Jos kysymys ei liity ohjeisiin tai sosiaaliturva-asioihin, erityisesti vammaisten ja pitkäaikaissairaiden oikeuksiin, **älä vastaa kysymykseen**.
   `;
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>;
@@ -78,7 +78,7 @@ async function submitUserMessage(content: string) {
     model: openai("gpt-4o"),
     initial: <SpinnerMessage />,
     system: prompt,
-    temperature: 0.6,
+    temperature: 0.8,
     messages: [
       ...aiState.get().messages.map(
         (message: Message) =>
