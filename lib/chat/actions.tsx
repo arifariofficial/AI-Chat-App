@@ -8,7 +8,11 @@ import {
 import { openai } from "@ai-sdk/openai";
 import { Chat, Message } from "../types";
 import { auth } from "@/auth";
-import { BotMessage, UserMessage } from "@components/chat/message";
+import {
+  BotMessage,
+  SpinnerMessage,
+  UserMessage,
+} from "@components/chat/message";
 import { nanoid } from "@lib/utils";
 import { saveChat } from "@data/save-chat";
 import { loadEnvConfig } from "@next/env";
@@ -45,27 +49,36 @@ async function submitUserMessage(content: string) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ query: content, apiKey, matches: 3 }),
+    body: JSON.stringify({ query: content, apiKey, matches: 5 }),
   });
 
   const results: SIPEChunk[] = await searchResponse.json();
+
   const prompt = `
-  Olet sosiaaliturva-asiantuntija, joka on erikoistunut pitkäaikaissairaiden ja vammaisten henkilöiden oikeuksiin. Vastatessasi käyttäjän kysymykseen "${content}", pyri ensin ymmärtämään tarkasti käyttäjän tilanne kysymällä tarvittavia lisätietoja. Tämä auttaa antamaan lyhyen, selkeän ja tarkasti kohdennetun vastauksen.
-
-  Kysy käyttäjältä aina erityisiä lisätietoja, jos tarvittavat tiedot puuttuvat, ja vastaa vasta sen jälkeen. Vastaa lyhyesti ja ystävällisesti, ja varmista, että jokainen vastaus tuntuu osalta keskustelua ihmisen kanssa.
-
-  Konteksti:
+  Olet sosiaaliturva-asiantuntija, joka on erikoistunut pitkäaikaissairaiden ja vammaisten henkilöiden oikeuksiin. Vastaa käyttäjän kysymykseen: "${content}" keskittyen ymmärtämään heidän tilanteensa. Kysy **vain yksi** tarkentava kysymys tai anna ytimekäs vastaus annetun kontekstin perusteella.
+  
+  ### Ohjeet:
+  - Varmista, että ymmärrät käyttäjän tilanteen tarkasti ennen kuin vastaat.
+  - Palauta **vain yksi** lyhyt ja selkeä kysymys tai vastaus, joka on suoraan yhteydessä käyttäjän tilanteeseen.
+  - Vältä tarpeetonta vastausten laajentamista. Pidä vastauksesi täsmällisenä ja asiaankuuluvana.
+  - Jos kysymys ei liity vammaisten tai pitkäaikaissairaiden oikeuksiin, **älä vastaa kysymykseen**.
+  - Vältä kaikenlaista laajentamista tai aiheeseen liittymättömiä vastauksia.
+  - Ole ystävällinen, empaattinen ja täsmällinen vastauksessasi.
+  
+  ### Konteksti:
   ${results?.map((d) => d.content).join("\n\n")}
-
-  Aloita kysymällä ystävällisesti tarkentavia kysymyksiä tilanteesta, jotta voit antaa juuri oikeanlaisen vastauksen käyttäjän tarpeisiin. Älä anna koko vastausta heti, vaan keskity yhteen asiaan kerrallaan. Vastauksiesi tulee olla selkeitä, mutta tarvittaessa kysy lisätietoja, jos jokin asia ei ole täysin selvä.
-`;
+  
+  Palauta vastaus tai yksi tarkentava kysymys, joka liittyy suoraan käyttäjän tilanteeseen. Jos kysymys ei liity ohjeisiin, **älä vastaa kysymykseen**.
+  `;
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>;
   let textNode: undefined | React.ReactNode;
+
   const result = await streamUI({
     model: openai("gpt-4o"),
+    initial: <SpinnerMessage />,
     system: prompt,
-    temperature: 0.5,
+    temperature: 0.6,
     messages: [
       ...aiState.get().messages.map(
         (message: Message) =>

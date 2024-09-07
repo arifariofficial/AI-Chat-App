@@ -15,8 +15,6 @@ export const POST = async (req: Request): Promise<Response> => {
       );
     }
 
-    console.log(query, apiKey, matches);
-
     const input = query.replace(/\n/g, " "); // Ensure query is valid before proceeding
 
     const res = await fetch("https://api.openai.com/v1/embeddings", {
@@ -46,7 +44,7 @@ export const POST = async (req: Request): Promise<Response> => {
     const { data: chunks, error } = await supabaseAdmin.rpc("sipe_ai_search", {
       match_count: matches,
       query_embedding: embedding,
-      similarity_threshold: 0.7,
+      similarity_threshold: 0.8,
     });
 
     if (error) {

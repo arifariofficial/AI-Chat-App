@@ -14,6 +14,19 @@ async function generateEmbeddings(essays: SIPEEssay[]) {
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
   );
 
+  //Delete all existing embeddings
+  const { error: deleteError } = await supabase
+    .from("sipe_ai")
+    .delete()
+    .neq("id", 0); // This will delete all rows
+  if (deleteError) {
+    console.error("Error deleting existing embeddings: ", deleteError.message);
+    return; // Stop execution if delete fails
+  } else {
+    console.log("Successfully deleted all existing embeddings.");
+  }
+
+  // Embedding
   for (let i = 0; i < essays.length; i++) {
     const essay = essays[i];
 
