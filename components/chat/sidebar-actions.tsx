@@ -46,12 +46,12 @@ export function SidebarActions({
 
   return (
     <>
-      <div className="">
+      <div className="space-x-2 pr-2">
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
-              variant="ghost"
-              className="size-7 p-0 hover:bg-background"
+              variant="outline"
+              className="size-7 p-0"
               onClick={() => setShareDialogOpen(true)}
             >
               <IconShare />
@@ -63,8 +63,8 @@ export function SidebarActions({
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
-              variant="ghost"
-              className="size-7 p-0 hover:bg-background"
+              variant="outline"
+              className="size-7 p-0"
               disabled={isRemovePending}
               onClick={() => setDeleteDialogOpen(true)}
             >

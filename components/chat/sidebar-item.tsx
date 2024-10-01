@@ -55,7 +55,7 @@ export function SidebarItem({ index, chat, children }: SidebarItemProps) {
     >
       <div className="absolute left-2 top-1 flex size-6 items-center justify-center">
         {chat.sharePath ? (
-          <Tooltip delayDuration={1000}>
+          <Tooltip delayDuration={500}>
             <TooltipTrigger
               tabIndex={-1}
               className="focus:bg-muted focus:ring-1 focus:ring-ring"
@@ -114,7 +114,9 @@ export function SidebarItem({ index, chat, children }: SidebarItemProps) {
                 </motion.span>
               ))
             ) : (
-              <span>{chat.title}</span>
+              <span className="text font-normal">
+                {chat.createdAt?.toDateString()}
+              </span>
             )}
           </span>
         </div>

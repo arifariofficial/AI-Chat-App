@@ -10,7 +10,6 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -36,9 +35,6 @@ export function ModeToggle() {
         align="center"
         className="w-56 border border-border/30"
       >
-        <DropdownMenuLabel className="flex size-full items-center justify-center">
-          Theme
-        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuCheckboxItem
           checked={isLightMode}

@@ -14,7 +14,7 @@ const NavBar = async () => {
 
   return (
     <nav className="sticky top-0 z-50 rounded-b-md border-b border-b-border/20 bg-primary text-foregroundNav">
-      <div className="mx-auto flex  h-14 max-w-screen-2xl justify-between">
+      <div className="mx-auto flex  h-16 max-w-screen-2xl justify-between">
         <section className="flex items-center">
           <Link href={`/`}>
             <div className="flex gap-2 px-4 text-2xl font-extrabold tracking-wide">
@@ -28,9 +28,6 @@ const NavBar = async () => {
               className="flex size-full items-center justify-center"
             />
           )}
-        </section>
-        <section className="flex h-full items-center justify-center text-3xl">
-          <p className="justify-center font-bold text-yellow-500">New</p>
         </section>
         <section className="mr-1 flex items-center justify-center text-xl font-semibold hover:opacity-90  ">
           <div className="flex size-full flex-row items-center p-px">
