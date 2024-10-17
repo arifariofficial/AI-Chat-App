@@ -29,7 +29,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Generate Prisma client
-RUN npx prisma generate
+RUN npm run db-gen:prod
 
 # Build the application
 RUN npm run build
@@ -39,7 +39,9 @@ FROM base AS runner
 WORKDIR /app
 
 # Set environment variables
-ENV NODE_ENV production
+ENV NODE_ENV=production
+ENV HOSTNAME="0.0.0.0"
+ENV PORT=3000
 
 # Create non-root user and group
 RUN addgroup --system --gid 1001 nodejs
@@ -65,4 +67,4 @@ USER nextjs
 EXPOSE 3000
 
 # Set the default command to run the application
-CMD HOSTNAME="0.0.0.0" node server.js
+CMD  ["node" "server.js"]

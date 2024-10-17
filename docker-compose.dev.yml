@@ -1,10 +1,11 @@
 services:
   frontend:
-    platform: linux/amd64
-    image: arifariofficial/sipe:latest
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
     environment:
       - NODE_ENV=production
-      - AUTH_URL=https://sipe.life
+      - AUTH_URL=http://localhost
       - DATABASE_HOST=postgres
       - DATABASE_USER=${POSTGRES_USER}
       - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
@@ -51,7 +52,7 @@ services:
   nginx:
     image: nginx:latest
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
     ports:
       - "80:80"

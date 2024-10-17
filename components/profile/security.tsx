@@ -2,16 +2,16 @@
 import { useEffect, useState } from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import { twoFactor } from "@actions/two-factor";
+import { twoFactor } from "@/actions/two-factor";
 import { useSession } from "next-auth/react";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@components/ui/tooltip";
-import { Button } from "@components/ui/button";
+} from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
 import { GiInfo } from "react-icons/gi";
-import { IconSpinner } from "@components/ui/icons";
+import { IconSpinner } from "@/components/ui/icons";
 
 export default function Security() {
   const [isTwoFactorEnabled, setIsTwoFactorEnabled] = useState<boolean>(false);
@@ -40,6 +40,10 @@ export default function Security() {
 
         await twoFactor(userId, newStatus);
       } catch (error) {
+        console.error(
+          "Failed to update two-factor authentication settings:",
+          error,
+        );
         setError("Failed to update two-factor authentication settings.");
         setIsTwoFactorEnabled(!newStatus);
       }
@@ -55,7 +59,7 @@ export default function Security() {
       {error && <div className="mb-2 text-destructive-foreground">{error}</div>}
       <form onSubmit={(e) => e.preventDefault()} className="flex w-full">
         <section className="flex w-full justify-between">
-          <div className="flex flex-row text-base  font-semibold text-foreground">
+          <div className="flex flex-row text-base font-semibold text-foreground">
             Two-Factor Authentication
             <Tooltip>
               <TooltipTrigger asChild>

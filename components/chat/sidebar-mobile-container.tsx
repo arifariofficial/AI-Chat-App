@@ -5,7 +5,9 @@ import * as React from "react";
 import { useSidebar } from "@/lib/hooks/use-sidebar";
 import { cn } from "@/lib/utils";
 
-export interface SidebarProps extends React.ComponentProps<"div"> {}
+export interface SidebarProps extends React.ComponentProps<"div"> {
+  customProp?: string;
+}
 
 export function SidebarMobileContainer({ className, children }: SidebarProps) {
   const { isSidebarOpen, isLoading } = useSidebar();
