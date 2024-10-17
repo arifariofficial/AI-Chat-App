@@ -16,7 +16,9 @@
     "db-gen:prod": "npx prisma generate --schema=./prisma/schema.prod.prisma",
     "db-push:dev": "npx prisma db push --schema=./prisma/schema.dev.prisma",
     "db-push:prod": "npx prisma db push --schema=./prisma/schema.prod.prisma",
-    "docker:dev": "docker system prune -f && docker build -f dev.Dockerfile -t arifariofficial/sipe-dev . && docker push arifariofficial/sipe-dev:latest"
+    "docker:dev": "docker system prune -f && docker build -f dev.Dockerfile -t arifariofficial/sipe-dev . && docker push arifariofficial/sipe-dev:latest",
+    "docker:push": "docker build --platform linux/amd64 -t arifariofficial/sipe . && docker push arifariofficial/sipe:latest",
+    "docker:deploy": "docker compose pull frontend && docker compose up"
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.67",
