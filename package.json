@@ -14,8 +14,6 @@
     "embed": "tsx scripts/embed.ts",
     "db-gen:dev": "npx prisma generate --schema=./prisma/schema.dev.prisma",
     "db-gen:prod": "npx prisma generate --schema=./prisma/schema.prod.prisma",
-    "db-push:dev": "npx prisma db push --schema=./prisma/schema.dev.prisma",
-    "db-push:prod": "npx prisma db push --schema=./prisma/schema.prod.prisma",
     "docker:dev": "docker system prune -f && docker build -f dev.Dockerfile -t arifariofficial/sipe-dev . && docker push arifariofficial/sipe-dev:latest",
     "docker:push": "docker build --platform linux/amd64 -t arifariofficial/sipe . && docker push arifariofficial/sipe:latest",
     "docker:deploy": "docker compose pull frontend && docker compose up"
@@ -63,6 +61,7 @@
     "next-auth": "^5.0.0-beta.22",
     "next-themes": "^0.3.0",
     "nodemailer": "^6.9.15",
+    "ollama-ai-provider": "^0.15.2",
     "openai": "^4.67.3",
     "pdf-parse": "^1.1.1",
     "react": "^18.3.1",
