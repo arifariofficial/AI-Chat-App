@@ -1,0 +1,49 @@
+/*styles/Home.module.css */
+
+.container {
+  @apply flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-5 font-sans mt-[-60px];
+}
+
+.header {
+  @apply text-center;
+}
+
+.title {
+  @apply text-[3rem] text-title m-0;
+}
+
+.subtitle {
+  @apply text-[1.5rem] text-subtitle;
+}
+
+.section {
+  @apply max-w-[600px] m-5 p-5 rounded-lg bg-backgroundSecondary shadow-md;
+}
+
+.sectionTitle {
+  @apply text-[2rem] mb-2 text-sectionTitle;
+}
+
+.sectionText {
+  @apply text-[1rem] leading-[1.5] mb-4;
+}
+
+.ctaSection {
+  @apply mt-10 text-center;
+}
+
+.ctaTitle {
+  @apply text-[2rem] text-ctaTitle;
+}
+
+.ctaText {
+  @apply text-base leading-[1.5];
+}
+
+.link {
+  @apply text-link underline;
+}
+
+.boldBlue {
+  @apply font-bold text-blue-700;
+}

@@ -1,22 +1,7 @@
-import Link from "next/link";
-import { Button } from "@components/ui/button";
+import Etusivu from "@components/etusivu/etusivu";
 
 const Home = () => {
-  return (
-    <div className="flex h-screen flex-col items-center justify-center gap-1">
-      <Link href="/query" passHref>
-        <Button variant="outline" className="w-[300px]">
-          Quick query
-        </Button>
-      </Link>
-
-      <Link href="/chat" passHref>
-        <Button variant="outline" className="w-[300px]">
-          Chat
-        </Button>
-      </Link>
-    </div>
-  );
+  return <Etusivu />;
 };
 
 export default Home;

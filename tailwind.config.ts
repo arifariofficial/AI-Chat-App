@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
+import typography from "@tailwindcss/typography";
 
 const config = {
   darkMode: ["class"],
@@ -18,13 +20,27 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["Arial", "ui-sans-serif", "system-ui", "sans-serif"],
+      },
+      backgroundImage: {
+        "navBarGradient-light": "linear-gradient(to right, #0056b3, #00aaff)",
+        "navBarGradient-dark": "linear-gradient(to right, #252424, #574f4f)",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
+        backgroundSecondary: "hsl(var(--background-secondary))",
         foreground: "hsl(var(--foreground))",
         foregroundNav: "hsl(var(--foreground-nav))",
+
+        title: "hsl(var(--title))",
+        subtitle: "hsl(var(--subtitle))",
+        sectionTitle: "hsl(var(--section-title))",
+        ctaTitle: "hsl(var(--cta-title))",
+        link: "hsl(var(--link))",
 
         primary: {
           DEFAULT: "hsl(var(--primary))",
@@ -83,7 +99,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [tailwindcssAnimate, typography],
 } satisfies Config;
 
 export default config;
