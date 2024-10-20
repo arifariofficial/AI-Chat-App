@@ -271,6 +271,7 @@ const getLinkskorvaamiKriisinhallintatehtava = async (): Promise<Links[]> => {
   return linksArr;
 };
 
+// Fetch the essay and ToC
 const getEssaySosiaaliturvaopas = async () => {
   const essay: SIPEEssay = {
     title: "Sosiaaliturvaopas 2018",
@@ -279,16 +280,27 @@ const getEssaySosiaaliturvaopas = async () => {
     length: 0,
     tokens: 0,
     chunks: [],
+    toc: {}, // Initialize as empty object
   };
+
   try {
+    // Fetch the PDF data
     const response = await axios.get(BASE_URL.Sosiaaliturvaopas, {
       responseType: "arraybuffer",
     });
 
     const pdfData = await pdfParse(response.data);
 
+    // Clean the extracted text
+    const cleanedText = cleanPDFText(pdfData.text);
+
     // Populate essay fields
-    essay.content = pdfData.text;
+    essay.content = cleanedText;
+    essay.length = cleanedText.length;
+    essay.tokens = countTokens(cleanedText); // Replace with your token counting logic
+    // Extract ToC and associate with page numbers
+    const toc = extractTableOfContents(pdfData.text);
+    essay.toc = toc;
 
     return essay;
   } catch (error) {
@@ -302,38 +314,98 @@ const getEssaySosiaaliturvaopas = async () => {
   }
 };
 
-const getEssayLiikennevakuutuksenKorvausohjeet = async () => {
-  const essay: SIPEEssay = {
-    title: "Liikennevakuutuksen korvausohjeet 2024",
-    url: BASE_URL.LiikennevakuutuksenKorvausohjeet,
-    content: "",
-    length: 0,
-    tokens: 0,
-    chunks: [],
-  };
-  try {
-    const response = await axios.get(
-      BASE_URL.LiikennevakuutuksenKorvausohjeet,
-      {
-        responseType: "arraybuffer",
-      },
-    );
+// Extract the Table of Contents from the PDF text
+const extractTableOfContents = (text: string): Record<string, number> => {
+  const toc: Record<string, number> = {};
 
-    const pdfData = await pdfParse(response.data);
+  // Example regular expression to match section titles and page numbers
+  const tocRegex = /^(\d+\.\d+.*)\.{2,}(\d+)$/gm;
+  let match;
 
-    essay.content = pdfData.text;
-
-    return essay;
-  } catch (error) {
-    console.error(`Failed to process PDF: ${error}`);
-    if (error instanceof Error) {
-      throw new Error(
-        `Failed to process Liikennevakuutuksen korvausohjeet pdf: ${error.message}`,
-      );
-    } else {
-      throw new Error("An unknown error occurred while processing pdf file.");
-    }
+  while ((match = tocRegex.exec(text)) !== null) {
+    const sectionTitle = match[1].trim();
+    const pageNumber = parseInt(match[2], 10);
+    toc[sectionTitle] = pageNumber;
   }
+
+  return toc;
+};
+
+// Function to clean the extracted PDF text
+const cleanPDFText = (text: string): string => {
+  // Remove page numbers (e.g., "Page 1 of 10")
+  text = text.replace(/Page \d+ of \d+/g, "");
+
+  // Remove unnecessary headers or footers if applicable
+  text = text.replace(/HEADER TEXT|FOOTER TEXT/g, "");
+
+  // Remove sections with lots of periods (e.g., "......")
+  text = text.replace(/\.+/g, "");
+
+  return text.trim();
+};
+
+// Placeholder function to count tokens (adjust based on your needs)
+const countTokens = (text: string): number => {
+  return text.split(/\s+/).length; // Simple token count based on word split
+};
+
+// Function to extract metadata and structure the result into SIPEEssay type
+const getEssayLiikennevakuutuksenKorvausohjeet =
+  async (): Promise<SIPEEssay> => {
+    try {
+      const response = await axios.get(
+        "https://www.liipo.fi/media/liikennevakuutuksen-korvausohjeet-2024.pdf",
+        {
+          responseType: "arraybuffer",
+        },
+      );
+
+      const pdfData = await pdfParse(response.data);
+
+      // Split the text into lines
+      const lines: string[] = pdfData.text.split("\n");
+
+      // Initialize the essay structure
+      const essay: SIPEEssay = {
+        title: "Liikennevakuutuksen Korvausohjeet 2024",
+        url: "https://www.liipo.fi/media/liikennevakuutuksen-korvausohjeet-2024.pdf",
+        content: pdfData.text,
+        length: pdfData.text.length,
+        tokens: calculateTokens(pdfData.text),
+        chunks: [],
+        toc: {},
+      };
+
+      console.log("--- Extracting Table of Contents ---");
+
+      // Extract TOC (this is a simplified example based on page number patterns)
+      lines.forEach((line, index) => {
+        // Use a pattern matching logic for TOC lines (e.g., "Section title .... Page X")
+        const tocMatch = line.match(/(.*)\s+(\d+)$/);
+        if (tocMatch) {
+          const title = tocMatch[1].trim();
+          const pageNumber = parseInt(tocMatch[2]);
+          essay.toc[title] = pageNumber;
+          console.log(
+            `Found TOC entry: Title = "${title}", Page = ${pageNumber}`,
+          );
+        }
+      });
+
+      console.log("--- Finished Extracting TOC ---");
+      console.log("Extracted TOC:", essay.toc);
+
+      return essay;
+    } catch (error) {
+      console.error("Error during metadata extraction:", error);
+      throw error;
+    }
+  };
+// Function to calculate tokens (you can replace this with a proper tokenizer later)
+const calculateTokens = (text: string): number => {
+  // A simple tokenizer that splits by spaces
+  return text.split(/\s+/).length;
 };
 
 const getEssayLiikennevakuutuslaki = async (linkObj: {
@@ -727,14 +799,15 @@ const chunkEssay = async (essay: SIPEEssay): Promise<SIPEEssay> => {
   const essayTextChunks: string[] = [];
   let chunkText = "";
 
-  // Split content by more granular delimiters
-  const segments = content.split(/[.\n;]/); // Split by period, newline, or semicolon
+  // Split content by more granular delimiters with an additional check for paragraph breaks
+  const segments = content.split(/(?<=\.)\s+|\n\n/); // Split by periods followed by space, or paragraph breaks
 
   for (let i = 0; i < segments.length; i++) {
     const segment = segments[i];
     const segmentTokenLength = encode(segment).length;
     const chunkTextTokenLength = encode(chunkText).length;
 
+    // If adding this segment exceeds the chunk size, finalize the current chunk
     if (chunkTextTokenLength + segmentTokenLength > CHUNK_SIZE) {
       if (chunkText.trim().length > 0) {
         // Ensure only non-empty chunks are added
@@ -751,6 +824,7 @@ const chunkEssay = async (essay: SIPEEssay): Promise<SIPEEssay> => {
     essayTextChunks.push(chunkText.trim());
   }
 
+  // Map chunks into the final essay chunk structure
   const essayChunks = essayTextChunks.map((text) => {
     const trimmedText = text.trim();
 
@@ -789,20 +863,21 @@ const chunkEssay = async (essay: SIPEEssay): Promise<SIPEEssay> => {
 (async () => {
   const essays = [];
 
-  console.log("Processing Sosiaaliturvaopas...");
+  // console.log("Processing Sosiaaliturvaopas...");
 
-  const essaySosiaaliturvaopas = await getEssaySosiaaliturvaopas();
+  // const essaySosiaaliturvaopas = await getEssaySosiaaliturvaopas();
 
-  if (essaySosiaaliturvaopas) {
-    console.log("Chunking essay...", essaySosiaaliturvaopas.title);
-    const chunkedEssay = await chunkEssay(essaySosiaaliturvaopas);
-    essays.push(chunkedEssay);
-  }
+  // if (essaySosiaaliturvaopas) {
+  //   console.log("Chunking essay...", essaySosiaaliturvaopas.title);
+  //   const chunkedEssay = await chunkEssay(essaySosiaaliturvaopas);
+  //   essays.push(chunkedEssay);
+  // }
 
   console.log("Processing LiikennevakuutuksenKorvausohjeet...");
 
   const essayLiikennevakuutuksenKorvausohjeet =
     await getEssayLiikennevakuutuksenKorvausohjeet();
+
   if (essayLiikennevakuutuksenKorvausohjeet) {
     console.log(
       "Chunking essay...",

@@ -9,6 +9,7 @@ export type SIPEEssay = {
   length: number;
   tokens: number;
   chunks: SIPEChunk[];
+  toc?: Record<string, number>;
 };
 
 export type SIPEChunk = {
