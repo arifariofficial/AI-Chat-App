@@ -34,12 +34,6 @@ const NavBar = ({ session }: NavBarProps) => {
               <p className="mt-1">SIPE</p>
             </div>
           </Link>
-          {session && (
-            <Balance
-              session={session}
-              className="flex size-full items-center justify-center"
-            />
-          )}
         </section>
         <NavItemsMiddle />
         <section className="mr-1 flex items-center justify-center text-xl font-semibold hover:opacity-90">

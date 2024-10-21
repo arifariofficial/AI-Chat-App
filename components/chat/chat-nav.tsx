@@ -1,33 +1,28 @@
 import UserButtonDesktop from "@components/navbar/user-button-desktop";
-import { cn } from "@lib/utils";
 import { Session } from "next-auth";
+import { useTheme } from "next-themes";
+import { ThemeToggle } from "@components/theme-toggle-mobile";
 import Link from "next/link";
-import SvgIcon, { SvgIconProps } from "@mui/material/SvgIcon";
+import { IconHome } from "@components/ui/icons";
 
 interface ChatNavProps {
-  className?: string;
   session: Session;
 }
 
-function HomeIcon(props: SvgIconProps) {
-  return (
-    <SvgIcon {...props}>
-      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-    </SvgIcon>
-  );
-}
+const ChatNav = ({ session }: ChatNavProps) => {
+  const { theme } = useTheme();
 
-const ChatNav = ({ className, session }: ChatNavProps) => {
   return (
-    <div className={cn(className, "flex w-full items-center justify-end")}>
-      <Link href="/">
-        <HomeIcon color="primary" fontSize="large" />
+    <div className="ml-auto inline-flex items-center">
+      <Link href="/" style={{ zIndex: 10 }}>
+        <IconHome className="size-7 text-primary" />
       </Link>
-      <UserButtonDesktop
-        session={session}
+      <ThemeToggle
+        className="w-10 bg-backgroundSecondary pr-2"
         variant="ghost"
-        className="w-30 overflow-hidden hover:bg-none"
+        iconClassName={theme === "light" ? "text-primary font-extrabold" : ""}
       />
+      <UserButtonDesktop session={session} variant="ghost" className="w-30" />
     </div>
   );
 };

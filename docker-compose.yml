@@ -2,15 +2,11 @@ services:
   frontend:
     platform: linux/amd64
     image: arifariofficial/sipe:latest
+    env_file:
+      - .env
     environment:
       - NODE_ENV=production
       - AUTH_URL=https://sipe.life
-      - DATABASE_HOST=postgres
-      - DATABASE_USER=${POSTGRES_USER}
-      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
-      - DATABASE_DB=${POSTGRES_DB}
-      - REDIS_HOST=${REDIS_URL}
-      - REDIS_PORT=6379
     networks:
       - sipe-network
     restart: unless-stopped
@@ -21,9 +17,10 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data/pgdataa
     volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:
@@ -35,8 +32,6 @@ services:
   adminer:
     image: adminer
     restart: always
-    ports:
-      - "8081:8081"
     networks:
       - sipe-network
 
@@ -46,6 +41,8 @@ services:
       - "6379:6379"
     networks:
       - sipe-network
+    volumes:
+      - redis-data:/data
     restart: unless-stopped
 
   nginx:
@@ -68,4 +65,6 @@ networks:
 
 volumes:
   postgres-data:
+    driver: local
+  redis-data:
     driver: local

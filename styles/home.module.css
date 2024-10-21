@@ -1,4 +1,4 @@
-/*styles/Home.module.css */
+/*styles/home.module.css */
 
 .container {
   @apply flex min-h-screen flex-col items-center justify-center bg-background p-5 font-sans text-foreground filter sm:mt-[-60px];
@@ -25,7 +25,7 @@
 }
 
 .sectionText {
-  @apply text-text mb-4 text-[1rem] leading-[1.5];
+  @apply mb-4 text-[1rem] leading-[1.5] text-text;
 }
 
 .ctaSection {
@@ -45,5 +45,5 @@
 }
 
 .boldBlue {
-  @apply text-boldBlue font-bold;
+  @apply font-bold text-boldBlue;
 }

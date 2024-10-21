@@ -8,7 +8,7 @@ interface NavItemsMiddleProps {
 
 const NavItemsMiddle = ({ className }: NavItemsMiddleProps) => {
   return (
-    <div className={cn(className, "flex justify-end w-full")}>
+    <div className={cn(className, "flex w-full justify-center")}>
       <Link href={`/`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
           <p className="text-sm">Etusivu</p>
@@ -22,11 +22,6 @@ const NavItemsMiddle = ({ className }: NavItemsMiddleProps) => {
       <Link href={`/yhteystiedot`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
           <p className="text-sm">Yhteystiedot</p>
-        </Button>
-      </Link>
-      <Link href={`/chat`} className="h-full">
-        <Button variant="nav" className="hidden size-full sm:flex">
-          <p className="text-sm">SipeAI</p>
         </Button>
       </Link>
     </div>

@@ -15,6 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Session } from "next-auth";
 import SignOutButton from "@/components/auth/signout-client";
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 
 interface UserButtonDesktopProps {
   session?: Session | null;
@@ -34,6 +35,8 @@ export default function UserButtonDesktop({
   className,
   variant,
 }: UserButtonDesktopProps) {
+  const { theme } = useTheme();
+
   if (session) {
     return (
       <div className={cn(className)}>
@@ -48,7 +51,10 @@ export default function UserButtonDesktop({
                   />
                 )}
                 <AvatarFallback className="size-full border text-3xl">
-                  <AccountCircleIcon fontSize="inherit" htmlColor="#0164c2" />
+                  <AccountCircleIcon
+                    fontSize="inherit"
+                    htmlColor={theme === "light" ? "#0164c2" : "#cbcbcb"}
+                  />
                 </AvatarFallback>
               </Avatar>
             </Button>

@@ -8,17 +8,22 @@ import { cn } from "@lib/utils";
 
 interface ThemeToggleProps {
   className?: string;
-  variant?: string;
+  variant?: "ghost" | "outline" | "secondary" | "link" | "nav" | "default";
+  iconClassName?: string;
 }
 
-export function ThemeToggle({ className }: ThemeToggleProps) {
+export function ThemeToggle({
+  className,
+  variant,
+  iconClassName,
+}: ThemeToggleProps) {
   const { setTheme, theme } = useTheme();
   const [, startTransition] = React.useTransition();
 
   return (
     <Button
-      className={cn(className, "size-full")}
-      variant="nav"
+      className={cn(className)}
+      variant={variant}
       onClick={() => {
         startTransition(() => {
           setTheme(theme === "light" ? "dark" : "light");
@@ -27,9 +32,9 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
     >
       <div>
         {!theme ? null : theme === "dark" ? (
-          <IconMoon className="size-6 transition-all" />
+          <IconMoon className={cn(iconClassName, "size-6 transition-all")} />
         ) : (
-          <IconSun className="size-6 transition-all" />
+          <IconSun className={cn(iconClassName, "size-6 transition-all")} />
         )}
         <span className="sr-only">Toggle theme</span>
       </div>
