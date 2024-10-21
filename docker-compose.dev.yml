@@ -1,0 +1,72 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    environment:
+      - NODE_ENV=production
+      - AUTH_URL=http://localhost
+      - DATABASE_HOST=postgres
+      - DATABASE_USER=${POSTGRES_USER}
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      - DATABASE_DB=${POSTGRES_DB}
+      - REDIS_HOST=${REDIS_URL}
+      - REDIS_PORT=6379
+    networks:
+      - sipe-network
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - sipe-network
+    restart: unless-stopped
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8081:8081"
+    networks:
+      - sipe-network
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - sipe-network
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - sipe-network
+    restart: unless-stopped
+    depends_on:
+      - frontend
+
+networks:
+  sipe-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local

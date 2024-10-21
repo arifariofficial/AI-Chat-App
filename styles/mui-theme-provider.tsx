@@ -17,7 +17,7 @@ const MUIThemeProvider = ({ children }: { children: React.ReactNode }) => {
         palette: {
           mode,
           primary: {
-            main: "hsl(180deg 9.36% 39.8%)",
+            main: "hsl(209deg 100% 38%)",
             light:
               mode === "dark"
                 ? "var(--background-dark)"
@@ -32,6 +32,12 @@ const MUIThemeProvider = ({ children }: { children: React.ReactNode }) => {
           MuiOutlinedInput: {
             styleOverrides: {
               root: {
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor:
+                    mode === "dark"
+                      ? "var(--border-dark)"
+                      : "var(--border-light)", // Default border color
+                },
                 "&:hover .MuiOutlinedInput-notchedOutline": {
                   borderColor:
                     mode === "dark"

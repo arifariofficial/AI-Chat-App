@@ -8,7 +8,6 @@
     "plugin:testing-library/react",
     "plugin:jest-dom/recommended",
     "eslint:recommended",
-    "plugin:react-hooks/recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
@@ -26,10 +25,7 @@
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { "args": "after-used", "ignoreRestSiblings": false }
-    ]
+    "@typescript-eslint/no-unused-vars": "error"
   },
   "settings": {
     "react": {

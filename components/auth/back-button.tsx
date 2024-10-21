@@ -16,7 +16,9 @@ export const BackBotton = ({ href, label }: BackBottonButtonProps) => {
       asChild
       className="w-full font-normal text-foreground"
     >
-      <Link href={href}>{label}</Link>
+      <Link href={href} className="text-link">
+        {label}
+      </Link>
     </Button>
   );
 };

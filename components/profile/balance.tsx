@@ -9,9 +9,9 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 
-import { useToast } from "@components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
-import { Button } from "@components/ui/button";
+import { Button } from "@/components/ui/button";
 
 type CreditOption = {
   value: number;
@@ -56,6 +56,7 @@ export default function Balance() {
         });
       }
     } catch (error) {
+      console.error("Error purchasing credits:", error);
       toast({
         variant: "destructive",
         description: "Something went wrong. Please try again later.",
