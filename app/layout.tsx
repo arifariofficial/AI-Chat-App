@@ -1,24 +1,15 @@
-// 1. React and Next imports
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
-
-// 2. Third-party library imports
 import { SessionProvider } from "next-auth/react";
 import { Toaster as ShadToaster } from "@/components/ui/toaster";
 import { Toaster } from "sonner";
-
-// 3. Internal components and utilities
-import NavBar from "@components/navbar/nav-bar";
 import { Providers } from "@components/providers";
 import { auth } from "@auth";
 import { cn } from "@lib/utils";
-
-// 4. Styles
 import "@/styles/globals.css";
-
-// Fonts (internal and external)
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import NavBarServer from "@components/navbar/navbar-server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -50,7 +41,7 @@ export default async function RootLayout({
           inter.className,
           GeistSans.variable,
           GeistMono.variable,
-          "bg-background text-foreground antialiased ",
+          "bg-background text-foreground antialiased",
         )}
       >
         <Toaster position="top-center" />
@@ -62,7 +53,7 @@ export default async function RootLayout({
         >
           <SessionProvider basePath="/api/auth" session={session}>
             <main className="relative flex size-full flex-col">
-              <NavBar />
+              <NavBarServer />
               {children}
               <ShadToaster />
             </main>

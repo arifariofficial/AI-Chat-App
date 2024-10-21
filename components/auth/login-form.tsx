@@ -46,6 +46,17 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
   const [success, setSuccess] = useState<string | undefined>("");
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const redirectUrl = searchParams.get("redirect") || "/";
+
+  useEffect(() => {
+    const fetchSession = async () => {
+      const session = await getSession();
+      if (session) {
+        window.location.href = redirectUrl;
+      }
+    };
+    fetchSession();
+  }, [redirectUrl]);
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -78,7 +89,7 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
           } else if (result?.type === "success") {
             setSuccess(getMessageFromCode(result.resultCode));
             setTimeout(() => {
-              window.location.href = "/";
+              window.location.href = redirectUrl;
             }, 1000);
           } else if (result?.type === "twoFactor") {
             setShowTwoFactor(true);
@@ -178,7 +189,7 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
                     <FormItem>
                       <FormControl>
                         <TextField
-                          className="border border-border/30 bg-background"
+                          className="border border-border bg-background"
                           disabled={isPending}
                           margin="normal"
                           required
@@ -241,7 +252,7 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
           </div>
           <FormError message={error || urlError} />
           <FormSucccess message={success} />
-          <Button type="submit" variant="outline" className="w-full">
+          <Button type="submit" variant="default" className="w-full">
             {isPending ? (
               <CircularProgress size="20px" className="text-foreground" />
             ) : showTwoFactor ? (

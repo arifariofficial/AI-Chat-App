@@ -27,14 +27,14 @@ export default function Etusivu() {
         </p>
       </section>
       <section className={styles.ctaSection}>
-        <p className={styles.ctaText}>
+        <div className={styles.ctaText}>
           Haluatko kuulla lisää palveluistamme?
           <p>
             <Link href="/yhteystiedot" className={styles.link}>
               Ota yhteyttä
             </Link>
           </p>
-        </p>
+        </div>
       </section>
     </div>
   );

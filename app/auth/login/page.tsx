@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function LoginPage() {
-  return <LoginForm headerLabel="Welcome Back" />;
+  return <LoginForm headerLabel="Welcome" />;
 }

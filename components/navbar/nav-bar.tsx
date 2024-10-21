@@ -3,17 +3,19 @@ import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import Balance from "./balance-button";
 import { SidebarMobile } from "@components/chat/sidebar-mobile";
 import { ChatHistory } from "@components/chat/chat-history";
-import { auth } from "@auth";
 import UserButtonMobile from "./user-button-mobile";
 import NavItemsRight from "./nav-items-right";
 import NavItemsMiddle from "./nav-items-middle";
+import { Session } from "next-auth";
 
-const NavBar = async () => {
-  const session = await auth();
+interface NavBarProps {
+  session: Session;
+}
 
+const NavBar = ({ session }: NavBarProps) => {
   return (
     <nav className="sticky top-0 z-50 rounded-b-md border-b border-b-border/20 bg-navBarGradient-light dark:bg-navBarGradient-dark">
-      <div className="mx-auto flex  h-[80px] max-w-screen-2xl justify-between">
+      <div className="mx-auto flex h-[80px] max-w-screen-2xl justify-between">
         <section className="flex items-center text-foregroundNav">
           <Link href={`/`}>
             <div className="flex gap-2 px-4 text-2xl font-extrabold tracking-wide">

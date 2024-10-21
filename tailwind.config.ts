@@ -25,7 +25,7 @@ const config = {
       },
       backgroundImage: {
         "navBarGradient-light": "linear-gradient(to right, #0056b3, #00aaff)",
-        "navBarGradient-dark": "linear-gradient(to right, #252424, #574f4f)",
+        "navBarGradient-dark": "linear-gradient(to right, #191919, #302b2b)",
       },
       colors: {
         border: "hsl(var(--border))",
@@ -35,6 +35,8 @@ const config = {
         backgroundSecondary: "hsl(var(--background-secondary))",
         foreground: "hsl(var(--foreground))",
         foregroundNav: "hsl(var(--foreground-nav))",
+        text: "hsl(var(--text))",
+        boldBlue: "hsl(var(--bold-blue))",
 
         title: "hsl(var(--title))",
         subtitle: "hsl(var(--subtitle))",

@@ -35,7 +35,6 @@ export function ModeToggle() {
         align="center"
         className="w-56 border border-border/30"
       >
-        <DropdownMenuSeparator />
         <DropdownMenuCheckboxItem
           checked={isLightMode}
           onCheckedChange={() => setTheme("light")}

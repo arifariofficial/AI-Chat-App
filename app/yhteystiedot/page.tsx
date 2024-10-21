@@ -1,4 +1,6 @@
+import Yhteystiedot from "@components/yhteystiedot/yhteystiedot";
+
 const YhteysteidotPage = () => {
-  return <div>YhteysteidotPage</div>;
+  return <Yhteystiedot />;
 };
 export default YhteysteidotPage;

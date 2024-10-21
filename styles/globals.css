@@ -3,12 +3,17 @@
 @tailwind utilities;
 
 :root {
-  height: 100%;
+  --background-light: #ffffff;
+  --background-dark: #121212;
+  --border-light: #009af1;
+  --border-dark: #444444;
+  --foreground-light: #000000;
+  --foreground-dark: #ffffff;
 }
 
 @layer base {
   :root {
-    --background: 0 0% 95.7%;
+    --background: 0 0% 95%;
     --background-secondary: 0 0 100%;
     --foreground: 0 0% 20%;
     --foreground-nav: 0 0% 100%;
@@ -19,7 +24,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 180 18.46% 15%;
 
-    --primary: 180 9.18% 40.59%;
+    --primary: 209 100% 38%;
     --primary-foreground: 50 64.29% 89.02%;
     --primary-hover: 208 100% 38%;
 
@@ -35,7 +40,7 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 180 18.46% 25.49%;
+    --border: 209 100% 38%;
     --input: 180 18.46% 25.49%;
     --ring: 222.2 84% 4.9%;
 
@@ -46,11 +51,14 @@
     --section-title: 209 100% 48%;
     --cta-title: 209 100% 48%;
     --link: 209 100% 48%;
+    --text: 0 0% 10%;
+
+    --bold-blue: 221, 72%, 53%;
   }
 
   .dark {
-    --background: 0 0% 10%;
-    --background-secondary: 0 0 15%;
+    --background: 0 0% 15%;
+    --background-secondary: 0 0 20%;
     --foreground: 0 0% 100%;
     --foreground-nav: 0 0 100%;
 
@@ -85,6 +93,9 @@
     --section-title: 0, 0%, 70%;
     --cta-title: 0, 0%, 70%;
     --link: 210, 100%, 65%;
+    --text: 0 0% 95%;
+
+    --bold-blue: 50, 100%, 85%;
   }
 
   .safe-bottom {
@@ -105,4 +116,15 @@
   .h-screen {
     height: -webkit-fill-available;
   }
+}
+
+/* Optionally, you can add theme-specific changes */
+[data-theme="light"] {
+  --background-light: #016ac6;
+  --foreground-light: #4c4d4e;
+}
+
+[data-theme="dark"] {
+  --background-dark: #4c4d4e;
+  --foreground-dark: #ffffff;
 }

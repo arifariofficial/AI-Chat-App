@@ -1,20 +1,21 @@
+import styles from "/styles/home.module.css";
 const Meista = () => {
   return (
-    <div>
-      <header>
-        <h1>Meistä</h1>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <h1 className={styles.title}>Meistä</h1>
       </header>
-      <section>
-        <h2>Visiomme ja missiomme</h2>
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Visiomme ja missiomme</h2>
 
-        <div>
-          <h3>Visio</h3>
+        <div className={styles.missionVision}>
+          <h3 className={styles.boldBlue}>Visio</h3>
           <p>
             Kuvitelkaa maailma, jossa jokainen pystyy helposti löytämään tietoa
             ja puolustamaan oikeuksiaan tasavertaisemmin.
           </p>
           <br /> {/* Empty paragraph for spacing */}
-          <h3>Missio</h3>
+          <h3 className={styles.boldBlue}>Missio</h3>
           <p>
             Tuoda tekoälyn avulla oikeudellinen tieto ja tuki kaikkien
             saataville, jotta monimutkaiset järjestelmät tai prosessit eivät
