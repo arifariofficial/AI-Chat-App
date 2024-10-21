@@ -1,7 +1,7 @@
 /*styles/Home.module.css */
 
 .container {
-  @apply mt-[-60px] flex min-h-screen flex-col items-center justify-center bg-background p-5 font-sans text-foreground filter;
+  @apply flex min-h-screen flex-col items-center justify-center bg-background p-5 font-sans text-foreground filter sm:mt-[-60px];
 }
 
 .header {

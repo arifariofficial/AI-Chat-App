@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import Balance from "./balance-button";
@@ -7,15 +9,24 @@ import UserButtonMobile from "./user-button-mobile";
 import NavItemsRight from "./nav-items-right";
 import NavItemsMiddle from "./nav-items-middle";
 import { Session } from "next-auth";
+import { usePathname } from "next/navigation";
+import { ModeToggle } from "@components/mode-toggle";
+import { ThemeToggle } from "@components/theme-toggle-mobile";
 
 interface NavBarProps {
-  session: Session;
+  session?: Session | null;
 }
 
 const NavBar = ({ session }: NavBarProps) => {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/chat")) {
+    return null;
+  }
+
   return (
     <nav className="sticky top-0 z-50 rounded-b-md border-b border-b-border/20 bg-navBarGradient-light dark:bg-navBarGradient-dark">
-      <div className="mx-auto flex h-[80px] max-w-screen-2xl justify-between">
+      <div className="mx-auto flex h-[60px] max-w-screen-2xl justify-between sm:h-[80px]">
         <section className="flex items-center text-foregroundNav">
           <Link href={`/`}>
             <div className="flex gap-2 px-4 text-2xl font-extrabold tracking-wide">
@@ -35,11 +46,11 @@ const NavBar = ({ session }: NavBarProps) => {
           <div className="flex size-full flex-row items-center p-px">
             <div className="flex size-full items-center justify-center">
               <SidebarMobile className="flex size-full items-center justify-center">
-                <ChatHistory session={session} />
+                {session && <ChatHistory session={session} />}
               </SidebarMobile>
             </div>
-
             <NavItemsRight session={session} />
+            <ThemeToggle className="flex sm:hidden" />
             <UserButtonMobile
               session={session}
               className="flex size-full sm:hidden"

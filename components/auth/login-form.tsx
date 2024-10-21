@@ -29,6 +29,7 @@ import { getSession } from "next-auth/react";
 import { FormSucccess } from "@components/form-success";
 import { Button } from "@components/ui/button";
 import { VisibilityIcon, VisibilityOffIcon } from "@components/ui/icons";
+import { useTheme } from "next-themes";
 
 interface LoginFormProps {
   headerLabel: string;
@@ -47,6 +48,7 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const redirectUrl = searchParams.get("redirect") || "/";
+  const { theme } = useTheme();
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -57,16 +59,6 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
     };
     fetchSession();
   }, [redirectUrl]);
-
-  useEffect(() => {
-    const fetchSession = async () => {
-      const session = await getSession();
-      if (session) {
-        window.location.href = "/";
-      }
-    };
-    fetchSession();
-  }, []);
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -252,7 +244,11 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
           </div>
           <FormError message={error || urlError} />
           <FormSucccess message={success} />
-          <Button type="submit" variant="default" className="w-full">
+          <Button
+            type="submit"
+            variant={theme === "dark" ? "outline" : "default"}
+            className="w-full"
+          >
             {isPending ? (
               <CircularProgress size="20px" className="text-foreground" />
             ) : showTwoFactor ? (

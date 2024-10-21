@@ -8,6 +8,7 @@ import { cn } from "@lib/utils";
 
 interface ThemeToggleProps {
   className?: string;
+  variant?: string;
 }
 
 export function ThemeToggle({ className }: ThemeToggleProps) {
@@ -16,15 +17,14 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
 
   return (
     <Button
-      className={cn(className, "w-full")}
-      variant="ghost"
+      className={cn(className, "size-full")}
+      variant="nav"
       onClick={() => {
         startTransition(() => {
           setTheme(theme === "light" ? "dark" : "light");
         });
       }}
     >
-      <p className="text-2xl font-bold">Switch Theme</p>
       <div>
         {!theme ? null : theme === "dark" ? (
           <IconMoon className="size-6 transition-all" />
