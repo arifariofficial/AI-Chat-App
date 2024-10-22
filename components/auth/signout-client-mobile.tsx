@@ -15,6 +15,7 @@ interface SignOutButtonMobileProps {
     | "secondary"
     | "ghost"
     | "link"
+    | "navMobile"
     | null
     | undefined;
 }
@@ -29,7 +30,7 @@ const SignOutButtonMobile = ({
 
   return (
     <Button variant={variant} onClick={handleSignOut} className={cn(className)}>
-      <p className="text-2xl font-bold"> Sign Out</p>
+      <p className="text-2xl font-bold">Kirjaudu ulos</p>
       <LogoutIcon />
     </Button>
   );

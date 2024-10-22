@@ -27,7 +27,7 @@ export const CardWrapper = ({
   return (
     <Card
       className={cn(
-        "w-full max-w-sm rounded-md bg-background p-5 brightness-100 filter md:border md:border-border md:p-7 md:shadow-xl",
+        "w-full max-w-sm rounded-md p-5 brightness-100 filter sm:bg-backgroundSecondary md:border md:border-border md:p-7 md:shadow-xl",
         className,
       )}
     >
@@ -43,7 +43,7 @@ export const CardWrapper = ({
             </Grid>
             <Grid item>
               <Typography variant="body2" px={2}>
-                Or continue with
+                Tai jatka käyttäen
               </Typography>
             </Grid>
             <Grid item xs>

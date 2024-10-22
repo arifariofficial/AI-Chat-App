@@ -148,7 +148,7 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
                           fullWidth
                           size="small"
                           id="email"
-                          label="Email Address"
+                          label="Sähköposti"
                           autoFocus
                           autoComplete="current-email"
                           value={value}
@@ -189,7 +189,7 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
                           size="small"
                           id="password"
                           name="password"
-                          label="Password"
+                          label="Salasana"
                           value={value}
                           onChange={onChange}
                           onBlur={onBlur}
@@ -234,7 +234,7 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
                         asChild
                         className="mb-2 px-0 font-normal text-foreground"
                       >
-                        <Link href="/auth/reset">Forgot password?</Link>
+                        <Link href="/auth/reset">Unohditko salasanan?</Link>
                       </Button>
                     </FormItem>
                   )}
@@ -252,9 +252,9 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
             {isPending ? (
               <CircularProgress size="20px" className="text-foreground" />
             ) : showTwoFactor ? (
-              "Confirm"
+              "Vahvista"
             ) : (
-              "Log in"
+              "Kirjaudu sisään"
             )}
           </Button>
         </Box>

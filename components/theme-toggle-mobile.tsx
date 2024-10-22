@@ -22,6 +22,7 @@ export function ThemeToggle({
 
   return (
     <Button
+      style={{ zIndex: 10 }}
       className={cn(className)}
       variant={variant}
       onClick={() => {
@@ -32,9 +33,9 @@ export function ThemeToggle({
     >
       <div>
         {!theme ? null : theme === "dark" ? (
-          <IconMoon className={cn(iconClassName, "size-6 transition-all")} />
+          <IconMoon className={cn(iconClassName, "size-7 transition-all")} />
         ) : (
-          <IconSun className={cn(iconClassName, "size-6 transition-all")} />
+          <IconSun className={cn(iconClassName, "size-7 transition-all")} />
         )}
         <span className="sr-only">Toggle theme</span>
       </div>

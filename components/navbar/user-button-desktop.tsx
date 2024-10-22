@@ -20,6 +20,7 @@ import { useTheme } from "next-themes";
 interface UserButtonDesktopProps {
   session?: Session | null;
   className?: string;
+  style?: React.CSSProperties;
   variant?:
     | "nav"
     | "outline"
@@ -34,6 +35,7 @@ export default function UserButtonDesktop({
   session,
   className,
   variant,
+  style,
 }: UserButtonDesktopProps) {
   const { theme } = useTheme();
 
@@ -41,7 +43,11 @@ export default function UserButtonDesktop({
     return (
       <div className={cn(className)}>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild className="text-foreground">
+          <DropdownMenuTrigger
+            asChild
+            className="text-foreground"
+            style={style}
+          >
             <Button variant={variant} className="w-42 h-full">
               <Avatar className="size-8">
                 {session.user.image && (

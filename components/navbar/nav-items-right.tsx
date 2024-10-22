@@ -15,7 +15,7 @@ function NavItemsRight({ className, session }: NavItemsMRightProps) {
     <div className={cn(className, "mr-1 hidden h-full items-center sm:flex")}>
       <Link href={`/chat`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
-          <p className="text-sm">SipeAI</p>
+          <p className="text-lg font-bold">SipeAI</p>
         </Button>
       </Link>
       <ModeToggle />

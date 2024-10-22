@@ -13,7 +13,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 95%;
+    --background: 0 0% 97%;
     --background-secondary: 0 0 100%;
     --foreground: 0 0% 20%;
     --foreground-nav: 0 0% 100%;
@@ -57,8 +57,8 @@
   }
 
   .dark {
-    --background: 0 0% 15%;
-    --background-secondary: 0 0 20%;
+    --background: 0 0% 10%;
+    --background-secondary: 0 0 15%;
     --foreground: 0 0% 100%;
     --foreground-nav: 0 0 100%;
 

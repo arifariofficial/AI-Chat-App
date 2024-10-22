@@ -16,7 +16,7 @@ export default function ChatModal({
       <ChatPageSkeleton />
       {showModal && (
         <div className="absolute inset-x-0 flex h-[calc(100vh-70px)] w-full items-center justify-center font-semibold md:mt-auto">
-          <div className="flex w-[250px] max-w-[400px] flex-col items-center justify-center rounded-xl border border-border/20 bg-backgroundSecondary p-4 text-foreground shadow-2xl sm:h-[180px] sm:w-[350px]">
+          <div className="flex w-[300px] max-w-[400px] flex-col items-center justify-center rounded-xl border border-border/20 bg-backgroundSecondary p-4 text-foreground shadow-2xl sm:h-[180px] sm:w-[350px]">
             <p className="p-4 text-foreground">Please Sign In </p>
             <Button
               variant="outline"
@@ -34,7 +34,7 @@ export default function ChatModal({
                 >
                   <span className="font-extrabold text-blue-900 hover:cursor-pointer dark:text-green-900">
                     {" "}
-                    Click Here
+                    Click here
                   </span>
                 </Link>
               </p>

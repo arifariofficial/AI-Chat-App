@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
-import Balance from "./balance-button";
 import { SidebarMobile } from "@components/chat/sidebar-mobile";
 import { ChatHistory } from "@components/chat/chat-history";
 import UserButtonMobile from "./user-button-mobile";
@@ -10,7 +9,6 @@ import NavItemsRight from "./nav-items-right";
 import NavItemsMiddle from "./nav-items-middle";
 import { Session } from "next-auth";
 import { usePathname } from "next/navigation";
-import { ModeToggle } from "@components/mode-toggle";
 import { ThemeToggle } from "@components/theme-toggle-mobile";
 
 interface NavBarProps {
@@ -44,7 +42,7 @@ const NavBar = ({ session }: NavBarProps) => {
               </SidebarMobile>
             </div>
             <NavItemsRight session={session} />
-            <ThemeToggle className="flex sm:hidden" />
+            <ThemeToggle className="flex size-full sm:hidden" variant="nav" />
             <UserButtonMobile
               session={session}
               className="flex size-full sm:hidden"

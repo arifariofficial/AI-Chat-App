@@ -15,6 +15,7 @@ interface SignInButtonMobileProps {
     | "secondary"
     | "ghost"
     | "link"
+    | "navMobile"
     | null
     | undefined;
 }
@@ -29,8 +30,8 @@ const SignInButtonMobile = ({
 
   return (
     <Button variant={variant} onClick={handleSignOut} className={cn(className)}>
-      <p className="text-2xl font-bold"> Sign In</p>
-      <LoginIcon className="mr-2" />
+      <p className="text-2xl font-bold">Kirjaudu sisään</p>
+      <LoginIcon />
     </Button>
   );
 };

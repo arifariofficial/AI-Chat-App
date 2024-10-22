@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Session } from "next-auth";
-import { ThemeToggle } from "@/components/theme-toggle-mobile";
 import { cn } from "@/lib/utils";
 import {
   Sheet,
@@ -12,21 +11,29 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Separator } from "@/components/ui/separator";
 import SignOutButtonMobile from "@/components/auth/signout-client-mobile";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
-import { UserIcon } from "../ui/icons";
+import {
+  IconAboutUs,
+  IconChat,
+  IconContact,
+  IconHome,
+  UserIcon,
+} from "../ui/icons";
 import SignInButtonMobile from "@components/auth/signin-client-mobile";
+import { Separator } from "@components/ui/separator";
 
 interface UserButtonMobileProps {
   session?: Session | null;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 export default function UserButtonMobile({
   session,
   className,
+  style,
 }: UserButtonMobileProps) {
   return (
     <div className={cn(className)}>
@@ -34,12 +41,13 @@ export default function UserButtonMobile({
         <SheetTrigger
           asChild
           className="flex min-w-0 items-center justify-center px-2"
+          style={style}
         >
           <Button variant="nav" className={cn(className, "mr-1")}>
-            <HamburgerMenuIcon className="size-7" />
+            <HamburgerMenuIcon className="size-8 w-10" />
           </Button>
         </SheetTrigger>
-        <SheetContent className="inset-y-0 flex max-h-screen w-full flex-col justify-start gap-1 sm:hidden">
+        <SheetContent className="inset-y-0 flex max-h-screen w-full flex-col justify-start gap-1 bg-backgroundSecondary text-title sm:hidden">
           <DialogTitle className="sr-only">Mobile Navigation Menu</DialogTitle>
           <DialogDescription className="sr-only">
             Navigate through the menu options using the buttons.
@@ -50,15 +58,15 @@ export default function UserButtonMobile({
                 {session.user.image && (
                   <AvatarImage
                     src={session.user.image}
-                    alt={session.user.name || "Name not available"}
+                    alt={session.user.name || "Nimi ei saatavilla"}
                   />
                 )}
                 <AvatarFallback className="size-28 rounded-none">
-                  No Image
+                  Ei kuvaa
                 </AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-xl">{session.user.name || "No Name"}</p>
+                <p className="text-xl">{session.user.name || "Ei nimeä"}</p>
                 <p>{session.user.email}</p>
               </div>
             </SheetHeader>
@@ -67,14 +75,15 @@ export default function UserButtonMobile({
           {/* { Account } */}
           {session && (
             <>
+              <Separator />
               <SheetClose asChild className="h-[60px]">
                 <Button
-                  variant="ghost"
+                  variant="navMobile"
                   asChild
                   className="flex justify-between px-7"
                 >
                   <Link className="" href="/profile">
-                    <p className="text-2xl font-bold">Account</p>
+                    <p className="text-2xl font-bold">Tili</p>
                     <UserIcon />
                   </Link>
                 </Button>
@@ -85,29 +94,66 @@ export default function UserButtonMobile({
           {!session && <div className="h-[50px]" />}
           <SheetClose asChild className="h-[60px]">
             <Button
-              variant="ghost"
+              variant="navMobile"
+              asChild
+              className="flex justify-between px-7"
+            >
+              <Link className="" href="/chat">
+                <p className="text-2xl font-bold">SipeAI</p>
+                <IconChat />
+              </Link>
+            </Button>
+          </SheetClose>
+          <SheetClose asChild className="h-[60px]">
+            <Button
+              variant="navMobile"
               asChild
               className="flex justify-between px-7"
             >
               <Link className="" href="/">
                 <p className="text-2xl font-bold">Etusivu</p>
-                <UserIcon />
+                <IconHome />
               </Link>
             </Button>
           </SheetClose>
+          <SheetClose asChild className="h-[60px]">
+            <Button
+              variant="navMobile"
+              asChild
+              className="flex justify-between px-7"
+            >
+              <Link className="" href="/meista">
+                <p className="text-2xl font-bold">Meistä</p>
+                <IconAboutUs />
+              </Link>
+            </Button>
+          </SheetClose>
+          <SheetClose asChild className="h-[60px]">
+            <Button
+              variant="navMobile"
+              asChild
+              className="flex justify-between px-7"
+            >
+              <Link className="" href="/yhteystiedot">
+                <p className="text-2xl font-bold">Yhteystiedot</p>
+                <IconContact />
+              </Link>
+            </Button>
+          </SheetClose>
+
           <div>
             {session ? (
               <SheetClose asChild>
                 <SignOutButtonMobile
                   className="flex h-[60px] w-full justify-between px-7"
-                  variant="ghost"
+                  variant="navMobile"
                 />
               </SheetClose>
             ) : (
               <SheetClose asChild>
                 <SignInButtonMobile
                   className="flex h-[60px] w-full justify-between px-7"
-                  variant="ghost"
+                  variant="navMobile"
                 />
               </SheetClose>
             )}

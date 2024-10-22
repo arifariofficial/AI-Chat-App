@@ -38,7 +38,7 @@ export default function ChatLayout({ children }: ChatLayoutProps) {
   }
 
   return (
-    <div className="mx-auto flex size-full min-h-screen flex-row bg-backgroundSecondary">
+    <div className="mx-auto flex size-full h-screen flex-row bg-backgroundSecondary">
       <div
         className={`hidden items-center bg-muted duration-300 ease-in-out md:block ${isSidebarOpen ? "w-96" : "w-0"} overflow-hidden`}
       >
