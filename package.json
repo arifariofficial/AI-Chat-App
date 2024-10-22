@@ -12,8 +12,9 @@
     "analyze": "ANALYZE=true next build",
     "scrape": "tsx scripts/scrape.ts",
     "embed": "tsx scripts/embed.ts",
-    "db-gen:dev": "npx prisma generate --schema=./prisma/schema.dev.prisma",
-    "db-gen:prod": "npx prisma generate --schema=./prisma/schema.prod.prisma",
+    "db-gen": "npx prisma generate --schema=./prisma/schema.dev.prisma",
+    "db-migrate:dev": "npx prisma migrate dev --name init --schema=./prisma/schema.dev.prisma",
+    "db-migrate": "npx prisma generate --schema=./prisma/schema.prisma",
     "docker:dev": "docker system prune -f && docker build -f dev.Dockerfile -t arifariofficial/sipe-dev . && docker push arifariofficial/sipe-dev:latest",
     "docker:push": "docker build --platform linux/amd64 -t arifariofficial/sipe . && docker push arifariofficial/sipe:latest",
     "docker:deploy": "docker compose pull frontend && docker compose up"
@@ -29,7 +30,7 @@
     "@mui/icons-material": "^6.1.4",
     "@mui/material": "^6.1.4",
     "@next/bundle-analyzer": "^14.2.15",
-    "@prisma/client": "^5.21.0",
+    "@prisma/client": "^5.21.1",
     "@radix-ui/react-alert-dialog": "^1.1.2",
     "@radix-ui/react-avatar": "^1.1.1",
     "@radix-ui/react-dialog": "^1.1.2",
@@ -103,7 +104,7 @@
     "eslint-plugin-testing-library": "^6.3.0",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
-    "prisma": "^5.21.0",
+    "prisma": "^5.21.1",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3"
   }
