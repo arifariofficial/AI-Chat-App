@@ -13,8 +13,6 @@ services:
     depends_on:
       - postgres
       - redis
-    command: >
-      sh -c "node server.js & npx prisma migrate deploy && fg"
 
   postgres:
     image: postgres:latest
