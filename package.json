@@ -13,8 +13,7 @@
     "scrape": "tsx scripts/scrape.ts",
     "embed": "tsx scripts/embed.ts",
     "db-gen": "npx prisma generate --schema=./prisma/schema.dev.prisma",
-    "db-migrate:dev": "npx prisma migrate dev --name init --schema=./prisma/schema.dev.prisma",
-    "db-migrate": "npx prisma generate --schema=./prisma/schema.prisma",
+    "db-migrate": "npx prisma migrate dev --name --schema=./prisma/schema.dev.prisma",
     "docker:dev": "docker system prune -f && docker build -f dev.Dockerfile -t arifariofficial/sipe-dev . && docker push arifariofficial/sipe-dev:latest",
     "docker:push": "docker build --platform linux/amd64 -t arifariofficial/sipe . && docker push arifariofficial/sipe:latest",
     "docker:deploy": "docker compose pull frontend && docker compose up"
