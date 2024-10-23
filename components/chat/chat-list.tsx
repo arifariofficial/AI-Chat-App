@@ -61,18 +61,18 @@ export function ChatList({ messages, className }: ChatListProps) {
       ref={containerRef}
       className={cn(
         className,
-        "absolute flex size-full flex-col items-start overflow-y-auto text-foreground sm:pr-6",
+        "absolute flex size-full flex-col items-start overflow-y-auto px-2 text-foreground sm:max-w-screen-md sm:px-10 md:max-w-screen-lg",
       )}
       style={{
         scrollbarColor: "transparent transparent",
       }}
     >
-      <div className="mr-8 p-6">
+      <div className="">
         {messages.map((message, index) => (
           <div key={message.id}>
-            <div className="flex flex-col">{message.display}</div>
+            <div className="mr-10 flex flex-col">{message.display}</div>
             {index < messages.length - 1 && (
-              <Separator className="my-6 bg-background" />
+              <Separator className="my-8 h-0 border-none" />
             )}
           </div>
         ))}

@@ -43,16 +43,18 @@ function Chat({ id, session }: ChatProps) {
 
   useEffect(() => {
     setNewChatId(id);
-    console.log("chatid", id);
   }, [id, setNewChatId]);
 
   const { messagesRef, scrollRef, visibilityRef, isAtBottom, scrollToBottom } =
     useScrollAnchor();
 
   return (
-    <div className="mx-auto flex size-full max-w-screen-md" ref={scrollRef}>
+    <div
+      className="relative z-10 mx-auto flex size-full sm:max-w-screen-md lg:max-w-screen-lg"
+      ref={scrollRef}
+    >
       <div className="mx-auto flex size-full flex-col" ref={messagesRef}>
-        <div className="relative flex size-full">
+        <div className="relative flex size-full justify-center">
           {messages?.length ? (
             <ChatList messages={messages} className="" />
           ) : (
@@ -60,6 +62,7 @@ function Chat({ id, session }: ChatProps) {
           )}
         </div>
         <div className="h-px w-full" ref={visibilityRef} />
+        {/* Chat Input container */}
         <div className="flex w-full">
           <ChatPanel
             input={input}

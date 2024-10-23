@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background-light: #ffffff;
-  --background-dark: #121212;
-  --border-light: #009af1;
-  --border-dark: #444444;
-  --foreground-light: #000000;
-  --foreground-dark: #ffffff;
-}
-
 @layer base {
   :root {
     --background: 0 0% 97%;
@@ -54,6 +45,14 @@
     --text: 0 0% 10%;
 
     --bold-blue: 221, 72%, 53%;
+
+    /* Mui CSS variable */
+    --background-light: #ffffff;
+    --background-dark: #121212;
+    --border-light: #009af1;
+    --border-dark: #444444;
+    --foreground-light: #000000;
+    --foreground-dark: #ffffff;
   }
 
   .dark {
@@ -106,9 +105,29 @@
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
+
+  /* Optionally, apply to all pseudo-elements as well */
+  *::before,
+  *::after {
+    box-sizing: border-box; /* Add this line for pseudo-elements */
+  }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Scrollbar hiding */
+  .scroll-container {
+    -webkit-overflow-scrolling: touch; /* Enables smooth scrolling on iOS */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  /* Hide scrollbar for WebKit-based browsers (Chrome, Safari) */
+  .scroll-container::-webkit-scrollbar {
+    display: none;
   }
 }
 

@@ -51,50 +51,51 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
   ];
 
   return (
+    /* Chat Input container */
     <div className={cn(className, "mx-auto flex size-full flex-col")}>
       {messages.length === 0 && (
-        <div
-          className="absolute bottom-[100px] mx-auto flex w-full flex-row gap-2 overflow-x-scroll border text-center sm:bottom-[130px] sm:mb-4"
-          style={{
-            scrollbarColor: "transparent transparent",
-          }}
-        >
-          {exampleMessages.map((example, index) => (
-            <div
-              key={example.heading}
-              className={`cursor-pointer rounded-lg border border-border/30 bg-background p-1 shadow-sm hover:bg-foreground/5 sm:block sm:min-w-[300px] ${
-                index > 1 && "hidden"
-              }`}
-              onClick={async () => {
-                setIsLoading(true);
-                setMessages((currentMessages) => [
-                  ...currentMessages,
-                  {
-                    id: nanoid(),
-                    display: <UserMessage>{example.message}</UserMessage>,
-                  },
-                ]);
+        /* Example message outer container absolute */
+        <div className="scroll-container absolute bottom-[100px] left-5 flex w-full justify-start overflow-x-scroll sm:bottom-[130px] sm:left-12 sm:mb-4 md:left-16">
+          {/* Inner container for example message */}
+          <div className="z-50 flex max-w-screen-sm flex-row gap-2 text-center">
+            {exampleMessages.map((example, index) => (
+              <div
+                key={example.heading}
+                /* example meassage container */
+                className={`sm:block" } z-50 w-[165px] flex-shrink-0 cursor-pointer rounded-lg border border-border/30 bg-background p-1 shadow-sm hover:bg-foreground/5 sm:w-[300px]`}
+                onClick={async () => {
+                  setIsLoading(true);
+                  setMessages((currentMessages) => [
+                    ...currentMessages,
+                    {
+                      id: nanoid(),
+                      display: <UserMessage>{example.message}</UserMessage>,
+                    },
+                  ]);
 
-                const responseMessage = await submitUserMessage(
-                  example.message,
-                );
+                  const responseMessage = await submitUserMessage(
+                    example.message,
+                  );
 
-                setMessages((currentMessages) => [
-                  ...currentMessages,
-                  responseMessage,
-                ]);
-                setIsLoading(false);
-                dispatch(decrement());
-              }}
-            >
-              <div className="text-xs font-semibold text-foreground/80 sm:text-sm">
-                {example.heading}
+                  setMessages((currentMessages) => [
+                    ...currentMessages,
+                    responseMessage,
+                  ]);
+                  setIsLoading(false);
+                  dispatch(decrement());
+                }}
+              >
+                <div className="text-xs font-semibold text-foreground/80 sm:text-sm">
+                  {example.heading}
+                </div>
+                <div className="text-xs text-muted-foreground sm:text-sm">
+                  {example.subheading}
+                </div>
               </div>
-              <div className="text-xs text-muted-foreground sm:text-sm">
-                {example.subheading}
-              </div>
-            </div>
-          ))}
+            ))}
+            {/* Empty div to create extra space at the end */}
+            <div className="w-[100px] flex-shrink-0" />
+          </div>
         </div>
       )}
 
