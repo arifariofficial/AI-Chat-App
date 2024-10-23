@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { UIState } from "@/lib/chat/actions";
+import { cn } from "@lib/utils";
 
 export interface ChatListProps {
   messages: UIState;
+  className?: string;
 }
 
-export function ChatList({ messages }: ChatListProps) {
+export function ChatList({ messages, className }: ChatListProps) {
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isAtBottom, setIsAtBottom] = useState(true);
@@ -57,7 +59,10 @@ export function ChatList({ messages }: ChatListProps) {
   return (
     <div
       ref={containerRef}
-      className="absolute flex size-full flex-col items-start overflow-y-auto text-foreground sm:pr-6"
+      className={cn(
+        className,
+        "absolute flex size-full flex-col items-start overflow-y-auto text-foreground sm:pr-6",
+      )}
       style={{
         scrollbarColor: "transparent transparent",
       }}

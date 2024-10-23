@@ -24,8 +24,8 @@ function Chat({ id, session }: ChatProps) {
   const [input, setInput] = useState("");
   const [messages] = useUIState();
   const [aiState] = useAIState();
-  const { loadChats } = useChats();
   const [, setNewChatId] = useLocalStorage("newChatId", id);
+  const { loadChats } = useChats();
 
   useEffect(() => {
     if (session?.user) {
@@ -37,22 +37,28 @@ function Chat({ id, session }: ChatProps) {
 
   useEffect(() => {
     if (aiState.messages?.length === 2 && session?.user?.id) {
+      loadChats(session.user.id);
       router.refresh();
     }
-  }, [aiState.messages, loadChats, router, session?.user?.id]);
+  }, [aiState.messages, router, session?.user?.id]);
 
   useEffect(() => {
     setNewChatId(id);
+    console.log("chatid", id);
   }, [id, setNewChatId]);
 
   const { messagesRef, scrollRef, visibilityRef, isAtBottom, scrollToBottom } =
     useScrollAnchor();
 
   return (
-    <div className="mx-auto flex size-full max-w-screen-md" ref={scrollRef}>
+    <div className="mx-auto flex w-full max-w-screen-lg border" ref={scrollRef}>
       <div className="mx-auto flex size-full flex-col" ref={messagesRef}>
-        <div className="relative flex size-full">
-          {messages.length ? <ChatList messages={messages} /> : <EmptyScreen />}
+        <div className="flex size-full">
+          {messages?.length ? (
+            <ChatList messages={messages} className="" />
+          ) : (
+            <EmptyScreen />
+          )}
         </div>
         <div className="h-px w-full" ref={visibilityRef} />
         <div className="flex w-full">
@@ -61,6 +67,7 @@ function Chat({ id, session }: ChatProps) {
             setInput={setInput}
             isAtBottom={isAtBottom}
             scrollToBottom={scrollToBottom}
+            className=""
           />
         </div>
       </div>
