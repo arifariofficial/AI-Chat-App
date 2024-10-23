@@ -18,13 +18,16 @@ const buttonVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost:
-          "hover:bg-backgroundSecondary hover:text-accent-foreground active:bg-background focus:bg-backgroundSecondary focus:outline-none focus-visible:border-none focus-visible:ring-0 bg-backgroundSecondary ",
+          "hover:bg-background hover:text-accent-foreground active:bg-backgroundSecondary focus:bg-background focus:outline-none focus-visible:border-none focus-visible:ring-0 bg-background",
 
         link: "text-primary underline-offset-4 hover:underline",
 
         nav: "bg-inherit text-foregroundNav hover:bg-primary-hover active:bg-transparent active:text-foregroundNav focus-visible:ring-0 hover:text-foregroundNav",
+
         navMobile:
           "bg-inherit text-title hover:bg-foreground/5 active:bg-foreground/20 focus-visible:ring-0",
+
+        inherit: "bg-inherit text-inherit",
       },
       size: {
         default: "h-9 px-4 py-2",

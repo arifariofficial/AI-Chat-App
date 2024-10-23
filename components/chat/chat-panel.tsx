@@ -58,11 +58,11 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
         <div className="scroll-container absolute bottom-[100px] left-5 flex w-full justify-start overflow-x-scroll sm:bottom-[130px] sm:left-12 sm:mb-4 md:left-16">
           {/* Inner container for example message */}
           <div className="z-50 flex max-w-screen-sm flex-row gap-2 text-center">
-            {exampleMessages.map((example, index) => (
+            {exampleMessages.map((example) => (
               <div
                 key={example.heading}
                 /* example meassage container */
-                className={`sm:block" } z-50 w-[165px] flex-shrink-0 cursor-pointer rounded-lg border border-border/30 bg-background p-1 shadow-sm hover:bg-foreground/5 sm:w-[300px]`}
+                className={`sm:block" } z-50 w-[165px] shrink-0 cursor-pointer rounded-lg border border-border/30 bg-background p-1 shadow-sm hover:bg-foreground/5 sm:w-[300px]`}
                 onClick={async () => {
                   setIsLoading(true);
                   setMessages((currentMessages) => [
@@ -94,7 +94,7 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
               </div>
             ))}
             {/* Empty div to create extra space at the end */}
-            <div className="w-[100px] flex-shrink-0" />
+            <div className="w-[100px] shrink-0" />
           </div>
         </div>
       )}

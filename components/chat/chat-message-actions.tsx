@@ -30,7 +30,11 @@ export function ChatMessageActions({
     <div className={cn("flex w-fit", className)} {...props}>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon" onClick={onCopy}>
+          <Button
+            variant="ghost"
+            onClick={onCopy}
+            className="active:bg-backgroundd bg-inherit hover:text-secondary"
+          >
             {isCopied ? <IconCheck /> : <IconCopy />}
             <span className="sr-only">Copy message</span>
           </Button>

@@ -8,7 +8,14 @@ import { cn } from "@lib/utils";
 
 interface ThemeToggleProps {
   className?: string;
-  variant?: "ghost" | "outline" | "secondary" | "link" | "nav" | "default";
+  variant?:
+    | "ghost"
+    | "outline"
+    | "secondary"
+    | "link"
+    | "nav"
+    | "default"
+    | "inherit";
   iconClassName?: string;
 }
 

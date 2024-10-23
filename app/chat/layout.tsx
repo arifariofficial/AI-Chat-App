@@ -48,7 +48,7 @@ export default function ChatLayout({ children }: ChatLayoutProps) {
         <div className="hidden items-center border-l border-border/20 sm:flex">
           <SidebarToggle />
         </div>
-        <div className="container relative flex size-full flex-col overflow-x-hidden">
+        <div className="container relative flex size-full flex-col overflow-x-hidden bg-background">
           <ChatNav session={session} />
           {children}
         </div>

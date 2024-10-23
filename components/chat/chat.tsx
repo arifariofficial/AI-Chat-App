@@ -39,7 +39,7 @@ function Chat({ id, session }: ChatProps) {
     if (aiState.messages?.length === 2 && session?.user?.id) {
       loadChats(session.user.id);
     }
-  }, [aiState.messages, router, session?.user?.id]);
+  }, [aiState.messages, router, session?.user?.id, loadChats]);
 
   useEffect(() => {
     setNewChatId(id);

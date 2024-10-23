@@ -5,6 +5,7 @@ import { ThemeToggle } from "@components/theme-toggle-mobile";
 import Link from "next/link";
 import { IconHome } from "@components/ui/icons";
 import { cn } from "@lib/utils";
+import { Button } from "@components/ui/button";
 
 interface ChatNavProps {
   session: Session;
@@ -15,26 +16,29 @@ const ChatNav = ({ session }: ChatNavProps) => {
 
   return (
     <div className="ml-auto inline-flex items-center">
-      <Link href="/" style={{ zIndex: 10 }} className="m-4 sm:m-0">
-        <IconHome
-          className={cn(
-            theme === "light" ? "text-primary" : "text-foreground",
-            "size-7",
-          )}
-        />
+      <Link href="/" style={{ zIndex: 20 }} className="m-4 sm:m-0">
+        <Button variant="inherit" className="text-foreground">
+          <IconHome
+            className={cn(
+              theme === "light" ? "text-inherit" : "text-foreground",
+              "size-7",
+            )}
+          />
+        </Button>
       </Link>
       <ThemeToggle
-        className="ml-3 hidden size-10 bg-backgroundSecondary sm:flex"
-        variant="ghost"
+        className="ml-1 hidden size-10 bg-background sm:flex"
+        variant="inherit"
         iconClassName={cn(
-          theme === "light" ? "text-primary font-extrabold" : "",
+          theme === "light" ? "text-inherit font-extrabold" : "",
           "size-9",
         )}
       />
       <UserButtonDesktop
         session={session}
-        variant="ghost"
+        variant="inherit"
         className="w-30 hidden sm:flex"
+        iconColor="#333333"
       />
     </div>
   );

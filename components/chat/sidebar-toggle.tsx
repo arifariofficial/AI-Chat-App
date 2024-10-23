@@ -16,7 +16,7 @@ export function SidebarToggle() {
   return (
     <Tooltip>
       <TooltipTrigger
-        className={`${isSidebarOpen ? "" : "border-r"} flex h-full flex-col items-center justify-evenly  border-foreground/10`}
+        className={`${isSidebarOpen ? "" : "border-r"} flex h-full flex-col items-center justify-evenly border-foreground/10 bg-background`}
       >
         <div
           className={` ${isSidebarOpen ? "hidden" : ""} inline-block rotate-180 cursor-default justify-center text-sm text-foreground/70 [writing-mode:vertical-lr]`}
@@ -24,19 +24,22 @@ export function SidebarToggle() {
           Chat History
         </div>
         <Button
-        asChild
+          asChild
           variant="ghost"
           className="hover:bg-transparen size-7 h-96 bg-transparent p-0 text-foreground/50"
           onClick={() => {
             toggleSidebar();
           }}
         >
-        <div> {isSidebarOpen ? (
-            <ChevronLeft className="size-7" strokeWidth={4} />
-          ) : (
-            <ChevronRight className="size-7" strokeWidth={4} />
-          )}
-          <span className="sr-only">Toggle Sidebar</span></div>
+          <div>
+            {" "}
+            {isSidebarOpen ? (
+              <ChevronLeft className="size-7" strokeWidth={4} />
+            ) : (
+              <ChevronRight className="size-7" strokeWidth={4} />
+            )}
+            <span className="sr-only">Toggle Sidebar</span>
+          </div>
         </Button>
         <div
           className={` ${isSidebarOpen ? "hidden" : ""} inline-block rotate-180 cursor-default justify-center text-sm text-foreground/70 [writing-mode:vertical-lr]`}

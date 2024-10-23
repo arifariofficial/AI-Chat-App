@@ -21,6 +21,7 @@ interface UserButtonDesktopProps {
   session?: Session | null;
   className?: string;
   style?: React.CSSProperties;
+  iconColor?: string;
   variant?:
     | "nav"
     | "outline"
@@ -28,7 +29,8 @@ interface UserButtonDesktopProps {
     | "destructive"
     | "secondary"
     | "ghost"
-    | "link";
+    | "link"
+    | "inherit";
 }
 
 export default function UserButtonDesktop({
@@ -36,8 +38,11 @@ export default function UserButtonDesktop({
   className,
   variant,
   style,
+  iconColor,
 }: UserButtonDesktopProps) {
   const { theme } = useTheme();
+
+  console.log(iconColor === undefined);
 
   if (session) {
     return (
@@ -59,7 +64,13 @@ export default function UserButtonDesktop({
                 <AvatarFallback className="size-full border text-3xl">
                   <AccountCircleIcon
                     fontSize="inherit"
-                    htmlColor={theme === "light" ? "#0164c2" : "#cbcbcb"}
+                    htmlColor={
+                      theme === "dark"
+                        ? "#fff"
+                        : iconColor
+                          ? iconColor
+                          : "#00a6fa"
+                    }
                   />
                 </AvatarFallback>
               </Avatar>
