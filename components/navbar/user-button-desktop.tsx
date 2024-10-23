@@ -1,8 +1,7 @@
-import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Link from "next/link";
-import { Button } from "@components/ui/button";
-import { DropdownIcon, LockIcon, UserIcon } from "@components/ui/icons";
+import { Button } from "@/components/ui/button";
+import { LockIcon, UserIcon } from "@/components/ui/icons";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,39 +10,59 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Session } from "next-auth";
-import SignOutButton from "@components/auth/signout-client";
-import { cn } from "@lib/utils";
+import SignOutButton from "@/components/auth/signout-client";
+import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 
 interface UserButtonDesktopProps {
-  session: Session | null;
+  session?: Session | null;
   className?: string;
+  style?: React.CSSProperties;
+  variant?:
+    | "nav"
+    | "outline"
+    | "default"
+    | "destructive"
+    | "secondary"
+    | "ghost"
+    | "link";
 }
 
 export default function UserButtonDesktop({
   session,
   className,
+  variant,
+  style,
 }: UserButtonDesktopProps) {
+  const { theme } = useTheme();
+
   if (session) {
     return (
       <div className={cn(className)}>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild className="text-foregroundNav sm:px-6">
-            <Button variant="nav" className=" w-42 h-full">
-              <Avatar className="size-7">
+          <DropdownMenuTrigger
+            asChild
+            className="text-foreground"
+            style={style}
+          >
+            <Button variant={variant} className="w-42 h-full">
+              <Avatar className="size-8">
                 {session.user.image && (
                   <AvatarImage
                     src={session.user.image}
                     alt={session.user.name || "Name not available"}
                   />
                 )}
-                <AvatarFallback className="size-8">
-                  <AccountCircleIcon />
+                <AvatarFallback className="size-full border text-3xl">
+                  <AccountCircleIcon
+                    fontSize="inherit"
+                    htmlColor={theme === "light" ? "#0164c2" : "#cbcbcb"}
+                  />
                 </AvatarFallback>
               </Avatar>
-              <DropdownIcon className="ml-1 hidden sm:block" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="mr-2 rounded-xl border border-border/30 shadow-xl sm:w-64">
@@ -93,8 +112,8 @@ export default function UserButtonDesktop({
         href={"/auth/login"}
         className="flex h-full flex-row items-center gap-2 font-bold"
       >
-        <LockIcon />
-        <p className="text-foregroundNav">Log in</p>
+        <LockIcon className="text-foregroundNav" />
+        <p className="text-foregroundNav">Log In</p>
       </Link>
     </Button>
   );

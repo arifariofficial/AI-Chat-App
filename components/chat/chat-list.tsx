@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { UIState } from "@/lib/chat/actions";
+import { cn } from "@lib/utils";
 
 export interface ChatListProps {
   messages: UIState;
+  className?: string;
 }
 
-export function ChatList({ messages }: ChatListProps) {
+export function ChatList({ messages, className }: ChatListProps) {
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isAtBottom, setIsAtBottom] = useState(true);
@@ -57,17 +59,20 @@ export function ChatList({ messages }: ChatListProps) {
   return (
     <div
       ref={containerRef}
-      className="absolute flex size-full flex-col items-start overflow-y-auto text-foreground sm:pr-6"
+      className={cn(
+        className,
+        "absolute flex size-full flex-col items-start overflow-y-auto px-2 text-foreground sm:max-w-screen-md sm:px-10 md:max-w-screen-lg",
+      )}
       style={{
         scrollbarColor: "transparent transparent",
       }}
     >
-      <div className="mr-8 p-6">
+      <div className="">
         {messages.map((message, index) => (
           <div key={message.id}>
-            <div className="flex flex-col">{message.display}</div>
+            <div className="mr-10 flex flex-col">{message.display}</div>
             {index < messages.length - 1 && (
-              <Separator className="my-6 bg-background" />
+              <Separator className="my-8 h-0 border-none" />
             )}
           </div>
         ))}

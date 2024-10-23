@@ -1,20 +1,22 @@
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
 import { Metadata } from "next";
-import "@/styles/globals.css";
 import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
-import { auth } from "@auth";
-import NavBar from "@components/navbar/nav-bar";
-import { cn } from "@lib/utils";
-import { Providers } from "@components/providers";
-import { Toaster } from "sonner";
-const inter = Inter({ subsets: ["latin"] });
 import { Toaster as ShadToaster } from "@/components/ui/toaster";
+import { Toaster } from "sonner";
+import { Providers } from "@components/providers";
+import { auth } from "@auth";
+import { cn } from "@lib/utils";
+import "@/styles/globals.css";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import NavBarServer from "@components/navbar/navbar-server";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SIPE | AI assistant",
-  description: "Legal AI assistant",
+  title: "Sipe AI - Innovating the Future",
+  description:
+    "Sipe AI provides intelligent solutions to help people find and utilize their rights effectively.",
   icons: "/favicon.ico",
 };
 
@@ -39,7 +41,7 @@ export default async function RootLayout({
           inter.className,
           GeistSans.variable,
           GeistMono.variable,
-          "bg-background text-foreground antialiased ",
+          "bg-background text-foreground antialiased",
         )}
       >
         <Toaster position="top-center" />
@@ -51,7 +53,7 @@ export default async function RootLayout({
         >
           <SessionProvider basePath="/api/auth" session={session}>
             <main className="relative flex size-full flex-col">
-              <NavBar />
+              <NavBarServer />
               {children}
               <ShadToaster />
             </main>

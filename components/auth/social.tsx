@@ -2,8 +2,8 @@
 
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-import { Button } from "@components/ui/button";
-import { FacebookIcon, GoogleIcon, IconSpinner } from "@components/ui/icons";
+import { Button } from "@/components/ui/button";
+import { FacebookIcon, GoogleIcon, IconSpinner } from "@/components/ui/icons";
 import { Typography } from "@mui/material";
 
 export const Social = () => {
@@ -11,7 +11,11 @@ export const Social = () => {
   const [pendingFacebook, setPendingFacebook] = useState(false);
 
   const onClick = async (provider: "facebook" | "google") => {
-    provider === "facebook" ? setPendingFacebook(true) : setPendingGoogle(true);
+    if (provider === "facebook") {
+      setPendingFacebook(true);
+    } else {
+      setPendingGoogle(true);
+    }
 
     try {
       await signIn(provider, { callbackUrl: "/" });

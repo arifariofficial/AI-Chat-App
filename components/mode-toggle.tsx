@@ -10,13 +10,13 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
+import { cn } from "@lib/utils";
 
-export function ModeToggle() {
+export function ModeToggle({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme();
   const isLightMode = theme === "light";
   const isDarkMode = theme === "dark";
@@ -24,10 +24,10 @@ export function ModeToggle() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild className={cn(className)}>
         <Button variant="nav" className="h-full">
-          <SunIcon className="size-[1.3rem]  rotate-0 scale-100 font-bold transition-all dark:-rotate-90 dark:scale-0" />
-          <MoonIcon className="absolute size-[1.3rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <SunIcon className="size-[1.4rem] rotate-0 scale-100 font-bold transition-all dark:-rotate-90 dark:scale-0" />
+          <MoonIcon className="absolute size-[1.4rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
 
           <span className="sr-only">Toggle theme</span>
         </Button>
@@ -36,10 +36,6 @@ export function ModeToggle() {
         align="center"
         className="w-56 border border-border/30"
       >
-        <DropdownMenuLabel className="flex size-full items-center justify-center">
-          Theme
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
         <DropdownMenuCheckboxItem
           checked={isLightMode}
           onCheckedChange={() => setTheme("light")}

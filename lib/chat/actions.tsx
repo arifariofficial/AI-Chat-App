@@ -3,81 +3,130 @@ import {
   createStreamableValue,
   getAIState,
   getMutableAIState,
+  streamUI,
 } from "ai/rsc";
+import { openai } from "@ai-sdk/openai";
 import { Chat, Message } from "../types";
 import { auth } from "@/auth";
-import { BotMessage, UserMessage } from "@components/chat/message";
+import {
+  BotMessage,
+  SpinnerMessage,
+  UserMessage,
+} from "@components/chat/message";
 import { nanoid } from "@lib/utils";
 import { saveChat } from "@data/save-chat";
-import { getSipeResponse } from "./sipe-api";
+import { loadEnvConfig } from "@next/env";
+import { SIPEChunk } from "@types";
+
+loadEnvConfig("");
+
+const apiKey = process.env.OPENAI_API_KEY;
 
 async function submitUserMessage(content: string) {
   "use server";
 
   const aiState = getMutableAIState<typeof AI>();
 
-  // Adding the user message to the aiState
-  aiState.update((prevState) => {
-    const newState: AIState = {
-      ...prevState,
-      messages: [
-        ...prevState.messages,
-        {
-          id: nanoid(),
-          role: "user",
-          content,
-        } as Message,
-      ],
-    };
-    return newState;
+  aiState.update({
+    ...aiState.get(),
+    messages: [
+      ...aiState.get().messages,
+      {
+        id: nanoid(),
+        role: "user",
+        content,
+      } as Message,
+    ],
   });
 
-  // Get the updated AI state to include in the API request
-  const currentState = getAIState();
+  const sipeBaseUrl =
+    process.env.NODE_ENV === "production"
+      ? "http://frontend:3000/api/search"
+      : "http://localhost:3000/api/search";
 
-  const fullConversation = currentState.messages
-    .map((msg: Message) => msg.content)
-    .join("\n");
+  const searchResponse = await fetch(sipeBaseUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ query: content, apiKey, matches: 5 }),
+  });
 
-  const fullResponse = await getSipeResponse(fullConversation);
+  const results: SIPEChunk[] = await searchResponse.json();
 
-  const chunks = fullResponse.split(" ");
-  const textStream = createStreamableValue("");
+  const prompt = `\
+  Olet sosiaaliturva-asiantuntija, joka on erikoistunut pitkäaikaissairaiden ja vammaisten henkilöiden oikeuksiin. 
 
-  // Function to simulate typing delay
-  const delay = (ms: number | undefined) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
+  Sinä ja käyttäjä voitte keskustella vakuutustapauksista Suomessa, joissa käyttäjä on joutunut onnettomuuteen ja haluaa tietää kaikki edut, joita hän voi saada vakuutusyhtiöltä tai Kelalta. Vakuutusyhtiöt pyrkivät usein salaamaan tietoa käyttäjän oikeuksista saada tukea tai rahallista korvausta.
 
-  const decoder = new TextDecoder();
+  
+  Vastaa käyttäjän kysymykseen: "${content}" keskittyen ymmärtämään heidän tilanteensa. Kysy **vain yksi** tarkentava kysymys tai anna ytimekäs vastaus annetun kontekstin perusteella.
+  
+  Viestejä, jotka ovat [], tarkoitetaan käyttöliittymäelementeiksi tai käyttäjän toiminnaksi.
 
-  // Function to update the stream gradually
-  const updateStreamGradually = async () => {
-    for (const chunk of chunks) {
-      const bytes = new TextEncoder().encode(chunk + " ");
-      const decodedString = decoder.decode(bytes); // Decode bytes to string
-      textStream.update(decodedString);
-      await delay(Math.floor(Math.random() * 60) + 30);
-    }
-    textStream.done();
-    // Adding the sipe-api message to the aiState
-    aiState.done({
-      ...aiState.get(),
-      messages: [
-        ...aiState.get().messages,
-        {
-          id: nanoid(),
-          role: "assistant",
-          content: fullResponse,
-        },
-      ],
-    });
-  };
+  ### Ohjeet:
+  - Varmista, että ymmärrät käyttäjän tilanteen tarkasti ennen kuin vastaat.
+  - Palauta **vain yksi** lyhyt ja selkeä kysymys tai vastaus, joka on suoraan yhteydessä käyttäjän tilanteeseen.
+  - Vältä tarpeetonta vastausten laajentamista. Pidä vastauksesi täsmällisenä ja asiaankuuluvana.
+  - Jos kysymys ei liity vammaisten tai pitkäaikaissairaiden oikeuksiin, **älä vastaa kysymykseen**.
+  - Vältä kaikenlaista laajentamista tai aiheeseen liittymättömiä vastauksia.
+  - Ole ystävällinen, empaattinen ja täsmällinen vastauksessasi.
+  
+  ### Konteksti:
+  ${results?.map((d) => d.content).join("\n\n")}
+  
+  Palauta vastaus tai yksi tarkentava kysymys, joka liittyy suoraan käyttäjän tilanteeseen. Jos kysymys ei liity ohjeisiin tai sosiaaliturva-asioihin, erityisesti vammaisten ja pitkäaikaissairaiden oikeuksiin, **älä vastaa kysymykseen**.
+  `;
 
-  updateStreamGradually(); // Start the streaming process
+  let textStream: undefined | ReturnType<typeof createStreamableValue<string>>;
+  let textNode: undefined | React.ReactNode;
+
+  const result = await streamUI({
+    model: openai("gpt-4o"),
+    initial: <SpinnerMessage />,
+    system: prompt,
+    temperature: 0.8,
+    messages: [
+      ...aiState.get().messages.map(
+        (message: Message) =>
+          ({
+            role: message.role,
+            content: message.content,
+            name: message.name,
+          }) as Message,
+      ),
+    ],
+    text: ({ content, done, delta }) => {
+      if (!textStream) {
+        textStream = createStreamableValue("");
+        textNode = <BotMessage content={textStream.value} />;
+      }
+
+      if (done) {
+        textStream.done();
+        aiState.done({
+          ...aiState.get(),
+          messages: [
+            ...aiState.get().messages,
+            {
+              id: nanoid(),
+              role: "assistant",
+              content,
+              name: "",
+            },
+          ],
+        });
+      } else {
+        textStream.update(delta);
+      }
+
+      return textNode;
+    },
+  });
 
   return {
     id: nanoid(),
-    display: <BotMessage content={textStream.value} />,
+    display: result.value,
   };
 }
 
@@ -107,7 +156,7 @@ export const AI = createAI<AIState, UIState>({
       const aiState = getAIState();
 
       if (aiState) {
-        const uiState = getUIStateFromAIState(aiState);
+        const uiState = getUIStateFromAIState(aiState as Chat);
         return uiState;
       }
     } else {

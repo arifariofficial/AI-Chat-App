@@ -1,8 +1,9 @@
 export type Message = {
+  name?: string;
   id: string;
   content: string;
   createdAt?: Date;
-  role: "user" | "system" | "assistant" | "tool";
+  role: "user" | "system" | "assistant";
   chatId?: string;
 };
 export interface Chat extends Record<string, unknown> {

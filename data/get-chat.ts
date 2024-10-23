@@ -42,7 +42,14 @@ export async function getChats(userId?: string | null): Promise<Chat[]> {
 
     await redis?.set(cacheKey, JSON.stringify(serializedChats), "EX", 5); // Cache for 5 minutes
 
-    return chats;
+    return chats.map((chat) => ({
+      ...chat,
+      createdAt: chat.createdAt ? new Date(chat.createdAt) : null,
+      messages: chat.messages.map((message) => ({
+        ...message,
+        createdAt: new Date(message.createdAt || Date.now()),
+      })),
+    }));
   } catch (error) {
     console.error("Error retrieving chats:", error);
     return [];
@@ -70,16 +77,21 @@ async function fetchChatFromDB(id: string, userId: string) {
       include: { messages: true },
     });
 
-    if (!chat || chat.userId !== userId) {
+    if (!chat) {
+      console.log(`No chat found with ID ${id} in the database.`);
+      return null;
+    }
+
+    if (chat.userId !== userId) {
       console.log(
-        `No chat found or user ID mismatch in DB fetch: Chat ID ${id}, User ${userId}`,
+        `User ID mismatch: chat user ID ${chat.userId}, request user ID ${userId}`,
       );
       return null;
     }
 
     const chatKey = `chat:${id}`;
     await redis?.hset(chatKey, "details", JSON.stringify(chat));
-
+    //console.log(`Chat ${id} cached successfully.`);
     return chat;
   } catch (error) {
     console.error(`Error fetching chat from database for ${id}:`, error);
@@ -91,17 +103,9 @@ async function getCachedChat(chatKey: string) {
   try {
     const cachedData = await redis?.hget(chatKey, "details");
     if (cachedData) {
-      try {
-        return JSON.parse(cachedData);
-      } catch (parseError) {
-        console.error(
-          `Error parsing JSON from Redis for ${chatKey}:`,
-          parseError,
-        );
-        throw new Error("Failed to parse chat data from Redis");
-      }
+      return JSON.parse(cachedData);
     } else {
-      console.log(`No cached data found for ${chatKey}`);
+      // console.log(`No cached data found for ${chatKey}`);
     }
   } catch (error) {
     console.error(`Error retrieving data from Redis for ${chatKey}:`, error);

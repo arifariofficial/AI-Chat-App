@@ -2,16 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body,
-:root {
-  height: 100%;
-}
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    --background: 0 0% 97%;
+    --background-secondary: 0 0 100%;
+    --foreground: 0 0% 20%;
     --foreground-nav: 0 0% 100%;
 
     --card: 0 0% 100%;
@@ -20,9 +15,9 @@ body,
     --popover: 0 0% 100%;
     --popover-foreground: 180 18.46% 15%;
 
-    --primary: 180 9.18% 40.59%;
+    --primary: 209 100% 38%;
     --primary-foreground: 50 64.29% 89.02%;
-    --primary-hover: 180 10.05% 48.53%;
+    --primary-hover: 208 100% 38%;
 
     --secondary: 183.75 16.67% 37.65%;
     --secondary-foreground: 50 100% 92%;
@@ -36,15 +31,33 @@ body,
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 180 18.46% 25.49%;
+    --border: 209 100% 38%;
     --input: 180 18.46% 25.49%;
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+
+    --title: 209, 100%, 48%;
+    --subtitle: 0, 0%, 40%;
+    --section-title: 209 100% 48%;
+    --cta-title: 209 100% 48%;
+    --link: 209 100% 48%;
+    --text: 0 0% 10%;
+
+    --bold-blue: 221, 72%, 53%;
+
+    /* Mui CSS variable */
+    --background-light: #ffffff;
+    --background-dark: #121212;
+    --border-light: #009af1;
+    --border-dark: #444444;
+    --foreground-light: #000000;
+    --foreground-dark: #ffffff;
   }
 
   .dark {
-    --background: 0 0% 12%;
+    --background: 0 0% 10%;
+    --background-secondary: 0 0 15%;
     --foreground: 0 0% 100%;
     --foreground-nav: 0 0 100%;
 
@@ -73,6 +86,15 @@ body,
     --border: 0 0% 50%;
     --input: 0 0% 100%;
     --ring: 212.7 26.8% 83.9%;
+
+    --title: 0, 0%, 70%;
+    --subtitle: 0, 0%, 70%;
+    --section-title: 0, 0%, 70%;
+    --cta-title: 0, 0%, 70%;
+    --link: 210, 100%, 65%;
+    --text: 0 0% 95%;
+
+    --bold-blue: 50, 100%, 85%;
   }
 
   .safe-bottom {
@@ -83,9 +105,29 @@ body,
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
+
+  /* Optionally, apply to all pseudo-elements as well */
+  *::before,
+  *::after {
+    box-sizing: border-box; /* Add this line for pseudo-elements */
+  }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Scrollbar hiding */
+  .scroll-container {
+    -webkit-overflow-scrolling: touch; /* Enables smooth scrolling on iOS */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  /* Hide scrollbar for WebKit-based browsers (Chrome, Safari) */
+  .scroll-container::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -93,4 +135,15 @@ body,
   .h-screen {
     height: -webkit-fill-available;
   }
+}
+
+/* Optionally, you can add theme-specific changes */
+[data-theme="light"] {
+  --background-light: #016ac6;
+  --foreground-light: #4c4d4e;
+}
+
+[data-theme="dark"] {
+  --background-dark: #4c4d4e;
+  --foreground-dark: #ffffff;
 }

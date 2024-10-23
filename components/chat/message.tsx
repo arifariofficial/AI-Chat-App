@@ -13,10 +13,10 @@ import { ChatMessageActions } from "./chat-message-actions";
 
 export function UserMessage({ children }: { children: React.ReactNode }) {
   return (
-    <div className=" flex flex-col ">
+    <div className="flex flex-col">
       <div className="flex flex-row">
         <div className="flex size-[24px] shrink-0 select-none items-center justify-center rounded-full border border-foreground/90 text-foreground/90 shadow-sm">
-          <UserIcon className=" p-[2px]" fill="currentColor" />
+          <UserIcon className="p-[2px]" fill="currentColor" />
         </div>
         <h1 className="mx-3 -mt-1 text-lg font-semibold text-foreground/90">
           Sinä
@@ -39,26 +39,29 @@ export function BotMessage({
   const { text, isStreamingDone } = useStreamableText(content);
 
   return (
+    /* Bot message container */
     <div
       className={cn(
-        "relative flex flex-col items-start font-medium text-foreground",
+        "relative flex w-full flex-col items-start font-medium text-foreground",
         className,
       )}
     >
-      <div className="flex flex-row">
-        <div className="flex size-[25px] shrink-0 select-none items-center justify-center rounded-full border border-foreground/90 text-foreground/90 shadow-sm ">
-          <LocalLibrary className="mb-px  p-[2px]" />
+      <div className="flex">
+        <div className="flex size-[25px] shrink-0 select-none items-center justify-center rounded-full border border-foreground/90 text-foreground/90 shadow-sm">
+          <LocalLibrary className="mb-px p-[2px]" />
         </div>
         <h1 className="mx-3 -mt-1 text-lg font-semibold text-foreground/90">
           Sipe
         </h1>
       </div>
-      <div className="ml-9 w-full flex-col space-y-2 px-1">
+      {/* copy + bot message container */}
+      <div className="pl-9">
         <MemoizedReactMarkdown
-          className="prose w-full break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
+          className="prose w-full max-w-none dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
           remarkPlugins={[remarkGfm, remarkMath]}
           components={{
             p({ children }) {
+              /* Bot messages most inner*/
               return <p className="mb-2 w-full last:mb-0">{children}</p>;
             },
           }}

@@ -4,7 +4,10 @@ import { useSidebar } from "@/lib/hooks/use-sidebar";
 import { cn } from "@/lib/utils";
 import { ComponentProps, useEffect, useState } from "react";
 
-export interface SidebarProps extends ComponentProps<"div"> {}
+export interface SidebarProps extends ComponentProps<"div"> {
+  customProp?: string;
+}
+
 
 export function Sidebar({ className, children }: SidebarProps) {
   const { isSidebarOpen, isLoading } = useSidebar();

@@ -50,7 +50,7 @@ const InnerMessage = styled.div`
 
 const ChatPageSkeleton = () => {
   return (
-    <div className="absolute inset-x-0 top-0 mx-auto flex h-[calc(100dvh-4rem)] w-screen max-w-screen-lg bg-transparent sm:h-[calc(100vh-70px)]">
+    <div className="absolute inset-x-0 top-0 mx-auto flex h-screen w-screen max-w-screen-lg bg-transparent sm:h-[calc(100vh-70px)]">
       <div className="flex size-full animate-pulse flex-col justify-end rounded-2xl px-4 pb-4">
         <ChatDisplay />
         <ChatInput />
@@ -65,7 +65,7 @@ const ChatInput = () => {
   return (
     <Box
       component="form"
-      className="w-full resize-none bg-transparent  opacity-30 sm:text-sm"
+      className="w-full resize-none bg-transparent opacity-30 sm:text-sm"
     >
       <TextField
         id="message"
@@ -115,7 +115,7 @@ const ChatInput = () => {
             },
           },
           "& .MuiInputAdornment-positionEnd": {
-            marginBottom: "25px",
+            marginBottom: "12px",
           },
         }}
       />
@@ -125,8 +125,8 @@ const ChatInput = () => {
 
 const ChatDisplay = () => {
   return (
-    <div className="flex size-full flex-col space-y-3 overflow-y-auto rounded-b-md rounded-t-xl sm:px-6 ">
-      <div className=" flex size-full flex-col justify-end rounded-2xl drop-shadow-xl  sm:px-4">
+    <div className="flex size-full flex-col space-y-3 overflow-y-auto rounded-b-md rounded-t-xl sm:px-6">
+      <div className="flex size-full flex-col justify-end rounded-2xl drop-shadow-xl sm:px-4">
         <Message>
           <InnerMessage>
             compare sales for allman brothers band and goo goo dolls

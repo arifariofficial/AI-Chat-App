@@ -20,13 +20,13 @@ export const Header = ({ label }: HeaderProps) => {
     <div
       className={cn(
         font,
-        "flex w-full flex-col items-center justify-center gap-1 text-foreground/60",
+        "flex w-full flex-col items-center justify-center gap-1",
       )}
     >
-      <Avatar className="p-1">
+      <Avatar className="p-1 text-foreground">
         <LockIcon />
       </Avatar>
-      <Typography component="h1" variant="h5" className="font-bold ">
+      <Typography component="h1" variant="h5" className="font-bold text-title">
         {label}
       </Typography>
     </div>
