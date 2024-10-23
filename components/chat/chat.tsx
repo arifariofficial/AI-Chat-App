@@ -38,7 +38,6 @@ function Chat({ id, session }: ChatProps) {
   useEffect(() => {
     if (aiState.messages?.length === 2 && session?.user?.id) {
       loadChats(session.user.id);
-      router.refresh();
     }
   }, [aiState.messages, router, session?.user?.id]);
 
@@ -51,9 +50,9 @@ function Chat({ id, session }: ChatProps) {
     useScrollAnchor();
 
   return (
-    <div className="mx-auto flex w-full max-w-screen-lg border" ref={scrollRef}>
+    <div className="mx-auto flex size-full max-w-screen-md" ref={scrollRef}>
       <div className="mx-auto flex size-full flex-col" ref={messagesRef}>
-        <div className="flex size-full">
+        <div className="relative flex size-full">
           {messages?.length ? (
             <ChatList messages={messages} className="" />
           ) : (

@@ -21,11 +21,6 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/chat", req.url));
   }
 
-  // If user tries to access "/new", redirect them to "/chat"
-  if (pathname.startsWith("/new")) {
-    return NextResponse.redirect(new URL("/chat", req.url));
-  }
-
   return NextResponse.next();
 }
 

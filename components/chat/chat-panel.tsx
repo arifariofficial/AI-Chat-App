@@ -53,12 +53,17 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
   return (
     <div className={cn(className, "mx-auto flex size-full flex-col")}>
       {messages.length === 0 && (
-        <div className="absolute bottom-[100px] mx-auto mb-2 flex w-full flex-row gap-2 overflow-x-scroll px-4 text-center sm:bottom-[130px] sm:mb-4">
+        <div
+          className="absolute bottom-[100px] mx-auto flex w-full flex-row gap-2 overflow-x-scroll border text-center sm:bottom-[130px] sm:mb-4"
+          style={{
+            scrollbarColor: "transparent transparent",
+          }}
+        >
           {exampleMessages.map((example, index) => (
             <div
               key={example.heading}
-              className={`cursor-pointer rounded-lg border border-border/30 bg-background p-1 shadow-sm hover:bg-foreground/5 sm:min-w-[300px] ${
-                index > 1 && "hidden md:block"
+              className={`cursor-pointer rounded-lg border border-border/30 bg-background p-1 shadow-sm hover:bg-foreground/5 sm:block sm:min-w-[300px] ${
+                index > 1 && "hidden"
               }`}
               onClick={async () => {
                 setIsLoading(true);
@@ -93,7 +98,7 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
         </div>
       )}
 
-      <div className="bottom-0 space-y-2 bg-background px-4 drop-shadow-xl sm:mx-10 sm:rounded-t-xl sm:border sm:border-border/20">
+      <div className="space-y-2 bg-background px-4 drop-shadow-xl sm:mx-10 sm:rounded-t-xl sm:border sm:border-border/20">
         <PromptForm
           input={input}
           setInput={setInput}

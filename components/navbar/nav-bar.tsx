@@ -18,7 +18,7 @@ interface NavBarProps {
 const NavBar = ({ session }: NavBarProps) => {
   const pathname = usePathname();
 
-  if (pathname.startsWith("/chat")) {
+  if (pathname.startsWith("/chat") || pathname.startsWith("/new")) {
     return null;
   }
 
