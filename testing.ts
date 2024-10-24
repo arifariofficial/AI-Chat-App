@@ -1,4 +1,4 @@
-import { SIPEEssay } from "@types";
+import { SIPEEssay } from "@/types";
 import axios from "axios";
 import PdfParse from "pdf-parse";
 

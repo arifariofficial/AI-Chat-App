@@ -11,7 +11,11 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import NavBarServer from "@/components/navbar/navbar-server";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  adjustFontFallback: false,
+});
 
 export const metadata: Metadata = {
   title: "Sipe AI - Innovating the Future",

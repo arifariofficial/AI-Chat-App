@@ -2,7 +2,7 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import pdfParse from "pdf-parse";
 import { BASE_URL } from "./prepare-links";
-import { SIPEEssay } from "@types";
+import { SIPEEssay } from "@/types";
 import { encode } from "gpt-3-encoder";
 
 // Fetch the essay and ToC

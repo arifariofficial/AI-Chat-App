@@ -1,4 +1,4 @@
-import { SIPEChunk, SIPEEssay, SIPEJSON } from "@types";
+import { SIPEChunk, SIPEEssay, SIPEJSON } from "@/types";
 
 import { encode } from "gpt-3-encoder";
 import fs from "fs";

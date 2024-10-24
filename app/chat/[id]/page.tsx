@@ -6,21 +6,20 @@ import { getChat } from "@/data/get-chat";
 
 import Chat from "@/components/chat/chat";
 
-export interface ChatPageProps {
-  params: {
-    id: string;
-  };
-}
+type Params = Promise<{ slug: string }>;
 
-export default async function ChatPage({ params }: ChatPageProps) {
+export default async function ChatPage(props: { params: Params }) {
   const session = (await auth()) as Session;
 
+  const params = await props.params;
+  const id = params.slug;
+
   if (!session?.user) {
-    redirect(`/auth/login?next=/chat/${params.id}`);
+    redirect(`/auth/login?next=/chat/${id}`);
   }
 
   const userId = session.user.id as string;
-  const chat = await getChat(params.id, userId);
+  const chat = await getChat(id, userId);
 
   if (!chat) {
     redirect("/chat");
