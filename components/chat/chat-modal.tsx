@@ -1,5 +1,5 @@
-import ChatPageSkeleton from "@components/skeletons/ChatSkeleton";
-import { Button } from "@components/ui/button";
+import ChatPageSkeleton from "@/components/skeletons/ChatSkeleton";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 interface ChatModalProps {

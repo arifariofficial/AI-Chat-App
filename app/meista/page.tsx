@@ -1,4 +1,4 @@
-import Meista from "@components/meista/meista";
+import Meista from "@/components/meista/meista";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

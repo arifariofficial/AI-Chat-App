@@ -1,9 +1,9 @@
 "use client";
 
 import { SidebarList } from "@/components/chat/sidebar-list";
-import { Button } from "@components/ui/button";
-import { IconRefresh } from "@components/ui/icons";
-import { useChats } from "@lib/hooks/useChats";
+import { Button } from "@/components/ui/button";
+import { IconRefresh } from "@/components/ui/icons";
+import { useChats } from "@/lib/hooks/useChats";
 import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
 import { Suspense, useEffect } from "react";
@@ -23,7 +23,7 @@ export function ChatHistory({ session }: { session: Session | null }) {
   }, [loadChats]);
 
   return (
-    <div className="flex h-full flex-col bg-background ">
+    <div className="flex h-full flex-col bg-background">
       <div className="flex items-center p-4">
         <h4 className="text-sm font-medium">Chat History</h4>
         <Button
@@ -46,7 +46,7 @@ export function ChatHistory({ session }: { session: Session | null }) {
           </div>
         }
       >
-        <SidebarList />
+        <SidebarList />/
       </Suspense>
     </div>
   );

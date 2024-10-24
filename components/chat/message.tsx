@@ -5,7 +5,7 @@ import { useStreamableText } from "@/lib/hooks/use-streamable-text";
 import { StreamableValue } from "ai/rsc";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
-import { UserIcon } from "@components/ui/icons";
+import { UserIcon } from "@/components/ui/icons";
 import LocalLibrary from "@mui/icons-material/LocalLibrary";
 import { MemoizedReactMarkdown } from "./markdown";
 import { spinner } from "./spinner";

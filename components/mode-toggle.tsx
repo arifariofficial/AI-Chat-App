@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
-import { cn } from "@lib/utils";
+import { cn } from "@/lib/utils";
 
 export function ModeToggle({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme();

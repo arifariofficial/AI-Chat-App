@@ -7,8 +7,8 @@ import { SidebarProvider } from "@/lib/hooks/use-sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import MUIThemeProvider from "../styles/mui-theme-provider";
 import { Provider as RuduxProvider } from "react-redux";
-import { store } from "@lib/store/store";
-import { ChatProvider } from "@lib/hooks/useChats";
+import { store } from "@/lib/store/store";
+import { ChatProvider } from "@/lib/hooks/useChats";
 
 export function Providers({ children, ...props }: ThemeProviderProps) {
   return (

@@ -5,8 +5,8 @@ import { CardWrapper } from "./card-wrapper";
 import { BeatLoader } from "react-spinners";
 import { useCallback, useEffect, useState } from "react";
 import { newVerification } from "@/actions/verification";
-import { FormSucccess } from "@components/form-success";
-import { FormError } from "@components/form-error";
+import { FormSucccess } from "@/components/form-success";
+import { FormError } from "@/components/form-error";
 
 export default function VerificationForm() {
   const [error, setError] = useState<string | undefined>("");

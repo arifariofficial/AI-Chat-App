@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useSidebar } from "@/lib/hooks/use-sidebar";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "@components/ui/icons";
+import { ChevronLeft, ChevronRight } from "@/components/ui/icons";
 import {
   Tooltip,
   TooltipContent,

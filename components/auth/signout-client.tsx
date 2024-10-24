@@ -2,8 +2,8 @@
 
 import { signOut } from "next-auth/react";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { cn } from "@lib/utils";
-import { DropdownMenuItem } from "@components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 interface SignOutButtonProps {
   className?: string;

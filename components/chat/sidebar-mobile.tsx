@@ -3,8 +3,8 @@
 import { Button } from "@/components/ui/button";
 
 import { IconSidebar } from "@/components/ui/icons";
-import { Sheet, SheetContent, SheetTrigger } from "@components/ui/sheet";
-import { cn } from "@lib/utils";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { SidebarMobileContainer } from "./sidebar-mobile-container";
 
@@ -33,7 +33,7 @@ export function SidebarMobile({ children, className }: SidebarMobileProps) {
         side="left"
         className="inset-y-0 flex h-auto w-full flex-col border p-0 sm:hidden"
       >
-        <SidebarMobileContainer className="flex ">
+        <SidebarMobileContainer className="flex">
           {children}
         </SidebarMobileContainer>
       </SheetContent>

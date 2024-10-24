@@ -11,12 +11,12 @@ import {
 } from "@/components/ui/tooltip";
 import { useEnterSubmit } from "@/lib/hooks/use-enter-submit";
 import { useRouter } from "next/navigation";
-import { IconArrowElbow, IconPlus } from "@components/ui/icons";
+import { IconArrowElbow, IconPlus } from "@/components/ui/icons";
 import { UserMessage } from "./message";
 import { CircularProgress, InputAdornment, TextField } from "@mui/material";
-import { nanoid } from "@lib/utils";
-import { decrement } from "@lib/store/balanceSlice";
-import { useAppDispatch } from "@lib/store/hook";
+import { nanoid } from "@/lib/utils";
+import { decrement } from "@/lib/store/balanceSlice";
+import { useAppDispatch } from "@/lib/store/hook";
 
 export function PromptForm({
   input,

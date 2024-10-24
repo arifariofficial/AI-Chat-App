@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
-import { SidebarMobile } from "@components/chat/sidebar-mobile";
-import { ChatHistory } from "@components/chat/chat-history";
+import { SidebarMobile } from "@/components/chat/sidebar-mobile";
+import { ChatHistory } from "@/components/chat/chat-history";
 import UserButtonMobile from "./user-button-mobile";
 import NavItemsRight from "./nav-items-right";
 import NavItemsMiddle from "./nav-items-middle";
 import { Session } from "next-auth";
 import { usePathname } from "next/navigation";
-import { ThemeToggle } from "@components/theme-toggle-mobile";
+import { ThemeToggle } from "@/components/theme-toggle-mobile";
 
 interface NavBarProps {
   session?: Session | null;

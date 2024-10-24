@@ -4,13 +4,13 @@ import { getSession, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 import React, { useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
-import { EditIcon } from "@components/ui/icons";
-import { Button } from "@components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { EditIcon } from "@/components/ui/icons";
+import { Button } from "@/components/ui/button";
 import { TextField } from "@mui/material";
-import { updateName } from "@actions/update";
-import { useToast } from "@components/ui/use-toast";
-import { sendNewVerificationEmail } from "@actions/send-verification";
+import { updateName } from "@/actions/update";
+import { useToast } from "@/components/ui/use-toast";
+import { sendNewVerificationEmail } from "@/actions/send-verification";
 
 export default function Account() {
   const { data: session, status } = useSession();
@@ -96,7 +96,7 @@ export default function Account() {
   };
 
   return (
-    <main className="mx-auto flex size-full flex-col items-center rounded-lg  bg-background text-foreground">
+    <main className="mx-auto flex size-full flex-col items-center rounded-lg bg-background text-foreground">
       <div className="mb-10 w-full">
         <h1 className="mb-1 text-2xl font-semibold">Account</h1>
         <p>Manage your account settings</p>
@@ -122,7 +122,7 @@ export default function Account() {
           </div>
         </section>
         <section className="mb-10 h-20">
-          <h2 className="border-b  border-border text-base font-semibold">
+          <h2 className="border-b border-border text-base font-semibold">
             Name
           </h2>
           <div className="m-2 flex w-full flex-row justify-between gap-2">

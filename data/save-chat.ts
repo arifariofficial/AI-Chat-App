@@ -1,18 +1,20 @@
 "use server";
 
-import { auth } from "@auth";
-import prisma from "@lib/prisma";
-import redis from "@lib/redis";
-import { Chat } from "@lib/types";
+import { auth } from "@/auth";
+import prisma from "@/lib/prisma";
+import { Chat } from "@/lib/types";
 
+// Function to save or update a chat
 export async function saveChat(chat: Chat) {
   const session = await auth();
 
+  // Ensure that a valid session exists
   if (!session || !session.user) {
     console.log("No valid session available.");
     return;
   }
 
+  // Check if the user exists
   const userExists = await prisma.user.findUnique({
     where: { id: chat.userId },
   });
@@ -23,18 +25,21 @@ export async function saveChat(chat: Chat) {
   }
 
   try {
+    // Perform a transaction to save or update the chat
     await prisma.$transaction(async (prisma) => {
-      // Fetch existing chat to compare messages
+      // Fetch the existing chat, if it exists
       const existingChat = await prisma.chat.findUnique({
         where: { id: chat.id },
         include: { messages: true },
       });
 
+      // Filter out any messages that already exist in the chat
       const newMessages = chat.messages.filter(
         (msg) => !existingChat?.messages.some((exMsg) => exMsg.id === msg.id),
       );
 
-      const updatedChat = await prisma.chat.upsert({
+      // Use Prisma's `upsert` to either update or create the chat
+      await prisma.chat.upsert({
         where: { id: chat.id },
         include: { messages: true },
         update: {
@@ -73,14 +78,6 @@ export async function saveChat(chat: Chat) {
           },
         },
       });
-
-      const chatKey = `chat:${chat.id}`;
-      const pipeline = redis?.pipeline();
-      pipeline?.hset(chatKey, "details", JSON.stringify(updatedChat));
-      await redis?.expire(chatKey, 5);
-      pipeline?.zadd(`user:chat:${chat.userId}`, Date.now(), chatKey);
-
-      await pipeline?.exec();
     });
   } catch (error) {
     console.error(`Failed to save chat: ${error}`);

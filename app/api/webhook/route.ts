@@ -1,6 +1,6 @@
-import { updateBalance } from "@data/balance";
-import prisma from "@lib/prisma";
-import { stripe } from "@lib/stripe";
+import { updateBalance } from "@/data/balance";
+import prisma from "@/lib/prisma";
+import { stripe } from "@/lib/stripe";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";

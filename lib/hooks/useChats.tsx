@@ -5,8 +5,8 @@ import React, {
   useCallback,
   ReactNode,
 } from "react";
-import { getChats } from "@data/get-chat";
-import { Chat } from "@lib/types";
+import { getChats } from "@/data/get-chat";
+import { Chat } from "@/lib/types";
 
 interface ChatContextType {
   chats: Chat[];

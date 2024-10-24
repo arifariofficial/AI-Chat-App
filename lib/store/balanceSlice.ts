@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { AppDispatch } from "./store";
-import { getBalance } from "@data/balance";
+import { getBalance } from "@/data/balance";
 
 export interface BalanceState {
   balance: number;

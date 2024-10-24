@@ -1,11 +1,11 @@
-import { FooterText } from "@components/chat/footer";
+import { FooterText } from "@/components/chat/footer";
 import { useActions, useUIState } from "ai/rsc";
 import { UserMessage } from "./message";
 import { PromptForm } from "./prompt-form";
-import { AI } from "@lib/chat/actions";
-import { cn, nanoid } from "@lib/utils";
-import { useAppDispatch } from "@lib/store/hook";
-import { decrement } from "@lib/store/balanceSlice";
+import { AI } from "@/lib/chat/actions";
+import { cn, nanoid } from "@/lib/utils";
+import { useAppDispatch } from "@/lib/store/hook";
+import { decrement } from "@/lib/store/balanceSlice";
 import { useState } from "react";
 
 export interface ChatPanelProps {
@@ -94,7 +94,7 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
               </div>
             ))}
             {/* Empty div to create extra space at the end */}
-            <div className="w-[100px] shrink-0" />
+            <div className="/shrink-0 w-[100px]" />
           </div>
         </div>
       )}

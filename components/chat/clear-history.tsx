@@ -15,9 +15,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { IconSpinner } from "@components/ui/icons";
+import { IconSpinner } from "@/components/ui/icons";
 import { useRouter } from "next/navigation";
-import { useChats } from "@lib/hooks/useChats";
+import { useChats } from "@/lib/hooks/useChats";
 import { Session } from "next-auth";
 
 interface ClearHistoryProps {

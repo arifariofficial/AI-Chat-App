@@ -3,8 +3,8 @@
 import React, { useEffect } from "react";
 import { ClearHistory } from "./clear-history";
 import { SidebarItems } from "./sidebar-items";
-import { useChats } from "@lib/hooks/useChats";
-import { clearChats } from "@data/chat";
+import { useChats } from "@/lib/hooks/useChats";
+import { clearChats } from "@/data/chat";
 import { useSession } from "next-auth/react";
 
 export function SidebarList() {

@@ -1,11 +1,11 @@
-import UserButtonDesktop from "@components/navbar/user-button-desktop";
+import UserButtonDesktop from "@/components/navbar/user-button-desktop";
 import { Session } from "next-auth";
 import { useTheme } from "next-themes";
-import { ThemeToggle } from "@components/theme-toggle-mobile";
+import { ThemeToggle } from "@/components/theme-toggle-mobile";
 import Link from "next/link";
-import { IconHome } from "@components/ui/icons";
-import { cn } from "@lib/utils";
-import { Button } from "@components/ui/button";
+import { IconHome } from "@/components/ui/icons";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 interface ChatNavProps {
   session: Session;

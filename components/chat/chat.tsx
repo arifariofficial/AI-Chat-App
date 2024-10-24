@@ -6,10 +6,10 @@ import { Session } from "next-auth";
 import { EmptyScreen } from "./empty-screen";
 import { ChatPanel } from "./chat-panel";
 import { useAIState, useUIState } from "ai/rsc";
-import { useLocalStorage } from "@lib/hooks/use-local-storage";
-import { useScrollAnchor } from "@lib/hooks/use-scroll-anchor";
-import { Message } from "@lib/types";
-import { useChats } from "@lib/hooks/useChats";
+import { useLocalStorage } from "@/lib/hooks/use-local-storage";
+import { useScrollAnchor } from "@/lib/hooks/use-scroll-anchor";
+import { Message } from "@/lib/types";
+import { useChats } from "@/lib/hooks/useChats";
 import { ChatList } from "./chat-list";
 
 export interface ChatProps extends React.ComponentProps<"div"> {

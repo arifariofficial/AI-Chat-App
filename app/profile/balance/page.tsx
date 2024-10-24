@@ -1,4 +1,4 @@
-import Balance from "@components/profile/balance";
+import Balance from "@/components/profile/balance";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -1,4 +1,4 @@
-import Account from "@components/profile/account";
+import Account from "@/components/profile/account";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

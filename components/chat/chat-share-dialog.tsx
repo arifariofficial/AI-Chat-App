@@ -15,7 +15,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useCopyToClipboard } from "@/lib/hooks/use-copy-to-clipboard";
-import { IconSpinner } from "@components/ui/icons";
+import { IconSpinner } from "@/components/ui/icons";
 
 interface ChatShareDialogProps extends DialogProps {
   chat: Pick<Chat, "id" | "title" | "messages">;

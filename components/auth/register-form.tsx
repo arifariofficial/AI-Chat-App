@@ -18,9 +18,9 @@ import {
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { getMessageFromCode } from "@lib/utils";
-import { FormSucccess } from "@components/form-success";
-import { Button } from "@components/ui/button";
+import { getMessageFromCode } from "@/lib/utils";
+import { FormSucccess } from "@/components/form-success";
+import { Button } from "@/components/ui/button";
 
 export const RegisterForm = () => {
   const [isPending, startTransition] = useTransition();

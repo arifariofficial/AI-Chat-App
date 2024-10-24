@@ -1,7 +1,7 @@
 "use server";
 
-import { sendVerificationEmail } from "@lib/mail";
-import { generateVerificationToken } from "@lib/token";
+import { sendVerificationEmail } from "@/lib/mail";
+import { generateVerificationToken } from "@/lib/token";
 
 export const sendNewVerificationEmail = async (email: string) => {
   try {

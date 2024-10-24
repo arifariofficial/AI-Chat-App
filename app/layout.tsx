@@ -3,13 +3,13 @@ import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 import { Toaster as ShadToaster } from "@/components/ui/toaster";
 import { Toaster } from "sonner";
-import { Providers } from "@components/providers";
-import { auth } from "@auth";
-import { cn } from "@lib/utils";
+import { Providers } from "@/components/providers";
+import { auth } from "@/auth";
+import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import NavBarServer from "@components/navbar/navbar-server";
+import NavBarServer from "@/components/navbar/navbar-server";
 
 const inter = Inter({ subsets: ["latin"] });
 

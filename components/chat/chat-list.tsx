@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { UIState } from "@/lib/chat/actions";
-import { cn } from "@lib/utils";
+import { cn } from "@/lib/utils";
 
 export interface ChatListProps {
   messages: UIState;

@@ -21,8 +21,8 @@ import {
   IconHome,
   UserIcon,
 } from "../ui/icons";
-import SignInButtonMobile from "@components/auth/signin-client-mobile";
-import { Separator } from "@components/ui/separator";
+import SignInButtonMobile from "@/components/auth/signin-client-mobile";
+import { Separator } from "@/components/ui/separator";
 
 interface UserButtonMobileProps {
   session?: Session | null;

@@ -1,4 +1,4 @@
-import Etusivu from "@components/etusivu/etusivu";
+import Etusivu from "@/components/etusivu/etusivu";
 
 const Home = () => {
   return <Etusivu />;

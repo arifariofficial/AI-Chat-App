@@ -3,7 +3,7 @@ import { ModeToggle } from "../mode-toggle";
 import UserButtonDesktop from "./user-button-desktop";
 import { Session } from "next-auth";
 import Link from "next/link";
-import { Button } from "@components/ui/button";
+import { Button } from "@/components/ui/button";
 
 interface NavItemsMRightProps {
   session?: Session | null;

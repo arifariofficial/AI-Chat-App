@@ -5,8 +5,8 @@ import { CardWrapper } from "./card-wrapper";
 import * as z from "zod";
 import { LoginSchema } from "@/lib/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem } from "@components/ui/form";
-import { FormError } from "@components/form-error";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { FormError } from "@/components/form-error";
 import { useEffect, useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -17,18 +17,18 @@ import {
   InputAdornment,
   TextField,
 } from "@mui/material";
-import { getMessageFromCode } from "@lib/utils";
+import { getMessageFromCode } from "@/lib/utils";
 
-import { login } from "@actions/login";
+import { login } from "@/actions/login";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@components/ui/input-otp";
+} from "@/components/ui/input-otp";
 import { getSession } from "next-auth/react";
-import { FormSucccess } from "@components/form-success";
-import { Button } from "@components/ui/button";
-import { VisibilityIcon, VisibilityOffIcon } from "@components/ui/icons";
+import { FormSucccess } from "@/components/form-success";
+import { Button } from "@/components/ui/button";
+import { VisibilityIcon, VisibilityOffIcon } from "@/components/ui/icons";
 import { useTheme } from "next-themes";
 
 interface LoginFormProps {

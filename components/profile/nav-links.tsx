@@ -4,7 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
-import { SecurityIcon, SubscriptionIcon, UserIcon } from "@components/ui/icons";
+import {
+  SecurityIcon,
+  SubscriptionIcon,
+  UserIcon,
+} from "@/components/ui/icons";
 
 const links = [
   {
@@ -32,9 +36,9 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              " text-md m-px flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-background font-medium text-foreground hover:bg-foreground/10 md:mx-1  md:justify-start md:px-4",
+              "text-md m-px flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-background font-medium text-foreground hover:bg-foreground/10 md:mx-1 md:justify-start md:px-4",
               {
-                "overflow-auto bg-foreground/10 text-foreground ":
+                "overflow-auto bg-foreground/10 text-foreground":
                   pathname === link.href,
               },
             )}

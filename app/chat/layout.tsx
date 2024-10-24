@@ -1,10 +1,10 @@
 "use client";
 
-import ChatModal from "@components/chat/chat-modal";
-import ChatNav from "@components/chat/chat-nav";
-import { SidebarDesktop } from "@components/chat/sidebar-desktop";
-import { SidebarToggle } from "@components/chat/sidebar-toggle";
-import { useSidebar } from "@lib/hooks/use-sidebar";
+import ChatModal from "@/components/chat/chat-modal";
+import ChatNav from "@/components/chat/chat-nav";
+import { SidebarDesktop } from "@/components/chat/sidebar-desktop";
+import { SidebarToggle } from "@/components/chat/sidebar-toggle";
+import { useSidebar } from "@/lib/hooks/use-sidebar";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

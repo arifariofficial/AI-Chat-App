@@ -12,11 +12,11 @@ import {
   BotMessage,
   SpinnerMessage,
   UserMessage,
-} from "@components/chat/message";
-import { nanoid } from "@lib/utils";
-import { saveChat } from "@data/save-chat";
+} from "@/components/chat/message";
+import { nanoid } from "@/lib/utils";
+import { saveChat } from "@/data/save-chat";
 import { loadEnvConfig } from "@next/env";
-import { SIPEChunk } from "@types";
+import { SIPEChunk } from "@/types";
 
 loadEnvConfig("");
 
