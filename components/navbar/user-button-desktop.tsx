@@ -42,8 +42,6 @@ export default function UserButtonDesktop({
 }: UserButtonDesktopProps) {
   const { theme } = useTheme();
 
-  console.log(iconColor === undefined);
-
   if (session) {
     return (
       <div className={cn(className)}>

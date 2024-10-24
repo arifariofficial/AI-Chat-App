@@ -24,8 +24,18 @@ export function ThemeToggle({
   variant,
   iconClassName,
 }: ThemeToggleProps) {
-  const { setTheme, theme } = useTheme();
-  const [, startTransition] = React.useTransition();
+  const { setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  // Ensure the component is mounted before rendering
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // If not mounted, return null to prevent mismatches
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <Button
@@ -33,13 +43,11 @@ export function ThemeToggle({
       className={cn(className)}
       variant={variant}
       onClick={() => {
-        startTransition(() => {
-          setTheme(theme === "light" ? "dark" : "light");
-        });
+        setTheme(resolvedTheme === "light" ? "dark" : "light");
       }}
     >
       <div>
-        {!theme ? null : theme === "dark" ? (
+        {resolvedTheme === "dark" ? (
           <IconMoon className={cn(iconClassName, "size-7 transition-all")} />
         ) : (
           <IconSun className={cn(iconClassName, "size-7 transition-all")} />

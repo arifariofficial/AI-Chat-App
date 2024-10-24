@@ -22,7 +22,7 @@ const buttonVariants = cva(
 
         link: "text-primary underline-offset-4 hover:underline",
 
-        nav: "bg-inherit text-foregroundNav hover:bg-primary-hover active:bg-transparent active:text-foregroundNav focus-visible:ring-0 hover:text-foregroundNav",
+        nav: "bg-inherit text-foregroundNav hover:bg-primary-hover active:bg-inherit active:text-foregroundNav focus-visible:ring-0 hover:text-foregroundNav",
 
         navMobile:
           "bg-inherit text-title hover:bg-foreground/5 active:bg-foreground/20 focus-visible:ring-0",

@@ -6,23 +6,20 @@ import { getChat } from "@data/get-chat";
 
 import Chat from "@components/chat/chat";
 
-export interface ChatPageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function ChatPage({ params }: ChatPageProps) {
+export default async function ChatPage({
+  params,
+}: {
+  params: { id: string }; // Destructure the params directly
+}) {
   const session = (await auth()) as Session;
-  const { id } = await params;
 
   // Redirect to login if no user is found
   if (!session?.user) {
-    return redirect(`/auth/login?next=/chat/${id}`);
+    return redirect(`/auth/login?next=/chat/${params.id}`);
   }
 
   const userId = session.user.id as string;
-  const chat = await getChat(id, userId);
+  const chat = await getChat(params.id, userId);
 
   // Redirect if chat is not found
   if (!chat) {
