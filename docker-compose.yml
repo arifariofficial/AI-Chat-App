@@ -3,7 +3,7 @@ services:
     platform: linux/amd64
     image: arifariofficial/sipe:latest
     env_file:
-      - .env
+      - .env.production
     environment:
       - NODE_ENV=production
       - AUTH_URL=https://sipe.life
