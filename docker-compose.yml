@@ -4,10 +4,6 @@ services:
     image: arifariofficial/sipe:latest
     env_file:
       - .env.production
-    environment:
-      - NODE_ENV=production
-      - AUTH_URL=https://sipe.life
-      - DATABASE_URL=${DATABASE_URL}
     networks:
       - sipe-network
     restart: unless-stopped
