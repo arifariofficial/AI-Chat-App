@@ -6,6 +6,7 @@ import { BackBotton } from "./back-button";
 import { Header } from "./header";
 import { Social } from "./social";
 import { cn } from "@/lib/utils";
+import React from "react";
 
 interface CardWrapperProps {
   children: React.ReactNode;

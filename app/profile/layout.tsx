@@ -1,5 +1,6 @@
 import ProfileSidebarMobile from "@/components/profile/profile-sidebar-mobile";
 import ProfileSideBarDeskop from "@/components/profile/sidebar-desktop";
+import React from "react";
 
 export default function ProfileLayout({
   children,

@@ -16,6 +16,7 @@ import { Session } from "next-auth";
 import SignOutButton from "@/components/auth/signout-client";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
+import React from "react";
 
 interface UserButtonDesktopProps {
   session?: Session | null;

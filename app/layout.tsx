@@ -10,6 +10,7 @@ import "@/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import NavBarServer from "@/components/navbar/navbar-server";
+import React from "react";
 
 const inter = Inter({
   subsets: ["latin"],

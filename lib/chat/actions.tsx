@@ -16,7 +16,9 @@ import {
 import { nanoid } from "@/lib/utils";
 import { saveChat } from "@/data/save-chat";
 import { loadEnvConfig } from "@next/env";
-import { SIPEChunk } from "@/types";
+import { SIPEChunk, SIPEEssay } from "@/types";
+import React from "react";
+import { searchAPI } from "../api";
 
 loadEnvConfig("");
 
@@ -39,20 +41,14 @@ async function submitUserMessage(content: string) {
     ],
   });
 
-  const sipeBaseUrl =
-    process.env.NODE_ENV === "production"
-      ? process.env.NEXT_PUBLIC_APP_URL || "http://frontend:3000/"
-      : "http://localhost:3000"; // Development fallback
+  // Ensure apiKey is a string before calling searchAPI
+  if (!apiKey) {
+    throw new Error(
+      "API Key is missing. Please check your environment variables.",
+    );
+  }
 
-  const searchResponse = await fetch(`${sipeBaseUrl}/api/search`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ query: content, apiKey, matches: 5 }),
-  });
-
-  const results: SIPEChunk[] = await searchResponse.json();
+  const results: SIPEEssay[] = await searchAPI(content, apiKey);
 
   const prompt = `\
   Olet sosiaaliturva-asiantuntija, joka on erikoistunut pitkäaikaissairaiden ja vammaisten henkilöiden oikeuksiin. 

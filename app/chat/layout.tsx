@@ -7,7 +7,7 @@ import { SidebarToggle } from "@/components/chat/sidebar-toggle";
 import { useSidebar } from "@/lib/hooks/use-sidebar";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface ChatLayoutProps {
   children: React.ReactNode;

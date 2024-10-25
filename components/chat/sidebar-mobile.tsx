@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { SidebarMobileContainer } from "./sidebar-mobile-container";
+import React from "react";
 
 interface SidebarMobileProps {
   children: React.ReactNode;

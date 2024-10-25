@@ -9,6 +9,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import React from "react";
 
 interface ChatMessageActionsProps extends React.ComponentProps<"div"> {
   message: string;

@@ -1,5 +1,6 @@
 import { signIn, signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
+import React from "react";
 
 export function SignIn({
   provider,

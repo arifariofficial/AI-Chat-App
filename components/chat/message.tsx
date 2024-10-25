@@ -10,6 +10,7 @@ import LocalLibrary from "@mui/icons-material/LocalLibrary";
 import { MemoizedReactMarkdown } from "./markdown";
 import { spinner } from "./spinner";
 import { ChatMessageActions } from "./chat-message-actions";
+import React from "react";
 
 export function UserMessage({ children }: { children: React.ReactNode }) {
   return (

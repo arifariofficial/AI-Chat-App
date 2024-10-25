@@ -1,4 +1,5 @@
 import { Alert, Button, Snackbar } from "@mui/material";
+import React from "react";
 
 interface SnackbarProps {
   open: boolean;
@@ -13,7 +14,10 @@ const CustomSnackbar: React.FC<SnackbarProps> = ({
   autoHideDuration,
   handleClose,
 }) => {
-  const handleCloseSnackbar = (event: React.SyntheticEvent | Event, reason?: string) => {
+  const handleCloseSnackbar = (
+    event: React.SyntheticEvent | Event,
+    reason?: string,
+  ) => {
     if (reason === "clickaway") {
       return;
     }
