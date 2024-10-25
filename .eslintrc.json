@@ -1,13 +1,3 @@
 {
-  "extends": ["next", "next/core-web-vitals", "eslint:recommended"],
-  "rules": {
-    "react/react-in-jsx-scope": "off",
-    "no-console": "off",
-    "no-debugger": "off",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "no-unused-vars": "off",
-    "no-undef": "off",
-    "no-redeclare": "off"
-  }
+  "extends": ["next/core-web-vitals", "next/typescript"]
 }

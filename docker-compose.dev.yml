@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     env_file:
-      - .env.local
+      - .env.production
     ports:
       - 3000:3000
     networks:
@@ -16,7 +16,7 @@ services:
   postgres:
     image: postgres:latest
     env_file:
-      - .env.local
+      - .env.production
     volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:

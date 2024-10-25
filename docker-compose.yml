@@ -4,6 +4,8 @@ services:
     image: arifariofficial/sipe:latest
     env_file:
       - .env.production
+    ports:
+      - 3000:3000
     networks:
       - sipe-network
     restart: unless-stopped

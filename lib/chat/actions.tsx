@@ -15,14 +15,9 @@ import {
 } from "@/components/chat/message";
 import { nanoid } from "@/lib/utils";
 import { saveChat } from "@/data/save-chat";
-import { loadEnvConfig } from "@next/env";
-import { SIPEChunk, SIPEEssay } from "@/types";
+import { SIPEEssay } from "@/types";
 import React from "react";
 import { searchAPI } from "../api";
-
-loadEnvConfig("");
-
-const apiKey = process.env.OPENAI_API_KEY;
 
 async function submitUserMessage(content: string) {
   "use server";
@@ -41,14 +36,7 @@ async function submitUserMessage(content: string) {
     ],
   });
 
-  // Ensure apiKey is a string before calling searchAPI
-  if (!apiKey) {
-    throw new Error(
-      "API Key is missing. Please check your environment variables.",
-    );
-  }
-
-  const results: SIPEEssay[] = await searchAPI(content, apiKey);
+  const results: SIPEEssay[] = await searchAPI(content);
 
   const prompt = `\
   Olet sosiaaliturva-asiantuntija, joka on erikoistunut pitkäaikaissairaiden ja vammaisten henkilöiden oikeuksiin. 

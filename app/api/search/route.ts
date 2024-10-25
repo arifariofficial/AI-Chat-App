@@ -6,11 +6,20 @@ export const POST = async (req: Request): Promise<Response> => {
     const body = await req.json();
 
     // Validate the request parameters
-    const { query, apiKey, matches } = body || {};
-    if (!query || !apiKey || typeof matches !== "number") {
+    const { query, matches } = body || {};
+    if (!query || typeof matches !== "number") {
       return new Response(
         JSON.stringify({ error: "Missing or invalid request parameters" }),
         { status: 400 },
+      );
+    }
+
+    // Get the OpenAI API key from the environment variable
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      return new Response(
+        JSON.stringify({ error: "OpenAI API key not configured on server" }),
+        { status: 500 },
       );
     }
 
