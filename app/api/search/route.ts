@@ -1,3 +1,5 @@
+// app/api/search/route.ts
+
 import { supabaseAdmin } from "@/lib/supabase";
 export const runtime = "edge";
 

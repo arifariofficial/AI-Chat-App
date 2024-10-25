@@ -5,6 +5,8 @@ FROM node:20-alpine AS base
 WORKDIR /app
 
 # Update npm to the desired version (optional, or remove if not needed)
+RUN apk update && apk add --no-cache curl
+
 RUN npm install -g npm@latest
 
 # Base image to install dependencies
