@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { cn } from "@/lib/utils";
 
 interface FormErrorProps {
   message?: string;
   time?: boolean;
+  className?: string;
 }
 
-export const FormError = ({ message, time = true }: FormErrorProps) => {
+export const FormError = ({
+  message,
+  time = true,
+  className,
+}: FormErrorProps) => {
   const [visibleMessage, setVisibleMessage] = useState<string | undefined>(
     message,
   );
@@ -29,7 +35,12 @@ export const FormError = ({ message, time = true }: FormErrorProps) => {
 
   if (!visibleMessage) return null;
   return (
-    <div className="m-1 flex items-center gap-x-2 rounded-md bg-destructive/15 p-3 text-sm text-destructive">
+    <div
+      className={cn(
+        className,
+        "flex items-center gap-x-2 rounded-md bg-destructive/15 p-3 text-sm text-destructive",
+      )}
+    >
       <ExclamationTriangleIcon className="size-4" />
       <p>{visibleMessage}</p>
     </div>

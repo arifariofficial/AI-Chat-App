@@ -6,7 +6,14 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Allow unauthenticated access to "/", "/miesta", and login page "/auth/login"
-  const publicPaths = ["/", "/meista", "/yhteystiedot", "/chat", "/auth/login"];
+  const publicPaths = [
+    "/",
+    "/meista",
+    "/yhteystiedot",
+    "/chat",
+    "/auth/login",
+    "/auth/register",
+  ];
   if (publicPaths.includes(pathname)) {
     return NextResponse.next();
   }

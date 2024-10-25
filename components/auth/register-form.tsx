@@ -47,6 +47,11 @@ export const RegisterForm = () => {
         .then((result) => {
           if (result?.type === "error") {
             setError(getMessageFromCode(result.resultCode));
+            if (result.resultCode === "USER_ALREADY_EXISTS") {
+              setTimeout(() => {
+                window.location.href = "/auth/login";
+              }, 1000);
+            }
           }
           if (result?.type === "success") {
             setSuccess(getMessageFromCode(result.resultCode));
@@ -54,6 +59,7 @@ export const RegisterForm = () => {
           }
         })
         .catch((error) => {
+          console.log("Error registering user:", error);
           const message =
             error.response?.data?.message || "Something went wrong";
           setError(message);
@@ -62,12 +68,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <CardWrapper
-      headerLabel="Create an account"
-      backButtonLabel="Already have an account?"
-      backButtonHref="/auth/login"
-      showLocal
-    >
+    <CardWrapper headerLabel="Luo tili" backButtonHref="/auth/login" showLocal>
       <Form {...form}>
         <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
           <FormField
@@ -196,13 +197,13 @@ export const RegisterForm = () => {
               </FormItem>
             )}
           />
-          <FormError message={error} />
+          <FormError message={error} className="mt-2" />
           <FormSucccess message={success} />
           <Button variant="outline" type="submit" className="mt-4 w-full">
             {isPending ? (
               <CircularProgress size="20px" className="text-[#f5efd1]" />
             ) : (
-              "Create"
+              "Luo"
             )}
           </Button>
         </Box>

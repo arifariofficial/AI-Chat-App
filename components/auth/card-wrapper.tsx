@@ -10,8 +10,8 @@ import { cn } from "@/lib/utils";
 interface CardWrapperProps {
   children: React.ReactNode;
   headerLabel: string;
-  backButtonLabel: string;
-  backButtonHref: string;
+  backButtonLabel?: string;
+  backButtonHref?: string;
   showLocal?: boolean;
   className?: string;
 }
@@ -27,7 +27,7 @@ export const CardWrapper = ({
   return (
     <Card
       className={cn(
-        "w-full max-w-sm rounded-md p-5 brightness-100 filter sm:bg-backgroundSecondary md:border md:border-border md:p-7 md:shadow-xl",
+        "mt-[100px] w-full max-w-sm rounded-md p-5 brightness-100 filter sm:bg-backgroundSecondary md:border md:border-border md:p-7 md:shadow-xl",
         className,
       )}
     >
@@ -53,9 +53,14 @@ export const CardWrapper = ({
           <Social />
         </CardFooter>
       )}
-      <CardFooter>
-        <BackBotton label={backButtonLabel} href={backButtonHref}></BackBotton>
-      </CardFooter>
+      {backButtonLabel && backButtonHref && (
+        <CardFooter>
+          <BackBotton
+            label={backButtonLabel}
+            href={backButtonHref}
+          ></BackBotton>
+        </CardFooter>
+      )}
     </Card>
   );
 };

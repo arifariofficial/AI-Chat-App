@@ -242,7 +242,7 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
               </>
             )}
           </div>
-          <FormError message={error || urlError} />
+          <FormError message={error || urlError} className="mb-4" />
           <FormSucccess message={success} />
           <Button
             type="submit"
