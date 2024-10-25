@@ -41,10 +41,10 @@ async function submitUserMessage(content: string) {
 
   const sipeBaseUrl =
     process.env.NODE_ENV === "production"
-      ? "http://frontend:3000/api/search"
-      : "http://localhost:3000/api/search";
+      ? process.env.NEXT_PUBLIC_APP_URL || "http://frontend:3000/"
+      : "http://localhost:3000"; // Development fallback
 
-  const searchResponse = await fetch(sipeBaseUrl, {
+  const searchResponse = await fetch(`${sipeBaseUrl}/api/search`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
