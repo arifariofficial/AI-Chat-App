@@ -10,6 +10,7 @@ datasource db {
 enum UserRole {
   ADMIN
   USER
+  EDITOR
 }
 
 model User {
@@ -139,10 +140,11 @@ enum Role {
 }
 
 model Message {
-  id      String @id @default(uuid())
-  role    Role   @default(user)
-  content String
-  chatId  String
+  id              String @id @default(uuid())
+  role            Role   @default(user)
+  content         String
+  edited          String? 
+  chatId          String
 
   chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
 

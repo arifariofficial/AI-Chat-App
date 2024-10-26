@@ -61,7 +61,7 @@ export function ChatList({ messages, className }: ChatListProps) {
       ref={containerRef}
       className={cn(
         className,
-        "absolute flex size-full flex-col items-start overflow-y-auto px-2 text-foreground sm:max-w-screen-md sm:px-10 md:max-w-screen-lg",
+        "absolute flex size-full flex-col items-start overflow-y-auto px-2 pb-20 text-foreground sm:max-w-screen-md sm:px-10 md:max-w-screen-lg",
       )}
       style={{
         scrollbarColor: "transparent transparent",

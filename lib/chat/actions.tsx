@@ -8,16 +8,14 @@ import {
 import { openai } from "@ai-sdk/openai";
 import { Chat, Message } from "../types";
 import { auth } from "@/auth";
-import {
-  BotMessage,
-  SpinnerMessage,
-  UserMessage,
-} from "@/components/chat/message";
+import { SpinnerMessage } from "@/components/chat/message";
 import { nanoid } from "@/lib/utils";
 import { saveChat } from "@/data/save-chat";
 import { SIPEEssay } from "@/types";
 import React from "react";
 import { searchAPI } from "../api";
+import { UserMessage } from "@/components/chat/user-message";
+import { BotMessage } from "@/components/chat/bot-message";
 
 async function submitUserMessage(content: string) {
   "use server";
@@ -64,6 +62,7 @@ async function submitUserMessage(content: string) {
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>;
   let textNode: undefined | React.ReactNode;
+  const uniqueId = nanoid(); // Generate a unique id early for BotMessage
 
   const result = await streamUI({
     model: openai("gpt-4o"),
@@ -81,9 +80,18 @@ async function submitUserMessage(content: string) {
       ),
     ],
     text: ({ content, done, delta }) => {
+      // Initialize the id early on
+      const chatId = aiState.get().chatId;
+
       if (!textStream) {
         textStream = createStreamableValue("");
-        textNode = <BotMessage content={textStream.value} />;
+        textNode = (
+          <BotMessage
+            content={textStream.value}
+            messageId={uniqueId}
+            chatId={chatId}
+          />
+        );
       }
 
       if (done) {
@@ -93,7 +101,7 @@ async function submitUserMessage(content: string) {
           messages: [
             ...aiState.get().messages,
             {
-              id: nanoid(),
+              id: uniqueId,
               role: "assistant",
               content,
               name: "",
@@ -184,6 +192,11 @@ export const AI = createAI<AIState, UIState>({
 export const getUIStateFromAIState = (aiState: Chat) => {
   return aiState.messages
     .filter((message) => message.role !== "system")
+    .sort((a, b) => {
+      const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+      const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+      return dateA - dateB;
+    })
     .map((message, index) => ({
       id: `${aiState.chatId}-${index}`,
       display:
@@ -191,7 +204,11 @@ export const getUIStateFromAIState = (aiState: Chat) => {
           <UserMessage>{message.content as string}</UserMessage>
         ) : message.role === "assistant" &&
           typeof message.content === "string" ? (
-          <BotMessage content={message.content} />
+          <BotMessage
+            content={message.content}
+            messageId={message.id}
+            chatId={message.chatId}
+          />
         ) : null,
     }));
 };

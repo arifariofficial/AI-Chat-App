@@ -17,24 +17,24 @@ export default function ChatModal({
       {showModal && (
         <div className="absolute inset-x-0 flex h-[calc(100vh-70px)] w-full items-center justify-center font-semibold md:mt-auto">
           <div className="flex w-[300px] max-w-[400px] flex-col items-center justify-center rounded-xl border border-border/20 bg-backgroundSecondary p-4 text-foreground shadow-2xl sm:h-[180px] sm:w-[350px]">
-            <p className="p-4 text-foreground">Please Sign In </p>
+            <p className="p-4 text-foreground">Kirjaudu sisään</p>
             <Button
-              variant="outline"
-              className="mb-6 w-[150px]"
+              variant="default"
+              className="mb-6 w-[150px] font-bold"
               onClick={handleModalClose}
             >
-              OK
+              Selvä!
             </Button>
             <div>
               <p className="text-sm">
-                Create a free Account.{" "}
+                Luo ilmainen tili{" "}
                 <Link
                   href="/auth/register"
                   className="text-foreground hover:text-foreground/60"
                 >
                   <span className="font-extrabold text-blue-900 hover:cursor-pointer dark:text-green-900">
                     {" "}
-                    Click here
+                    Klikkaa tästä
                   </span>
                 </Link>
               </p>

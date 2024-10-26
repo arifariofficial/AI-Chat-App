@@ -1,12 +1,12 @@
 import { FooterText } from "@/components/chat/footer";
 import { useActions, useUIState } from "ai/rsc";
-import { UserMessage } from "./message";
 import { PromptForm } from "./prompt-form";
 import { AI } from "@/lib/chat/actions";
 import { cn, nanoid } from "@/lib/utils";
 import { useAppDispatch } from "@/lib/store/hook";
 import { decrement } from "@/lib/store/balanceSlice";
 import { useState } from "react";
+import { UserMessage } from "./user-message";
 
 export interface ChatPanelProps {
   input: string;

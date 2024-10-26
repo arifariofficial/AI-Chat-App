@@ -5,6 +5,7 @@ export type Message = {
   createdAt?: Date;
   role: "user" | "system" | "assistant";
   chatId?: string;
+  edited?: string | null;
 };
 export interface Chat extends Record<string, unknown> {
   id: string;

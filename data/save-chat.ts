@@ -4,7 +4,18 @@ import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 import { Chat } from "@/lib/types";
 
-// Function to save or update a chat
+// Helper function to format message data for Prisma
+const formatMessages = (messages: Chat["messages"]) =>
+  messages.map((message) => ({
+    id: message.id,
+    role: message.role,
+    content:
+      typeof message.content === "string"
+        ? message.content
+        : JSON.stringify(message.content),
+    createdAt: message.createdAt || new Date().toISOString(),
+  }));
+
 export async function saveChat(chat: Chat) {
   const session = await auth();
 
@@ -44,19 +55,11 @@ export async function saveChat(chat: Chat) {
         include: { messages: true },
         update: {
           title: chat.title,
-          updatedAt: chat.createdAt,
+          updatedAt: new Date().toISOString(),
           userId: chat.userId,
           path: chat.path,
           messages: {
-            create: newMessages.map((message) => ({
-              id: message.id,
-              role: message.role,
-              content:
-                typeof message.content === "string"
-                  ? message.content
-                  : JSON.stringify(message.content),
-              createdAt: new Date().toISOString(),
-            })),
+            create: formatMessages(newMessages),
           },
         },
         create: {
@@ -66,21 +69,24 @@ export async function saveChat(chat: Chat) {
           userId: chat.userId,
           path: chat.path,
           messages: {
-            create: chat.messages.map((message) => ({
-              id: message.id,
-              role: message.role,
-              content:
-                typeof message.content === "string"
-                  ? message.content
-                  : JSON.stringify(message.content),
-              createdAt: new Date().toISOString(),
-            })),
+            create: formatMessages(chat.messages),
           },
         },
       });
     });
   } catch (error) {
-    console.error(`Failed to save chat: ${error}`);
-    throw error;
+    if (error instanceof Error) {
+      console.error(`Failed to save chat: ${error.message}`, {
+        userId: chat.userId,
+        chatId: chat.id,
+      });
+      throw error;
+    } else {
+      console.error("An unknown error occurred", {
+        userId: chat.userId,
+        chatId: chat.id,
+      });
+      throw new Error("Unknown error occurred while saving chat.");
+    }
   }
 }
