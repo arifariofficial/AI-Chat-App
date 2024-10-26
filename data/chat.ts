@@ -47,12 +47,6 @@ export async function clearChats() {
     };
   }
 
-  // Get the user's chat IDs
-  const userChats = await prisma.chat.findMany({
-    where: { userId: session.user.id },
-    select: { id: true }, // Only fetch the chat IDs
-  });
-
   // Delete all the chats from the database
   await prisma.chat.deleteMany({
     where: { userId: session.user.id },

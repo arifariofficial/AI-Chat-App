@@ -3,7 +3,7 @@
 import { getSession, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { EditIcon } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";

@@ -70,7 +70,7 @@ export async function checkBalance(userId: string) {
   } else {
     // Deduct the required amount from the user's balance
     const currentBalance = balance - 0.5;
-    const updatedUser = await prisma.user.update({
+    await prisma.user.update({
       where: { id: userId },
       data: { balance: currentBalance },
       select: { balance: true },

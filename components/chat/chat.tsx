@@ -1,25 +1,22 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Session } from "next-auth";
 import { EmptyScreen } from "./empty-screen";
 import { ChatPanel } from "./chat-panel";
 import { useAIState, useUIState } from "ai/rsc";
 import { useLocalStorage } from "@/lib/hooks/use-local-storage";
 import { useScrollAnchor } from "@/lib/hooks/use-scroll-anchor";
-import { Message } from "@/lib/types";
 import { useChats } from "@/lib/hooks/useChats";
 import { ChatList } from "./chat-list";
 
 export interface ChatProps extends React.ComponentProps<"div"> {
-  initialMessages?: Message[];
   id?: string;
   session?: Session;
 }
 
-function Chat({ id, session }: ChatProps) {
-  const router = useRouter();
+function Chat({ id = "", session, ...props }: ChatProps) {
   const path = usePathname();
   const [input, setInput] = useState("");
   const [messages] = useUIState();
@@ -28,21 +25,26 @@ function Chat({ id, session }: ChatProps) {
   const { loadChats } = useChats();
 
   useEffect(() => {
-    if (session?.user) {
-      if (!path.includes("/chat/") && messages.length === 1) {
-        window.history.replaceState({}, "/chat", `/chat/${id}`);
-      }
+    if (
+      session?.user &&
+      id &&
+      !path.includes("/chat/") &&
+      messages?.length === 1
+    ) {
+      window.history.replaceState({}, "", `/chat/${id}`);
     }
-  }, [id, path, session?.user, messages.length]);
+  }, [id, path, session?.user, messages?.length]);
 
   useEffect(() => {
     if (aiState.messages?.length === 2 && session?.user?.id) {
       loadChats(session.user.id);
     }
-  }, [aiState.messages, router, session?.user?.id, loadChats]);
+  }, [aiState.messages, session?.user?.id, loadChats]);
 
   useEffect(() => {
-    setNewChatId(id);
+    if (id) {
+      setNewChatId(id);
+    }
   }, [id, setNewChatId]);
 
   const { messagesRef, scrollRef, visibilityRef, isAtBottom, scrollToBottom } =
@@ -52,6 +54,7 @@ function Chat({ id, session }: ChatProps) {
     <div
       className="relative z-10 mx-auto flex size-full sm:max-w-screen-md lg:max-w-screen-lg"
       ref={scrollRef}
+      {...props}
     >
       <div className="mx-auto flex size-full flex-col" ref={messagesRef}>
         <div className="relative flex size-full justify-center">

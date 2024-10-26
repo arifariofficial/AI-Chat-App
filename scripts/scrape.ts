@@ -241,5 +241,7 @@ const chunkEssay = async (essay: SIPEEssay): Promise<SIPEEssay> => {
     tokens: essays.reduce((acc, essay) => acc + essay.tokens, 0),
     essays,
   };
+  console.log("write file...");
   fs.writeFileSync("scripts/sipe.json", JSON.stringify(json));
+  console.log("Done!");
 })();

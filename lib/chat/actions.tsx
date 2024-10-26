@@ -141,12 +141,14 @@ export const AI = createAI<AIState, UIState>({
 
       if (aiState) {
         const uiState = getUIStateFromAIState(aiState as Chat);
-        return uiState;
+        return uiState; // Expected to be of type UIState
       }
-    } else {
-      return;
     }
+
+    // Explicitly return undefined to satisfy the UIState | undefined requirement
+    return undefined;
   },
+
   onSetAIState: async ({ state }) => {
     "use server";
 

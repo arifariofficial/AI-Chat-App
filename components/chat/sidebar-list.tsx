@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { ClearHistory } from "./clear-history";
 import { SidebarItems } from "./sidebar-items";
 import { useChats } from "@/lib/hooks/useChats";

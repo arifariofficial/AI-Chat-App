@@ -8,7 +8,6 @@ export interface SidebarProps extends ComponentProps<"div"> {
   customProp?: string;
 }
 
-
 export function Sidebar({ className, children }: SidebarProps) {
   const { isSidebarOpen, isLoading } = useSidebar();
   const [showSidebar, setShowSidebar] = useState(false);
@@ -19,9 +18,10 @@ export function Sidebar({ className, children }: SidebarProps) {
         setShowSidebar(true);
       }, 300);
 
-      return () => clearTimeout(timer);
+      return () => clearTimeout(timer); // Return a cleanup function
     } else {
       setShowSidebar(false);
+      return undefined; // Explicitly return undefined here
     }
   }, [isSidebarOpen, isLoading]);
 
@@ -32,10 +32,7 @@ export function Sidebar({ className, children }: SidebarProps) {
   return (
     <div
       data-state={isSidebarOpen && !isLoading ? "open" : "closed"}
-      className={cn(
-        className,
-        "peer  flex size-full flex-col dark:bg-zinc-950",
-      )}
+      className={cn(className, "peer flex size-full flex-col dark:bg-zinc-950")}
     >
       {children}
     </div>

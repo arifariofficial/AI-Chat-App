@@ -159,13 +159,14 @@ export const getEssayLiikennevakuutuslaki = async (linkObj: {
   let sectionText = "";
 
   // Get the next sibling elements until the next header
-  sectionHeader.nextAll().each((index, element) => {
+  sectionHeader.nextAll().each((_, element) => {
     if ($(element).is("h5")) {
       return false; // Exit the loop if another header is found
     }
     if ($(element).is("p.py")) {
       sectionText += $(element).text().trim() + "\n";
     }
+    return;
   });
 
   // After accumulating sectionText, check if it is not empty
@@ -210,7 +211,7 @@ export const getEssayVahingonkorvauslaki = async (linkObj: {
   let sectionText = "";
 
   // Get the next sibling elements until the next header
-  sectionHeader.nextAll().each((index, element) => {
+  sectionHeader.nextAll().each((_, element) => {
     if ($(element).is("h4")) {
       return false; // Exit the loop if another header is found
     }
@@ -218,6 +219,7 @@ export const getEssayVahingonkorvauslaki = async (linkObj: {
     if ($(element).is("p.py")) {
       sectionText += $(element).text().trim() + "\n";
     }
+    return;
   });
 
   // After accumulating sectionText, check if it is not empty
@@ -262,13 +264,14 @@ export const getEssayVammaispalvelulaki = async (linkObj: {
   let sectionText = "";
 
   // Get the next sibling elements until the next header
-  sectionHeader.nextAll().each((index, element) => {
+  sectionHeader.nextAll().each((_, element) => {
     if ($(element).is("p.py")) {
       sectionText += $(element).text().trim() + "\n";
     }
     if ($(element).is("h5.ot")) {
       return false; // Exit the loop if another header is found
     }
+    return;
   });
 
   // After accumulating sectionText, check if it is not empty
@@ -313,13 +316,14 @@ export const getEssaySairausvakuutuslaki = async (linkObj: {
   let sectionText = "";
 
   // Get the next sibling elements until the next header
-  sectionHeader.nextAll().each((index, element) => {
+  sectionHeader.nextAll().each((_, element) => {
     if ($(element).is("p")) {
       sectionText += $(element).text().trim() + "\n";
     }
     if ($(element).is("h5.ot")) {
       return false; // Exit the loop if another header is found
     }
+    return;
   });
 
   // After accumulating sectionText, check if it is not empty
@@ -355,12 +359,13 @@ export const getEssayKelaKorvauksetYksityisestaSairaanhoidosta = async () => {
   let sectionText = "";
 
   // Get the next sibling elements until the next header
-  sectionHeader.nextAll().each((index, element) => {
+  sectionHeader.nextAll().each((_, element) => {
     sectionText += $(element).text().trim() + "\n";
 
     if ($(element).is("h2") && $(element).text().trim() === "Lue lisää") {
       return false; // Exit the loop if another header is found
     }
+    return;
   });
 
   // After accumulating sectionText, check if it is not empty
@@ -394,12 +399,13 @@ export const getEssayYksityistapaturmavakuutus = async () => {
   let sectionText = "";
 
   // Get the next sibling elements until the next header
-  sectionHeader.nextAll().each((index, element) => {
+  sectionHeader.nextAll().each((_, element) => {
     sectionText += $(element).text().trim() + "\n";
 
     if ($(element).is("div.container")) {
       return false; // Exit the loop if another header is found
     }
+    return;
   });
 
   // After accumulating sectionText, check if it is not empty
@@ -444,13 +450,14 @@ export const getEssayKansaneläkelaki = async (linkObj: {
   let sectionText = "";
 
   // Get the next sibling elements until the next header
-  sectionHeader.nextAll().each((index, element) => {
+  sectionHeader.nextAll().each((_, element) => {
     if ($(element).is("p")) {
       sectionText += $(element).text().trim() + "\n";
     }
     if ($(element).is("h5.ot")) {
       return false; // Exit the loop if another header is found
     }
+    return;
   });
 
   // After accumulating sectionText, check if it is not empty
@@ -495,13 +502,14 @@ export const getEssaykorvaamiKriisinhallintatehtava = async (linkObj: {
   let sectionText = "";
 
   // Get the next sibling elements until the next header
-  sectionHeader.nextAll().each((index, element) => {
+  sectionHeader.nextAll().each((_, element) => {
     if ($(element).is("p")) {
       sectionText += $(element).text().trim() + "\n";
     }
     if ($(element).is("h5.ot")) {
       return false; // Exit the loop if another header is found
     }
+    return;
   });
 
   // After accumulating sectionText, check if it is not empty
