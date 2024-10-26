@@ -41,21 +41,22 @@ export function ClearHistory({
       <AlertDialogTrigger asChild className="flex w-full self-center">
         <Button variant="outline" disabled={!isEnabled || isPending}>
           {isPending && <IconSpinner className="mr-2" />}
-          Clear history
+          Tyhjennä historia
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>Oletko aivan varma?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently delete your chat history and remove your data
-            from our servers.
+            Tämä poistaa keskusteluviestisi pysyvästi ja poistaa tietosi
+            palvelimiltamme.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={isPending}>Peruuta</AlertDialogCancel>
           <AlertDialogAction
             disabled={isPending}
+            variant="outline"
             onClick={(event) => {
               event.preventDefault();
               startTransition(async () => {
@@ -64,15 +65,14 @@ export function ClearHistory({
                   toast.error(result.error);
                   return;
                 }
-
                 setOpen(false);
-                router.push("/chat");
-                loadChats(session?.user?.id ?? "");
+                // Ensure navigation and chat loading happen sequentially
+                router.push("/new");
               });
             }}
           >
             {isPending && <IconSpinner className="mr-2 animate-spin" />}
-            Delete
+            Poista
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

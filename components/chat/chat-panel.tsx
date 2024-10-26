@@ -55,14 +55,14 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
     <div className={cn(className, "mx-auto flex size-full flex-col")}>
       {messages.length === 0 && (
         /* Example message outer container absolute */
-        <div className="scroll-container absolute bottom-[100px] left-5 flex w-full justify-start overflow-x-scroll sm:bottom-[130px] sm:left-12 sm:mb-4 md:left-16">
+        <div className="scroll-container absolute bottom-[100px] flex w-full justify-start overflow-x-scroll pl-5 sm:bottom-[130px] sm:mb-4 sm:pl-12 md:pl-16">
           {/* Inner container for example message */}
           <div className="z-50 flex max-w-screen-sm flex-row gap-2 text-center">
             {exampleMessages.map((example) => (
               <div
                 key={example.heading}
                 /* example meassage container */
-                className={`sm:block" } z-50 w-[165px] shrink-0 cursor-pointer rounded-lg border border-border/30 bg-background p-1 shadow-sm hover:bg-foreground/5 sm:w-[300px]`}
+                className={`sm:block" } z-50 w-[165px] shrink-0 cursor-pointer rounded-lg border border-border/30 p-1 shadow-sm hover:bg-foreground/5 sm:w-[300px]`}
                 onClick={async () => {
                   setIsLoading(true);
                   setMessages((currentMessages) => [
@@ -94,12 +94,12 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
               </div>
             ))}
             {/* Empty div to create extra space at the end */}
-            <div className="/shrink-0 w-[100px]" />
+            <div className="w-[100px] shrink-0" />
           </div>
         </div>
       )}
 
-      <div className="space-y-2 bg-background px-4 drop-shadow-xl sm:mx-10 sm:rounded-t-xl sm:border sm:border-border/20">
+      <div className="space-y-2 bg-inherit px-4 drop-shadow-xl sm:mx-10 sm:rounded-t-xl sm:border sm:border-foreground/20">
         <PromptForm
           input={input}
           setInput={setInput}

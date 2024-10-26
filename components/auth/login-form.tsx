@@ -100,7 +100,7 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
   return (
     <CardWrapper
       headerLabel={headerLabel}
-      backButtonLabel="Don't have an account?"
+      backButtonLabel="Eikö sinulla ole tiliä?"
       backButtonHref="/auth/register"
       showLocal={!showTwoFactor}
     >

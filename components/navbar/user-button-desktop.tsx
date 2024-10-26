@@ -57,7 +57,7 @@ export default function UserButtonDesktop({
                 {session.user.image && (
                   <AvatarImage
                     src={session.user.image}
-                    alt={session.user.name || "Name not available"}
+                    alt={session.user.name || "Kuva ei ole saatavilla"}
                   />
                 )}
                 <AvatarFallback className="size-full border text-3xl">
@@ -85,11 +85,11 @@ export default function UserButtonDesktop({
                   />
                 )}
                 <AvatarFallback className="size-32 rounded-none">
-                  No Image
+                  Ei kuvaa
                 </AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-xl">{session.user.name || "No Name"}</p>
+                <p className="text-xl">{session.user.name || "Ei nimeä"}</p>
                 <p>{session.user.email}</p>
               </div>
             </DropdownMenuLabel>
@@ -100,15 +100,15 @@ export default function UserButtonDesktop({
                 asChild
               >
                 <Link
-                  className="flex h-[48px] w-full items-center justify-evenly"
+                  className="flex h-[48px] w-full items-center justify-between px-8"
                   href="/profile"
                 >
-                  <p>Account</p>
+                  <p>Tili</p>
                   <UserIcon />
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <SignOutButton className="flex h-[48px] w-full justify-evenly hover:cursor-pointer" />
+              <SignOutButton className="flex h-[48px] w-full justify-between px-8 hover:cursor-pointer" />
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -123,7 +123,7 @@ export default function UserButtonDesktop({
         className="flex h-full flex-row items-center gap-2 font-bold"
       >
         <LockIcon className="text-foregroundNav" />
-        <p className="text-foregroundNav">Log In</p>
+        <p className="text-foregroundNav">Kirjaudu</p>
       </Link>
     </Button>
   );

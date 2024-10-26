@@ -8,10 +8,10 @@ export const ErrorCard = () => {
   return (
     <Card>
       <CardHeader className="w-[400px] shadow-md">
-        <Header label="Oops! Something went wrong!" />
+        <Header label="Hups! Jotain meni pieleen!" />
       </CardHeader>
       <CardFooter>
-        <BackBotton label="Back to login" href="/auth/login" />
+        <BackBotton label="Takaisin kirjautumiseen" href="/auth/login" />
       </CardFooter>
     </Card>
   );

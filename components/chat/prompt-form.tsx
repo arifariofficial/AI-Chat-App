@@ -17,6 +17,7 @@ import { CircularProgress, InputAdornment, TextField } from "@mui/material";
 import { nanoid } from "@/lib/utils";
 import { decrement } from "@/lib/store/balanceSlice";
 import { useAppDispatch } from "@/lib/store/hook";
+import { useTheme } from "next-themes";
 
 export function PromptForm({
   input,
@@ -36,6 +37,8 @@ export function PromptForm({
   const [, setMessages] = useUIState<typeof AI>();
 
   const dispatch = useAppDispatch();
+
+  const theme = useTheme();
 
   React.useEffect(() => {
     if (inputRef.current) {
@@ -103,12 +106,28 @@ export function PromptForm({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={onKeyDown}
-          placeholder="Write a Message to SIPE..."
+          placeholder="Kirjoita viesti SipeAI:lle..."
           helperText={`${input.length}/5000`}
           inputProps={{
             maxLength: 5000,
             spellCheck: true,
             lang: "fi-FI",
+          }}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: `${theme.theme === "light" ? "lightgray" : "gray"}`,
+                borderWidth: "1px",
+              },
+              "&:hover fieldset": {
+                borderColor: `${theme.theme === "light" ? "darkgray" : "gray"}`,
+                borderWidth: "1px",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: `${theme.theme === "light" ? "gray" : "gray"}`,
+                borderWidth: "1px",
+              },
+            },
           }}
           InputProps={{
             startAdornment: (
@@ -121,13 +140,13 @@ export function PromptForm({
                       onClick={() => {
                         router.push("/new");
                       }}
-                      className="hidden drop-shadow-sm sm:block"
+                      className="hidden sm:block"
                     >
                       <IconPlus />
-                      <span className="sr-only">New Chat</span>
+                      <span className="sr-only">Uusi keskustelu</span>
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>New Chat</TooltipContent>
+                  <TooltipContent>Uusi keskustelu</TooltipContent>
                 </Tooltip>
               </InputAdornment>
             ),
@@ -153,10 +172,10 @@ export function PromptForm({
                           className="text-foreground"
                         />
                       )}
-                      <span className="sr-only">Send message</span>
+                      <span className="sr-only">Lähetä viesti</span>
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>Send message</TooltipContent>
+                  <TooltipContent>Lähetä viesti</TooltipContent>
                 </Tooltip>
               </InputAdornment>
             ),

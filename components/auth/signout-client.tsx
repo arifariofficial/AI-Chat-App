@@ -16,7 +16,7 @@ const SignOutButton = ({ className }: SignOutButtonProps) => {
 
   return (
     <DropdownMenuItem onClick={handleSignOut} className={cn(className)}>
-      <p>Sign Out</p>
+      <p>Kirjaudu ulos</p>
       <LogoutIcon />
     </DropdownMenuItem>
   );

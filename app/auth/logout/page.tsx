@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function LogotPage() {
-  return <LoginForm headerLabel="Logged Out Successfully" />;
+  return <LoginForm headerLabel="Kirjautunut ulos" />;
 }

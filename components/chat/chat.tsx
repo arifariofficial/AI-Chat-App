@@ -56,7 +56,7 @@ function Chat({ id, session }: ChatProps) {
       <div className="mx-auto flex size-full flex-col" ref={messagesRef}>
         <div className="relative flex size-full justify-center">
           {messages?.length ? (
-            <ChatList messages={messages} className="" />
+            <ChatList messages={messages} />
           ) : (
             <EmptyScreen />
           )}
@@ -69,7 +69,6 @@ function Chat({ id, session }: ChatProps) {
             setInput={setInput}
             isAtBottom={isAtBottom}
             scrollToBottom={scrollToBottom}
-            className=""
           />
         </div>
       </div>

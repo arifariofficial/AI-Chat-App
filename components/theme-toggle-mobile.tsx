@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 
 interface ThemeToggleProps {
   className?: string;
+  style?: React.CSSProperties;
   variant?:
     | "ghost"
     | "outline"
@@ -23,6 +24,7 @@ export function ThemeToggle({
   className,
   variant,
   iconClassName,
+  style,
 }: ThemeToggleProps) {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
@@ -39,7 +41,7 @@ export function ThemeToggle({
 
   return (
     <Button
-      style={{ zIndex: 10 }}
+      style={style}
       className={cn(className)}
       variant={variant}
       onClick={() => {

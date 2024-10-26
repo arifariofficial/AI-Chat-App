@@ -27,11 +27,12 @@ const ChatNav = ({ session }: ChatNavProps) => {
         </Button>
       </Link>
       <ThemeToggle
-        className="ml-1 hidden size-10 bg-background sm:flex"
+        className="ml-1 hidden size-10 sm:flex"
         variant="inherit"
+        style={{ zIndex: 20 }}
         iconClassName={cn(
-          theme === "light" ? "text-inherit font-extrabold" : "",
-          "size-9",
+          theme === "light" ? "text-inherit font-extrabold bg-inherit " : "",
+          "size-9 z-40",
         )}
       />
       <UserButtonDesktop
@@ -39,6 +40,7 @@ const ChatNav = ({ session }: ChatNavProps) => {
         variant="inherit"
         className="w-30 hidden sm:flex"
         iconColor="#333333"
+        style={{ zIndex: 20 }}
       />
     </div>
   );

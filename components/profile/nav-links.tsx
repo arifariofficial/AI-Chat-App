@@ -12,16 +12,16 @@ import {
 
 const links = [
   {
-    name: "Account",
+    name: "Tili",
     href: "/profile",
     icon: UserIcon,
   },
   {
-    name: "Balance",
+    name: "Saldo",
     href: "/profile/balance",
     icon: SubscriptionIcon,
   },
-  { name: "Security", href: "/profile/security", icon: SecurityIcon },
+  { name: "Turvallisuus", href: "/profile/security", icon: SecurityIcon },
 ];
 
 export default function NavLinks() {

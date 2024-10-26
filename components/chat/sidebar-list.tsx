@@ -28,14 +28,17 @@ export function SidebarList() {
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
+      {/* Chat list section */}
       <div className="flex-1 overflow-auto">
         {chats?.length ? (
-          <div className="space-y-2 px-2">
+          <div className="space-y-2 p-2">
             <SidebarItems chats={chats} />
           </div>
         ) : (
           <div className="p-8 text-center">
-            <p className="text-sm text-muted-foreground">No chat history</p>
+            <p className="text-sm text-muted-foreground">
+              Ei keskusteluhistoriaa
+            </p>
           </div>
         )}
       </div>

@@ -11,7 +11,7 @@ export function FooterText({ className, ...props }: React.ComponentProps<"p">) {
       )}
       {...props}
     >
-      SIPE: Your legal Ai advisor
+      SipeAI: Sinun oikeudellinen tekoälyneuvoja
     </p>
   );
 }

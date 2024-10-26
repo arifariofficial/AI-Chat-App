@@ -16,12 +16,12 @@ export function SidebarToggle() {
   return (
     <Tooltip>
       <TooltipTrigger
-        className={`${isSidebarOpen ? "" : "border-r"} flex h-full flex-col items-center justify-evenly border-foreground/10 bg-background`}
+        className={`${isSidebarOpen ? "" : "border-r"} flex h-full flex-col items-center justify-evenly border-foreground/10`}
       >
         <div
           className={` ${isSidebarOpen ? "hidden" : ""} inline-block rotate-180 cursor-default justify-center text-sm text-foreground/70 [writing-mode:vertical-lr]`}
         >
-          Chat History
+          Keskusteluhistoria
         </div>
         <Button
           asChild
@@ -38,17 +38,17 @@ export function SidebarToggle() {
             ) : (
               <ChevronRight className="size-7" strokeWidth={4} />
             )}
-            <span className="sr-only">Toggle Sidebar</span>
+            <span className="sr-only">Vaihda sivupalkki</span>
           </div>
         </Button>
         <div
           className={` ${isSidebarOpen ? "hidden" : ""} inline-block rotate-180 cursor-default justify-center text-sm text-foreground/70 [writing-mode:vertical-lr]`}
         >
-          Chat History
+          Keskusteluhistoria
         </div>
       </TooltipTrigger>
       <TooltipContent side="right">
-        <p>{isSidebarOpen ? "Close Sidebar" : "Open Sidebar"}</p>
+        <p>{isSidebarOpen ? "Sulje sivupalkki" : "Avaa sivupalkki"}</p>
       </TooltipContent>
     </Tooltip>
   );

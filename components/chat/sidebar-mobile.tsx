@@ -27,7 +27,7 @@ export function SidebarMobile({ children, className }: SidebarMobileProps) {
       >
         <Button variant="nav" className={cn("sm:hidden", className)}>
           <IconSidebar className="size-6" />
-          <span className="sr-only">Toggle Sidebar</span>
+          <span className="sr-only">Vaihda sivupalkki</span>
         </Button>
       </SheetTrigger>
       <SheetContent

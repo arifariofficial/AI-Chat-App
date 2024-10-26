@@ -68,7 +68,12 @@ export const RegisterForm = () => {
   };
 
   return (
-    <CardWrapper headerLabel="Luo tili" backButtonHref="/auth/login" showLocal>
+    <CardWrapper
+      headerLabel="Luo tili"
+      showLocal
+      backButtonLabel="Onko sinulla jo tili?"
+      backButtonHref="/auth/login"
+    >
       <Form {...form}>
         <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
           <FormField

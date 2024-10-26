@@ -98,32 +98,32 @@ export default function Account() {
   return (
     <main className="mx-auto flex size-full flex-col items-center rounded-lg bg-background text-foreground">
       <div className="mb-10 w-full">
-        <h1 className="mb-1 text-2xl font-semibold">Account</h1>
-        <p>Manage your account settings</p>
+        <h1 className="mb-1 text-2xl font-semibold">Tili</h1>
+        <p>Hallitse tilin asetuksia</p>
       </div>
 
       <div className="w-full">
         <section className="mb-10">
           <h2 className="border-b border-border text-base font-semibold">
-            Profile
+            Profiili
           </h2>
           <div className="flex flex-row px-0 py-4">
             <Avatar className="size-32 rounded-sm border shadow-md">
               {session.user.image && (
                 <AvatarImage
                   src={session.user.image}
-                  alt={session.user.name || "Name not available"}
+                  alt={session.user.name || "Kuva ei ole saatavilla"}
                 />
               )}
               <AvatarFallback className="size-32 rounded-none">
-                No Image
+                Ei kuvaa
               </AvatarFallback>
             </Avatar>
           </div>
         </section>
         <section className="mb-10 h-20">
           <h2 className="border-b border-border text-base font-semibold">
-            Name
+            Nimi
           </h2>
           <div className="m-2 flex w-full flex-row justify-between gap-2">
             {editName ? (
@@ -135,7 +135,7 @@ export default function Account() {
                 onChange={(e) => setName(e.target.value)}
               />
             ) : (
-              <p>{session.user.name || "Not available"}</p>
+              <p>{session.user.name || "Ei saatavilla"}</p>
             )}
             {!editName ? (
               <Button variant="ghost" onClick={() => setEditName(true)}>
@@ -150,7 +150,7 @@ export default function Account() {
         </section>
         <section className="mb-10">
           <h2 className="border-b border-border text-base font-semibold">
-            Email address
+            Sähköpostiosoite
           </h2>
           <div className="m-2 flex w-full flex-row items-center justify-between">
             <p className="h-8">{session.user.email}</p>
@@ -161,12 +161,12 @@ export default function Account() {
                 className="m-1"
                 disabled={verificationSend || isLoading}
               >
-                Verify Email
+                Vahvista sähköposti
               </Button>
             )}
             {session.user.emailVerified && (
               <p className="m-1 rounded-md border bg-background p-1 text-center text-[9px] font-bold text-foreground">
-                Verified
+                Vahvistettu
               </p>
             )}
           </div>

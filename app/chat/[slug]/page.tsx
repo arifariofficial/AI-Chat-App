@@ -13,6 +13,7 @@ export default async function ChatPage(props: { params: Params }) {
 
   const params = await props.params;
   const id = params.slug;
+  console.log("ChatPage: params", params);
 
   if (!session?.user) {
     redirect(`/auth/login?next=/chat/${id}`);

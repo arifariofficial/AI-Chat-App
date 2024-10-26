@@ -29,7 +29,7 @@ const NavBar = ({ session }: NavBarProps) => {
           <Link href={`/`}>
             <div className="flex gap-2 px-4 text-2xl font-extrabold tracking-wide">
               <LocalLibraryIcon fontSize="large" aria-label="Library Icon" />
-              <p className="mt-1">SIPE</p>
+              <p className="mt-1">SipeAI</p>
             </div>
           </Link>
         </section>

@@ -12,6 +12,7 @@ interface SidebarItemsProps {
 }
 
 export function SidebarItems({ chats }: SidebarItemsProps) {
+  //  Return early if no chats are provided.
   if (!chats?.length) return null;
 
   return (

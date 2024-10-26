@@ -69,17 +69,17 @@ export default function Balance() {
   return (
     <div className="flex size-full flex-col items-center">
       <div className="mb-10 w-full bg-background text-foreground">
-        <h1 className="mb-1 text-2xl font-semibold">Balance</h1>
-        <p>Manage your payment settings</p>
+        <h1 className="mb-1 text-2xl font-semibold">Saldo</h1>
+        <p>Hallitse maksuasetuksiasi</p>
       </div>
       <div className="flex w-full max-w-md flex-col items-center space-y-6 rounded-xl border border-border/30 bg-background px-8 py-6 text-foreground">
-        <h1 className="text-lg font-semibold">Top Up Your Sipe Account</h1>
+        <h1 className="text-lg font-semibold">Lataa saldoa Sipe-tilillesi</h1>
         <FormControl
           fullWidth
           className="text-foreground focus:text-foreground"
         >
           <InputLabel id="credit-select-label" className="mb-6">
-            Amount
+            Määrä
           </InputLabel>
           <Select
             size="medium"
@@ -98,11 +98,11 @@ export default function Balance() {
         </FormControl>
         <Button
           disabled={loading}
-          variant="outline"
+          variant="default"
           className="h-ful my-10 w-2/3 p-5"
           onClick={buyCredits}
         >
-          Purchase
+          Osto
         </Button>
       </div>
     </div>

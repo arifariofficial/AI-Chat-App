@@ -53,14 +53,14 @@ export default function Security() {
   return (
     <main className="flex size-full flex-col text-foreground">
       <div className="mb-10 h-fit w-full">
-        <h1 className="mb-1 text-2xl font-semibold">Security</h1>
-        <p>Manage your security settings</p>
+        <h1 className="mb-1 text-2xl font-semibold">Turvallisuus</h1>
+        <p>Hallitse turvallisuusasetuksiasi</p>
       </div>
       {error && <div className="mb-2 text-destructive-foreground">{error}</div>}
       <form onSubmit={(e) => e.preventDefault()} className="flex w-full">
         <section className="flex w-full justify-between">
           <div className="flex flex-row text-base font-semibold text-foreground">
-            Two-Factor Authentication
+            Kaksivaiheinen todennus
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="ghost" className="ml-1 size-4 p-0">
@@ -68,10 +68,10 @@ export default function Security() {
                 </Button>
               </TooltipTrigger>
               <TooltipContent side="top" className="shadow-md">
-                <p className="max-w-44">
-                  When this feature is activated, a one-time password (OTP) will
-                  be sent to the user&apos;s email address to facilitate secure
-                  login.
+                <p className="max-w-[200px]">
+                  Kun tämä ominaisuus on aktivoitu, kertakäyttöinen salasana
+                  (OTP) lähetetään käyttäjän sähköpostiosoitteeseen turvallisen
+                  kirjautumisen mahdollistamiseksi.
                 </p>
               </TooltipContent>
             </Tooltip>
@@ -87,15 +87,15 @@ export default function Security() {
               />
             }
             label={
-              <div className="-mr-6">
+              <div className="-mr-6 text-sm">
                 {isTwoFactorEnabled ? (
                   loading ? (
                     <IconSpinner />
                   ) : (
-                    "Enabled"
+                    "Otettu käyttöön"
                   )
                 ) : (
-                  "Disabled"
+                  "Poistettu käytöstä"
                 )}
               </div>
             }
