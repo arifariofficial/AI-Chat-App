@@ -27,7 +27,7 @@ const ChatNav = ({ session }: ChatNavProps) => {
         </Button>
       </Link>
       <ThemeToggle
-        className="ml-1 hidden size-10 sm:flex"
+        buttonClassName="ml-1 hidden size-10 sm:flex"
         variant="inherit"
         style={{ zIndex: 20 }}
         iconClassName={cn(

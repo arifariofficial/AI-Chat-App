@@ -9,19 +9,21 @@ import { cn } from "@/lib/utils";
 interface ThemeToggleProps {
   className?: string;
   style?: React.CSSProperties;
-  variant?:
-    | "ghost"
-    | "outline"
-    | "secondary"
-    | "link"
-    | "nav"
-    | "default"
-    | "inherit";
   iconClassName?: string;
+  buttonClassName?: string;
+  variant?:
+    | "nav"
+    | "outline"
+    | "default"
+    | "destructive"
+    | "secondary"
+    | "ghost"
+    | "link"
+    | "inherit";
 }
 
 export function ThemeToggle({
-  className,
+  buttonClassName,
   variant,
   iconClassName,
   style,
@@ -42,7 +44,7 @@ export function ThemeToggle({
   return (
     <Button
       style={style}
-      className={cn(className)}
+      className={cn(buttonClassName)}
       variant={variant}
       onClick={() => {
         setTheme(resolvedTheme === "light" ? "dark" : "light");

@@ -2,8 +2,8 @@ import { LoginForm } from "@/components/auth/login-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "SIPE | Logged out",
-  description: "Please log in again to continue",
+  title: "SipeAI - Kirjautunut ulos",
+  description: "Kirjaudu sisään uudelleen jatkaaksesi",
   icons: "/favicon.ico",
 };
 

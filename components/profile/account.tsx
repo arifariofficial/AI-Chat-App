@@ -143,7 +143,7 @@ export default function Account() {
               </Button>
             ) : (
               <Button variant="outline" onClick={handleNameUpdate}>
-                Upate
+                Päivitä
               </Button>
             )}
           </div>
@@ -156,7 +156,7 @@ export default function Account() {
             <p className="h-8">{session.user.email}</p>
             {!session.user.emailVerified && (
               <Button
-                variant="outline"
+                variant="default"
                 onClick={handleSendVerificationEmail}
                 className="m-1"
                 disabled={verificationSend || isLoading}

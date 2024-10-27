@@ -1,14 +1,28 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { getSession, signIn } from "next-auth/react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FacebookIcon, GoogleIcon, IconSpinner } from "@/components/ui/icons";
 import { Typography } from "@mui/material";
+import { useSearchParams } from "next/navigation";
 
 export const Social = () => {
   const [pendingGoogle, setPendingGoogle] = useState(false);
   const [pendingFacebook, setPendingFacebook] = useState(false);
+  const searchParams = useSearchParams();
+
+  const redirectUrl = searchParams.get("redirect") || "/";
+
+  useEffect(() => {
+    const fetchSession = async () => {
+      const session = await getSession();
+      if (session) {
+        window.location.href = redirectUrl;
+      }
+    };
+    fetchSession();
+  }, [redirectUrl]);
 
   const onClick = async (provider: "facebook" | "google") => {
     if (provider === "facebook") {
@@ -18,7 +32,7 @@ export const Social = () => {
     }
 
     try {
-      await signIn(provider, { callbackUrl: "/" });
+      await signIn(provider, { callbackUrl: redirectUrl });
     } catch (error) {
       console.log(error);
     }

@@ -1,38 +1,53 @@
 "use client";
 
 import { SidebarList } from "@/components/chat/sidebar-list";
-import { Button } from "@/components/ui/button";
 import { IconRefresh } from "@/components/ui/icons";
 import { useChats } from "@/lib/hooks/useChats";
 import { Session } from "next-auth";
-import { getSession } from "next-auth/react";
-import { Suspense, useEffect } from "react";
+import { Suspense, useCallback, useEffect } from "react";
+import { toast } from "../ui/use-toast";
+import MyButton from "../my-button";
 
 export function ChatHistory({ session }: { session: Session | null }) {
   const { loadChats } = useChats();
 
   useEffect(() => {
     async function fetchSessionAndLoadChats() {
-      const session = await getSession();
-      if (session?.user?.id) {
-        loadChats(session.user.id);
+      try {
+        if (session?.user?.id) {
+          loadChats(session.user.id);
+        }
+      } catch (error) {
+        console.error("Failed to load chats:", error);
+        throw error; // Rethrow the error for the caller to handle
       }
     }
 
     fetchSessionAndLoadChats();
   }, [loadChats]);
 
+  const handleRefresh = useCallback(() => {
+    if (session?.user?.id) {
+      loadChats(session.user.id);
+      toast({
+        title: "Päivitä",
+        description: "Keskusteluhistoria päivitetty.",
+      });
+    }
+  }, [session, loadChats]);
+
   return (
     <div className="bg-bg-backgroundSecondary flex h-full flex-col">
       <div className="flex items-center justify-between bg-background p-4 shadow">
         <h4 className="text-sm font-medium">Keskusteluhistoria</h4>
-        <Button
+        <MyButton
           variant="outline"
           className="h-7"
-          onClick={() => session?.user?.id && loadChats(session?.user?.id)}
+          onClick={handleRefresh}
+          tooltipText="Päivitä"
         >
           <IconRefresh />
-        </Button>
+        </MyButton>
       </div>
       <Suspense
         // Loading skeleton while chats are loading

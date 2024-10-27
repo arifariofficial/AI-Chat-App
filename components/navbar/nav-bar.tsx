@@ -42,10 +42,15 @@ const NavBar = ({ session }: NavBarProps) => {
               </SidebarMobile>
             </div>
             <NavItemsRight session={session} />
-            <ThemeToggle className="flex size-full sm:hidden" variant="nav" />
+            <ThemeToggle
+              buttonClassName="text-foregroundNav hover:opacity-90 sm:hidden flex"
+              variant="inherit"
+            />
             <UserButtonMobile
               session={session}
               className="flex size-full sm:hidden"
+              buttonClassName="h-full text-foregroundNav hover:opacity-90"
+              variant="inherit"
             />
           </div>
         </section>

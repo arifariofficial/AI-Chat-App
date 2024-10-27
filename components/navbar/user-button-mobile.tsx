@@ -27,13 +27,25 @@ import { Separator } from "@/components/ui/separator";
 interface UserButtonMobileProps {
   session?: Session | null;
   className?: string;
+  buttonClassName?: string;
   style?: React.CSSProperties;
+  variant?:
+    | "nav"
+    | "outline"
+    | "default"
+    | "destructive"
+    | "secondary"
+    | "ghost"
+    | "link"
+    | "inherit";
 }
 
 export default function UserButtonMobile({
   session,
   className,
+  buttonClassName,
   style,
+  variant,
 }: UserButtonMobileProps) {
   return (
     <div className={cn(className)}>
@@ -43,7 +55,8 @@ export default function UserButtonMobile({
           className="flex min-w-0 items-center justify-center px-2"
           style={style}
         >
-          <Button variant="nav" className={cn(className, "mr-1")}>
+          {/* Attach the ref to the Button */}
+          <Button variant={variant} className={cn(buttonClassName)}>
             <HamburgerMenuIcon className="size-8 w-10" />
           </Button>
         </SheetTrigger>

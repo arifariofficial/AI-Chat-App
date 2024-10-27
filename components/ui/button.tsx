@@ -14,7 +14,7 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-border/30 bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "border border-border/30 bg-background shadow-sm hover:bg-accent hover:text-accent-foreground active:bg-background",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost:
@@ -27,7 +27,7 @@ const buttonVariants = cva(
         navMobile:
           "bg-inherit text-title hover:bg-foreground/5 active:bg-foreground/20 focus-visible:ring-0",
 
-        inherit: "bg-inherit text-inherit",
+        inherit: "bg-inherit",
       },
       size: {
         default: "h-9 px-4 py-2",

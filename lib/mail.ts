@@ -1,31 +1,16 @@
 import nodemailer from "nodemailer";
-/* import { Resend } from "resend"; */
+
+const app_pass = process.env.GOOGLE_APP_PASSWORD;
+const google_email = process.env.GOOGLE_EMAIL;
 
 // Gmail settings
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
-    user: "sipeai6@gmail.com",
-    pass: "jslg uyyo mopu rymt",
+    user: google_email,
+    pass: app_pass,
   },
 });
-
-//Resender settings
-/* const resend = new Resend(process.env.RESEND_API_KEY); */
-
-// Own mail server settings
-/* const transporter = nodemailer.createTransport({
-  host: "mailserver", // or the IP address of your mail server
-  port: 587, // Adjust if your server uses a different port (587 for STARTTLS or 465 for SSL)
-  secure: false, // True for port 465 (SSL), false for other ports
-  auth: {
-    user: "no-reply@sipe.life", // Your mail server username
-    pass: "Sipe123", // Your mail server password
-  },
-  tls: {
-    rejectUnauthorized: false, // Allow self-signed certificates
-  },
-}); */
 
 const baseURL = process.env.NEXT_PUBLIC_APP_URL;
 
@@ -33,7 +18,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
   const confirmLink = `${baseURL}/auth/new-verification?token=${encodeURIComponent(token)}`;
 
   await transporter.sendMail({
-    from: '"SIPE" <sipeai6@gmail.com>',
+    from: google_email,
     to: email,
     subject: "Confirm your email",
     html: `
@@ -55,7 +40,7 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
   const resetLink = `${baseURL}/auth/reset-password?token=${encodeURIComponent(token)}`;
 
   await transporter.sendMail({
-    from: '"SIPE" <sipeai6@gmail.com>',
+    from: google_email,
     to: email,
     subject: "Reset your password",
     html: `
@@ -75,7 +60,7 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
 
 export const sendTwoFactorTokenEmail = async (email: string, code: string) => {
   await transporter.sendMail({
-    from: '"SIPE" <sipeai6@gmail.com>',
+    from: google_email,
     to: email,
     subject: "2FA Code",
     html: `
