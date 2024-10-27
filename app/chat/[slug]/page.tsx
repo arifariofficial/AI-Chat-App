@@ -5,6 +5,13 @@ import { Session } from "next-auth";
 import { getChat } from "@/data/get-chat";
 
 import Chat from "@/components/chat/chat";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SipeAI - Keskustelu",
+  description: "Oikeudellinen tekoälyassistentti",
+  icons: "/favicon.ico",
+};
 
 type Params = Promise<{ slug: string }>;
 

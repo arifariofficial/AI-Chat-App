@@ -9,8 +9,8 @@ import { cn } from "@/lib/utils";
 import React from "react";
 
 interface MyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-  clasName?: string;
+  children?: React.ReactNode;
+  className?: string;
   tooltipPlacement?: "top" | "bottom" | "left" | "right";
   tooltipText?: string;
   variant?:
@@ -41,7 +41,7 @@ const MyButton: React.FC<MyButtonProps> = ({
             {children}
           </Button>
         </TooltipTrigger>
-        <TooltipContent side={tooltipPlacement}>
+        <TooltipContent side={tooltipPlacement} hidden={!tooltipText}>
           <p>{tooltipText}</p>
         </TooltipContent>
       </Tooltip>

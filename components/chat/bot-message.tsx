@@ -17,6 +17,7 @@ import { editMessage } from "@/actions/edit-message";
 import { getChat } from "@/data/get-chat";
 import { Chat } from "@/lib/types";
 import { useRouter } from "next/navigation";
+import { Role } from "@/types";
 
 export function BotMessage({
   content,
@@ -32,27 +33,30 @@ export function BotMessage({
   const { text, isStreamingDone } = useStreamableText(content);
   const { data: session } = useSession();
   const [isEditing, setIsEditing] = useState(false);
-  const [editedContent, setEditedContent] = useState(text);
+  const [editedContent, setEditedContent] = useState("");
   const [chat, setChat] = useState<Chat | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    // Define an async function to fetch the chat
-    const fetchChat = async () => {
-      const userId = session?.user.id ?? "";
-      if (chatId) {
-        try {
-          const chatData = await getChat(chatId, userId);
-          setChat(chatData);
-        } catch (error) {
-          console.error("Error fetching chat data:", error);
+    let isMounted = true;
+    (async () => {
+      // Fetch chat data
+      if (isMounted) {
+        const userId = session?.user.id ?? "";
+        if (chatId) {
+          try {
+            const chatData = await getChat(chatId, userId);
+            setChat(chatData);
+          } catch (error) {
+            console.error("Error fetching chat data:", error);
+          }
         }
       }
+    })();
+    return () => {
+      isMounted = false;
     };
-
-    // Call the async function
-    fetchChat();
-  }, [messageId, chatId, session?.user.id]);
+  }, [chatId, session?.user.id]);
 
   useEffect(() => {
     if (isStreamingDone && text) {
@@ -103,6 +107,10 @@ export function BotMessage({
     });
   };
 
+  const editedMessage = chat?.messages?.find(
+    (message) => message.id === messageId && message.edited !== null,
+  );
+
   return (
     /* Bot message container */
     <div
@@ -120,7 +128,7 @@ export function BotMessage({
             Sipe
           </h1>
           {/* Add edit message */}
-          {session?.user?.role === "EDITOR" && (
+          {session?.user?.role === Role.EDITOR && (
             <Button
               variant="ghost"
               className="mx-2 -mt-1 h-full p-0 hover:text-secondary"
@@ -186,32 +194,20 @@ export function BotMessage({
         {isStreamingDone && !isEditing && <ChatMessageActions message={text} />}
 
         {/* Render edited content if any */}
-        {chat?.messages?.some((message) => message.edited !== null) && (
+        {editedMessage && (
           <div className="edited-message">
-            {/* Render edited content here */}
-            {chat.messages
-              .filter((message) => message.edited !== null)
-              .map((message) => (
-                <div key={message.id}>
-                  {messageId === message.id && (
-                    <div>
-                      <h1 className="mt-4 font-bold">Muokattu</h1>
-                      <MemoizedReactMarkdown
-                        className="prose w-full max-w-none dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
-                        remarkPlugins={[remarkGfm, remarkMath]}
-                        components={{
-                          p({ children }) {
-                            /* Bot messages most inner*/
-                            return <p className="w-full">{children}</p>;
-                          },
-                        }}
-                      >
-                        {message.edited}
-                      </MemoizedReactMarkdown>
-                    </div>
-                  )}
-                </div>
-              ))}
+            <h1 className="mt-4 font-bold">Muokattu</h1>
+            <MemoizedReactMarkdown
+              className="prose w-full max-w-none dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
+              remarkPlugins={[remarkGfm, remarkMath]}
+              components={{
+                p({ children }) {
+                  return <p className="w-full">{children}</p>;
+                },
+              }}
+            >
+              {editedMessage.edited}
+            </MemoizedReactMarkdown>
           </div>
         )}
       </div>

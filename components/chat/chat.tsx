@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Session } from "next-auth";
 import { EmptyScreen } from "./empty-screen";
 import { ChatPanel } from "./chat-panel";
@@ -23,6 +23,7 @@ function Chat({ id = "", session, ...props }: ChatProps) {
   const [aiState] = useAIState();
   const [, setNewChatId] = useLocalStorage("newChatId", id);
   const { loadChats } = useChats();
+  const router = useRouter();
 
   useEffect(() => {
     if (
@@ -38,6 +39,7 @@ function Chat({ id = "", session, ...props }: ChatProps) {
   useEffect(() => {
     if (aiState.messages?.length === 2 && session?.user?.id) {
       loadChats(session.user.id);
+      router.refresh();
     }
   }, [aiState.messages, session?.user?.id, loadChats]);
 

@@ -5,9 +5,8 @@ import { Button } from "@/components/ui/button";
 import { IconSidebar } from "@/components/ui/icons";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
-import { SidebarMobileContainer } from "./sidebar-mobile-container";
 import React from "react";
+import { DialogDescription, DialogTitle } from "../ui/dialog";
 
 interface SidebarMobileProps {
   children: React.ReactNode;
@@ -15,28 +14,24 @@ interface SidebarMobileProps {
 }
 
 export function SidebarMobile({ children, className }: SidebarMobileProps) {
-  const path = usePathname();
-
-  if (!path.includes("/chat")) return null;
-
   return (
     <Sheet>
-      <SheetTrigger
-        asChild
-        className="text-foregroundNav focus-visible:border-none focus-visible:ring-0"
-      >
-        <Button variant="nav" className={cn("sm:hidden", className)}>
-          <IconSidebar className="size-6" />
+      <SheetTrigger asChild>
+        <Button variant="inherit" className={cn("sm:hidden", className)}>
+          <IconSidebar className="size-7" />
           <span className="sr-only">Vaihda sivupalkki</span>
         </Button>
       </SheetTrigger>
       <SheetContent
         side="left"
-        className="inset-y-0 flex h-auto w-full flex-col border p-0 sm:hidden"
+        className="inset-y-0 flex h-auto flex-col p-0 sm:hidden"
       >
-        <SidebarMobileContainer className="flex">
-          {children}
-        </SidebarMobileContainer>
+        <DialogTitle className="sr-only">Mobile Navigation Menu</DialogTitle>
+        <DialogDescription className="sr-only">
+          Navigate through the menu options using the buttons.
+        </DialogDescription>
+
+        {children}
       </SheetContent>
     </Sheet>
   );

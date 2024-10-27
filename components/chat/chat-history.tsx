@@ -7,8 +7,14 @@ import { Session } from "next-auth";
 import { Suspense, useCallback, useEffect } from "react";
 import { toast } from "../ui/use-toast";
 import MyButton from "../my-button";
+import { cn } from "@/lib/utils";
 
-export function ChatHistory({ session }: { session: Session | null }) {
+interface ChatHistoryProps {
+  session: Session | null;
+  buttonClassName?: string;
+}
+
+export function ChatHistory({ session, buttonClassName }: ChatHistoryProps) {
   const { loadChats } = useChats();
 
   useEffect(() => {
@@ -42,7 +48,7 @@ export function ChatHistory({ session }: { session: Session | null }) {
         <h4 className="text-sm font-medium">Keskusteluhistoria</h4>
         <MyButton
           variant="outline"
-          className="h-7"
+          className={cn(buttonClassName, "h-7")}
           onClick={handleRefresh}
           tooltipText="Päivitä"
         >

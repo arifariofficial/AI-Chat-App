@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
-import { SidebarMobile } from "@/components/chat/sidebar-mobile";
-import { ChatHistory } from "@/components/chat/chat-history";
 import UserButtonMobile from "./user-button-mobile";
 import NavItemsRight from "./nav-items-right";
 import NavItemsMiddle from "./nav-items-middle";
@@ -36,11 +34,6 @@ const NavBar = ({ session }: NavBarProps) => {
         <NavItemsMiddle />
         <section className="mr-1 flex items-center justify-center text-xl font-semibold hover:opacity-90">
           <div className="flex size-full flex-row items-center p-px">
-            <div className="flex size-full items-center justify-center">
-              <SidebarMobile className="flex size-full items-center justify-center">
-                {session && <ChatHistory session={session} />}
-              </SidebarMobile>
-            </div>
             <NavItemsRight session={session} />
             <ThemeToggle
               buttonClassName="text-foregroundNav hover:opacity-90 sm:hidden flex"

@@ -60,7 +60,7 @@ export default function UserButtonMobile({
             <HamburgerMenuIcon className="size-8 w-10" />
           </Button>
         </SheetTrigger>
-        <SheetContent className="inset-y-0 flex max-h-screen w-full flex-col justify-start gap-1 bg-backgroundSecondary text-title sm:hidden">
+        <SheetContent className="inset-y-0 flex max-h-screen flex-col justify-start gap-1 border border-border/20 bg-backgroundSecondary text-title sm:hidden">
           <DialogTitle className="sr-only">Mobile Navigation Menu</DialogTitle>
           <DialogDescription className="sr-only">
             Navigate through the menu options using the buttons.

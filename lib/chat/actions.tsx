@@ -35,6 +35,10 @@ async function submitUserMessage(content: string) {
   });
 
   const results: SIPEEssay[] = await searchAPI(content);
+  const context =
+    results && results.length > 0
+      ? results.map((d) => d.content).join("\n\n")
+      : "Ei lisätietoja saatavilla.";
 
   const prompt = `\
   Olet sosiaaliturva-asiantuntija, joka on erikoistunut pitkäaikaissairaiden ja vammaisten henkilöiden oikeuksiin. 
@@ -55,7 +59,7 @@ async function submitUserMessage(content: string) {
   - Ole ystävällinen, empaattinen ja täsmällinen vastauksessasi.
   
   ### Konteksti:
-  ${results?.map((d) => d.content).join("\n\n")}
+  ${context}
   
   Palauta vastaus tai yksi tarkentava kysymys, joka liittyy suoraan käyttäjän tilanteeseen. Jos kysymys ei liity ohjeisiin tai sosiaaliturva-asioihin, erityisesti vammaisten ja pitkäaikaissairaiden oikeuksiin, **älä vastaa kysymykseen**.
   `;
@@ -132,62 +136,6 @@ export type UIState = {
   display: React.ReactNode;
 }[];
 
-export const AI = createAI<AIState, UIState>({
-  actions: {
-    submitUserMessage,
-  },
-  initialUIState: [],
-  initialAIState: { chatId: nanoid(), messages: [] },
-
-  onGetUIState: async () => {
-    "use server";
-
-    const session = await auth();
-
-    if (session && session.user) {
-      const aiState = getAIState();
-
-      if (aiState) {
-        const uiState = getUIStateFromAIState(aiState as Chat);
-        return uiState; // Expected to be of type UIState
-      }
-    }
-
-    // Explicitly return undefined to satisfy the UIState | undefined requirement
-    return undefined;
-  },
-
-  onSetAIState: async ({ state }) => {
-    "use server";
-
-    const session = await auth();
-
-    if (session && session.user) {
-      const { chatId, messages } = state;
-
-      const createdAt = new Date();
-      const userId = session.user.id as string;
-      const path = `/chat/${chatId}`;
-
-      const firstMessageContent = messages[0].content as string;
-      const title = firstMessageContent.substring(0, 100);
-
-      const chat: Chat = {
-        id: chatId,
-        title,
-        userId,
-        createdAt,
-        messages,
-        path,
-      };
-
-      await saveChat(chat);
-    } else {
-      return;
-    }
-  },
-});
-
 // Function to map AI state to UI state
 export const getUIStateFromAIState = (aiState: Chat) => {
   return aiState.messages
@@ -212,3 +160,74 @@ export const getUIStateFromAIState = (aiState: Chat) => {
         ) : null,
     }));
 };
+
+// Function to create and initialize the AI
+export const AI = createAI<AIState, UIState>({
+  actions: {
+    submitUserMessage,
+  },
+  initialUIState: [],
+  initialAIState: { chatId: nanoid(), messages: [] },
+
+  onGetUIState: async () => {
+    "use server";
+
+    try {
+      const session = await auth();
+
+      if (session?.user) {
+        const aiState = getAIState();
+
+        if (aiState) {
+          const uiState = getUIStateFromAIState(aiState as Chat);
+          return uiState; // Expected to be of type UIState
+        }
+      }
+
+      return undefined;
+    } catch (error) {
+      console.error("Error in onGetUIState:", error);
+
+      return undefined;
+    }
+  },
+
+  onSetAIState: async ({ state }) => {
+    "use server";
+
+    try {
+      const session = await auth();
+
+      if (session?.user) {
+        const { chatId, messages } = state;
+
+        if (!messages || messages.length === 0) {
+          throw new Error("No messages available to create a chat title.");
+        }
+
+        const createdAt = new Date();
+        const userId = session.user.id as string;
+        const path = `/chat/${chatId}`;
+
+        const firstMessageContent = messages[0].content as string;
+        const title = firstMessageContent.substring(0, 100);
+
+        const chat: Chat = {
+          id: chatId,
+          title,
+          userId,
+          createdAt,
+          messages,
+          path,
+        };
+
+        await saveChat(chat);
+      } else {
+        console.warn("Unauthorized access attempt in onSetAIState.");
+        return;
+      }
+    } catch (error) {
+      console.error("Error in onSetAIState:", error);
+    }
+  },
+});
