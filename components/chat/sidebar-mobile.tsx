@@ -17,7 +17,10 @@ export function SidebarMobile({ children, className }: SidebarMobileProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="inherit" className={cn("sm:hidden", className)}>
+        <Button
+          variant="inherit"
+          className={cn("focus:border-none sm:hidden", className)}
+        >
           <IconSidebar className="size-7" />
           <span className="sr-only">Vaihda sivupalkki</span>
         </Button>
@@ -26,11 +29,10 @@ export function SidebarMobile({ children, className }: SidebarMobileProps) {
         side="left"
         className="inset-y-0 flex h-auto flex-col p-0 sm:hidden"
       >
-        <DialogTitle className="sr-only">Mobile Navigation Menu</DialogTitle>
+        <DialogTitle className="sr-only">Mobiiilinavigointivalikko</DialogTitle>
         <DialogDescription className="sr-only">
-          Navigate through the menu options using the buttons.
+          Siirry valikkovaihtoehtojen läpi käyttämällä painikkeita
         </DialogDescription>
-
         {children}
       </SheetContent>
     </Sheet>

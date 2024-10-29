@@ -1,8 +1,8 @@
 "use client";
 
 import { SidebarList } from "@/components/chat/sidebar-list";
-import { IconRefresh } from "@/components/ui/icons";
-import { useChats } from "@/lib/hooks/useChats";
+import { IconDownload, IconRefresh } from "@/components/ui/icons";
+import { useChat } from "@/lib/hooks/use-chat";
 import { Session } from "next-auth";
 import { Suspense, useCallback, useEffect } from "react";
 import { toast } from "../ui/use-toast";
@@ -15,7 +15,7 @@ interface ChatHistoryProps {
 }
 
 export function ChatHistory({ session, buttonClassName }: ChatHistoryProps) {
-  const { loadChats } = useChats();
+  const { loadChats } = useChat();
 
   useEffect(() => {
     async function fetchSessionAndLoadChats() {
@@ -30,7 +30,7 @@ export function ChatHistory({ session, buttonClassName }: ChatHistoryProps) {
     }
 
     fetchSessionAndLoadChats();
-  }, [loadChats]);
+  }, [loadChats, session?.user?.id]);
 
   const handleRefresh = useCallback(() => {
     if (session?.user?.id) {
@@ -40,19 +40,23 @@ export function ChatHistory({ session, buttonClassName }: ChatHistoryProps) {
         description: "Keskusteluhistoria päivitetty.",
       });
     }
-  }, [session, loadChats]);
+  }, [session?.user?.id, loadChats]);
 
   return (
-    <div className="bg-bg-backgroundSecondary flex h-full flex-col">
-      <div className="flex items-center justify-between bg-background p-4 shadow">
-        <h4 className="text-sm font-medium">Keskusteluhistoria</h4>
+    <div className="bg-bg-backgroundSecondary flex h-full flex-col overflow-hidden">
+      <div className="mb-2 flex items-center justify-between bg-background p-4 shadow-sm">
+        <h4 className="text-sm font-bold">Keskusteluhistoria</h4>
         <MyButton
           variant="outline"
-          className={cn(buttonClassName, "h-7")}
+          className={cn(buttonClassName, "ml-4 h-7 p-1")}
           onClick={handleRefresh}
           tooltipText="Päivitä"
         >
-          <IconRefresh />
+          <div className="flex max-w-full flex-row items-center gap-2">
+            <IconDownload className="size-5" />
+            <p>Päivitä</p>
+            <IconRefresh className="size-4" />
+          </div>
         </MyButton>
       </div>
       <Suspense

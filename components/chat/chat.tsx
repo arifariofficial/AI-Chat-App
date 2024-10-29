@@ -8,8 +8,10 @@ import { ChatPanel } from "./chat-panel";
 import { useAIState, useUIState } from "ai/rsc";
 import { useLocalStorage } from "@/lib/hooks/use-local-storage";
 import { useScrollAnchor } from "@/lib/hooks/use-scroll-anchor";
-import { useChats } from "@/lib/hooks/useChats";
+import { useChat } from "@/lib/hooks/use-chat";
 import { ChatList } from "./chat-list";
+import { useAppDispatch } from "@/lib/store/hook";
+import { startChat } from "@/lib/store/chatSlice";
 
 export interface ChatProps extends React.ComponentProps<"div"> {
   id?: string;
@@ -22,8 +24,10 @@ function Chat({ id = "", session, ...props }: ChatProps) {
   const [messages] = useUIState();
   const [aiState] = useAIState();
   const [, setNewChatId] = useLocalStorage("newChatId", id);
-  const { loadChats } = useChats();
+  const { loadChats } = useChat();
   const router = useRouter();
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (
@@ -39,9 +43,9 @@ function Chat({ id = "", session, ...props }: ChatProps) {
   useEffect(() => {
     if (aiState.messages?.length === 2 && session?.user?.id) {
       loadChats(session.user.id);
-      router.refresh();
+      dispatch(startChat());
     }
-  }, [aiState.messages, session?.user?.id, loadChats]);
+  }, [aiState.messages, session?.user?.id, loadChats, router, startChat]);
 
   useEffect(() => {
     if (id) {

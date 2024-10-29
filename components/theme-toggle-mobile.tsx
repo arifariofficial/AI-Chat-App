@@ -11,6 +11,7 @@ interface ThemeToggleProps {
   style?: React.CSSProperties;
   iconClassName?: string;
   buttonClassName?: string;
+  buttonText?: string;
   variant?:
     | "nav"
     | "outline"
@@ -26,6 +27,7 @@ export function ThemeToggle({
   buttonClassName,
   variant,
   iconClassName,
+  buttonText,
   style,
 }: ThemeToggleProps) {
   const { setTheme, resolvedTheme } = useTheme();
@@ -50,13 +52,16 @@ export function ThemeToggle({
         setTheme(resolvedTheme === "light" ? "dark" : "light");
       }}
     >
-      <div>
-        {resolvedTheme === "dark" ? (
-          <IconMoon className={cn(iconClassName, "size-7 transition-all")} />
-        ) : (
-          <IconSun className={cn(iconClassName, "size-7 transition-all")} />
-        )}
-        <span className="sr-only">Toggle theme</span>
+      <div className="flex flex-row items-center">
+        {buttonText && <p>{buttonText}</p>}
+        <div>
+          {resolvedTheme === "dark" ? (
+            <IconMoon className={cn(iconClassName, "size-7 transition-all")} />
+          ) : (
+            <IconSun className={cn(iconClassName, "size-7 transition-all")} />
+          )}
+          <span className="sr-only">Toggle theme</span>
+        </div>
       </div>
     </Button>
   );

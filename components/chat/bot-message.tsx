@@ -67,12 +67,12 @@ export function BotMessage({
   const handleEditMessage = () => {
     setIsEditing(true);
   };
-  if (!session) {
+  if (!session && chat?.sharePath) {
     return null;
   }
 
   const handleSaveEditedContent = async () => {
-    const userId = session.user.id ?? "";
+    const userId = session?.user.id ?? "";
     if (!userId || !messageId || !chatId) {
       console.warn("Missing required parameters for saving content.");
       return;
@@ -131,7 +131,7 @@ export function BotMessage({
           {session?.user?.role === Role.EDITOR && (
             <Button
               variant="ghost"
-              className="mx-2 -mt-1 h-full p-0 hover:text-secondary"
+              className="mx-2 -mt-1 h-full bg-backgroundSecondary p-0 hover:text-secondary"
               onClick={handleEditMessage}
             >
               <IconEdit className="size-5" />

@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { UIState } from "@/lib/chat/actions";
@@ -6,6 +8,7 @@ import { cn } from "@/lib/utils";
 export interface ChatListProps {
   messages: UIState;
   className?: string;
+  isShared?: boolean;
 }
 
 export function ChatList({ messages, className }: ChatListProps) {
@@ -70,7 +73,10 @@ export function ChatList({ messages, className }: ChatListProps) {
       <div className="">
         {messages.map((message, index) => (
           <div key={message.id}>
-            <div className="mr-10 flex flex-col">{message.display}</div>
+            {/* Only render display if it's not null */}
+            {message.display && (
+              <div className="mr-10 flex flex-col">{message.display}</div>
+            )}
             {index < messages.length - 1 && (
               <Separator className="my-8 h-0 border-none" />
             )}

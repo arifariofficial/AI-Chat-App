@@ -18,6 +18,7 @@ import { decrement } from "@/lib/store/balanceSlice";
 import { useAppDispatch } from "@/lib/store/hook";
 import { useTheme } from "next-themes";
 import { UserMessage } from "./user-message";
+import { resetChat } from "@/lib/store/chatSlice";
 
 export function PromptForm({
   input,
@@ -139,6 +140,7 @@ export function PromptForm({
                       variant="outline"
                       onClick={() => {
                         router.push("/new");
+                        dispatch(resetChat());
                       }}
                       className="hidden sm:block"
                     >

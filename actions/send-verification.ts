@@ -53,8 +53,17 @@ export const sendNewVerificationEmail = async (
       message: MESSAGES.SUCCESS,
     };
   } catch (error) {
-    // Log the error details for debugging purposes
-    logger.error(`Failed to send verification email to ${email}:`, error);
+    // Check if error is an instance of Error
+    if (error instanceof Error) {
+      // Log the error details for debugging purposes
+      logger.error(`Failed to send verification email to ${email}:`, error);
+    } else {
+      // Log the error details for debugging purposes
+      logger.error(
+        `An unknown error occurred while sending verification email to ${email}:`,
+        error as Error,
+      );
+    }
 
     return {
       type: ResponseType.ERROR,

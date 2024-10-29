@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import NavBarServer from "@/components/navbar/navbar-server";
 import React from "react";
+import { getChats } from "@/data/get-chat";
 
 export const metadata: Metadata = {
   title: "Sipe AI - Innovating the Future",
@@ -29,6 +30,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
+  const chats = await getChats(session?.user?.id || ("" as string));
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -39,6 +41,7 @@ export default async function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
+          chats={chats}
         >
           <SessionProvider basePath="/api/auth" session={session}>
             <main className="relative flex size-full flex-col">

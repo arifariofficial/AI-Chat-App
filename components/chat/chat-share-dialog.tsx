@@ -1,10 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { type DialogProps } from "@radix-ui/react-dialog";
 import { toast } from "sonner";
-
-import { ServerActionResult, type Chat } from "@/lib/types";
+import { useChat } from "@/lib/hooks/use-chat";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -16,19 +14,15 @@ import {
 } from "@/components/ui/dialog";
 import { useCopyToClipboard } from "@/lib/hooks/use-copy-to-clipboard";
 import { IconSpinner } from "@/components/ui/icons";
+import { Chat } from "@/lib/types";
 
-interface ChatShareDialogProps extends DialogProps {
-  chat: Pick<Chat, "id" | "title" | "messages">;
-  shareChat: (id: string) => ServerActionResult<Chat>;
-  onCopy: () => void;
-}
-
-export function ChatShareDialog({
-  chat,
-  shareChat,
-  onCopy,
-  ...props
-}: ChatShareDialogProps) {
+export function ChatShareDialog() {
+  const {
+    chatToShare,
+    setShareDialogOpen,
+    shareDialogOpen,
+    shareChatFunction,
+  } = useChat();
   const { copyToClipboard } = useCopyToClipboard({ timeout: 1000 });
   const [isSharePending, startShareTransition] = React.useTransition();
 
@@ -42,50 +36,67 @@ export function ChatShareDialog({
       const url = new URL(window.location.href);
       url.pathname = chat.sharePath;
       copyToClipboard(url.toString());
-      onCopy();
+      setShareDialogOpen(false);
       toast.success("Share link copied to clipboard");
     },
-    [copyToClipboard, onCopy],
+    [copyToClipboard, setShareDialogOpen],
   );
 
+  const handleShareChat = React.useCallback(() => {
+    if (!chatToShare?.id) {
+      toast.error("Chat ID is missing. Cannot share this chat.");
+      return;
+    }
+    startShareTransition(async () => {
+      try {
+        const result = await shareChatFunction(chatToShare?.id);
+
+        if ("error" in result) {
+          toast.error(result.error as string);
+          return;
+        }
+
+        copyShareLink(result);
+      } catch (error) {
+        console.error("Failed to share chat:", error);
+        toast.error("Failed to share chat");
+      }
+    });
+  }, [chatToShare, copyShareLink]);
+
+  if (!chatToShare) {
+    return null; // Don't render if there's no chat to share
+  }
+
   return (
-    <Dialog {...props}>
+    <Dialog open={shareDialogOpen} onOpenChange={setShareDialogOpen}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Share link to chat</DialogTitle>
+          <DialogTitle>Jaa linkki keskusteluun</DialogTitle>
           <DialogDescription>
-            Anyone with the URL will be able to view the shared chat.
+            Kuka tahansa, jolla on URL-osoite, pystyy katsomaan jaettua
+            keskustelua
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-1 rounded-md border p-4 text-sm">
-          <div className="font-medium">{chat.title}</div>
+          <ul className="font-medium">
+            {chatToShare.messages.length > 0 && (
+              <li key={0}>{chatToShare.messages[0].content}</li>
+            )}
+          </ul>
           <div className="text-muted-foreground">
-            {chat.messages.length} messages
+            {chatToShare.messages.length} messages
           </div>
         </div>
         <DialogFooter className="items-center">
-          <Button
-            disabled={isSharePending}
-            onClick={() => {
-              startShareTransition(async () => {
-                const result = await shareChat(chat.id);
-
-                if ("error" in result) {
-                  toast.error(result.error as string);
-                  return;
-                }
-
-                copyShareLink(result);
-              });
-            }}
-          >
+          <Button disabled={isSharePending} onClick={handleShareChat}>
             {isSharePending ? (
               <>
                 <IconSpinner className="mr-2 animate-spin" />
-                Copying...
+                Kopioidaan...
               </>
             ) : (
-              <>Copy link</>
+              <>Kopioi linkki</>
             )}
           </Button>
         </DialogFooter>

@@ -7,14 +7,19 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import MUIThemeProvider from "../styles/mui-theme-provider";
 import { Provider as RuduxProvider } from "react-redux";
 import { store } from "@/lib/store/store";
-import { ChatProvider } from "@/lib/hooks/useChats";
+import { ChatProvider } from "@/lib/hooks/use-chat";
+import { Chat } from "@/lib/types";
 
-export function Providers({ children, ...props }: ThemeProviderProps) {
+type ProvidersProps = ThemeProviderProps & {
+  chats?: Chat[] | undefined;
+};
+
+export function Providers({ children, chats, ...props }: ProvidersProps) {
   return (
     <RuduxProvider store={store}>
       <NextThemesProvider {...props}>
         <MUIThemeProvider>
-          <ChatProvider>
+          <ChatProvider initialChats={chats}>
             <SidebarProvider>
               <TooltipProvider>{children}</TooltipProvider>
             </SidebarProvider>

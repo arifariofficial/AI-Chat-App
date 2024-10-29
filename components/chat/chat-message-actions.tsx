@@ -34,13 +34,9 @@ export function ChatMessageActions({
           <Button
             variant="inherit"
             onClick={onCopy}
-            className="bg-backgroundSecondary p-0 text-secondary hover:bg-backgroundSecondary active:bg-backgroundSecondary"
+            className="p-0 text-secondary"
           >
-            {isCopied ? (
-              <IconCheck className="size-5 bg-backgroundSecondary" />
-            ) : (
-              <IconCopy className="size-6 bg-backgroundSecondary" />
-            )}
+            {isCopied ? <IconCheck /> : <IconCopy />}
             <span className="sr-only">Kopioi viesti</span>
           </Button>
         </TooltipTrigger>

@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { SidebarItem } from "./sidebar-item";
 import { SidebarActions } from "./sidebar-actions";
 import { removeChat } from "@/data/chat";
-import { shareChat } from "@/data/share-chat";
 
 interface SidebarItemsProps {
   chats?: Chat[];
@@ -28,14 +27,7 @@ export function SidebarItems({ chats }: SidebarItemsProps) {
               }}
             >
               <SidebarItem index={index} chat={chat}>
-                <SidebarActions
-                  chat={chat}
-                  removeChat={removeChat}
-                  shareChat={async (id: string) => {
-                    const result = await shareChat(id);
-                    return result as Chat | { error: string };
-                  }}
-                />
+                <SidebarActions chat={chat} removeChat={removeChat} />
               </SidebarItem>
             </motion.div>
           ),
