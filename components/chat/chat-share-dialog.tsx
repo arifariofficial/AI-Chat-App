@@ -62,7 +62,7 @@ export function ChatShareDialog() {
         toast.error("Failed to share chat");
       }
     });
-  }, [chatToShare, copyShareLink]);
+  }, [chatToShare, copyShareLink, shareChatFunction]);
 
   if (!chatToShare) {
     return null; // Don't render if there's no chat to share
@@ -70,7 +70,7 @@ export function ChatShareDialog() {
 
   return (
     <Dialog open={shareDialogOpen} onOpenChange={setShareDialogOpen}>
-      <DialogContent>
+      <DialogContent className="w-[400px] rounded-md sm:w-[700px]">
         <DialogHeader>
           <DialogTitle>Jaa linkki keskusteluun</DialogTitle>
           <DialogDescription>

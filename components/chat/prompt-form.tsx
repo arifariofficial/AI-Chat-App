@@ -120,8 +120,9 @@ export function PromptForm({
                 borderColor: `${theme.theme === "light" ? "lightgray" : "gray"}`,
                 borderWidth: "1px",
               },
-              "&:hover fieldset": {
-                borderColor: `${theme.theme === "light" ? "darkgray" : "gray"}`,
+              "&:hover:not(.Mui-focused) fieldset": {
+                // Explicitly targeting hover and not-focused state
+                borderColor: theme.theme === "light" ? "darkgray" : "gray",
                 borderWidth: "1px",
               },
               "&.Mui-focused fieldset": {

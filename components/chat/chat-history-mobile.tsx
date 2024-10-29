@@ -24,11 +24,13 @@ import Link from "next/link";
 interface ChatHistoryProps {
   session: Session | null;
   buttonClassName?: string;
+  onShareClick: () => void;
 }
 
 export function ChatHistoryMobile({
   session,
   buttonClassName,
+  onShareClick,
 }: ChatHistoryProps) {
   const { loadChats } = useChat();
   const router = useRouter();

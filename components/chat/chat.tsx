@@ -45,7 +45,13 @@ function Chat({ id = "", session, ...props }: ChatProps) {
       loadChats(session.user.id);
       dispatch(startChat());
     }
-  }, [aiState.messages, session?.user?.id, loadChats, router, startChat]);
+  }, [aiState.messages, session?.user?.id, loadChats, router]);
+
+  useEffect(() => {
+    if (aiState.messages?.length > 2 && session?.user?.id) {
+      dispatch(startChat());
+    }
+  }, [aiState.messages, session?.user?.id, dispatch]);
 
   useEffect(() => {
     if (id) {

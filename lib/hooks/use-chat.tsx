@@ -98,7 +98,7 @@ export const ChatProvider: React.FC<{
       handleShare,
       shareChatFunction,
     }),
-    [chats, chatToShare, shareDialogOpen],
+    [chats, chatToShare, shareDialogOpen, loadChats],
   );
 
   return (

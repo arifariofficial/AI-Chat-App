@@ -53,7 +53,7 @@ const ChatNav: React.FC<ChatNavProps> = ({ session }) => {
   return (
     <div className="mb-4 flex h-14 w-full flex-row items-center justify-between">
       <SidebarMobile className="z-50 border-none focus:border-none">
-        <ChatHistoryMobile session={session} />
+        <ChatHistoryMobile session={session} onShareClick={onShareClick} />
       </SidebarMobile>
 
       {chatStarted && (
