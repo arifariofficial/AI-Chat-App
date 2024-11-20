@@ -46,6 +46,8 @@ services:
 
   jenkins:
     image: jenkins/jenkins:lts
+    env_file:
+      - .env.production
     user: root
     ports:
       - "8080:8080"
