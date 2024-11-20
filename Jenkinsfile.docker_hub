@@ -11,7 +11,7 @@ pipeline {
     }
 
     environment {
-        PROJECT_PATH = '/home/sipeai18/sipe-frontend'
+        PROJECT_PATH = '/home/sipeai8/sipe-frontend'
     }
 
     stages {
@@ -23,12 +23,12 @@ pipeline {
                         cd ${PROJECT_PATH}
                         git checkout main
                         git pull origin main 
-                        docker compose down
-                        docker compose pull frontend
+                        docker-compose down
+                        docker-compose pull frontend
                         docker system prune -f
                         docker volume prune -f
                         docker image prune -f 
-                        docker compose up -d
+                        docker-compose up -d
 
                     '''
                 }
