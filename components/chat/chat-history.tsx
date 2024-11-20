@@ -8,6 +8,7 @@ import { Suspense, useCallback, useEffect } from "react";
 import { toast } from "../ui/use-toast";
 import MyButton from "../my-button";
 import { cn } from "@/lib/utils";
+import { useSidebar } from "@/lib/hooks/use-sidebar";
 
 interface ChatHistoryProps {
   session: Session | null;
@@ -16,11 +17,12 @@ interface ChatHistoryProps {
 
 export function ChatHistory({ session, buttonClassName }: ChatHistoryProps) {
   const { loadChats } = useChat();
+  const { isSidebarOpen } = useSidebar();
 
   useEffect(() => {
     async function fetchSessionAndLoadChats() {
       try {
-        if (session?.user?.id) {
+        if (isSidebarOpen && session?.user?.id) {
           loadChats(session.user.id);
         }
       } catch (error) {
@@ -30,7 +32,7 @@ export function ChatHistory({ session, buttonClassName }: ChatHistoryProps) {
     }
 
     fetchSessionAndLoadChats();
-  }, [loadChats, session?.user?.id]);
+  }, [loadChats, session?.user?.id, isSidebarOpen]);
 
   const handleRefresh = useCallback(() => {
     if (session?.user?.id) {
@@ -41,6 +43,10 @@ export function ChatHistory({ session, buttonClassName }: ChatHistoryProps) {
       });
     }
   }, [session?.user?.id, loadChats]);
+
+  if (!isSidebarOpen) {
+    return null; // Ensure the component doesn't render when the sidebar is closed
+  }
 
   return (
     <div className="bg-bg-backgroundSecondary flex h-full flex-col overflow-hidden">

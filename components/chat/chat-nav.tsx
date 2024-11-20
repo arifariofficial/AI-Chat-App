@@ -4,7 +4,7 @@ import { Session } from "next-auth";
 import { useTheme } from "next-themes";
 import { ThemeToggle } from "@/components/theme-toggle-mobile";
 import Link from "next/link";
-import { IconHome, IconShareUp } from "@/components/ui/icons";
+import { IconEdit, IconHome, IconShareUp } from "@/components/ui/icons";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { SidebarMobile } from "./sidebar-mobile";
@@ -13,9 +13,11 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { useSelector } from "react-redux";
 import { selectChatStarted } from "@/lib/store/chatSlice";
 import { useChat } from "@/lib/hooks/use-chat";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { getChat } from "@/data/get-chat";
 import { Chat } from "@/lib/types";
+import { useAppDispatch } from "@/lib/store/hook";
+import { resetChat } from "@/lib/store/chatSlice";
 
 interface ChatNavProps {
   session: Session;
@@ -26,9 +28,10 @@ const ChatNav: React.FC<ChatNavProps> = ({ session }) => {
   const chatStarted = useSelector(selectChatStarted);
   const { handleShare } = useChat();
   const [chat, setChat] = useState<Chat>();
-
+  const dispatch = useAppDispatch();
   const params = useParams();
   const chatId = Array.isArray(params?.slug) ? params.slug[0] : params?.slug; // Ensure chatId is a string
+  const router = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -56,24 +59,45 @@ const ChatNav: React.FC<ChatNavProps> = ({ session }) => {
         <ChatHistoryMobile session={session} onShareClick={onShareClick} />
       </SidebarMobile>
 
-      {chatStarted && (
+      <div className="flex">
         <Tooltip>
           <TooltipTrigger asChild className="hidden sm:flex">
             <Button
               variant="inherit"
-              onClick={onShareClick}
-              className="z-50 my-0 gap-1 border-foreground/40 p-0 px-1 text-foreground hover:bg-accent hover:text-foreground/80 active:text-foreground sm:ml-3 sm:border"
+              onClick={() => {
+                router.push("/new");
+                dispatch(resetChat());
+              }}
+              className="z-50 my-0 gap-1 border-foreground/40 p-0 px-1 text-foreground hover:bg-accent hover:text-foreground/80 active:text-foreground sm:ml-1 sm:border"
             >
               <div className="flex items-center gap-1">
-                <span className="hidden text-sm md:inline-flex">Jaa</span>
-                <IconShareUp className="mb-1 size-5 p-0" />
+                <span className="hidden text-sm md:inline-flex">Uusi</span>
+                <IconEdit className="mb-1 size-5 p-0" />
                 <span className="sr-only">Jaa keskustelu</span>
               </div>
             </Button>
           </TooltipTrigger>
           <TooltipContent>Jaa keskustelu</TooltipContent>
         </Tooltip>
-      )}
+        {chatStarted && (
+          <Tooltip>
+            <TooltipTrigger asChild className="hidden sm:flex">
+              <Button
+                variant="inherit"
+                onClick={onShareClick}
+                className="z-50 border-foreground/40 p-0 px-1 text-foreground hover:bg-accent hover:text-foreground/80 active:text-foreground sm:ml-1 sm:border"
+              >
+                <div className="flex items-center gap-1">
+                  <span className="hidden text-sm md:inline-flex">Jaa</span>
+                  <IconShareUp className="mb-1 size-5 p-0" />
+                  <span className="sr-only">Jaa keskustelu</span>
+                </div>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Jaa keskustelu</TooltipContent>
+          </Tooltip>
+        )}
+      </div>
 
       <div className="ml-auto hidden items-center sm:inline-flex">
         <Link href="/" style={{ zIndex: 50 }}>

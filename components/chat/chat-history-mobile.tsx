@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ThemeToggle } from "../theme-toggle-mobile";
 import { useTheme } from "next-themes";
 import Link from "next/link";
+import { useSidebar } from "@/lib/hooks/use-sidebar";
 
 interface ChatHistoryProps {
   session: Session | null;
@@ -37,11 +38,12 @@ export function ChatHistoryMobile({
   const dispatch = useDispatch();
   const chatStarted = useSelector(selectChatStarted);
   const { theme } = useTheme();
+  const { isSidebarOpen } = useSidebar();
 
   useEffect(() => {
     async function fetchSessionAndLoadChats() {
       try {
-        if (session?.user?.id) {
+        if (isSidebarOpen && session?.user?.id) {
           loadChats(session.user.id);
         }
       } catch (error) {
@@ -51,7 +53,11 @@ export function ChatHistoryMobile({
     }
 
     fetchSessionAndLoadChats();
-  }, [loadChats, session?.user?.id]);
+  }, [loadChats, session?.user?.id, isSidebarOpen]);
+
+  if (!isSidebarOpen) {
+    return null; // Ensure the component doesn't render when the sidebar is closed
+  }
 
   return (
     <div className="flex h-full flex-col bg-backgroundSecondary">
@@ -105,7 +111,7 @@ export function ChatHistoryMobile({
               buttonClassName="flex items-center bg-background border w-full gap-1 border-foreground/40 p-1 text-foreground hover:bg-accent items-center"
               variant="inherit"
               style={{ zIndex: 20 }}
-              buttonText="Change theme"
+              buttonText="Vaihda teema"
               iconClassName={cn(
                 theme === "light"
                   ? "text-inherit font-extrabold bg-inherit "
@@ -121,7 +127,7 @@ export function ChatHistoryMobile({
                 className="z-50 w-full gap-1 border border-foreground/40 bg-background p-1 text-foreground hover:bg-accent"
               >
                 <div className="flex flex-row items-center gap-4">
-                  <p>Back to Home</p>
+                  <p>Takaisin etusivulle</p>
                   <IconHome
                     className={cn(
                       theme === "light" ? "text-inherit" : "text-foreground",

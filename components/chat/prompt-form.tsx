@@ -10,15 +10,13 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useEnterSubmit } from "@/lib/hooks/use-enter-submit";
-import { useRouter } from "next/navigation";
-import { IconArrowElbow, IconPlus } from "@/components/ui/icons";
+import { IconArrowElbow } from "@/components/ui/icons";
 import { CircularProgress, InputAdornment, TextField } from "@mui/material";
 import { nanoid } from "@/lib/utils";
 import { decrement } from "@/lib/store/balanceSlice";
 import { useAppDispatch } from "@/lib/store/hook";
 import { useTheme } from "next-themes";
 import { UserMessage } from "./user-message";
-import { resetChat } from "@/lib/store/chatSlice";
 
 export function PromptForm({
   input,
@@ -31,7 +29,6 @@ export function PromptForm({
   isLoading: boolean;
   setIsLoading: (value: boolean) => void;
 }) {
-  const router = useRouter();
   const { formRef, onKeyDown, handleButtonClick } = useEnterSubmit();
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
   const { submitUserMessage } = useActions();
@@ -132,28 +129,6 @@ export function PromptForm({
             },
           }}
           InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => {
-                        router.push("/new");
-                        dispatch(resetChat());
-                      }}
-                      className="hidden sm:block"
-                    >
-                      <IconPlus />
-                      <span className="sr-only">Uusi keskustelu</span>
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Uusi keskustelu</TooltipContent>
-                </Tooltip>
-              </InputAdornment>
-            ),
-
             endAdornment: (
               <InputAdornment position="end">
                 <Tooltip>

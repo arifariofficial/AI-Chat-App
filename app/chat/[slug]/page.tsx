@@ -26,6 +26,7 @@ export default async function ChatPage(props: { params: Params }) {
   }
 
   const userId = session.user.id as string;
+
   const chat = await getChat(id, userId);
 
   if (!chat) {

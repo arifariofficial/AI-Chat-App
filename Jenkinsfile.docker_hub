@@ -21,8 +21,8 @@ pipeline {
                     sh '''
                         set -e
                         cd ${PROJECT_PATH}
-                        git checkout main
-                        git pull origin main 
+                        git checkout ai-sdk
+                        git pull origin ai-sdk 
                         docker-compose down
                         docker-compose pull frontend
                         docker system prune -f

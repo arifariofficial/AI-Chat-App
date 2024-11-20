@@ -8,7 +8,6 @@ import { ChatPanel } from "./chat-panel";
 import { useAIState, useUIState } from "ai/rsc";
 import { useLocalStorage } from "@/lib/hooks/use-local-storage";
 import { useScrollAnchor } from "@/lib/hooks/use-scroll-anchor";
-import { useChat } from "@/lib/hooks/use-chat";
 import { ChatList } from "./chat-list";
 import { useAppDispatch } from "@/lib/store/hook";
 import { startChat } from "@/lib/store/chatSlice";
@@ -24,7 +23,6 @@ function Chat({ id = "", session, ...props }: ChatProps) {
   const [messages] = useUIState();
   const [aiState] = useAIState();
   const [, setNewChatId] = useLocalStorage("newChatId", id);
-  const { loadChats } = useChat();
 
   const dispatch = useAppDispatch();
 
@@ -40,16 +38,12 @@ function Chat({ id = "", session, ...props }: ChatProps) {
   }, [id, path, session?.user, messages?.length]);
 
   useEffect(() => {
-    if (aiState.messages?.length === 2 && session?.user?.id) {
-      loadChats(session.user.id);
-    }
-  }, [aiState.messages, session?.user?.id, loadChats]);
-
-  useEffect(() => {
     if (aiState.messages?.length >= 2 && session?.user?.id) {
-      dispatch(startChat());
+      if (!aiState.chatStarted) {
+        dispatch(startChat());
+      }
     }
-  }, [aiState.messages, session?.user?.id, dispatch]);
+  }, [aiState.messages, session?.user?.id, dispatch, aiState.chatStarted]);
 
   useEffect(() => {
     if (id) {
