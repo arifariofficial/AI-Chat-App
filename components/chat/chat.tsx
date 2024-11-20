@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Session } from "next-auth";
 import { EmptyScreen } from "./empty-screen";
 import { ChatPanel } from "./chat-panel";
@@ -25,7 +25,6 @@ function Chat({ id = "", session, ...props }: ChatProps) {
   const [aiState] = useAIState();
   const [, setNewChatId] = useLocalStorage("newChatId", id);
   const { loadChats } = useChat();
-  const router = useRouter();
 
   const dispatch = useAppDispatch();
 
@@ -43,12 +42,11 @@ function Chat({ id = "", session, ...props }: ChatProps) {
   useEffect(() => {
     if (aiState.messages?.length === 2 && session?.user?.id) {
       loadChats(session.user.id);
-      dispatch(startChat());
     }
-  }, [aiState.messages, session?.user?.id, loadChats, router]);
+  }, [aiState.messages, session?.user?.id, loadChats]);
 
   useEffect(() => {
-    if (aiState.messages?.length > 2 && session?.user?.id) {
+    if (aiState.messages?.length >= 2 && session?.user?.id) {
       dispatch(startChat());
     }
   }, [aiState.messages, session?.user?.id, dispatch]);

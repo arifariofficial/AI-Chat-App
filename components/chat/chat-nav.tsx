@@ -75,7 +75,7 @@ const ChatNav: React.FC<ChatNavProps> = ({ session }) => {
         </Tooltip>
       )}
 
-      <div className="ml-auto inline-flex items-center">
+      <div className="ml-auto hidden items-center sm:inline-flex">
         <Link href="/" style={{ zIndex: 50 }}>
           <Button variant="inherit" className="text-foreground">
             <IconHome

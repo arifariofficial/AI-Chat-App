@@ -187,16 +187,22 @@ export function BotMessage({
               },
             }}
           >
-            {text}
+            {editedMessage ? editedMessage.edited : text}
           </MemoizedReactMarkdown>
         )}
 
-        {isStreamingDone && !isEditing && <ChatMessageActions message={text} />}
+        {isStreamingDone &&
+          !isEditing &&
+          (editedMessage ? (
+            <ChatMessageActions message={editedMessage.edited ?? text ?? ""} />
+          ) : (
+            <ChatMessageActions message={text} />
+          ))}
 
         {/* Render edited content if any */}
         {editedMessage && (
           <div className="edited-message">
-            <h1 className="mt-4 font-bold">Muokattu</h1>
+            <h1 className="mt-4 font-bold">Alkuperäinen vastaus</h1>
             <MemoizedReactMarkdown
               className="prose w-full max-w-none dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
               remarkPlugins={[remarkGfm, remarkMath]}
@@ -206,8 +212,9 @@ export function BotMessage({
                 },
               }}
             >
-              {editedMessage.edited}
+              {editedMessage.content}
             </MemoizedReactMarkdown>
+            <ChatMessageActions message={editedMessage.content} />
           </div>
         )}
       </div>
