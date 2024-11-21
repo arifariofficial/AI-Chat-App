@@ -48,7 +48,7 @@ services:
 
   jenkins:
     image: arifariofficial/sipe-jenkins:latest
-    user: root
+    user: "1002:1003" # Use the UID and GID from the host
     environment:
       - JENKINS_OPTS=--prefix=/jenkins
     ports:
