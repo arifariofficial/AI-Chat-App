@@ -3,10 +3,10 @@ pipeline {
     triggers {
         GenericTrigger(
             genericVariables: [
-                [key: 'DOCKER_REPO', value: '$.repository.repo_name'],
+                [key: 'DOCKER_REPO', value: '$.repository.repo_name']
             ],
             causeString: 'Triggered by Docker Hub webhook: $DOCKER_REPO',
-            token: 'DOCKER_HUB',
+            token: 'DOCKER_HUB'
         )
     }
 
@@ -19,20 +19,33 @@ pipeline {
         stage('Deploy Docker Image') {
             steps {
                 script {
-                    sh '''
-                        set -e
-                        git config --global --add safe.directory ${PROJECT_PATH}
-                        cd ${PROJECT_PATH}
-                        git checkout ai-sdk
-                        git pull origin ai-sdk 
-                        docker-compose down
-                        docker-compose pull frontend
-                        docker system prune -f
-                        docker volume prune -f
-                        docker image prune -f 
-                        docker-compose up -d
-
-                    '''
+                    withCredentials([usernamePassword(
+                        credentialsId: "${env.GIT_CREDENTIALS}", 
+                        usernameVariable: 'GIT_USERNAME', 
+                        passwordVariable: 'GIT_PASSWORD'
+                    )]) {
+                        sh '''
+                            set -e
+                            git config --global --add safe.directory ${PROJECT_PATH}
+                            cd ${PROJECT_PATH}
+                            git checkout ai-sdk
+                            git pull https://${GIT_USERNAME}:${GIT_PASSWORD}@gitlab.com/sipe3/sipe-frontend ai-sdk
+                            
+                            # Stop and remove existing containers
+                            docker-compose down
+                            
+                            # Pull the latest Docker image for the frontend
+                            docker-compose pull frontend
+                            
+                            # Clean up unused Docker resources
+                            docker system prune -f
+                            docker volume prune -f
+                            docker image prune -f
+                            
+                            # Restart the application
+                            docker-compose up -d
+                        '''
+                    }
                 }
             }
         }
