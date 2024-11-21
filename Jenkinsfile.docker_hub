@@ -25,6 +25,10 @@ pipeline {
                     )]) {
                         sh '''
                             set -e
+
+                            # Configure Git user identity globally
+                            git config --global user.email "ariful6@yahoo.com"
+                            git config --global user.name "Ariful Islam"
                             
                             # Configure Git to safely handle the repository
                             git config --global --add safe.directory ${PROJECT_PATH}
