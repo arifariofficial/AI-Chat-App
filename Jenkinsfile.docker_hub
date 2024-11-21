@@ -19,7 +19,6 @@ pipeline {
                 script {
                     sh '''
                         set -e
-
                         cd ${PROJECT_PATH}
                         git checkout ai-sdk
                         git pull origin ai-sdk 
@@ -29,7 +28,6 @@ pipeline {
                         docker volume prune -f
                         docker image prune -f 
                         docker compose up -d
-
                     '''
                 }
             }
