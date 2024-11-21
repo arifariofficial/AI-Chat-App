@@ -6,7 +6,6 @@ pipeline {
                 [key: 'DOCKER_REPO', value: '$.repository.repo_name']
             ],
             causeString: 'Triggered by Docker Hub webhook: $DOCKER_REPO',
-            token: 'DOCKER_HUB'
         )
     }
 
@@ -28,8 +27,7 @@ pipeline {
                             set -e
                             git config --global --add safe.directory ${PROJECT_PATH}
                             cd ${PROJECT_PATH}
-                            git checkout ai-sdk
-                            git pull https://${GIT_USERNAME}:${GIT_PASSWORD}@gitlab.com/sipe3/sipe-frontend ai-sdk
+                            git pull https://${GIT_USERNAME}:${GIT_PASSWORD}@gitlab.com/sipe3/sipe-frontend
                             
                             # Stop and remove existing containers
                             docker compose down
