@@ -32,10 +32,10 @@ pipeline {
                             git pull https://${GIT_USERNAME}:${GIT_PASSWORD}@gitlab.com/sipe3/sipe-frontend ai-sdk
                             
                             # Stop and remove existing containers
-                            docker-compose down
+                            docker compose down
                             
                             # Pull the latest Docker image for the frontend
-                            docker-compose pull frontend
+                            docker compose pull frontend
                             
                             # Clean up unused Docker resources
                             docker system prune -f
