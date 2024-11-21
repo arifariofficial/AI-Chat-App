@@ -12,27 +12,30 @@ pipeline {
 
     environment {
         PROJECT_PATH = '/home/sipeai8/sipe-frontend'
-        GIT_CREDENTIALS = 'arifariofficial' 
+        GIT_CREDENTIALS = 'arifariofficial' // Credentials ID in Jenkins
     }
 
     stages {
         stage('Deploy Docker Image') {
             steps {
                 script {
-                    sh '''
-                        set -e
-                        git config --global --add safe.directory ${PROJECT_PATH}
-                        cd ${PROJECT_PATH}
-                        git checkout ai-sdk
-                        git pull origin ai-sdk 
-                        docker-compose down
-                        docker-compose pull frontend
-                        docker system prune -f
-                        docker volume prune -f
-                        docker image prune -f 
-                        docker-compose up -d
-
-                    '''
+                    withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIALS}", usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                        sh '''
+                            set -e
+                            git config --global --add safe.directory ${PROJECT_PATH}
+                            cd ${PROJECT_PATH}
+                            git config credential.helper store
+                            echo "https://${GIT_USERNAME}:${GIT_PASSWORD}@gitlab.com" > ~/.git-credentials
+                            chmod 600 ~/.git-credentials
+                            git pull origin ai-sdk
+                            docker-compose down
+                            docker-compose pull frontend
+                            docker system prune -f
+                            docker volume prune -f
+                            docker image prune -f 
+                            docker-compose up -d
+                        '''
+                    }
                 }
             }
         }
