@@ -19,7 +19,7 @@ pipeline {
                 script {
                     sh '''
                         set -e
-                        ssh sipeai8@sipe.life
+                        ssh sipeai8@sipe.life -o StrictHostKeyChecking=no
                         cd ${PROJECT_PATH}
                         git checkout ai-sdk
                         git pull origin ai-sdk 
