@@ -14,6 +14,7 @@
     "analyze": "ANALYZE=true next build",
     "scrape": "tsx scripts/scrape.ts",
     "embed": "tsx scripts/embed.ts",
+    "docker:jenkins": "docker build -f jenkins.Dockerfile -t arifariofficial/sipe-jenkins . && docker push arifariofficial/sipe-jenkins:latest",
     "docker:dev": "docker build -f Dockerfile -t arifariofficial/sipe-dev . && docker push arifariofficial/sipe-dev:latest",
     "docker:push": "docker build --platform linux/amd64 -t arifariofficial/sipe . --no-cache && docker push arifariofficial/sipe:latest",
     "docker:build": "docker-compose -f docker-compose.dev.yml build",
