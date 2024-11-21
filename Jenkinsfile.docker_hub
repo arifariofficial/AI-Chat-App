@@ -17,19 +17,23 @@ pipeline {
         stage('Deploy Docker Image') {
             steps {
                 script {
-                    sh '''
-                        set -e
-                        cd ${PROJECT_PATH}
-                        git checkout ai-sdk
-                        git pull origin ai-sdk 
-                        docker compose down
-                        docker compose pull frontend
-                        docker system prune -f
-                        docker volume prune -f
-                        docker image prune -f 
-                        docker compose up -d
-
-                    '''
+                    withCredentials([usernamePassword(credentialsId: 'GitLab-PAT-ID', passwordVariable: 'GITLAB_PAT', usernameVariable: 'GITLAB_USERNAME')]) {
+                        sh '''
+                            set -e
+                            cd ${PROJECT_PATH}
+                            git config credential.helper 'store --file=.git-credentials'
+                            echo "https://${GITLAB_USERNAME}:${GITLAB_PAT}@gitlab.com" > .git-credentials
+                            git checkout ai-sdk
+                            git pull origin ai-sdk 
+                            rm -f .git-credentials
+                            docker compose down
+                            docker compose pull frontend
+                            docker system prune -f
+                            docker volume prune -f
+                            docker image prune -f 
+                            docker compose up -d
+                        '''
+                    }
                 }
             }
         }
