@@ -23,8 +23,8 @@ pipeline {
                             cd ${PROJECT_PATH}
                             git config credential.helper 'store --file=.git-credentials'
                             echo "https://${GITLAB_USERNAME}:${GITLAB_PAT}@gitlab.com" > .git-credentials
-                            git checkout ai-sdk
-                            git pull origin ai-sdk 
+                            git fetch origin ai-sdk
+                            git reset --hard origin/ai-sdk
                             rm -f .git-credentials
                             docker compose down
                             docker compose pull frontend
