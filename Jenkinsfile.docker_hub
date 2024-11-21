@@ -3,7 +3,7 @@ pipeline {
     triggers {
         GenericTrigger(
             genericVariables: [
-                [key: 'DOCKER_REPO', value: '$.repository.repo_name']
+                [key: 'DOCKER_REPO', value: '$.repository.repo_name'],
             ],
             causeString: 'Triggered by Docker Hub webhook: $DOCKER_REPO',
         )
@@ -11,50 +11,25 @@ pipeline {
 
     environment {
         PROJECT_PATH = '/home/sipeai8/sipe-frontend'
-        GIT_CREDENTIALS = '1203bdaf-bfe5-49c4-9ff5-37e6447cb1cb'
     }
 
     stages {
         stage('Deploy Docker Image') {
             steps {
                 script {
-                    withCredentials([usernamePassword(
-                        credentialsId: "${env.GIT_CREDENTIALS}", 
-                        usernameVariable: 'GIT_USERNAME', 
-                        passwordVariable: 'GIT_PASSWORD'
-                    )]) {
-                        sh '''
-                            set -e
+                    sh '''
+                        set -e
+                        cd ${PROJECT_PATH}
+                        git checkout main
+                        git pull origin main 
+                        docker compose down
+                        docker compose pull frontend
+                        docker system prune -f
+                        docker volume prune -f
+                        docker image prune -f 
+                        docker compose up -d
 
-                            # Configure Git user identity globally
-                            git config --global user.email "ariful6@yahoo.com"
-                            git config --global user.name "Ariful Islam"
-                            
-                            # Configure Git to safely handle the repository
-                            git config --global --add safe.directory ${PROJECT_PATH}
-                            cd ${PROJECT_PATH}
-
-                            # Set Git pull strategy to avoid conflicts with divergent branches
-                            git config pull.rebase false
-
-                            # Pull the latest changes from the Git repository
-                            git pull https://${GIT_USERNAME}:${GIT_PASSWORD}@gitlab.com/sipe3/sipe-frontend
-
-                            # Stop and remove existing containers
-                            docker compose down
-
-                            # Pull the latest Docker image for the frontend
-                            docker compose pull frontend
-
-                            # Clean up unused Docker resources
-                            docker system prune -f
-                            docker volume prune -f
-                            docker image prune -f
-
-                            # Restart the application
-                            docker compose up -d
-                        '''
-                    }
+                    '''
                 }
             }
         }
