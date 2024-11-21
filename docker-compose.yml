@@ -47,7 +47,7 @@ services:
       - frontend
 
   jenkins:
-    image: jenkins/jenkins:lts
+    image: myoung34/docker-github-actions:latest
     user: root
     environment:
       - JENKINS_OPTS=--prefix=/jenkins
