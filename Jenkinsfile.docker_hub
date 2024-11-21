@@ -20,6 +20,7 @@ pipeline {
                 script {
                     sh '''
                         set -e
+                        git config --global --add safe.directory ${PROJECT_PATH}
                         cd ${PROJECT_PATH}
                         git checkout ai-sdk
                         git pull origin ai-sdk 
