@@ -47,7 +47,7 @@ services:
       - frontend
 
   jenkins:
-    image: myoung34/docker-github-actions:latest
+    image: arifariofficial/sipe-jenkins:latest
     user: root
     environment:
       - JENKINS_OPTS=--prefix=/jenkins
