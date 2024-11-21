@@ -25,23 +25,30 @@ pipeline {
                     )]) {
                         sh '''
                             set -e
+                            
+                            # Configure Git to safely handle the repository
                             git config --global --add safe.directory ${PROJECT_PATH}
                             cd ${PROJECT_PATH}
+
+                            # Set Git pull strategy to avoid conflicts with divergent branches
+                            git config pull.rebase false
+
+                            # Pull the latest changes from the Git repository
                             git pull https://${GIT_USERNAME}:${GIT_PASSWORD}@gitlab.com/sipe3/sipe-frontend
-                            
+
                             # Stop and remove existing containers
                             docker compose down
-                            
+
                             # Pull the latest Docker image for the frontend
                             docker compose pull frontend
-                            
+
                             # Clean up unused Docker resources
                             docker system prune -f
                             docker volume prune -f
                             docker image prune -f
-                            
+
                             # Restart the application
-                            docker-compose up -d
+                            docker compose up -d
                         '''
                     }
                 }
