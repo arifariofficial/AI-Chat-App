@@ -58,6 +58,10 @@ services:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - /home/sipeai8/sipe-frontend:/home/sipeai8/sipe-frontend
+    entrypoint: >
+      /bin/bash -c "
+      git config --global --add safe.directory /home/sipeai8/sipe-frontend &&
+      /usr/bin/tini -- /usr/local/bin/jenkins.sh"
     networks:
       - sipe-network
     restart: unless-stopped
