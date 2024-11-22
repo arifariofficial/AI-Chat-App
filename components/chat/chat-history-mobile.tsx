@@ -38,7 +38,11 @@ export function ChatHistoryMobile({
   const dispatch = useDispatch();
   const chatStarted = useSelector(selectChatStarted);
   const { theme } = useTheme();
-  const { isSidebarOpen } = useSidebar();
+  const { isSidebarOpen, isLoading } = useSidebar();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   useEffect(() => {
     async function fetchSessionAndLoadChats() {
@@ -55,11 +59,7 @@ export function ChatHistoryMobile({
     fetchSessionAndLoadChats();
   }, [loadChats, session?.user?.id, isSidebarOpen]);
 
-  if (!isSidebarOpen) {
-    return null; // Ensure the component doesn't render when the sidebar is closed
-  }
-
-  return (
+  return isSidebarOpen ? (
     <div className="flex h-full flex-col bg-backgroundSecondary">
       <div>
         <ul className="flex w-full flex-col gap-y-1">
@@ -177,5 +177,5 @@ export function ChatHistoryMobile({
         </div>
       </div>
     </div>
-  );
+  ) : null;
 }

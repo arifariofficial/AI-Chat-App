@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { DialogDescription, DialogTitle } from "../ui/dialog";
+import { useSidebar } from "@/lib/hooks/use-sidebar";
 
 interface SidebarMobileProps {
   children: React.ReactNode;
@@ -14,8 +15,10 @@ interface SidebarMobileProps {
 }
 
 export function SidebarMobile({ children, className }: SidebarMobileProps) {
+  const { toggleSidebar } = useSidebar();
+
   return (
-    <Sheet>
+    <Sheet onOpenChange={(isOpen) => toggleSidebar(isOpen)}>
       <SheetTrigger asChild>
         <Button
           variant="inherit"

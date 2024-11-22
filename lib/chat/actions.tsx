@@ -8,12 +8,10 @@ import {
 import { openai } from "@ai-sdk/openai";
 import { Chat, Message } from "../types";
 import { auth } from "@/auth";
-import { SpinnerMessage } from "@/components/chat/message";
+import { SpinnerMessage } from "@/components/chat/spiner-message";
 import { nanoid } from "@/lib/utils";
 import { saveChat } from "@/data/save-chat";
-import { SIPEEssay } from "@/types";
 import React from "react";
-import { searchAPI } from "../api";
 import { UserMessage } from "@/components/chat/user-message";
 import { BotMessage } from "@/components/chat/bot-message";
 
@@ -34,44 +32,37 @@ async function submitUserMessage(content: string) {
     ],
   });
 
-  const results: SIPEEssay[] = await searchAPI(content);
-
   const prompt = `\
-      Olet sosiaaliturva-asiantuntija, joka on erikoistunut pitkäaikaissairaiden ja vammaisten henkilöiden oikeuksiin.
-      
-      Sinun tehtäväsi on auttaa käyttäjää vakuutustapauksissa Suomessa, erityisesti silloin, kun he ovat joutuneet onnettomuuteen ja haluavat tietää kaikki mahdolliset edut ja korvaukset, joita he voivat saada vakuutusyhtiöiltä tai Kelalta. Vakuutusyhtiöt pyrkivät usein salaamaan tietoa käyttäjän oikeuksista saada tukea tai rahallista korvausta. Vastaa empaattisesti ja täsmällisesti.
-      
-      ### Ohjeet:
-      1. **Kontekstin ymmärtäminen:**
-         - Käy huolellisesti läpi käyttäjän antamat tiedot ja määritä, onko lisätietoja tarpeen.
-         - Jos kysymys on epäselvä tai siihen on useita mahdollisia vastauksia, kysy käyttäjältä tarkentavia kysymyksiä ennen kuin annat lopullisen vastauksen.
-      
-      2. **Kysymysten esittäminen:**
-         - Jos käyttäjän tilanteesta puuttuu kriittistä tietoa, aloita keskustelu yhdellä tai useammalla **tarkentavalla kysymyksellä**.
-         - Esitä kysymyksiä, jotka auttavat kaventamaan vastauksen mahdollisuuksia ja varmistamaan, että vastaus on hyödyllinen ja täsmällinen.
-      
-      3. **Vastausten antaminen:**
-         - Kun olet saanut tarvittavat tiedot käyttäjältä, anna lyhyt ja ytimekäs vastaus.
-         - Varmista, että vastaus on suoraan yhteydessä käyttäjän tilanteeseen.
-         - Jos kysymys ei liity sosiaaliturva-asioihin, erityisesti vammaisten ja pitkäaikaissairaiden oikeuksiin, ilmoita ystävällisesti, että se ei kuulu asiantuntemukseesi.
-      
-      4. **Käyttöliittymäelementit:**
-         - Viestejä, jotka ovat [hakemuksissa], tarkoitetaan käyttöliittymäelementeiksi tai käyttäjän toiminnaksi. Älä kommentoi niitä.
-      
-      ### Käyttäjän kysymys:
-      "${content}"
-      
-      ### Konteksti:
-      ${results?.map((d) => `- ${d.content}`).join("\n")}
-      
-      ### Ohjeiden mukainen toimintatapa:
-      - Jos kysymys on epäselvä tai sisältää monia mahdollisia vastauksia, aloita kysymällä tarkentavia kysymyksiä, kuten:
-        - "Voitko kertoa tarkemmin tilanteestasi?"
-        - "Mihin tarkkaan liittyen haluat tietoa, esim. Kela-tuki vai vakuutusyhtiön korvaukset?"
-      - Kun olet saanut riittävästi tietoa, palauta lyhyt ja täsmällinen vastaus, joka liittyy suoraan käyttäjän tilanteeseen.
-      
-      Palauta joko yksi tarkentava kysymys tai lopullinen vastaus, riippuen käyttäjän antaman tiedon riittävyydestä.
-      `;
+  Olet sosiaaliturva-asiantuntija, joka on erikoistunut pitkäaikaissairaiden ja vammaisten henkilöiden oikeuksiin.
+  
+  Sinä ja käyttäjä voitte keskustella vakuutustapauksista Suomessa, joissa käyttäjä on joutunut onnettomuuteen ja haluaa tietää kaikki edut, joita hän voi saada vakuutusyhtiöltä tai Kelalta. Vakuutusyhtiöt pyrkivät usein salaamaan tietoa käyttäjän oikeuksista saada tukea tai rahallista korvausta.
+  
+  Vastaa käyttäjän kysymykseen: "${content}". 
+  Keskittyen ymmärtämään heidän tilanteensa. Kysy **vain yksi** tarkentava kysymys tai anna ytimekäs vastaus annetun kontekstin perusteella.
+  
+  ### Ohjeet:
+  - Varmista, että ymmärrät käyttäjän tilanteen tarkasti ennen kuin vastaat.
+  - Jos käyttäjän kysymys voi johtaa useisiin eri ratkaisuihin tai tarvitset lisätietoja, kysy selventäviä ja tarkentavia kysymyksiä.
+  - Kysy tarvittaessa kaikki olennaiset tiedot, jotta voit antaa parhaan mahdollisen neuvon.
+  - Korosta, että vakuutusyhtiöllä on ensisijainen korvausvastuu liikennevahingoissa.
+  - Vältä mainitsemasta Kelan tukia tai korvauksia, ellei vakuutusyhtiö ole hylännyt korvaushakemusta.
+  - Anna konkreettisia neuvoja ja ohjeita käyttäjän tilanteeseen perustuen.
+  - Selitä käyttäjälle heidän oikeutensa, kuten oikeus pyytää vakuutusyhtiöltä kaikki heitä koskevat asiakirjat ja sisäiset keskustelut.
+  - Kerro käyttäjälle mahdollisuudesta valittaa vakuutusyhtiön päätöksestä ja miten se tehdään.
+  - Käytä empaattista ja ystävällistä sävyä.
+  - Vältä tarpeettomia yksityiskohtia, jotka eivät liity suoraan käyttäjän kysymykseen.
+  
+  ### Konteksti:
+  - "Vakuutusyhtiö korvaa myös esimerkiksi apuvälineet."
+  - "Oletko ollut yhteydessä vakuutusyhtiöön?"
+  - "Voit pyytää vakuutusyhtiöltä kaikki sinua koskevat asiakirjat, mukaan lukien heidän sisäiset keskustelut."
+  - "Sinulla on oikeus valittaa vakuutusyhtiön päätöksestä."
+  - "General Data Protection Regulation (yleinen tietosuoja-asetus) mukaisesti sinulla on oikeus tietää, mitä tietoja vakuutusyhtiöllä on sinusta."
+  - "Jos vakuutusyhtiö kieltäytyy korvaamasta, voit ottaa yhteyttä Kelaan."
+  - "Koska sinulla on epäilys hermovauriosta, olisi hyödyllistä käydä neurologilla."
+  
+  Palauta vastaus tai yksi tarkentava kysymys, joka liittyy suoraan käyttäjän tilanteeseen. Jos kysymys ei liity ohjeisiin tai sosiaaliturva-asioihin, erityisesti vammaisten ja pitkäaikaissairaiden oikeuksiin, **älä vastaa kysymykseen**.
+  `;
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>;
   let textNode: undefined | React.ReactNode;
@@ -81,7 +72,7 @@ async function submitUserMessage(content: string) {
     model: openai("gpt-4o"),
     initial: <SpinnerMessage />,
     system: prompt,
-    temperature: 0.8,
+    temperature: 0.7,
     messages: [
       ...aiState.get().messages.map(
         (message: Message) =>
