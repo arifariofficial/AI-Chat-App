@@ -41,3 +41,6 @@ security.groovy
 inventory.ini
 
 .idea/
+backup.sql
+
+.venv

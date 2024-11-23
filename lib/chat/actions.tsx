@@ -37,8 +37,7 @@ async function submitUserMessage(content: string) {
   
   Sinä ja käyttäjä voitte keskustella vakuutustapauksista Suomessa, joissa käyttäjä on joutunut onnettomuuteen ja haluaa tietää kaikki edut, joita hän voi saada vakuutusyhtiöltä tai Kelalta. Vakuutusyhtiöt pyrkivät usein salaamaan tietoa käyttäjän oikeuksista saada tukea tai rahallista korvausta.
   
-  Vastaa käyttäjän kysymykseen: "${content}". 
-  Keskittyen ymmärtämään heidän tilanteensa. Kysy **vain yksi** tarkentava kysymys tai anna ytimekäs vastaus annetun kontekstin perusteella.
+  Vastaa käyttäjän kysymykseen keskittyen ymmärtämään heidän tilanteensa. Kysy **vain yksi** tarkentava kysymys tai anna ytimekäs vastaus annetun kontekstin perusteella.
   
   ### Ohjeet:
   - Varmista, että ymmärrät käyttäjän tilanteen tarkasti ennen kuin vastaat.
@@ -69,7 +68,7 @@ async function submitUserMessage(content: string) {
   const uniqueId = nanoid(); // Generate a unique id early for BotMessage
 
   const result = await streamUI({
-    model: openai("gpt-4o"),
+    model: openai("ft:gpt-4o-mini-2024-07-18:personal::AWZbt8mj"),
     initial: <SpinnerMessage />,
     system: prompt,
     temperature: 0.7,

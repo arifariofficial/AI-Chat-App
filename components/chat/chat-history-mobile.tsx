@@ -40,10 +40,6 @@ export function ChatHistoryMobile({
   const { theme } = useTheme();
   const { isSidebarOpen, isLoading } = useSidebar();
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   useEffect(() => {
     async function fetchSessionAndLoadChats() {
       try {
@@ -58,6 +54,10 @@ export function ChatHistoryMobile({
 
     fetchSessionAndLoadChats();
   }, [loadChats, session?.user?.id, isSidebarOpen]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return isSidebarOpen ? (
     <div className="flex h-full flex-col bg-backgroundSecondary">
