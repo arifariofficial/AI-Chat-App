@@ -31,10 +31,12 @@ async function FineTune() {
   );
   console.log("Fine-tuning job state:", fineTune);
 
-  /*   let events = await openai.fineTuning.jobs.listEvents(fineTune.id, {
+  /*   
+  let events = await openai.fineTuning.jobs.listEvents(fineTune.id, {
     limit: 10,
   });
-  console.log("Fine-tuning job events:", events); */
+  console.log("Fine-tuning job events:", events); 
+  */
 }
 
 // Call the async function
