@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import UserButtonDesktop from "@/components/navbar/user-button-desktop";
 import { Session } from "next-auth";
@@ -18,6 +20,7 @@ import { getChat } from "@/data/get-chat";
 import { Chat } from "@/lib/types";
 import { useAppDispatch } from "@/lib/store/hook";
 import { resetChat } from "@/lib/store/chatSlice";
+import { ModelSelection } from "./model-selection";
 
 interface ChatNavProps {
   session: Session;
@@ -68,24 +71,28 @@ const ChatNav: React.FC<ChatNavProps> = ({ session }) => {
                 router.push("/new");
                 dispatch(resetChat());
               }}
-              className="z-50 my-0 gap-1 border-foreground/40 p-0 px-1 text-foreground hover:bg-accent hover:text-foreground/80 active:text-foreground sm:ml-1 sm:border"
+              className="z-50 my-0 border-foreground/40 p-0 px-1 font-bold text-foreground hover:bg-accent hover:text-foreground/80 active:text-foreground sm:ml-1 sm:border"
             >
               <div className="flex items-center gap-1">
                 <span className="hidden text-sm md:inline-flex">Uusi</span>
-                <IconEdit className="mb-1 size-5 p-0" />
-                <span className="sr-only">Jaa keskustelu</span>
+                <IconEdit className="my-0 mb-1 size-5 p-0" />
+                <span className="sr-only">Uusi keskustelu</span>
               </div>
             </Button>
           </TooltipTrigger>
-          <TooltipContent>Jaa keskustelu</TooltipContent>
+          <TooltipContent>Uusi keskustelu</TooltipContent>
         </Tooltip>
+        {/* Model Selection  */}
+        <div className="z-50 ml-1 flex w-full justify-center">
+          <ModelSelection />
+        </div>
         {chatStarted && (
           <Tooltip>
             <TooltipTrigger asChild className="hidden sm:flex">
               <Button
                 variant="inherit"
                 onClick={onShareClick}
-                className="z-50 border-foreground/40 p-0 px-1 text-foreground hover:bg-accent hover:text-foreground/80 active:text-foreground sm:ml-1 sm:border"
+                className="z-50 border-foreground/40 p-0 px-1 font-bold text-foreground hover:bg-accent hover:text-foreground/80 active:text-foreground sm:ml-1 sm:border"
               >
                 <div className="flex items-center gap-1">
                   <span className="hidden text-sm md:inline-flex">Jaa</span>
