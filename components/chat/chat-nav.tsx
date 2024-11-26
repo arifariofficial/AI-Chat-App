@@ -83,7 +83,7 @@ const ChatNav: React.FC<ChatNavProps> = ({ session }) => {
           <TooltipContent>Uusi keskustelu</TooltipContent>
         </Tooltip>
         {/* Model Selection  */}
-        <div className="z-50 ml-1 flex w-full justify-center">
+        <div className="z-50 ml-1 mr-1 flex w-full justify-center sm:mr-0">
           <ModelSelection />
         </div>
         {chatStarted && (
