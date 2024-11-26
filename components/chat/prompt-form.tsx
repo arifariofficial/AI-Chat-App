@@ -14,7 +14,7 @@ import { IconArrowElbow } from "@/components/ui/icons";
 import { CircularProgress, InputAdornment, TextField } from "@mui/material";
 import { nanoid } from "@/lib/utils";
 import { decrement } from "@/lib/store/balanceSlice";
-import { useAppDispatch } from "@/lib/store/hook";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hook";
 import { useTheme } from "next-themes";
 import { UserMessage } from "./user-message";
 
@@ -35,7 +35,7 @@ export function PromptForm({
   const [, setMessages] = useUIState<typeof AI>();
 
   const dispatch = useAppDispatch();
-
+  const model = useAppSelector((state) => state.model);
   const theme = useTheme();
 
   React.useEffect(() => {
@@ -83,7 +83,10 @@ export function PromptForm({
         ]);
 
         // Submit and get response message
-        const responseMessage = await submitUserMessage(value);
+        const responseMessage = await submitUserMessage({
+          content: value,
+          model: model.model,
+        });
         setMessages((currentMessages) => [...currentMessages, responseMessage]);
         setIsLoading(false);
         dispatch(decrement());

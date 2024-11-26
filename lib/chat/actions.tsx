@@ -15,8 +15,17 @@ import React from "react";
 import { UserMessage } from "@/components/chat/user-message";
 import { BotMessage } from "@/components/chat/bot-message";
 
-async function submitUserMessage(content: string) {
+async function submitUserMessage({
+  content,
+  model,
+}: {
+  content: string;
+  model: string;
+}) {
   "use server";
+
+  console.log("Content:", content);
+  console.log("Model:", model);
 
   const aiState = getMutableAIState<typeof AI>();
 
@@ -68,7 +77,7 @@ async function submitUserMessage(content: string) {
   const uniqueId = nanoid(); // Generate a unique id early for BotMessage
 
   const result = await streamUI({
-    model: openai("ft:gpt-4o-mini-2024-07-18:personal::AWZbt8mj"),
+    model: openai(model),
     initial: <SpinnerMessage />,
     system: prompt,
     temperature: 0.7,

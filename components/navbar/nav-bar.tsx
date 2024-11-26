@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import UserButtonMobile from "./user-button-mobile";
 import NavItemsRight from "./nav-items-right";
 import NavItemsMiddle from "./nav-items-middle";
@@ -25,9 +24,11 @@ const NavBar = ({ session }: NavBarProps) => {
       <div className="mx-auto flex h-[60px] max-w-screen-2xl justify-between sm:h-[80px]">
         <section className="flex items-center text-foregroundNav">
           <Link href={`/`}>
-            <div className="flex gap-2 px-4 text-2xl font-extrabold tracking-wide">
-              <LocalLibraryIcon fontSize="large" aria-label="Library Icon" />
-              <p className="mt-1">SipeAI</p>
+            <div className="mx-4 flex">
+              <p className="inline-flex items-end text-3xl font-bold">
+                <span>SIPE</span>
+                <span className="align-baseline text-base font-light">AI</span>
+              </p>
             </div>
           </Link>
         </section>

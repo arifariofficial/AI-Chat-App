@@ -3,7 +3,7 @@ import { useActions, useUIState } from "ai/rsc";
 import { PromptForm } from "./prompt-form";
 import { AI } from "@/lib/chat/actions";
 import { cn, nanoid } from "@/lib/utils";
-import { useAppDispatch } from "@/lib/store/hook";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hook";
 import { decrement } from "@/lib/store/balanceSlice";
 import { useState } from "react";
 import { UserMessage } from "./user-message";
@@ -22,6 +22,7 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useAppDispatch();
+  const model = useAppSelector((state) => state.model);
 
   const exampleMessages = [
     {
@@ -73,9 +74,10 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
                     },
                   ]);
 
-                  const responseMessage = await submitUserMessage(
-                    example.message,
-                  );
+                  const responseMessage = await submitUserMessage({
+                    content: example.message,
+                    model: model.model,
+                  });
 
                   setMessages((currentMessages) => [
                     ...currentMessages,
