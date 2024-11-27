@@ -24,9 +24,10 @@ import { ModelSelection } from "./model-selection";
 
 interface ChatNavProps {
   session: Session;
+  setShowPromptModal: (value: boolean) => void;
 }
 
-const ChatNav: React.FC<ChatNavProps> = ({ session }) => {
+const ChatNav: React.FC<ChatNavProps> = ({ session, setShowPromptModal }) => {
   const { theme } = useTheme();
   const chatStarted = useSelector(selectChatStarted);
   const { handleShare } = useChat();
@@ -61,7 +62,6 @@ const ChatNav: React.FC<ChatNavProps> = ({ session }) => {
       <SidebarMobile className="z-50 border-none focus:border-none">
         <ChatHistoryMobile session={session} onShareClick={onShareClick} />
       </SidebarMobile>
-
       <div className="flex">
         <Tooltip>
           <TooltipTrigger asChild className="hidden sm:flex">
@@ -84,7 +84,7 @@ const ChatNav: React.FC<ChatNavProps> = ({ session }) => {
         </Tooltip>
         {/* Model Selection  */}
         <div className="z-50 ml-1 mr-1 flex w-full justify-center sm:mr-0">
-          <ModelSelection />
+          <ModelSelection setShowPromptModal={setShowPromptModal} />
         </div>
         {chatStarted && (
           <Tooltip>

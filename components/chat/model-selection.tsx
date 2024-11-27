@@ -22,26 +22,36 @@ import { setModel } from "@/lib/store/modelSlice";
 
 const models = [
   {
-    value: "gpt-4o",
-    label: "GPT-4o",
+    value: "gpt-3.5-turbo",
+    label: "GPT-3.5 Turbo",
   },
   {
     value: "gpt-4o-mini",
     label: "GPT-4o-mini",
   },
+
   {
     value: "ft:gpt-4o-mini-2024-07-18:personal::AWZbt8mj",
     label: "GPT-4o-mini FineTuned",
   },
 ];
 
-export function ModelSelection() {
+interface ModelSelectionProps {
+  setShowPromptModal: (value: boolean) => void;
+}
+
+export function ModelSelection({ setShowPromptModal }: ModelSelectionProps) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(
     "ft:gpt-4o-mini-2024-07-18:personal::AWZbt8mj",
   );
 
   const dispatch = useAppDispatch();
+
+  const handlePromptModalOpen = () => {
+    setShowPromptModal(true);
+    setOpen(false);
+  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -81,8 +91,12 @@ export function ModelSelection() {
               ))}
               <Separator className="my-1 bg-foreground/30 font-bold shadow" />
               <CommandItem asChild>
-                <Button variant="inherit" className="w-full">
-                  Muokkaa kehotetta
+                <Button
+                  variant="inherit"
+                  className="w-full font-semibold"
+                  onClick={handlePromptModalOpen}
+                >
+                  Edit Prompt
                 </Button>
               </CommandItem>
             </CommandGroup>

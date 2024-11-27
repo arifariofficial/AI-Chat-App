@@ -22,7 +22,8 @@
     "docker:prune": "docker system prune -f && docker image prune -f",
     "migrate": "dotenv -e .env.development -- npx prisma migrate dev",
     "generate": "dotenv -e .env.development -- npx prisma generate",
-    "prisma": "dotenv -e .env.development -- npx prisma studio"
+    "prisma": "dotenv -e .env.development -- npx prisma studio",
+    "seed": "dotenv -e .env.development tsx prisma/seed.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.70",
@@ -43,6 +44,7 @@
     "@radix-ui/react-popover": "^1.1.2",
     "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-separator": "^1.1.0",
+    "@radix-ui/react-slider": "^1.2.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.2",
     "@radix-ui/react-tooltip": "^1.1.3",

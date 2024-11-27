@@ -7,7 +7,7 @@ export interface ModelState {
 }
 
 const initialState: ModelState = {
-  model: "GPT-4o-mini FineTuned",
+  model: "ft:gpt-4o-mini-2024-07-18:personal::AWZbt8mj",
   prompt: "",
 } as ModelState;
 

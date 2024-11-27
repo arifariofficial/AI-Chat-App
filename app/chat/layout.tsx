@@ -2,6 +2,7 @@
 
 import ChatModal from "@/components/chat/chat-modal";
 import ChatNav from "@/components/chat/chat-nav";
+import PromptModal from "@/components/chat/prompt-modal";
 import { SidebarDesktop } from "@/components/chat/sidebar-desktop";
 import { SidebarToggle } from "@/components/chat/sidebar-toggle";
 import { useSidebar } from "@/lib/hooks/use-sidebar";
@@ -16,6 +17,7 @@ interface ChatLayoutProps {
 export default function ChatLayout({ children }: ChatLayoutProps) {
   const { isSidebarOpen } = useSidebar();
   const [showModal, setShowModal] = useState(false);
+  const [showPromptModal, setShowPromptModal] = useState(false);
   const { data: session, status } = useSession();
   const router = useRouter();
   const pathname = usePathname();
@@ -29,6 +31,9 @@ export default function ChatLayout({ children }: ChatLayoutProps) {
   const handleModalClose = () => {
     setShowModal(false);
     router.push(`/auth/login?redirect=${encodeURIComponent(pathname)}`);
+  };
+  const handlePromptModalClose = () => {
+    setShowPromptModal(false);
   };
 
   // Handle the loading state
@@ -63,7 +68,16 @@ export default function ChatLayout({ children }: ChatLayoutProps) {
             <SidebarToggle />
           </div>
           <div className="relative flex size-full flex-col overflow-x-hidden">
-            <ChatNav session={session} />
+            <ChatNav
+              session={session}
+              setShowPromptModal={setShowPromptModal}
+            />
+            {showPromptModal && (
+              <PromptModal
+                handlePromptModalClose={handlePromptModalClose}
+                showPromptModal={showPromptModal}
+              />
+            )}
             {children}
           </div>
         </div>

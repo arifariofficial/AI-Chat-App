@@ -14,6 +14,7 @@ import { saveChat } from "@/data/save-chat";
 import React from "react";
 import { UserMessage } from "@/components/chat/user-message";
 import { BotMessage } from "@/components/chat/bot-message";
+import { getPrompt } from "@/data/get-prompt";
 
 async function submitUserMessage({
   content,
@@ -24,8 +25,15 @@ async function submitUserMessage({
 }) {
   "use server";
 
-  console.log("Content:", content);
-  console.log("Model:", model);
+  const promptData = await getPrompt();
+
+  if (!promptData) {
+    return { error: "Error fetching prompt" };
+  }
+
+  if (!promptData) {
+    return { error: "Error fetching prompt" };
+  }
 
   const aiState = getMutableAIState<typeof AI>();
 
@@ -42,34 +50,19 @@ async function submitUserMessage({
   });
 
   const prompt = `\
-  Olet sosiaaliturva-asiantuntija, joka on erikoistunut pitkäaikaissairaiden ja vammaisten henkilöiden oikeuksiin.
+  ${"roleDefinition" in promptData ? promptData.roleDefinition : ""}
   
-  Sinä ja käyttäjä voitte keskustella vakuutustapauksista Suomessa, joissa käyttäjä on joutunut onnettomuuteen ja haluaa tietää kaikki edut, joita hän voi saada vakuutusyhtiöltä tai Kelalta. Vakuutusyhtiöt pyrkivät usein salaamaan tietoa käyttäjän oikeuksista saada tukea tai rahallista korvausta.
+  ${"userContext" in promptData ? promptData.userContext : ""},
   
-  Vastaa käyttäjän kysymykseen keskittyen ymmärtämään heidän tilanteensa. Kysy **vain yksi** tarkentava kysymys tai anna ytimekäs vastaus annetun kontekstin perusteella.
+  ${"guidelines" in promptData ? promptData.guidelines : ""}
   
   ### Ohjeet:
-  - Varmista, että ymmärrät käyttäjän tilanteen tarkasti ennen kuin vastaat.
-  - Jos käyttäjän kysymys voi johtaa useisiin eri ratkaisuihin tai tarvitset lisätietoja, kysy selventäviä ja tarkentavia kysymyksiä.
-  - Kysy tarvittaessa kaikki olennaiset tiedot, jotta voit antaa parhaan mahdollisen neuvon.
-  - Korosta, että vakuutusyhtiöllä on ensisijainen korvausvastuu liikennevahingoissa.
-  - Vältä mainitsemasta Kelan tukia tai korvauksia, ellei vakuutusyhtiö ole hylännyt korvaushakemusta.
-  - Anna konkreettisia neuvoja ja ohjeita käyttäjän tilanteeseen perustuen.
-  - Selitä käyttäjälle heidän oikeutensa, kuten oikeus pyytää vakuutusyhtiöltä kaikki heitä koskevat asiakirjat ja sisäiset keskustelut.
-  - Kerro käyttäjälle mahdollisuudesta valittaa vakuutusyhtiön päätöksestä ja miten se tehdään.
-  - Käytä empaattista ja ystävällistä sävyä.
-  - Vältä tarpeettomia yksityiskohtia, jotka eivät liity suoraan käyttäjän kysymykseen.
+  ${"instructions" in promptData ? promptData.instructions : ""}
   
   ### Konteksti:
-  - "Vakuutusyhtiö korvaa myös esimerkiksi apuvälineet."
-  - "Oletko ollut yhteydessä vakuutusyhtiöön?"
-  - "Voit pyytää vakuutusyhtiöltä kaikki sinua koskevat asiakirjat, mukaan lukien heidän sisäiset keskustelut."
-  - "Sinulla on oikeus valittaa vakuutusyhtiön päätöksestä."
-  - "General Data Protection Regulation (yleinen tietosuoja-asetus) mukaisesti sinulla on oikeus tietää, mitä tietoja vakuutusyhtiöllä on sinusta."
-  - "Jos vakuutusyhtiö kieltäytyy korvaamasta, voit ottaa yhteyttä Kelaan."
-  - "Koska sinulla on epäilys hermovauriosta, olisi hyödyllistä käydä neurologilla."
+  ${"keyPointers" in promptData ? promptData.keyPointers : ""}
   
-  Palauta vastaus tai yksi tarkentava kysymys, joka liittyy suoraan käyttäjän tilanteeseen. Jos kysymys ei liity ohjeisiin tai sosiaaliturva-asioihin, erityisesti vammaisten ja pitkäaikaissairaiden oikeuksiin, **älä vastaa kysymykseen**.
+  ${"responseLimitations" in promptData ? promptData.responseLimitations : ""}
   `;
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>;
@@ -80,7 +73,10 @@ async function submitUserMessage({
     model: openai(model),
     initial: <SpinnerMessage />,
     system: prompt,
-    temperature: 0.7,
+    temperature:
+      "temperature" in promptData && promptData.temperature !== null
+        ? promptData.temperature
+        : undefined,
     messages: [
       ...aiState.get().messages.map(
         (message: Message) =>
