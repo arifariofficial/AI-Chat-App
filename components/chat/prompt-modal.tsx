@@ -84,7 +84,7 @@ export default function PromptModal({
   const handleEdit = async (field: keyof typeof enableEdit) => {
     try {
       // Dispatch updates to Redux and the database
-      await dispatch(
+      dispatch(
         setPrompt({
           ...promptData,
           temperature: parseFloat(promptData.temperature),
@@ -140,40 +140,62 @@ export default function PromptModal({
                 <div className="flex w-full flex-col items-center">
                   <div className="mx-auto flex w-full flex-row items-center justify-center space-x-3">
                     <span>Less Creative</span>
-                    <Slider
-                      className="w-[50%] border-foreground/40"
-                      sliderClassName="bg-foreground/40"
-                      defaultValue={[parseFloat(promptData.temperature)]}
-                      min={0.3}
-                      max={0.9}
-                      step={0.1}
-                      onValueChange={(values: number[]) => {
-                        const newTemperature = values[0].toString();
-                        setPromptData((prev) => ({
-                          ...prev,
-                          temperature: newTemperature,
-                        }));
-                      }}
-                      onValueCommit={(values: number[]) => {
-                        const newTemperature = values[0].toString();
-                        const updatedPromptData = {
-                          ...promptData,
-                          temperature: newTemperature,
-                        };
-                        // Update the state
-                        setPromptData(updatedPromptData);
-                        // Dispatch the updated data to the database
-                        dispatch(
-                          updatePromptToDB({
-                            ...updatedPromptData,
-                            temperature: parseFloat(newTemperature),
-                          }),
-                        );
-                      }}
-                    />
+                    <div className="relative w-[40%]">
+                      <Slider
+                        className="z-30 w-full border-foreground/40"
+                        sliderClassName="bg-foreground/40"
+                        value={[parseFloat(promptData.temperature) || 0.7]}
+                        min={0.3}
+                        max={0.9}
+                        step={0.1}
+                        onValueChange={(values: number[]) => {
+                          const newTemperature = values[0].toString();
+                          setPromptData((prev) => ({
+                            ...prev,
+                            temperature: newTemperature,
+                          }));
+                        }}
+                        onValueCommit={(values: number[]) => {
+                          const newTemperature = values[0].toString();
+                          const updatedPromptData = {
+                            ...promptData,
+                            temperature: newTemperature,
+                          };
+                          // Update the state
+                          setPromptData(updatedPromptData);
+                          // Dispatch the updated data to the database
+                          dispatch(
+                            updatePromptToDB({
+                              ...updatedPromptData,
+                              temperature: parseFloat(newTemperature),
+                            }),
+                          );
+                        }}
+                      />
+                      {/* Markers */}
+                      <div className="absolute left-0 right-0 top-3">
+                        {[0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9].map((val) => {
+                          const leftPercent =
+                            ((val - 0.28) / (0.92 - 0.28)) * 100;
+                          return (
+                            <div
+                              key={val}
+                              className="absolute"
+                              style={{ left: `${leftPercent}%` }}
+                            >
+                              <div className="h-2 w-px bg-foreground" />
+                              <span className="absolute left-1/2 -translate-x-1/2 transform text-xs">
+                                {val}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+
                     <span>More Creative</span>
                   </div>
-                  <h1 className="mx-auto mt-1 w-full text-center font-semibold">
+                  <h1 className="mx-auto mt-10 w-full text-center font-semibold">
                     Temperature: {promptData.temperature}
                   </h1>
                 </div>

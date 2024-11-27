@@ -183,9 +183,7 @@ export function BotMessage({
             components={{
               p({ children }) {
                 /* Bot messages most inner*/
-                return (
-                  <p className="mb-2 w-full p-2 px-5 last:mb-0">{children}</p>
-                );
+                return <p className="mb-2 w-full p-2 last:mb-0">{children}</p>;
               },
             }}
           >

@@ -11,7 +11,7 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
           Sinä
         </h1>
       </div>
-      <div className="ml-8 flex-1 space-y-2 overflow-hidden rounded-3xl bg-foreground/5 p-2 px-5">
+      <div className="ml-6 flex-1 space-y-2 overflow-hidden rounded-3xl bg-foreground/5 p-2 px-5">
         {children}
       </div>
     </div>

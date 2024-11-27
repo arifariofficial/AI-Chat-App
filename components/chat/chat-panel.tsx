@@ -10,6 +10,62 @@ import { decrement } from "@/lib/store/balanceSlice";
 import React, { useEffect, useRef, useState } from "react";
 import { UserMessage } from "./user-message";
 
+const STATIC_EXAMPLE_MESSAGES: ExampleMessage[] = [
+  {
+    heading: "Olin vakavassa liikenneonnettomuudessa",
+    subheading:
+      "ja kärsin pysyvästä vammasta. Mitä korvauksia voin saada vakuutusyhtiöltä ja Kelalta?",
+    message: `Olen ollut vakavassa liikenneonnettomuudessa ja kärsin pysyvästä vammasta. Mitä korvauksia voin saada vakuutusyhtiöltä ja Kelalta?`,
+  },
+  {
+    heading: "Vakuutusyhtiö kieltäytyy maksamasta",
+    subheading:
+      "tapaturmavakuutuksen korvauksia lääkärintodistuksista huolimatta, mitä tehdä?",
+    message: `Vakuutusyhtiö kieltäytyy maksamasta tapaturmavakuutuksen korvauksia lääkärintodistuksista huolimatta, mitä tehdä?`,
+  },
+  {
+    heading: "Minulla on tapaturmavakuutus joka katta",
+    subheading:
+      "työkyvyttömyyden, mutta vakuutusyhtiö ei maksa ansionmenetyskorvausta. Miten voin valittaa?",
+    message: `Minulla on tapaturmavakuutus, joka kattaa työkyvyttömyyden, mutta vakuutusyhtiö ei maksa ansionmenetyskorvausta. Miten voin valittaa?`,
+  },
+  {
+    heading: "Vakuutusyhtiö kieltäytyi maksamasta",
+    subheading:
+      "hoitokuluja sairauskuluvakuutuksesta. Onko oikeutta korvaukseen, miten tulisi edetä?",
+    message: `Vakuutusyhtiö kieltäytyi maksamasta hoitokuluja sairauskuluvakuutuksesta. Onko oikeutta korvaukseen, miten tulisi edetä?`,
+  },
+  // Uudet viestit
+  {
+    heading: "Sain kielteisen päätöksen vammaistuesta",
+    subheading:
+      "vaikka minulla on lääkärinlausunto, miten voin valittaa päätöksestä?",
+    message: `Sain kielteisen päätöksen vammaistuesta vaikka minulla on lääkärinlausunto. Miten voin valittaa päätöksestä?`,
+  },
+  {
+    heading: "Pitkäaikaissairaus ja kuntoutustuki",
+    subheading:
+      "miten haen kuntoutustukea ja mitä etuuksia voin saada Kelalta?",
+    message: `Olen pitkäaikaissairas. Miten haen kuntoutustukea ja mitä etuuksia voin saada Kelalta?`,
+  },
+  {
+    heading: "Vammaispalveluiden myöntämisen kriteerit",
+    subheading:
+      "mitä palveluita voin saada ja miten hakuprosessi toimii kunnassani?",
+    message: `Mitkä ovat vammaispalveluiden myöntämisen kriteerit? Mitä palveluita voin saada ja miten hakuprosessi toimii kunnassani?`,
+  },
+  {
+    heading: "Kelalta evättiin sairauspäiväraha",
+    subheading: "vaikka olen ollut sairauslomalla yli viikon, mitä voin tehdä?",
+    message: `Kelalta evättiin sairauspäiväraha vaikka olen ollut sairauslomalla yli viikon. Mitä voin tehdä?`,
+  },
+  {
+    heading: "Työkyvyttömyyseläkkeen hakeminen",
+    subheading: "mitä edellytyksiä ja dokumentteja tarvitaan hakemukseen?",
+    message: `Miten haen työkyvyttömyyseläkettä? Mitä edellytyksiä ja dokumentteja tarvitaan hakemukseen?`,
+  },
+];
+
 export interface ChatPanelProps {
   input: string;
   setInput: (value: string) => void;
@@ -35,68 +91,14 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
   const dispatch = useAppDispatch();
   const model = useAppSelector((state) => state.model);
 
-  const exampleMessages = [
-    {
-      heading: "Olin vakavassa liikenneonnettomuudessa",
-      subheading:
-        "ja kärsin pysyvästä vammasta. Mitä korvauksia voin saada vakuutusyhtiöltä ja Kelalta?",
-      message: `Olen ollut vakavassa liikenneonnettomuudessa ja kärsin pysyvästä vammasta. Mitä korvauksia voin saada vakuutusyhtiöltä ja Kelalta?`,
-    },
-    {
-      heading: "Vakuutusyhtiö kieltäytyy maksamasta",
-      subheading:
-        "tapaturmavakuutuksen korvauksia lääkärintodistuksista huolimatta, mitä tehdä?",
-      message: `Vakuutusyhtiö kieltäytyy maksamasta tapaturmavakuutuksen korvauksia lääkärintodistuksista huolimatta, mitä tehdä?`,
-    },
-    {
-      heading: "Minulla on tapaturmavakuutus joka katta",
-      subheading:
-        "työkyvyttömyyden, mutta vakuutusyhtiö ei maksa ansionmenetyskorvausta. Miten voin valittaa?",
-      message: `Minulla on tapaturmavakuutus, joka kattaa työkyvyttömyyden, mutta vakuutusyhtiö ei maksa ansionmenetyskorvausta. Miten voin valittaa?`,
-    },
-    {
-      heading: "Vakuutusyhtiö kieltäytyi maksamasta",
-      subheading:
-        "hoitokuluja sairauskuluvakuutuksesta. Onko oikeutta korvaukseen, miten tulisi edetä?",
-      message: `Vakuutusyhtiö kieltäytyi maksamasta hoitokuluja sairauskuluvakuutuksesta. Onko oikeutta korvaukseen, miten tulisi edetä?`,
-    },
-    // Uudet viestit
-    {
-      heading: "Sain kielteisen päätöksen vammaistuesta",
-      subheading:
-        "vaikka minulla on lääkärinlausunto, miten voin valittaa päätöksestä?",
-      message: `Sain kielteisen päätöksen vammaistuesta vaikka minulla on lääkärinlausunto. Miten voin valittaa päätöksestä?`,
-    },
-    {
-      heading: "Pitkäaikaissairaus ja kuntoutustuki",
-      subheading:
-        "miten haen kuntoutustukea ja mitä etuuksia voin saada Kelalta?",
-      message: `Olen pitkäaikaissairas. Miten haen kuntoutustukea ja mitä etuuksia voin saada Kelalta?`,
-    },
-    {
-      heading: "Vammaispalveluiden myöntämisen kriteerit",
-      subheading:
-        "mitä palveluita voin saada ja miten hakuprosessi toimii kunnassani?",
-      message: `Mitkä ovat vammaispalveluiden myöntämisen kriteerit? Mitä palveluita voin saada ja miten hakuprosessi toimii kunnassani?`,
-    },
-    {
-      heading: "Kelalta evättiin sairauspäiväraha",
-      subheading:
-        "vaikka olen ollut sairauslomalla yli viikon, mitä voin tehdä?",
-      message: `Kelalta evättiin sairauspäiväraha vaikka olen ollut sairauslomalla yli viikon. Mitä voin tehdä?`,
-    },
-    {
-      heading: "Työkyvyttömyyseläkkeen hakeminen",
-      subheading: "mitä edellytyksiä ja dokumentteja tarvitaan hakemukseen?",
-      message: `Miten haen työkyvyttömyyseläkettä? Mitä edellytyksiä ja dokumentteja tarvitaan hakemukseen?`,
-    },
-  ];
   // Use state to store messages with refs
   const [messagesWithAnimations, setMessagesWithAnimations] = useState<
     (ExampleMessage & { ref: React.RefObject<HTMLDivElement> })[]
   >([]);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const exampleMessages = STATIC_EXAMPLE_MESSAGES;
 
   useEffect(() => {
     function shuffleArray(array: ExampleMessage[]): ExampleMessage[] {
@@ -132,7 +134,7 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
     };
 
     updateMessages(); // Initial call
-  }, []);
+  }, [exampleMessages]);
 
   useEffect(() => {
     const container = scrollContainerRef.current;
