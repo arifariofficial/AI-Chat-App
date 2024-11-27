@@ -71,7 +71,7 @@ const ChatNav: React.FC<ChatNavProps> = ({ session, setShowPromptModal }) => {
                 router.push("/new");
                 dispatch(resetChat());
               }}
-              className="z-50 my-0 border-foreground/40 p-0 px-1 font-bold text-foreground hover:bg-accent hover:text-foreground/80 active:text-foreground sm:ml-1 sm:border"
+              className="z-50 my-0 border-border/40 p-0 px-1 font-bold text-foreground hover:bg-accent hover:text-foreground/80 active:text-foreground sm:ml-1 sm:border"
             >
               <div className="flex items-center gap-1">
                 <span className="hidden text-sm md:inline-flex">Uusi</span>

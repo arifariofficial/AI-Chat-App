@@ -107,7 +107,7 @@ export function PromptForm({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={onKeyDown}
-          placeholder="Kirjoita viesti SipeAI:lle..."
+          placeholder="Kirjoita viesti..."
           helperText={`${input.length}/5000`}
           inputProps={{
             maxLength: 5000,

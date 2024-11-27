@@ -31,10 +31,6 @@ async function submitUserMessage({
     return { error: "Error fetching prompt" };
   }
 
-  if (!promptData) {
-    return { error: "Error fetching prompt" };
-  }
-
   const aiState = getMutableAIState<typeof AI>();
 
   aiState.update({
@@ -62,8 +58,6 @@ async function submitUserMessage({
   
   ${"responseLimitations" in promptData ? promptData.responseLimitations : ""}
   `;
-
-  console.log(prompt);
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>;
   let textNode: undefined | React.ReactNode;

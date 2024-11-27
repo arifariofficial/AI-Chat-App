@@ -60,7 +60,7 @@ export function ModelSelection({ setShowPromptModal }: ModelSelectionProps) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between border-foreground/40 bg-inherit px-1 font-bold text-foreground"
+          className="w-[200px] justify-between border-border/40 bg-inherit px-1 font-bold text-foreground"
         >
           {value ? models.find((model) => model.value === value)?.label : value}
           <ChevronsUpDown className="opacity-50" />
