@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { IconCheck, IconEdit } from "../ui/icons";
 import { Textarea } from "../ui/textarea";
 import { Slider } from "../ui/slider";
+import { toast } from "../ui/use-toast";
 
 interface PromptModalProps {
   showPromptModal: boolean;
@@ -80,25 +81,44 @@ export default function PromptModal({
     });
   }, [prompt]);
 
-  const handleEdit = (field: keyof typeof enableEdit) => {
-    dispatch(
-      setPrompt({
-        ...promptData,
-        temperature: parseFloat(promptData.temperature),
-      }),
-    );
-    dispatch(
-      updatePromptToDB({
-        ...promptData,
-        temperature: parseFloat(promptData.temperature),
-      }),
-    );
-    setEnableEdit((prev) => ({
-      ...prev,
-      [field]: false,
-    }));
-  };
+  const handleEdit = async (field: keyof typeof enableEdit) => {
+    try {
+      // Dispatch updates to Redux and the database
+      await dispatch(
+        setPrompt({
+          ...promptData,
+          temperature: parseFloat(promptData.temperature),
+        }),
+      );
+      await dispatch(
+        updatePromptToDB({
+          ...promptData,
+          temperature: parseFloat(promptData.temperature),
+        }),
+      );
 
+      // Show success toast
+      toast({
+        title: `Saved`,
+        description: "",
+        variant: "default",
+        duration: 3000,
+      });
+
+      // Disable edit mode
+      setEnableEdit((prev) => ({
+        ...prev,
+        [field]: false,
+      }));
+    } catch (error) {
+      console.log("Error updating prompt: ", error);
+      toast({
+        title: "Failed to update. Please try again.",
+        variant: "destructive",
+        duration: 3000,
+      });
+    }
+  };
   if (loading) {
     return null;
   }
@@ -113,8 +133,8 @@ export default function PromptModal({
                 System Prompt
               </h1>
               <p className="mx-auto mb-2">
-                Only "Role Defination" must have a value. Other flieds are
-                optional.
+                Only &quot;Role Defination&quot; must have a value. Other flieds
+                are optional.
               </p>
               <div className="flex flex-col space-y-4 overflow-auto p-4">
                 <div className="flex w-full flex-col items-center">
@@ -298,9 +318,7 @@ export default function PromptModal({
                 {/* Instructions */}
                 <div>
                   <div className="mr-2 flex flex-row justify-between">
-                    <h1 className="font-semibold">
-                      Instructions (Keep the format when you edit)
-                    </h1>
+                    <h1 className="font-semibold">Instructions</h1>
                     {!enableEdit.instructions ? (
                       <IconEdit
                         onClick={() =>
@@ -354,9 +372,7 @@ export default function PromptModal({
                 {/* Key Pointers */}
                 <div>
                   <div className="mr-2 flex flex-row justify-between">
-                    <h1 className="font-semibold">
-                      Key Pointers (Keep the format when you edit)
-                    </h1>
+                    <h1 className="font-semibold">Key Pointers</h1>
                     {!enableEdit.keyPointers ? (
                       <IconEdit
                         onClick={() =>
@@ -463,14 +479,7 @@ export default function PromptModal({
                 className="mb-6 mt-2 w-[150px] font-bold"
                 onClick={handlePromptModalClose}
               >
-                Cancel
-              </Button>{" "}
-              <Button
-                variant="outline"
-                className="mb-6 mt-2 w-[150px] font-bold"
-                onClick={handlePromptModalClose}
-              >
-                Save
+                Close
               </Button>
             </div>
           </div>

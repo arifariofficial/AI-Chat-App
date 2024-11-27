@@ -2,6 +2,8 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+const temperature = 0.7; // Initialize the temperature variable
+
 const roleDefinition = `Olet sosiaaliturva-asiantuntija, joka on erikoistunut pitkäaikaissairaiden ja vammaisten henkilöiden oikeuksiin.`;
 
 const roleDefinitionPurpose = `Määrittelee tekoälyn roolin ja erikoistumisen.`;
@@ -14,7 +16,8 @@ const guidelines = `Vastaa käyttäjän kysymykseen keskittyen ymmärtämään h
 
 const guidelinesPurpose = `Tarjoaa korkeantason vuorovaikutusohjeet.`;
 
-const instructions = `- Varmista, että ymmärrät käyttäjän tilanteen tarkasti ennen kuin vastaat.
+const instructions = `### Ohjeet:
+- Varmista, että ymmärrät käyttäjän tilanteen tarkasti ennen kuin vastaat.
 - Jos käyttäjän kysymys voi johtaa useisiin eri ratkaisuihin tai tarvitset lisätietoja, kysy selventäviä ja tarkentavia kysymyksiä.
 - Kysy tarvittaessa kaikki olennaiset tiedot, jotta voit antaa parhaan mahdollisen neuvon.
 - Korosta, että vakuutusyhtiöllä on ensisijainen korvausvastuu liikennevahingoissa.
@@ -27,7 +30,8 @@ const instructions = `- Varmista, että ymmärrät käyttäjän tilanteen tarkas
 
 const instructionsPurpose = `Tarkentaa yksityiskohtaiset säännöt vastaamiseen ja tehokkaaseen vuorovaikutukseen.`;
 
-const keyPointers = `- "Vakuutusyhtiö korvaa myös esimerkiksi apuvälineet."
+const keyPointers = `### Konteksti:
+- "Vakuutusyhtiö korvaa myös esimerkiksi apuvälineet."
 - "Oletko ollut yhteydessä vakuutusyhtiöön?"
 - "Voit pyytää vakuutusyhtiöltä kaikki sinua koskevat asiakirjat, mukaan lukien heidän sisäiset keskustelut."
 - "Sinulla on oikeus valittaa vakuutusyhtiön päätöksestä."
@@ -41,8 +45,6 @@ const responseLimitations = `Palauta vastaus tai yksi tarkentava kysymys, joka l
 
 const responseLimitationsPurpose = `
 Selkeyttää tekoälyn vastausten rajat.`;
-
-const temperature = 0.7; // Initialize the temperature variable
 
 async function main() {
   const existingPrompt = await prisma.prompt.findFirst();

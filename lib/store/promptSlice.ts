@@ -38,18 +38,16 @@ export default promptSlice.reducer;
 
 export const fetchPrompt = () => async (dispatch: AppDispatch) => {
   try {
-    dispatch(setLoading(true)); // Set loading state to true.
+    dispatch(setLoading(true));
 
     const promptData = await getPrompt();
 
-    // Check if promptData is null
     if (!promptData) {
       console.error("Failed to fetch prompt: Data is null.");
       dispatch(setError("Failed to fetch prompt: Data is null."));
       return;
     }
 
-    // Validate if the returned data matches the Prompt interface
     if (
       "id" in promptData &&
       typeof promptData.id === "string" &&
@@ -61,16 +59,23 @@ export const fetchPrompt = () => async (dispatch: AppDispatch) => {
         createdAt: new Date(promptData.createdAt).toISOString(),
         updatedAt: new Date(promptData.updatedAt).toISOString(),
       };
-      dispatch(setPrompt(serializedPrompt)); // Dispatch serialized data.
+      dispatch(setPrompt(serializedPrompt));
     } else {
       console.error("Unexpected response structure:", promptData);
       dispatch(setError("Unexpected response structure."));
     }
-  } catch (error: any) {
-    console.error("Failed to fetch prompt:", error.message || error);
-    dispatch(setError("An error occurred while fetching the prompt."));
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Failed to fetch prompt:", error.message);
+      dispatch(setError("An error occurred while fetching the prompt."));
+    } else {
+      console.error("An unknown error occurred:", error);
+      dispatch(
+        setError("An unknown error occurred while fetching the prompt."),
+      );
+    }
   } finally {
-    dispatch(setLoading(false)); // Set loading state to false.
+    dispatch(setLoading(false));
   }
 };
 

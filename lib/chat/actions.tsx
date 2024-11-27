@@ -56,14 +56,14 @@ async function submitUserMessage({
   
   ${"guidelines" in promptData ? promptData.guidelines : ""}
   
-  ### Ohjeet:
   ${"instructions" in promptData ? promptData.instructions : ""}
-  
-  ### Konteksti:
+
   ${"keyPointers" in promptData ? promptData.keyPointers : ""}
   
   ${"responseLimitations" in promptData ? promptData.responseLimitations : ""}
   `;
+
+  console.log(prompt);
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>;
   let textNode: undefined | React.ReactNode;
