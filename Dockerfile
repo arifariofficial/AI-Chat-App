@@ -30,7 +30,7 @@ RUN npm ci
 # Copy the rest of the project files
 COPY . .
 
-# Generate Prisma client
+# Generate Prisma Client
 RUN npx prisma generate
 
 # Build the application
@@ -54,6 +54,9 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
+
+# Install tsx globally in the runner stage
+RUN npm install -g tsx
 
 # Ensure proper permissions for prerender cache
 RUN mkdir -p .next && chown nextjs:nodejs .next
