@@ -38,14 +38,11 @@ export async function saveChat(chat: Chat) {
         include: { messages: true },
       });
 
-      console.log("Existing Chat:", existingChat);
-
       if (existingChat) {
         // Delete all existing messages for the chat
         await prisma.message.deleteMany({
           where: { chatId: chat.id },
         });
-        console.log("All previous messages deleted.");
       }
 
       // Prepare new messages

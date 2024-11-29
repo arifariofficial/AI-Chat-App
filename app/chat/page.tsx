@@ -15,6 +15,8 @@ export default async function ChatPage() {
   const id = nanoid();
   const session = (await auth()) as Session;
 
+  console.log("chatid", id);
+
   return (
     <AI initialAIState={{ chatId: id, messages: [] }}>
       <Chat id={id} session={session} />

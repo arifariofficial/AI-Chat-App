@@ -282,6 +282,8 @@ export const AI = createAI<AIState, UIState>({
         path,
       };
 
+      console.log("chat id: ", chat.id);
+
       await saveChat(chat);
     } catch (error) {
       console.error("Error in onSetAIState:", {

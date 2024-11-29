@@ -5,7 +5,7 @@ import { useStreamableText } from "@/lib/hooks/use-streamable-text";
 import { StreamableValue } from "ai/rsc";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
-import { IconEdit } from "@/components/ui/icons";
+import { IconPencil } from "@/components/ui/icons";
 import LocalLibrary from "@mui/icons-material/LocalLibrary";
 import { MemoizedReactMarkdown } from "./markdown";
 import { ChatMessageActions } from "./chat-message-actions";
@@ -36,6 +36,7 @@ export function BotMessage({
   const [editedContent, setEditedContent] = useState("");
   const [chat, setChat] = useState<Chat | null>(null);
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -72,6 +73,14 @@ export function BotMessage({
   }
 
   const handleSaveEditedContent = async () => {
+    if (isSubmitting) return; // Prevent duplicate submissions
+
+    if (editedContent.trim() === "") {
+      alert("Täytä viesti");
+      return;
+    }
+    setIsSubmitting(true);
+
     const userId = session?.user.id ?? "";
     if (!userId || !botMessageId || !chatId) {
       console.warn("Missing required parameters for saving content.");
@@ -103,6 +112,8 @@ export function BotMessage({
         router.refresh();
       } catch (error) {
         console.error("Failed to save edited content:", error);
+      } finally {
+        setIsSubmitting(false);
       }
     });
   };
@@ -115,27 +126,35 @@ export function BotMessage({
     /* Bot message container */
     <div
       className={cn(
-        "relative flex w-full flex-col items-start font-medium text-foreground",
+        "group relative flex w-full flex-col items-start font-medium text-foreground",
         className,
       )}
     >
       <div className="flex">
-        <div className="flex size-[25px] shrink-0 select-none items-center justify-center rounded-full border border-foreground/90 text-foreground/90 shadow-sm">
+        <div className="flex size-[25px] shrink-0 select-none items-center justify-center rounded-full border border-border text-foreground/90 shadow-sm">
           <LocalLibrary className="mb-px p-[2px]" />
         </div>
         <div className="flex flex-row items-start">
-          <h1 className="mx-3 -mt-1 text-lg font-semibold text-foreground/90">
-            Sipe
-          </h1>
+          <div className="mx-3 -mt-1 text-lg font-semibold text-foreground">
+            <p className="inline-flex items-end font-bold">
+              <span>SIPE</span>
+              <span className="mb-[3px] align-baseline text-sm font-light">
+                AI
+              </span>
+            </p>
+          </div>
+
           {/* Add edit message */}
           {session?.user?.role === Role.EDITOR && (
-            <Button
-              variant="ghost"
-              className="mx-2 -mt-1 h-full bg-backgroundSecondary p-0 hover:text-secondary"
-              onClick={handleEditMessage}
-            >
-              <IconEdit className="size-5" />
-            </Button>
+            <div className="absolute -right-9 top-7 opacity-0 transition-opacity group-hover:opacity-100">
+              <Button
+                variant="outline"
+                onClick={handleEditMessage}
+                className="rounded-full p-1 hover:bg-foreground/10"
+              >
+                <IconPencil className="h-5 w-5 text-foreground/90" />
+              </Button>
+            </div>
           )}
         </div>
       </div>
@@ -144,7 +163,7 @@ export function BotMessage({
         {isEditing ? (
           <div className="flex w-full flex-col gap-2">
             <Textarea
-              className="flex-grow resize-none overflow-hidden p-0 px-px text-base focus:border-foreground/20"
+              className="w-full resize-none rounded-md border-border/20 p-2 text-base text-foreground shadow-none focus:border-foreground/40 focus-visible:ring-0"
               rows={1}
               value={editedContent}
               onChange={(e) => {

@@ -17,7 +17,7 @@ export interface ChatProps extends React.ComponentProps<"div"> {
   session?: Session;
 }
 
-const Chat: React.FC<ChatProps> = ({ id = "", session, ...props }) => {
+const Chat: React.FC<ChatProps> = ({ id, session, ...props }) => {
   const path = usePathname();
   const [input, setInput] = useState("");
   const [messages] = useUIState();
@@ -49,9 +49,7 @@ const Chat: React.FC<ChatProps> = ({ id = "", session, ...props }) => {
 
   // Store the chat ID in local storage when it changes
   useEffect(() => {
-    if (id) {
-      setNewChatId(id);
-    }
+    if (id) setNewChatId(id);
   }, [id, setNewChatId]);
 
   const { messagesRef, scrollRef, visibilityRef, isAtBottom, scrollToBottom } =

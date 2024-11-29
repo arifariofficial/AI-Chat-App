@@ -26,6 +26,11 @@ export default function UserMessage({
 
   const handleSave = async () => {
     if (isSubmitting) return; // Prevent duplicate submissions
+
+    if (editContent.trim() === "") {
+      alert("Täytä viesti");
+      return;
+    }
     setIsSubmitting(true);
     // Update the existing user message in UI state
     setMessages((currentMessages) =>
@@ -89,21 +94,22 @@ export default function UserMessage({
   return (
     <div className="group relative flex flex-col">
       <div className="flex flex-row">
-        <div className="flex size-[24px] shrink-0 select-none items-center justify-center rounded-full border border-foreground/90 text-foreground/90 shadow-sm">
+        <div className="flex size-[24px] shrink-0 select-none items-center justify-center rounded-full border border-border text-foreground/90 shadow-sm">
           <UserIcon className="p-[2px]" fill="currentColor" />
         </div>
-        <h1 className="mx-3 -mt-1 text-lg font-semibold text-foreground/90">
+        <h1 className="mx-3 -mt-1 text-lg font-semibold text-foreground">
           Sinä
         </h1>
         {/* Pencil Icon */}
         {!isEditing && (
-          <div className="absolute -right-8 top-7 opacity-0 transition-opacity group-hover:opacity-100">
-            <button
+          <div className="absolute -right-9 top-7 opacity-0 transition-opacity group-hover:opacity-100">
+            <Button
+              variant="outline"
               onClick={() => setIsEditing(true)}
               className="rounded-full p-1 hover:bg-foreground/10"
             >
               <IconPencil className="h-5 w-5 text-foreground/90" />
-            </button>
+            </Button>
           </div>
         )}
       </div>
@@ -133,14 +139,14 @@ export default function UserMessage({
                 onClick={() => setIsEditing(false)}
                 className="px-3 py-1"
               >
-                Cancel
+                Peruuta
               </Button>
               <Button
                 variant="outline"
                 onClick={handleSave}
                 className="px-3 py-1"
               >
-                Send
+                Lähetä
               </Button>
             </div>
           </div>
