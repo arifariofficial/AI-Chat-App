@@ -9,6 +9,7 @@ import "@/styles/globals.css";
 import NavBarServer from "@/components/navbar/navbar-server";
 import React from "react";
 import { getChats } from "@/data/get-chat";
+import CookieConsent from "@/components/cookie-consent";
 
 export const metadata: Metadata = {
   title: "Sipe AI - Innovating the Future",
@@ -46,6 +47,7 @@ export default async function RootLayout({
           <SessionProvider basePath="/api/auth" session={session}>
             <main className="relative flex size-full flex-col">
               <NavBarServer />
+              <CookieConsent />
               {children}
               <ShadToaster />
             </main>
