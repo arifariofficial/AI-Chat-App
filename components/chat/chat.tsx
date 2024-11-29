@@ -33,7 +33,7 @@ const Chat: React.FC<ChatProps> = ({ id = "", session, ...props }) => {
       router.refresh();
       dispatch(startChat());
     }
-  }, [aiState.messages?.length]); // Only depend on the length of messages
+  }, [aiState.messages?.length, dispatch, router]); // Only depend on the length of messages
 
   // Update browser history to the current chat URL if conditions are met
   useEffect(() => {

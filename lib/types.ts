@@ -6,7 +6,6 @@ export type Message = {
   role: "user" | "system" | "assistant";
   chatId?: string;
   edited?: string | null;
-  parentId?: string | null;
 };
 export interface Chat extends Record<string, unknown> {
   id: string;

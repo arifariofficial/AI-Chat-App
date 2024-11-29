@@ -18,7 +18,6 @@ export async function updateChat(chat: Chat) {
             id: message.id,
             role: message.role,
             content: message.content,
-            parentMessageId: message.parentMessageId,
             createdAt: message.createdAt || new Date(),
           },
         })),

@@ -22,7 +22,7 @@ export default function UserMessage({
   const [editContent, setEditContent] = useState(content);
   const model = useAppSelector((state) => state.model);
   const { submitUserMessage } = useActions();
-  const [_, setMessages] = useUIState<typeof AI>();
+  const [, setMessages] = useUIState<typeof AI>();
 
   const handleSave = async () => {
     if (isSubmitting) return; // Prevent duplicate submissions

@@ -87,7 +87,6 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
   const [messages, setMessages] = useUIState<typeof AI>();
   const { submitUserMessage } = useActions();
   const [isLoading, setIsLoading] = useState(false);
-
   const dispatch = useAppDispatch();
   const model = useAppSelector((state) => state.model);
 
@@ -100,6 +99,22 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
 
   const exampleMessages = STATIC_EXAMPLE_MESSAGES;
 
+  function assignAnimations(
+    array: ExampleMessage[],
+    direction: "left" | "right",
+  ): (ExampleMessage & { ref: React.RefObject<HTMLDivElement> })[] {
+    const animationClass =
+      direction === "left"
+        ? "animate-slide-left-to-right"
+        : "animate-slide-right-to-left";
+
+    return array.map((item, index) => {
+      const animationDelay = `${index * 0.02}s`; // Ensure no overlap with incremental delay
+      const ref = React.createRef<HTMLDivElement>();
+      return { ...item, animationClass, animationDelay, ref };
+    });
+  }
+
   useEffect(() => {
     function shuffleArray(array: ExampleMessage[]): ExampleMessage[] {
       const shuffled = [...array];
@@ -110,26 +125,20 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
       return shuffled;
     }
 
-    function assignAnimations(
-      array: ExampleMessage[],
-    ): (ExampleMessage & { ref: React.RefObject<HTMLDivElement> })[] {
-      const animations = [
-        "animate-slide-left-to-right",
-        "animate-slide-right-to-left",
-      ];
-
-      return array.map((item) => {
-        const animationClass =
-          animations[Math.floor(Math.random() * animations.length)];
-        const animationDelay = `${Math.random() * 0.5}s`; // Random delay between 0 and 0.5 seconds
-        const ref = React.createRef<HTMLDivElement>();
-        return { ...item, animationClass, animationDelay, ref };
-      });
-    }
+    const getRandomDirection = (): "left" | "right" => {
+      return Math.random() < 0.5 ? "left" : "right";
+    };
 
     const updateMessages = () => {
       const shuffledMessages = shuffleArray(exampleMessages);
-      const messagesWithRefs = assignAnimations(shuffledMessages);
+
+      // Use a random direction for each render
+      const randomDirection = getRandomDirection();
+
+      const messagesWithRefs = assignAnimations(
+        shuffledMessages,
+        randomDirection,
+      );
       setMessagesWithAnimations(messagesWithRefs);
     };
 

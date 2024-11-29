@@ -20,6 +20,7 @@ const config = {
       },
     },
     extend: {
+      scrollBehaviou: "smooth",
       fontFamily: {
         sans: ["Arial", "ui-sans-serif", "system-ui", "sans-serif"],
       },
