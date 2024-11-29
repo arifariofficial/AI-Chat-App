@@ -70,7 +70,7 @@ export function ChatList({ messages, className }: ChatListProps) {
         scrollbarColor: "transparent transparent",
       }}
     >
-      <div className="">
+      <div className="w-full">
         {messages.map((message, index) => (
           <div key={message.id}>
             {/* Only render display if it's not null */}

@@ -12,16 +12,20 @@ import { SpinnerMessage } from "@/components/chat/spiner-message";
 import { nanoid } from "@/lib/utils";
 import { saveChat } from "@/data/save-chat";
 import React from "react";
-import { UserMessage } from "@/components/chat/user-message";
-import { BotMessage } from "@/components/chat/bot-message";
 import { getPrompt } from "@/data/get-prompt";
+import { BotMessage } from "@/components/chat/bot-message";
+import UserMessage from "@/components/chat/user-message";
 
 async function submitUserMessage({
   content,
   model,
+  userMessageId,
+  editAIState = false,
 }: {
   content: string;
   model: string;
+  userMessageId: string;
+  editAIState?: boolean;
 }) {
   "use server";
 
@@ -33,17 +37,55 @@ async function submitUserMessage({
 
   const aiState = getMutableAIState<typeof AI>();
 
-  aiState.update({
-    ...aiState.get(),
-    messages: [
-      ...aiState.get().messages,
-      {
-        id: nanoid(),
+  if (editAIState) {
+    aiState.update((currentAIState) => {
+      const currentMessages = currentAIState.messages;
+      // Find the index of the message with the matching userMessageId
+      const targetIndex = currentMessages.findIndex(
+        (msg) => msg.id === userMessageId,
+      );
+
+      if (targetIndex === -1) {
+        // If no match is found, append the new message
+        return {
+          ...currentAIState,
+          messages: [
+            ...currentMessages,
+            {
+              id: userMessageId,
+              role: "user",
+              content,
+            } as Message,
+          ],
+        };
+      }
+
+      // If match is found, retain messages up to the matched ID
+      const updatedMessages = currentMessages.slice(0, targetIndex + 1);
+      updatedMessages[targetIndex] = {
+        id: userMessageId,
         role: "user",
         content,
-      } as Message,
-    ],
-  });
+      };
+
+      return {
+        ...currentAIState,
+        messages: updatedMessages, // Update messages by removing all after the matched ID
+      };
+    });
+  } else {
+    aiState.update({
+      ...aiState.get(),
+      messages: [
+        ...aiState.get().messages,
+        {
+          id: userMessageId,
+          role: "user",
+          content,
+        } as Message,
+      ],
+    });
+  }
 
   const prompt = `\
   ${"roleDefinition" in promptData ? promptData.roleDefinition : ""}
@@ -61,7 +103,7 @@ async function submitUserMessage({
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>;
   let textNode: undefined | React.ReactNode;
-  const uniqueId = nanoid(); // Generate a unique id early for BotMessage
+  const botMessageId = nanoid(); // Generate a unique id early for BotMessage
 
   const result = await streamUI({
     model: openai(model),
@@ -90,7 +132,7 @@ async function submitUserMessage({
         textNode = (
           <BotMessage
             content={textStream.value}
-            messageId={uniqueId}
+            botMessageId={botMessageId}
             chatId={chatId}
           />
         );
@@ -103,11 +145,10 @@ async function submitUserMessage({
           messages: [
             ...aiState.get().messages,
             {
-              id: uniqueId,
+              id: botMessageId,
               role: "assistant",
               content,
-              name: "",
-            },
+            } as Message,
           ],
         });
       } else {
@@ -131,6 +172,7 @@ export type AIState = {
 
 export type UIState = {
   id: string;
+  role: "user" | "assistant" | "system";
   display: React.ReactNode;
 }[];
 
@@ -143,16 +185,17 @@ export const getUIStateFromAIState = (aiState: Chat) => {
       const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
       return dateA - dateB;
     })
-    .map((message, index) => ({
-      id: `${aiState.chatId}-${index}`,
+    .map((message) => ({
+      id: message.id,
+      role: message.role,
       display:
         message.role === "user" ? (
-          <UserMessage>{message.content as string}</UserMessage>
+          <UserMessage content={message.content} userMessageId={message.id} />
         ) : message.role === "assistant" &&
           typeof message.content === "string" ? (
           <BotMessage
             content={message.content}
-            messageId={message.id}
+            botMessageId={message.id}
             chatId={message.chatId}
           />
         ) : null,
@@ -175,6 +218,12 @@ export const AI = createAI<AIState, UIState>({
 
       if (session?.user) {
         const aiState = getAIState();
+        if (!aiState || !aiState.chatId) {
+          console.warn(
+            "AI state or chatId is missing, initializing default state.",
+          );
+          return []; // Fallback to empty UIState
+        }
 
         if (aiState) {
           const uiState = getUIStateFromAIState(aiState as Chat);
@@ -185,7 +234,6 @@ export const AI = createAI<AIState, UIState>({
       return undefined;
     } catch (error) {
       console.error("Error in onGetUIState:", error);
-
       return undefined;
     }
   },
@@ -196,36 +244,50 @@ export const AI = createAI<AIState, UIState>({
     try {
       const session = await auth();
 
-      if (session?.user) {
-        const { chatId, messages } = state;
-
-        if (!messages || messages.length === 0) {
-          throw new Error("No messages available to create a chat title.");
-        }
-
-        const createdAt = new Date();
-        const userId = session.user.id as string;
-        const path = `/chat/${chatId}`;
-
-        const firstMessageContent = messages[0].content as string;
-        const title = firstMessageContent.substring(0, 100);
-
-        const chat: Chat = {
-          id: chatId,
-          title,
-          userId,
-          createdAt,
-          messages,
-          path,
-        };
-
-        await saveChat(chat);
-      } else {
+      if (!session?.user) {
         console.warn("Unauthorized access attempt in onSetAIState.");
         return;
       }
+
+      const { chatId, messages } = state;
+
+      if (!state.chatId) {
+        throw new Error("Missing chatId in state.");
+      }
+
+      // console.log("AiState:", state);
+
+      if (!messages || messages.length === 0) {
+        throw new Error("No messages available to create a chat title.");
+      }
+
+      const deduplicatedMessages = Array.from(
+        new Map(messages.map((msg) => [msg.id, msg])).values(),
+      );
+
+      const createdAt = new Date();
+      const userId = session.user.id as string;
+      const path = `/chat/${chatId}`;
+
+      const firstMessageContent = deduplicatedMessages[0].content as string;
+      const words = firstMessageContent.split(/\s+/); // Split by spaces or newlines
+      const title = words.slice(0, 5).join(" "); // Take the first 5 words and join them with spaces
+
+      const chat: Chat = {
+        id: chatId,
+        title,
+        userId,
+        createdAt,
+        messages: deduplicatedMessages,
+        path,
+      };
+
+      await saveChat(chat);
     } catch (error) {
-      console.error("Error in onSetAIState:", error);
+      console.error("Error in onSetAIState:", {
+        state,
+        error: error instanceof Error ? error.message : "Unknown error",
+      });
     }
   },
 });

@@ -117,6 +117,13 @@ model UserPayment {
   @@map(name: "user_payments")
 }
 
+
+enum Role {
+  user
+  system
+  assistant
+}
+
 model Chat {
   id        String    @id @default(uuid())
   title     String
@@ -133,11 +140,6 @@ model Chat {
   @@map("chats")
 }
 
-enum Role {
-  user
-  system
-  assistant
-}
 
 model Message {
   id              String @id @default(uuid())
@@ -145,6 +147,7 @@ model Message {
   content         String
   edited          String? 
   chatId          String
+  
 
   chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
 

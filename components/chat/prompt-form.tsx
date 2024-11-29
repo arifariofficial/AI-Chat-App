@@ -16,7 +16,7 @@ import { nanoid } from "@/lib/utils";
 import { decrement } from "@/lib/store/balanceSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hook";
 import { useTheme } from "next-themes";
-import { UserMessage } from "./user-message";
+import UserMessage from "./user-message";
 
 export function PromptForm({
   input,
@@ -52,6 +52,8 @@ export function PromptForm({
     }
   }, []);
 
+  const userMessageId = nanoid();
+
   return (
     <form
       className="sm:mt-4"
@@ -77,13 +79,17 @@ export function PromptForm({
         setMessages((currentMessages) => [
           ...currentMessages,
           {
-            id: nanoid(),
-            display: <UserMessage>{value}</UserMessage>,
+            id: userMessageId,
+            role: "user",
+            display: (
+              <UserMessage content={value} userMessageId={userMessageId} />
+            ),
           },
         ]);
 
         // Submit and get response message
         const responseMessage = await submitUserMessage({
+          userMessageId: userMessageId,
           content: value,
           model: model.model,
         });

@@ -21,12 +21,12 @@ import { Role } from "@/types";
 
 export function BotMessage({
   content,
-  messageId,
+  botMessageId,
   chatId,
   className,
 }: {
   content: string | StreamableValue<string>;
-  messageId?: string;
+  botMessageId: string;
   chatId?: string;
   className?: string;
 }) {
@@ -73,7 +73,7 @@ export function BotMessage({
 
   const handleSaveEditedContent = async () => {
     const userId = session?.user.id ?? "";
-    if (!userId || !messageId || !chatId) {
+    if (!userId || !botMessageId || !chatId) {
       console.warn("Missing required parameters for saving content.");
       return;
     }
@@ -85,7 +85,7 @@ export function BotMessage({
 
     startTransition(async () => {
       try {
-        await editMessage(userId, messageId, editedContent, chatId);
+        await editMessage(userId, botMessageId, editedContent, chatId);
         setIsEditing(false);
 
         setChat((prevChat) => {
@@ -93,7 +93,7 @@ export function BotMessage({
           return {
             ...prevChat,
             messages: prevChat.messages.map((message) =>
-              message.id === messageId
+              message.id === botMessageId
                 ? { ...message, edited: editedContent }
                 : message,
             ),
@@ -108,7 +108,7 @@ export function BotMessage({
   };
 
   const editedMessage = chat?.messages?.find(
-    (message) => message.id === messageId && message.edited !== null,
+    (message) => message.id === botMessageId && message.edited !== null,
   );
 
   return (

@@ -19,74 +19,68 @@ const formatMessages = (messages: Chat["messages"]) =>
 export async function saveChat(chat: Chat) {
   const session = await auth();
 
-  // Ensure that a valid session exists
   if (!session || !session.user) {
-    console.log("No valid session available.");
+    console.error("No valid session available.");
     return;
   }
 
-  // Check if the user exists
-  const userExists = await prisma.user.findUnique({
-    where: { id: chat.userId },
-  });
-
-  if (!userExists) {
-    console.error("User does not exist, cannot save chat.");
+  if (session.user.id !== chat.userId) {
+    console.error("Unauthorized access attempt detected.");
     return;
   }
 
   try {
-    // Perform a transaction to save or update the chat
+    const now = new Date().toISOString();
+
     await prisma.$transaction(async (prisma) => {
-      // Fetch the existing chat, if it exists
       const existingChat = await prisma.chat.findUnique({
         where: { id: chat.id },
         include: { messages: true },
       });
 
-      // Filter out any messages that already exist in the chat
-      const newMessages = chat.messages.filter(
-        (msg) => !existingChat?.messages.some((exMsg) => exMsg.id === msg.id),
-      );
+      console.log("Existing Chat:", existingChat);
 
-      // Use Prisma's `upsert` to either update or create the chat
+      if (existingChat) {
+        // Delete all existing messages for the chat
+        await prisma.message.deleteMany({
+          where: { chatId: chat.id },
+        });
+        console.log("All previous messages deleted.");
+      }
+
+      // Prepare new messages
+      const formattedMessages = formatMessages(chat.messages);
+
+      // Upsert the chat
       await prisma.chat.upsert({
         where: { id: chat.id },
-        include: { messages: true },
         update: {
           title: chat.title,
-          updatedAt: new Date().toISOString(),
+          updatedAt: now,
           userId: chat.userId,
           path: chat.path,
           messages: {
-            create: formatMessages(newMessages),
+            create: formattedMessages,
           },
         },
         create: {
           id: chat.id,
           title: chat.title,
-          createdAt: chat.createdAt,
+          createdAt: chat.createdAt || now,
           userId: chat.userId,
           path: chat.path,
           messages: {
-            create: formatMessages(chat.messages),
+            create: formattedMessages,
           },
         },
       });
     });
   } catch (error) {
-    if (error instanceof Error) {
-      console.error(`Failed to save chat: ${error.message}`, {
-        userId: chat.userId,
-        chatId: chat.id,
-      });
-      throw error;
-    } else {
-      console.error("An unknown error occurred", {
-        userId: chat.userId,
-        chatId: chat.id,
-      });
-      throw new Error("Unknown error occurred while saving chat.");
-    }
+    console.error(
+      `Failed to save chat: ${error instanceof Error ? error.message : "Unknown error"}`,
+    );
+    throw error instanceof Error
+      ? error
+      : new Error("Unknown error occurred while saving chat.");
   }
 }

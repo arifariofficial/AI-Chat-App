@@ -8,7 +8,7 @@ import { cn, nanoid } from "@/lib/utils";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hook";
 import { decrement } from "@/lib/store/balanceSlice";
 import React, { useEffect, useRef, useState } from "react";
-import { UserMessage } from "./user-message";
+import UserMessage from "./user-message";
 
 const STATIC_EXAMPLE_MESSAGES: ExampleMessage[] = [
   {
@@ -184,6 +184,8 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
     };
   }, [messagesWithAnimations]);
 
+  const userMessageId = nanoid();
+
   return (
     /* Chat Input container */
     <div className={cn(className, "mx-auto flex size-full flex-col")}>
@@ -203,16 +205,24 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
                 )}
                 style={{ animationDelay: example.animationDelay }}
                 onClick={async () => {
+                  if (isLoading) return;
                   setIsLoading(true);
                   setMessages((currentMessages) => [
                     ...currentMessages,
                     {
-                      id: nanoid(),
-                      display: <UserMessage>{example.message}</UserMessage>,
+                      id: userMessageId,
+                      role: "user",
+                      display: (
+                        <UserMessage
+                          content={example.message}
+                          userMessageId={userMessageId}
+                        />
+                      ),
                     },
                   ]);
 
                   const responseMessage = await submitUserMessage({
+                    userMessageId: userMessageId,
                     content: example.message,
                     model: model.model,
                   });
