@@ -7,6 +7,8 @@ import NavItemsMiddle from "./nav-items-middle";
 import { Session } from "next-auth";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle-mobile";
+import Logo from "@/public/assets/Logo-main.svg";
+import Image from "next/image";
 
 interface NavBarProps {
   session?: Session | null;
@@ -25,10 +27,12 @@ const NavBar = ({ session }: NavBarProps) => {
         <section className="flex items-center text-foregroundNav">
           <Link href={`/`}>
             <div className="mx-4 flex">
-              <p className="inline-flex items-end text-3xl font-bold">
-                <span>SIPE</span>
-                <span className="align-baseline text-base font-light">AI</span>
-              </p>
+              <Image
+                src={Logo} // Path relative to the public folder
+                alt="Logo"
+                width={120} // Set your desired width
+                height={100} // Set your desired height
+              />
             </div>
           </Link>
         </section>
