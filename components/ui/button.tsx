@@ -19,7 +19,7 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-background hover:text-accent-foreground active:bg-backgroundSecondary active:text-background focus:bg-background focus:outline-none focus-visible:border-none focus-visible:ring-0 bg-background",
 
-        link: "text-primary underline-offset-4 hover:underline",
+        link: "text-primary dark:text-white underline-offset-4 hover:underline",
 
         nav: "bg-inherit text-foregroundNav hover:bg-primary-hover active:bg-inherit active:text-foregroundNav focus-visible:ring-0 hover:text-foregroundNav",
 

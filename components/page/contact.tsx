@@ -63,7 +63,9 @@ export const ContactSection = (props: ContactSectionProps) => {
                 <p className="mb-2">{contact.description}</p>
                 {contact.title === "Office" && contact.button ? (
                   <div className="mt-5 md:mt-6">
-                    <Button {...contact.button}>{contact.button.title}</Button>
+                    <Button {...contact.button} className="w-full">
+                      {contact.button.title}
+                    </Button>
                   </div>
                 ) : (
                   contact.link && (
