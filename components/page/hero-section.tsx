@@ -46,7 +46,7 @@ export const HeroSection = (props: HeroSectionProps) => {
     <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="md:mb-18 mb-12 grid grid-cols-1 items-start gap-x-12 gap-y-5 md:grid-cols-2 lg:mb-20 lg:gap-x-20 lg:gap-y-16">
-          <h1 className="lg:text-10xl text-6xl font-bold md:text-9xl">
+          <h1 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
             {heading}
           </h1>
           <div>

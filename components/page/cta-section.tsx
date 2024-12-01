@@ -25,7 +25,7 @@ export const CtaSection = (props: CtaSectionProps) => {
       <div className="container">
         <div className="border-border-primary grid auto-cols-fr grid-cols-1 border lg:grid-cols-2">
           <div className="flex flex-col justify-center p-8 md:p-12">
-            <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+            <h2 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
               {heading}
             </h2>
             <p className="md:text-md">{description}</p>

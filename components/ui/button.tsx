@@ -70,9 +70,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {iconLeft && <span className="mr-2">{iconLeft}</span>}
-        {props.children}
-        {iconRight && <span className="ml-2">{iconRight}</span>}
+        <span className="flex items-center">
+          {iconLeft && <span className="mr-2">{iconLeft}</span>}
+          {props.children}
+          {iconRight && <span className="ml-2">{iconRight}</span>}
+        </span>
       </Comp>
     );
   },

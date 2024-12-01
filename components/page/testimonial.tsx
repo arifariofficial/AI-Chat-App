@@ -32,7 +32,7 @@ export const TestimonialSection = (props: TestimonialSectionProps) => {
     <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="md:mb-18 mb-12 w-full lg:mb-20">
-          <h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+          <h1 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
             {heading}
           </h1>
           <p className="md:text-md">{description}</p>

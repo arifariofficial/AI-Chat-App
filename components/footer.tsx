@@ -103,7 +103,7 @@ export const Footer = (props: FooterProps) => {
             <div dangerouslySetInnerHTML={{ __html: termsAndConditions }} />
           </div>
         </div>
-        <div className="rb-12 md:mb-18 mb-12 grid grid-cols-1 items-start gap-x-8 gap-y-10 sm:grid-cols-3 md:gap-y-12 lg:mb-20 lg:grid-cols-6">
+        <div className="rb-12 md:mb-18 mb-12 grid grid-cols-1 items-start gap-x-8 gap-y-10 sm:grid-cols-3 md:grid-cols-3 md:gap-y-12 lg:mb-20 lg:grid-cols-6">
           <a
             href={logo.url}
             className="sm:col-start-1 sm:col-end-4 sm:row-start-1 sm:row-end-2 lg:col-start-auto lg:col-end-auto lg:row-start-auto lg:row-end-auto"
