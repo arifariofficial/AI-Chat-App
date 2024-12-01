@@ -6,7 +6,7 @@ import AIJustice from "@/public/assets/ai-law.jpg";
 const InnovationSection = () => {
   return (
     <section className="relative bg-background py-16">
-      <div className="container mx-auto flex flex-col items-center gap-8 md:flex-row">
+      <div className="mx-auto flex flex-col items-center gap-8 md:flex-row">
         {/* Left Content */}
         <div className="md:w-1/2">
           <h2 className="text-2xl font-bold uppercase text-muted-foreground">

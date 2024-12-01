@@ -37,8 +37,8 @@
 
     --radius: 0.5rem;
 
-    --title: 209, 100%, 48%;
-    --subtitle: 0, 0%, 40%;
+    --title: 222, 64%, 21%;
+    --subtitle: 222, 50%, 40%;
     --section-title: 209 100% 48%;
     --cta-title: 209 100% 48%;
     --link: 209 100% 48%;
@@ -128,6 +128,18 @@
   /* Hide scrollbar for WebKit-based browsers (Chrome, Safari) */
   .scroll-container::-webkit-scrollbar {
     display: none;
+  }
+}
+
+@layer components {
+  .pretitle {
+    @apply text-base font-bold uppercase text-muted-foreground;
+  }
+  .title {
+    @apply text-4xl font-bold text-title;
+  }
+  .subtitle {
+    @apply text-3xl font-semibold text-subtitle;
   }
 }
 

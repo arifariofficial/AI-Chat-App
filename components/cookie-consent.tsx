@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 const CookieConsent = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -65,24 +66,32 @@ const CookieConsent = () => {
     <>
       {/* Basic Cookie Consent Popup */}
       {isVisible && (
-        <div className="fixed bottom-4 right-4 z-50 w-[50%] rounded-lg border border-border/40 bg-background p-4 text-foreground shadow-md">
+        <div className="fixed bottom-4 right-0 z-50 mx-4 max-w-screen-sm rounded-lg border border-border/40 bg-background p-4 text-foreground shadow-md lg:w-[50%]">
           <p className="text-sm">
-            We use cookies to enhance your experience, analyze site usage, and
-            assist in our marketing efforts.
+            Käytämme evästeitä parantaaksemme sivustoa, analysoidaksemme käyttöä
+            ja auttaaksemme markkinoinnissa.
           </p>
-          <div className="mt-4 flex justify-end gap-4">
+          <div className="mt-4 flex flex-col items-center justify-end gap-4 sm:flex-row">
             <Button
-              variant="link"
+              variant="outline"
               onClick={() => setIsSettingsOpen(true)}
-              className="underline"
+              className="w-full"
             >
-              Manage Preferences
+              Hallinnoi asetuksia
             </Button>
-            <Button variant="outline" onClick={handleRejectAll}>
-              Reject all cookies
+            <Button
+              variant="outline"
+              onClick={handleRejectAll}
+              className="w-full"
+            >
+              Poista kaikki evästeet
             </Button>
-            <Button variant="default" onClick={handleAcceptAll}>
-              Allow all cookies
+            <Button
+              variant="default"
+              onClick={handleAcceptAll}
+              className="w-full"
+            >
+              Salli kaikki evästeet
             </Button>
           </div>
         </div>
@@ -91,25 +100,25 @@ const CookieConsent = () => {
       {/* Cookie Settings Modal */}
       {isSettingsOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="w-full max-w-lg rounded-lg bg-background p-6 text-foreground shadow-lg">
-            <h2 className="mb-4 text-xl font-bold">Cookie Settings</h2>
+          <div className="m-4 w-full max-w-lg rounded-lg bg-background p-6 text-foreground shadow-lg">
+            <h2 className="mb-4 text-xl font-bold">Evästeasetukset</h2>
             <p className="mb-4 text-sm">
-              Customize your cookie preferences. Essential cookies are always
-              enabled to ensure the website functions correctly.{" "}
-              <a
+              Mukauta evästeasetuksesi. Välttämättömät evästeet ovat aina
+              käytössä, jotta sivusto toimii oikein.
+              <Link
                 href="/cookie-policy"
-                className="text-link underline hover:opacity-80"
+                className="ml-1 text-link underline hover:opacity-80"
               >
-                Learn more
-              </a>
+                Lue lisää
+              </Link>
             </p>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span>Essential</span>
+                <span>Välttämättömät</span>
                 <span className="text-muted-foreground">Always On</span>
               </div>
               <div className="flex items-center justify-between">
-                <span>Personalization</span>
+                <span>Personointi</span>
                 <input
                   type="checkbox"
                   checked={preferences.personalization}
@@ -118,7 +127,7 @@ const CookieConsent = () => {
                 />
               </div>
               <div className="flex items-center justify-between">
-                <span>Marketing</span>
+                <span>Markkinointi</span>
                 <input
                   type="checkbox"
                   checked={preferences.marketing}
@@ -127,7 +136,7 @@ const CookieConsent = () => {
                 />
               </div>
               <div className="flex items-center justify-between">
-                <span>Analytics</span>
+                <span>Analytiikka</span>
                 <input
                   type="checkbox"
                   checked={preferences.analytics}
@@ -141,10 +150,10 @@ const CookieConsent = () => {
                 variant="outline"
                 onClick={() => setIsSettingsOpen(false)}
               >
-                Cancel
+                Peruuta
               </Button>
               <Button variant="default" onClick={handleSavePreferences}>
-                Save
+                Tallenna
               </Button>
             </div>
           </div>

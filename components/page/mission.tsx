@@ -19,15 +19,10 @@ const MissionSection = () => {
       </div>
 
       {/* Content */}
-      <div className="container relative -top-8 z-10 mx-auto flex h-full flex-col items-end justify-center">
-        <div></div>
-        <div className="h-full text-center sm:pr-6 md:w-1/2 md:text-right">
-          <h2 className="text-2xl font-bold uppercase text-muted-foreground">
-            Oikeutta tekoälyn avulla
-          </h2>
-          <h1 className="mt-4 text-4xl font-bold text-foreground">
-            SIPE:n tehtävä
-          </h1>
+      <div className="mx-auto flex flex-col items-end justify-center">
+        <div className="text-center sm:pr-6 md:w-1/2 md:text-right">
+          <h2 className="pretitle">Oikeutta tekoälyn avulla</h2>
+          <h1 className="subtitle mt-4">SIPE:n tehtävä</h1>
           <p className="mt-4 text-foreground">
             Teemme oikeudellisesta tiedosta ja tuesta helposti saatavaa kaikille
             tekoälyn avulla, jotta monimutkaiset järjestelmät tai prosessit

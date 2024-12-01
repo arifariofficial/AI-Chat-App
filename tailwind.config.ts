@@ -12,13 +12,6 @@ const config = {
   ],
   prefix: "",
   theme: {
-    container: {
-      center: true,
-      padding: "0rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
       scrollBehaviou: "smooth",
       fontFamily: {
@@ -38,13 +31,11 @@ const config = {
         foregroundNav: "hsl(var(--foreground-nav))",
         text: "hsl(var(--text))",
         boldBlue: "hsl(var(--bold-blue))",
-
         title: "hsl(var(--title))",
         subtitle: "hsl(var(--subtitle))",
         sectionTitle: "hsl(var(--section-title))",
         ctaTitle: "hsl(var(--cta-title))",
         link: "hsl(var(--link))",
-
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -76,34 +67,48 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
       keyframes: {
         "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
         },
         "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
         },
         "caret-blink": {
-          "0%,70%,100%": { opacity: "1" },
-          "20%,50%": { opacity: "0" },
+          "0%,70%,100%": {
+            opacity: "1",
+          },
+          "20%,50%": {
+            opacity: "0",
+          },
         },
         slideLeftToRight: {
-          "0%": { transform: "translateX(-100%)" },
-          "100%": { transform: "translateX(0)" },
+          "0%": {
+            transform: "translateX(-100%)",
+          },
+          "100%": {
+            transform: "translateX(0)",
+          },
         },
         slideRightToLeft: {
-          "0%": { transform: "translateX(100%)" },
-          "100%": { transform: "translateX(0)" },
+          "0%": {
+            transform: "translateX(100%)",
+          },
+          "100%": {
+            transform: "translateX(0)",
+          },
         },
       },
-
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
@@ -113,6 +118,7 @@ const config = {
       },
     },
   },
+  presets: [require("@relume_io/relume-tailwind")],
   plugins: [tailwindcssAnimate, typography],
 } satisfies Config;
 

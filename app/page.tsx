@@ -1,7 +1,7 @@
-import Etusivu from "@/components/etusivu/etusivu";
+import HomePage from "@/components/page/home-page";
 
 const Home = () => {
-  return <Etusivu />;
+  return <HomePage />;
 };
 
 export default Home;
