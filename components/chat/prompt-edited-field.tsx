@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 interface EditableFieldProps {
   label: string;
   value: string;
+  purpose?: string;
   placeholder?: string;
   editable: boolean;
   onToggleEdit: () => void;
@@ -15,6 +16,7 @@ interface EditableFieldProps {
 export function EditableField({
   label,
   value,
+  purpose,
   editable,
   placeholder = "Not set",
   onToggleEdit,
@@ -24,11 +26,19 @@ export function EditableField({
   return (
     <div className="group flex flex-col space-y-1">
       <div className="flex items-center justify-between">
-        <h1 className="font-semibold">{label}</h1>
+        <div>
+          <h1 className="font-semibold">{label}</h1>
+          <p>{purpose}</p>
+        </div>
         {editable ? (
-          <Button variant="outline" onClick={onSave} size="sm">
-            Tallenna
-          </Button>
+          <div className="space-x-1">
+            <Button variant="outline" onClick={onToggleEdit} size="sm">
+              Peruuta
+            </Button>
+            <Button variant="outline" onClick={onSave} size="sm">
+              Tallenna
+            </Button>
+          </div>
         ) : (
           <IconEdit
             className="size-5 cursor-pointer opacity-0 transition-opacity group-hover:opacity-100"
@@ -55,7 +65,7 @@ export function EditableField({
           }}
         />
       ) : (
-        <div className="mt-1 rounded-sm border border-border/20 bg-foreground/5 p-2 text-sm">
+        <div className="mt-1 whitespace-pre-wrap rounded-sm border border-border/20 bg-foreground/5 p-2 text-sm">
           {value || placeholder}
         </div>
       )}

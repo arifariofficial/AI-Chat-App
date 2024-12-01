@@ -60,9 +60,13 @@ export function ModelSelection({ setShowPromptModal }: ModelSelectionProps) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between border-border/40 bg-inherit px-1 font-bold text-foreground"
+          className="flex w-[200px] items-center justify-between border px-1 font-bold"
+          spanClassName="justify-between  w-full"
         >
-          {value ? models.find((model) => model.value === value)?.label : value}
+          {value
+            ? models.find((model) => model.value === value)?.label
+            : "Select an option"}
+
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>

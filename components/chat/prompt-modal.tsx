@@ -31,11 +31,17 @@ export default function PromptModal({
     id: "",
     temperature: "0.7",
     roleDefinition: "",
+    roleDefinitionPurpose: "",
     userContext: "",
+    userContextPurpose: "",
     guidelines: "",
+    guidelinesPurpose: "",
     instructions: "",
+    instructionsPurpose: "",
     keyPointers: "",
+    keyPointersPurpose: "",
     responseLimitations: "",
+    responseLimitationsPurpose: "",
   });
 
   const [enableEdit, setEnableEdit] = useState({
@@ -62,11 +68,17 @@ export default function PromptModal({
         temperature:
           prompt.temperature?.toString() || prev.temperature || "0.7",
         roleDefinition: prompt.roleDefinition || "",
+        roleDefinitionPurpose: prompt.roleDefinitionPurpose || "",
         userContext: prompt.userContext || "",
+        userContextPurpose: prompt.userContextPurpose || "",
         guidelines: prompt.guidelines || "",
+        guidelinesPurpose: prompt.guidelinesPurpose || "",
         instructions: prompt.instructions || "",
+        instructionsPurpose: prompt.instructionsPurpose || "",
         keyPointers: prompt.keyPointers || "",
+        keyPointersPurpose: prompt.keyPointersPurpose || "",
         responseLimitations: prompt.responseLimitations || "",
+        responseLimitationsPurpose: prompt.responseLimitationsPurpose || "",
       }));
     }
   }, [prompt]);
@@ -128,9 +140,15 @@ export default function PromptModal({
         }),
       );
 
+      function toTitleCase(field: string): string {
+        return field
+          .replace(/([a-z])([A-Z])/g, "$1 $2") // Add a space before uppercase letters
+          .replace(/^./, (str) => str.toUpperCase()); // Capitalize the first letter
+      }
+
       toast({
         title: `Saved`,
-        description: `${field} updated successfully`,
+        description: `${toTitleCase(field)} updated successfully`,
         variant: "default",
         duration: 3000,
       });
@@ -238,9 +256,13 @@ export default function PromptModal({
           <EditableField
             label="Role Definition"
             value={promptData.roleDefinition}
+            purpose={promptData.roleDefinitionPurpose}
             editable={enableEdit.roleDefinition}
             onToggleEdit={() =>
-              setEnableEdit((prev) => ({ ...prev, roleDefinition: true }))
+              setEnableEdit((prev) => ({
+                ...prev,
+                roleDefinition: !prev.roleDefinition,
+              }))
             }
             onSave={() => handleEdit("roleDefinition")}
             onChange={(value) =>
@@ -251,9 +273,13 @@ export default function PromptModal({
           <EditableField
             label="User Context"
             value={promptData.userContext}
+            purpose={promptData.userContextPurpose}
             editable={enableEdit.userContext}
             onToggleEdit={() =>
-              setEnableEdit((prev) => ({ ...prev, userContext: true }))
+              setEnableEdit((prev) => ({
+                ...prev,
+                userContext: !prev.userContext,
+              }))
             }
             onSave={() => handleEdit("userContext")}
             onChange={(value) =>
@@ -263,9 +289,13 @@ export default function PromptModal({
           <EditableField
             label="Guidelines"
             value={promptData.guidelines}
+            purpose={promptData.guidelinesPurpose}
             editable={enableEdit.guidelines}
             onToggleEdit={() =>
-              setEnableEdit((prev) => ({ ...prev, guidelines: true }))
+              setEnableEdit((prev) => ({
+                ...prev,
+                guidelines: !prev.guidelines,
+              }))
             }
             onSave={() => handleEdit("guidelines")}
             onChange={(value) =>
@@ -275,9 +305,13 @@ export default function PromptModal({
           <EditableField
             label="Instructions"
             value={promptData.instructions}
+            purpose={promptData.instructionsPurpose}
             editable={enableEdit.instructions}
             onToggleEdit={() =>
-              setEnableEdit((prev) => ({ ...prev, instructions: true }))
+              setEnableEdit((prev) => ({
+                ...prev,
+                instructions: !prev.instructions,
+              }))
             }
             onSave={() => handleEdit("instructions")}
             onChange={(value) =>
@@ -287,9 +321,13 @@ export default function PromptModal({
           <EditableField
             label="Key Pointers"
             value={promptData.keyPointers}
+            purpose={promptData.keyPointersPurpose}
             editable={enableEdit.keyPointers}
             onToggleEdit={() =>
-              setEnableEdit((prev) => ({ ...prev, keyPointers: true }))
+              setEnableEdit((prev) => ({
+                ...prev,
+                keyPointers: !prev.keyPointers,
+              }))
             }
             onSave={() => handleEdit("keyPointers")}
             onChange={(value) =>
@@ -299,11 +337,12 @@ export default function PromptModal({
           <EditableField
             label="Response Limitations"
             value={promptData.responseLimitations}
+            purpose={promptData.responseLimitationsPurpose}
             editable={enableEdit.responseLimitations}
             onToggleEdit={() =>
               setEnableEdit((prev) => ({
                 ...prev,
-                responseLimitations: true,
+                responseLimitations: !prev.responseLimitations,
               }))
             }
             onSave={() => handleEdit("responseLimitations")}

@@ -13,7 +13,7 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-border/30 bg-background shadow-sm hover:bg-accent hover:text-accent-foreground active:bg-background",
+          "border border-border/30 bg-background shadow-sm hover:bg-accent hover:text-accent-foreground active:bg-background font-semibold",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost:
@@ -48,12 +48,14 @@ export interface ButtonProps
   asChild?: boolean;
   iconLeft?: React.ReactNode;
   iconRight?: React.ReactNode;
+  spanClassName?: string;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       className,
+      spanClassName,
       variant,
       size,
       asChild = false,
@@ -64,13 +66,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const Comp = asChild ? Slot : "button";
+    // Example of dynamically modifying spanClassName
+    const dynamicSpanClassName = cn("flex items-center", spanClassName);
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
       >
-        <span className="flex items-center">
+        <span className={dynamicSpanClassName}>
           {iconLeft && <span className="mr-2">{iconLeft}</span>}
           {props.children}
           {iconRight && <span className="ml-2">{iconRight}</span>}
