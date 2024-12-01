@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button, ButtonProps } from "../ui/button";
 
 type ImageProps = {
@@ -23,7 +24,7 @@ export const CtaSection = (props: CtaSectionProps) => {
   return (
     <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
-        <div className="border-border-primary grid auto-cols-fr grid-cols-1 border lg:grid-cols-2">
+        <div className="border-border-primary grid auto-cols-fr grid-cols-1 border p-1 lg:grid-cols-2">
           <div className="flex flex-col justify-center p-8 md:p-12">
             <h2 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
               {heading}
@@ -37,11 +38,13 @@ export const CtaSection = (props: CtaSectionProps) => {
               ))}
             </div>
           </div>
-          <div className="flex items-center justify-center">
-            <img
+          <div className="flex items-center justify-center overflow-hidden rounded-lg p-1">
+            <Image
               src={image.src}
-              className="w-full object-cover"
-              alt={image.alt}
+              className="m-1 h-full w-full scale-[1.2] object-cover p-2 opacity-50"
+              alt={image.alt!}
+              width={720}
+              height={480}
             />
           </div>
         </div>
@@ -59,7 +62,7 @@ export const CtaSectionDefaults: CtaSectionProps = {
     { title: "Learn More", variant: "outline" },
   ],
   image: {
-    src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape4x3.svg",
+    src: "/assets/car-accident.jpg",
     alt: "Relume placeholder image",
   },
 };

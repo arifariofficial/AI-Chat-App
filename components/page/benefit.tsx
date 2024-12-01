@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type ImageProps = {
   src: string;
   alt?: string;
@@ -37,10 +39,12 @@ export const BenefitSection = (props: BenefitSectionProps) => {
               {subHeadings.map((subHeading, index) => (
                 <div key={index}>
                   <div className="mb-3 md:mb-4">
-                    <img
+                    <Image
                       src={subHeading.icon.src}
                       className="size-12"
-                      alt={subHeading.icon.alt}
+                      alt={subHeading.icon.alt!}
+                      width={400}
+                      height={400}
                     />
                   </div>
                   <h6 className="text-md mb-3 font-bold leading-[1.4] md:mb-4 md:text-xl">
@@ -51,11 +55,13 @@ export const BenefitSection = (props: BenefitSectionProps) => {
               ))}
             </div>
           </div>
-          <div>
-            <img
+          <div className="h-full overflow-hidden rounded-lg">
+            <Image
               src={image.src}
-              className="w-full object-cover"
-              alt={image.alt}
+              className="h-full w-full scale-[1.4] object-cover opacity-60"
+              alt={image.alt!}
+              width={720}
+              height={480}
             />
           </div>
         </div>
@@ -72,7 +78,7 @@ export const BenefitSectionDefaults: BenefitSectionProps = {
   subHeadings: [
     {
       icon: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg",
+        src: "./assets/placeholder-image.svg",
         alt: "Relume logo 1",
       },
       title: "Time-Saving",
@@ -81,7 +87,7 @@ export const BenefitSectionDefaults: BenefitSectionProps = {
     },
     {
       icon: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg",
+        src: "./assets/placeholder-image.svg",
         alt: "Relume logo 1",
       },
       title: "Accurate Insights",
@@ -90,7 +96,7 @@ export const BenefitSectionDefaults: BenefitSectionProps = {
     },
   ],
   image: {
-    src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
-    alt: "Relume placeholder image",
+    src: "/assets/secure-family.jpg",
+    alt: "Secure family",
   },
 };

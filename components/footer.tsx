@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { Button, ButtonProps } from "./ui/button";
 import { Input } from "./ui/input";
+import Image from "next/image";
 
 type ImageProps = {
   url?: string;
@@ -108,7 +109,13 @@ export const Footer = (props: FooterProps) => {
             href={logo.url}
             className="sm:col-start-1 sm:col-end-4 sm:row-start-1 sm:row-end-2 lg:col-start-auto lg:col-end-auto lg:row-start-auto lg:row-end-auto"
           >
-            <img src={logo.src} alt={logo.alt} className="bg-primary p-2" />
+            <Image
+              src={logo.src}
+              alt={logo.alt!}
+              width={100}
+              height={100}
+              className="bg-primary p-2"
+            />
           </a>
           {columnLinks.map((column, index) => (
             <div

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Button } from "../ui/button";
 
 type ImageProps = {
@@ -32,9 +33,11 @@ export const FeatureSectionList = (props: FeatureSectionListProps) => {
         <div className="grid grid-cols-1 gap-y-12 md:grid-cols-3 md:gap-x-8">
           {features.map((feature, index) => (
             <div key={index} className="cursor-pointer text-center">
-              <img
+              <Image
                 src={feature.image.src}
-                alt={feature.image.alt}
+                alt={feature.image.alt!}
+                width={720}
+                height={480}
                 className="mb-4 h-48 w-full object-cover"
               />
               <h2 className="text-xl font-semibold">{feature.title}</h2>
@@ -63,7 +66,7 @@ export const FeatureSectionListDefaults: FeatureSectionListProps = {
       description:
         "Get instant access to vital information at your fingertips.",
       image: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+        src: "./assets/placeholder-image.svg",
         alt: "Placeholder image 1",
       },
     },
@@ -72,7 +75,7 @@ export const FeatureSectionListDefaults: FeatureSectionListProps = {
       description:
         "Our app provides personalized insights based on your circumstances.",
       image: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+        src: "./assets/placeholder-image.svg",
         alt: "Placeholder image 2",
       },
     },
@@ -81,7 +84,7 @@ export const FeatureSectionListDefaults: FeatureSectionListProps = {
       description:
         "Access reliable and up-to-date information whenever you need it.",
       image: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+        src: "./assets/placeholder-image.svg",
         alt: "Placeholder image 3",
       },
     },

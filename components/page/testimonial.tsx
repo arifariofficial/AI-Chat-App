@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { BiSolidStar } from "react-icons/bi";
 
 type ImageProps = {
@@ -61,9 +62,11 @@ const Testimonial = ({ testimonial }: { testimonial: Testimonial }) => (
     </blockquote>
     <div className="mt-6 flex w-full flex-col gap-3 md:mt-8 md:w-auto md:flex-row md:items-center md:gap-5">
       <div>
-        <img
+        <Image
           src={testimonial.avatar.src}
-          alt={testimonial.avatar.alt}
+          alt={testimonial.avatar.alt!}
+          width={400}
+          height={400}
           className="size-14 min-h-14 min-w-14 rounded-full object-cover"
         />
       </div>
@@ -73,9 +76,11 @@ const Testimonial = ({ testimonial }: { testimonial: Testimonial }) => (
       </div>
       <div className="hidden w-px self-stretch bg-black md:block" />
       <div>
-        <img
+        <Image
           src={testimonial.logo.src}
-          alt={testimonial.logo.alt}
+          alt={testimonial.logo.alt!}
+          width={400}
+          height={400}
           className="max-h-12"
         />
       </div>
@@ -91,13 +96,13 @@ export const TestimonialSectionDefaults: TestimonialSectionProps = {
       numberOfStars: 5,
       quote: '"With the AI app, I felt empowered and informed."',
       avatar: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+        src: "./assets/placeholder-image.svg",
         alt: "Testimonial avatar 1",
       },
       name: "Sami Mäkinen",
       position: "Teacher, Webflow, Inc.",
       logo: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/webflow-logo.svg",
+        src: "./assets/placeholder-image.svg",
         alt: "Webflow logo 1",
       },
     },
@@ -105,13 +110,13 @@ export const TestimonialSectionDefaults: TestimonialSectionProps = {
       numberOfStars: 5,
       quote: '"I never knew I had so many options available!"',
       avatar: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+        src: "./assets/placeholder-image.svg",
         alt: "Testimonial avatar 2",
       },
       name: "Juuso Montonen",
       position: "Guitar Teacher, Kitarakoutsi, Inc.",
       logo: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/webflow-logo.svg",
+        src: "./assets/placeholder-image.svg",
         alt: "Webflow logo 2",
       },
     },

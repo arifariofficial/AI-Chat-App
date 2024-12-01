@@ -2,6 +2,7 @@ import React from "react";
 import { BiEnvelope, BiMap, BiPhone } from "react-icons/bi";
 import { RxChevronRight } from "react-icons/rx";
 import { Button, ButtonProps } from "../ui/button";
+import Image from "next/image";
 
 type ImageProps = {
   src: string;
@@ -82,9 +83,11 @@ export const ContactSection = (props: ContactSectionProps) => {
             href={map.url}
             className="justify-self-end md:w-[321.6px] lg:w-auto"
           >
-            <img
+            <Image
               src={map.image.src}
-              alt={map.image.alt}
+              alt={map.image.alt!}
+              width={400}
+              height={400}
               className="size-full h-[400px] object-cover md:h-[516px]"
             />
           </a>
@@ -131,7 +134,7 @@ export const ContactSectionDefaults: ContactSectionProps = {
   map: {
     url: "#",
     image: {
-      src: "https://relume-assets.s3.us-east-1.amazonaws.com/placeholder-map-image.svg",
+      src: "./assets/placeholder-image.svg",
       alt: "Relume placeholder map image",
     },
   },

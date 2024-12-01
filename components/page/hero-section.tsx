@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button, ButtonProps } from "../ui/button";
 import { Input } from "../ui/input";
+import Image from "next/image";
 
 type ImageProps = {
   src: string;
@@ -71,11 +72,13 @@ export const HeroSection = (props: HeroSectionProps) => {
             </div>
           </div>
         </div>
-        <div>
-          <img
+        <div className="overflow-hidden rounded-lg">
+          <Image
             src={image.src}
-            className="w-full object-cover"
-            alt={image.alt}
+            className="w-full rounded-lg object-cover opacity-80"
+            alt={image.alt!}
+            width={600}
+            height={600}
           />
         </div>
       </div>
@@ -96,7 +99,7 @@ export const HeroSectionDefaults: HeroSectionProps = {
         </p>
         `,
   image: {
-    src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
+    src: "/assets/ai-law.jpg",
     alt: "Relume placeholder image",
   },
 };

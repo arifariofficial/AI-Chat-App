@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type ImageProps = {
   src: string;
   alt?: string;
@@ -27,11 +29,13 @@ export const FeatureSection = (props: FeatureSectionProps) => {
             </h1>
             <p className="md:text-md">{description}</p>
           </div>
-          <div>
-            <img
+          <div className="h-full overflow-hidden rounded-lg border">
+            <Image
               src={image.src}
-              className="w-full object-cover"
-              alt={image.alt}
+              className="h-full w-full object-cover opacity-80"
+              alt={image.alt!}
+              width={400}
+              height={600}
             />
           </div>
         </div>
@@ -45,7 +49,7 @@ export const FeatureSectionDefaults: FeatureSectionProps = {
   description:
     "Our cutting-edge AI app simplifies the process of understanding your rights across various situations. With just a few taps, you can access tailored information that ensures you know exactly what you're entitled to.",
   image: {
-    src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+    src: "/assets/hand-shaking.jpg",
     alt: "Relume placeholder image",
   },
 };
