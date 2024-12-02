@@ -10,7 +10,7 @@ import { TestimonialSection } from "./testimonial";
 
 export default function HomePage() {
   return (
-    <div className="container mx-auto flex max-w-screen-2xl flex-col p-10">
+    <div className="container mx-auto flex max-w-screen-2xl flex-col px-[3%] md:px-[5%]">
       <HeroSection />
       <FeatureSection />
       <FeatureSectionList />

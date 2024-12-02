@@ -238,7 +238,7 @@ export const FooterDefaults: FooterProps = {
   socialMediaLinks: [
     { url: "#", icon: <BiLogoFacebookCircle className="size-6" /> },
     {
-      url: "https://www.linkedin.com/company/sipeai/posts/?feedView=all",
+      url: "https://www.instagram.com/sipe.ai/",
       icon: <BiLogoInstagram className="size-6" />,
     },
     { url: "#", icon: <FaXTwitter className="size-6 p-0.5" /> },
@@ -250,8 +250,8 @@ export const FooterDefaults: FooterProps = {
   ],
   footerText: "© 2024 SIPE. All rights reserved.",
   footerLinks: [
-    { title: "Privacy Policy", url: "/privacy-policy" },
-    { title: "Terms of Service", url: "/terms-of-use" },
-    { title: "Cookies Settings", url: "/cookie-policy" },
+    { title: "Privacy Policy", url: "/privacy" },
+    { title: "Terms of Service", url: "/terms" },
+    { title: "Cookies Settings", url: "/cookie" },
   ],
 };

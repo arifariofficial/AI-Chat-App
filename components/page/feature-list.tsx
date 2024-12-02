@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 
 type ImageProps = {
   src: string;
-  alt?: string;
+  alt: string;
 };
 
 type Props = {
@@ -57,7 +57,7 @@ export const FeatureSectionList = (props: FeatureSectionListProps) => {
 };
 
 export const FeatureSectionListDefaults: FeatureSectionListProps = {
-  heading: "Discover Your Rights with Our AI App",
+  heading: "Unlock the Benefits of Our AI App",
   description:
     "Our AI app simplifies the process of understanding your rights. With just a few taps, you can access crucial information tailored to your specific case.",
   features: [
@@ -67,7 +67,7 @@ export const FeatureSectionListDefaults: FeatureSectionListProps = {
         "Get instant access to vital information at your fingertips.",
       image: {
         src: "./assets/placeholder-image.svg",
-        alt: "Placeholder image 1",
+        alt: "clock",
       },
     },
     {

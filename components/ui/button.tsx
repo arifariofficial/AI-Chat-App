@@ -9,7 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary/90 text-foreground shadow hover:bg-primary",
+        default:
+          "bg-primary/90 text-background font-semibold shadow hover:bg-primary",
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
@@ -67,7 +68,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const Comp = asChild ? Slot : "button";
     // Example of dynamically modifying spanClassName
-    const dynamicSpanClassName = cn("flex items-center", spanClassName);
+    const dynamicSpanClassName = cn(spanClassName);
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}

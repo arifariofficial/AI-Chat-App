@@ -44,8 +44,9 @@ export const Social = () => {
         variant="outline"
         className="w-full bg-background text-foreground"
         onClick={() => onClick("google")}
+        iconRight={<GoogleIcon />}
+        spanClassName="flex"
       >
-        <GoogleIcon />
         <Typography variant="inherit" sx={{ mx: 3 }}>
           Google
         </Typography>
@@ -56,8 +57,9 @@ export const Social = () => {
         variant="outline"
         className="w-full bg-background text-foreground"
         onClick={() => onClick("facebook")}
+        iconRight={<FacebookIcon />}
+        spanClassName="flex"
       >
-        <FacebookIcon />
         <Typography variant="inherit" sx={{ mx: 2 }}>
           Facebook
         </Typography>

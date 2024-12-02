@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { IconBulb, IconClock } from "../ui/icons";
+import React from "react";
 
 type ImageProps = {
   src: string;
@@ -6,7 +8,7 @@ type ImageProps = {
 };
 
 type SubHeadingProps = {
-  icon: ImageProps;
+  icon: React.ReactNode;
   title: string;
   description: string;
 };
@@ -38,14 +40,8 @@ export const BenefitSection = (props: BenefitSectionProps) => {
             <div className="grid grid-cols-1 gap-6 py-2 sm:grid-cols-2">
               {subHeadings.map((subHeading, index) => (
                 <div key={index}>
-                  <div className="mb-3 md:mb-4">
-                    <Image
-                      src={subHeading.icon.src}
-                      className="size-12"
-                      alt={subHeading.icon.alt!}
-                      width={400}
-                      height={400}
-                    />
+                  <div className="mx-auto mb-3 w-full md:mb-4">
+                    {subHeading.icon}
                   </div>
                   <h6 className="text-md mb-3 font-bold leading-[1.4] md:mb-4 md:text-xl">
                     {subHeading.title}
@@ -77,19 +73,13 @@ export const BenefitSectionDefaults: BenefitSectionProps = {
     "Our AI app streamlines the process of understanding your rights, saving you valuable time. With precise information at your fingertips, you can navigate your case with confidence.",
   subHeadings: [
     {
-      icon: {
-        src: "./assets/placeholder-image.svg",
-        alt: "Relume logo 1",
-      },
+      icon: <IconClock />,
       title: "Time-Saving",
       description:
         "Get instant access to essential information without the hassle of extensive research.",
     },
     {
-      icon: {
-        src: "./assets/placeholder-image.svg",
-        alt: "Relume logo 1",
-      },
+      icon: <IconBulb />,
       title: "Accurate Insights",
       description:
         "Rely on our AI for accurate, up-to-date information tailored to your specific situation.",

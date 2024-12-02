@@ -11,7 +11,9 @@ import { useState, useTransition } from "react";
 import { register } from "@/actions/register";
 import {
   Box,
+  Checkbox,
   CircularProgress,
+  FormControlLabel,
   IconButton,
   InputAdornment,
   TextField,
@@ -21,12 +23,14 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { getMessageFromCode } from "@/lib/utils";
 import { FormSucccess } from "@/components/form-success";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export const RegisterForm = () => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -39,6 +43,11 @@ export const RegisterForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+    if (!agreedToTerms) {
+      setError("You must agree to the terms and conditions.");
+      return;
+    }
+
     setError("");
     setSuccess("");
 
@@ -201,6 +210,23 @@ export const RegisterForm = () => {
                 </FormControl>
               </FormItem>
             )}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={agreedToTerms}
+                onChange={(e) => setAgreedToTerms(e.target.checked)}
+              />
+            }
+            label={
+              <div className="text-sm">
+                Hyväksyn{" "}
+                <Link href="/terms" className="text-primary underline">
+                  ehdot ja edellytykset
+                </Link>
+                .
+              </div>
+            }
           />
           <FormError message={error} className="mt-2" />
           <FormSucccess message={success} />

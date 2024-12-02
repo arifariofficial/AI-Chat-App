@@ -11,32 +11,53 @@ pipeline {
         )
     }
 
+    parameters {
+        string(name: 'PROJECT_PATH', defaultValue: '/home/sipeai8/sipe-frontend', description: 'Path to the project')
+        string(name: 'BRANCH', defaultValue: 'ai-sdk', description: 'Branch to deploy')
+    }
+
     environment {
-        PROJECT_PATH = '/home/sipeai8/sipe-frontend'
+        DOCKER_USERNAME = credentials('docker-hub-username')
+        DOCKER_PASSWORD = credentials('docker-hub-password')
     }
 
     stages {
+        stage('Prepare') {
+            steps {
+                script {
+                    echo "Navigating to project path: ${params.PROJECT_PATH}"
+                    sh "cd ${params.PROJECT_PATH}"
+                }
+            }
+        }
+
         stage('Deploy Docker Image') {
             steps {
                 script {
                     sh '''
                         set -e
-                        echo "Navigating to project path: ${PROJECT_PATH}"
-                        cd ${PROJECT_PATH}
-                        echo "Checking out ai-sdk branch"
-                        git checkout ai-sdk
-                        echo "Pulling latest changes"
-                        git pull origin ai-sdk 
+                        echo "Checking out branch: ${BRANCH}"
+                        git fetch origin ${BRANCH}:${BRANCH}
+                        git checkout ${BRANCH}
+                        git pull origin ${BRANCH}
+                        
+                        echo "Logging into Docker"
+                        docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" registry.hub.docker.com
+
                         echo "Stopping existing containers"
                         docker compose down
+
                         echo "Pulling updated Docker images"
                         docker compose pull frontend
+
                         echo "Cleaning up unused Docker resources"
-                        docker system prune -f
-                        docker volume prune -f
-                        docker image prune -f 
+                        docker image prune --filter "label=project=sipe-frontend" -f
+
                         echo "Starting updated containers"
                         docker compose up -d
+
+                        echo "Displaying logs for frontend service"
+                        docker logs sipe-frontend-frontend-1
                     '''
                 }
             }
@@ -46,6 +67,9 @@ pipeline {
     post {
         success {
             echo "Deployment completed successfully."
+            script {
+                sh 'docker ps -a'
+            }
         }
         failure {
             echo "Deployment failed. Check the logs for details."

@@ -3,7 +3,20 @@
 import { useState } from "react";
 import { Button, ButtonProps } from "../ui/button";
 import { Input } from "../ui/input";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
+import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "../ui/form";
+import { IconSpinner } from "../ui/icons";
+import { useRouter } from "next/navigation";
+import TermsModal from "../terms-modal";
 
 type ImageProps = {
   src: string;
@@ -22,29 +35,40 @@ type Props = {
 export type HeroSectionProps = React.ComponentPropsWithoutRef<"section"> &
   Partial<Props>;
 
+const emailSchema = z.object({
+  email: z
+    .string()
+    .email("Please enter a valid email address")
+    .nonempty("Email cannot be empty"),
+});
+
 export const HeroSection = (props: HeroSectionProps) => {
-  const {
-    heading,
-    description,
-    inputPlaceholder,
-    button,
-    termsAndConditions,
-    image,
-  } = {
+  const { heading, description, inputPlaceholder, button, image } = {
     ...HeroSectionDefaults,
     ...props,
   } as Props;
+  const router = useRouter();
 
-  const [emailInput, setEmailInput] = useState<string>("");
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log({
-      emailInput,
-    });
+  const form = useForm({
+    resolver: zodResolver(emailSchema),
+    defaultValues: { email: "" },
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const onSubmit: SubmitHandler<z.infer<typeof emailSchema>> = (data) => {
+    setIsSubmitting(true);
+
+    // Navigate to the register page with the email as a query parameter
+    router.push(`/auth/register?email=${encodeURIComponent(data.email)}`);
   };
 
+  const handleOpenModal = () => setModalOpen(true);
+  const handleCloseModal = () => setModalOpen(false);
+
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="relative px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="md:mb-18 mb-12 grid grid-cols-1 items-start gap-x-12 gap-y-5 md:grid-cols-2 lg:mb-20 lg:gap-x-20 lg:gap-y-16">
           <h1 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
@@ -53,35 +77,62 @@ export const HeroSection = (props: HeroSectionProps) => {
           <div>
             <p className="md:text-md">{description}</p>
             <div className="mt-6 w-full max-w-sm md:mt-8">
-              <form
-                className="rb-4 mb-4 grid max-w-sm grid-cols-1 gap-y-3 sm:grid-cols-[1fr_max-content] sm:gap-4"
-                onSubmit={handleSubmit}
-              >
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder={inputPlaceholder}
-                  value={emailInput}
-                  onChange={(e) => setEmailInput(e.target.value)}
-                />
-                <Button {...button} variant="outline">
-                  {button.title}
-                </Button>
-              </form>
-              <div dangerouslySetInnerHTML={{ __html: termsAndConditions }} />
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="mb-2 grid max-w-sm grid-cols-1 gap-y-3 sm:grid-cols-[1fr_max-content] sm:gap-4"
+                >
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder={inputPlaceholder}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    variant="outline"
+                  >
+                    {isSubmitting ? <IconSpinner /> : button.title}
+                  </Button>
+                </form>
+              </Form>
+              <div className="text-xs">
+                By clicking Sign Up you're confirming that you agree with our{" "}
+                <button
+                  className="m-0 inline p-0 align-baseline text-inherit underline hover:no-underline focus:outline-none"
+                  onClick={handleOpenModal} // Open the modal
+                >
+                  Terms and Conditions
+                </button>
+                .
+              </div>
             </div>
           </div>
         </div>
         <div className="overflow-hidden rounded-lg">
           <Image
             src={image.src}
-            className="w-full rounded-lg object-cover opacity-80"
+            className="w-full rounded-lg object-cover opacity-90"
             alt={image.alt!}
             width={600}
             height={600}
           />
         </div>
       </div>
+      {/* Modal */}
+      <TermsModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </section>
   );
 };
@@ -99,7 +150,7 @@ export const HeroSectionDefaults: HeroSectionProps = {
         </p>
         `,
   image: {
-    src: "/assets/ai-law.jpg",
-    alt: "Relume placeholder image",
+    src: "/assets/family-legal-advice.jpg",
+    alt: "Family Legal Advice",
   },
 };

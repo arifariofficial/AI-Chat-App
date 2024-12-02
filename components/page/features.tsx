@@ -29,13 +29,13 @@ export const FeatureSection = (props: FeatureSectionProps) => {
             </h1>
             <p className="md:text-md">{description}</p>
           </div>
-          <div className="h-full overflow-hidden rounded-lg border">
+          <div className="relative mx-auto flex h-[400px] w-full max-w-[400px] items-center justify-center overflow-hidden rounded-lg border">
             <Image
               src={image.src}
-              className="h-full w-full object-cover opacity-80"
-              alt={image.alt!}
+              className="absolute left-0 top-0 h-full w-full object-cover"
+              alt={image.alt || "Image"}
               width={400}
-              height={600}
+              height={400}
             />
           </div>
         </div>
@@ -45,7 +45,7 @@ export const FeatureSection = (props: FeatureSectionProps) => {
 };
 
 export const FeatureSectionDefaults: FeatureSectionProps = {
-  heading: "Empower Yourself: Discover Your Rights with Our Innovative AI App",
+  heading: "Discover Your Rights with Our Innovative AI App",
   description:
     "Our cutting-edge AI app simplifies the process of understanding your rights across various situations. With just a few taps, you can access tailored information that ensures you know exactly what you're entitled to.",
   image: {

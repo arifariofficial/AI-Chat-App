@@ -1,4 +1,4 @@
-import Meista from "@/components/meista/meista";
+import { AboutUsPage } from "@/components/about-us/about-us";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,6 +8,6 @@ export const metadata: Metadata = {
 };
 
 const MeistaSivu = () => {
-  return <Meista />;
+  return <AboutUsPage />;
 };
 export default MeistaSivu;
