@@ -61,7 +61,7 @@ export function ModelSelection({ setShowPromptModal }: ModelSelectionProps) {
           role="combobox"
           aria-expanded={open}
           className="flex w-[200px] items-center justify-between border px-1 font-bold"
-          spanClassName="justify-between  w-full"
+          spanClassName="justify-between  w-full flex flex-row"
         >
           {value
             ? models.find((model) => model.value === value)?.label

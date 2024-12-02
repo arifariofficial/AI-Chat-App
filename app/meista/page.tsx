@@ -1,4 +1,5 @@
 import { AboutUsPage } from "@/components/about-us/about-us";
+import { Footer } from "@/components/footer";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,6 +9,11 @@ export const metadata: Metadata = {
 };
 
 const MeistaSivu = () => {
-  return <AboutUsPage />;
+  return (
+    <div>
+      <AboutUsPage />
+      <Footer />
+    </div>
+  );
 };
 export default MeistaSivu;
