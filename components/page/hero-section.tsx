@@ -109,7 +109,8 @@ export const HeroSection = (props: HeroSectionProps) => {
                 </form>
               </Form>
               <div className="text-xs">
-                By clicking Sign Up you're confirming that you agree with our{" "}
+                By clicking Sign Up you&apos;re confirming that you agree with
+                our{" "}
                 <button
                   className="m-0 inline p-0 align-baseline text-inherit underline hover:no-underline focus:outline-none"
                   onClick={handleOpenModal} // Open the modal

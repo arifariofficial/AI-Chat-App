@@ -64,12 +64,12 @@ const PrivacyPolicy = () => {
       <section className="mb-6">
         <h2 className="mb-3 text-2xl font-semibold">3. Data Security</h2>
         <p>
-          Your data's security is our priority. We use industry-standard
+          Your data&apos;s security is our priority. We use industry-standard
           encryption and secure storage solutions to protect your information
           from unauthorized access, alteration, or disclosure.
         </p>
         <p className="mt-2">
-          However, please note that no online platform can guarantee 100%
+          However, please note that no online platform can guarantee 100&#37;
           security. We continuously strive to improve our security practices.
         </p>
       </section>

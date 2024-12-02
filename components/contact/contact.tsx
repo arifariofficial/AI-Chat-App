@@ -47,6 +47,8 @@ export default function ContactForm() {
         message: "",
       });
     } catch (error) {
+      // Handle form submission error
+      console.error("Failed to send message:", error);
       // Display error toast
       toast({
         title: "Error",
@@ -62,8 +64,8 @@ export default function ContactForm() {
     <div className="mx-auto mt-10 max-w-lg">
       <h2 className="mb-6 text-center text-3xl font-bold">Contact Us</h2>
       <p className="mb-8 text-center text-gray-600">
-        We'd love to hear from you. Fill out the form below and we’ll get back
-        to you as soon as possible.
+        We&apos;d love to hear from you. Fill out the form below and we’ll get
+        back to you as soon as possible.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-6">
