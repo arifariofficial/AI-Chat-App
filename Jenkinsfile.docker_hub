@@ -17,18 +17,21 @@ pipeline {
         stage('Deploy Docker Image') {
             steps {
                 script {
-                    sh '''
-                        set -e
-                        cd ${PROJECT_PATH}
-                        git checkout ai-sdk
-                        git pull origin ai-sdk 
-                        docker compose down
-                        docker compose pull frontend
-                        docker system prune -f
-                        docker volume prune -f
-                        docker image prune -f 
-                        docker compose up -d
-                    '''
+                    withCredentials([usernamePassword(credentialsId: 'fc5b7186-e4b3-484d-afd4-be43b7ddecae', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                        sh '''
+                            set -e
+                            cd ${PROJECT_PATH}
+                            git config pull.rebase false  # Set default pull strategy to merge
+                            git checkout ai-sdk
+                            git pull https://${GIT_USERNAME}:${GIT_PASSWORD}@gitlab.com/sipe3/sipe-frontend.git ai-sdk
+                            docker compose down
+                            docker compose pull frontend
+                            docker system prune -f
+                            docker volume prune -f
+                            docker image prune -f
+                            docker compose up -d
+                        '''
+                    }
                 }
             }
         }
