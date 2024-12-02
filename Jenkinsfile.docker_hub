@@ -11,10 +11,6 @@ pipeline {
         )
     }
 
-    parameters {
-        string(name: 'PROJECT_PATH', defaultValue: '/home/sipeai8/sipe-frontend', description: 'Path to the project')
-        string(name: 'BRANCH', defaultValue: 'ai-sdk', description: 'Branch to deploy')
-    }
 
     stages {
         stage('Prepare') {
