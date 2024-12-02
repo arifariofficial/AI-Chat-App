@@ -24,17 +24,11 @@ export type FaqSectionProps = React.ComponentPropsWithoutRef<"section"> &
   Partial<Props>;
 
 export const FaqSection = (props: FaqSectionProps) => {
-  const {
-    heading,
-    description,
-    questions,
-    footerHeading,
-    footerDescription,
-    button,
-  } = {
-    ...FaqSectionDefaults,
-    ...props,
-  } as Props;
+  const { heading, description, questions, footerHeading, footerDescription } =
+    {
+      ...FaqSectionDefaults,
+      ...props,
+    } as Props;
   return (
     <section id="relume" className="py-16 md:py-24 lg:py-28">
       <div className="container">
@@ -71,7 +65,9 @@ export const FaqSection = (props: FaqSectionProps) => {
           </h4>
           <p className="md:text-md">{footerDescription}</p>
           <div className="mt-6 md:mt-8">
-            <Button {...button}>{button.title}</Button>
+            <Button asChild variant="outline">
+              <a href="/contact">Contact</a>
+            </Button>
           </div>
         </div>
       </div>

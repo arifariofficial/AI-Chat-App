@@ -9,6 +9,11 @@ interface NavItemsMiddleProps {
 const NavItemsMiddle = ({ className }: NavItemsMiddleProps) => {
   return (
     <div className={cn(className, "flex w-full justify-center text-lg")}>
+      <Link href={`/`} className="h-full">
+        <Button variant="nav" className="hidden size-full sm:flex">
+          <p className="text-base font-bold">Etusivu</p>
+        </Button>
+      </Link>
       <Link href={`/chat`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
           <p className="text-base font-bold">SipeChat</p>
