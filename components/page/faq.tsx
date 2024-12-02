@@ -36,7 +36,7 @@ export const FaqSection = (props: FaqSectionProps) => {
     ...props,
   } as Props;
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section id="relume" className="py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="md:mb-18 mb-12 lg:mb-20">
           <div className="mx-auto w-full max-w-lg text-center">
@@ -54,7 +54,7 @@ export const FaqSection = (props: FaqSectionProps) => {
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className="border-border-primary border px-5 md:px-6"
+              className="rounded-lg border border-border/60 px-5 md:px-6"
             >
               <AccordionTrigger className="md:text-md md:py-5 [&[data-state=open]>svg]:rotate-180">
                 {question.title}

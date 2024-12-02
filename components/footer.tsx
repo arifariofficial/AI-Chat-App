@@ -204,9 +204,9 @@ export const FooterDefaults: FooterProps = {
     {
       title: "Legal",
       links: [
-        { title: "Privacy Policy", url: "/privacy-policy" },
-        { title: "Terms of Use", url: "/terms-of-use" },
-        { title: "Cookie Policy", url: "/cookie-policy" },
+        { title: "Privacy Policy", url: "/privacy" },
+        { title: "Terms of Use", url: "/terms" },
+        { title: "Cookie Policy", url: "/cookie" },
         { title: "User Agreement", url: "/user-aggrement" },
         { title: "Site Map", url: "#" },
       ],
@@ -231,7 +231,7 @@ export const FooterDefaults: FooterProps = {
         { title: "Call Us Today", url: "#" },
         { title: "Visit Our Office ", url: "#" },
         { title: "Feedback Form", url: "/feedback" },
-        { title: "Help Center", url: "/help-center" },
+        { title: "Help Center", url: "/help" },
       ],
     },
   ],
@@ -248,7 +248,7 @@ export const FooterDefaults: FooterProps = {
     },
     { url: "#", icon: <BiLogoYoutube className="size-6" /> },
   ],
-  footerText: "© 2024 SIPE. All rights reserved.",
+  footerText: "© 2024 SipeAI. All rights reserved.",
   footerLinks: [
     { title: "Privacy Policy", url: "/privacy" },
     { title: "Terms of Service", url: "/terms" },
