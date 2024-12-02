@@ -25,9 +25,9 @@ type CategoryKey = keyof typeof articlesByCategory;
 export default async function CategoryPage({
   params,
 }: {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 }) {
-  const { category } = await params; // Await the params object
+  const { category } = await params;
 
   // Validate the category
   if (!Object.keys(articlesByCategory).includes(category)) {

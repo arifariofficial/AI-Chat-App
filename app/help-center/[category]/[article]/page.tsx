@@ -40,9 +40,9 @@ type ArticleKey = keyof typeof articleContent;
 export default async function ArticlePage({
   params,
 }: {
-  params: { category: string; article: string };
+  params: Promise<{ category: string; article: string }>;
 }) {
-  const { article } = await params; // Await the params object
+  const { article } = await params; // Await the params promise
 
   // Validate the article
   if (!articleContent[article as ArticleKey]) {

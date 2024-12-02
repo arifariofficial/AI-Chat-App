@@ -16,11 +16,6 @@ pipeline {
         string(name: 'BRANCH', defaultValue: 'ai-sdk', description: 'Branch to deploy')
     }
 
-    environment {
-        DOCKER_USERNAME = credentials('docker-hub-username')
-        DOCKER_PASSWORD = credentials('docker-hub-password')
-    }
-
     stages {
         stage('Prepare') {
             steps {
@@ -40,9 +35,9 @@ pipeline {
                         git fetch origin ${BRANCH}:${BRANCH}
                         git checkout ${BRANCH}
                         git pull origin ${BRANCH}
-                        
-                        echo "Logging into Docker"
-                        docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" registry.hub.docker.com
+
+                        echo "Logging into Docker using Jenkins-managed credentials"
+                        docker login registry.hub.docker.com
 
                         echo "Stopping existing containers"
                         docker compose down
