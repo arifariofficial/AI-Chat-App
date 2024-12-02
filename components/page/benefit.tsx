@@ -2,6 +2,31 @@ import Image from "next/image";
 import { IconBulb, IconClock } from "../ui/icons";
 import React from "react";
 
+const BenefitSectionDefaults: BenefitSectionProps = {
+  heading:
+    "Discover the transformative benefits of our AI-powered rights information app.",
+  description:
+    "Our AI app streamlines the process of understanding your rights, saving you valuable time. With precise information at your fingertips, you can navigate your case with confidence.",
+  subHeadings: [
+    {
+      icon: <IconClock />,
+      title: "Time-Saving",
+      description:
+        "Get instant access to essential information without the hassle of extensive research.",
+    },
+    {
+      icon: <IconBulb />,
+      title: "Accurate Insights",
+      description:
+        "Rely on our AI for accurate, up-to-date information tailored to your specific situation.",
+    },
+  ],
+  image: {
+    src: "/assets/benefit-1.webp",
+    alt: "Secure family",
+  },
+};
+
 type ImageProps = {
   src: string;
   alt?: string;
@@ -20,7 +45,7 @@ type Props = {
   image: ImageProps;
 };
 
-export type BenefitSectionProps = React.ComponentPropsWithoutRef<"section"> &
+type BenefitSectionProps = React.ComponentPropsWithoutRef<"section"> &
   Partial<Props>;
 
 export const BenefitSection = (props: BenefitSectionProps) => {
@@ -51,42 +76,18 @@ export const BenefitSection = (props: BenefitSectionProps) => {
               ))}
             </div>
           </div>
-          <div className="h-full overflow-hidden rounded-lg">
+          <div className="overflow-hidden rounded-lg">
             <Image
               src={image.src}
-              className="h-full w-full scale-[1.4] object-cover opacity-60"
+              className="size-full rounded-lg object-cover opacity-40"
               alt={image.alt!}
-              width={720}
-              height={480}
+              width={700}
+              height={700}
+              priority
             />
           </div>
         </div>
       </div>
     </section>
   );
-};
-
-export const BenefitSectionDefaults: BenefitSectionProps = {
-  heading:
-    "Discover the transformative benefits of our AI-powered rights information app.",
-  description:
-    "Our AI app streamlines the process of understanding your rights, saving you valuable time. With precise information at your fingertips, you can navigate your case with confidence.",
-  subHeadings: [
-    {
-      icon: <IconClock />,
-      title: "Time-Saving",
-      description:
-        "Get instant access to essential information without the hassle of extensive research.",
-    },
-    {
-      icon: <IconBulb />,
-      title: "Accurate Insights",
-      description:
-        "Rely on our AI for accurate, up-to-date information tailored to your specific situation.",
-    },
-  ],
-  image: {
-    src: "/assets/secure-family.jpg",
-    alt: "Secure family",
-  },
 };

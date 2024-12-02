@@ -25,16 +25,17 @@ export function SidebarMobile({ children, className }: SidebarMobileProps) {
           className={cn("focus:border-none sm:hidden", className)}
         >
           <IconSidebar className="size-7" />
-          <span className="sr-only">Vaihda sivupalkki</span>
+          <span className="sr-only">Toggle the sidebar</span>
         </Button>
       </SheetTrigger>
       <SheetContent
         side="left"
         className="inset-y-0 flex h-auto flex-col p-0 sm:hidden"
+        tabIndex={-1} // Prevent focusing on the first element
       >
-        <DialogTitle className="sr-only">Mobiiilinavigointivalikko</DialogTitle>
+        <DialogTitle className="sr-only">Mobile navigation menu</DialogTitle>
         <DialogDescription className="sr-only">
-          Siirry valikkovaihtoehtojen läpi käyttämällä painikkeita
+          Navigate through the menu options using the buttons.
         </DialogDescription>
         {children}
       </SheetContent>

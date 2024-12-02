@@ -66,7 +66,7 @@ export const FaqSection = (props: FaqSectionProps) => {
           <p className="md:text-md">{footerDescription}</p>
           <div className="mt-6 md:mt-8">
             <Button asChild variant="outline">
-              <a href="/contact">Contact</a>
+              <a href="/contact">Contact Us</a>
             </Button>
           </div>
         </div>

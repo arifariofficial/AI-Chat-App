@@ -36,9 +36,7 @@ export function SidebarList() {
           </div>
         ) : (
           <div className="p-8 text-center">
-            <p className="text-sm text-muted-foreground">
-              Ei keskusteluhistoriaa
-            </p>
+            <p className="text-sm text-muted-foreground">NO Chat History</p>
           </div>
         )}
       </div>

@@ -1,5 +1,15 @@
 import Image from "next/image";
 
+const FeatureSectionDefaults: FeatureSectionProps = {
+  heading: "Discover Your Rights with Our Innovative AI App",
+  description:
+    "Our cutting-edge AI app simplifies the process of understanding your rights across various situations. With just a few taps, you can access tailored information that ensures you know exactly what you're entitled to.",
+  image: {
+    src: "/assets/ai-network-1.jpg",
+    alt: "Relume placeholder image",
+  },
+};
+
 type ImageProps = {
   src: string;
   alt?: string;
@@ -11,7 +21,7 @@ type Props = {
   image: ImageProps;
 };
 
-export type FeatureSectionProps = React.ComponentPropsWithoutRef<"section"> &
+type FeatureSectionProps = React.ComponentPropsWithoutRef<"section"> &
   Partial<Props>;
 
 export const FeatureSection = (props: FeatureSectionProps) => {
@@ -29,27 +39,18 @@ export const FeatureSection = (props: FeatureSectionProps) => {
             </h1>
             <p className="md:text-md">{description}</p>
           </div>
-          <div className="relative mx-auto flex h-[400px] w-full max-w-[400px] items-center justify-center overflow-hidden rounded-lg border">
+          <div className="relative mx-auto flex h-[400px] w-full max-w-[400px] items-center justify-center overflow-hidden rounded-lg">
             <Image
               src={image.src}
-              className="absolute left-0 top-0 h-full w-full object-cover"
+              className="absolute left-0 top-0 h-full w-auto object-cover opacity-70"
               alt={image.alt || "Image"}
-              width={400}
-              height={400}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority
             />
           </div>
         </div>
       </div>
     </section>
   );
-};
-
-export const FeatureSectionDefaults: FeatureSectionProps = {
-  heading: "Discover Your Rights with Our Innovative AI App",
-  description:
-    "Our cutting-edge AI app simplifies the process of understanding your rights across various situations. With just a few taps, you can access tailored information that ensures you know exactly what you're entitled to.",
-  image: {
-    src: "/assets/hand-shaking.jpg",
-    alt: "Relume placeholder image",
-  },
 };

@@ -72,10 +72,9 @@ export function ChatShareDialog() {
     <Dialog open={shareDialogOpen} onOpenChange={setShareDialogOpen}>
       <DialogContent className="w-[400px] rounded-md sm:w-[700px]">
         <DialogHeader>
-          <DialogTitle>Jaa linkki keskusteluun</DialogTitle>
+          <DialogTitle>Share a link to the chat</DialogTitle>
           <DialogDescription>
-            Kuka tahansa, jolla on URL-osoite, pystyy katsomaan jaettua
-            keskustelua
+            Anyone with the URL can view the shared discussion.
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-1 rounded-md border p-4 text-sm">
@@ -93,10 +92,10 @@ export function ChatShareDialog() {
             {isSharePending ? (
               <>
                 <IconSpinner className="mr-2 animate-spin" />
-                Kopioidaan...
+                Copying...
               </>
             ) : (
-              <>Kopioi linkki</>
+              <>Copy Link</>
             )}
           </Button>
         </DialogFooter>

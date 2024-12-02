@@ -17,6 +17,25 @@ import {
 import { IconSpinner } from "../ui/icons";
 import { useRouter } from "next/navigation";
 import TermsModal from "../terms-modal";
+import { Session } from "next-auth";
+
+const HeroSectionDefaults: HeroSectionProps = {
+  heading: "Empowering You with Knowledge of Your Rights",
+  description:
+    "At our startup, we are dedicated to providing you with essential information about your rights in various situations. Discover how our innovative AI app can guide you through your specific case and ensure you receive the support you deserve.",
+  inputPlaceholder: "Enter your email",
+  button: { title: "Sign up" },
+  termsAndConditions: `
+        <p class='text-xs'>
+          By clicking Sign Up you're confirming that you agree with our
+          <a href='#' class='underline'>Terms and Conditions</a>.
+        </p>
+        `,
+  image: {
+    src: "/assets/family-legal-advice.jpg",
+    alt: "Family Legal Advice",
+  },
+};
 
 type ImageProps = {
   src: string;
@@ -30,35 +49,55 @@ type Props = {
   button: ButtonProps;
   termsAndConditions: string;
   image: ImageProps;
+  session: Session | null;
 };
 
-export type HeroSectionProps = React.ComponentPropsWithoutRef<"section"> &
+type HeroSectionProps = React.ComponentPropsWithoutRef<"section"> &
   Partial<Props>;
 
-const emailSchema = z.object({
-  email: z
-    .string()
-    .email("Please enter a valid email address")
-    .nonempty("Email cannot be empty"),
-});
+// Function to dynamically create email validation schema
+const createEmailSchema = (sessionEmail: string | null) =>
+  z.object({
+    email: z
+      .string()
+      .min(1, "No email entered")
+      .email("Please enter a valid email address")
+      .refine((email) => !sessionEmail || email !== sessionEmail, {
+        message: "You have already signed up with this email.",
+      }),
+  });
 
 export const HeroSection = (props: HeroSectionProps) => {
-  const { heading, description, inputPlaceholder, button, image } = {
+  const { heading, description, inputPlaceholder, button, image, session } = {
     ...HeroSectionDefaults,
     ...props,
   } as Props;
+
+  const sessionEmail = session?.user?.email || null;
+
   const router = useRouter();
 
   const form = useForm({
-    resolver: zodResolver(emailSchema),
+    resolver: zodResolver(createEmailSchema(sessionEmail)),
     defaultValues: { email: "" },
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const onSubmit: SubmitHandler<z.infer<typeof emailSchema>> = (data) => {
+  const onSubmit: SubmitHandler<
+    z.infer<ReturnType<typeof createEmailSchema>>
+  > = (data) => {
     setIsSubmitting(true);
+
+    if (session) {
+      // If user is already logged in, alert the user and close the modal
+      alert(
+        "You are already logged in. Please sign out to register witha new email.",
+      );
+      setIsSubmitting(false);
+      return;
+    }
 
     // Navigate to the register page with the email as a query parameter
     router.push(`/auth/register?email=${encodeURIComponent(data.email)}`);
@@ -122,13 +161,14 @@ export const HeroSection = (props: HeroSectionProps) => {
             </div>
           </div>
         </div>
-        <div className="overflow-hidden rounded-lg">
+        <div className="w-full overflow-hidden rounded-lg">
           <Image
             src={image.src}
-            className="w-full rounded-lg object-cover opacity-90"
+            className="w-full rounded-lg object-cover opacity-80"
             alt={image.alt!}
             width={600}
             height={600}
+            priority
           />
         </div>
       </div>
@@ -136,22 +176,4 @@ export const HeroSection = (props: HeroSectionProps) => {
       <TermsModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </section>
   );
-};
-
-export const HeroSectionDefaults: HeroSectionProps = {
-  heading: "Empowering You with Knowledge of Your Rights",
-  description:
-    "At our startup, we are dedicated to providing you with essential information about your rights in various situations. Discover how our innovative AI app can guide you through your specific case and ensure you receive the support you deserve.",
-  inputPlaceholder: "Enter your email",
-  button: { title: "Sign up" },
-  termsAndConditions: `
-        <p class='text-xs'>
-          By clicking Sign Up you're confirming that you agree with our
-          <a href='#' class='underline'>Terms and Conditions</a>.
-        </p>
-        `,
-  image: {
-    src: "/assets/family-legal-advice.jpg",
-    alt: "Family Legal Advice",
-  },
 };

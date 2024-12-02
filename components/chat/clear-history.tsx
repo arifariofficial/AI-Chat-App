@@ -38,19 +38,18 @@ export function ClearHistory({
       <AlertDialogTrigger asChild className="flex w-full self-center">
         <Button variant="outline" disabled={!isEnabled || isPending}>
           {isPending && <IconSpinner className="mr-2" />}
-          Tyhjennä historia
+          Delete Chat History
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className="w-[300px] rounded-lg">
         <AlertDialogHeader>
-          <AlertDialogTitle>Oletko aivan varma?</AlertDialogTitle>
+          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            Tämä poistaa keskusteluviestisi pysyvästi ja poistaa tietosi
-            palvelimiltamme.
+            This will permanently delete your conversation message.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={isPending}>Peruuta</AlertDialogCancel>
+          <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>
           <AlertDialogAction
             disabled={isPending}
             variant="outline"
@@ -64,12 +63,12 @@ export function ClearHistory({
                 }
                 setOpen(false);
                 // Ensure navigation and chat loading happen sequentially
-                router.push("/new");
+                router.push("/chat");
               });
             }}
           >
             {isPending && <IconSpinner className="mr-2 animate-spin" />}
-            Poista
+            Delete
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

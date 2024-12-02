@@ -11,7 +11,7 @@ const NavItemsMiddle = ({ className }: NavItemsMiddleProps) => {
     <div className={cn(className, "flex w-full justify-center text-lg")}>
       <Link href={`/`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
-          <p className="text-base font-bold">Etusivu</p>
+          <p className="text-base font-bold">Home</p>
         </Button>
       </Link>
       <Link href={`/chat`} className="h-full">
@@ -21,12 +21,12 @@ const NavItemsMiddle = ({ className }: NavItemsMiddleProps) => {
       </Link>
       <Link href={`/meista`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
-          <p className="text-base font-bold">Meistä</p>
+          <p className="text-base font-bold">About Us</p>
         </Button>
       </Link>
       <Link href={`/yhteystiedot`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
-          <p className="text-base font-bold">Yhteystiedot</p>
+          <p className="text-base font-bold">Contact</p>
         </Button>
       </Link>
     </div>

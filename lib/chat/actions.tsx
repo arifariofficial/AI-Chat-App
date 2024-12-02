@@ -37,6 +37,7 @@ async function submitUserMessage({
 
   const aiState = getMutableAIState<typeof AI>();
 
+  // Update AI State
   if (editAIState) {
     aiState.update((currentAIState) => {
       const currentMessages = currentAIState.messages;
@@ -218,11 +219,10 @@ export const AI = createAI<AIState, UIState>({
 
       if (session?.user) {
         const aiState = getAIState();
-        if (!aiState || !aiState.chatId) {
-          console.warn(
-            "AI state or chatId is missing, initializing default state.",
-          );
-          return []; // Fallback to empty UIState
+
+        console.log("Initializing UIState with AIState:", aiState);
+        if (!aiState?.chatId) {
+          console.warn("No chatId found in AI state.");
         }
 
         if (aiState) {

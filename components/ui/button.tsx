@@ -68,7 +68,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const Comp = asChild ? Slot : "button";
     // Example of dynamically modifying spanClassName
-    const dynamicSpanClassName = cn(spanClassName);
+    const dynamicSpanClassName = cn(
+      "flex flex-row items-center",
+      spanClassName,
+    );
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}

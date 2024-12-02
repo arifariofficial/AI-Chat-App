@@ -2,15 +2,16 @@
 
 import * as React from "react";
 import { useTheme } from "next-themes";
-import { Button } from "./ui/button";
 import { IconMoon, IconSun } from "./ui/icons";
 import { cn } from "@/lib/utils";
+import MyButton from "./my-button";
 
 interface ThemeToggleProps {
   className?: string;
   style?: React.CSSProperties;
   iconClassName?: string;
   buttonClassName?: string;
+  spanClassName?: string;
   buttonText?: string;
   variant?:
     | "nav"
@@ -27,6 +28,7 @@ export function ThemeToggle({
   buttonClassName,
   variant,
   iconClassName,
+  spanClassName,
   buttonText,
   style,
 }: ThemeToggleProps) {
@@ -44,25 +46,26 @@ export function ThemeToggle({
   }
 
   return (
-    <Button
+    <MyButton
       style={style}
       className={cn(buttonClassName)}
+      spanClassName={spanClassName}
       variant={variant}
+      iconRight={
+        <div>
+          {resolvedTheme === "dark" ? (
+            <IconMoon className={cn("transition-all", iconClassName)} />
+          ) : (
+            <IconSun className={cn("transition-all", iconClassName)} />
+          )}
+          <span className="sr-only">Toggle theme</span>
+        </div>
+      }
       onClick={() => {
         setTheme(resolvedTheme === "light" ? "dark" : "light");
       }}
     >
-      <div className="flex flex-row items-center">
-        {buttonText && <p>{buttonText}</p>}
-        <div>
-          {resolvedTheme === "dark" ? (
-            <IconMoon className={cn(iconClassName, "size-7 transition-all")} />
-          ) : (
-            <IconSun className={cn(iconClassName, "size-7 transition-all")} />
-          )}
-          <span className="sr-only">Toggle theme</span>
-        </div>
-      </div>
-    </Button>
+      {buttonText && <p>{buttonText}</p>}
+    </MyButton>
   );
 }

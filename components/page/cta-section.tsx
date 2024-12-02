@@ -1,19 +1,38 @@
 import Image from "next/image";
 import { Button, ButtonProps } from "../ui/button";
+import Link from "next/link";
+
+const CtaSectionDefaults: CtaSectionProps = {
+  heading: "Empower Yourself with Our App",
+  description:
+    "Discover your rights and benefits effortlessly. Try our app for instant access to vital information.",
+  buttons: [
+    { title: "Try SipeChat", variant: "outline", href: "/chat" },
+    { title: "Learn More", variant: "outline", href: "/more" },
+  ],
+  image: {
+    src: "/assets/car-accident.jpg",
+    alt: "Relume placeholder image",
+  },
+};
 
 type ImageProps = {
   src: string;
   alt?: string;
 };
 
+interface ButtonProp extends ButtonProps {
+  href?: string;
+}
+
 type Props = {
   heading: string;
   description: string;
-  buttons: ButtonProps[];
+  buttons: ButtonProp[];
   image: ImageProps;
 };
 
-export type CtaSectionProps = React.ComponentPropsWithoutRef<"section"> &
+type CtaSectionProps = React.ComponentPropsWithoutRef<"section"> &
   Partial<Props>;
 
 export const CtaSection = (props: CtaSectionProps) => {
@@ -32,16 +51,16 @@ export const CtaSection = (props: CtaSectionProps) => {
             <p className="md:text-md">{description}</p>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
               {buttons.map((button, index) => (
-                <Button key={index} {...button}>
-                  {button.title}
-                </Button>
+                <Link href={`${button.href}`} key={index}>
+                  <Button {...button}>{button.title}</Button>
+                </Link>
               ))}
             </div>
           </div>
-          <div className="flex items-center justify-center overflow-hidden rounded-lg p-1">
+          <div className="flex items-center justify-center overflow-hidden rounded-lg">
             <Image
               src={image.src}
-              className="m-1 h-full w-full scale-[1.2] object-cover p-2 opacity-70"
+              className="h-full w-auto scale-[1.2] object-cover opacity-70"
               alt={image.alt!}
               width={720}
               height={480}
@@ -51,18 +70,4 @@ export const CtaSection = (props: CtaSectionProps) => {
       </div>
     </section>
   );
-};
-
-export const CtaSectionDefaults: CtaSectionProps = {
-  heading: "Empower Yourself with Our App",
-  description:
-    "Discover your rights and benefits effortlessly. Try our app for instant access to vital information.",
-  buttons: [
-    { title: "Try SipeChat", variant: "outline" },
-    { title: "Learn More", variant: "outline" },
-  ],
-  image: {
-    src: "/assets/car-accident.jpg",
-    alt: "Relume placeholder image",
-  },
 };

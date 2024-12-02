@@ -13,6 +13,9 @@ interface MyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   tooltipPlacement?: "top" | "bottom" | "left" | "right";
   tooltipText?: string;
+  iconLeft?: React.ReactNode;
+  iconRight?: React.ReactNode;
+  spanClassName?: string;
   variant?:
     | "default"
     | "destructive"
@@ -31,13 +34,23 @@ const MyButton: React.FC<MyButtonProps> = ({
   className,
   tooltipPlacement,
   variant,
+  iconLeft,
+  iconRight,
+  spanClassName,
   ...props
 }) => {
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant={variant} {...props} className={cn(className)}>
+          <Button
+            variant={variant}
+            {...props}
+            className={cn(className)}
+            iconLeft={iconLeft}
+            iconRight={iconRight}
+            spanClassName={spanClassName}
+          >
             {children}
           </Button>
         </TooltipTrigger>

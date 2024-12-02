@@ -35,6 +35,7 @@ export async function getChats(userId?: string | null): Promise<Chat[]> {
 
 // Function to retrieve a specific chat by ID and user ID
 export async function getChat(id: string, userId: string) {
+  console.log(`Fetching chat ${id} for user ${userId}`);
   try {
     // Fetch the chat from the database
     return await fetchChatFromDB(id, userId);
@@ -47,22 +48,14 @@ export async function getChat(id: string, userId: string) {
 // Helper function to fetch a chat from the database
 async function fetchChatFromDB(id: string, userId: string) {
   try {
-    // Find the chat in the database, including its messages
+    // Find the chat by ID and ensure it belongs to the correct user
     const chat = await prisma.chat.findUnique({
-      where: { id },
+      where: { id, userId }, // Use a composite unique key (id + userId)
       include: { messages: true },
     });
 
     if (!chat) {
-      console.log(`No chat found with ID ${id} in the database.`);
-      return null;
-    }
-
-    // Ensure the chat belongs to the requesting user
-    if (chat.userId !== userId) {
-      console.log(
-        `User ID mismatch: chat user ID ${chat.userId}, request user ID ${userId}`,
-      );
+      console.log(`No chat found with ID ${id} for user ${userId}.`);
       return null;
     }
 

@@ -11,6 +11,7 @@ import { useState } from "react";
 import { Button, ButtonProps } from "./ui/button";
 import { Input } from "./ui/input";
 import Image from "next/image";
+import { toast } from "./ui/use-toast";
 
 type ImageProps = {
   url?: string;
@@ -72,13 +73,26 @@ export const Footer = (props: FooterProps) => {
   } as Props;
 
   const [emailInput, setEmailInput] = useState<string>("");
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log({
-      emailInput,
-    });
-  };
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (emailInput.trim() === "") {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive", // Use ShadCN's variants (e.g., destructive for errors)
+      });
+      return;
+    }
+
+    toast({
+      title: "Subscribed!",
+      description: "Thank you for subscribing to our newsletter.",
+      variant: "default", // Success variant
+    });
+    setEmailInput(""); // Clear input field
+  };
   return (
     <footer className="md:py-18 px-[5%] py-12 lg:py-20">
       <div className="container">

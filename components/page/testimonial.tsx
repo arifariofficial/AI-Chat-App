@@ -1,6 +1,41 @@
 import Image from "next/image";
 import { BiSolidStar } from "react-icons/bi";
 
+const TestimonialSectionDefaults: TestimonialSectionProps = {
+  heading: "Customer Testimonials",
+  description: "This app transformed my understanding of my rights.",
+  testimonials: [
+    {
+      numberOfStars: 5,
+      quote: '"With the AI app, I felt empowered and informed."',
+      avatar: {
+        src: "/assets/testimonial-1.webp",
+        alt: "Testimonial avatar 1",
+      },
+      name: "Sami Mäkinen",
+      position: "Doctor, GreenLife",
+      logo: {
+        src: "/assets/company-1.webp",
+        alt: "Webflow logo 1",
+      },
+    },
+    {
+      numberOfStars: 5,
+      quote: '"I never knew I had so many options available!"',
+      avatar: {
+        src: "/assets/testimonial-2.webp",
+        alt: "Testimonial avatar 2",
+      },
+      name: "Juuso Montonen",
+      position: "Guitar Teacher, Kitarakoutsi, Inc.",
+      logo: {
+        src: "/assets/company-2.webp",
+        alt: "Webflow logo 2",
+      },
+    },
+  ],
+};
+
 type ImageProps = {
   src: string;
   alt?: string;
@@ -21,8 +56,8 @@ type Props = {
   testimonials: Testimonial[];
 };
 
-export type TestimonialSectionProps =
-  React.ComponentPropsWithoutRef<"section"> & Partial<Props>;
+type TestimonialSectionProps = React.ComponentPropsWithoutRef<"section"> &
+  Partial<Props>;
 
 export const TestimonialSection = (props: TestimonialSectionProps) => {
   const { heading, description, testimonials } = {
@@ -60,14 +95,14 @@ const Testimonial = ({ testimonial }: { testimonial: Testimonial }) => (
     <blockquote className="text-md font-bold leading-[1.4] md:text-xl">
       {testimonial.quote}
     </blockquote>
-    <div className="mt-6 flex w-full flex-col gap-3 md:mt-8 md:w-auto md:flex-row md:items-center md:gap-5">
+    <div className="mt-6 flex w-full flex-col gap-2 md:mt-8 md:w-auto md:flex-row md:items-center">
       <div>
         <Image
           src={testimonial.avatar.src}
           alt={testimonial.avatar.alt!}
           width={400}
           height={400}
-          className="size-14 min-h-14 min-w-14 rounded-full object-cover"
+          className="size-20 min-h-8 min-w-8 rounded-full object-cover"
         />
       </div>
       <div className="mb-4 md:mb-0">
@@ -75,50 +110,15 @@ const Testimonial = ({ testimonial }: { testimonial: Testimonial }) => (
         <p>{testimonial.position}</p>
       </div>
       <div className="hidden w-px self-stretch bg-black md:block" />
-      <div>
+      <div className="relative h-12 w-12 overflow-hidden rounded-full">
         <Image
           src={testimonial.logo.src}
           alt={testimonial.logo.alt!}
-          width={400}
-          height={400}
-          className="max-h-12"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="absolute max-h-12 border"
         />
       </div>
     </div>
   </div>
 );
-
-export const TestimonialSectionDefaults: TestimonialSectionProps = {
-  heading: "Customer testimonials",
-  description: "This app transformed my understanding of my rights.",
-  testimonials: [
-    {
-      numberOfStars: 5,
-      quote: '"With the AI app, I felt empowered and informed."',
-      avatar: {
-        src: "./assets/placeholder-image.svg",
-        alt: "Testimonial avatar 1",
-      },
-      name: "Sami Mäkinen",
-      position: "Teacher, Webflow, Inc.",
-      logo: {
-        src: "./assets/placeholder-image.svg",
-        alt: "Webflow logo 1",
-      },
-    },
-    {
-      numberOfStars: 5,
-      quote: '"I never knew I had so many options available!"',
-      avatar: {
-        src: "./assets/placeholder-image.svg",
-        alt: "Testimonial avatar 2",
-      },
-      name: "Juuso Montonen",
-      position: "Guitar Teacher, Kitarakoutsi, Inc.",
-      logo: {
-        src: "./assets/placeholder-image.svg",
-        alt: "Webflow logo 2",
-      },
-    },
-  ],
-};
