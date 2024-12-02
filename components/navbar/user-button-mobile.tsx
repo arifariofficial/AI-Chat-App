@@ -94,10 +94,10 @@ export default function UserButtonMobile({
                   variant="navMobile"
                   asChild
                   className="flex justify-between px-7"
+                  iconRight={<UserIcon />}
                 >
                   <Link className="" href="/profile">
                     <p className="text-2xl font-bold">Tili</p>
-                    <UserIcon />
                   </Link>
                 </Button>
               </SheetClose>
@@ -110,22 +110,10 @@ export default function UserButtonMobile({
               variant="navMobile"
               asChild
               className="flex justify-between px-7"
-            >
-              <Link className="" href="/chat">
-                <p className="text-2xl font-bold">SipeAI</p>
-                <IconChat />
-              </Link>
-            </Button>
-          </SheetClose>
-          <SheetClose asChild className="h-[60px]">
-            <Button
-              variant="navMobile"
-              asChild
-              className="flex justify-between px-7"
+              iconRight={<IconHome />}
             >
               <Link className="" href="/">
-                <p className="text-2xl font-bold">Etusivu</p>
-                <IconHome />
+                <p className="text-2xl font-bold">Home</p>
               </Link>
             </Button>
           </SheetClose>
@@ -134,10 +122,23 @@ export default function UserButtonMobile({
               variant="navMobile"
               asChild
               className="flex justify-between px-7"
+              iconRight={<IconChat />}
             >
-              <Link className="" href="/meista">
-                <p className="text-2xl font-bold">Meistä</p>
-                <IconAboutUs />
+              <Link className="" href="/chat">
+                <p className="text-2xl font-bold">SipeChat</p>
+              </Link>
+            </Button>
+          </SheetClose>
+
+          <SheetClose asChild className="h-[60px]">
+            <Button
+              variant="navMobile"
+              asChild
+              className="flex justify-between px-7"
+              iconRight={<IconAboutUs />}
+            >
+              <Link className="" href="/about-us">
+                <p className="text-2xl font-bold">About Us</p>
               </Link>
             </Button>
           </SheetClose>
@@ -146,10 +147,10 @@ export default function UserButtonMobile({
               variant="navMobile"
               asChild
               className="flex justify-between px-7"
+              iconRight={<IconContact />}
             >
-              <Link className="" href="/yhteystiedot">
-                <p className="text-2xl font-bold">Yhteystiedot</p>
-                <IconContact />
+              <Link className="" href="/contact">
+                <p className="text-2xl font-bold">Contact</p>
               </Link>
             </Button>
           </SheetClose>
@@ -159,6 +160,7 @@ export default function UserButtonMobile({
               <SheetClose asChild>
                 <SignOutButtonMobile
                   className="flex h-[60px] w-full justify-between px-7"
+                  spanClassName="flex flex-row items-center justify-between  w-full"
                   variant="navMobile"
                 />
               </SheetClose>
@@ -166,6 +168,7 @@ export default function UserButtonMobile({
               <SheetClose asChild>
                 <SignInButtonMobile
                   className="flex h-[60px] w-full justify-between px-7"
+                  spanClassName="flex flex-row items-center justify-between  w-full"
                   variant="navMobile"
                 />
               </SheetClose>

@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 interface SignInButtonMobileProps {
   className?: string;
+  spanClassName?: string;
   variant?:
     | "nav"
     | "outline"
@@ -22,6 +23,7 @@ interface SignInButtonMobileProps {
 
 const SignInButtonMobile = ({
   className,
+  spanClassName,
   variant,
 }: SignInButtonMobileProps) => {
   const handleSignOut = async () => {
@@ -29,9 +31,14 @@ const SignInButtonMobile = ({
   };
 
   return (
-    <Button variant={variant} onClick={handleSignOut} className={cn(className)}>
-      <p className="text-2xl font-bold">Kirjaudu sisään</p>
-      <LoginIcon />
+    <Button
+      variant={variant}
+      onClick={handleSignOut}
+      className={cn(className)}
+      spanClassName={spanClassName}
+      iconRight={<LoginIcon />}
+    >
+      <p className="text-2xl font-bold">Sign In</p>
     </Button>
   );
 };
