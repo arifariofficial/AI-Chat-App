@@ -231,7 +231,7 @@ export const FooterDefaults: FooterProps = {
         { title: "Call Us Today", url: "#" },
         { title: "Visit Our Office ", url: "#" },
         { title: "Feedback Form", url: "/feedback" },
-        { title: "Help Center", url: "/help" },
+        { title: "Help Center", url: "/help-center" },
       ],
     },
   ],
