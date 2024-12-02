@@ -3,79 +3,34 @@ pipeline {
     triggers {
         GenericTrigger(
             genericVariables: [
-                [key: 'DOCKER_REPO', value: '$.repository.repo_name']
+                [key: 'DOCKER_REPO', value: '$.repository.repo_name'],
             ],
             causeString: 'Triggered by Docker Hub webhook: $DOCKER_REPO',
-            printContributedVariables: true,
-            printPostContent: true,
-            token: 'SIPE_AI' // Webhook token for triggering the pipeline
         )
     }
 
-    parameters {
-        string(name: 'PROJECT_PATH', defaultValue: '/home/sipeai8/sipe-frontend', description: 'Path to the project')
-        string(name: 'BRANCH', defaultValue: 'ai-sdk', description: 'Branch to deploy')
-    }
-
     environment {
-        GIT_CREDENTIALS = credentials('gitlab-token') // Credential ID for GitLab PAT
+        PROJECT_PATH = '/home/sipeai8/sipe-frontend'
     }
 
     stages {
-        stage('Prepare') {
-            steps {
-                script {
-                    echo "Navigating to project path: ${params.PROJECT_PATH}"
-                    sh "cd ${params.PROJECT_PATH}"
-                }
-            }
-        }
-
         stage('Deploy Docker Image') {
             steps {
                 script {
                     sh '''
                         set -e
-                        echo "Checking out branch: ${BRANCH}"
-                        
-                        # Configure Git with token-based authentication
-                        git config --global credential.helper '!echo username=${GIT_CREDENTIALS_USR}; echo password=${GIT_CREDENTIALS_PSW}'
-                        git fetch https://${GIT_CREDENTIALS_USR}:${GIT_CREDENTIALS_PSW}@gitlab.com/sipe3/sipe-frontend.git ${BRANCH}:${BRANCH}
-                        git checkout ${BRANCH}
-                        git pull https://${GIT_CREDENTIALS_USR}:${GIT_CREDENTIALS_PSW}@gitlab.com/sipe3/sipe-frontend.git ${BRANCH}
-
-                        echo "Logging into Docker using Jenkins-managed credentials"
-                        docker login registry.hub.docker.com
-
-                        echo "Stopping existing containers"
+                        cd ${PROJECT_PATH}
+                        git checkout ai-sdk
+                        git pull origin ai-sdk 
                         docker compose down
-
-                        echo "Pulling updated Docker images"
                         docker compose pull frontend
-
-                        echo "Cleaning up unused Docker resources"
-                        docker image prune --filter "label=project=sipe-frontend" -f
-
-                        echo "Starting updated containers"
+                        docker system prune -f
+                        docker volume prune -f
+                        docker image prune -f 
                         docker compose up -d
-
-                        echo "Displaying logs for frontend service"
-                        docker logs sipe-frontend-frontend-1
                     '''
                 }
             }
-        }
-    }
-
-    post {
-        success {
-            echo "Deployment completed successfully."
-            script {
-                sh 'docker ps -a'
-            }
-        }
-        failure {
-            echo "Deployment failed. Check the logs for details."
         }
     }
 }
