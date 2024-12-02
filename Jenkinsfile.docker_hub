@@ -7,10 +7,19 @@ pipeline {
             ],
             causeString: 'Triggered by Docker Hub webhook: $DOCKER_REPO',
             printContributedVariables: true,
-            printPostContent: true
+            printPostContent: true,
+            token: 'SIPE_AI' // Webhook token for triggering the pipeline
         )
     }
 
+    parameters {
+        string(name: 'PROJECT_PATH', defaultValue: '/home/sipeai8/sipe-frontend', description: 'Path to the project')
+        string(name: 'BRANCH', defaultValue: 'ai-sdk', description: 'Branch to deploy')
+    }
+
+    environment {
+        GIT_CREDENTIALS = credentials('gitlab-token') // Credential ID for GitLab PAT
+    }
 
     stages {
         stage('Prepare') {
@@ -28,9 +37,12 @@ pipeline {
                     sh '''
                         set -e
                         echo "Checking out branch: ${BRANCH}"
-                        git fetch origin ${BRANCH}:${BRANCH}
+                        
+                        # Configure Git with token-based authentication
+                        git config --global credential.helper '!echo username=${GIT_CREDENTIALS_USR}; echo password=${GIT_CREDENTIALS_PSW}'
+                        git fetch https://${GIT_CREDENTIALS_USR}:${GIT_CREDENTIALS_PSW}@gitlab.com/sipe3/sipe-frontend.git ${BRANCH}:${BRANCH}
                         git checkout ${BRANCH}
-                        git pull origin ${BRANCH}
+                        git pull https://${GIT_CREDENTIALS_USR}:${GIT_CREDENTIALS_PSW}@gitlab.com/sipe3/sipe-frontend.git ${BRANCH}
 
                         echo "Logging into Docker using Jenkins-managed credentials"
                         docker login registry.hub.docker.com
