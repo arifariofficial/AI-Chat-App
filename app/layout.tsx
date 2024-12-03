@@ -7,9 +7,10 @@ import { auth } from "@/auth";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import NavBarServer from "@/components/navbar/navbar-server";
-import React from "react";
+import React, { Suspense } from "react";
 import { getChats } from "@/data/get-chat";
 import CookieConsent from "@/components/cookie-consent";
+import { Loading } from "@/components/loading";
 
 export const metadata: Metadata = {
   title: "Sipe AI - Innovating the Future",
@@ -37,22 +38,24 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={cn("bg-background text-foreground antialiased")}>
         <Toaster position="top-center" />
-        <Providers
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-          chats={chats}
-        >
-          <SessionProvider basePath="/api/auth" session={session}>
-            <main className="relative flex size-full flex-col">
-              <NavBarServer />
-              <CookieConsent />
-              {children}
-              <ShadToaster />
-            </main>
-          </SessionProvider>
-        </Providers>
+        <Suspense fallback={<Loading />}>
+          <Providers
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+            chats={chats}
+          >
+            <SessionProvider basePath="/api/auth" session={session}>
+              <main className="relative mx-auto flex size-full flex-col">
+                <NavBarServer />
+                <CookieConsent />
+                {children}
+                <ShadToaster />
+              </main>
+            </SessionProvider>
+          </Providers>
+        </Suspense>
       </body>
     </html>
   );

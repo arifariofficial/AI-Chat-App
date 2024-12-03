@@ -13,44 +13,45 @@ import { useAppDispatch } from "@/lib/store/hook";
 import { startChat } from "@/lib/store/chatSlice";
 
 export interface ChatProps extends React.ComponentProps<"div"> {
-  id?: string;
+  chatId?: string;
   session?: Session;
 }
 
-const Chat: React.FC<ChatProps> = ({ id, session, ...props }) => {
+const Chat: React.FC<ChatProps> = ({ chatId, session, ...props }) => {
   const path = usePathname();
   const [input, setInput] = useState("");
   const [messages] = useUIState();
   const [aiState] = useAIState();
-  const [, setNewChatId] = useLocalStorage("newChatId", id);
-  const router = useRouter();
+  const [, setNewChatId] = useLocalStorage("newChatId", chatId);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
-  // Refresh the page when AI messages reach an even number
+  console.log(path);
+
   useEffect(() => {
     const messageCount = aiState.messages?.length || 0;
     if (messageCount === 2) {
-      router.refresh();
       dispatch(startChat());
+      router.refresh();
     }
-  }, [aiState.messages?.length, dispatch, router]); // Only depend on the length of messages
+  }, [aiState.messages?.length, dispatch, router]);
 
   // Update browser history to the current chat URL if conditions are met
   useEffect(() => {
     if (
       session?.user &&
-      id &&
+      chatId &&
       !path.includes("/chat/") &&
       messages?.length === 1
     ) {
-      window.history.replaceState({}, "", `/chat/${id}`);
+      window.history.replaceState({}, "", `/chat/${chatId}`);
     }
-  }, [id, path, session?.user, messages?.length]);
+  }, [chatId, path, session?.user, messages?.length]);
 
   // Store the chat ID in local storage when it changes
   useEffect(() => {
-    if (id) setNewChatId(id);
-  }, [id, setNewChatId]);
+    if (chatId) setNewChatId(chatId);
+  }, [chatId, setNewChatId]);
 
   const { messagesRef, scrollRef, visibilityRef, isAtBottom, scrollToBottom } =
     useScrollAnchor();

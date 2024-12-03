@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import { useAppSelector } from "@/lib/store/hook";
 import { useActions, useUIState } from "ai/rsc";
 import { AI } from "@/lib/chat/actions";
+import { usePathname } from "next/navigation";
 
 interface UserMessageProps {
   content: string;
@@ -23,6 +24,10 @@ export default function UserMessage({
   const model = useAppSelector((state) => state.model);
   const { submitUserMessage } = useActions();
   const [, setMessages] = useUIState<typeof AI>();
+  const path = usePathname();
+
+  // Check if the path includes 'share'
+  const isSharePath = path.includes("share");
 
   const handleSave = async () => {
     if (isSubmitting) return; // Prevent duplicate submissions
@@ -100,8 +105,8 @@ export default function UserMessage({
         <h1 className="mx-3 -mt-1 text-lg font-semibold text-foreground">
           Sinä
         </h1>
-        {/* Pencil Icon */}
-        {!isEditing && (
+        {/* Conditionally render the pencil icon based on the path */}
+        {!isEditing && !isSharePath && (
           <div className="absolute -right-9 top-7 opacity-0 transition-opacity group-hover:opacity-100">
             <Button
               variant="outline"

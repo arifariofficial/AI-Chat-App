@@ -30,8 +30,8 @@ export const FaqSection = (props: FaqSectionProps) => {
       ...props,
     } as Props;
   return (
-    <section id="relume" className="py-16 md:py-24 lg:py-28">
-      <div className="container">
+    <section className="py-16 md:py-24 lg:py-28">
+      <div className="container mx-auto">
         <div className="md:mb-18 mb-12 lg:mb-20">
           <div className="mx-auto w-full max-w-lg text-center">
             <h2 className="rb-5 mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">

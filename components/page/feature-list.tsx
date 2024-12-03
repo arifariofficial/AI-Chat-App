@@ -73,7 +73,7 @@ export const FeatureSectionList = (props: FeatureSectionListProps) => {
 
   return (
     <section className="px-[5%] py-16 md:py-24 lg:py-28">
-      <div className="container">
+      <div className="container mx-auto">
         <div className="md:mb-18 mb-12 text-center lg:mb-20">
           <h1 className="text-4xl font-bold lg:text-6xl">{heading}</h1>
           <p className="mt-4 text-lg">{description}</p>

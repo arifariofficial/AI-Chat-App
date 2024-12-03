@@ -1,5 +1,3 @@
-// components/TermsAndConditions.js
-
 import React from "react";
 
 const TermsAndConditions = () => {
@@ -7,11 +5,11 @@ const TermsAndConditions = () => {
   const countryName = process.env.NEXT_PUBLIC_COUNTRY_NAME || "Our Country";
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-8 text-gray-800">
+    <div className="mx-auto max-w-4xl px-6 py-8 text-foreground">
       <h1 className="mb-6 text-center text-4xl font-bold">
         Terms and Conditions
       </h1>
-      <p className="mb-8 text-center text-sm text-gray-500">
+      <p className="mb-8 text-center text-sm text-muted-foreground">
         Last updated: <span className="font-medium">01.12.2024</span>
       </p>
 

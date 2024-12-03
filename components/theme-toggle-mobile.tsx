@@ -54,9 +54,9 @@ export function ThemeToggle({
       iconRight={
         <div>
           {resolvedTheme === "dark" ? (
-            <IconMoon className={cn("transition-all", iconClassName)} />
+            <IconMoon className={cn("size-6 transition-all", iconClassName)} />
           ) : (
-            <IconSun className={cn("transition-all", iconClassName)} />
+            <IconSun className={cn("size-6 transition-all", iconClassName)} />
           )}
           <span className="sr-only">Toggle theme</span>
         </div>

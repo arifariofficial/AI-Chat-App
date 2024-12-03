@@ -58,16 +58,14 @@ export function ModelSelection({ setShowPromptModal }: ModelSelectionProps) {
       <PopoverTrigger asChild className="m-0 p-0">
         <Button
           variant="outline"
-          role="combobox"
           aria-expanded={open}
-          className="flex w-[200px] items-center justify-between border px-1 font-bold"
-          spanClassName="justify-between  w-full flex flex-row"
+          className="flex w-[200px] items-center justify-between border bg-background/30 px-1 font-bold"
+          spanClassName="justify-between  w-full flex flex-row "
+          iconRight={<ChevronsUpDown className="opacity-50" />}
         >
           {value
             ? models.find((model) => model.value === value)?.label
             : "Select an option"}
-
-          <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] border-foreground/40 p-0">

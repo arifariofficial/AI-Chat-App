@@ -1,27 +1,23 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import UserButtonDesktop from "@/components/navbar/user-button-desktop";
 import { Session } from "next-auth";
-import { useTheme } from "next-themes";
 import { ThemeToggle } from "@/components/theme-toggle-mobile";
 import Link from "next/link";
 import { IconEdit, IconHome, IconShareUp } from "@/components/ui/icons";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { SidebarMobile } from "./sidebar-mobile";
 import { ChatHistoryMobile } from "./chat-history-mobile";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { useSelector } from "react-redux";
 import { selectChatStarted } from "@/lib/store/chatSlice";
-import { useChat } from "@/lib/hooks/use-chat";
 import { useParams, useRouter } from "next/navigation";
-import { getChat } from "@/data/get-chat";
-import { Chat } from "@/lib/types";
 import { useAppDispatch } from "@/lib/store/hook";
 import { resetChat } from "@/lib/store/chatSlice";
 import { ModelSelection } from "./model-selection";
 import { Role } from "@/types";
+import { useChat } from "@/lib/hooks/use-chat";
+import React from "react";
 
 interface ChatNavProps {
   session: Session;
@@ -29,32 +25,17 @@ interface ChatNavProps {
 }
 
 const ChatNav: React.FC<ChatNavProps> = ({ session, setShowPromptModal }) => {
-  const { theme } = useTheme();
   const chatStarted = useSelector(selectChatStarted);
   const { handleShare } = useChat();
-  const [chat, setChat] = useState<Chat>();
   const dispatch = useAppDispatch();
   const params = useParams();
   const chatId = Array.isArray(params?.slug) ? params.slug[0] : params?.slug; // Ensure chatId is a string
   const router = useRouter();
 
-  useEffect(() => {
-    (async () => {
-      if (chatId && chatId.trim() !== "") {
-        const userId = session?.user.id as string;
-        const chatData = await getChat(chatId, userId);
-
-        if (chatData) {
-          setChat(chatData);
-        }
-      }
-      return;
-    })();
-  }, [chatId, session]);
-
   const onShareClick = () => {
-    if (chat) {
-      handleShare(chat);
+    if (session.user.id && chatId) {
+      const userId = session.user.id as string;
+      handleShare(chatId, userId);
     }
   };
 
@@ -112,23 +93,15 @@ const ChatNav: React.FC<ChatNavProps> = ({ session, setShowPromptModal }) => {
       <div className="ml-auto hidden items-center sm:inline-flex">
         <Link href="/" style={{ zIndex: 50 }}>
           <Button variant="inherit" className="text-foreground">
-            <IconHome
-              className={cn(
-                theme === "light" ? "text-inherit" : "text-foreground",
-                "size-7",
-              )}
-            />
+            <IconHome className="size-7" />
           </Button>
         </Link>
 
         <ThemeToggle
-          buttonClassName="ml-1 hidden size-10 sm:flex"
+          buttonClassName="hidden sm:flex"
           variant="inherit"
           style={{ zIndex: 20 }}
-          iconClassName={cn(
-            theme === "light" ? "text-inherit font-extrabold bg-inherit" : "",
-            "size-9 z-40",
-          )}
+          iconClassName="size-7"
         />
 
         <UserButtonDesktop

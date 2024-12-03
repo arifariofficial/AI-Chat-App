@@ -16,7 +16,7 @@ import { startTransition, useEffect, useState } from "react";
 import { editMessage } from "@/actions/edit-message";
 import { getChat } from "@/data/get-chat";
 import { Chat } from "@/lib/types";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Role } from "@/types";
 
 export function BotMessage({
@@ -37,6 +37,10 @@ export function BotMessage({
   const [chat, setChat] = useState<Chat | null>(null);
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const path = usePathname();
+
+  // Check if the path includes 'share'
+  const isSharePath = path.includes("share");
 
   useEffect(() => {
     let isMounted = true;
@@ -145,7 +149,7 @@ export function BotMessage({
           </div>
 
           {/* Add edit message */}
-          {session?.user?.role === Role.EDITOR && (
+          {session?.user?.role === Role.EDITOR && !isSharePath && (
             <div className="absolute -right-9 top-7 opacity-0 transition-opacity group-hover:opacity-100">
               <Button
                 variant="outline"

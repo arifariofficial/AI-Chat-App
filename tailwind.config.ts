@@ -103,8 +103,14 @@ const config = {
             transform: "translateX(0)",
           },
         },
+        loadingBar: {
+          "0%": { left: "-100%" },
+          "50%": { left: "0%" },
+          "100%": { left: "100%" },
+        },
       },
       animation: {
+        "loading-bar": "loadingBar 2s ease-in-out infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "caret-blink": "caret-blink 1.25s ease-out infinite",

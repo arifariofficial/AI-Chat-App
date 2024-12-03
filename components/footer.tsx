@@ -13,6 +13,102 @@ import { Input } from "./ui/input";
 import Image from "next/image";
 import { toast } from "./ui/use-toast";
 
+const FooterDefaults: FooterProps = {
+  logo: {
+    url: "#",
+    src: "/assets/Logo-main.svg",
+    alt: "Logo image",
+  },
+  newsletterHeading: "Join our newsletter",
+  newsletterDescription: "We're here to assist you with your inquiries.",
+  inputPlaceholder: "Enter your email",
+  button: {
+    title: "Subscribe",
+    variant: "outline",
+    size: "sm",
+  },
+  termsAndConditions: `
+  <p class='text-xs'>
+    By subscribing you agree to with our 
+    <a href='#' class='underline'>Privacy Policy</a>.
+  </p>
+  `,
+  columnLinks: [
+    {
+      title: "Quick Links",
+      links: [
+        { title: "About Us", url: "/about-us" },
+        { title: "Contact Us", url: "/contact-us" },
+        { title: "FAQs", url: "/FAQs" },
+        { title: "Blog", url: "/blog" },
+        { title: "Support", url: "/support" },
+      ],
+    },
+    {
+      title: "Resources",
+      links: [
+        { title: "Guides", url: "#" },
+        { title: "Updates", url: "#" },
+        { title: "Testimonials", url: "#" },
+        { title: "Careers", url: "#" },
+        { title: "Partnerships", url: "#" },
+      ],
+    },
+    {
+      title: "Legal",
+      links: [
+        { title: "Privacy Policy", url: "/privacy" },
+        { title: "Terms of Use", url: "/terms" },
+        { title: "Cookie Policy", url: "/cookie" },
+        { title: "User Agreement", url: "/user-agreement" },
+        { title: "Site Map", url: "#" },
+      ],
+    },
+    {
+      title: "Follow Us",
+      links: [
+        { title: "Facebook", url: "#" },
+        { title: "Twitter", url: "#" },
+        {
+          title: "LinkedIn",
+          url: "https://www.linkedin.com/company/sipeai/posts/?feedView=all",
+        },
+        { title: "Instagram", url: "https://www.instagram.com/sipe.ai/" },
+        { title: "YouTube", url: "#" },
+      ],
+    },
+    {
+      title: "Contact Info",
+      links: [
+        { title: "Email Us Here ", url: "info@sipe.ai" },
+        { title: "Call Us Today", url: "#" },
+        { title: "Visit Our Office ", url: "#" },
+        { title: "Feedback Form", url: "/feedback" },
+        { title: "Help Center", url: "/help-center" },
+      ],
+    },
+  ],
+  socialMediaLinks: [
+    { url: "#", icon: <BiLogoFacebookCircle className="size-6" /> },
+    {
+      url: "https://www.instagram.com/sipe.ai/",
+      icon: <BiLogoInstagram className="size-6" />,
+    },
+    { url: "#", icon: <FaXTwitter className="size-6 p-0.5" /> },
+    {
+      url: "https://www.linkedin.com/company/sipeai/posts/?feedView=all",
+      icon: <BiLogoLinkedinSquare className="size-6" />,
+    },
+    { url: "#", icon: <BiLogoYoutube className="size-6" /> },
+  ],
+  footerText: "© 2024 SipeAI. All rights reserved.",
+  footerLinks: [
+    { title: "Privacy Policy", url: "/privacy" },
+    { title: "Terms of Service", url: "/terms" },
+    { title: "Cookies Settings", url: "/cookie" },
+  ],
+};
+
 type ImageProps = {
   url?: string;
   src: string;
@@ -52,8 +148,7 @@ type Props = {
   footerLinks: FooterLink[];
 };
 
-export type FooterProps = React.ComponentPropsWithoutRef<"section"> &
-  Partial<Props>;
+type FooterProps = React.ComponentPropsWithoutRef<"section"> & Partial<Props>;
 
 export const Footer = (props: FooterProps) => {
   const {
@@ -95,7 +190,7 @@ export const Footer = (props: FooterProps) => {
   };
   return (
     <footer className="md:py-18 px-[5%] py-12 lg:py-20">
-      <div className="container">
+      <div className="container mx-auto">
         <div className="rb-12 md:mb-18 mb-12 block items-start justify-between lg:mb-20 lg:flex">
           <div className="rb-6 mb-6 lg:mb-0">
             <h1 className="md:text-md font-semibold">{newsletterHeading}</h1>
@@ -172,100 +267,4 @@ export const Footer = (props: FooterProps) => {
       </div>
     </footer>
   );
-};
-
-export const FooterDefaults: FooterProps = {
-  logo: {
-    url: "#",
-    src: "/assets/Logo-main.svg",
-    alt: "Logo image",
-  },
-  newsletterHeading: "Join our newsletter",
-  newsletterDescription: "We're here to assist you with your inquiries.",
-  inputPlaceholder: "Enter your email",
-  button: {
-    title: "Subscribe",
-    variant: "outline",
-    size: "sm",
-  },
-  termsAndConditions: `
-  <p class='text-xs'>
-    By subscribing you agree to with our 
-    <a href='#' class='underline'>Privacy Policy</a>.
-  </p>
-  `,
-  columnLinks: [
-    {
-      title: "Quick Links",
-      links: [
-        { title: "About Us", url: "/about-us" },
-        { title: "Contact Us", url: "/contact-us" },
-        { title: "FAQs", url: "/FAQs" },
-        { title: "Blog", url: "/blog" },
-        { title: "Support", url: "/support" },
-      ],
-    },
-    {
-      title: "Resources",
-      links: [
-        { title: "Guides", url: "#" },
-        { title: "Updates", url: "#" },
-        { title: "Testimonials", url: "#" },
-        { title: "Careers", url: "#" },
-        { title: "Partnerships", url: "#" },
-      ],
-    },
-    {
-      title: "Legal",
-      links: [
-        { title: "Privacy Policy", url: "/privacy" },
-        { title: "Terms of Use", url: "/terms" },
-        { title: "Cookie Policy", url: "/cookie" },
-        { title: "User Agreement", url: "/user-aggrement" },
-        { title: "Site Map", url: "#" },
-      ],
-    },
-    {
-      title: "Follow Us",
-      links: [
-        { title: "Facebook", url: "#" },
-        { title: "Twitter", url: "#" },
-        {
-          title: "LinkedIn",
-          url: "https://www.linkedin.com/company/sipeai/posts/?feedView=all",
-        },
-        { title: "Instagram", url: "https://www.instagram.com/sipe.ai/" },
-        { title: "YouTube", url: "#" },
-      ],
-    },
-    {
-      title: "Contact Info",
-      links: [
-        { title: "Email Us Here ", url: "info@sipe.ai" },
-        { title: "Call Us Today", url: "#" },
-        { title: "Visit Our Office ", url: "#" },
-        { title: "Feedback Form", url: "/feedback" },
-        { title: "Help Center", url: "/help-center" },
-      ],
-    },
-  ],
-  socialMediaLinks: [
-    { url: "#", icon: <BiLogoFacebookCircle className="size-6" /> },
-    {
-      url: "https://www.instagram.com/sipe.ai/",
-      icon: <BiLogoInstagram className="size-6" />,
-    },
-    { url: "#", icon: <FaXTwitter className="size-6 p-0.5" /> },
-    {
-      url: "https://www.linkedin.com/company/sipeai/posts/?feedView=all",
-      icon: <BiLogoLinkedinSquare className="size-6" />,
-    },
-    { url: "#", icon: <BiLogoYoutube className="size-6" /> },
-  ],
-  footerText: "© 2024 SipeAI. All rights reserved.",
-  footerLinks: [
-    { title: "Privacy Policy", url: "/privacy" },
-    { title: "Terms of Service", url: "/terms" },
-    { title: "Cookies Settings", url: "/cookie" },
-  ],
 };

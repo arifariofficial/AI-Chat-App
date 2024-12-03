@@ -220,7 +220,6 @@ export const AI = createAI<AIState, UIState>({
       if (session?.user) {
         const aiState = getAIState();
 
-        console.log("Initializing UIState with AIState:", aiState);
         if (!aiState?.chatId) {
           console.warn("No chatId found in AI state.");
         }
@@ -255,8 +254,6 @@ export const AI = createAI<AIState, UIState>({
         throw new Error("Missing chatId in state.");
       }
 
-      // console.log("AiState:", state);
-
       if (!messages || messages.length === 0) {
         throw new Error("No messages available to create a chat title.");
       }
@@ -281,8 +278,6 @@ export const AI = createAI<AIState, UIState>({
         messages: deduplicatedMessages,
         path,
       };
-
-      console.log("chat id: ", chat.id);
 
       await saveChat(chat);
     } catch (error) {
