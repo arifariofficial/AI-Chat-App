@@ -60,7 +60,7 @@ export default function UserButtonMobile({
             <HamburgerMenuIcon className="size-8 w-10" />
           </Button>
         </SheetTrigger>
-        <SheetContent className="inset-y-0 flex max-h-screen flex-col justify-start gap-1 border border-border/20 bg-backgroundSecondary text-title sm:hidden">
+        <SheetContent className="inset-y-0 flex max-h-screen flex-col justify-start border border-border/20 bg-backgroundSecondary text-title sm:hidden">
           <DialogTitle className="sr-only">Mobile Navigation Menu</DialogTitle>
           <DialogDescription className="sr-only">
             Navigate through the menu options using the buttons.
@@ -90,69 +90,69 @@ export default function UserButtonMobile({
             <>
               <Separator />
               <SheetClose asChild className="h-[60px]">
-                <Button
-                  variant="navMobile"
-                  asChild
-                  className="flex justify-between px-7"
-                  iconRight={<UserIcon />}
-                >
-                  <Link className="" href="/profile">
-                    <p className="text-2xl font-bold">Tili</p>
-                  </Link>
-                </Button>
+                <Link className="" href="/profile">
+                  <Button
+                    variant="navMobile"
+                    asChild
+                    className="flex justify-between px-7"
+                    iconRight={<UserIcon />}
+                  >
+                    <p className="text-2xl font-bold">Account</p>
+                  </Button>
+                </Link>
               </SheetClose>
             </>
           )}
           {/* Etusivu */}
           {!session && <div className="h-[50px]" />}
           <SheetClose asChild className="h-[60px]">
-            <Button
-              variant="navMobile"
-              asChild
-              className="flex justify-between px-7"
-              iconRight={<IconHome />}
-            >
-              <Link className="" href="/">
+            <Link className="" href="/">
+              <Button
+                variant="navMobile"
+                asChild
+                className="flex justify-between px-7"
+                iconRight={<IconHome />}
+              >
                 <p className="text-2xl font-bold">Home</p>
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </SheetClose>
           <SheetClose asChild className="h-[60px]">
-            <Button
-              variant="navMobile"
-              asChild
-              className="flex justify-between px-7"
-              iconRight={<IconChat />}
-            >
-              <Link className="" href="/chat">
+            <Link className="" href="/chat">
+              <Button
+                variant="navMobile"
+                asChild
+                className="flex justify-between px-7"
+                iconRight={<IconChat />}
+              >
                 <p className="text-2xl font-bold">SipeChat</p>
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </SheetClose>
 
           <SheetClose asChild className="h-[60px]">
-            <Button
-              variant="navMobile"
-              asChild
-              className="flex justify-between px-7"
-              iconRight={<IconAboutUs />}
-            >
-              <Link className="" href="/about-us">
+            <Link className="" href="/about-us">
+              <Button
+                variant="navMobile"
+                asChild
+                className="flex justify-between px-7"
+                iconRight={<IconAboutUs />}
+              >
                 <p className="text-2xl font-bold">About Us</p>
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </SheetClose>
           <SheetClose asChild className="h-[60px]">
-            <Button
-              variant="navMobile"
-              asChild
-              className="flex justify-between px-7"
-              iconRight={<IconContact />}
-            >
-              <Link className="" href="/contact">
+            <Link className="" href="/contact">
+              <Button
+                variant="navMobile"
+                asChild
+                className="flex justify-between px-7"
+                iconRight={<IconContact />}
+              >
                 <p className="text-2xl font-bold">Contact</p>
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </SheetClose>
 
           <div>

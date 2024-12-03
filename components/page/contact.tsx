@@ -100,7 +100,7 @@ export const ContactSection = (props: ContactSectionProps) => {
     ...props,
   } as Props;
   return (
-    <section className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="py-16 md:py-24 lg:py-28">
       <div className="container mx-auto">
         <div className="rb-12 md:mb-18 mb-12 max-w-lg lg:mb-20">
           <p className="mb-3 font-semibold md:mb-4">{tagline}</p>

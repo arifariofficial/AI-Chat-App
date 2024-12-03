@@ -12,7 +12,7 @@ import { auth } from "@/auth";
 export default async function HomePage() {
   const session = await auth();
   return (
-    <div className="container mx-auto flex max-w-screen-2xl flex-col px-[3%] md:px-[5%]">
+    <div className="container mx-auto flex max-w-screen-2xl flex-col px-[5%] md:px-[10%]">
       <HeroSection session={session} />
       <FeatureSection />
       <FeatureSectionList session={session} />

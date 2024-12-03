@@ -61,7 +61,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="mx-auto mt-10 max-w-lg">
+    <div className="container mx-auto my-10 max-w-lg px-4">
       <h2 className="mb-6 text-center text-3xl font-bold">Contact Us</h2>
       <p className="mb-8 text-center text-gray-600">
         We&apos;d love to hear from you. Fill out the form below and we’ll get

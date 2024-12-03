@@ -54,7 +54,7 @@ export const BenefitSection = (props: BenefitSectionProps) => {
     ...props,
   } as Props;
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section id="relume" className="py-16 md:py-24 lg:py-28">
       <div className="container mx-auto">
         <h1 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
           {heading}
