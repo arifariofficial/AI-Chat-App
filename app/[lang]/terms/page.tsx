@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const TermsAndConditions = () => {
@@ -61,9 +62,9 @@ const TermsAndConditions = () => {
         <h2 className="mb-3 text-2xl font-semibold">4. Privacy Policy</h2>
         <p>
           We are committed to protecting your privacy. Please review our{" "}
-          <a href="/privacy" className="text-blue-600 underline">
+          <Link href="/privacy" className="text-blue-600 underline">
             Privacy Policy
-          </a>
+          </Link>
           .
         </p>
       </section>

@@ -60,8 +60,6 @@ export interface Testimonials {
     alt: string;
   };
 }
-[];
-
 export interface ContactSection {
   tagline: string;
   heading: string;
