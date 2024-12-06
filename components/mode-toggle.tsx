@@ -14,8 +14,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
 import { cn } from "@/lib/utils";
+import { Dictionary } from "@/lib/types";
 
-export function ModeToggle({ className }: { className?: string }) {
+interface ModeToggleProps {
+  className?: string;
+  dictionary?: Dictionary;
+}
+
+export function ModeToggle({ className, dictionary }: ModeToggleProps) {
   const { theme, setTheme } = useTheme();
   const isLightMode = theme === "light";
   const isDarkMode = theme === "dark";
@@ -36,14 +42,14 @@ export function ModeToggle({ className }: { className?: string }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="center"
-        className="w-56 border border-border/30"
+        className="w-48 border border-border/30"
       >
         <DropdownMenuCheckboxItem
           checked={isLightMode}
           onCheckedChange={() => setTheme("light")}
         >
           <DropdownMenuItem className="flex w-full items-center justify-evenly hover:cursor-pointer">
-            <p>Light</p>
+            <p>{dictionary?.theme.light}</p>
             <SunIcon className="size-[1.3rem]" />
           </DropdownMenuItem>
         </DropdownMenuCheckboxItem>
@@ -53,7 +59,7 @@ export function ModeToggle({ className }: { className?: string }) {
           onCheckedChange={() => setTheme("dark")}
         >
           <DropdownMenuItem className="flex w-full items-center justify-evenly hover:cursor-pointer">
-            <p>Dark</p>
+            <p>{dictionary?.theme.dark}</p>
             <MoonIcon className="size-[1.2rem]" />
           </DropdownMenuItem>
         </DropdownMenuCheckboxItem>
@@ -63,7 +69,7 @@ export function ModeToggle({ className }: { className?: string }) {
           onCheckedChange={() => setTheme("system")}
         >
           <DropdownMenuItem className="flex w-full items-center justify-evenly hover:cursor-pointer">
-            <p>System</p>
+            <p>{dictionary?.theme.system}</p>
             <SettingsSuggestOutlinedIcon className="mr-1 size-[1.2rem]" />
           </DropdownMenuItem>
         </DropdownMenuCheckboxItem>

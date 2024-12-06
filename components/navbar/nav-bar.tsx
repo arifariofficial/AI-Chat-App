@@ -9,15 +9,23 @@ import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle-mobile";
 import Logo from "@/public/assets/Logo-main.svg";
 import Image from "next/image";
+import { Locale } from "@/i18n.config";
+import { Dictionary } from "@/lib/types";
 
 interface NavBarProps {
   session?: Session | null;
+  lang: Locale;
+  dictionary: Dictionary;
 }
 
-const NavBar = ({ session }: NavBarProps) => {
+const NavBar = ({ session, lang, dictionary }: NavBarProps) => {
   const pathname = usePathname();
 
-  if (pathname.startsWith("/chat") || pathname.startsWith("/new")) {
+  // Check if the path starts with lang and either "/chat" or "/new"
+  if (
+    pathname.startsWith(`/${lang}/chat`) ||
+    pathname.startsWith(`/${lang}/new`)
+  ) {
     return null;
   }
 
@@ -36,10 +44,14 @@ const NavBar = ({ session }: NavBarProps) => {
             </div>
           </Link>
         </section>
-        <NavItemsMiddle />
+        <NavItemsMiddle lang={lang} dictionary={dictionary} />
         <section className="mr-1 flex items-center justify-center text-xl font-semibold hover:opacity-90">
           <div className="flex size-full flex-row items-center p-px">
-            <NavItemsRight session={session} />
+            <NavItemsRight
+              session={session}
+              lang={lang}
+              dictionary={dictionary}
+            />
             <ThemeToggle
               buttonClassName="text-foregroundNav hover:opacity-90 sm:hidden flex"
               variant="inherit"

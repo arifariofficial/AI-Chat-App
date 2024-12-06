@@ -1,0 +1,313 @@
+{
+  "navigation": {
+    "home": "Hem",
+    "sipeChat": "SipeChat",
+    "aboutUs": "Om oss",
+    "contact": "Kontakt"
+  },
+  "theme": {
+    "light": "Ljus",
+    "dark": "Mörk",
+    "system": "System"
+  },
+  "language": {
+    "en": "English",
+    "fi": "Suomi",
+    "sv": "Svenska"
+  },
+
+  "input": {
+    "email": "E-post",
+    "password": "Lösenord",
+    "confirmPassword": "Bekräfta lösenord",
+    "firstName": "Förnamn",
+    "lastName": "Efternamn",
+    "phone": "Telefon",
+    "address": "Adress",
+    "city": "Stad",
+    "postalCode": "Postnummer",
+    "country": "Land",
+    "submit": "Skicka",
+    "reset": "Återställ",
+    "emailPlaceholder": "Ange din e-postadress"
+  },
+  "hero": {
+    "heading": "Ge dig kunskap om dina rättigheter",
+    "description": "På vårt startup är vi dedikerade till att ge dig viktig information om dina rättigheter i olika situationer. Upptäck hur vår innovativa AI-app kan vägleda dig genom din specifika situation och säkerställa att du får det stöd du förtjänar.",
+    "inputPlaceholder": "Ange din e-postadress",
+    "button": { "title": "Registrera dig" },
+    "termsAndConditions": {
+      "text": "Genom att registrera dig godkänner du våra",
+      "link": "Villkor"
+    }
+  },
+  "features": {
+    "heading": "Upptäck dina rättigheter med vår innovativa AI-app",
+    "description": "Vår avancerade AI-app förenklar processen att förstå dina rättigheter i olika situationer. Med bara några få klick kan du få skräddarsydd information som säkerställer att du vet exakt vad du har rätt till."
+  },
+  "featuresList": {
+    "heading": "Utforska fördelarna med vår AI-app",
+    "description": "Vår AI-app gör det enkelt att förstå dina rättigheter. Med bara några klick kan du få viktig information som är anpassad till din specifika situation.",
+    "buttonText": "Läs mer",
+    "notification": "Du är redan inloggad.",
+    "features": [
+      {
+        "title": "Enkel åtkomst till viktig information",
+        "description": "Få omedelbar tillgång till viktig information när som helst.",
+        "imageAlt": "Egenskap 1 platshållarbild"
+      },
+      {
+        "title": "Skräddarsydd analys för din unika situation",
+        "description": "Vår app ger personliga insikter baserade på dina omständigheter.",
+        "imageAlt": "Egenskap 2 platshållarbild"
+      },
+      {
+        "title": "Håll dig uppdaterad med aktuell information",
+        "description": "Få tillgång till pålitlig och uppdaterad information när du behöver den.",
+        "imageAlt": "Egenskap 3 platshållarbild"
+      }
+    ]
+  },
+  "faqSection": {
+    "heading": "Vanliga frågor",
+    "description": "Hitta svar på vanliga frågor om våra tjänster och AI-appen.",
+    "contactUs": "Kontakta oss",
+    "questions": [
+      {
+        "title": "Vad är er tjänst?",
+        "answer": "Vi erbjuder information om rättigheter i olika fall. Vår AI-app förenklar processen genom att leverera skräddarsydda insikter. Oavsett om det handlar om en bilolycka eller något annat, guidar vi dig genom dina rättigheter."
+      },
+      {
+        "title": "Kan jag få support?",
+        "answer": "Absolut! Vi erbjuder support genom vårt kundtjänstteam. Du kan nå oss via appen eller vår webbplats när som helst."
+      },
+      {
+        "title": "Hur fungerar appen?",
+        "answer": "Vår app samlar in relevant information om ditt fall. Den analyserar uppgifterna för att informera dig om dina rättigheter. Detta säkerställer att du har kunskapen som behövs för att fatta välgrundade beslut."
+      },
+      {
+        "title": "Vad gör jag om jag har fler frågor?",
+        "answer": "Om du har fler frågor, tveka inte att kontakta oss. Vi är här för att ge tydlighet och stöd. Din förståelse är vår prioritet."
+      },
+      {
+        "title": "Är tjänsten gratis?",
+        "answer": "Ja, vår första konsultation och tillgång till AI-appen är gratis. Vi tror på att ge individer kunskap utan ekonomiska hinder. Ytterligare tjänster kan innebära kostnader som tydligt kommuniceras."
+      },
+      {
+        "title": "Är mina uppgifter säkra?",
+        "answer": "Ja, vi tar datasäkerhet på största allvar. Din information skyddas med branschstandardkryptering och sekretessåtgärder. Vi delar inte dina uppgifter utan ditt samtycke."
+      },
+      {
+        "title": "Vem kan använda det?",
+        "answer": "Våra tjänster är utformade för alla som söker information om sina rättigheter. Oavsett om du varit med om en bilolycka eller står inför andra juridiska frågor, är vi här för att hjälpa. Vår app är användarvänlig och tillgänglig för alla."
+      },
+      {
+        "title": "Hur ofta uppdateras informationen?",
+        "answer": "Vår app uppdaterar regelbundet information för att säkerställa korrekthet. Vi övervakar lagändringar och justerar vårt innehåll därefter. Detta garanterar att du får de senaste råden."
+      },
+      {
+        "title": "Hur kommer jag igång?",
+        "answer": "Det är enkelt att komma igång! Ladda ner vår app och skapa ett konto. Följ instruktionerna för att ange dina falluppgifter och upptäck dina rättigheter."
+      },
+      {
+        "title": "Kan jag lämna feedback?",
+        "answer": "Vi välkomnar din feedback! Det hjälper oss att förbättra våra tjänster och appens funktionalitet. Du kan skicka dina tankar via appen eller vår webbplats."
+      }
+    ],
+    "footerHeading": "Har du fortfarande frågor?",
+    "footerDescription": "Kontakta oss när som helst för hjälp.",
+    "button": {
+      "title": "Kontakta oss",
+      "variant": "outline"
+    }
+  },
+  "benefits": {
+    "heading": "Upptäck de transformativa fördelarna med vår AI-drivna app för information om rättigheter.",
+    "description": "Vår AI-app förenklar processen att förstå dina rättigheter och sparar värdefull tid. Med korrekt information vid dina fingertoppar kan du navigera ditt fall med självförtroende.",
+    "subHeadings": [
+      {
+        "title": "Tidseffektivt",
+        "description": "Få omedelbar åtkomst till viktig information utan krångliga efterforskningar."
+      },
+      {
+        "title": "Exakta insikter",
+        "description": "Lita på vår AI för att få korrekt, uppdaterad information anpassad till din specifika situation."
+      }
+    ]
+  },
+  "ctaSection": {
+    "heading": "Stärk dig själv med vår app",
+    "description": "Upptäck dina rättigheter och fördelar enkelt. Prova vår app för omedelbar åtkomst till viktig information.",
+    "button1": "Prova SipeChat",
+    "button2": "Läs mer"
+  },
+
+  "testimonialSection": {
+    "heading": "Kundomdömen",
+    "description": "Den här appen förändrade min förståelse för mina rättigheter.",
+    "testimonials": [
+      {
+        "numberOfStars": 5,
+        "quote": "\"Med AI-appen kände jag mig stärkt och välinformerad.\"",
+        "avatar": {
+          "src": "/assets/testimonial-1.webp",
+          "alt": "Testimonial-avatar 1"
+        },
+        "name": "Sami Mäkinen",
+        "position": "Läkare, GreenLife",
+        "logo": {
+          "src": "/assets/company-1.webp",
+          "alt": "Webflow-logo 1"
+        }
+      },
+      {
+        "numberOfStars": 5,
+        "quote": "\"Jag visste inte att jag hade så många alternativ!\"",
+        "avatar": {
+          "src": "/assets/testimonial-2.webp",
+          "alt": "Testimonial-avatar 2"
+        },
+        "name": "Juuso Montonen",
+        "position": "Gitarrlärare, Kitarakoutsi, Inc.",
+        "logo": {
+          "src": "/assets/company-2.webp",
+          "alt": "Webflow-logo 2"
+        }
+      }
+    ]
+  },
+  "contactSection": {
+    "tagline": "Kontakta oss",
+    "heading": "Kontakt",
+    "description": "Vi är här för att hjälpa dig med dina frågor.",
+    "contacts": [
+      {
+        "icon": "BiEnvelope",
+        "title": "E-post",
+        "description": "Kontakta oss på",
+        "link": {
+          "label": "info@sipe.ai",
+          "url": "mailto:info@sipe.ai"
+        }
+      },
+      {
+        "icon": "BiPhone",
+        "title": "Telefon",
+        "description": "Ring oss när som helst",
+        "link": {
+          "label": "+358440000500",
+          "url": "tel:+358440000500"
+        }
+      },
+      {
+        "icon": "BiMap",
+        "title": "Kontor",
+        "description": "123 Postiljooninkatu, Helsingfors, Finland",
+        "button": {
+          "title": "Hämta vägbeskrivning"
+        }
+      }
+    ]
+  },
+  "auth": {
+    "signup": "Registrera dig",
+    "signin": "Logga in",
+    "signout": "Logga ut"
+  },
+  "validation": {
+    "emailRequired": "Ingen e-postadress angiven",
+    "emailInvalidTitle": "Ogiltig e-post",
+    "emailInvalid": "Ange en giltig e-postadress.",
+    "emailExists": "Du har redan registrerat dig med denna e-postadress.",
+    "emailAlreadyLoggedIn": "Du är redan inloggad. Logga ut för att registrera dig med en ny e-postadress."
+  },
+
+  "footer": {
+    "logo": {
+      "url": "#",
+      "src": "/assets/Logo-main.svg",
+      "alt": "Logobild"
+    },
+    "newsletterHeading": "Prenumerera på vårt nyhetsbrev",
+    "newsletterDescription": "Vi är här för att hjälpa dig med dina frågor.",
+    "inputPlaceholder": "Ange din e-postadress",
+    "button": {
+      "title": "Prenumerera",
+      "variant": "outline",
+      "size": "sm"
+    },
+    "termsAndConditions": "<p class='text-xs'>Genom att prenumerera godkänner du vår <a href='#' class='underline'>Integritetspolicy</a>.</p>",
+    "columnLinks": [
+      {
+        "title": "Snabblänkar",
+        "links": [
+          { "title": "Om oss", "url": "/about-us" },
+          { "title": "Kontakta oss", "url": "/contact-us" },
+          { "title": "Vanliga frågor", "url": "/FAQs" },
+          { "title": "Blogg", "url": "/blog" },
+          { "title": "Support", "url": "/support" }
+        ]
+      },
+      {
+        "title": "Resurser",
+        "links": [
+          { "title": "Guider", "url": "#" },
+          { "title": "Uppdateringar", "url": "#" },
+          { "title": "Kundomdömen", "url": "#" },
+          { "title": "Karriär", "url": "#" },
+          { "title": "Partnerskap", "url": "#" }
+        ]
+      },
+      {
+        "title": "Juridik",
+        "links": [
+          { "title": "Integritetspolicy", "url": "/privacy" },
+          { "title": "Villkor", "url": "/terms" },
+          { "title": "Cookiepolicy", "url": "/cookie" },
+          { "title": "Användaravtal", "url": "/user-agreement" },
+          { "title": "Webbplatskarta", "url": "#" }
+        ]
+      },
+      {
+        "title": "Följ oss",
+        "links": [
+          { "title": "Facebook", "url": "#" },
+          { "title": "Twitter", "url": "#" },
+          {
+            "title": "LinkedIn",
+            "url": "https://www.linkedin.com/company/sipeai/posts/?feedView=all"
+          },
+          { "title": "Instagram", "url": "https://www.instagram.com/sipe.ai/" },
+          { "title": "YouTube", "url": "#" }
+        ]
+      },
+      {
+        "title": "Kontaktinformation",
+        "links": [
+          { "title": "Maila oss här", "url": "info@sipe.ai" },
+          { "title": "Ring oss idag", "url": "#" },
+          { "title": "Besök vårt kontor", "url": "#" },
+          { "title": "Feedback", "url": "/feedback" },
+          { "title": "Hjälpcenter", "url": "/help-center" }
+        ]
+      }
+    ],
+    "socialMediaLinks": [
+      { "url": "#", "icon": "BiLogoFacebookCircle" },
+      {
+        "url": "https://www.instagram.com/sipe.ai/"
+      },
+
+      {
+        "url": "https://www.linkedin.com/company/sipeai/posts/?feedView=all"
+      },
+      { "url": "#", "icon": "BiLogoYoutube" }
+    ],
+    "footerText": "© 2024 SipeAI. Alla rättigheter förbehållna.",
+    "footerLinks": [
+      { "title": "Integritetspolicy", "url": "/privacy" },
+      { "title": "Villkor", "url": "/terms" },
+      { "title": "Cookie-inställningar", "url": "/cookie" }
+    ]
+  }
+}

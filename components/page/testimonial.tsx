@@ -1,89 +1,37 @@
+import { Dictionary, Testimonials } from "@/lib/types";
 import Image from "next/image";
 import { BiSolidStar } from "react-icons/bi";
 
-const TestimonialSectionDefaults: TestimonialSectionProps = {
-  heading: "Customer Testimonials",
-  description: "This app transformed my understanding of my rights.",
-  testimonials: [
-    {
-      numberOfStars: 5,
-      quote: '"With the AI app, I felt empowered and informed."',
-      avatar: {
-        src: "/assets/testimonial-1.webp",
-        alt: "Testimonial avatar 1",
-      },
-      name: "Sami Mäkinen",
-      position: "Doctor, GreenLife",
-      logo: {
-        src: "/assets/company-1.webp",
-        alt: "Webflow logo 1",
-      },
-    },
-    {
-      numberOfStars: 5,
-      quote: '"I never knew I had so many options available!"',
-      avatar: {
-        src: "/assets/testimonial-2.webp",
-        alt: "Testimonial avatar 2",
-      },
-      name: "Juuso Montonen",
-      position: "Guitar Teacher, Kitarakoutsi, Inc.",
-      logo: {
-        src: "/assets/company-2.webp",
-        alt: "Webflow logo 2",
-      },
-    },
-  ],
-};
+interface TestimonialSectionProps {
+  dictionary: Dictionary;
+}
 
-type ImageProps = {
-  src: string;
-  alt?: string;
-};
-
-type Testimonial = {
-  numberOfStars: number;
-  quote: string;
-  avatar: ImageProps;
-  name: string;
-  position: string;
-  logo: ImageProps;
-};
-
-type Props = {
-  heading: string;
-  description: string;
-  testimonials: Testimonial[];
-};
-
-type TestimonialSectionProps = React.ComponentPropsWithoutRef<"section"> &
-  Partial<Props>;
-
-export const TestimonialSection = (props: TestimonialSectionProps) => {
-  const { heading, description, testimonials } = {
-    ...TestimonialSectionDefaults,
-    ...props,
-  } as Props;
+export const TestimonialSection = ({ dictionary }: TestimonialSectionProps) => {
   return (
     <section className="py-16 md:py-24 lg:py-28">
       <div className="container mx-auto">
         <div className="md:mb-18 mb-12 w-full lg:mb-20">
           <h1 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
-            {heading}
+            {dictionary.testimonialSection.heading}
           </h1>
-          <p className="md:text-md">{description}</p>
+          <p className="md:text-md">
+            {dictionary.testimonialSection.description}
+          </p>
         </div>
         <div className="grid grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-x-8 lg:gap-16">
-          {testimonials.map((testimonial, index) => (
-            <Testimonial key={index} testimonial={testimonial} />
-          ))}
+          {Array.isArray(dictionary.testimonialSection.testimonials) &&
+            dictionary.testimonialSection.testimonials.map(
+              (testimonial: Testimonials, index: number) => (
+                <Testimonial key={index} testimonial={testimonial} />
+              ),
+            )}
         </div>
       </div>
     </section>
   );
 };
 
-const Testimonial = ({ testimonial }: { testimonial: Testimonial }) => (
+const Testimonial = ({ testimonial }: { testimonial: Testimonials }) => (
   <div className="flex h-full max-w-lg flex-col items-start justify-start text-left">
     <div className="mb-6 flex md:mb-8">
       {Array(testimonial.numberOfStars)

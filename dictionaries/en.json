@@ -1,0 +1,313 @@
+{
+  "navigation": {
+    "home": "Home",
+    "sipeChat": "SipeChat",
+    "aboutUs": "About Us",
+    "contact": "Contact"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "language": {
+    "en": "English",
+    "fi": "Suomi",
+    "sv": "Svenska"
+  },
+
+  "input": {
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Phone",
+    "address": "Address",
+    "city": "City",
+    "postalCode": "Postal Code",
+    "country": "Country",
+    "submit": "Submit",
+    "reset": "Reset",
+    "emailPlaceholder": "Enter your email address"
+  },
+  "hero": {
+    "heading": "Empowering You with Knowledge of Your Rights",
+    "description": "At our startup, we are dedicated to providing you with essential information about your rights in various situations. Discover how our innovative AI app can guide you through your specific case and ensure you receive the support you deserve.",
+    "inputPlaceholder": "Enter your email",
+    "button": { "title": "Sign up" },
+    "termsAndConditions": {
+      "text": "By signing up, you agree to our",
+      "link": "Terms and Conditions"
+    }
+  },
+  "features": {
+    "heading": "Discover Your Rights with Our Innovative AI App",
+    "description": "Our cutting-edge AI app simplifies the process of understanding your rights across various situations. With just a few taps, you can access tailored information that ensures you know exactly what you're entitled to."
+  },
+  "featuresList": {
+    "heading": "Unlock the Benefits of Our AI App",
+    "description": "Our AI app simplifies the process of understanding your rights. With just a few taps, you can access crucial information tailored to your specific case.",
+    "buttonText": "Learn More",
+    "notification": "You are already logged in.",
+    "features": [
+      {
+        "title": "Effortless Access to Essential Information",
+        "description": "Get instant access to vital information at your fingertips.",
+        "imageAlt": "Features 1 placeholder image"
+      },
+      {
+        "title": "Tailored Analysis for Your Unique Situation",
+        "description": "Our app provides personalized insights based on your circumstances.",
+        "imageAlt": "Features 2 placeholder image"
+      },
+      {
+        "title": "Stay Informed with Current Data",
+        "description": "Access reliable and up-to-date information whenever you need it.",
+        "imageAlt": "Features 3 placeholder image"
+      }
+    ]
+  },
+  "faqSection": {
+    "heading": "FAQs",
+    "description": "Find answers to common questions about our services and AI app.",
+    "contactUs": "Contact Us",
+    "questions": [
+      {
+        "title": "What is your service?",
+        "answer": "We provide information on rights related to various cases. Our AI app simplifies this process by delivering tailored insights. Whether it's a car accident or another issue, we guide you through your rights."
+      },
+      {
+        "title": "Can I get support?",
+        "answer": "Absolutely! We offer support through our customer service team. You can reach out via the app or our website for assistance at any time."
+      },
+      {
+        "title": "How does the app work?",
+        "answer": "Our app collects relevant information about your case. It analyses the data to inform you of your rights. This ensures you have the knowledge needed to make informed decisions."
+      },
+      {
+        "title": "What if I have more questions?",
+        "answer": "If you have additional questions, don’t hesitate to contact us. We are here to provide clarity and support. Your understanding is our priority."
+      },
+      {
+        "title": "Is the service free?",
+        "answer": "Yes, our initial consultation and access to the AI app are free. We believe in empowering individuals with knowledge without financial barriers. Additional services may incur charges, which will be clearly communicated."
+      },
+      {
+        "title": "Is my data secure?",
+        "answer": "Yes, we take data security very seriously. Your information is protected with industry-standard encryption and privacy measures. We do not share your data without your consent."
+      },
+      {
+        "title": "Who can use it?",
+        "answer": "Our services are designed for anyone seeking information about their rights. Whether you're involved in a car accident or facing other legal issues, we are here to help. Our app is user-friendly and accessible to all."
+      },
+      {
+        "title": "How often is information updated?",
+        "answer": "Our app regularly updates its information to ensure accuracy. We monitor legal changes and adjust our content accordingly. This guarantees you receive the most current advice."
+      },
+      {
+        "title": "How do I start?",
+        "answer": "Getting started is simple! Download our app and create an account to begin. Follow the prompts to enter your case details and discover your rights."
+      },
+      {
+        "title": "Can I provide feedback?",
+        "answer": "We welcome your feedback! It helps us improve our services and app functionality. You can submit your thoughts through the app or our website."
+      }
+    ],
+    "footerHeading": "Still have questions?",
+    "footerDescription": "Reach out to us anytime for assistance.",
+    "button": {
+      "title": "Contact",
+      "variant": "outline"
+    }
+  },
+  "benefits": {
+    "heading": "Discover the transformative benefits of our AI-powered rights information app.",
+    "description": "Our AI app streamlines the process of understanding your rights, saving you valuable time. With precise information at your fingertips, you can navigate your case with confidence.",
+    "subHeadings": [
+      {
+        "title": "Time-Saving",
+        "description": "Get instant access to essential information without the hassle of extensive research."
+      },
+      {
+        "title": "Accurate Insights",
+        "description": "Rely on our AI for accurate, up-to-date information tailored to your specific situation."
+      }
+    ]
+  },
+  "ctaSection": {
+    "heading": "Empower Yourself with Our App",
+    "description": "Discover your rights and benefits effortlessly. Try our app for instant access to vital information.",
+    "button1": "Try SipeChat",
+    "button2": "Learn More"
+  },
+
+  "testimonialSection": {
+    "heading": "Customer Testimonials",
+    "description": "This app transformed my understanding of my rights.",
+    "testimonials": [
+      {
+        "numberOfStars": 5,
+        "quote": "\"With the AI app, I felt empowered and informed.\"",
+        "avatar": {
+          "src": "/assets/testimonial-1.webp",
+          "alt": "Testimonial avatar 1"
+        },
+        "name": "Sami Mäkinen",
+        "position": "Doctor, GreenLife",
+        "logo": {
+          "src": "/assets/company-1.webp",
+          "alt": "Webflow logo 1"
+        }
+      },
+      {
+        "numberOfStars": 5,
+        "quote": "\"I never knew I had so many options available!\"",
+        "avatar": {
+          "src": "/assets/testimonial-2.webp",
+          "alt": "Testimonial avatar 2"
+        },
+        "name": "Juuso Montonen",
+        "position": "Guitar Teacher, Kitarakoutsi, Inc.",
+        "logo": {
+          "src": "/assets/company-2.webp",
+          "alt": "Webflow logo 2"
+        }
+      }
+    ]
+  },
+  "contactSection": {
+    "tagline": "Connect",
+    "heading": "Contact Us",
+    "description": "We're here to assist you with your inquiries.",
+    "contacts": [
+      {
+        "icon": "BiEnvelope",
+        "title": "Email",
+        "description": "Reach us at",
+        "link": {
+          "label": "info@sipe.ai",
+          "url": "mailto:info@sipe.ai"
+        }
+      },
+      {
+        "icon": "BiPhone",
+        "title": "Phone",
+        "description": "Call us anytime",
+        "link": {
+          "label": "+358440000500",
+          "url": "tel:+358440000500"
+        }
+      },
+      {
+        "icon": "BiMap",
+        "title": "Office",
+        "description": "123 Postiljooninkatu, Helsinki, Finland",
+        "button": {
+          "title": "Get Directions"
+        }
+      }
+    ]
+  },
+  "auth": {
+    "signup": "Sign Up",
+    "signin": "Sign In",
+    "signout": "Sign Out"
+  },
+  "validation": {
+    "emailRequired": "No email entered",
+    "emailInvalidTitle": "Invalid Email",
+    "emailInvalid": "Please enter a valid email address.",
+    "emailExists": "You have already signed up with this email.",
+    "emailAlreadyLoggedIn": "You are already logged in. Please sign out to register with a new email."
+  },
+
+  "footer": {
+    "logo": {
+      "url": "#",
+      "src": "/assets/Logo-main.svg",
+      "alt": "Logo image"
+    },
+    "newsletterHeading": "Join our newsletter",
+    "newsletterDescription": "We're here to assist you with your inquiries.",
+    "inputPlaceholder": "Enter your email",
+    "button": {
+      "title": "Subscribe",
+      "variant": "outline",
+      "size": "sm"
+    },
+    "termsAndConditions": "<p class='text-xs'>By subscribing you agree to with our <a href='#' class='underline'>Privacy Policy</a>.</p>",
+    "columnLinks": [
+      {
+        "title": "Quick Links",
+        "links": [
+          { "title": "About Us", "url": "/about-us" },
+          { "title": "Contact Us", "url": "/contact-us" },
+          { "title": "FAQs", "url": "/FAQs" },
+          { "title": "Blog", "url": "/blog" },
+          { "title": "Support", "url": "/support" }
+        ]
+      },
+      {
+        "title": "Resources",
+        "links": [
+          { "title": "Guides", "url": "#" },
+          { "title": "Updates", "url": "#" },
+          { "title": "Testimonials", "url": "#" },
+          { "title": "Careers", "url": "#" },
+          { "title": "Partnerships", "url": "#" }
+        ]
+      },
+      {
+        "title": "Legal",
+        "links": [
+          { "title": "Privacy Policy", "url": "/privacy" },
+          { "title": "Terms of Use", "url": "/terms" },
+          { "title": "Cookie Policy", "url": "/cookie" },
+          { "title": "User Agreement", "url": "/user-agreement" },
+          { "title": "Site Map", "url": "#" }
+        ]
+      },
+      {
+        "title": "Follow Us",
+        "links": [
+          { "title": "Facebook", "url": "#" },
+          { "title": "Twitter", "url": "#" },
+          {
+            "title": "LinkedIn",
+            "url": "https://www.linkedin.com/company/sipeai/posts/?feedView=all"
+          },
+          { "title": "Instagram", "url": "https://www.instagram.com/sipe.ai/" },
+          { "title": "YouTube", "url": "#" }
+        ]
+      },
+      {
+        "title": "Contact Info",
+        "links": [
+          { "title": "Email Us Here ", "url": "info@sipe.ai" },
+          { "title": "Call Us Today", "url": "#" },
+          { "title": "Visit Our Office ", "url": "#" },
+          { "title": "Feedback Form", "url": "/feedback" },
+          { "title": "Help Center", "url": "/help-center" }
+        ]
+      }
+    ],
+    "socialMediaLinks": [
+      { "url": "#", "icon": "BiLogoFacebookCircle" },
+      {
+        "url": "https://www.instagram.com/sipe.ai/"
+      },
+
+      {
+        "url": "https://www.linkedin.com/company/sipeai/posts/?feedView=all"
+      },
+      { "url": "#", "icon": "BiLogoYoutube" }
+    ],
+    "footerText": "© 2024 SipeAI. All rights reserved.",
+    "footerLinks": [
+      { "title": "Privacy Policy", "url": "/privacy" },
+      { "title": "Terms of Service", "url": "/terms" },
+      { "title": "Cookies Settings", "url": "/cookie" }
+    ]
+  }
+}

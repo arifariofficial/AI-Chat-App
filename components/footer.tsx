@@ -1,182 +1,43 @@
 "use client";
 
-import { FaXTwitter } from "react-icons/fa6";
 import {
   BiLogoFacebookCircle,
   BiLogoInstagram,
   BiLogoLinkedinSquare,
   BiLogoYoutube,
 } from "react-icons/bi";
-import { useState } from "react";
-import { Button, ButtonProps } from "./ui/button";
+import React, { useState } from "react";
+import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import Image from "next/image";
 import { toast } from "./ui/use-toast";
+import { Dictionary } from "@/lib/types";
+import { Locale } from "@/i18n.config";
+import Link from "next/link";
 
-const FooterDefaults: FooterProps = {
-  logo: {
-    url: "#",
-    src: "/assets/Logo-main.svg",
-    alt: "Logo image",
-  },
-  newsletterHeading: "Join our newsletter",
-  newsletterDescription: "We're here to assist you with your inquiries.",
-  inputPlaceholder: "Enter your email",
-  button: {
-    title: "Subscribe",
-    variant: "outline",
-    size: "sm",
-  },
-  termsAndConditions: `
-  <p class='text-xs'>
-    By subscribing you agree to with our 
-    <a href='#' class='underline'>Privacy Policy</a>.
-  </p>
-  `,
-  columnLinks: [
-    {
-      title: "Quick Links",
-      links: [
-        { title: "About Us", url: "/about-us" },
-        { title: "Contact Us", url: "/contact-us" },
-        { title: "FAQs", url: "/FAQs" },
-        { title: "Blog", url: "/blog" },
-        { title: "Support", url: "/support" },
-      ],
-    },
-    {
-      title: "Resources",
-      links: [
-        { title: "Guides", url: "#" },
-        { title: "Updates", url: "#" },
-        { title: "Testimonials", url: "#" },
-        { title: "Careers", url: "#" },
-        { title: "Partnerships", url: "#" },
-      ],
-    },
-    {
-      title: "Legal",
-      links: [
-        { title: "Privacy Policy", url: "/privacy" },
-        { title: "Terms of Use", url: "/terms" },
-        { title: "Cookie Policy", url: "/cookie" },
-        { title: "User Agreement", url: "/user-agreement" },
-        { title: "Site Map", url: "#" },
-      ],
-    },
-    {
-      title: "Follow Us",
-      links: [
-        { title: "Facebook", url: "#" },
-        { title: "Twitter", url: "#" },
-        {
-          title: "LinkedIn",
-          url: "https://www.linkedin.com/company/sipeai/posts/?feedView=all",
-        },
-        { title: "Instagram", url: "https://www.instagram.com/sipe.ai/" },
-        { title: "YouTube", url: "#" },
-      ],
-    },
-    {
-      title: "Contact Info",
-      links: [
-        { title: "Email Us Here ", url: "info@sipe.ai" },
-        { title: "Call Us Today", url: "#" },
-        { title: "Visit Our Office ", url: "#" },
-        { title: "Feedback Form", url: "/feedback" },
-        { title: "Help Center", url: "/help-center" },
-      ],
-    },
-  ],
-  socialMediaLinks: [
-    { url: "#", icon: <BiLogoFacebookCircle className="size-6" /> },
-    {
-      url: "https://www.instagram.com/sipe.ai/",
-      icon: <BiLogoInstagram className="size-6" />,
-    },
-    { url: "#", icon: <FaXTwitter className="size-6 p-0.5" /> },
-    {
-      url: "https://www.linkedin.com/company/sipeai/posts/?feedView=all",
-      icon: <BiLogoLinkedinSquare className="size-6" />,
-    },
-    { url: "#", icon: <BiLogoYoutube className="size-6" /> },
-  ],
-  footerText: "© 2024 SipeAI. All rights reserved.",
-  footerLinks: [
-    { title: "Privacy Policy", url: "/privacy" },
-    { title: "Terms of Service", url: "/terms" },
-    { title: "Cookies Settings", url: "/cookie" },
-  ],
-};
+interface FooterProps {
+  dictionary: Dictionary;
+  lang: Locale;
+}
 
-type ImageProps = {
-  url?: string;
-  src: string;
-  alt?: string;
-};
-
-type Links = {
-  title: string;
-  url: string;
-};
-
-type ColumnLinks = {
-  title: string;
-  links: Links[];
-};
-
-type SocialMediaLinks = {
-  url: string;
-  icon: React.ReactNode;
-};
-
-type FooterLink = {
-  title: string;
-  url: string;
-};
-
-type Props = {
-  logo: ImageProps;
-  newsletterHeading: string;
-  newsletterDescription: string;
-  inputPlaceholder?: string;
-  button: ButtonProps;
-  termsAndConditions: string;
-  columnLinks: ColumnLinks[];
-  socialMediaLinks: SocialMediaLinks[];
-  footerText?: string;
-  footerLinks: FooterLink[];
-};
-
-type FooterProps = React.ComponentPropsWithoutRef<"section"> & Partial<Props>;
-
-export const Footer = (props: FooterProps) => {
-  const {
-    logo,
-    newsletterHeading,
-    newsletterDescription,
-    inputPlaceholder,
-    button,
-    termsAndConditions,
-    columnLinks,
-    socialMediaLinks,
-    footerText,
-    footerLinks,
-  } = {
-    ...FooterDefaults,
-    ...props,
-  } as Props;
-
+export const Footer = ({ dictionary, lang }: FooterProps) => {
   const [emailInput, setEmailInput] = useState<string>("");
+
+  const socialMediaIcons = [
+    BiLogoFacebookCircle,
+    BiLogoInstagram,
+    BiLogoLinkedinSquare,
+    BiLogoYoutube,
+  ];
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (emailInput.trim() === "") {
       toast({
-        title: "Invalid Email",
-        description: "Please enter a valid email address.",
-        variant: "destructive", // Use ShadCN's variants (e.g., destructive for errors)
+        title: dictionary.validation.emailInvalidTitle,
+        description: dictionary.validation.emailInvalid,
+        variant: "default",
       });
       return;
     }
@@ -193,8 +54,10 @@ export const Footer = (props: FooterProps) => {
       <div className="container mx-auto">
         <div className="rb-12 md:mb-18 mb-12 block items-start justify-between lg:mb-20 lg:flex">
           <div className="rb-6 mb-6 lg:mb-0">
-            <h1 className="md:text-md font-semibold">{newsletterHeading}</h1>
-            <p>{newsletterDescription}</p>
+            <h1 className="md:text-md font-semibold">
+              {dictionary.footer.newsletterHeading}
+            </h1>
+            <p>{dictionary.footer.newsletterDescription}</p>
           </div>
           <div className="max-w-md lg:min-w-[25rem]">
             <form
@@ -204,29 +67,33 @@ export const Footer = (props: FooterProps) => {
               <Input
                 id="email"
                 type="email"
-                placeholder={inputPlaceholder}
+                placeholder={dictionary.input.emailPlaceholder}
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
               />
-              <Button {...button}>{button.title}</Button>
+              <Button>{dictionary.footer.button.title}</Button>
             </form>
-            <div dangerouslySetInnerHTML={{ __html: termsAndConditions }} />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: dictionary.footer.termsAndConditions,
+              }}
+            />
           </div>
         </div>
         <div className="rb-12 md:mb-18 mb-12 grid grid-cols-1 items-start gap-x-8 gap-y-10 sm:grid-cols-3 md:grid-cols-3 md:gap-y-12 lg:mb-20 lg:grid-cols-6">
           <a
-            href={logo.url}
+            href="/"
             className="sm:col-start-1 sm:col-end-4 sm:row-start-1 sm:row-end-2 lg:col-start-auto lg:col-end-auto lg:row-start-auto lg:row-end-auto"
           >
             <Image
-              src={logo.src}
-              alt={logo.alt!}
+              src="/assets/Logo-main.svg"
+              alt="Logo image"
               width={100}
               height={100}
               className="bg-primary p-2"
             />
           </a>
-          {columnLinks.map((column, index) => (
+          {dictionary.footer.columnLinks.map((column, index) => (
             <div
               key={index}
               className="flex flex-col items-start justify-start"
@@ -247,20 +114,22 @@ export const Footer = (props: FooterProps) => {
         <div className="h-px w-full bg-black" />
         <div className="flex flex-col-reverse items-start pb-4 pt-6 text-sm md:justify-start md:pb-0 md:pt-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-col-reverse items-start md:flex-row md:gap-6 lg:items-center">
-            <p className="mt-8 md:mt-0">{footerText}</p>
+            <p className="mt-8 md:mt-0">{dictionary.footer.footerText}</p>
             <div className="grid grid-flow-row grid-cols-[max-content] justify-center gap-y-4 md:grid-flow-col md:justify-center md:gap-x-6 md:gap-y-0 lg:text-left">
-              {footerLinks.map((link, index) => (
+              {dictionary.footer.footerLinks.map((link, index) => (
                 <p key={index} className="underline">
-                  <a href={link.url}>{link.title}</a>
+                  <Link href={`${lang}/${link.url}`}>{link.title}</Link>
                 </p>
               ))}
             </div>
           </div>
           <div className="mb-8 flex items-center justify-center gap-3 lg:mb-0">
-            {socialMediaLinks.map((link, index) => (
-              <a key={index} href={link.url}>
-                {link.icon}
-              </a>
+            {dictionary.footer.socialMediaLinks.map((link, index) => (
+              <Link key={index} href={`${lang}/${link.url}`}>
+                {React.createElement(socialMediaIcons[index], {
+                  className: "size-8",
+                })}
+              </Link>
             ))}
           </div>
         </div>

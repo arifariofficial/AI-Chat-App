@@ -1,32 +1,37 @@
 import { Button } from "@/components/ui/button";
+import { Locale } from "@/i18n.config";
+import { Dictionary } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 interface NavItemsMiddleProps {
   className?: string;
+  lang: Locale;
+  dictionary: Dictionary;
 }
 
-const NavItemsMiddle = ({ className }: NavItemsMiddleProps) => {
+const NavItemsMiddle = ({ className, dictionary }: NavItemsMiddleProps) => {
+  const { navigation } = dictionary;
   return (
     <div className={cn(className, "flex w-full justify-center text-lg")}>
       <Link href={`/`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
-          <p className="text-base font-bold">Home</p>
+          <p className="text-base font-bold">{navigation.home}</p>
         </Button>
       </Link>
       <Link href={`/chat`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
-          <p className="text-base font-bold">SipeChat</p>
+          <p className="text-base font-bold">{navigation.sipeChat}</p>
         </Button>
       </Link>
-      <Link href={`/meista`} className="h-full">
+      <Link href={`/about-us`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
-          <p className="text-base font-bold">About Us</p>
+          <p className="text-base font-bold">{navigation.aboutUs}</p>
         </Button>
       </Link>
       <Link href={`/yhteystiedot`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
-          <p className="text-base font-bold">Contact</p>
+          <p className="text-base font-bold">{navigation.contact}</p>
         </Button>
       </Link>
     </div>

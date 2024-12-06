@@ -1,0 +1,313 @@
+{
+  "navigation": {
+    "home": "Koti",
+    "sipeChat": "SipeChat",
+    "aboutUs": "Meistä",
+    "contact": "Yhteys"
+  },
+  "theme": {
+    "light": "Vaalea",
+    "dark": "Tumma",
+    "system": "Järjestelmä"
+  },
+  "language": {
+    "en": "English",
+    "fi": "Suomi",
+    "sv": "Svenska"
+  },
+
+  "input": {
+    "email": "Sähköposti",
+    "password": "Salasana",
+    "confirmPassword": "Vahvista salasana",
+    "firstName": "Etunimi",
+    "lastName": "Sukunimi",
+    "phone": "Puhelin",
+    "address": "Osoite",
+    "city": "Kaupunki",
+    "postalCode": "Postinumero",
+    "country": "Maa",
+    "submit": "Lähetä",
+    "reset": "Nollaa",
+    "emailPlaceholder": "Anna sähköpostiosoitteesi"
+  },
+  "hero": {
+    "heading": "Valjastamme tiedon voimasi oikeuksistasi",
+    "description": "Startup-yrityksemme tarjoaa olennaista tietoa oikeuksistasi eri tilanteissa. Tutustu innovatiiviseen tekoälysovellukseemme, joka ohjaa sinua tapauskohtaisesti ja varmistaa, että saat ansaitsemasi tuen.",
+    "inputPlaceholder": "Anna sähköpostiosoitteesi",
+    "button": { "title": "Rekisteröidy" },
+    "termsAndConditions": {
+      "text": "Rekisteröitymällä hyväksyt",
+      "link": "Käyttöehdot"
+    }
+  },
+  "features": {
+    "heading": "Tutustu oikeuksiisi innovatiivisella tekoälysovelluksellamme",
+    "description": "Kehittynyt tekoälysovelluksemme helpottaa oikeuksiesi ymmärtämistä eri tilanteissa. Vain muutamalla napautuksella saat juuri sinun tarpeisiisi räätälöityä tietoa."
+  },
+  "featuresList": {
+    "heading": "Avaa tekoälysovelluksemme hyödyt",
+    "description": "Tekoälysovelluksemme yksinkertaistaa oikeuksiesi ymmärtämistä. Vain muutamalla napautuksella voit saada tärkeää tietoa, joka on räätälöity tilanteeseesi.",
+    "buttonText": "Lisätietoja",
+    "notification": "Olet jo kirjautunut sisään.",
+    "features": [
+      {
+        "title": "Vaivaton pääsy tärkeään tietoon",
+        "description": "Saat välittömän pääsyn elintärkeään tietoon helposti.",
+        "imageAlt": "Ominaisuus 1 paikkakuva"
+      },
+      {
+        "title": "Räätälöity analyysi ainutlaatuiseen tilanteeseesi",
+        "description": "Sovelluksemme tarjoaa henkilökohtaisia oivalluksia tilanteesi perusteella.",
+        "imageAlt": "Ominaisuus 2 paikkakuva"
+      },
+      {
+        "title": "Pysy ajan tasalla ajankohtaisilla tiedoilla",
+        "description": "Pääsy luotettavaan ja ajankohtaiseen tietoon aina tarvittaessa.",
+        "imageAlt": "Ominaisuus 3 paikkakuva"
+      }
+    ]
+  },
+  "faqSection": {
+    "heading": "UKK",
+    "description": "Löydä vastauksia yleisiin kysymyksiin palveluistamme ja AI-sovelluksesta.",
+    "contactUs": "Ota yhteyttä",
+    "questions": [
+      {
+        "title": "Mikä on palvelunne?",
+        "answer": "Tarjoamme tietoa oikeuksista erilaisissa tapauksissa. AI-sovelluksemme yksinkertaistaa prosessia toimittamalla räätälöityjä näkemyksiä. Olipa kyseessä liikenneonnettomuus tai jokin muu tilanne, autamme sinua ymmärtämään oikeutesi."
+      },
+      {
+        "title": "Voinko saada tukea?",
+        "answer": "Ehdottomasti! Asiakaspalvelutiimimme tarjoaa tukea. Voit ottaa yhteyttä sovelluksen tai verkkosivustomme kautta milloin tahansa."
+      },
+      {
+        "title": "Miten sovellus toimii?",
+        "answer": "Sovelluksemme kerää asiaan liittyviä tietoja tapauksestasi. Se analysoi tiedot ja tiedottaa sinulle oikeuksistasi. Tämä varmistaa, että sinulla on tarvittavat tiedot tehdäksesi tietoon perustuvia päätöksiä."
+      },
+      {
+        "title": "Entä jos minulla on lisää kysymyksiä?",
+        "answer": "Jos sinulla on lisäkysymyksiä, älä epäröi ottaa meihin yhteyttä. Olemme täällä auttamassa ja selventämässä asioita. Ymmärryksesi on meille tärkeintä."
+      },
+      {
+        "title": "Onko palvelu ilmainen?",
+        "answer": "Kyllä, ensimmäinen konsultaatio ja AI-sovelluksen käyttö ovat ilmaisia. Uskomme, että tiedon tarjoaminen ei saa olla taloudellinen este. Lisäpalveluista voi aiheutua kustannuksia, jotka ilmoitamme selkeästi."
+      },
+      {
+        "title": "Onko tietoni turvassa?",
+        "answer": "Kyllä, otamme tietoturvan erittäin vakavasti. Tietosi on suojattu alan standardin mukaisilla salaustoimenpiteillä ja yksityisyydensuojalla. Emme jaa tietojasi ilman suostumustasi."
+      },
+      {
+        "title": "Kuka voi käyttää palvelua?",
+        "answer": "Palvelumme on suunnattu kaikille, jotka etsivät tietoa oikeuksistaan. Olipa kyseessä liikenneonnettomuus tai muu oikeudellinen asia, olemme apunasi. Sovelluksemme on käyttäjäystävällinen ja kaikkien saatavilla."
+      },
+      {
+        "title": "Kuinka usein tietoja päivitetään?",
+        "answer": "Sovelluksemme päivittää tietoja säännöllisesti varmistaakseen ajantasaisuuden. Seuraamme lakimuutoksia ja mukautamme sisältöämme tarpeen mukaan. Näin varmistamme, että saat aina ajankohtaista tietoa."
+      },
+      {
+        "title": "Kuinka pääsen alkuun?",
+        "answer": "Aloittaminen on helppoa! Lataa sovelluksemme ja luo tili. Seuraa ohjeita, lisää tapaustietosi ja löydä oikeutesi."
+      },
+      {
+        "title": "Voinko antaa palautetta?",
+        "answer": "Otamme mielellämme vastaan palautetta! Se auttaa meitä parantamaan palveluitamme ja sovelluksen toimivuutta. Voit lähettää palautetta sovelluksen tai verkkosivustomme kautta."
+      }
+    ],
+    "footerHeading": "Onko vielä kysyttävää?",
+    "footerDescription": "Ota yhteyttä milloin tahansa saadaksesi apua.",
+    "button": {
+      "title": "Ota yhteyttä",
+      "variant": "outline"
+    }
+  },
+  "benefits": {
+    "heading": "Tutustu tekoälypohjaisen oikeusinformaatiomme mullistaviin etuihin.",
+    "description": "Tekoälysovelluksemme yksinkertaistaa oikeuksiesi ymmärtämistä ja säästää arvokasta aikaa. Tarkalla tiedolla voit edetä tapaukseesi luottavaisesti.",
+    "subHeadings": [
+      {
+        "title": "Ajansäästö",
+        "description": "Saat välittömän pääsyn tärkeään tietoon ilman laajaa tutkimusta."
+      },
+      {
+        "title": "Tarkat tiedot",
+        "description": "Luota tekoälyymme saadaksesi tarkkaa, ajan tasalla olevaa tietoa, joka on räätälöity tilanteeseesi."
+      }
+    ]
+  },
+  "ctaSection": {
+    "heading": "Voimaannu sovelluksellamme",
+    "description": "Tutustu oikeuksiisi ja etuihisi vaivattomasti. Kokeile sovellustamme ja saat välitöntä pääsyä tärkeään tietoon.",
+    "button1": "Kokeile SipeChatia",
+    "button2": "Lisätietoja"
+  },
+
+  "testimonialSection": {
+    "heading": "Asiakaspalautteet",
+    "description": "Tämä sovellus mullisti oikeuksieni ymmärtämisen.",
+    "testimonials": [
+      {
+        "numberOfStars": 5,
+        "quote": "\"Tekoälysovelluksen avulla tunsin itseni voimaantuneeksi ja informoiduksi.\"",
+        "avatar": {
+          "src": "/assets/testimonial-1.webp",
+          "alt": "Testimonialin avatar 1"
+        },
+        "name": "Sami Mäkinen",
+        "position": "Lääkäri, GreenLife",
+        "logo": {
+          "src": "/assets/company-1.webp",
+          "alt": "Webflow-logo 1"
+        }
+      },
+      {
+        "numberOfStars": 5,
+        "quote": "\"En tiennyt, että minulla oli niin paljon vaihtoehtoja!\"",
+        "avatar": {
+          "src": "/assets/testimonial-2.webp",
+          "alt": "Testimonialin avatar 2"
+        },
+        "name": "Juuso Montonen",
+        "position": "Kitaransoiton opettaja, Kitarakoutsi, Inc.",
+        "logo": {
+          "src": "/assets/company-2.webp",
+          "alt": "Webflow-logo 2"
+        }
+      }
+    ]
+  },
+  "contactSection": {
+    "tagline": "Ota yhteyttä",
+    "heading": "Yhteystiedot",
+    "description": "Olemme täällä auttamassa sinua kysymyksissäsi.",
+    "contacts": [
+      {
+        "icon": "BiEnvelope",
+        "title": "Sähköposti",
+        "description": "Ota yhteyttä osoitteessa",
+        "link": {
+          "label": "info@sipe.ai",
+          "url": "mailto:info@sipe.ai"
+        }
+      },
+      {
+        "icon": "BiPhone",
+        "title": "Puhelin",
+        "description": "Soita meille milloin tahansa",
+        "link": {
+          "label": "+358440000500",
+          "url": "tel:+358440000500"
+        }
+      },
+      {
+        "icon": "BiMap",
+        "title": "Toimisto",
+        "description": "123 Postiljooninkatu, Helsinki, Suomi",
+        "button": {
+          "title": "Hae reittiohjeet"
+        }
+      }
+    ]
+  },
+  "auth": {
+    "signup": "Rekisteröidy",
+    "signin": "Kirjaudu sisään",
+    "signout": "Kirjaudu ulos"
+  },
+  "validation": {
+    "emailRequired": "Sähköpostiosoitetta ei ole syötetty",
+    "emailInvalidTitle": "Virheellinen sähköposti",
+    "emailInvalid": "Anna kelvollinen sähköpostiosoite.",
+    "emailExists": "Olet jo rekisteröitynyt tällä sähköpostilla.",
+    "emailAlreadyLoggedIn": "Olet jo kirjautunut sisään. Kirjaudu ulos rekisteröityäksesi uudella sähköpostilla."
+  },
+
+  "footer": {
+    "logo": {
+      "url": "#",
+      "src": "/assets/Logo-main.svg",
+      "alt": "Logokuva"
+    },
+    "newsletterHeading": "Liity uutiskirjeeseemme",
+    "newsletterDescription": "Olemme täällä auttamassa sinua kysymyksissäsi.",
+    "inputPlaceholder": "Syötä sähköpostiosoitteesi",
+    "button": {
+      "title": "Tilaa",
+      "variant": "outline",
+      "size": "sm"
+    },
+    "termsAndConditions": "<p class='text-xs'>Tilaamalla hyväksyt <a href='#' class='underline'>Tietosuojakäytäntömme</a>.</p>",
+    "columnLinks": [
+      {
+        "title": "Pikalinkit",
+        "links": [
+          { "title": "Meistä", "url": "/about-us" },
+          { "title": "Ota yhteyttä", "url": "/contact-us" },
+          { "title": "Usein kysytyt kysymykset", "url": "/FAQs" },
+          { "title": "Blogi", "url": "/blog" },
+          { "title": "Tuki", "url": "/support" }
+        ]
+      },
+      {
+        "title": "Resurssit",
+        "links": [
+          { "title": "Oppaat", "url": "#" },
+          { "title": "Päivitykset", "url": "#" },
+          { "title": "Asiakaspalautteet", "url": "#" },
+          { "title": "Urat", "url": "#" },
+          { "title": "Yhteistyö", "url": "#" }
+        ]
+      },
+      {
+        "title": "Laillisuus",
+        "links": [
+          { "title": "Tietosuojakäytäntö", "url": "/privacy" },
+          { "title": "Käyttöehdot", "url": "/terms" },
+          { "title": "Evästekäytäntö", "url": "/cookie" },
+          { "title": "Käyttäjäsopimus", "url": "/user-agreement" },
+          { "title": "Sivukartta", "url": "#" }
+        ]
+      },
+      {
+        "title": "Seuraa meitä",
+        "links": [
+          { "title": "Facebook", "url": "#" },
+          { "title": "Twitter", "url": "#" },
+          {
+            "title": "LinkedIn",
+            "url": "https://www.linkedin.com/company/sipeai/posts/?feedView=all"
+          },
+          { "title": "Instagram", "url": "https://www.instagram.com/sipe.ai/" },
+          { "title": "YouTube", "url": "#" }
+        ]
+      },
+      {
+        "title": "Yhteystiedot",
+        "links": [
+          { "title": "Lähetä sähköpostia", "url": "info@sipe.ai" },
+          { "title": "Soita tänään", "url": "#" },
+          { "title": "Käy toimistollamme", "url": "#" },
+          { "title": "Palaute", "url": "/feedback" },
+          { "title": "Ohjekeskus", "url": "/help-center" }
+        ]
+      }
+    ],
+    "socialMediaLinks": [
+      { "url": "#", "icon": "BiLogoFacebookCircle" },
+      {
+        "url": "https://www.instagram.com/sipe.ai/"
+      },
+
+      {
+        "url": "https://www.linkedin.com/company/sipeai/posts/?feedView=all"
+      },
+      { "url": "#", "icon": "BiLogoYoutube" }
+    ],
+    "footerText": "© 2024 SipeAI. Kaikki oikeudet pidätetään.",
+    "footerLinks": [
+      { "title": "Tietosuojakäytäntö", "url": "/privacy" },
+      { "title": "Käyttöehdot", "url": "/terms" },
+      { "title": "Evästeasetukset", "url": "/cookie" }
+    ]
+  }
+}

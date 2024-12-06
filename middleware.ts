@@ -1,8 +1,12 @@
-import NextAuth from "next-auth";
-import { authConfig } from "./auth.config";
+import { chain } from "@/middlewares/chain";
+import { withAuthMiddleware } from "@/middlewares/auth-middleware";
+import { withI18nMiddleware } from "@/middlewares/i18n-middleware";
 
-export default NextAuth(authConfig).auth;
+export default chain([withAuthMiddleware, withI18nMiddleware]);
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+  matcher: [
+    "/:path((?!api|_next/static|_next/image|assets).*)",
+    "/:path*{!.(png|jpg|jpeg|webp|svg|gif|ico|tiff|bmp)}",
+  ],
 };

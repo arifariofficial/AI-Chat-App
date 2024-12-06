@@ -10,6 +10,7 @@ import NavBarServer from "@/components/navbar/navbar-server";
 import React from "react";
 import { getChats } from "@/data/get-chat";
 import CookieConsent from "@/components/cookie-consent";
+import { i18n, Locale } from "@/i18n.config";
 
 export const metadata: Metadata = {
   title: "Sipe AI - Innovating the Future",
@@ -25,16 +26,24 @@ export const viewport = {
   ],
 };
 
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale }));
+}
+
 export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ lang: Locale }>;
 }>) {
   const session = await auth();
   const chats = await getChats(session?.user?.id || ("" as string));
 
+  const { lang } = await params;
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning>
       <body className={cn("bg-background text-foreground antialiased")}>
         <Toaster position="top-center" />
 
@@ -47,7 +56,7 @@ export default async function RootLayout({
         >
           <SessionProvider basePath="/api/auth" session={session}>
             <main className="relative mx-auto flex size-full flex-col">
-              <NavBarServer />
+              <NavBarServer lang={lang} />
               <CookieConsent />
               {children}
               <ShadToaster />
