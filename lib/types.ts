@@ -60,26 +60,6 @@ export interface Testimonials {
     alt: string;
   };
 }
-export interface ContactSection {
-  tagline: string;
-  heading: string;
-  description: string;
-  contacts: {
-    icon: JSX.Element | string; // Use string for JSON compatibility
-    title: string;
-    description: string;
-    link?: {
-      label: string;
-      url: string;
-    };
-    button?: {
-      title: string;
-      variant: "link" | "outline" | "solid";
-      iconRight?: JSX.Element | string; // Use string for JSON compatibility
-      onClick?: () => void | string; // Use string for JSON compatibility
-    };
-  }[];
-}
 
 export interface FooterColumnLinks {
   title: string;
@@ -107,10 +87,6 @@ export interface Dictionary {
   };
   language: Record<Locale, string>;
   input: {
-    email: string;
-    password: string;
-    passwordConfirmation: string;
-    passwordReset: string;
     emailPlaceholder: string;
   };
   hero: {
@@ -121,7 +97,6 @@ export interface Dictionary {
       text: string;
       link: string;
     };
-    imageAlt: string;
   };
   features: {
     heading: string;
@@ -156,7 +131,7 @@ export interface Dictionary {
     emailInvalidTitle: string;
     emailInvalid: string;
     emailExists: string;
-    emilAlreadyLoggedIn: string;
+    emailAlreadyLoggedIn: string;
   };
   faqSection: {
     heading: string;
@@ -182,7 +157,7 @@ export interface Dictionary {
   testimonialSection: {
     heading: string;
     description: string;
-    testimonials: Testimonials;
+    testimonials: Testimonials[];
   };
   contactSection: {
     tagline: string;

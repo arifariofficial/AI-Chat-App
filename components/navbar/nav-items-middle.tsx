@@ -29,7 +29,7 @@ const NavItemsMiddle = ({ className, dictionary }: NavItemsMiddleProps) => {
           <p className="text-base font-bold">{navigation.aboutUs}</p>
         </Button>
       </Link>
-      <Link href={`/yhteystiedot`} className="h-full">
+      <Link href={`/contact`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
           <p className="text-base font-bold">{navigation.contact}</p>
         </Button>

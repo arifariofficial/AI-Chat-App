@@ -17,18 +17,6 @@
   },
 
   "input": {
-    "email": "Email",
-    "password": "Password",
-    "confirmPassword": "Confirm Password",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "phone": "Phone",
-    "address": "Address",
-    "city": "City",
-    "postalCode": "Postal Code",
-    "country": "Country",
-    "submit": "Submit",
-    "reset": "Reset",
     "emailPlaceholder": "Enter your email address"
   },
   "hero": {

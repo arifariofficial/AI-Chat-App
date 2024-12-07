@@ -20,10 +20,10 @@ interface MyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     | "default"
     | "destructive"
     | "outline"
-    | "secondary"
     | "ghost"
     | "link"
     | "nav"
+    | "black"
     | "navMobile"
     | "inherit";
 }

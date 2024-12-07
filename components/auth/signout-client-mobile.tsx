@@ -13,9 +13,10 @@ interface SignOutButtonMobileProps {
     | "outline"
     | "default"
     | "destructive"
-    | "secondary"
     | "ghost"
     | "link"
+    | "inherit"
+    | "black"
     | "navMobile";
 }
 

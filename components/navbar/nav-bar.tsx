@@ -1,16 +1,22 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
 import UserButtonMobile from "./user-button-mobile";
 import NavItemsRight from "./nav-items-right";
 import NavItemsMiddle from "./nav-items-middle";
-import { Session } from "next-auth";
-import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle-mobile";
-import Logo from "@/public/assets/Logo-main.svg";
-import Image from "next/image";
 import { Locale } from "@/i18n.config";
 import { Dictionary } from "@/lib/types";
+import { Session } from "next-auth";
+import { cn } from "@/lib/utils";
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
 
 interface NavBarProps {
   session?: Session | null;
@@ -18,35 +24,44 @@ interface NavBarProps {
   dictionary: Dictionary;
 }
 
-const NavBar = ({ session, lang, dictionary }: NavBarProps) => {
+const NavBar = ({ session = null, lang = "fi", dictionary }: NavBarProps) => {
   const pathname = usePathname();
 
-  // Check if the path starts with lang and either "/chat" or "/new"
-  if (
-    pathname.startsWith(`/${lang}/chat`) ||
-    pathname.startsWith(`/${lang}/new`)
-  ) {
+  // Define paths to hide the navbar
+  const hiddenPaths = [`/${lang}/chat`, `/${lang}/new`];
+  if (hiddenPaths.some((path) => pathname.startsWith(path))) {
     return null;
   }
 
   return (
-    <nav className="sticky top-0 z-50 rounded-b-md border-b border-b-border/20 bg-navBarGradient-light dark:bg-navBarGradient-dark">
+    <nav
+      className={cn(
+        roboto.className,
+        "sticky top-0 z-50 rounded-b-md border-b bg-primary",
+      )}
+    >
       <div className="mx-auto flex h-[60px] max-w-screen-2xl justify-between sm:h-[80px]">
-        <section className="flex items-center text-foregroundNav">
-          <Link href={`/`}>
-            <div className="mx-4 flex">
+        {/* Logo Section */}
+        <section className="flex items-center">
+          <Link href="/" aria-label={"Home"}>
+            <div className="mx-4 flex w-[100px]">
               <Image
-                src={Logo} // Path relative to the public folder
-                alt="Logo"
-                width={120} // Set your desired width
-                height={100} // Set your desired height
+                src="/assets/Logo-main.svg"
+                alt={"Logo"}
+                width={120}
+                height={100}
+                priority
               />
             </div>
           </Link>
         </section>
+
+        {/* Middle Nav Items */}
         <NavItemsMiddle lang={lang} dictionary={dictionary} />
+
+        {/* Right Nav Items */}
         <section className="mr-1 flex items-center justify-center text-xl font-semibold hover:opacity-90">
-          <div className="flex size-full flex-row items-center p-px">
+          <div className="flex h-full flex-row items-center p-px">
             <NavItemsRight
               session={session}
               lang={lang}
@@ -54,7 +69,7 @@ const NavBar = ({ session, lang, dictionary }: NavBarProps) => {
             />
             <ThemeToggle
               buttonClassName="text-foregroundNav hover:opacity-90 sm:hidden flex"
-              variant="inherit"
+              variant="nav"
             />
             <UserButtonMobile
               session={session}

@@ -28,10 +28,11 @@ interface UserButtonDesktopProps {
     | "outline"
     | "default"
     | "destructive"
-    | "secondary"
     | "ghost"
     | "link"
-    | "inherit";
+    | "inherit"
+    | "black"
+    | "navMobile";
 }
 
 export default function UserButtonDesktop({

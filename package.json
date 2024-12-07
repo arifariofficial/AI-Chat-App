@@ -8,7 +8,7 @@
     "build:dev": "dotenv -e .env.local -- next build",
     "start": "next start",
     "start:dev": "dotenv -e .env.local -- next start",
-    "lint": "next lint",
+    "lint": "next lint && tsc --noEmit",
     "test": "jest",
     "cypress:open": "cypress open",
     "analyze": "ANALYZE=true next build",

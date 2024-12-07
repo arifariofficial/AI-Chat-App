@@ -9,7 +9,7 @@ import { Locale } from "@/i18n.config";
 
 interface FeatureSectionListProps {
   dictionary: Dictionary;
-  session: Session;
+  session: Session | null;
   lang: Locale;
 }
 

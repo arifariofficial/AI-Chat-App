@@ -17,18 +17,6 @@
   },
 
   "input": {
-    "email": "Sähköposti",
-    "password": "Salasana",
-    "confirmPassword": "Vahvista salasana",
-    "firstName": "Etunimi",
-    "lastName": "Sukunimi",
-    "phone": "Puhelin",
-    "address": "Osoite",
-    "city": "Kaupunki",
-    "postalCode": "Postinumero",
-    "country": "Maa",
-    "submit": "Lähetä",
-    "reset": "Nollaa",
     "emailPlaceholder": "Anna sähköpostiosoitteesi"
   },
   "hero": {
@@ -42,11 +30,11 @@
     }
   },
   "features": {
-    "heading": "Tutustu oikeuksiisi innovatiivisella tekoälysovelluksellamme",
+    "heading": "Tutustu oikeuksiisi innovatiivisella tekoälymme avulla",
     "description": "Kehittynyt tekoälysovelluksemme helpottaa oikeuksiesi ymmärtämistä eri tilanteissa. Vain muutamalla napautuksella saat juuri sinun tarpeisiisi räätälöityä tietoa."
   },
   "featuresList": {
-    "heading": "Avaa tekoälysovelluksemme hyödyt",
+    "heading": "Löydä tekoälymme hyödyt",
     "description": "Tekoälysovelluksemme yksinkertaistaa oikeuksiesi ymmärtämistä. Vain muutamalla napautuksella voit saada tärkeää tietoa, joka on räätälöity tilanteeseesi.",
     "buttonText": "Lisätietoja",
     "notification": "Olet jo kirjautunut sisään.",
@@ -122,7 +110,7 @@
     }
   },
   "benefits": {
-    "heading": "Tutustu tekoälypohjaisen oikeusinformaatiomme mullistaviin etuihin.",
+    "heading": "Tutustu tekoälyn tarjoamiin mullistaviin oikeusetuihin.",
     "description": "Tekoälysovelluksemme yksinkertaistaa oikeuksiesi ymmärtämistä ja säästää arvokasta aikaa. Tarkalla tiedolla voit edetä tapaukseesi luottavaisesti.",
     "subHeadings": [
       {
@@ -136,7 +124,7 @@
     ]
   },
   "ctaSection": {
-    "heading": "Voimaannu sovelluksellamme",
+    "heading": "Voimaannu työkalullamme",
     "description": "Tutustu oikeuksiisi ja etuihisi vaivattomasti. Kokeile sovellustamme ja saat välitöntä pääsyä tärkeään tietoon.",
     "button1": "Kokeile SipeChatia",
     "button2": "Lisätietoja"

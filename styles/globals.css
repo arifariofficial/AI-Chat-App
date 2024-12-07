@@ -9,13 +9,15 @@
     --foreground: 0 0% 20%;
     --foreground-nav: 0 0% 100%;
 
+    --nav-hover: 216 100% 19%;
+
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 180 18.46% 15%;
 
-    --primary: 209 100% 38%;
+    --primary: 215 100% 25%;
     --primary-foreground: 50 64.29% 89.02%;
     --primary-hover: 208 100% 38%;
 
@@ -60,6 +62,8 @@
     --background-secondary: 0 0 15%;
     --foreground: 0 0% 100%;
     --foreground-nav: 0 0 100%;
+
+    --nav-hover: 217.24 32.58% 10%;
 
     --card: 240 6% 10%;
     --card-foreground: 210 40% 98%;

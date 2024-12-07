@@ -24,6 +24,7 @@ const config = {
         backgroundSecondary: "hsl(var(--background-secondary))",
         foreground: "hsl(var(--foreground))",
         foregroundNav: "hsl(var(--foreground-nav))",
+        navHover: "hsl(var(--nav-hover))",
         text: "hsl(var(--text))",
         boldBlue: "hsl(var(--bold-blue))",
         title: "hsl(var(--title))",

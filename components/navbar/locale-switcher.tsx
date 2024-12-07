@@ -37,10 +37,10 @@ export function LocaleSwitcher({
       <DropdownMenuTrigger asChild className={cn(className)}>
         <Button
           variant="nav"
-          className="h-full outline-none focus:outline-none focus-visible:outline-none"
-          iconRight={<IconGlobe />}
+          className="flex h-full items-center justify-center outline-none focus:outline-none focus-visible:outline-none"
+          iconRight={<IconGlobe className="size-6" />}
         >
-          <p className="text-sm font-bold">{lang.toUpperCase()}</p>
+          <p className="text-xl font-bold">{lang.toUpperCase()}</p>
           <span className="sr-only">Switch Locale</span>
         </Button>
       </DropdownMenuTrigger>

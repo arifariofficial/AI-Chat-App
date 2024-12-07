@@ -37,8 +37,10 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: Promise<{ lang: Locale }>;
 }>) {
-  const session = await auth();
-  const chats = await getChats(session?.user?.id || ("" as string));
+  const session = await auth().catch(() => null);
+  const chats = session
+    ? await getChats(session?.user?.id || "").catch(() => [])
+    : [];
 
   const { lang } = await params;
 

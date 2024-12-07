@@ -110,7 +110,7 @@ const AlertDialogAction = React.forwardRef<
       | "nav"
       | "destructive"
       | "outline"
-      | "secondary"
+      | "black"
       | "ghost"
       | "navMobile"
       | "inherit"

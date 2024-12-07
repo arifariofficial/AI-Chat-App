@@ -69,7 +69,7 @@ export const HeroSection = (props: HeroSectionProps) => {
 
     if (session) {
       // If user is already logged in, alert the user and close the modal
-      alert(dictionary.validation.emilAlreadyLoggedIn);
+      alert(dictionary.validation.emailAlreadyLoggedIn);
       setIsSubmitting(false);
       return;
     }
@@ -111,15 +111,11 @@ export const HeroSection = (props: HeroSectionProps) => {
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="dark:text-foreground/40" />
                       </FormItem>
                     )}
                   />
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    variant="outline"
-                  >
+                  <Button type="submit" disabled={isSubmitting} variant="black">
                     {isSubmitting ? <IconSpinner /> : dictionary.auth.signup}
                   </Button>
                 </form>

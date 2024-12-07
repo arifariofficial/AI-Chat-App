@@ -13,10 +13,11 @@ interface SignInButtonMobileProps {
     | "outline"
     | "default"
     | "destructive"
-    | "secondary"
+    | "inherit"
     | "ghost"
     | "link"
     | "navMobile"
+    | "black"
     | null
     | undefined;
 }

@@ -34,10 +34,11 @@ interface UserButtonMobileProps {
     | "outline"
     | "default"
     | "destructive"
-    | "secondary"
     | "ghost"
     | "link"
-    | "inherit";
+    | "inherit"
+    | "black"
+    | "navMobile";
 }
 
 export default function UserButtonMobile({

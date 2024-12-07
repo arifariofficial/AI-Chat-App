@@ -28,13 +28,13 @@ export default async function HomePage({ lang }: HomePageProps) {
     <div className="container mx-auto flex max-w-screen-2xl flex-col px-[5%] md:px-[10%]">
       <HeroSection session={session} dictionary={dictionary} lang={lang} />
       <FeatureSection dictionary={dictionary} />
-      {session && (
-        <FeatureSectionList
-          session={session}
-          dictionary={dictionary}
-          lang={lang}
-        />
-      )}
+
+      <FeatureSectionList
+        session={session}
+        dictionary={dictionary}
+        lang={lang}
+      />
+
       <BenefitSection dictionary={dictionary} />
       <FaqSection dictionary={dictionary} lang={lang} />
       <CtaSection dictionary={dictionary} lang={lang} />

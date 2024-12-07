@@ -18,10 +18,11 @@ interface ThemeToggleProps {
     | "outline"
     | "default"
     | "destructive"
-    | "secondary"
     | "ghost"
     | "link"
-    | "inherit";
+    | "inherit"
+    | "black"
+    | "navMobile";
 }
 
 export function ThemeToggle({

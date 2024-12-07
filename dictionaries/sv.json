@@ -17,18 +17,6 @@
   },
 
   "input": {
-    "email": "E-post",
-    "password": "Lösenord",
-    "confirmPassword": "Bekräfta lösenord",
-    "firstName": "Förnamn",
-    "lastName": "Efternamn",
-    "phone": "Telefon",
-    "address": "Adress",
-    "city": "Stad",
-    "postalCode": "Postnummer",
-    "country": "Land",
-    "submit": "Skicka",
-    "reset": "Återställ",
     "emailPlaceholder": "Ange din e-postadress"
   },
   "hero": {

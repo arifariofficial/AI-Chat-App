@@ -8,10 +8,6 @@ const AboutUs = async ({ params }: { params: Promise<{ lang: Locale }> }) => {
 
   const dictionary = await getDictionary(lang);
 
-  if (!dictionary) {
-    return null;
-  }
-
   return (
     <div>
       <AboutUsPage />
