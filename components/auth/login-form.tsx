@@ -110,13 +110,11 @@ export const LoginForm = ({
     });
   };
 
-  console.log("Current Language:", lang);
-
   return (
     <CardWrapper
       headerLabel={headerLabel}
       backButtonLabel={dictionary.login.backButtonLabel}
-      backButtonHref={`${lang}/auth/register`}
+      backButtonHref={`/${lang}${routes.auth.register}`}
       showLocal={!showTwoFactor}
       className={className}
       dictionary={dictionary}

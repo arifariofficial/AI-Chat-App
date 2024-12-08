@@ -53,7 +53,7 @@ export const FaqSection = ({ dictionary, lang }: FaqSectionProps) => {
           </p>
           <div className="mt-6 md:mt-8">
             <Button asChild variant="outline">
-              <a href={`${lang}/contact`}>{dictionary.faqSection.contactUs}</a>
+              <a href={`/${lang}/contact`}>{dictionary.faqSection.contactUs}</a>
             </Button>
           </div>
         </div>

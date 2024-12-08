@@ -36,7 +36,7 @@ export const localizedRoutes: LocalizedRoutes = {
     auth: {
       signIn: "/kirjautuminen/kirjaudu-sisaan",
       signOut: "/kirjautuminen/kirjaudu-ulos",
-      register: "/kirjautuminen/rekisteröidy",
+      register: "/kirjautuminen/rekisteroidy",
       reset: "/kirjautuminen/palauta",
     },
   },

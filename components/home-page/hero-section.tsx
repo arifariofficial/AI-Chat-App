@@ -20,6 +20,7 @@ import TermsModal from "../terms-modal";
 import { Session } from "next-auth";
 import { Dictionary } from "@/lib/types";
 import { Locale } from "@/i18n.config";
+import { localizedRoutes } from "@/lib/localized-routes";
 
 type Props = {
   session: Session | null;
@@ -54,6 +55,8 @@ export const HeroSection = (props: HeroSectionProps) => {
 
   const router = useRouter();
 
+  const routes = localizedRoutes[lang];
+
   const form = useForm({
     resolver: zodResolver(createEmailSchema(sessionEmail, dictionary)),
     defaultValues: { email: "" },
@@ -74,9 +77,13 @@ export const HeroSection = (props: HeroSectionProps) => {
       return;
     }
 
+    console.log(
+      `/${lang}${routes.auth.register}?email=${encodeURIComponent(data.email)}`,
+    );
+
     // Navigate to the register page with the email as a query parameter
     router.push(
-      `${lang}/auth/register?email=${encodeURIComponent(data.email)}`,
+      `/${lang}${routes.auth.register}?email=${encodeURIComponent(data.email)}`,
     );
   };
 

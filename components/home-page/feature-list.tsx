@@ -24,7 +24,7 @@ export const FeatureSectionList = ({
       alert(dictionary.featuresList.notification);
     } else {
       // Redirect to login page
-      window.location.href = `${lang}/auth/login`;
+      window.location.href = `/${lang}/auth/register`;
     }
   };
 
@@ -69,7 +69,7 @@ export const FeatureSectionList = ({
           ))}
         </div>
         <div className="mx-auto mt-12 flex w-full items-center justify-center gap-4">
-          <Link href="/more">
+          <Link href={`/${lang}/more`}>
             <Button variant="outline">
               {dictionary.featuresList.buttonText}
             </Button>
