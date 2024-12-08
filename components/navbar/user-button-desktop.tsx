@@ -17,12 +17,17 @@ import SignOutButton from "@/components/auth/signout-client";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import React from "react";
+import { Locale } from "@/i18n.config";
+import { Dictionary } from "@/lib/types";
+import { localizedRoutes } from "@/lib/localized-routes";
 
 interface UserButtonDesktopProps {
   session?: Session | null;
   className?: string;
   style?: React.CSSProperties;
   iconColor?: string;
+  lang: Locale;
+  dictionary: Dictionary;
   variant?:
     | "nav"
     | "outline"
@@ -41,8 +46,11 @@ export default function UserButtonDesktop({
   variant,
   style,
   iconColor,
+  lang,
+  dictionary,
 }: UserButtonDesktopProps) {
   const { theme } = useTheme();
+  const routes = localizedRoutes[lang];
 
   if (session) {
     return (
@@ -120,11 +128,11 @@ export default function UserButtonDesktop({
   return (
     <Button variant="nav" className={cn(className, "h-full")}>
       <Link
-        href={"/auth/login"}
+        href={`/${lang}${routes.auth.signIn}`}
         className="flex h-full flex-row items-center gap-2 font-bold"
       >
         <LockIcon className="text-foregroundNav" />
-        <p className="text-foregroundNav">Kirjaudu</p>
+        <p className="text-foregroundNav">{dictionary.auth.signin}</p>
       </Link>
     </Button>
   );

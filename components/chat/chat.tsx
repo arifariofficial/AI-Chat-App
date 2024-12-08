@@ -26,8 +26,6 @@ const Chat: React.FC<ChatProps> = ({ chatId, session, ...props }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  console.log(path);
-
   useEffect(() => {
     const messageCount = aiState.messages?.length || 0;
     if (messageCount === 2) {

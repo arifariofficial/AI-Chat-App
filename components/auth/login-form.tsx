@@ -33,9 +33,10 @@ import { useTheme } from "next-themes";
 
 interface LoginFormProps {
   headerLabel: string;
+  className?: string;
 }
 
-export const LoginForm = ({ headerLabel }: LoginFormProps) => {
+export const LoginForm = ({ headerLabel, className }: LoginFormProps) => {
   const searchParams = useSearchParams();
   const urlError =
     searchParams.get("error") === "OAuthAccountNotLinked"
@@ -103,6 +104,7 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
       backButtonLabel="Eikö sinulla ole tiliä?"
       backButtonHref="/auth/register"
       showLocal={!showTwoFactor}
+      className={className}
     >
       <Form {...form}>
         <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>

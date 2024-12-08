@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Locale } from "@/i18n.config";
+import { localizedRoutes } from "@/lib/localized-routes";
 import { Dictionary } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -10,26 +11,32 @@ interface NavItemsMiddleProps {
   dictionary: Dictionary;
 }
 
-const NavItemsMiddle = ({ className, dictionary }: NavItemsMiddleProps) => {
+const NavItemsMiddle = ({
+  className,
+  lang,
+  dictionary,
+}: NavItemsMiddleProps) => {
   const { navigation } = dictionary;
+  const routes = localizedRoutes[lang];
+
   return (
     <div className={cn(className, "flex w-full justify-center text-lg")}>
-      <Link href={`/`} className="h-full">
+      <Link href={`/${lang}${routes.home}`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
           <p className="text-base font-bold">{navigation.home}</p>
         </Button>
       </Link>
-      <Link href={`/chat`} className="h-full">
+      <Link href={`/${lang}${routes.chat}`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
           <p className="text-base font-bold">{navigation.sipeChat}</p>
         </Button>
       </Link>
-      <Link href={`/about-us`} className="h-full">
+      <Link href={`/${lang}${routes.aboutUs}`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
           <p className="text-base font-bold">{navigation.aboutUs}</p>
         </Button>
       </Link>
-      <Link href={`/contact`} className="h-full">
+      <Link href={`/${lang}${routes.contact}`} className="h-full">
         <Button variant="nav" className="hidden size-full sm:flex">
           <p className="text-base font-bold">{navigation.contact}</p>
         </Button>
@@ -37,4 +44,5 @@ const NavItemsMiddle = ({ className, dictionary }: NavItemsMiddleProps) => {
     </div>
   );
 };
+
 export default NavItemsMiddle;

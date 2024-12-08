@@ -15,7 +15,18 @@
     "fi": "Suomi",
     "sv": "Svenska"
   },
-
+  "auth": {
+    "signup": "Sign Up",
+    "signin": "Sign In",
+    "signout": "Sign Out"
+  },
+  "validation": {
+    "emailRequired": "No email entered",
+    "emailInvalidTitle": "Invalid Email",
+    "emailInvalid": "Please enter a valid email address.",
+    "emailExists": "You have already signed up with this email.",
+    "emailAlreadyLoggedIn": "You are already logged in. Please sign out to register with a new email."
+  },
   "input": {
     "emailPlaceholder": "Enter your email address"
   },
@@ -196,18 +207,6 @@
         }
       }
     ]
-  },
-  "auth": {
-    "signup": "Sign Up",
-    "signin": "Sign In",
-    "signout": "Sign Out"
-  },
-  "validation": {
-    "emailRequired": "No email entered",
-    "emailInvalidTitle": "Invalid Email",
-    "emailInvalid": "Please enter a valid email address.",
-    "emailExists": "You have already signed up with this email.",
-    "emailAlreadyLoggedIn": "You are already logged in. Please sign out to register with a new email."
   },
 
   "footer": {

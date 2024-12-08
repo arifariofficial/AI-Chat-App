@@ -18,9 +18,16 @@ export function chain(
 
   if (current) {
     const next = chain(functions, index + 1);
-    return current(next);
+
+    // Wrap the middleware to include debugging
+    return async (request, event, response) => {
+      const result = await current(next)(request, event, response);
+
+      return result;
+    };
   }
 
+  // Final step in the chain
   return (
     _request: NextRequest,
     _event: NextFetchEvent,

@@ -39,12 +39,12 @@ type Props = {
   footer: Footer;
 };
 
-export type AboutUsPageProps = React.ComponentPropsWithoutRef<"section"> &
+export type AboutUsProps = React.ComponentPropsWithoutRef<"section"> &
   Partial<Props>;
 
-export const AboutUsPage = (props: AboutUsPageProps) => {
+export const AboutUs = (props: AboutUsProps) => {
   const { tagline, heading, description, teamMembers, footer } = {
-    ...AboutUsPageDefaults,
+    ...AboutUsDefaults,
     ...props,
   } as Props;
   return (
@@ -115,7 +115,7 @@ const TeamMember = ({ member }: { member: TeamMember }) => {
   );
 };
 
-export const AboutUsPageDefaults: AboutUsPageProps = {
+export const AboutUsDefaults: AboutUsProps = {
   tagline: "Innovate",
   heading: "Our team",
   description: "Meet the brilliant minds behind our innovative solutions.",

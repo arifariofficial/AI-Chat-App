@@ -13,6 +13,7 @@ import {
 import { cn } from "@/lib/utils";
 import { IconGlobe } from "../ui/icons";
 import { Dictionary } from "@/lib/types";
+import { findRouteKeyFromPath, getLocalizedPath } from "@/lib/locale-utils";
 
 export function LocaleSwitcher({
   className,
@@ -25,11 +26,19 @@ export function LocaleSwitcher({
 }) {
   const pathName = usePathname();
 
-  const redirectedPathName = (locale: string) => {
+  const redirectedPathName = (locale: Locale) => {
     if (!pathName) return "/";
-    const segments = pathName.split("/");
-    segments[1] = locale;
-    return segments.join("/");
+
+    // Find the route key for the current path
+    const routeKey = findRouteKeyFromPath(pathName, lang);
+
+    // If a valid route key is found, generate the localized path
+    if (routeKey) {
+      return `/${locale}${getLocalizedPath(locale, routeKey)}`;
+    }
+
+    // Default to the homepage if no valid route key is found
+    return `/${locale}`;
   };
 
   return (
@@ -54,7 +63,7 @@ export function LocaleSwitcher({
               className="flex w-full items-center justify-evenly hover:cursor-pointer"
               asChild
             >
-              <a href={redirectedPathName(locale)}>
+              <a href={redirectedPathName(locale as Locale)}>
                 <p>{dictionary.language[locale]}</p>
               </a>
             </DropdownMenuItem>

@@ -44,6 +44,8 @@ export default async function RootLayout({
 
   const { lang } = await params;
 
+  const navBar = await NavBarServer({ lang });
+
   return (
     <html lang={lang} suppressHydrationWarning>
       <body className={cn("bg-background text-foreground antialiased")}>
@@ -58,7 +60,7 @@ export default async function RootLayout({
         >
           <SessionProvider basePath="/api/auth" session={session}>
             <main className="relative mx-auto flex size-full flex-col">
-              <NavBarServer lang={lang} />
+              {navBar}
               <CookieConsent />
               {children}
               <ShadToaster />

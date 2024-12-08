@@ -4,7 +4,7 @@ import { getToken } from "next-auth/jwt";
 import { Locale, i18n } from "@/i18n.config";
 import { CustomMiddleware } from "./chain";
 
-const protectedPaths = ["/dashboard"];
+const protectedPaths = ["/chat", "/profile"];
 
 function getProtectedRoutes(protectedPaths: string[], locales: Locale[]) {
   let protectedPathsWithLocale = [...protectedPaths];
@@ -27,6 +27,21 @@ export function withAuthMiddleware(middleware: CustomMiddleware) {
     // Create a response object to pass down the chain
     const response = NextResponse.next();
 
+    // Define paths to exclude from authentication
+    const excludedPaths = ["/fi/kirjautuminen/kirjaudu-sisaan"];
+
+    // Get the current path
+    const pathname = request.nextUrl?.pathname || "/";
+
+    console.log("Auth Middleware: Pathname:", pathname);
+
+    // Check if the current path is in the excluded paths
+    if (excludedPaths.includes(pathname)) {
+      console.log("Excluded Path: Bypassing authentication for", pathname);
+      return middleware(request, event, response);
+    }
+
+    // Get the authentication token
     const token = await getToken({
       req: request,
       secret: process.env.NEXTAUTH_SECRET,
@@ -36,12 +51,13 @@ export function withAuthMiddleware(middleware: CustomMiddleware) {
     request.nextauth = request.nextauth || {};
     // @ts-ignore
     request.nextauth.token = token;
-    const pathname = request.nextUrl.pathname;
 
+    // Define protected paths with locales
     const protectedPathsWithLocale = getProtectedRoutes(protectedPaths, [
       ...i18n.locales,
     ]);
 
+    // Redirect to sign-in if token is missing and path is protected
     if (!token && protectedPathsWithLocale.includes(pathname)) {
       const signInUrl = new URL("/api/auth/signin", request.url);
       signInUrl.searchParams.set("callbackUrl", pathname);

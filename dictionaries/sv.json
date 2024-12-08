@@ -15,6 +15,18 @@
     "fi": "Suomi",
     "sv": "Svenska"
   },
+  "auth": {
+    "signup": "Registrera dig",
+    "signin": "Logga in",
+    "signout": "Logga ut"
+  },
+  "validation": {
+    "emailRequired": "Ingen e-postadress angiven",
+    "emailInvalidTitle": "Ogiltig e-post",
+    "emailInvalid": "Ange en giltig e-postadress.",
+    "emailExists": "Du har redan registrerat dig med denna e-postadress.",
+    "emailAlreadyLoggedIn": "Du är redan inloggad. Logga ut för att registrera dig med en ny e-postadress."
+  },
 
   "input": {
     "emailPlaceholder": "Ange din e-postadress"
@@ -196,18 +208,6 @@
         }
       }
     ]
-  },
-  "auth": {
-    "signup": "Registrera dig",
-    "signin": "Logga in",
-    "signout": "Logga ut"
-  },
-  "validation": {
-    "emailRequired": "Ingen e-postadress angiven",
-    "emailInvalidTitle": "Ogiltig e-post",
-    "emailInvalid": "Ange en giltig e-postadress.",
-    "emailExists": "Du har redan registrerat dig med denna e-postadress.",
-    "emailAlreadyLoggedIn": "Du är redan inloggad. Logga ut för att registrera dig med en ny e-postadress."
   },
 
   "footer": {

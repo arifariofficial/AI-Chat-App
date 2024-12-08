@@ -1,5 +1,7 @@
 // components/navbar/nav-bar-server.tsx
 
+"use server";
+
 import { Locale } from "@/i18n.config";
 import NavBar from "./nav-bar";
 import { auth } from "@/auth";

@@ -24,7 +24,7 @@ interface NavBarProps {
   dictionary: Dictionary;
 }
 
-const NavBar = ({ session = null, lang = "fi", dictionary }: NavBarProps) => {
+const NavBar = ({ session = null, lang, dictionary }: NavBarProps) => {
   const pathname = usePathname();
 
   // Define paths to hide the navbar
@@ -76,6 +76,8 @@ const NavBar = ({ session = null, lang = "fi", dictionary }: NavBarProps) => {
               className="flex size-full sm:hidden"
               buttonClassName="h-full text-foregroundNav hover:opacity-90"
               variant="inherit"
+              lang={lang}
+              dictionary={dictionary}
             />
           </div>
         </section>

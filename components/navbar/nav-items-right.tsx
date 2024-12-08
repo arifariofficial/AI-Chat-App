@@ -23,7 +23,13 @@ function NavItemsRight({
     <div className={cn(className, "mr-1 hidden h-full items-center sm:flex")}>
       <LocaleSwitcher className="px-2" lang={lang} dictionary={dictionary} />
       <ModeToggle dictionary={dictionary} />
-      <UserButtonDesktop session={session} className="h-full" variant="nav" />
+      <UserButtonDesktop
+        session={session}
+        className="h-full"
+        variant="nav"
+        lang={lang}
+        dictionary={dictionary}
+      />
     </div>
   );
 }

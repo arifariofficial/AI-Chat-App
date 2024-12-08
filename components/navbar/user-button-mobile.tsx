@@ -23,12 +23,17 @@ import {
 } from "../ui/icons";
 import SignInButtonMobile from "@/components/auth/signin-client-mobile";
 import { Separator } from "@/components/ui/separator";
+import { Locale } from "@/i18n.config";
+import { Dictionary } from "@/lib/types";
+import { localizedRoutes } from "@/lib/localized-routes";
 
 interface UserButtonMobileProps {
   session?: Session | null;
   className?: string;
   buttonClassName?: string;
   style?: React.CSSProperties;
+  lang: Locale;
+  dictionary: Dictionary;
   variant?:
     | "nav"
     | "outline"
@@ -47,7 +52,12 @@ export default function UserButtonMobile({
   buttonClassName,
   style,
   variant,
+  lang,
+  dictionary,
 }: UserButtonMobileProps) {
+  const { auth } = dictionary;
+  const routes = localizedRoutes[lang];
+
   return (
     <div className={cn(className)}>
       <Sheet>

@@ -1,8 +1,10 @@
+// middlewares.ts
+
 import { chain } from "@/middlewares/chain";
 import { withAuthMiddleware } from "@/middlewares/auth-middleware";
 import { withI18nMiddleware } from "@/middlewares/i18n-middleware";
 
-export default chain([withAuthMiddleware, withI18nMiddleware]);
+export default chain([withI18nMiddleware, withAuthMiddleware]);
 
 export const config = {
   matcher: [

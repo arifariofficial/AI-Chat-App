@@ -15,6 +15,18 @@
     "fi": "Suomi",
     "sv": "Svenska"
   },
+  "auth": {
+    "signup": "Rekisteröidy",
+    "signin": "Kirjaudu",
+    "signout": "Kirjaudu ulos"
+  },
+  "validation": {
+    "emailRequired": "Sähköpostiosoitetta ei ole syötetty",
+    "emailInvalidTitle": "Virheellinen sähköposti",
+    "emailInvalid": "Anna kelvollinen sähköpostiosoite.",
+    "emailExists": "Olet jo rekisteröitynyt tällä sähköpostilla.",
+    "emailAlreadyLoggedIn": "Olet jo kirjautunut sisään. Kirjaudu ulos rekisteröityäksesi uudella sähköpostilla."
+  },
 
   "input": {
     "emailPlaceholder": "Anna sähköpostiosoitteesi"
@@ -196,18 +208,6 @@
         }
       }
     ]
-  },
-  "auth": {
-    "signup": "Rekisteröidy",
-    "signin": "Kirjaudu sisään",
-    "signout": "Kirjaudu ulos"
-  },
-  "validation": {
-    "emailRequired": "Sähköpostiosoitetta ei ole syötetty",
-    "emailInvalidTitle": "Virheellinen sähköposti",
-    "emailInvalid": "Anna kelvollinen sähköpostiosoite.",
-    "emailExists": "Olet jo rekisteröitynyt tällä sähköpostilla.",
-    "emailAlreadyLoggedIn": "Olet jo kirjautunut sisään. Kirjaudu ulos rekisteröityäksesi uudella sähköpostilla."
   },
 
   "footer": {

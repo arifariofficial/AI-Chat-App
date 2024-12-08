@@ -23,6 +23,13 @@ interface FooterProps {
 export const Footer = ({ dictionary, lang }: FooterProps) => {
   const [emailInput, setEmailInput] = useState<string>("");
 
+  if (!dictionary || !lang) {
+    console.log(
+      "dictionary or lang not provided to Footer component. Skipping rendering.",
+    );
+    return null;
+  }
+
   const socialMediaIcons = [
     BiLogoFacebookCircle,
     BiLogoInstagram,
