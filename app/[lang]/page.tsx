@@ -1,4 +1,4 @@
-import HomePage from "@/components/page/home-page";
+import HomePage from "@/components/home-page/home-page";
 import { Locale } from "@/i18n.config";
 
 const Home = async ({ params }: { params: Promise<{ lang: Locale }> }) => {

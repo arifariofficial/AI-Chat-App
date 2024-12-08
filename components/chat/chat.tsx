@@ -11,13 +11,15 @@ import { useScrollAnchor } from "@/lib/hooks/use-scroll-anchor";
 import { ChatList } from "./chat-list";
 import { useAppDispatch } from "@/lib/store/hook";
 import { startChat } from "@/lib/store/chatSlice";
+import { Locale } from "@/i18n.config";
 
 export interface ChatProps extends React.ComponentProps<"div"> {
   chatId?: string;
   session?: Session;
+  lang: Locale;
 }
 
-const Chat: React.FC<ChatProps> = ({ chatId, session, ...props }) => {
+const Chat: React.FC<ChatProps> = ({ chatId, lang, session, ...props }) => {
   const path = usePathname();
   const [input, setInput] = useState("");
   const [messages] = useUIState();
@@ -39,10 +41,10 @@ const Chat: React.FC<ChatProps> = ({ chatId, session, ...props }) => {
     if (
       session?.user &&
       chatId &&
-      !path.includes("/chat/") &&
+      !path.includes(`/${lang}/chat/`) &&
       messages?.length === 1
     ) {
-      window.history.replaceState({}, "", `/chat/${chatId}`);
+      window.history.replaceState({}, "", `/${lang}/chat/${chatId}`);
     }
   }, [chatId, path, session?.user, messages?.length]);
 

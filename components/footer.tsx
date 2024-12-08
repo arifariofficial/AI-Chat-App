@@ -57,7 +57,7 @@ export const Footer = ({ dictionary, lang }: FooterProps) => {
     setEmailInput(""); // Clear input field
   };
   return (
-    <footer className="md:py-18 px-[5%] py-12 lg:py-20">
+    <footer className="md:py-18 container mx-auto flex max-w-screen-2xl flex-col px-[5%] py-12 md:px-[10%] lg:py-20">
       <div className="container mx-auto">
         <div className="rb-12 md:mb-18 mb-12 block items-start justify-between lg:mb-20 lg:flex">
           <div className="rb-6 mb-6 lg:mb-0">

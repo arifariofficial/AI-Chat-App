@@ -17,9 +17,9 @@ import { resetChat } from "@/lib/store/chatSlice";
 import { ModelSelection } from "./model-selection";
 import { Role } from "@/types";
 import { useChat } from "@/lib/hooks/use-chat";
-import React, { Suspense } from "react";
 import { Locale } from "@/i18n.config";
 import { Dictionary } from "@/lib/types";
+import React from "react";
 
 interface ChatNavProps {
   session: Session;
@@ -59,7 +59,7 @@ const ChatNav: React.FC<ChatNavProps> = ({
             <Button
               variant="inherit"
               onClick={() => {
-                router.push("/new");
+                router.push(`/${lang}/new`);
                 dispatch(resetChat());
               }}
               className="z-50 my-0 border-border/40 p-0 px-1 font-bold text-foreground hover:bg-accent hover:text-foreground/80 active:text-foreground sm:ml-1 sm:border"
@@ -112,18 +112,15 @@ const ChatNav: React.FC<ChatNavProps> = ({
           style={{ zIndex: 20 }}
           iconClassName="size-7"
         />
-
-        <Suspense fallback={<div>Loading User Button...</div>}>
-          <UserButtonDesktop
-            session={session}
-            variant="inherit"
-            className="w-30 hidden sm:flex"
-            iconColor="#333333"
-            style={{ zIndex: 20 }}
-            lang={lang}
-            dictionary={dictionary}
-          />
-        </Suspense>
+        <UserButtonDesktop
+          session={session}
+          variant="inherit"
+          className="w-30 hidden sm:flex"
+          iconColor="#333333"
+          style={{ zIndex: 20 }}
+          lang={lang}
+          dictionary={dictionary}
+        />
       </div>
     </div>
   );

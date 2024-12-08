@@ -76,7 +76,7 @@ export const ContactSection = ({ dictionary }: ContactSectionProps) => {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="h-[400px] w-full rounded-md md:h-[516px]"
+              className="h-[400px] w-full rounded-md dark:opacity-80 md:h-[516px]"
             ></iframe>
           </Link>
         </div>

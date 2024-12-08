@@ -48,7 +48,7 @@ export const AboutUs = (props: AboutUsProps) => {
     ...props,
   } as Props;
   return (
-    <section className="mx-auto max-w-screen-xl px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="container mx-auto mt-10 flex max-w-screen-2xl flex-col px-[5%] md:px-[10%]">
       <div className="container">
         <div className="md:mb-18 mx-auto mb-12 max-w-lg text-center lg:mb-20">
           <p className="mb-3 font-semibold md:mb-4">{tagline}</p>

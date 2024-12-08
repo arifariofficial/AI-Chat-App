@@ -230,18 +230,22 @@ export function ChatPanel({ input, setInput, className }: ChatPanelProps) {
                     },
                   ]);
 
-                  const responseMessage = await submitUserMessage({
-                    userMessageId: userMessageId,
-                    content: example.message,
-                    model: model.model,
-                  });
-
-                  setMessages((currentMessages) => [
-                    ...currentMessages,
-                    responseMessage,
-                  ]);
-                  setIsLoading(false);
-                  dispatch(decrement());
+                  try {
+                    const responseMessage = await submitUserMessage({
+                      userMessageId: userMessageId,
+                      content: example.message,
+                      model: model.model,
+                    });
+                    setMessages((currentMessages) => [
+                      ...currentMessages,
+                      responseMessage,
+                    ]);
+                  } catch (error) {
+                    console.error("Failed to submit user message:", error);
+                  } finally {
+                    setIsLoading(false);
+                    dispatch(decrement());
+                  }
                 }}
               >
                 <div className="text-xs font-semibold text-foreground sm:text-sm">
