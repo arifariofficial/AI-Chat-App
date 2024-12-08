@@ -15,10 +15,33 @@
     "fi": "Suomi",
     "sv": "Svenska"
   },
+  "metadata": {
+    "homePage": {
+      "title": "Innovating the Future",
+      "description": "Sipe AI provides intelligent solutions to help people find and utilize their rights effectively."
+    }
+  },
   "auth": {
+    "email": "Email",
+    "password": "Password",
     "signup": "Sign Up",
     "signin": "Sign In",
     "signout": "Sign Out"
+  },
+  "login": {
+    "headerLabel": "Welcome",
+    "backButtonLabel": "Don't have an account?",
+    "ariaLabelPasswordToggle": "Toggle password visibility",
+    "forgotPassword": "Forgot password?",
+    "twoFactorConfirmButtonLabel": "Confirm",
+    "orContinueButtonLabel": "Or continue with"
+  },
+  "resetPassword": {
+    "headerLabel": "Password Reset",
+    "resetButtonLabel": "Reset Password",
+    "backButtonLabel": "Back to Sign In",
+    "emailLabel": "Email Address",
+    "sendLinkLabel": "Send a Recovery Link"
   },
   "validation": {
     "emailRequired": "No email entered",
@@ -29,6 +52,10 @@
   },
   "input": {
     "emailPlaceholder": "Enter your email address"
+  },
+  "chatPage": {
+    "header": "Chat",
+    "description": "Legal AI Assistant"
   },
   "hero": {
     "heading": "Empowering You with Knowledge of Your Rights",

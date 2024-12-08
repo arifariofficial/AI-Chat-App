@@ -1,4 +1,6 @@
 import { ResetForm } from "@/components/auth/reset-form";
+import { Locale } from "@/i18n.config";
+import { getDictionary } from "@/lib/dictionary";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,6 +9,19 @@ export const metadata: Metadata = {
   icons: "/favicon.ico",
 };
 
-export default function ResetPage() {
-  return <ResetForm />;
+export default async function ResetPage({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}) {
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang);
+
+  return (
+    <ResetForm
+      dictionary={dictionary}
+      lang={lang}
+      className="mx-auto flex w-full flex-col border"
+    />
+  );
 }

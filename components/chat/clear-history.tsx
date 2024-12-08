@@ -55,15 +55,16 @@ export function ClearHistory({
             variant="outline"
             onClick={(event) => {
               event.preventDefault();
-              startTransition(async () => {
-                const result = await clearChats();
-                if (result && "error" in result) {
-                  toast.error(result.error);
-                  return;
-                }
-                setOpen(false);
-                // Ensure navigation and chat loading happen sequentially
-                router.push("/chat");
+              startTransition(() => {
+                clearChats().then((result) => {
+                  if (result && "error" in result) {
+                    toast.error(result.error);
+                    return;
+                  }
+                  setOpen(false);
+                  // Ensure navigation and chat loading happen sequentially
+                  router.push("/chat");
+                });
               });
             }}
           >

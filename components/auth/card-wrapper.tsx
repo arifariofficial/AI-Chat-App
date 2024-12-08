@@ -7,6 +7,7 @@ import { Header } from "./header";
 import { Social } from "./social";
 import { cn } from "@/lib/utils";
 import React from "react";
+import { Dictionary } from "@/lib/types";
 
 interface CardWrapperProps {
   children: React.ReactNode;
@@ -15,6 +16,7 @@ interface CardWrapperProps {
   backButtonHref?: string;
   showLocal?: boolean;
   className?: string;
+  dictionary?: Dictionary;
 }
 
 export const CardWrapper = ({
@@ -24,6 +26,7 @@ export const CardWrapper = ({
   backButtonHref,
   showLocal,
   className,
+  dictionary,
 }: CardWrapperProps) => {
   return (
     <Card
@@ -44,7 +47,7 @@ export const CardWrapper = ({
             </Grid>
             <Grid item>
               <Typography variant="body2" px={2}>
-                Tai jatka käyttäen
+                {dictionary?.login.orContinueButtonLabel}
               </Typography>
             </Grid>
             <Grid item xs>

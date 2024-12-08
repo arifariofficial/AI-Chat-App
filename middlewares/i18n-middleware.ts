@@ -5,7 +5,6 @@ import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import { CustomMiddleware } from "./chain";
 import { findRouteKeyFromPath, getLocalizedPath } from "@/lib/locale-utils";
-import { localizedRoutes } from "@/lib/localized-routes";
 
 function getLocale(request: NextRequest): Locale | undefined {
   const negotiatorHeaders: Record<string, string> = {};
@@ -25,7 +24,7 @@ export function withI18nMiddleware(middleware: CustomMiddleware) {
     const pathname = request.nextUrl.pathname;
 
     console.log("Middleware Debug:");
-    console.log("Pathname:", pathname);
+    console.log("Original Pathname:", pathname);
 
     // Detect if the pathname is missing a locale
     const pathnameIsMissingLocale = i18n.locales.every(
@@ -43,9 +42,15 @@ export function withI18nMiddleware(middleware: CustomMiddleware) {
       // Extract route key for the current pathname
       const routeKey = findRouteKeyFromPath(pathname, i18n.defaultLocale);
 
+      console.log("Route Key:", routeKey);
+
       if (routeKey) {
         // Redirect to the detected locale with the corresponding localized path
         const localizedPath = getLocalizedPath(detectedLocale, routeKey);
+        console.log(
+          "Localized Path:",
+          getLocalizedPath(detectedLocale, "/auth/reset"),
+        );
 
         console.log("Redirecting to:", `/${detectedLocale}${localizedPath}`);
 

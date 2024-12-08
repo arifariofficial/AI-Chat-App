@@ -10,10 +10,10 @@ import { getStringFromBuffer } from "./lib/utils";
 
 export const authConfig = {
   pages: {
-    signIn: "/[lang]/auth/login",
-    signOut: "/[lang]/auth/logout",
-    newUser: "/[lang]/auth/register",
-    error: "/[lang]/auth/error",
+    signIn: "/auth/login",
+    signOut: "/auth/logout",
+    newUser: "/auth/register",
+    error: "/auth/error",
   },
   basePath: "/api/auth",
   providers: [

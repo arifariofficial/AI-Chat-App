@@ -22,11 +22,9 @@ export default async function SharePage(props: { params: Params }) {
 
   const uiState: UIState = getUIStateFromAIState(chat);
 
-  return (
-    <div className="relative mt-10 h-screen">
-      <AI>
-        <ChatList messages={uiState} isShared={true} />
-      </AI>
-    </div>
-  );
+  const aiComponent = await AI({
+    children: <ChatList messages={uiState} isShared={true} />,
+  });
+
+  return aiComponent;
 }

@@ -16,10 +16,10 @@ import { Session } from "next-auth";
 import SignOutButton from "@/components/auth/signout-client";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
-import React from "react";
 import { Locale } from "@/i18n.config";
-import { Dictionary } from "@/lib/types";
 import { localizedRoutes } from "@/lib/localized-routes";
+
+import { Dictionary } from "@/lib/types";
 
 interface UserButtonDesktopProps {
   session?: Session | null;
@@ -131,8 +131,8 @@ export default function UserButtonDesktop({
         href={`/${lang}${routes.auth.signIn}`}
         className="flex h-full flex-row items-center gap-2 font-bold"
       >
-        <LockIcon className="text-foregroundNav" />
-        <p className="text-foregroundNav">{dictionary.auth.signin}</p>
+        <LockIcon />
+        <p className="text-lg">{dictionary.auth.signin}</p>
       </Link>
     </Button>
   );

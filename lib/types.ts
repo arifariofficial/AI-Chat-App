@@ -73,6 +73,11 @@ export interface FooterSocialMediaLinks {
   url: string;
 }
 
+export interface ChatPage {
+  header: string;
+  description: string;
+}
+
 export interface Dictionary {
   navigation: {
     home: string;
@@ -86,9 +91,45 @@ export interface Dictionary {
     system: string;
   };
   language: Record<Locale, string>;
+  metadata: {
+    homePage: {
+      title: string;
+      description: string;
+    };
+  };
+  auth: {
+    email: string;
+    password: string;
+    signup: string;
+    signin: string;
+    signout: string;
+  };
+  login: {
+    headerLabel: string;
+    backButtonLabel: string;
+    ariaLabelPasswordToggle: string;
+    forgotPassword: string;
+    twoFactorConfirmButtonLabel: string;
+    orContinueButtonLabel: string;
+  };
+  resetPassword: {
+    headerLabel: string;
+    resetButtonLabel: string;
+    backButtonLabel: string;
+    emailLabel: string;
+    sendLinkLabel: string;
+  };
+  validation: {
+    emailRequired: string;
+    emailInvalidTitle: string;
+    emailInvalid: string;
+    emailExists: string;
+    emailAlreadyLoggedIn: string;
+  };
   input: {
     emailPlaceholder: string;
   };
+  chatPage: ChatPage;
   hero: {
     heading: string;
     description: string;
@@ -121,18 +162,7 @@ export interface Dictionary {
       description: string;
     }[];
   };
-  auth: {
-    signup: string;
-    signin: string;
-    signout: string;
-  };
-  validation: {
-    emailRequired: string;
-    emailInvalidTitle: string;
-    emailInvalid: string;
-    emailExists: string;
-    emailAlreadyLoggedIn: string;
-  };
+
   faqSection: {
     heading: string;
     description: string;

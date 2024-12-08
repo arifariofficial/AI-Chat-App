@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import AboutUsPage from "../about-us/page";
 import ContactPage from "../contact/page";
 import LoginPage from "../auth/login/page";
+import ResetPage from "../auth/reset/page";
 
 export default async function DynamicPage({
   params,
@@ -44,11 +45,12 @@ export default async function DynamicPage({
     notFound();
   }
 
+  const aboutUsContent = await AboutUsPage({ params });
+
   // Handle matched routes
   if (topLevelKey) {
     switch (topLevelKey) {
       case "aboutUs":
-        const aboutUsContent = await AboutUsPage({ params });
         return aboutUsContent;
       case "contact":
         return <ContactPage />;
@@ -61,14 +63,19 @@ export default async function DynamicPage({
     }
   }
 
+  const loginPage = await LoginPage({ params });
+  const resetPage = await ResetPage({ params });
+
   if (authKey) {
     switch (authKey) {
       case "signIn":
-        return <LoginPage />;
+        return loginPage;
       case "signOut":
         return <div>Sign out page for {lang}</div>;
       case "register":
         return <div>Register page for {lang}</div>;
+      case "reset":
+        return resetPage;
       default:
         return (
           <div>

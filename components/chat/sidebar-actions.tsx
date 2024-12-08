@@ -77,22 +77,24 @@ export function SidebarActions({ chat }: SidebarActionsProps) {
               onClick={(event) => {
                 event.preventDefault();
 
-                startRemoveTransition(async () => {
-                  const result = await removeChat({
-                    id: chat.id,
-                    path: chat.path,
-                  });
+                startRemoveTransition(() => {
+                  (async () => {
+                    const result = await removeChat({
+                      id: chat.id,
+                      path: chat.path,
+                    });
 
-                  if (result && "error" in result) {
-                    toast.error(result.error);
-                    return;
-                  }
+                    if (result && "error" in result) {
+                      toast.error(result.error);
+                      return;
+                    }
 
-                  setDeleteDialogOpen(false);
-                  router.refresh();
-                  router.push("/chat");
-                  toast.success("Chat deleted");
-                  loadChats(session?.user?.id ?? "");
+                    setDeleteDialogOpen(false);
+                    router.refresh();
+                    router.push("/chat");
+                    toast.success("Chat deleted");
+                    loadChats(session?.user?.id ?? "");
+                  })();
                 });
               }}
             >

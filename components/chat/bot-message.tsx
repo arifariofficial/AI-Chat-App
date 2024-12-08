@@ -96,7 +96,7 @@ export function BotMessage({
       return;
     }
 
-    startTransition(async () => {
+    const saveEditedContent = async () => {
       try {
         await editMessage(userId, botMessageId, editedContent, chatId);
         setIsEditing(false);
@@ -119,6 +119,10 @@ export function BotMessage({
       } finally {
         setIsSubmitting(false);
       }
+    };
+
+    startTransition(() => {
+      saveEditedContent();
     });
   };
 

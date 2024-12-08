@@ -15,10 +15,33 @@
     "fi": "Suomi",
     "sv": "Svenska"
   },
+  "metadata": {
+    "homePage": {
+      "title": "Innovativa framtiden",
+      "description": "Sipe AI erbjuder intelligenta lösningar för att hjälpa människor att hitta och utnyttja sina rättigheter effektivt."
+    }
+  },
   "auth": {
+    "email": "E-post",
+    "password": "Lösenord",
     "signup": "Registrera dig",
     "signin": "Logga in",
     "signout": "Logga ut"
+  },
+  "login": {
+    "headerLabel": "Välkommen",
+    "backButtonLabel": "Har du inget konto?",
+    "ariaLabelPasswordToggle": "Växla lösenordets synlighet",
+    "forgotPassword": "Glömt lösenordet?",
+    "twoFactorConfirmButtonLabel": "Bekräfta",
+    "orContinueButtonLabel": "Eller fortsätt med"
+  },
+  "resetPassword": {
+    "headerLabel": "Återställ lösenord",
+    "resetButtonLabel": "Återställ lösenordet",
+    "backButtonLabel": "Tillbaka till inloggning",
+    "emailLabel": "E-postadress",
+    "sendLinkLabel": "Skicka en återställningslänk"
   },
   "validation": {
     "emailRequired": "Ingen e-postadress angiven",
@@ -30,6 +53,10 @@
 
   "input": {
     "emailPlaceholder": "Ange din e-postadress"
+  },
+  "chatPage": {
+    "header": "Chatt",
+    "description": "Juridisk AI-assistent"
   },
   "hero": {
     "heading": "Ge dig kunskap om dina rättigheter",

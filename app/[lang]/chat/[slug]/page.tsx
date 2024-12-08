@@ -6,6 +6,8 @@ import { getChat } from "@/data/get-chat";
 
 import Chat from "@/components/chat/chat";
 import { Metadata } from "next";
+import { Locale } from "@/i18n.config";
+import { localizedRoutes } from "@/lib/localized-routes";
 
 export const metadata: Metadata = {
   title: "SipeAI - Keskustelu",
@@ -13,16 +15,19 @@ export const metadata: Metadata = {
   icons: "/favicon.ico",
 };
 
-type Params = Promise<{ slug: string }>;
+type Params = Promise<{ slug: string; lang: Locale }>;
 
 export default async function ChatPage(props: { params: Params }) {
   const session = (await auth()) as Session;
 
-  const params = await props.params;
-  const id = params.slug;
+  const { slug, lang } = await props.params;
+
+  const routes = localizedRoutes[lang];
+
+  const id = slug;
 
   if (!session?.user) {
-    redirect(`/auth/login?next=/chat/${id}`);
+    redirect(`/${lang}${routes.auth.signIn}?next=/${lang}${routes.chat}${id}`);
   }
 
   const userId = session.user.id as string;
@@ -37,9 +42,11 @@ export default async function ChatPage(props: { params: Params }) {
     notFound();
   }
 
-  return (
-    <AI initialAIState={{ chatId: chat.id, messages: chat.messages }}>
-      <Chat session={session} />
-    </AI>
-  );
+  // Await the AI component logic
+  const aiComponent = await AI({
+    initialAIState: { chatId: chat.id, messages: chat.messages },
+    children: <Chat session={session} />,
+  });
+
+  return aiComponent;
 }

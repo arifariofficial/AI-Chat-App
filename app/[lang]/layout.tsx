@@ -11,13 +11,24 @@ import React from "react";
 import { getChats } from "@/data/get-chat";
 import CookieConsent from "@/components/cookie-consent";
 import { i18n, Locale } from "@/i18n.config";
+import { getDictionary } from "@/lib/dictionary";
 
-export const metadata: Metadata = {
-  title: "Sipe AI - Innovating the Future",
-  description:
-    "Sipe AI provides intelligent solutions to help people find and utilize their rights effectively.",
-  icons: "/favicon.ico",
-};
+// Metadata will be dynamically generated based on the localizedRoutes
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+
+  const dictionary = await getDictionary(lang);
+
+  return {
+    title: `SipeAI - ${dictionary.metadata.homePage.title}`,
+    description: `${dictionary.metadata.homePage.description}`,
+    icons: "/favicon.ico",
+  };
+}
 
 export const viewport = {
   themeColor: [
@@ -57,6 +68,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
           chats={chats}
+          lang={lang}
         >
           <SessionProvider basePath="/api/auth" session={session}>
             <main className="relative mx-auto flex size-full flex-col">

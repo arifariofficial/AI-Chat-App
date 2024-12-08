@@ -30,13 +30,23 @@ import { FormSucccess } from "@/components/form-success";
 import { Button } from "@/components/ui/button";
 import { VisibilityIcon, VisibilityOffIcon } from "@/components/ui/icons";
 import { useTheme } from "next-themes";
+import { Dictionary } from "@/lib/types";
+import { Locale } from "@/i18n.config";
+import { localizedRoutes } from "@/lib/localized-routes";
 
 interface LoginFormProps {
   headerLabel: string;
   className?: string;
+  dictionary: Dictionary;
+  lang: Locale;
 }
 
-export const LoginForm = ({ headerLabel, className }: LoginFormProps) => {
+export const LoginForm = ({
+  headerLabel,
+  className,
+  lang,
+  dictionary,
+}: LoginFormProps) => {
   const searchParams = useSearchParams();
   const urlError =
     searchParams.get("error") === "OAuthAccountNotLinked"
@@ -50,6 +60,8 @@ export const LoginForm = ({ headerLabel, className }: LoginFormProps) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const redirectUrl = searchParams.get("redirect") || "/";
   const { theme } = useTheme();
+
+  const routes = localizedRoutes[lang];
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -98,13 +110,16 @@ export const LoginForm = ({ headerLabel, className }: LoginFormProps) => {
     });
   };
 
+  console.log("Current Language:", lang);
+
   return (
     <CardWrapper
       headerLabel={headerLabel}
-      backButtonLabel="Eikö sinulla ole tiliä?"
-      backButtonHref="/auth/register"
+      backButtonLabel={dictionary.login.backButtonLabel}
+      backButtonHref={`${lang}/auth/register`}
       showLocal={!showTwoFactor}
       className={className}
+      dictionary={dictionary}
     >
       <Form {...form}>
         <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
@@ -150,7 +165,7 @@ export const LoginForm = ({ headerLabel, className }: LoginFormProps) => {
                           fullWidth
                           size="small"
                           id="email"
-                          label="Sähköposti"
+                          label={dictionary.auth.email}
                           autoFocus
                           autoComplete="current-email"
                           value={value}
@@ -191,7 +206,7 @@ export const LoginForm = ({ headerLabel, className }: LoginFormProps) => {
                           size="small"
                           id="password"
                           name="password"
-                          label="Salasana"
+                          label={dictionary.auth.password}
                           value={value}
                           onChange={onChange}
                           onBlur={onBlur}
@@ -216,7 +231,9 @@ export const LoginForm = ({ headerLabel, className }: LoginFormProps) => {
                             endAdornment: (
                               <InputAdornment position="end">
                                 <IconButton
-                                  aria-label="toggle password visibility"
+                                  aria-label={
+                                    dictionary.login.ariaLabelPasswordToggle
+                                  }
                                   onClick={() => setShowPassword(!showPassword)}
                                 >
                                   {showPassword ? (
@@ -236,7 +253,9 @@ export const LoginForm = ({ headerLabel, className }: LoginFormProps) => {
                         asChild
                         className="mb-2 px-0 font-normal text-foreground"
                       >
-                        <Link href="/auth/reset">Unohditko salasanan?</Link>
+                        <Link href={`/${lang}${routes.auth.reset}`}>
+                          {dictionary.login.forgotPassword}
+                        </Link>
                       </Button>
                     </FormItem>
                   )}
@@ -254,9 +273,9 @@ export const LoginForm = ({ headerLabel, className }: LoginFormProps) => {
             {isPending ? (
               <CircularProgress size="20px" className="text-foreground" />
             ) : showTwoFactor ? (
-              "Vahvista"
+              <>{dictionary.login.twoFactorConfirmButtonLabel}</>
             ) : (
-              "Kirjaudu sisään"
+              dictionary.auth.signin
             )}
           </Button>
         </Box>

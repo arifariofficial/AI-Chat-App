@@ -9,6 +9,7 @@
     "start": "next start",
     "start:dev": "dotenv -e .env.local -- next start",
     "lint": "next lint",
+    "type-check": "tsc --noEmit",
     "test": "jest",
     "cypress:open": "cypress open",
     "analyze": "ANALYZE=true next build",

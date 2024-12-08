@@ -1,4 +1,6 @@
 import { LoginForm } from "@/components/auth/login-form";
+import { Locale } from "@/i18n.config";
+import { getDictionary } from "@/lib/dictionary";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,6 +9,19 @@ export const metadata: Metadata = {
   icons: "/favicon.ico",
 };
 
-export default function LogotPage() {
-  return <LoginForm headerLabel="Kirjautunut ulos" />;
+export default async function LogotPage({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}) {
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang);
+
+  return (
+    <LoginForm
+      headerLabel="Kirjautunut ulos"
+      dictionary={dictionary}
+      lang={lang}
+    />
+  );
 }

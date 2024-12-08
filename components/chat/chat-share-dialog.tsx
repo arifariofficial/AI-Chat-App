@@ -47,20 +47,22 @@ export function ChatShareDialog() {
       toast.error("Chat ID is missing. Cannot share this chat.");
       return;
     }
-    startShareTransition(async () => {
-      try {
-        const result = await shareChatFunction(chatToShare?.id);
+    startShareTransition(() => {
+      (async () => {
+        try {
+          const result = await shareChatFunction(chatToShare?.id);
 
-        if ("error" in result) {
-          toast.error(result.error as string);
-          return;
+          if ("error" in result) {
+            toast.error(result.error as string);
+            return;
+          }
+
+          copyShareLink(result);
+        } catch (error) {
+          console.error("Failed to share chat:", error);
+          toast.error("Failed to share chat");
         }
-
-        copyShareLink(result);
-      } catch (error) {
-        console.error("Failed to share chat:", error);
-        toast.error("Failed to share chat");
-      }
+      })();
     });
   }, [chatToShare, copyShareLink, shareChatFunction]);
 

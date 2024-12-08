@@ -17,14 +17,23 @@ import { resetChat } from "@/lib/store/chatSlice";
 import { ModelSelection } from "./model-selection";
 import { Role } from "@/types";
 import { useChat } from "@/lib/hooks/use-chat";
-import React from "react";
+import React, { Suspense } from "react";
+import { Locale } from "@/i18n.config";
+import { Dictionary } from "@/lib/types";
 
 interface ChatNavProps {
   session: Session;
+  lang: Locale;
+  dictionary: Dictionary;
   setShowPromptModal: (value: boolean) => void;
 }
 
-const ChatNav: React.FC<ChatNavProps> = ({ session, setShowPromptModal }) => {
+const ChatNav: React.FC<ChatNavProps> = ({
+  session,
+  setShowPromptModal,
+  lang,
+  dictionary,
+}) => {
   const chatStarted = useSelector(selectChatStarted);
   const { handleShare } = useChat();
   const dispatch = useAppDispatch();
@@ -104,13 +113,17 @@ const ChatNav: React.FC<ChatNavProps> = ({ session, setShowPromptModal }) => {
           iconClassName="size-7"
         />
 
-        <UserButtonDesktop
-          session={session}
-          variant="inherit"
-          className="w-30 hidden sm:flex"
-          iconColor="#333333"
-          style={{ zIndex: 20 }}
-        />
+        <Suspense fallback={<div>Loading User Button...</div>}>
+          <UserButtonDesktop
+            session={session}
+            variant="inherit"
+            className="w-30 hidden sm:flex"
+            iconColor="#333333"
+            style={{ zIndex: 20 }}
+            lang={lang}
+            dictionary={dictionary}
+          />
+        </Suspense>
       </div>
     </div>
   );

@@ -15,10 +15,33 @@
     "fi": "Suomi",
     "sv": "Svenska"
   },
+  "metadata": {
+    "homePage": {
+      "title": "Innovoimassa tulevaisuutta",
+      "description": "Sipe AI tarjoaa älykkäitä ratkaisuja auttamaan ihmisiä löytämään ja hyödyntämään oikeuksiaan tehokkaasti."
+    }
+  },
   "auth": {
+    "email": "Sähköposti",
+    "password": "Salasana",
     "signup": "Rekisteröidy",
-    "signin": "Kirjaudu",
+    "signin": "Kirjauduu",
     "signout": "Kirjaudu ulos"
+  },
+  "login": {
+    "headerLabel": "Tervetuloa",
+    "backButtonLabel": "Eikö sinulla ole tiliä?",
+    "ariaLabelPasswordToggle": "Vaihda salasanan näkyvyyttä",
+    "forgotPassword": "Unohditko salasanan?",
+    "twoFactorConfirmButtonLabel": "Vahvista",
+    "orContinueButtonLabel": "Tai jatka seuraavilla"
+  },
+  "resetPassword": {
+    "headerLabel": "Salasanan nollaus",
+    "resetButtonLabel": "Nollaa salasana",
+    "backButtonLabel": "Takaisin kirjautumiseen",
+    "emailLabel": "Sähköpostiosoite",
+    "sendLinkLabel": "Lähetä palautuslinkki"
   },
   "validation": {
     "emailRequired": "Sähköpostiosoitetta ei ole syötetty",
@@ -30,6 +53,10 @@
 
   "input": {
     "emailPlaceholder": "Anna sähköpostiosoitteesi"
+  },
+  "chatPage": {
+    "header": "Keskustelu",
+    "description": "Lakisääteinen tekoälyassistentti"
   },
   "hero": {
     "heading": "Valjastamme tiedon voimasi oikeuksistasi",
