@@ -46,7 +46,7 @@ const Chat: React.FC<ChatProps> = ({ chatId, lang, session, ...props }) => {
     ) {
       window.history.replaceState({}, "", `/${lang}/chat/${chatId}`);
     }
-  }, [chatId, path, session?.user, messages?.length]);
+  }, [chatId, path, session?.user, messages?.length, lang]);
 
   // Store the chat ID in local storage when it changes
   useEffect(() => {

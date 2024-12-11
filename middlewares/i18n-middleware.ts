@@ -23,36 +23,21 @@ export function withI18nMiddleware(middleware: CustomMiddleware) {
   ) => {
     const pathname = request.nextUrl.pathname;
 
-    console.log("Middleware Debug:");
-    console.log("Original Pathname:", pathname);
-
     // Detect if the pathname is missing a locale
     const pathnameIsMissingLocale = i18n.locales.every(
       (locale) =>
         !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
     );
 
-    console.log("Pathname Is Missing Locale:", pathnameIsMissingLocale);
-
     if (pathnameIsMissingLocale) {
       const detectedLocale = getLocale(request) || i18n.defaultLocale;
-
-      console.log("Detected Locale:", detectedLocale);
 
       // Extract route key for the current pathname
       const routeKey = findRouteKeyFromPath(pathname, i18n.defaultLocale);
 
-      console.log("Route Key:", routeKey);
-
       if (routeKey) {
         // Redirect to the detected locale with the corresponding localized path
         const localizedPath = getLocalizedPath(detectedLocale, routeKey);
-        console.log(
-          "Localized Path:",
-          getLocalizedPath(detectedLocale, "/auth/reset"),
-        );
-
-        console.log("Redirecting to:", `/${detectedLocale}${localizedPath}`);
 
         return NextResponse.redirect(
           new URL(`/${detectedLocale}${localizedPath}`, request.url),

@@ -33,11 +33,8 @@ export function withAuthMiddleware(middleware: CustomMiddleware) {
     // Get the current path
     const pathname = request.nextUrl?.pathname || "/";
 
-    console.log("Auth Middleware: Pathname:", pathname);
-
     // Check if the current path is in the excluded paths
     if (excludedPaths.includes(pathname)) {
-      console.log("Excluded Path: Bypassing authentication for", pathname);
       return middleware(request, event, response);
     }
 

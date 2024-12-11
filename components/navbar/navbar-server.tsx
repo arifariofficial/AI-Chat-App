@@ -1,5 +1,3 @@
-// components/navbar/nav-bar-server.tsx
-
 "use server";
 
 import { Locale } from "@/i18n.config";
@@ -14,15 +12,21 @@ const NavBarServer = async ({ lang }: { lang: Locale }) => {
       getDictionary(lang),
     ]);
 
-    if (!session) {
-      // Provide a fallback for logged-out users
-      return <NavBar session={null} lang={lang} dictionary={dictionary} />;
-    }
-
-    return <NavBar session={session} lang={lang} dictionary={dictionary} />;
+    return (
+      <NavBar
+        session={session || null} // Explicitly handle null fallback
+        lang={lang}
+        dictionary={dictionary}
+      />
+    );
   } catch (error) {
     console.error("Error loading navbar data:", error);
-    return <div>Error loading navigation bar.</div>;
+
+    return (
+      <div className="text-red-500">
+        Error loading navigation bar. Please try again later.
+      </div>
+    );
   }
 };
 

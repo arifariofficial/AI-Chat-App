@@ -24,7 +24,11 @@ interface NavBarProps {
   dictionary: Dictionary;
 }
 
-const NavBar = ({ session = null, lang, dictionary }: NavBarProps) => {
+const NavBar: React.FC<NavBarProps> = ({
+  session = null,
+  lang,
+  dictionary,
+}) => {
   const pathname = usePathname();
 
   // Define paths to hide the navbar
@@ -43,11 +47,11 @@ const NavBar = ({ session = null, lang, dictionary }: NavBarProps) => {
       <div className="mx-auto flex h-[60px] max-w-screen-2xl justify-between sm:h-[80px]">
         {/* Logo Section */}
         <section className="flex items-center">
-          <Link href="/" aria-label={"Home"}>
+          <Link href="/" aria-label="Home">
             <div className="mx-4 flex w-[100px]">
               <Image
                 src="/assets/Logo-main.svg"
-                alt={"Logo"}
+                alt="Logo"
                 width={120}
                 height={100}
                 priority

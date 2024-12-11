@@ -1,3 +1,5 @@
+//app/[lang]/chat/[slug]/page.tsx
+
 import { notFound, redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { AI } from "@/lib/chat/actions";
@@ -35,7 +37,7 @@ export default async function ChatPage(props: { params: Params }) {
   const chat = await getChat(id, userId);
 
   if (!chat) {
-    redirect("/chat");
+    redirect(`$/{lang}${routes.chat}`);
   }
 
   if (chat?.userId !== session?.user?.id) {
@@ -45,7 +47,7 @@ export default async function ChatPage(props: { params: Params }) {
   // Await the AI component logic
   const aiComponent = await AI({
     initialAIState: { chatId: chat.id, messages: chat.messages },
-    children: <Chat session={session} />,
+    children: <Chat session={session} lang={lang} />,
   });
 
   return aiComponent;
