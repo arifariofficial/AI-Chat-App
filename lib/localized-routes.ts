@@ -6,6 +6,9 @@ export type LocalizedRoutes = {
     chat: string;
     aboutUs: string;
     contact: string;
+    account: string;
+    balance: string;
+    security: string;
     auth: {
       signIn: string;
       signOut: string;
@@ -21,6 +24,9 @@ export const localizedRoutes: LocalizedRoutes = {
     chat: "/chat",
     aboutUs: "/about-us",
     contact: "/contact",
+    account: "/account",
+    balance: "/balance",
+    security: "/security",
     auth: {
       signIn: "/auth/login",
       signOut: "/auth/logout",
@@ -33,6 +39,9 @@ export const localizedRoutes: LocalizedRoutes = {
     chat: "/chat",
     aboutUs: "/miesta",
     contact: "/yhteys",
+    account: "/tili",
+    balance: "/saldo",
+    security: "/turvallisuus",
     auth: {
       signIn: "/kirjautuminen/kirjaudu-sisaan",
       signOut: "/kirjautuminen/kirjaudu-ulos",
@@ -45,6 +54,9 @@ export const localizedRoutes: LocalizedRoutes = {
     chat: "/chat",
     aboutUs: "/om-oss",
     contact: "/kontakt",
+    account: "/konto",
+    balance: "/balans",
+    security: "/sakerhet",
     auth: {
       signIn: "/autentisering/logga-in",
       signOut: "/autentisering/logga-ut",

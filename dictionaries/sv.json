@@ -21,6 +21,9 @@
       "description": "Sipe AI erbjuder intelligenta lösningar för att hjälpa människor att hitta och utnyttja sina rättigheter effektivt."
     }
   },
+  "notifications": {
+    "loading": "Laddar..."
+  },
   "auth": {
     "email": "E-post",
     "password": "Lösenord",
@@ -52,7 +55,45 @@
   },
 
   "input": {
+    "updateButtonLabel": "Uppdatera",
+    "email": "E-post",
+    "emailAddress": "E-postadress",
     "emailPlaceholder": "Ange din e-postadress"
+  },
+  "image": {
+    "imageAlt": "Namn inte tillgängligt",
+    "imageError": "Ingen bild"
+  },
+  "userButton": {
+    "noName": "Inget namn",
+    "account": "Konto"
+  },
+  "profile": {
+    "account": {
+      "header": "Konto",
+      "description": "Hantera dina kontoinställningar och information.",
+      "profile": "Profil",
+      "name": "Namn",
+      "nameNotAvailable": "Namn inte tillgängligt",
+      "email": "E-post",
+      "emailButtonConfirm": "Bekräfta e-post",
+      "emailButtonConfirmation": "Bekräftad"
+    },
+    "balance": {
+      "header": "Saldo",
+      "description": "Hantera dina betalningsinställningar",
+      "selectHeader": "Ladda saldo till ditt Sipe-konto",
+      "selectAmount": "Belopp",
+      "selectBuy": "Köp"
+    },
+    "security": {
+      "header": "Säkerhet",
+      "description": "Hantera dina säkerhetsinställningar",
+      "twoFactorTitle": "Tvåfaktorsautentisering",
+      "twoFactorTooltip": "När denna funktion är aktiverad skickas ett engångslösenord (OTP) till användarens e-postadress för att möjliggöra säker inloggning.",
+      "twoFactorEnable": "Aktivera",
+      "twoFactorDisable": "Inaktivera"
+    }
   },
   "chatPage": {
     "header": "Chatt",

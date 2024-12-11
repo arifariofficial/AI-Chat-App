@@ -21,6 +21,9 @@
       "description": "Sipe AI tarjoaa älykkäitä ratkaisuja auttamaan ihmisiä löytämään ja hyödyntämään oikeuksiaan tehokkaasti."
     }
   },
+  "notifications": {
+    "loading": "Ladataan..."
+  },
   "auth": {
     "email": "Sähköposti",
     "password": "Salasana",
@@ -52,8 +55,47 @@
   },
 
   "input": {
-    "emailPlaceholder": "Anna sähköpostiosoitteesi"
+    "updateButtonLabel": "Päivitä",
+    "email": "Sähköposti",
+    "emailAddress": "Sähköpostiosoite",
+    "emailPlaceholder": "Kirjoita sähköpostiosoitteesi"
   },
+  "image": {
+    "imageAlt": "Nimi ei saatavilla",
+    "imageError": "Ei kuvaa"
+  },
+  "userButton": {
+    "noName": "Ei nimeä",
+    "account": "Tili"
+  },
+  "profile": {
+    "account": {
+      "header": "Tili",
+      "description": "Hallitse tilisi asetuksia ja tietoja.",
+      "profile": "Profiili",
+      "name": "Nimi",
+      "nameNotAvailable": "Nimi ei saatavilla",
+      "email": "Sähköposti",
+      "emailButtonConfirm": "Vahvista sähköposti",
+      "emailButtonConfirmation": "Vahvistettu"
+    },
+    "balance": {
+      "header": "Saldo",
+      "description": "Hallitse maksuasetuksiasi",
+      "selectHeader": "Lataa saldoa Sipe-tilillesi",
+      "selectAmount": "Määrä",
+      "selectBuy": "Osta"
+    },
+    "security": {
+      "header": "Turvallisuus",
+      "description": "Hallitse turvallisuusasetuksiasi",
+      "twoFactorTitle": "Kaksivaiheinen tunnistautuminen",
+      "twoFactorTooltip": "Kun tämä toiminto on aktivoitu, kertakäyttöinen salasana (OTP) lähetetään käyttäjän sähköpostiosoitteeseen turvallisen kirjautumisen mahdollistamiseksi.",
+      "twoFactorEnable": "Ota käyttöön",
+      "twoFactorDisable": "Poista käytöstä"
+    }
+  },
+
   "chatPage": {
     "header": "Keskustelu",
     "description": "Lakisääteinen tekoälyassistentti"

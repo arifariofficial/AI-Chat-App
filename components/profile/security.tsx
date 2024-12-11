@@ -12,8 +12,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { GiInfo } from "react-icons/gi";
 import { IconSpinner } from "@/components/ui/icons";
+import { Dictionary } from "@/lib/types";
 
-export default function Security() {
+interface SecurityProps {
+  dictionary: Dictionary;
+}
+
+export default function Security({ dictionary }: SecurityProps) {
   const [isTwoFactorEnabled, setIsTwoFactorEnabled] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -53,14 +58,16 @@ export default function Security() {
   return (
     <main className="flex size-full flex-col text-foreground">
       <div className="mb-10 h-fit w-full">
-        <h1 className="mb-1 text-2xl font-semibold">Turvallisuus</h1>
-        <p>Hallitse turvallisuusasetuksiasi</p>
+        <h1 className="mb-1 text-2xl font-semibold">
+          {dictionary.profile.security.header}
+        </h1>
+        <p>{dictionary.profile.security.description}</p>
       </div>
       {error && <div className="mb-2 text-destructive-foreground">{error}</div>}
       <form onSubmit={(e) => e.preventDefault()} className="flex w-full">
         <section className="flex w-full justify-between">
           <div className="flex flex-row text-base font-semibold text-foreground">
-            Kaksivaiheinen todennus
+            {dictionary.profile.security.twoFactorTitle}
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="ghost" className="ml-1 size-4 p-0">
@@ -69,9 +76,7 @@ export default function Security() {
               </TooltipTrigger>
               <TooltipContent side="top" className="shadow-md">
                 <p className="max-w-[200px]">
-                  Kun tämä ominaisuus on aktivoitu, kertakäyttöinen salasana
-                  (OTP) lähetetään käyttäjän sähköpostiosoitteeseen turvallisen
-                  kirjautumisen mahdollistamiseksi.
+                  {dictionary.profile.security.twoFactorTooltip}
                 </p>
               </TooltipContent>
             </Tooltip>
@@ -92,10 +97,10 @@ export default function Security() {
                   loading ? (
                     <IconSpinner />
                   ) : (
-                    "Otettu käyttöön"
+                    dictionary.profile.security.twoFactorEnable
                   )
                 ) : (
-                  "Poistettu käytöstä"
+                  dictionary.profile.security.twoFactorDisable
                 )}
               </div>
             }

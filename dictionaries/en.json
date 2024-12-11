@@ -21,6 +21,9 @@
       "description": "Sipe AI provides intelligent solutions to help people find and utilize their rights effectively."
     }
   },
+  "notifications": {
+    "loading": "Loading..."
+  },
   "auth": {
     "email": "Email",
     "password": "Password",
@@ -51,7 +54,45 @@
     "emailAlreadyLoggedIn": "You are already logged in. Please sign out to register with a new email."
   },
   "input": {
+    "updateButtonLabel": "Update",
+    "email": "Email",
+    "emailAddress": "Email Address",
     "emailPlaceholder": "Enter your email address"
+  },
+  "image": {
+    "imageAlt": "Name not available",
+    "imageError": "No Image"
+  },
+  "userButton": {
+    "noName": "No Name",
+    "account": "Account"
+  },
+  "profile": {
+    "account": {
+      "header": "Account",
+      "description": "Manage your account settings and information.",
+      "profile": "Profile",
+      "name": "Name",
+      "nameNotAvailable": "Name not available",
+      "email": "Email",
+      "emailButtonConfirm": "Confirm Email",
+      "emailButtonConfirmation": "Confirmed"
+    },
+    "balance": {
+      "header": "Balance",
+      "description": "Manage your payment settings",
+      "selectHeader": "Load balance to your Sipe account",
+      "selectAmount": "Amount",
+      "selectBuy": "Buy"
+    },
+    "security": {
+      "header": "Security",
+      "description": "Manage your security settings",
+      "twoFactorTitle": "Two-Factor Authentication",
+      "twoFactorTooltip": "When this feature is activated, a one-time password (OTP) will be sent to the user's email address to enable secure login.",
+      "twoFactorEnable": "Enable",
+      "twoFactorDisable": "Disable"
+    }
   },
   "chatPage": {
     "header": "Chat",
@@ -291,7 +332,10 @@
             "title": "LinkedIn",
             "url": "https://www.linkedin.com/company/sipeai/posts/?feedView=all"
           },
-          { "title": "Instagram", "url": "https://www.instagram.com/sipe.ai/" },
+          {
+            "title": "Instagram",
+            "url": "https://www.instagram.com/sipe.ai/"
+          },
           { "title": "YouTube", "url": "#" }
         ]
       },

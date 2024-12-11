@@ -12,6 +12,7 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
+import { Dictionary } from "@/lib/types";
 
 type CreditOption = {
   value: number;
@@ -26,7 +27,11 @@ const creditOptions: CreditOption[] = [
   { value: 20, label: "20 EUR" },
 ];
 
-export default function Balance() {
+interface BalanceProps {
+  dictionary: Dictionary;
+}
+
+export default function Balance({ dictionary }: BalanceProps) {
   const [loading, setLoading] = useState(false);
   const [credit, setCredit] = useState<number>(creditOptions[0].value);
   const { toast } = useToast();
@@ -69,17 +74,21 @@ export default function Balance() {
   return (
     <div className="flex size-full flex-col items-center">
       <div className="mb-10 w-full bg-background text-foreground">
-        <h1 className="mb-1 text-2xl font-semibold">Saldo</h1>
-        <p>Hallitse maksuasetuksiasi</p>
+        <h1 className="mb-1 text-2xl font-semibold">
+          {dictionary.profile.balance.header}
+        </h1>
+        <p>{dictionary.profile.balance.description}</p>
       </div>
       <div className="flex w-full max-w-md flex-col items-center space-y-6 rounded-xl border border-border/30 bg-background px-8 py-6 text-foreground">
-        <h1 className="text-lg font-semibold">Lataa saldoa Sipe-tilillesi</h1>
+        <h1 className="text-lg font-semibold">
+          {dictionary.profile.balance.selectHeader}
+        </h1>
         <FormControl
           fullWidth
           className="text-foreground focus:text-foreground"
         >
           <InputLabel id="credit-select-label" className="mb-6">
-            Määrä
+            {dictionary.profile.balance.selectAmount}
           </InputLabel>
           <Select
             size="medium"
@@ -102,7 +111,7 @@ export default function Balance() {
           className="h-ful my-10 w-2/3 p-5"
           onClick={buyCredits}
         >
-          Osto
+          {dictionary.profile.balance.selectBuy}
         </Button>
       </div>
     </div>

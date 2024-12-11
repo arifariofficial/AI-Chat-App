@@ -6,6 +6,11 @@ import AboutUsPage from "../about-us/page";
 import ContactPage from "../contact/page";
 import LoginPage from "../auth/login/page";
 import ResetPage from "../auth/reset/page";
+import ProfileLayout from "../profile/layout";
+import ProfilePage from "../profile/(account)/page";
+import { getDictionary } from "@/lib/dictionary";
+import SubscriptionPage from "../profile/balance/page";
+import SecurityPage from "../profile/security/page";
 
 export default async function DynamicPage({
   params,
@@ -13,6 +18,8 @@ export default async function DynamicPage({
   params: Promise<{ lang: Locale; slug: string[] }>;
 }) {
   const { lang, slug } = await params;
+
+  const dictionary = await getDictionary(lang);
 
   // Validate the language
   if (!localizedRoutes[lang as keyof typeof localizedRoutes]) {
@@ -46,6 +53,9 @@ export default async function DynamicPage({
   }
 
   const aboutUsContent = await AboutUsPage({ params });
+  const profilePageContent = await ProfilePage({ params });
+  const balancePageContent = await SubscriptionPage({ params });
+  const securityPageContent = await SecurityPage({ params });
 
   // Handle matched routes
   if (topLevelKey) {
@@ -54,6 +64,25 @@ export default async function DynamicPage({
         return aboutUsContent;
       case "contact":
         return <ContactPage />;
+      case "account":
+      case "balance":
+      case "security":
+        return (
+          <ProfileLayout lang={lang} dictionary={dictionary}>
+            {(() => {
+              switch (topLevelKey) {
+                case "account":
+                  return profilePageContent;
+                case "balance":
+                  return balancePageContent;
+                case "security":
+                  return securityPageContent;
+                default:
+                  return null;
+              }
+            })()}
+          </ProfileLayout>
+        );
       default:
         return (
           <div>

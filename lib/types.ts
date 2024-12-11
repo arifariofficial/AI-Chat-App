@@ -97,6 +97,9 @@ export interface Dictionary {
       description: string;
     };
   };
+  notifications: {
+    loading: string;
+  };
   auth: {
     email: string;
     password: string;
@@ -127,7 +130,45 @@ export interface Dictionary {
     emailAlreadyLoggedIn: string;
   };
   input: {
+    updateButtonLabel: string;
+    email: string;
+    emailAddress: string;
     emailPlaceholder: string;
+  };
+  image: {
+    imageAlt: string;
+    imageError: string;
+  };
+  userButton: {
+    noName: string;
+    account: string;
+  };
+  profile: {
+    account: {
+      header: string;
+      description: string;
+      profile: string;
+      name: string;
+      nameNotAvailable: string;
+      email: string;
+      emailButtonConfirm: string;
+      emailButtonConfirmation: string;
+    };
+    balance: {
+      header: string;
+      description: string;
+      selectHeader: string;
+      selectAmount: string;
+      selectBuy: string;
+    };
+    security: {
+      header: string;
+      description: string;
+      twoFactorTitle: string;
+      twoFactorTooltip: string;
+      twoFactorEnable: string;
+      twoFactorDisable: string;
+    };
   };
   chatPage: ChatPage;
   hero: {

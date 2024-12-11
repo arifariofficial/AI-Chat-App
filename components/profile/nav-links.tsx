@@ -3,37 +3,49 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-
 import {
   SecurityIcon,
   SubscriptionIcon,
   UserIcon,
 } from "@/components/ui/icons";
+import { Locale } from "@/i18n.config";
+import { Dictionary } from "@/lib/types";
+import { LocalizedRoutes } from "@/lib/localized-routes";
 
-const links = [
-  {
-    name: "Tili",
-    href: "/profile",
-    icon: UserIcon,
-  },
-  {
-    name: "Saldo",
-    href: "/profile/balance",
-    icon: SubscriptionIcon,
-  },
-  { name: "Turvallisuus", href: "/profile/security", icon: SecurityIcon },
-];
+interface NavLinksProps {
+  lang: Locale;
+  dictionary: Dictionary;
+  routes: LocalizedRoutes[Locale];
+}
 
-export default function NavLinks() {
+export default function NavLinks({ lang, dictionary, routes }: NavLinksProps) {
   const pathname = usePathname();
+
+  const links = [
+    {
+      name: dictionary?.profile?.account.header,
+      href: `/${lang}${routes?.account}`,
+      icon: UserIcon,
+    },
+    {
+      name: dictionary?.profile?.balance.header,
+      href: `/${lang}${routes?.balance}`,
+      icon: SubscriptionIcon,
+    },
+    {
+      name: dictionary?.profile?.security.header,
+      href: `/${lang}${routes?.security}`,
+      icon: SecurityIcon,
+    },
+  ];
 
   return (
     <>
-      {links.map((link) => {
+      {links.map((link, index) => {
         const LinkIcon = link.icon;
         return (
           <Link
-            key={link.name}
+            key={index}
             href={link.href}
             className={clsx(
               "text-md m-px flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-background font-medium text-foreground hover:bg-foreground/10 md:mx-1 md:justify-start md:px-4",

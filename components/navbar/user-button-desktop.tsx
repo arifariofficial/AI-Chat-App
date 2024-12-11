@@ -66,7 +66,7 @@ export default function UserButtonDesktop({
                 {session.user.image && (
                   <AvatarImage
                     src={session.user.image}
-                    alt={session.user.name || "Kuva ei ole saatavilla"}
+                    alt={session.user.name || dictionary.image.imageAlt}
                   />
                 )}
                 <AvatarFallback className="size-full border text-3xl">
@@ -90,15 +90,17 @@ export default function UserButtonDesktop({
                 {session.user.image && (
                   <AvatarImage
                     src={session.user.image}
-                    alt={session.user.name || "Name not available"}
+                    alt={session.user.name || dictionary.image.imageAlt}
                   />
                 )}
                 <AvatarFallback className="size-32 rounded-none">
-                  Ei kuvaa
+                  {dictionary.image.imageError}
                 </AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-xl">{session.user.name || "Ei nimeä"}</p>
+                <p className="text-xl">
+                  {session.user.name || dictionary.userButton.noName}
+                </p>
                 <p>{session.user.email}</p>
               </div>
             </DropdownMenuLabel>
@@ -110,14 +112,17 @@ export default function UserButtonDesktop({
               >
                 <Link
                   className="flex h-[48px] w-full items-center justify-between px-8"
-                  href="/profile"
+                  href={`/${lang}${routes.account}`}
                 >
-                  <p>Tili</p>
+                  <p>{dictionary.userButton.account}</p>
                   <UserIcon />
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <SignOutButton className="flex h-[48px] w-full justify-between px-8 hover:cursor-pointer" />
+              <SignOutButton
+                className="flex h-[48px] w-full justify-between px-8 hover:cursor-pointer"
+                dictionary={dictionary}
+              />
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>

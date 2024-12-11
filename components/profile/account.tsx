@@ -2,7 +2,6 @@
 
 import { getSession, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { EditIcon } from "@/components/ui/icons";
@@ -11,23 +10,31 @@ import { TextField } from "@mui/material";
 import { updateName } from "@/actions/update";
 import { useToast } from "@/components/ui/use-toast";
 import { sendNewVerificationEmail } from "@/actions/send-verification";
+import { Locale } from "@/i18n.config";
+import { Dictionary } from "@/lib/types";
+import { localizedRoutes } from "@/lib/localized-routes";
 
-export default function Account() {
+interface AccountProps {
+  lang: Locale;
+  dictionary: Dictionary;
+}
+
+export default function Account({ lang, dictionary }: AccountProps) {
   const { data: session, status } = useSession();
-
   const [editName, setEditName] = useState(false);
   const [name, setName] = useState(session?.user.name || "");
   const [isLoading, setIsLoading] = useState(false);
   const [verificationSend, setVerificationSend] = useState(false);
+  const routes = localizedRoutes[lang];
 
   const { toast } = useToast();
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return <p>{dictionary.notifications.loading}</p>;
   }
 
   if (status !== "authenticated") {
-    redirect("/auth/signin");
+    redirect(`/${lang}${routes.auth.signIn}?next=/${lang}${routes.account}`);
   }
 
   const handleNameUpdate = async () => {
@@ -98,32 +105,34 @@ export default function Account() {
   return (
     <main className="mx-auto flex size-full flex-col items-center rounded-lg bg-background text-foreground">
       <div className="mb-10 w-full">
-        <h1 className="mb-1 text-2xl font-semibold">Tili</h1>
-        <p>Hallitse tilin asetuksia</p>
+        <h1 className="mb-1 text-2xl font-semibold">
+          {dictionary.profile.account.header}
+        </h1>
+        <p>{dictionary.profile.account.description}</p>
       </div>
 
       <div className="w-full">
         <section className="mb-10">
           <h2 className="border-b border-border text-base font-semibold">
-            Profiili
+            {dictionary.profile.account.profile}
           </h2>
           <div className="flex flex-row px-0 py-4">
             <Avatar className="size-32 rounded-sm border shadow-md">
               {session.user.image && (
                 <AvatarImage
                   src={session.user.image}
-                  alt={session.user.name || "Kuva ei ole saatavilla"}
+                  alt={session.user.name || dictionary.image.imageError}
                 />
               )}
               <AvatarFallback className="size-32 rounded-none">
-                Ei kuvaa
+                {dictionary.image.imageError}
               </AvatarFallback>
             </Avatar>
           </div>
         </section>
         <section className="mb-10 h-20">
           <h2 className="border-b border-border text-base font-semibold">
-            Nimi
+            {dictionary.profile.account.name}
           </h2>
           <div className="m-2 flex w-full flex-row justify-between gap-2">
             {editName ? (
@@ -135,7 +144,10 @@ export default function Account() {
                 onChange={(e) => setName(e.target.value)}
               />
             ) : (
-              <p>{session.user.name || "Ei saatavilla"}</p>
+              <p>
+                {session.user.name ||
+                  dictionary.profile.account.nameNotAvailable}
+              </p>
             )}
             {!editName ? (
               <Button variant="ghost" onClick={() => setEditName(true)}>
@@ -143,14 +155,14 @@ export default function Account() {
               </Button>
             ) : (
               <Button variant="outline" onClick={handleNameUpdate}>
-                Päivitä
+                {dictionary.input.updateButtonLabel}
               </Button>
             )}
           </div>
         </section>
         <section className="mb-10">
           <h2 className="border-b border-border text-base font-semibold">
-            Sähköpostiosoite
+            {dictionary.input.emailAddress}
           </h2>
           <div className="m-2 flex w-full flex-row items-center justify-between">
             <p className="h-8">{session.user.email}</p>
@@ -161,12 +173,12 @@ export default function Account() {
                 className="m-1"
                 disabled={verificationSend || isLoading}
               >
-                Vahvista sähköposti
+                {dictionary.profile.account.emailButtonConfirm}
               </Button>
             )}
             {session.user.emailVerified && (
               <p className="m-1 rounded-md border bg-background p-1 text-center text-[9px] font-bold text-foreground">
-                Vahvistettu
+                {dictionary.profile.account.emailButtonConfirmation}
               </p>
             )}
           </div>
