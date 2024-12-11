@@ -79,15 +79,15 @@ export default function Balance({ dictionary }: BalanceProps) {
         </h1>
         <p>{dictionary.profile.balance.description}</p>
       </div>
-      <div className="flex w-full max-w-md flex-col items-center space-y-6 rounded-xl border border-border/30 bg-background px-8 py-6 text-foreground">
-        <h1 className="text-lg font-semibold">
+      <div className="flex h-[300px] w-full max-w-md flex-col items-center justify-center space-y-6 rounded-xl border border-border bg-background px-8 py-6 text-foreground">
+        <h1 className="text-xl font-bold">
           {dictionary.profile.balance.selectHeader}
         </h1>
         <FormControl
           fullWidth
           className="text-foreground focus:text-foreground"
         >
-          <InputLabel id="credit-select-label" className="mb-6">
+          <InputLabel id="credit-select-label" className="mb-6 text-foreground">
             {dictionary.profile.balance.selectAmount}
           </InputLabel>
           <Select

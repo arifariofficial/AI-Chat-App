@@ -13,7 +13,7 @@ export type LocalizedRoutes = {
       signIn: string;
       signOut: string;
       register: string;
-      reset: string; // Optional since it's missing in 'fi' and 'sv'
+      reset: string;
     };
   };
 };

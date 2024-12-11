@@ -6,6 +6,7 @@
     "contact": "Yhteys"
   },
   "theme": {
+    "theme": "Teema",
     "light": "Vaalea",
     "dark": "Tumma",
     "system": "Järjestelmä"
@@ -82,7 +83,7 @@
     "balance": {
       "header": "Saldo",
       "description": "Hallitse maksuasetuksiasi",
-      "selectHeader": "Lataa saldoa Sipe-tilillesi",
+      "selectHeader": "Osta hyvityksiä",
       "selectAmount": "Määrä",
       "selectBuy": "Osta"
     },

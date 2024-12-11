@@ -12,7 +12,7 @@ const AboutUsPage = async ({
   const dictionary = await getDictionary(lang);
 
   return (
-    <div className="mx-auto flex w-full flex-col border">
+    <div className="mx-auto flex w-full flex-col">
       <AboutUs />
       <Footer dictionary={dictionary} lang={lang} />
     </div>

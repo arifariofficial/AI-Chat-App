@@ -86,6 +86,7 @@ export interface Dictionary {
     contact: string;
   };
   theme: {
+    theme: string;
     light: string;
     dark: string;
     system: string;

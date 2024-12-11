@@ -9,90 +9,44 @@ import { useTheme as useNextTheme } from "next-themes";
 
 const MUIThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { theme: nextTheme, systemTheme } = useNextTheme();
-  const [muiTheme, setMuiTheme] = useState(createDefaultTheme());
+  const [muiTheme, setMuiTheme] = useState(() => {
+    const initialMode =
+      nextTheme === "system" ? systemTheme : nextTheme || "light";
+    return createDefaultTheme(initialMode === "dark" ? "dark" : "light");
+  });
 
   function createDefaultTheme(mode: PaletteMode = "light") {
     return responsiveFontSizes(
       createTheme({
         palette: {
-          mode,
-          primary: {
-            main: "hsl(209deg 100% 38%)",
-            light:
-              mode === "dark"
-                ? "var(--background-dark)"
-                : "var(--background-light)",
-            dark:
-              mode === "dark"
-                ? "var(--background-dark)"
-                : "var(--background-light)",
-          },
+          mode, // Use the system's or user's preference for light/dark mode
         },
         components: {
           MuiOutlinedInput: {
             styleOverrides: {
               root: {
                 "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor:
-                    mode === "dark"
-                      ? "var(--border-dark)"
-                      : "var(--border-light)", // Default border color
+                  borderColor: "hsl(var(--border))", // Default border color
+                  borderWidth: "1px", // Default border width
                 },
                 "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor:
-                    mode === "dark"
-                      ? "var(--border-dark)"
-                      : "var(--border-light)",
-                  opacity: 0.5,
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor:
-                    mode === "dark"
-                      ? "var(--border-dark)"
-                      : "var(--border-light)",
-                  opacity: 0.4,
-                },
-                "& .MuiInputBase-input:-webkit-autofill": {
-                  borderColor:
-                    mode === "dark"
-                      ? "var(--border-dark)"
-                      : "var(--border-light)",
-                  WebkitBoxShadow: `0 0 0 100px ${mode === "dark" ? "#1f1f1f" : "#ffffff"} inset`,
-                  WebkitTextFillColor:
-                    mode === "dark"
-                      ? "var(--foreground-dark)"
-                      : "var(--foreground-light)",
-                },
-              },
-            },
-          },
-          MuiInputLabel: {
-            styleOverrides: {
-              root: {
-                "&.Mui-focused": {
-                  color:
-                    mode === "dark"
-                      ? "var(--foreground-dark)"
-                      : "var(--foreground-light)",
+                  borderColor: "hsl(var(--border))", // Same color
+                  borderWidth: "2px", // Slightly thicker on hover
                 },
               },
             },
           },
           MuiSelect: {
             styleOverrides: {
-              select: {
-                "&:focus": {
-                  backgroundColor:
-                    mode === "dark"
-                      ? "var(--background-dark)"
-                      : "var(--background-light)",
+              root: {
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "hsl(var(--border))", // Default border color
+                  borderWidth: "1px", // Default border width
                 },
-              },
-              icon: {
-                color:
-                  mode === "dark"
-                    ? "var(--foreground-dark)"
-                    : "var(--foreground-light)",
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "hsl(var(--border))", // Same color
+                  borderWidth: "2px", // Slightly thicker on hover
+                },
               },
             },
           },
@@ -101,7 +55,6 @@ const MUIThemeProvider = ({ children }: { children: React.ReactNode }) => {
     );
   }
 
-  // Update MUI theme when Next.js theme changes
   useEffect(() => {
     const effectiveTheme = nextTheme === "system" ? systemTheme : nextTheme;
     const isDarkMode = effectiveTheme === "dark";

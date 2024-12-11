@@ -35,7 +35,7 @@ export const FaqSection = ({ dictionary, lang }: FaqSectionProps) => {
               value={`item-${index}`}
               className="rounded-lg border border-border/60 px-5 md:px-6"
             >
-              <AccordionTrigger className="md:text-md md:py-5 [&[data-state=open]>svg]:rotate-180">
+              <AccordionTrigger className="md:text-md hover:bg-inherit hover:text-foreground md:py-5 [&[data-state=open]>svg]:rotate-180">
                 {question.title}
               </AccordionTrigger>
               <AccordionContent className="md:pb-6">

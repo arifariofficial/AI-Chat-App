@@ -425,7 +425,6 @@ function IconSeparator({ className, ...props }: React.ComponentProps<"svg">) {
       strokeLinejoin="round"
       strokeWidth="1"
       viewBox="0 0 24 24"
-      aria-hidden="true"
       className={cn("size-4", className)}
       {...props}
     >
@@ -962,7 +961,7 @@ const IconContact = ({ className, ...props }: React.ComponentProps<"svg">) => {
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      strokeWidth={1.5}
+      strokeWidth={2}
       stroke="currentColor"
       className={cn("size-5", className)}
       {...props}
@@ -981,7 +980,7 @@ const IconChat = ({ className, ...props }: React.ComponentProps<"svg">) => {
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      strokeWidth={1.5}
+      strokeWidth={2}
       stroke="currentColor"
       className={cn("size-5", className)}
       {...props}

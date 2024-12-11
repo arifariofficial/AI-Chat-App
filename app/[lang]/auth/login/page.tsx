@@ -22,7 +22,7 @@ export default async function LoginPage({
       headerLabel={dictionary.login.headerLabel}
       dictionary={dictionary}
       lang={lang}
-      className="mx-auto flex w-full flex-col border"
+      className="mx-auto flex w-full flex-col"
     />
   );
 }

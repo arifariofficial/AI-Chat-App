@@ -16,7 +16,7 @@ const buttonVariants = cva(
         outline:
           "border border-border/30 bg-background shadow-sm hover:bg-accent hover:text-accent-foreground active:bg-background font-semibold",
         black:
-          "bg-black/80 text-white shadow-sm hover:bg-black/90 active:bg-black/80 font-semibold dark:bg-primary dark:hover:bg-black dark:active:bg-primary dark:text-white",
+          "bg-black/80 text-white shadow-sm hover:bg-black/90 active:bg-black/80 font-semibold dark:bg-primary dark:hover:bg-black dark:active:bg-primary dark:text-white dark:border",
         ghost:
           "hover:bg-background hover:text-accent-foreground active:bg-backgroundSecondary active:text-background focus:bg-background focus:outline-none focus-visible:border-none focus-visible:ring-0 bg-background",
 
@@ -25,7 +25,7 @@ const buttonVariants = cva(
         nav: "bg-inherit text-foregroundNav hover:bg-navHover active:bg-inherit active:text-foregroundNav focus-visible:ring-0 hover:text-foregroundNav",
 
         navMobile:
-          "bg-inherit text-inherit hover:bg-foreground/5 active:bg-foreground/20 focus-visible:ring-0",
+          "bg-inherit text-inherit hover:bg-foreground/5 active:bg-foreground/20 focus-visible:ring-0 !h-[60px] border border-border/20 m-0",
 
         inherit: "bg-inherit",
       },

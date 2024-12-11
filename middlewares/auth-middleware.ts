@@ -27,16 +27,9 @@ export function withAuthMiddleware(middleware: CustomMiddleware) {
     // Create a response object to pass down the chain
     const response = NextResponse.next();
 
-    // Define paths to exclude from authentication
-    const excludedPaths = ["/fi/kirjautuminen/kirjaudu-sisaan"];
-
     // Get the current path
     const pathname = request.nextUrl?.pathname || "/";
-
-    // Check if the current path is in the excluded paths
-    if (excludedPaths.includes(pathname)) {
-      return middleware(request, event, response);
-    }
+    console.log("Auth path");
 
     // Get the authentication token
     const token = await getToken({

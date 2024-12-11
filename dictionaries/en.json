@@ -2,10 +2,11 @@
   "navigation": {
     "home": "Home",
     "sipeChat": "SipeChat",
-    "aboutUs": "About Us",
+    "aboutUs": "About us",
     "contact": "Contact"
   },
   "theme": {
+    "theme": "Theme",
     "light": "Light",
     "dark": "Dark",
     "system": "System"
@@ -81,7 +82,7 @@
     "balance": {
       "header": "Balance",
       "description": "Manage your payment settings",
-      "selectHeader": "Load balance to your Sipe account",
+      "selectHeader": "Buy credits",
       "selectAmount": "Amount",
       "selectBuy": "Buy"
     },

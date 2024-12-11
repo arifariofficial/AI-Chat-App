@@ -6,6 +6,7 @@
     "contact": "Kontakt"
   },
   "theme": {
+    "theme": "Tema",
     "light": "Ljus",
     "dark": "Mörk",
     "system": "System"
@@ -82,7 +83,7 @@
     "balance": {
       "header": "Saldo",
       "description": "Hantera dina betalningsinställningar",
-      "selectHeader": "Ladda saldo till ditt Sipe-konto",
+      "selectHeader": "Köp krediter",
       "selectAmount": "Belopp",
       "selectBuy": "Köp"
     },

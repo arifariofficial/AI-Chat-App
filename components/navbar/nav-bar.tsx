@@ -3,15 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import UserButtonMobile from "./user-button-mobile";
 import NavItemsRight from "./nav-items-right";
 import NavItemsMiddle from "./nav-items-middle";
-import { ThemeToggle } from "@/components/theme-toggle-mobile";
 import { Locale } from "@/i18n.config";
 import { Dictionary } from "@/lib/types";
 import { Session } from "next-auth";
 import { cn } from "@/lib/utils";
 import { Roboto } from "next/font/google";
+import { LocalizedRoutes } from "@/lib/localized-routes";
+import HamburgerButton from "./hamburger-button";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -22,12 +22,14 @@ interface NavBarProps {
   session?: Session | null;
   lang: Locale;
   dictionary: Dictionary;
+  routes: LocalizedRoutes[Locale];
 }
 
 const NavBar: React.FC<NavBarProps> = ({
   session = null,
   lang,
   dictionary,
+  routes,
 }) => {
   const pathname = usePathname();
 
@@ -71,17 +73,14 @@ const NavBar: React.FC<NavBarProps> = ({
               lang={lang}
               dictionary={dictionary}
             />
-            <ThemeToggle
-              buttonClassName="text-foregroundNav hover:opacity-90 sm:hidden flex"
+            <HamburgerButton
               variant="nav"
-            />
-            <UserButtonMobile
               session={session}
               className="flex size-full sm:hidden"
               buttonClassName="h-full text-foregroundNav hover:opacity-90"
-              variant="inherit"
               lang={lang}
               dictionary={dictionary}
+              routes={routes}
             />
           </div>
         </section>

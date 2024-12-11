@@ -104,6 +104,17 @@ const config = {
             transform: "translateX(0)",
           },
         },
+        slideUp: {
+          "0%": {
+            transform: "translateY(100%)",
+            opacity: "0",
+          },
+          "100%": {
+            transform: "translateY(0)",
+            opacity: "1",
+          },
+        },
+
         loadingBar: {
           "0%": { left: "-100%" },
           "50%": { left: "0%" },
@@ -117,6 +128,7 @@ const config = {
         "caret-blink": "caret-blink 1.25s ease-out infinite",
         "slide-left-to-right": "slideLeftToRight 1s ease-in-out",
         "slide-right-to-left": "slideRightToLeft 1s ease-in-out",
+        slideUp: "slideUp 0.5s ease-out",
       },
     },
   },

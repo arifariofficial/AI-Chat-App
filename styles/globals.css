@@ -8,7 +8,6 @@
     --background-secondary: 0 0 100%;
     --foreground: 0 0% 20%;
     --foreground-nav: 0 0% 100%;
-
     --nav-hover: 216 100% 19%;
 
     --card: 0 0% 100%;
@@ -27,47 +26,33 @@
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
+
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 209 100% 38%;
     --input: 180 18.46% 25.49%;
     --ring: 222.2 84% 4.9%;
-
     --radius: 0.5rem;
-
     --title: 222, 64%, 21%;
     --subtitle: 222, 50%, 40%;
     --section-title: 209 100% 48%;
     --cta-title: 209 100% 48%;
     --link: 209 100% 48%;
     --text: 0 0% 10%;
-
     --bold-blue: 221, 72%, 53%;
-
-    /* Mui CSS variable */
-    --background-light: #ffffff;
-    --background-dark: #121212;
-    --border-light: #009af1;
-    --border-dark: #444444;
-    --foreground-light: #000000;
-    --foreground-dark: #ffffff;
   }
 
   .dark {
     --background: 0 0% 10%;
     --background-secondary: 0 0 15%;
     --foreground: 0 0% 100%;
-    --foreground-nav: 0 0 100%;
-
     --nav-hover: 217.24 32.58% 10%;
 
     --card: 240 6% 10%;
     --card-foreground: 210 40% 98%;
-
     --popover: 0 0% 12%;
     --popover-foreground: 0 0% 93%;
 
@@ -90,48 +75,54 @@
     --border: 0 0% 50%;
     --input: 0 0% 100%;
     --ring: 212.7 26.8% 83.9%;
-
     --title: 0, 0%, 70%;
     --subtitle: 0, 0%, 70%;
     --section-title: 0, 0%, 70%;
     --cta-title: 0, 0%, 70%;
     --link: 210, 100%, 65%;
     --text: 0 0% 95%;
-
     --bold-blue: 50, 100%, 85%;
   }
 
-  .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-    box-sizing: border-box;
-  }
-
-  /* Optionally, apply to all pseudo-elements as well */
+  *,
   *::before,
   *::after {
-    box-sizing: border-box; /* Add this line for pseudo-elements */
+    @apply border-border;
+    box-sizing: border-box;
   }
 
   body {
     @apply bg-background text-foreground;
   }
 
-  /* Scrollbar hiding */
   .scroll-container {
-    -webkit-overflow-scrolling: touch; /* Enables smooth scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
   }
 
-  /* Hide scrollbar for WebKit-based browsers (Chrome, Safari) */
   .scroll-container::-webkit-scrollbar {
-    display: none;
+    display: none; /* Chrome, Safari */
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Focus styling for buttons (to handle Safari issue) */
+  button:focus {
+    outline: none; /* Disable default outline */
+  }
+
+  button:focus-visible {
+    outline: 2px solid var(--primary); /* Add custom focus ring */
+    outline-offset: 2px; /* Space between element and outline */
+  }
+
+  /* Optional: add hover or active state for buttons */
+  button:hover,
+  button:active {
+    @apply bg-primary-hover text-primary-foreground;
   }
 }
 
@@ -139,9 +130,11 @@
   .pretitle {
     @apply text-base font-bold uppercase text-muted-foreground;
   }
+
   .title {
     @apply text-4xl font-bold text-title;
   }
+
   .subtitle {
     @apply text-3xl font-semibold text-subtitle;
   }
@@ -151,15 +144,4 @@
   .h-screen {
     height: -webkit-fill-available;
   }
-}
-
-/* Optionally, you can add theme-specific changes */
-[data-theme="light"] {
-  --background-light: #016ac6;
-  --foreground-light: #4c4d4e;
-}
-
-[data-theme="dark"] {
-  --background-dark: #4c4d4e;
-  --foreground-dark: #ffffff;
 }

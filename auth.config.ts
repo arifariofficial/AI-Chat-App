@@ -10,7 +10,7 @@ import { getStringFromBuffer } from "./lib/utils";
 
 export const authConfig = {
   pages: {
-    signIn: "/auth/login",
+    signIn: "/lang/auth/login",
     signOut: "/auth/logout",
     newUser: "/auth/register",
     error: "/auth/error",

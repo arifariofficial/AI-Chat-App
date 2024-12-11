@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { ModeToggle } from "../mode-toggle";
+import { ModeToggle } from "./mode-toggle";
 import UserButtonDesktop from "./user-button-desktop";
 import { Session } from "next-auth";
 import { LocaleSwitcher } from "./locale-switcher";

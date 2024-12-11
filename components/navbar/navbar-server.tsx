@@ -4,6 +4,7 @@ import { Locale } from "@/i18n.config";
 import NavBar from "./nav-bar";
 import { auth } from "@/auth";
 import { getDictionary } from "@/lib/dictionary";
+import { localizedRoutes } from "@/lib/localized-routes";
 
 const NavBarServer = async ({ lang }: { lang: Locale }) => {
   try {
@@ -12,11 +13,14 @@ const NavBarServer = async ({ lang }: { lang: Locale }) => {
       getDictionary(lang),
     ]);
 
+    const routes = localizedRoutes[lang];
+
     return (
       <NavBar
         session={session || null} // Explicitly handle null fallback
         lang={lang}
         dictionary={dictionary}
+        routes={routes}
       />
     );
   } catch (error) {

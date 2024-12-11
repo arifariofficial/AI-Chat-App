@@ -66,7 +66,7 @@ const CookieConsent = () => {
     <>
       {/* Basic Cookie Consent Popup */}
       {isVisible && (
-        <div className="fixed bottom-4 right-0 z-50 mx-4 max-w-screen-sm rounded-lg border border-border/40 bg-background p-4 text-foreground shadow-md lg:w-[50%]">
+        <div className="animate-slideUp fixed bottom-4 right-0 z-50 mx-4 max-w-screen-sm rounded-lg border border-border/40 bg-gray-100 p-4 text-foreground shadow-md dark:bg-gray-800 lg:w-[60%]">
           <p className="text-sm">
             Käytämme evästeitä parantaaksemme sivustoa, analysoidaksemme käyttöä
             ja auttaaksemme markkinoinnissa.
