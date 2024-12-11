@@ -9,6 +9,7 @@ export type LocalizedRoutes = {
     account: string;
     balance: string;
     security: string;
+    cookiePolicy: string;
     auth: {
       signIn: string;
       signOut: string;
@@ -27,6 +28,7 @@ export const localizedRoutes: LocalizedRoutes = {
     account: "/account",
     balance: "/balance",
     security: "/security",
+    cookiePolicy: "/cookie-policy",
     auth: {
       signIn: "/auth/login",
       signOut: "/auth/logout",
@@ -42,6 +44,7 @@ export const localizedRoutes: LocalizedRoutes = {
     account: "/tili",
     balance: "/saldo",
     security: "/turvallisuus",
+    cookiePolicy: "/evastekaytanto",
     auth: {
       signIn: "/kirjautuminen/kirjaudu-sisaan",
       signOut: "/kirjautuminen/kirjaudu-ulos",
@@ -57,6 +60,7 @@ export const localizedRoutes: LocalizedRoutes = {
     account: "/konto",
     balance: "/balans",
     security: "/sakerhet",
+    cookiePolicy: "/kakor",
     auth: {
       signIn: "/autentisering/logga-in",
       signOut: "/autentisering/logga-ut",

@@ -12,6 +12,7 @@ import { getChats } from "@/data/get-chat";
 import CookieConsent from "@/components/cookie-consent";
 import { i18n, Locale } from "@/i18n.config";
 import { getDictionary } from "@/lib/dictionary";
+import { localizedRoutes } from "@/lib/localized-routes";
 
 // Metadata will be dynamically generated based on the localizedRoutes
 export async function generateMetadata({
@@ -55,7 +56,11 @@ export default async function RootLayout({
 
   const { lang } = await params;
 
+  const dictionary = await getDictionary(lang);
+
   const navBar = await NavBarServer({ lang });
+
+  const routes = localizedRoutes[lang];
 
   return (
     <html lang={lang} suppressHydrationWarning>
@@ -73,7 +78,11 @@ export default async function RootLayout({
           <SessionProvider basePath="/api/auth" session={session}>
             <main className="relative mx-auto flex size-full flex-col">
               {navBar}
-              <CookieConsent />
+              <CookieConsent
+                lang={lang}
+                dictionary={dictionary}
+                routes={routes}
+              />
               {children}
               <ShadToaster />
             </main>

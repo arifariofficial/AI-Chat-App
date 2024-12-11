@@ -55,6 +55,8 @@
     "emailAlreadyLoggedIn": "You are already logged in. Please sign out to register with a new email."
   },
   "input": {
+    "cancelButtonLabel": "Cancel",
+    "saveButtonLabel": "Save",
     "updateButtonLabel": "Update",
     "email": "Email",
     "emailAddress": "Email Address",
@@ -368,5 +370,19 @@
       { "title": "Terms of Service", "url": "/terms" },
       { "title": "Cookies Settings", "url": "/cookie" }
     ]
+  },
+  "cookieConsent": {
+    "message": "We use cookies to improve the website, analyze usage, and assist with marketing.",
+    "manageSettings": "Manage settings",
+    "deleteCookies": "Delete all cookies",
+    "acceptAllCookies": "Accept all cookies",
+    "cookieSettings": "Cookie settings",
+    "cookieSettingsDescription": "Customize your cookie settings. Essential cookies are always enabled to ensure the website functions properly.",
+    "readMore": "Read more",
+    "essential": "Essential",
+    "alwaysOn": "Always on",
+    "personalized": "Personalized",
+    "marketing": "Marketing",
+    "analytics": "Analytics"
   }
 }

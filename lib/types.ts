@@ -131,6 +131,8 @@ export interface Dictionary {
     emailAlreadyLoggedIn: string;
   };
   input: {
+    cancelButtonLabel: string;
+    saveButtonLabel: string;
     updateButtonLabel: string;
     email: string;
     emailAddress: string;
@@ -267,5 +269,19 @@ export interface Dictionary {
       url: string;
       alt: string;
     };
+  };
+  cookieConsent: {
+    message: string;
+    manageSettings: string;
+    deleteCookies: string;
+    acceptAllCookies: string;
+    cookieSettings: string;
+    cookieSettingsDescription: string;
+    readMore: string;
+    essential: string;
+    alwaysOn: string;
+    personalized: string;
+    marketing: string;
+    analytics: string;
   };
 }

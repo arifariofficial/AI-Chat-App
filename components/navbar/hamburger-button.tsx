@@ -128,7 +128,7 @@ export default function HamburgerButton({
           {/* Etusivu */}
           {!session && <div className="h-[50px]" />}
           <SheetClose asChild>
-            <Link className="" href="/">
+            <Link href={`/${lang}`}>
               <Button
                 variant="navMobile"
                 asChild

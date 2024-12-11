@@ -56,6 +56,8 @@
   },
 
   "input": {
+    "cancelButtonLabel": "Avbryt",
+    "saveButtonLabel": "Spara",
     "updateButtonLabel": "Uppdatera",
     "email": "E-post",
     "emailAddress": "E-postadress",
@@ -366,5 +368,19 @@
       { "title": "Villkor", "url": "/terms" },
       { "title": "Cookie-inställningar", "url": "/cookie" }
     ]
+  },
+  "cookieConsent": {
+    "message": "Vi använder cookies för att förbättra webbplatsen, analysera användning och stödja marknadsföring.",
+    "manageSettings": "Hantera inställningar",
+    "deleteCookies": "Ta bort alla cookies",
+    "acceptAllCookies": "Acceptera alla cookies",
+    "cookieSettings": "Cookie-inställningar",
+    "cookieSettingsDescription": "Anpassa dina cookie-inställningar. Nödvändiga cookies är alltid aktiverade för att webbplatsen ska fungera korrekt.",
+    "readMore": "Läs mer",
+    "essential": "Nödvändiga",
+    "alwaysOn": "Alltid på",
+    "personalized": "Personliga",
+    "marketing": "Marknadsföring",
+    "analytics": "Analys"
   }
 }

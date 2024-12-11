@@ -56,10 +56,12 @@
   },
 
   "input": {
+    "cancelButtonLabel": "Peruuta",
+    "saveButtonLabel": "Tallenna",
     "updateButtonLabel": "Päivitä",
     "email": "Sähköposti",
     "emailAddress": "Sähköpostiosoite",
-    "emailPlaceholder": "Kirjoita sähköpostiosoitteesi"
+    "emailPlaceholder": "Anna sähköpostiosoitteesi"
   },
   "image": {
     "imageAlt": "Nimi ei saatavilla",
@@ -367,5 +369,19 @@
       { "title": "Käyttöehdot", "url": "/terms" },
       { "title": "Evästeasetukset", "url": "/cookie" }
     ]
+  },
+  "cookieConsent": {
+    "message": "Käytämme evästeitä parantaaksemme verkkosivustoa, analysoidaksemme käyttöä ja tukeaksemme markkinointia.",
+    "manageSettings": "Hallinnoi asetuksia",
+    "deleteCookies": "Poista kaikki evästeet",
+    "acceptAllCookies": "Hyväksy kaikki evästeet",
+    "cookieSettings": "Evästeasetukset",
+    "cookieSettingsDescription": "Mukauta evästeasetuksia. Välttämättömät evästeet ovat aina käytössä, jotta verkkosivusto toimii oikein.",
+    "readMore": "Lue lisää",
+    "essential": "Välttämättömät",
+    "alwaysOn": "Aina päällä",
+    "personalized": "Personoidut",
+    "marketing": "Markkinointi",
+    "analytics": "Analytiikka"
   }
 }
