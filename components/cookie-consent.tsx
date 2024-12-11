@@ -114,9 +114,15 @@ const CookieConsent = ({ lang, dictionary, routes }: CookieConsentProps) => {
               {dictionary.cookieConsent.cookieSettingsDescription}
               <Link
                 href={`/${lang}${routes.cookiePolicy}`}
-                className="ml-1 text-link underline hover:opacity-80"
+                className="mx-0 ml-1 px-0 text-link underline hover:opacity-80"
               >
-                {dictionary.cookieConsent.readMore}
+                <Button
+                  onClick={() => setIsSettingsOpen(false)}
+                  variant="link"
+                  className="mx-0 px-0 hover:bg-inherit hover:text-foreground"
+                >
+                  {dictionary.cookieConsent.readMore}
+                </Button>
               </Link>
             </p>
             <div className="space-y-4">

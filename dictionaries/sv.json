@@ -382,5 +382,51 @@
     "personalized": "Personliga",
     "marketing": "Marknadsföring",
     "analytics": "Analys"
+  },
+  "cookiePolicy": {
+    "title": "Cookiepolicy",
+    "at": "På",
+    "introduction": "är vi engagerade i att skydda din integritet och säkerställa transparens om den data vi samlar in via cookies. Denna cookiepolicy förklarar hur och varför vi använder cookies, vilka typer av cookies vi använder och dina val när det gäller hantering av cookies.",
+    "whatAreCookies": {
+      "title": "Vad är cookies?",
+      "description": "Cookies är små textfiler som lagras på din enhet när du besöker en webbplats. De används ofta för att få webbplatser att fungera effektivt, förbättra användarupplevelsen och ge analytiska data till webbplatsägare. Cookies kan lagra information som dina preferenser, inloggningsstatus och surfaktiviteter."
+    },
+    "typesOfCookies": {
+      "title": "Typer av cookies vi använder",
+      "necessary": "<strong>Nödvändiga cookies:</strong> Dessa cookies är avgörande för att webbplatsen ska fungera korrekt. De möjliggör grundläggande funktioner som säkerhet, autentisering och tillgänglighet.",
+      "performance": "<strong>Prestandacookies:</strong> Dessa cookies hjälper oss att analysera webbplatsens prestanda och förbättra din upplevelse genom att samla in anonymiserad data om hur användare interagerar med webbplatsen.",
+      "functional": "<strong>Funktionella cookies:</strong> Dessa cookies gör att vi kan komma ihåg dina preferenser, som språkval och andra anpassningsbara funktioner, för att ge en mer personlig upplevelse.",
+      "advertising": "<strong>Reklamcookies:</strong> Dessa cookies spårar din onlineaktivitet för att ge dig relevanta annonser baserade på dina intressen."
+    },
+    "howWeUseCookies": {
+      "title": "Hur vi använder cookies",
+      "list": [
+        "Säkerställa att vår webbplats fungerar korrekt.",
+        "Förbättra webbplatsens prestanda och användarupplevelse.",
+        "Analysera användarbeteende och webbplatstrafik för att optimera innehållet.",
+        "Ge personliga rekommendationer och annonser."
+      ]
+    },
+    "managingCookies": {
+      "title": "Hantera cookies",
+      "description": "Du har rätt att hantera eller inaktivera cookies enligt dina preferenser. De flesta webbläsare tillåter dig att kontrollera cookies via deras inställningar. Att inaktivera vissa cookies kan dock påverka webbplatsens funktionalitet.",
+      "learnMore": "Läs mer om att hantera cookies i hjälpsektionen i din webbläsare:",
+      "browsers": {
+        "chrome": "Google Chrome",
+        "firefox": "Mozilla Firefox",
+        "safari": "Safari",
+        "edge": "Microsoft Edge"
+      }
+    },
+    "changesToPolicy": {
+      "title": "Ändringar i denna policy",
+      "description": "Vi kan uppdatera denna cookiepolicy från tid till annan för att återspegla ändringar i våra metoder eller av andra operativa, juridiska eller regulatoriska skäl. Läs igenom denna policy regelbundet för att hålla dig informerad om vår användning av cookies."
+    },
+    "contactUs": {
+      "title": "Kontakta oss",
+      "description": "Om du har några frågor eller funderingar om denna cookiepolicy, vänligen kontakta oss:",
+      "email": "E-post: support@sipeai.com",
+      "phone": "Telefon: +358 123 456 789"
+    }
   }
 }

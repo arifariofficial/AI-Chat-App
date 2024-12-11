@@ -20,14 +20,15 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-background hover:text-accent-foreground active:bg-backgroundSecondary active:text-background focus:bg-background focus:outline-none focus-visible:border-none focus-visible:ring-0 bg-background",
 
-        link: "text-primary dark:text-white underline-offset-4 hover:underline",
+        link: "text-primary dark:text-white underline-offset-4 hover:underline underline text-xs mx-0 px-0",
 
         nav: "bg-inherit text-foregroundNav hover:bg-navHover active:bg-inherit active:text-foregroundNav focus-visible:ring-0 hover:text-foregroundNav",
 
         navMobile:
           "bg-inherit text-inherit hover:bg-foreground/5 active:bg-foreground/20 focus-visible:ring-0 !h-[60px] border border-border/20 m-0",
 
-        inherit: "bg-inherit",
+        inherit:
+          "bg-inherit hover:bg-inherit hover:text-inherit focus-visible:ring-0 active:bg-inherit active:text-inherit",
       },
       size: {
         default: "h-9 px-4 py-2",

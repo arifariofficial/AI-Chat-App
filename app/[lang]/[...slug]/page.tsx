@@ -11,6 +11,7 @@ import ProfilePage from "../profile/(account)/page";
 import { getDictionary } from "@/lib/dictionary";
 import SubscriptionPage from "../profile/balance/page";
 import SecurityPage from "../profile/security/page";
+import CookiePolicyPage from "../cookie/page";
 
 export default async function DynamicPage({
   params,
@@ -56,6 +57,7 @@ export default async function DynamicPage({
   const profilePageContent = await ProfilePage({ params });
   const balancePageContent = await SubscriptionPage({ params });
   const securityPageContent = await SecurityPage({ params });
+  const cookiePolicyContent = await CookiePolicyPage({ params });
 
   // Handle matched routes
   if (topLevelKey) {
@@ -83,6 +85,8 @@ export default async function DynamicPage({
             })()}
           </ProfileLayout>
         );
+      case "cookiePolicy":
+        return cookiePolicyContent;
       default:
         return (
           <div>

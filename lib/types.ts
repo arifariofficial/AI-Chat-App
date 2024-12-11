@@ -284,4 +284,46 @@ export interface Dictionary {
     marketing: string;
     analytics: string;
   };
+
+  cookiePolicy: {
+    title: string;
+    at?: string;
+    introduction: string;
+    whatAreCookies: {
+      title: string;
+      description: string;
+    };
+    typesOfCookies: {
+      title: string;
+      necessary: string;
+      performance: string;
+      functional: string;
+      advertising: string;
+    };
+    howWeUseCookies: {
+      title: string;
+      list: string[];
+    };
+    managingCookies: {
+      title: string;
+      description: string;
+      learnMore: string;
+      browsers: {
+        chrome: string;
+        firefox: string;
+        safari: string;
+        edge: string;
+      };
+    };
+    changesToPolicy: {
+      title: string;
+      description: string;
+    };
+    contactUs: {
+      title: string;
+      description: string;
+      email: string;
+      phone: string;
+    };
+  };
 }

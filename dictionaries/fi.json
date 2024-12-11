@@ -383,5 +383,50 @@
     "personalized": "Personoidut",
     "marketing": "Markkinointi",
     "analytics": "Analytiikka"
+  },
+  "cookiePolicy": {
+    "title": "Evästekäytäntö",
+    "introduction": "on sitoutunut suojaamaan yksityisyyttäsi ja varmistamaan läpinäkyvyyden keräämämme evästedatan osalta. Tämä evästekäytäntö selittää, miten ja miksi käytämme evästeitä, minkä tyyppisiä evästeitä käytämme ja valintasi evästeiden hallintaan liittyen.",
+    "whatAreCookies": {
+      "title": "Mitä evästeet ovat?",
+      "description": "Evästeet ovat pieniä tekstitiedostoja, jotka tallennetaan laitteellesi, kun vierailet verkkosivustolla. Niitä käytetään yleisesti verkkosivustojen tehokkaaseen toimintaan, käyttökokemuksen parantamiseen ja analyyttisten tietojen tarjoamiseen verkkosivuston omistajille. Evästeet voivat tallentaa tietoja, kuten mieltymyksesi, kirjautumistilanteesi ja selaustoimintasi."
+    },
+    "typesOfCookies": {
+      "title": "Käyttämämme evästetyypit",
+      "necessary": "<strong>Välttämättömät evästeet:</strong> Nämä evästeet ovat välttämättömiä verkkosivuston asianmukaiselle toiminnalle. Ne mahdollistavat ydintoiminnot, kuten turvallisuuden, todentamisen ja saavutettavuuden.",
+      "performance": "<strong>Suorituskykyevästeet:</strong> Näiden evästeiden avulla analysoimme verkkosivuston suorituskykyä ja parannamme käyttökokemusta keräämällä anonymisoituja tietoja siitä, miten käyttäjät ovat vuorovaikutuksessa sivuston kanssa.",
+      "functional": "<strong>Toiminnalliset evästeet:</strong> Näiden evästeiden avulla voimme muistaa mieltymyksesi, kuten kielivalinnat ja muut mukautettavat ominaisuudet, tarjotaksemme henkilökohtaisemman käyttökokemuksen.",
+      "advertising": "<strong>Mainosevästeet:</strong> Nämä evästeet seuraavat verkkotoimintaasi tarjotakseen sinulle kiinnostuksesi mukaisia mainoksia."
+    },
+    "howWeUseCookies": {
+      "title": "Miten käytämme evästeitä",
+      "list": [
+        "Varmistaa verkkosivuston asianmukaisen toiminnan.",
+        "Parantaa verkkosivuston suorituskykyä ja käyttökokemusta.",
+        "Analysoida käyttäytymistä ja verkkosivuston liikennettä sisällön optimoimiseksi.",
+        "Tarjota henkilökohtaisia suosituksia ja mainoksia."
+      ]
+    },
+    "managingCookies": {
+      "title": "Evästeiden hallinta",
+      "description": "Sinulla on oikeus hallita tai poistaa evästeitä mieltymystesi mukaisesti. Useimmat selaimet sallivat evästeiden hallinnan niiden asetuksista. Tiettyjen evästeiden poistaminen käytöstä voi kuitenkin vaikuttaa verkkosivuston toimivuuteen.",
+      "learnMore": "Lisätietoja evästeiden hallinnasta löydät selaimesi ohjeosioista:",
+      "browsers": {
+        "chrome": "Google Chrome",
+        "firefox": "Mozilla Firefox",
+        "safari": "Safari",
+        "edge": "Microsoft Edge"
+      }
+    },
+    "changesToPolicy": {
+      "title": "Muutokset tähän käytäntöön",
+      "description": "Saatamme päivittää tätä evästekäytäntöä ajoittain heijastaaksemme muutoksia käytännöissämme tai muista toiminnallisista, oikeudellisista tai sääntelysyistä. Tarkista tämä käytäntö säännöllisesti pysyäksesi ajan tasalla evästeiden käytöstämme."
+    },
+    "contactUs": {
+      "title": "Ota yhteyttä",
+      "description": "Jos sinulla on kysyttävää tai huolenaiheita tähän evästekäytäntöön liittyen, ota meihin yhteyttä:",
+      "email": "Sähköposti: support@sipeai.com",
+      "phone": "Puhelin: +358 123 456 789"
+    }
   }
 }
