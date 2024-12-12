@@ -77,10 +77,6 @@ export const HeroSection = (props: HeroSectionProps) => {
       return;
     }
 
-    console.log(
-      `/${lang}${routes.auth.register}?email=${encodeURIComponent(data.email)}`,
-    );
-
     // Navigate to the register page with the email as a query parameter
     router.push(
       `/${lang}${routes.auth.register}?email=${encodeURIComponent(data.email)}`,
@@ -152,7 +148,11 @@ export const HeroSection = (props: HeroSectionProps) => {
         </div>
       </div>
       {/* Modal */}
-      <TermsModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      <TermsModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        dictionary={dictionary}
+      />
     </section>
   );
 };

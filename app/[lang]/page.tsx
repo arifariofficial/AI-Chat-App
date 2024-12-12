@@ -1,5 +1,9 @@
 import HomePage from "@/components/home-page/home-page";
-import { Locale } from "@/i18n.config";
+import { i18n, Locale } from "@/i18n.config";
+
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale }));
+}
 
 const Home = async ({ params }: { params: Promise<{ lang: Locale }> }) => {
   const { lang } = await params;

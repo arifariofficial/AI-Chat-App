@@ -5,8 +5,9 @@ import { Chat } from "@/lib/types";
 
 // Function to retrieve all chats for a given user
 export async function getChats(userId?: string | null): Promise<Chat[]> {
-  if (!userId) {
-    console.log("No user ID provided.");
+  //Robust validation
+  if (!userId || typeof userId !== "string" || userId.trim() === "") {
+    console.warn("Invalid user ID provided.");
     return [];
   }
 
@@ -21,10 +22,20 @@ export async function getChats(userId?: string | null): Promise<Chat[]> {
     // Return the chats, ensuring that date objects are correctly parsed
     return chats.map((chat) => ({
       ...chat,
-      createdAt: chat.createdAt ? new Date(chat.createdAt) : null,
+      createdAt:
+        chat.createdAt instanceof Date
+          ? chat.createdAt
+          : chat.createdAt
+            ? new Date(chat.createdAt)
+            : null,
       messages: chat.messages.map((message) => ({
         ...message,
-        createdAt: new Date(message.createdAt || Date.now()),
+        // More precise date handling
+        createdAt: message.createdAt
+          ? message.createdAt instanceof Date
+            ? message.createdAt
+            : new Date(message.createdAt)
+          : new Date(),
       })),
     }));
   } catch (error) {

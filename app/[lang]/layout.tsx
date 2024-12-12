@@ -50,17 +50,17 @@ export default async function RootLayout({
   params: Promise<{ lang: Locale }>;
 }>) {
   const session = await auth().catch(() => null);
+
   const chats = session
     ? await getChats(session?.user?.id || "").catch(() => [])
     : [];
 
+  // Internaitonalization
   const { lang } = await params;
-
   const dictionary = await getDictionary(lang);
+  const routes = localizedRoutes[lang];
 
   const navBar = await NavBarServer({ lang });
-
-  const routes = localizedRoutes[lang];
 
   return (
     <html lang={lang} suppressHydrationWarning>

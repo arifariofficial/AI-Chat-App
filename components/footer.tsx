@@ -14,13 +14,15 @@ import { toast } from "./ui/use-toast";
 import { Dictionary } from "@/lib/types";
 import { Locale } from "@/i18n.config";
 import Link from "next/link";
+import { LocalizedRoutes } from "@/lib/localized-routes";
 
 interface FooterProps {
   dictionary: Dictionary;
   lang: Locale;
+  routes: LocalizedRoutes[Locale];
 }
 
-export const Footer = ({ dictionary, lang }: FooterProps) => {
+export const Footer = ({ dictionary, lang, routes }: FooterProps) => {
   const [emailInput, setEmailInput] = useState<string>("");
 
   if (!dictionary || !lang) {
@@ -125,14 +127,18 @@ export const Footer = ({ dictionary, lang }: FooterProps) => {
             <div className="grid grid-flow-row grid-cols-[max-content] justify-center gap-y-4 md:grid-flow-col md:justify-center md:gap-x-6 md:gap-y-0 lg:text-left">
               {dictionary.footer.footerLinks.map((link, index) => (
                 <p key={index} className="underline">
-                  <Link href={`${lang}/${link.url}`}>{link.title}</Link>
+                  <Link
+                    href={`/${lang}/${routes[link.url as keyof typeof routes]}`}
+                  >
+                    {link.title}
+                  </Link>
                 </p>
               ))}
             </div>
           </div>
           <div className="mb-8 flex items-center justify-center gap-3 lg:mb-0">
             {dictionary.footer.socialMediaLinks.map((link, index) => (
-              <Link key={index} href={`${lang}/${link.url}`}>
+              <Link key={index} href={`/${lang}/${link.url}`}>
                 {React.createElement(socialMediaIcons[index], {
                   className: "size-8",
                 })}

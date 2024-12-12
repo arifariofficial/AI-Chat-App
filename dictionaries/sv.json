@@ -364,9 +364,9 @@
     ],
     "footerText": "© 2024 SipeAI. Alla rättigheter förbehållna.",
     "footerLinks": [
-      { "title": "Integritetspolicy", "url": "/privacy" },
-      { "title": "Villkor", "url": "/terms" },
-      { "title": "Cookie-inställningar", "url": "/cookie" }
+      { "title": "Integritetspolicy", "url": "privacy" },
+      { "title": "Villkor", "url": "terms" },
+      { "title": "Cookie-inställningar", "url": "cookiePolicy" }
     ]
   },
   "cookieConsent": {
@@ -427,6 +427,78 @@
       "description": "Om du har några frågor eller funderingar om denna cookiepolicy, vänligen kontakta oss:",
       "email": "E-post: support@sipeai.com",
       "phone": "Telefon: +358 123 456 789"
+    }
+  },
+  "terms_modal": {
+    "title": "Användarvillkor",
+    "welcome": "Välkommen till {companyName}! Dessa användarvillkor beskriver reglerna och föreskrifterna för användning av vår webbplats.",
+    "definitions_title": "1. Definitioner",
+    "definitions_content": "“Företaget” avser {companyName}, dess anställda, agenter och dotterbolag. “Användare” avser alla personer som använder vår webbplats eller våra tjänster.",
+    "services_title": "2. Användning av våra tjänster",
+    "services_content": {
+      "item1": "Användare måste vara minst 18 år gamla eller ha förälders samtycke för att använda våra tjänster.",
+      "item2": "Användare godkänner att inte använda webbplatsen på ett sätt som kan skada eller försämra dess funktionalitet.",
+      "item3": "Användare godkänner att inte använda våra tjänster för olagliga aktiviteter."
+    },
+    "intellectual_property_title": "3. Immateriella rättigheter",
+    "intellectual_property_content": "Allt innehåll på denna webbplats, inklusive text, bilder och programvara, ägs av {companyName} eller dess licensgivare. Användare är förbjudna att reproducera eller distribuera innehåll utan skriftligt tillstånd i förväg.",
+    "privacy_policy_title": "4. Sekretesspolicy",
+    "privacy_policy_content": "Vi är engagerade i att skydda din integritet. Läs vår sekretesspolicy.",
+    "limitation_liability_title": "5. Ansvarsbegränsning",
+    "limitation_liability_content": "{companyName} är inte ansvarigt för direkta, indirekta eller följdskador som uppstår vid användning av vår webbplats.",
+    "governing_law_title": "6. Tillämplig lag",
+    "governing_law_content": "Dessa användarvillkor styrs av och tolkas i enlighet med lagarna i {countryName}.",
+    "changes_terms_title": "7. Ändringar av villkoren",
+    "changes_terms_content": "Vi kan uppdatera dessa villkor från tid till annan. Användare uppmanas att granska dem regelbundet.",
+    "close_button": "Stäng"
+  },
+  "privacyPolicy": {
+    "title": "Integritetspolicy",
+    "lastUpdated": "Senast uppdaterad",
+    "description": "På <strong>{companyName}</strong> är vi engagerade i att skydda din integritet och säkerställa säkerheten för dina personuppgifter. Denna policy förklarar hur vi samlar in, använder och skyddar din information när du använder våra tjänster.",
+    "sections": {
+      "informationWeCollect": {
+        "title": "1. Information vi samlar in",
+        "content": "Vi kan samla in följande typer av information:",
+        "list": [
+          "Personuppgifter: Information du tillhandahåller när du skapar ett konto eller kontaktar oss, såsom ditt namn, din e-postadress och ditt telefonnummer.",
+          "Användningsdata: Data om hur du använder vår webbplats och våra tjänster, inklusive IP-adress, webbläsartyp och interaktioner.",
+          "Maskininlärningsinsikter: Information som genereras av våra AI-modeller baserat på dina inmatningar, begränsad till offentligt tillgänglig information."
+        ]
+      },
+      "howWeUseYourInformation": {
+        "title": "2. Hur vi använder din information",
+        "list": [
+          "För att tillhandahålla, förbättra och anpassa våra AI-tjänster.",
+          "För att kommunicera uppdateringar, nya funktioner eller supportrelaterade frågor.",
+          "För att säkerställa säkerhet och upptäcka bedräglig eller obehörig aktivitet."
+        ]
+      },
+      "dataSecurity": {
+        "title": "3. Datasäkerhet",
+        "content": "Säkerheten för dina data är vår prioritet. Vi använder industristandard för kryptering och säkra lagringslösningar för att skydda din information från obehörig åtkomst, ändring eller avslöjande.",
+        "note": "Observera dock att ingen onlineplattform kan garantera 100 % säkerhet. Vi strävar ständigt efter att förbättra våra säkerhetsrutiner."
+      },
+      "useOfAI": {
+        "title": "4. Användning av AI och maskininlärning",
+        "content": "Våra tjänster förlitar sig på AI och maskininlärningsmodeller för att tillhandahålla information och insikter. Även om vi strävar efter noggrannhet kan {companyName} inte garantera att alla AI-genererade svar är felfria eller korrekta."
+      },
+      "sharingInformation": {
+        "title": "5. Delning av information",
+        "content": "Vi säljer, hyr ut eller byter inte din personliga information till tredje part. Däremot kan vi dela data med betrodda partners för att tillhandahålla eller förbättra våra tjänster, med strikt efterlevnad av sekretessavtal."
+      },
+      "yourRights": {
+        "title": "6. Dina rättigheter",
+        "content": "Du har rätt att när som helst få tillgång till, ändra eller ta bort din personliga information. Om du har några bekymmer över hur vi hanterar dina data, vänligen kontakta oss på privacy@{companyWebsite}."
+      },
+      "changesToPolicy": {
+        "title": "7. Ändringar i denna policy",
+        "content": "Vi kan uppdatera denna integritetspolicy regelbundet för att återspegla ändringar i våra metoder eller regelverk. Användare uppmuntras att granska denna policy regelbundet."
+      },
+      "contactUs": {
+        "title": "8. Kontakta oss",
+        "content": "Om du har några frågor eller funderingar angående vår integritetspolicy, kontakta oss gärna på privacy@{companyWebsite}."
+      }
     }
   }
 }

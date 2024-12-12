@@ -1,5 +1,6 @@
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
+import { IoSettingsOutline as Settings } from "react-icons/io5";
 import {
   Accordion,
   AccordionContent,
@@ -39,7 +40,9 @@ export function ThemeNavMobile({ className, dictionary }: ThemeNavMobileProps) {
             asChild
             variant="navMobile"
             iconRight={
-              !isLightMode ? (
+              isSystemMode ? (
+                <Settings className="size-6" />
+              ) : isDarkMode ? (
                 <MoonIcon className="size-6" />
               ) : (
                 <SunIcon className="size-6" />

@@ -326,4 +326,69 @@ export interface Dictionary {
       phone: string;
     };
   };
+  terms_modal: {
+    title: string;
+    welcome: string;
+    definitions_title: string;
+    definitions_content: string;
+    services_title: string;
+    services_content: {
+      item1: string;
+      item2: string;
+      item3: string;
+    };
+    intellectual_property_title: string;
+    intellectual_property_content: string;
+    privacy_policy_title: string;
+    privacy_policy_content: string;
+    limitation_liability_title: string;
+    limitation_liability_content: string;
+    governing_law_title: string;
+    governing_law_content: string;
+    changes_terms_title: string;
+    changes_terms_content: string;
+    close_button: string;
+  };
+  privacyPolicy: {
+    title: string;
+    lastUpdated: string;
+    description: string;
+    sections: {
+      informationWeCollect: {
+        title: string;
+        content: string;
+        list: string[];
+      };
+      howWeUseYourInformation: {
+        title: string;
+        list: string[];
+      };
+      dataSecurity: {
+        title: string;
+        content: string;
+        note?: string; // Optional
+      };
+      useOfAI: {
+        title: string;
+        content: string;
+        note?: string; // Optional
+      };
+      sharingInformation: {
+        title: string;
+        content: string;
+      };
+      yourRights: {
+        title: string;
+        content: string;
+      };
+      changesToPolicy: {
+        title: string;
+        content: string;
+      };
+      contactUs: {
+        title: string;
+        content: string;
+      };
+    };
+  };
 }

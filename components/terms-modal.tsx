@@ -1,12 +1,14 @@
 import React from "react";
 import { Button } from "./ui/button";
+import { Dictionary } from "@/lib/types";
 
 interface TermsModalProps {
   isOpen: boolean;
   onClose: () => void;
+  dictionary: Dictionary;
 }
 
-const TermsModal = ({ isOpen, onClose }: TermsModalProps) => {
+const TermsModal = ({ isOpen, onClose, dictionary }: TermsModalProps) => {
   const companyName = process.env.NEXT_PUBLIC_COMPANY_NAME || "Our Company";
 
   if (!isOpen) return null;
@@ -21,7 +23,7 @@ const TermsModal = ({ isOpen, onClose }: TermsModalProps) => {
     >
       <div className="relative w-full max-w-lg rounded-lg bg-white p-6 shadow-lg sm:p-8">
         <button
-          aria-label="Close Terms Modal"
+          aria-label={dictionary.terms_modal.close_button}
           onClick={onClose}
           className="absolute right-4 top-4 text-gray-500 hover:text-gray-700 focus:outline-none focus:ring focus:ring-gray-300"
         >
@@ -44,54 +46,52 @@ const TermsModal = ({ isOpen, onClose }: TermsModalProps) => {
           id="terms-title"
           className="mb-4 text-center text-2xl font-bold text-gray-800"
         >
-          Terms and Conditions
+          {dictionary.terms_modal.title}
         </h2>
         <div id="terms-content" className="space-y-4 text-gray-600">
           <p>
-            Welcome to <strong>{companyName}</strong>! These terms and
-            conditions outline the rules and regulations for the use of our
-            website.
+            {dictionary.terms_modal.welcome.replace(
+              "{companyName}",
+              companyName,
+            )}
           </p>
 
           <h3 className="text-lg font-semibold text-gray-800">
-            1. Definitions
+            {dictionary.terms_modal.definitions_title}
           </h3>
           <p>
-            <strong>“Company”</strong> refers to {companyName}, its employees,
-            agents, and affiliates.
-            <br />
-            <strong>“User”</strong> refers to any person accessing our website
-            or using our services.
+            {dictionary.terms_modal.definitions_content.replace(
+              "{companyName}",
+              companyName,
+            )}
           </p>
 
           <h3 className="text-lg font-semibold text-gray-800">
-            2. Use of Our Services
+            {dictionary.terms_modal.services_title}
           </h3>
           <ul className="list-disc space-y-1 pl-6">
-            <li>
-              Users must be at least 18 years old or have parental consent to
-              use our services.
-            </li>
-            <li>
-              Users agree not to use the website in any way that may damage or
-              impair its functionality.
-            </li>
-            <li>Users agree not to use our services for illegal activities.</li>
+            <li>{dictionary.terms_modal.services_content.item1}</li>
+            <li>{dictionary.terms_modal.services_content.item2}</li>
+            <li>{dictionary.terms_modal.services_content.item3}</li>
           </ul>
 
           <h3 className="text-lg font-semibold text-gray-800">
-            3. Intellectual Property
+            {dictionary.terms_modal.intellectual_property_title}
           </h3>
           <p>
-            All content on this website, including text, images, and software,
-            is owned by {companyName} or its licensors. Users are prohibited
-            from reproducing or redistributing any content without prior written
-            permission.
+            {dictionary.terms_modal.intellectual_property_content.replace(
+              "{companyName}",
+              companyName,
+            )}
           </p>
         </div>
         <div className="mt-6 flex justify-center">
-          <Button onClick={onClose} className="px-6 py-2 text-sm">
-            Close
+          <Button
+            variant="black"
+            onClick={onClose}
+            className="px-6 py-2 text-sm"
+          >
+            {dictionary.terms_modal.close_button}
           </Button>
         </div>
       </div>

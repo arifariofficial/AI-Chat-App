@@ -10,6 +10,7 @@ import { HeroSection } from "./hero-section";
 import { TestimonialSection } from "./testimonial";
 import { auth } from "@/auth";
 import { Locale } from "@/i18n.config";
+import { localizedRoutes } from "@/lib/localized-routes";
 
 interface HomePageProps {
   lang: Locale;
@@ -19,6 +20,8 @@ export default async function HomePage({ lang }: HomePageProps) {
   const session = await auth();
 
   const dictionary = await getDictionary(lang);
+
+  const routes = localizedRoutes[lang];
 
   if (!dictionary) {
     return null;
@@ -40,7 +43,7 @@ export default async function HomePage({ lang }: HomePageProps) {
       <CtaSection dictionary={dictionary} lang={lang} />
       <TestimonialSection dictionary={dictionary} />
       <ContactSection dictionary={dictionary} />
-      <Footer dictionary={dictionary} lang={lang} />
+      <Footer dictionary={dictionary} lang={lang} routes={routes} />
     </div>
   );
 }

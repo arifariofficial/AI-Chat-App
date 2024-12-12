@@ -29,7 +29,6 @@ export function withAuthMiddleware(middleware: CustomMiddleware) {
 
     // Get the current path
     const pathname = request.nextUrl?.pathname || "/";
-    console.log("Auth path");
 
     // Get the authentication token
     const token = await getToken({

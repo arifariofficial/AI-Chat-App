@@ -12,6 +12,8 @@ import { getDictionary } from "@/lib/dictionary";
 import SubscriptionPage from "../profile/balance/page";
 import SecurityPage from "../profile/security/page";
 import CookiePolicyPage from "../cookie/page";
+import TermsModal from "../terms/page";
+import PrivacyPolicyPage from "../privacy/page";
 
 export default async function DynamicPage({
   params,
@@ -53,40 +55,42 @@ export default async function DynamicPage({
     notFound();
   }
 
-  const aboutUsContent = await AboutUsPage({ params });
-  const profilePageContent = await ProfilePage({ params });
-  const balancePageContent = await SubscriptionPage({ params });
-  const securityPageContent = await SecurityPage({ params });
-  const cookiePolicyContent = await CookiePolicyPage({ params });
-
-  // Handle matched routes
+  // Handle matched top-level routes
   if (topLevelKey) {
     switch (topLevelKey) {
-      case "aboutUs":
+      case "aboutUs": {
+        const aboutUsContent = await AboutUsPage({ params });
         return aboutUsContent;
+      }
       case "contact":
         return <ContactPage />;
       case "account":
       case "balance":
-      case "security":
+      case "security": {
+        const profileContent =
+          topLevelKey === "account"
+            ? await ProfilePage({ params })
+            : topLevelKey === "balance"
+              ? await SubscriptionPage({ params })
+              : await SecurityPage({ params });
         return (
           <ProfileLayout lang={lang} dictionary={dictionary}>
-            {(() => {
-              switch (topLevelKey) {
-                case "account":
-                  return profilePageContent;
-                case "balance":
-                  return balancePageContent;
-                case "security":
-                  return securityPageContent;
-                default:
-                  return null;
-              }
-            })()}
+            {profileContent}
           </ProfileLayout>
         );
-      case "cookiePolicy":
+      }
+      case "cookiePolicy": {
+        const cookiePolicyContent = await CookiePolicyPage({ params });
         return cookiePolicyContent;
+      }
+      case "privacy": {
+        const privacyPolicyContent = await PrivacyPolicyPage({ params });
+        return privacyPolicyContent;
+      }
+      case "terms": {
+        const termsContent = await TermsModal({ params });
+        return termsContent;
+      }
       default:
         return (
           <div>
@@ -96,19 +100,21 @@ export default async function DynamicPage({
     }
   }
 
-  const loginPage = await LoginPage({ params });
-  const resetPage = await ResetPage({ params });
-
+  // Handle matched auth routes
   if (authKey) {
     switch (authKey) {
-      case "signIn":
+      case "signIn": {
+        const loginPage = await LoginPage({ params });
         return loginPage;
+      }
+      case "reset": {
+        const resetPage = await ResetPage({ params });
+        return resetPage;
+      }
       case "signOut":
         return <div>Sign out page for {lang}</div>;
       case "register":
         return <div>Register page for {lang}</div>;
-      case "reset":
-        return resetPage;
       default:
         return (
           <div>
