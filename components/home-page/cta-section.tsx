@@ -21,7 +21,7 @@ export const CtaSection = ({ dictionary, lang }: CtaSectionProps) => {
             <p className="md:text-md">{dictionary.ctaSection.description}</p>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
               <Link href={`${lang}/chat`}>
-                <Button>{dictionary.ctaSection.button1}</Button>
+                <Button variant="black">{dictionary.ctaSection.button1}</Button>
               </Link>
               <Link href={`${lang}/more`}>
                 <Button variant="outline">

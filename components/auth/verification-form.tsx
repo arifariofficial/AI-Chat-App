@@ -7,14 +7,24 @@ import { useCallback, useEffect, useState } from "react";
 import { newVerification } from "@/actions/verification";
 import { FormSucccess } from "@/components/form-success";
 import { FormError } from "@/components/form-error";
+import { Dictionary } from "@/lib/types";
+import { Locale } from "@/i18n.config";
 
-export default function VerificationForm() {
+interface VerificationFormProps {
+  dictionary: Dictionary;
+  lang: Locale;
+}
+
+export default function VerificationForm({
+  dictionary,
+  lang,
+}: VerificationFormProps) {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
 
   const searchParams = useSearchParams();
 
-  const token = searchParams.get("token");
+  const token = searchParams?.get("token");
 
   //IN DEVELOPMENT MODE ONSUBMIT WILL BE CALLED TWICE IN STRICT MODE
   const onSubmit = useCallback(async () => {
@@ -57,6 +67,8 @@ export default function VerificationForm() {
       headerLabel="Confirming your verification"
       backButtonLabel="Back to Home"
       backButtonHref="/"
+      dictionary={dictionary}
+      lang={lang}
     >
       <div className="flex w-full flex-col items-center justify-center space-y-4">
         {!success && !error && <BeatLoader />}

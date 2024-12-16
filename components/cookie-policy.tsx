@@ -8,7 +8,7 @@ const companyName = process.env.NEXT_PUBLIC_COMPANY_NAME;
 
 const CookiePolicy = ({ dictionary }: CookiePolicyProps) => {
   return (
-    <div className="container mx-auto rounded-lg bg-background p-8 pb-32 text-foreground shadow-md">
+    <div className="container mx-auto rounded-lg bg-background p-8 pb-32 text-foreground">
       {/* Title */}
       <h1 className="mb-6 text-3xl font-bold">
         {dictionary.cookiePolicy.title}

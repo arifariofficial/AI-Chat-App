@@ -9,11 +9,16 @@ import ResetPage from "../auth/reset/page";
 import ProfileLayout from "../profile/layout";
 import ProfilePage from "../profile/(account)/page";
 import { getDictionary } from "@/lib/dictionary";
-import SubscriptionPage from "../profile/balance/page";
+import SubscriptionPage from "../profile/subscription/page";
 import SecurityPage from "../profile/security/page";
 import CookiePolicyPage from "../cookie/page";
-import TermsModal from "../terms/page";
 import PrivacyPolicyPage from "../privacy/page";
+import TermsAndConditionsPage from "../terms/page";
+import LogoutPage from "../auth/logout/page";
+import RegisterPage from "../auth/register/page";
+import Layout from "../chat/layout";
+import ChatPage from "../chat/page";
+import NewPage from "../new/page";
 
 export default async function DynamicPage({
   params,
@@ -62,15 +67,23 @@ export default async function DynamicPage({
         const aboutUsContent = await AboutUsPage({ params });
         return aboutUsContent;
       }
+      case "chat": {
+        const chatContent = await ChatPage({ params });
+        return <Layout params={params}>{chatContent}</Layout>;
+      }
+      case "new": {
+        const newContent = await NewPage({ params });
+        return newContent;
+      }
       case "contact":
-        return <ContactPage />;
+        return <ContactPage params={params} />;
       case "account":
-      case "balance":
+      case "subscription":
       case "security": {
         const profileContent =
           topLevelKey === "account"
             ? await ProfilePage({ params })
-            : topLevelKey === "balance"
+            : topLevelKey === "subscription"
               ? await SubscriptionPage({ params })
               : await SecurityPage({ params });
         return (
@@ -88,7 +101,7 @@ export default async function DynamicPage({
         return privacyPolicyContent;
       }
       case "terms": {
-        const termsContent = await TermsModal({ params });
+        const termsContent = await TermsAndConditionsPage({ params });
         return termsContent;
       }
       default:
@@ -111,10 +124,14 @@ export default async function DynamicPage({
         const resetPage = await ResetPage({ params });
         return resetPage;
       }
-      case "signOut":
-        return <div>Sign out page for {lang}</div>;
-      case "register":
-        return <div>Register page for {lang}</div>;
+      case "signOut": {
+        const signOutPage = await LogoutPage({ params });
+        return signOutPage;
+      }
+      case "register": {
+        const registerPage = await RegisterPage({ params });
+        return registerPage;
+      }
       default:
         return (
           <div>

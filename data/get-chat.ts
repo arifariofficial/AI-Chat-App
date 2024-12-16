@@ -46,7 +46,6 @@ export async function getChats(userId?: string | null): Promise<Chat[]> {
 
 // Function to retrieve a specific chat by ID and user ID
 export async function getChat(id: string, userId: string) {
-  console.log(`Fetching chat ${id} for user ${userId}`);
   try {
     // Fetch the chat from the database
     return await fetchChatFromDB(id, userId);

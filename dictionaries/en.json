@@ -40,6 +40,22 @@
     "twoFactorConfirmButtonLabel": "Confirm",
     "orContinueButtonLabel": "Or continue with"
   },
+  "registerForm": {
+    "headerLabel": "Create an account",
+    "emailAddress": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "agreeToTerms": "I agree to the",
+    "termsAndConditions": "terms and conditions",
+    "submit": "Register",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Login",
+    "successMessage": "Registration successful!",
+    "errorMessage": "Something went wrong. Please try again."
+  },
+  "logout": {
+    "headerLabel": "You have been logged out"
+  },
   "resetPassword": {
     "headerLabel": "Password Reset",
     "resetButtonLabel": "Reset Password",
@@ -70,6 +86,11 @@
     "noName": "No Name",
     "account": "Account"
   },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "Sorry, we couldn't find the resource you were looking for.",
+    "returnHome": "Return Home"
+  },
   "profile": {
     "account": {
       "header": "Account",
@@ -81,8 +102,8 @@
       "emailButtonConfirm": "Confirm Email",
       "emailButtonConfirmation": "Confirmed"
     },
-    "balance": {
-      "header": "Balance",
+    "subscription": {
+      "header": "Subscription",
       "description": "Manage your payment settings",
       "selectHeader": "Buy credits",
       "selectAmount": "Amount",
@@ -100,6 +121,12 @@
   "chatPage": {
     "header": "Chat",
     "description": "Legal AI Assistant"
+  },
+  "chatModal": {
+    "signIn": "Sign In",
+    "okButton": "Ok!",
+    "createAccount": "Create a free account",
+    "clickHere": "Click here"
   },
   "hero": {
     "heading": "Empowering You with Knowledge of Your Rights",
@@ -279,7 +306,122 @@
       }
     ]
   },
-
+  "aboutUs": {
+    "tagline": "Innovate",
+    "heading": "Our team",
+    "description": "Meet the brilliant minds behind our innovative solutions.",
+    "footer": {
+      "heading": "We're hiring!",
+      "description": "Join our dynamic team and shape the future.",
+      "button": {
+        "title": "Open positions"
+      }
+    },
+    "teamMembers": [
+      {
+        "name": "Elina Eriksson",
+        "jobTitle": "CEO & Founder",
+        "email": "eriksson.elina@sipe.ai",
+        "mobile": "+358 40 7798881",
+        "description": "Passionate about leveraging AI to solve real-world challenges and drive innovation.",
+        "image": {
+          "src": "/assets/Elina.jpeg",
+          "alt": "Elina Eriksson"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/elina-eriksson/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Sampo Kaarenmaa",
+        "jobTitle": "Product Manager & Developer",
+        "email": "kaarenmaa.sampo@sipe.ai",
+        "mobile": "+358 40 5800869",
+        "description": "Focused on creating user-centric products that enhance customer experience.",
+        "image": {
+          "src": "/assets/Sampo.jpeg",
+          "alt": "Sampo Kaarenmaa"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/sampo-kaarenmaa-75a76587/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Mia Almgren",
+        "jobTitle": "Marketing Director",
+        "email": "almgren.mia@sipe.ai",
+        "mobile": "+358 40 8296048",
+        "description": "Committed to building our brand and engaging with our community.",
+        "image": {
+          "src": "/assets/Mia.jpeg",
+          "alt": "Mia Almgren"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/mia-almgren-1327a9b8/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Amir Ingher",
+        "jobTitle": "Software Engineer",
+        "email": "ingher.amir@sipe.ai",
+        "mobile": "+358 40 3012289",
+        "description": "Experienced in software engineering with a strong passion for innovation and expertise in AI-driven solutions.",
+        "image": {
+          "src": "/assets/Amir.jpeg",
+          "alt": "Amir Ingher"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/amir-ingher-ba24a7129/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Ariful Islam",
+        "jobTitle": "Full Stack Engineer",
+        "email": "islam.ariful@sipe.ai",
+        "mobile": "+358 40 555699",
+        "description": "Full Stack Engineer with expertise in AI and a passion for creating scalable, intelligent solutions.",
+        "image": {
+          "src": "/assets/Ariful.jpeg",
+          "alt": "Ariful Islam",
+          "className": "scale-[1.4]"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/arifariofficial/",
+            "icon": "linkedin"
+          }
+        ]
+      }
+    ]
+  },
+  "contactForm": {
+    "title": "Contact Us",
+    "description": "We'd love to hear from you. Fill out the form below and we’ll get back to you as soon as possible.",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your Name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Your Email",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Your Message",
+    "submitButton": "Send Message",
+    "sendingButton": "Sending...",
+    "successToastTitle": "Message sent successfully!",
+    "successToastDescription": "We will get back to you soon.",
+    "errorToastTitle": "Error",
+    "errorToastDescription": "Something went wrong. Please try again later."
+  },
   "footer": {
     "logo": {
       "url": "#",
@@ -294,13 +436,17 @@
       "variant": "outline",
       "size": "sm"
     },
-    "termsAndConditions": "<p class='text-xs'>By subscribing you agree to with our <a href='#' class='underline'>Privacy Policy</a>.</p>",
+    "termsAndConditions": {
+      "text": "By subscribing you agree to with our",
+      "link": "Privacy Policy"
+    },
+
     "columnLinks": [
       {
         "title": "Quick Links",
         "links": [
-          { "title": "About Us", "url": "/about-us" },
-          { "title": "Contact Us", "url": "/contact-us" },
+          { "title": "About Us", "url": "aboutUs" },
+          { "title": "Contact Us", "url": "contact" },
           { "title": "FAQs", "url": "/FAQs" },
           { "title": "Blog", "url": "/blog" },
           { "title": "Support", "url": "/support" }
@@ -319,10 +465,10 @@
       {
         "title": "Legal",
         "links": [
-          { "title": "Privacy Policy", "url": "/privacy" },
-          { "title": "Terms of Use", "url": "/terms" },
-          { "title": "Cookie Policy", "url": "/cookie" },
-          { "title": "User Agreement", "url": "/user-agreement" },
+          { "title": "Privacy Policy", "url": "privacy" },
+          { "title": "Terms of Use", "url": "terms" },
+          { "title": "Cookie Policy", "url": "cookiePolicy" },
+          { "title": "User Agreement", "url": "userAgreement" },
           { "title": "Site Map", "url": "#" }
         ]
       },

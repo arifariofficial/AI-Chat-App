@@ -1,6 +1,7 @@
 import { LoginForm } from "@/components/auth/login-form";
 import { Locale } from "@/i18n.config";
 import { getDictionary } from "@/lib/dictionary";
+import { localizedRoutes } from "@/lib/localized-routes";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -16,12 +17,14 @@ export default async function LoginPage({
 }) {
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
+  const routes = localizedRoutes[lang];
 
   return (
     <LoginForm
       headerLabel={dictionary.login.headerLabel}
       dictionary={dictionary}
       lang={lang}
+      routes={routes}
       className="mx-auto flex w-full flex-col"
     />
   );

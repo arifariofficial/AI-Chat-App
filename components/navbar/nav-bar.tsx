@@ -34,8 +34,14 @@ const NavBar: React.FC<NavBarProps> = ({
   const pathname = usePathname();
 
   // Define paths to hide the navbar
-  const hiddenPaths = [`/${lang}/chat`, `/${lang}/new`];
-  if (hiddenPaths.some((path) => pathname.startsWith(path))) {
+  // Define paths to hide the navbar
+  const hiddenPaths = [
+    `/${lang}/chat`,
+    `/${lang}/keskustelu`,
+    `/${lang}/chatt`,
+    `/${lang}/new`,
+  ];
+  if (hiddenPaths.some((path) => pathname?.startsWith(path))) {
     return null;
   }
 

@@ -32,13 +32,14 @@ import { VisibilityIcon, VisibilityOffIcon } from "@/components/ui/icons";
 import { useTheme } from "next-themes";
 import { Dictionary } from "@/lib/types";
 import { Locale } from "@/i18n.config";
-import { localizedRoutes } from "@/lib/localized-routes";
+import { LocalizedRoutes } from "@/lib/localized-routes";
 
 interface LoginFormProps {
   headerLabel: string;
   className?: string;
   dictionary: Dictionary;
   lang: Locale;
+  routes: LocalizedRoutes[Locale];
 }
 
 export const LoginForm = ({
@@ -46,10 +47,11 @@ export const LoginForm = ({
   className,
   lang,
   dictionary,
+  routes,
 }: LoginFormProps) => {
   const searchParams = useSearchParams();
   const urlError =
-    searchParams.get("error") === "OAuthAccountNotLinked"
+    searchParams?.get("error") === "OAuthAccountNotLinked"
       ? "Email already in use with different provider"
       : "";
 
@@ -58,10 +60,8 @@ export const LoginForm = ({
   const [success, setSuccess] = useState<string | undefined>("");
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const redirectUrl = searchParams.get("redirect") || "/";
+  const redirectUrl = searchParams?.get("redirect") || `/${lang}/`;
   const { theme } = useTheme();
-
-  const routes = localizedRoutes[lang];
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -118,6 +118,7 @@ export const LoginForm = ({
       showLocal={!showTwoFactor}
       className={className}
       dictionary={dictionary}
+      lang={lang}
     >
       <Form {...form}>
         <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
@@ -229,6 +230,7 @@ export const LoginForm = ({
                             endAdornment: (
                               <InputAdornment position="end">
                                 <IconButton
+                                  className="hover:bg-inherit hover:text-inherit"
                                   aria-label={
                                     dictionary.login.ariaLabelPasswordToggle
                                   }
@@ -249,7 +251,7 @@ export const LoginForm = ({
                         size="sm"
                         variant="link"
                         asChild
-                        className="mb-2 px-0 font-normal text-foreground"
+                        className="mb-2 px-0 font-normal"
                       >
                         <Link href={`/${lang}${routes.auth.reset}`}>
                           {dictionary.login.forgotPassword}
@@ -266,7 +268,7 @@ export const LoginForm = ({
           <Button
             type="submit"
             variant={theme === "dark" ? "outline" : "default"}
-            className="w-full"
+            className="mt-2 w-full"
           >
             {isPending ? (
               <CircularProgress size="20px" className="text-foreground" />

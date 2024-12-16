@@ -28,7 +28,6 @@ export function withI18nMiddleware(middleware: CustomMiddleware) {
       (locale) =>
         !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
     );
-    console.log(pathnameIsMissingLocale);
 
     if (pathnameIsMissingLocale) {
       const detectedLocale = getLocale(request) || i18n.defaultLocale;

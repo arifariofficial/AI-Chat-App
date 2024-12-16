@@ -8,6 +8,7 @@ import { Social } from "./social";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { Dictionary } from "@/lib/types";
+import { Locale } from "@/i18n.config";
 
 interface CardWrapperProps {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ interface CardWrapperProps {
   showLocal?: boolean;
   className?: string;
   dictionary?: Dictionary;
+  lang: Locale;
 }
 
 export const CardWrapper = ({
@@ -27,6 +29,7 @@ export const CardWrapper = ({
   showLocal,
   className,
   dictionary,
+  lang,
 }: CardWrapperProps) => {
   return (
     <Card
@@ -54,7 +57,7 @@ export const CardWrapper = ({
               <hr />
             </Grid>
           </Grid>
-          <Social />
+          <Social lang={lang} />
         </CardFooter>
       )}
       {backButtonLabel && backButtonHref && (

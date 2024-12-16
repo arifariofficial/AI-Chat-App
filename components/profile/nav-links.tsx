@@ -23,18 +23,18 @@ export default function NavLinks({ lang, dictionary, routes }: NavLinksProps) {
 
   const links = [
     {
-      name: dictionary?.profile?.account.header,
-      href: `/${lang}${routes?.account}`,
+      name: dictionary.profile.account.header,
+      href: `/${lang}${routes.account}`,
       icon: UserIcon,
     },
     {
-      name: dictionary?.profile?.balance.header,
-      href: `/${lang}${routes?.balance}`,
+      name: dictionary.profile.subscription.header,
+      href: `/${lang}${routes.subscription}`,
       icon: SubscriptionIcon,
     },
     {
-      name: dictionary?.profile?.security.header,
-      href: `/${lang}${routes?.security}`,
+      name: dictionary.profile.security.header,
+      href: `/${lang}${routes.security}`,
       icon: SecurityIcon,
     },
   ];

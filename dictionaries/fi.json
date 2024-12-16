@@ -29,7 +29,7 @@
     "email": "Sähköposti",
     "password": "Salasana",
     "signup": "Rekisteröidy",
-    "signin": "Kirjauduu",
+    "signin": "Kirjaudu",
     "signout": "Kirjaudu ulos"
   },
   "login": {
@@ -39,6 +39,22 @@
     "forgotPassword": "Unohditko salasanan?",
     "twoFactorConfirmButtonLabel": "Vahvista",
     "orContinueButtonLabel": "Tai jatka seuraavilla"
+  },
+  "registerForm": {
+    "headerLabel": "Luo tili",
+    "emailAddress": "Sähköpostiosoite",
+    "password": "Salasana",
+    "confirmPassword": "Vahvista salasana",
+    "agreeToTerms": "Hyväksyn",
+    "termsAndConditions": "ehdot ja edellytykset",
+    "submit": "Luo",
+    "alreadyHaveAccount": "Onko sinulla jo tili?",
+    "login": "Kirjaudu sisään",
+    "successMessage": "Rekisteröinti onnistui!",
+    "errorMessage": "Jotain meni pieleen. Yritä uudelleen."
+  },
+  "logout": {
+    "headerLabel": "Olet kirjautunut ulos"
   },
   "resetPassword": {
     "headerLabel": "Salasanan nollaus",
@@ -71,6 +87,11 @@
     "noName": "Ei nimeä",
     "account": "Tili"
   },
+  "notFound": {
+    "title": "Sivua ei löytynyt",
+    "description": "Valitettavasti emme löytäneet etsimääsi resurssia.",
+    "returnHome": "Palaa kotiin"
+  },
   "profile": {
     "account": {
       "header": "Tili",
@@ -82,8 +103,8 @@
       "emailButtonConfirm": "Vahvista sähköposti",
       "emailButtonConfirmation": "Vahvistettu"
     },
-    "balance": {
-      "header": "Saldo",
+    "subscription": {
+      "header": "Tilaukset",
       "description": "Hallitse maksuasetuksiasi",
       "selectHeader": "Osta hyvityksiä",
       "selectAmount": "Määrä",
@@ -102,6 +123,12 @@
   "chatPage": {
     "header": "Keskustelu",
     "description": "Lakisääteinen tekoälyassistentti"
+  },
+  "chatModal": {
+    "signIn": "Kirjaudu sisään",
+    "okButton": "Ok!",
+    "createAccount": "Luo ilmainen tili",
+    "clickHere": "Klikkaa tästä"
   },
   "hero": {
     "heading": "Valjastamme tiedon voimasi oikeuksistasi",
@@ -281,7 +308,122 @@
       }
     ]
   },
-
+  "aboutUs": {
+    "tagline": "Innovoi",
+    "heading": "Tiimimme",
+    "description": "Tutustu innovatiivisten ratkaisujemme nerokkaisiin mieliin.",
+    "footer": {
+      "heading": "Etsimme tekijöitä!",
+      "description": "Liity dynaamiseen tiimiimme ja muovaa tulevaisuutta.",
+      "button": {
+        "title": "Avoimet paikat"
+      }
+    },
+    "teamMembers": [
+      {
+        "name": "Elina Eriksson",
+        "jobTitle": "Toimitusjohtaja & Perustaja",
+        "email": "eriksson.elina@sipe.ai",
+        "mobile": "+358 40 7798881",
+        "description": "Innokas hyödyntämään tekoälyä ratkaisemaan todellisia haasteita ja edistämään innovaatioita.",
+        "image": {
+          "src": "/assets/Elina.jpeg",
+          "alt": "Elina Eriksson"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/elina-eriksson/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Sampo Kaarenmaa",
+        "jobTitle": "Tuotepäällikkö & Kehittäjä",
+        "email": "kaarenmaa.sampo@sipe.ai",
+        "mobile": "+358 40 5800869",
+        "description": "Keskittynyt luomaan käyttäjäystävällisiä tuotteita, jotka parantavat asiakaskokemusta.",
+        "image": {
+          "src": "/assets/Sampo.jpeg",
+          "alt": "Sampo Kaarenmaa"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/sampo-kaarenmaa-75a76587/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Mia Almgren",
+        "jobTitle": "Markkinointijohtaja",
+        "email": "almgren.mia@sipe.ai",
+        "mobile": "+358 40 8296048",
+        "description": "Omistautunut brändin rakentamiseen ja yhteisön sitouttamiseen.",
+        "image": {
+          "src": "/assets/Mia.jpeg",
+          "alt": "Mia Almgren"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/mia-almgren-1327a9b8/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Amir Ingher",
+        "jobTitle": "Ohjelmistoinsinööri",
+        "email": "ingher.amir@sipe.ai",
+        "mobile": "+358 40 3012289",
+        "description": "Kokenut ohjelmistoinsinööri, jolla on vahva intohimo innovaatioihin ja tekoälyyn.",
+        "image": {
+          "src": "/assets/Amir.jpeg",
+          "alt": "Amir Ingher"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/amir-ingher-ba24a7129/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Ariful Islam",
+        "jobTitle": "Full Stack -insinööri",
+        "email": "islam.ariful@sipe.ai",
+        "mobile": "+358 40 555699",
+        "description": "Full Stack -insinööri, jolla on asiantuntemusta tekoälystä ja intohimoa skaalautuvien, älykkäiden ratkaisujen luomiseen.",
+        "image": {
+          "src": "/assets/Ariful.jpeg",
+          "alt": "Ariful Islam",
+          "className": "scale-[1.4]"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/arifariofficial/",
+            "icon": "linkedin"
+          }
+        ]
+      }
+    ]
+  },
+  "contactForm": {
+    "title": "Ota yhteyttä",
+    "description": "Haluamme kuulla sinusta. Täytä alla oleva lomake, niin otamme sinuun yhteyttä mahdollisimman pian.",
+    "nameLabel": "Nimi",
+    "namePlaceholder": "Nimesi",
+    "emailLabel": "Sähköposti",
+    "emailPlaceholder": "Sähköpostisi",
+    "messageLabel": "Viesti",
+    "messagePlaceholder": "Viesti",
+    "submitButton": "Lähetä viesti",
+    "sendingButton": "Lähetetään...",
+    "successToastTitle": "Viesti lähetetty onnistuneesti!",
+    "successToastDescription": "Otamme sinuun pian yhteyttä.",
+    "errorToastTitle": "Virhe",
+    "errorToastDescription": "Jokin meni pieleen. Yritä uudelleen myöhemmin."
+  },
   "footer": {
     "logo": {
       "url": "#",
@@ -296,13 +438,16 @@
       "variant": "outline",
       "size": "sm"
     },
-    "termsAndConditions": "<p class='text-xs'>Tilaamalla hyväksyt <a href='#' class='underline'>Tietosuojakäytäntömme</a>.</p>",
+    "termsAndConditions": {
+      "text": "Tilaamalla hyväksyt",
+      "link": "Tietosuojakäytäntömme"
+    },
     "columnLinks": [
       {
         "title": "Pikalinkit",
         "links": [
-          { "title": "Meistä", "url": "/about-us" },
-          { "title": "Ota yhteyttä", "url": "/contact-us" },
+          { "title": "Meistä", "url": "aboutUs" },
+          { "title": "Ota yhteyttä", "url": "contact" },
           { "title": "Usein kysytyt kysymykset", "url": "/FAQs" },
           { "title": "Blogi", "url": "/blog" },
           { "title": "Tuki", "url": "/support" }
@@ -321,10 +466,10 @@
       {
         "title": "Laillisuus",
         "links": [
-          { "title": "Tietosuojakäytäntö", "url": "/privacy" },
-          { "title": "Käyttöehdot", "url": "/terms" },
-          { "title": "Evästekäytäntö", "url": "/cookie" },
-          { "title": "Käyttäjäsopimus", "url": "/user-agreement" },
+          { "title": "Tietosuojakäytäntö", "url": "privacy" },
+          { "title": "Käyttöehdot", "url": "terms" },
+          { "title": "Evästekäytäntö", "url": "cookiePolicy" },
+          { "title": "Käyttäjäsopimus", "url": "userAgreement" },
           { "title": "Sivukartta", "url": "#" }
         ]
       },

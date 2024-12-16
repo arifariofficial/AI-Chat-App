@@ -40,6 +40,22 @@
     "twoFactorConfirmButtonLabel": "Bekräfta",
     "orContinueButtonLabel": "Eller fortsätt med"
   },
+  "registerForm": {
+    "headerLabel": "Skapa ett konto",
+    "emailAddress": "E-postadress",
+    "password": "Lösenord",
+    "confirmPassword": "Bekräfta lösenord",
+    "agreeToTerms": "Jag godkänner",
+    "termsAndConditions": "Villkor & regler",
+    "submit": "Registrera",
+    "alreadyHaveAccount": "Har du redan ett konto?",
+    "login": "Logga in",
+    "successMessage": "Registreringen lyckades!",
+    "errorMessage": "Något gick fel. Försök igen."
+  },
+  "logout": {
+    "headerLabel": "Du har loggats ut"
+  },
   "resetPassword": {
     "headerLabel": "Återställ lösenord",
     "resetButtonLabel": "Återställ lösenordet",
@@ -71,6 +87,11 @@
     "noName": "Inget namn",
     "account": "Konto"
   },
+  "notFound": {
+    "title": "Sidan hittades inte",
+    "description": "Tyvärr kunde vi inte hitta resursen du letade efter.",
+    "returnHome": "Gå hem"
+  },
   "profile": {
     "account": {
       "header": "Konto",
@@ -82,8 +103,8 @@
       "emailButtonConfirm": "Bekräfta e-post",
       "emailButtonConfirmation": "Bekräftad"
     },
-    "balance": {
-      "header": "Saldo",
+    "subscription": {
+      "header": "Prenumeration",
       "description": "Hantera dina betalningsinställningar",
       "selectHeader": "Köp krediter",
       "selectAmount": "Belopp",
@@ -101,6 +122,12 @@
   "chatPage": {
     "header": "Chatt",
     "description": "Juridisk AI-assistent"
+  },
+  "chatModal": {
+    "signIn": "Logga in",
+    "okButton": "Ok!",
+    "createAccount": "Skapa ett gratis konto",
+    "clickHere": "Klicka här"
   },
   "hero": {
     "heading": "Ge dig kunskap om dina rättigheter",
@@ -280,7 +307,122 @@
       }
     ]
   },
-
+  "aboutUs": {
+    "tagline": "Innovera",
+    "heading": "Vårt team",
+    "description": "Möt de briljanta hjärnorna bakom våra innovativa lösningar.",
+    "footer": {
+      "heading": "Vi rekryterar!",
+      "description": "Gå med i vårt dynamiska team och forma framtiden.",
+      "button": {
+        "title": "Lediga tjänster"
+      }
+    },
+    "teamMembers": [
+      {
+        "name": "Elina Eriksson",
+        "jobTitle": "VD & Grundare",
+        "email": "eriksson.elina@sipe.ai",
+        "mobile": "+358 40 7798881",
+        "description": "Brinner för att använda AI för att lösa verkliga problem och driva innovation.",
+        "image": {
+          "src": "/assets/Elina.jpeg",
+          "alt": "Elina Eriksson"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/elina-eriksson/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Sampo Kaarenmaa",
+        "jobTitle": "Produktchef & Utvecklare",
+        "email": "kaarenmaa.sampo@sipe.ai",
+        "mobile": "+358 40 5800869",
+        "description": "Fokuserad på att skapa användarvänliga produkter som förbättrar kundupplevelsen.",
+        "image": {
+          "src": "/assets/Sampo.jpeg",
+          "alt": "Sampo Kaarenmaa"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/sampo-kaarenmaa-75a76587/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Mia Almgren",
+        "jobTitle": "Marknadsföringschef",
+        "email": "almgren.mia@sipe.ai",
+        "mobile": "+358 40 8296048",
+        "description": "Engagerad i att bygga vårt varumärke och engagera vår gemenskap.",
+        "image": {
+          "src": "/assets/Mia.jpeg",
+          "alt": "Mia Almgren"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/mia-almgren-1327a9b8/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Amir Ingher",
+        "jobTitle": "Mjukvaruingenjör",
+        "email": "ingher.amir@sipe.ai",
+        "mobile": "+358 40 3012289",
+        "description": "Erfaren mjukvaruingenjör med stark passion för innovation och AI-drivna lösningar.",
+        "image": {
+          "src": "/assets/Amir.jpeg",
+          "alt": "Amir Ingher"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/amir-ingher-ba24a7129/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Ariful Islam",
+        "jobTitle": "Fullstackutvecklare",
+        "email": "islam.ariful@sipe.ai",
+        "mobile": "+358 40 555699",
+        "description": "Fullstackutvecklare med expertis inom AI och en passion för att skapa skalbara, intelligenta lösningar.",
+        "image": {
+          "src": "/assets/Ariful.jpeg",
+          "alt": "Ariful Islam",
+          "className": "scale-[1.4]"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/arifariofficial/",
+            "icon": "linkedin"
+          }
+        ]
+      }
+    ]
+  },
+  "contactForm": {
+    "title": "Kontakta oss",
+    "description": "Vi vill gärna höra från dig. Fyll i formuläret nedan så återkommer vi så snart som möjligt.",
+    "nameLabel": "Namn",
+    "namePlaceholder": "Ditt namn",
+    "emailLabel": "E-post",
+    "emailPlaceholder": "Din e-post",
+    "messageLabel": "Meddelande",
+    "messagePlaceholder": "Ditt meddelande",
+    "submitButton": "Skicka meddelande",
+    "sendingButton": "Skickar...",
+    "successToastTitle": "Meddelandet skickades framgångsrikt!",
+    "successToastDescription": "Vi kommer att återkomma till dig snart.",
+    "errorToastTitle": "Fel",
+    "errorToastDescription": "Något gick fel. Försök igen senare."
+  },
   "footer": {
     "logo": {
       "url": "#",
@@ -295,13 +437,16 @@
       "variant": "outline",
       "size": "sm"
     },
-    "termsAndConditions": "<p class='text-xs'>Genom att prenumerera godkänner du vår <a href='#' class='underline'>Integritetspolicy</a>.</p>",
+    "termsAndConditions": {
+      "text": "Genom att prenumerera godkänner du",
+      "link": "Vår integritetspolicy"
+    },
     "columnLinks": [
       {
         "title": "Snabblänkar",
         "links": [
-          { "title": "Om oss", "url": "/about-us" },
-          { "title": "Kontakta oss", "url": "/contact-us" },
+          { "title": "Om oss", "url": "aboutUs" },
+          { "title": "Kontakta oss", "url": "contact" },
           { "title": "Vanliga frågor", "url": "/FAQs" },
           { "title": "Blogg", "url": "/blog" },
           { "title": "Support", "url": "/support" }
@@ -320,10 +465,10 @@
       {
         "title": "Juridik",
         "links": [
-          { "title": "Integritetspolicy", "url": "/privacy" },
-          { "title": "Villkor", "url": "/terms" },
-          { "title": "Cookiepolicy", "url": "/cookie" },
-          { "title": "Användaravtal", "url": "/user-agreement" },
+          { "title": "Integritetspolicy", "url": "privacy" },
+          { "title": "Villkor", "url": "terms" },
+          { "title": "Cookiepolicy", "url": "cookiePolicy" },
+          { "title": "Användaravtal", "url": "userAgreement" },
           { "title": "Webbplatskarta", "url": "#" }
         ]
       },

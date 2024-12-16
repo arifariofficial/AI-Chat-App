@@ -75,7 +75,7 @@ export const FeatureSectionList = ({
             </Button>
           </Link>
 
-          <Button onClick={handleSignUp}>
+          <Button onClick={handleSignUp} variant="black">
             {dictionary.auth.signup} <span className="ml-1">→</span>
           </Button>
         </div>

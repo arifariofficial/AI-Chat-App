@@ -27,11 +27,11 @@ const creditOptions: CreditOption[] = [
   { value: 20, label: "20 EUR" },
 ];
 
-interface BalanceProps {
+interface SubscriptionProps {
   dictionary: Dictionary;
 }
 
-export default function Balance({ dictionary }: BalanceProps) {
+export default function Subscription({ dictionary }: SubscriptionProps) {
   const [loading, setLoading] = useState(false);
   const [credit, setCredit] = useState<number>(creditOptions[0].value);
   const { toast } = useToast();
@@ -75,20 +75,20 @@ export default function Balance({ dictionary }: BalanceProps) {
     <div className="flex size-full flex-col items-center">
       <div className="mb-10 w-full bg-background text-foreground">
         <h1 className="mb-1 text-2xl font-semibold">
-          {dictionary.profile.balance.header}
+          {dictionary.profile.subscription.header}
         </h1>
-        <p>{dictionary.profile.balance.description}</p>
+        <p>{dictionary.profile.subscription.description}</p>
       </div>
-      <div className="flex h-[300px] w-full max-w-md flex-col items-center justify-center space-y-6 rounded-xl border border-border bg-background px-8 py-6 text-foreground">
+      <div className="flex h-[300px] w-full max-w-md flex-col items-center justify-center space-y-6 rounded-xl border border-border/40 bg-background px-14 py-6 text-foreground shadow-md">
         <h1 className="text-xl font-bold">
-          {dictionary.profile.balance.selectHeader}
+          {dictionary.profile.subscription.selectHeader}
         </h1>
         <FormControl
           fullWidth
           className="text-foreground focus:text-foreground"
         >
           <InputLabel id="credit-select-label" className="mb-6 text-foreground">
-            {dictionary.profile.balance.selectAmount}
+            {dictionary.profile.subscription.selectAmount}
           </InputLabel>
           <Select
             size="medium"
@@ -111,7 +111,7 @@ export default function Balance({ dictionary }: BalanceProps) {
           className="h-ful my-10 w-2/3 p-5"
           onClick={buyCredits}
         >
-          {dictionary.profile.balance.selectBuy}
+          {dictionary.profile.subscription.selectBuy}
         </Button>
       </div>
     </div>

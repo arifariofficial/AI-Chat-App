@@ -6,13 +6,20 @@ import { Button } from "@/components/ui/button";
 import { FacebookIcon, GoogleIcon, IconSpinner } from "@/components/ui/icons";
 import { Typography } from "@mui/material";
 import { useSearchParams } from "next/navigation";
+import { Locale } from "@/i18n.config";
 
-export const Social = () => {
+interface SocialProps {
+  lang: Locale;
+}
+
+export const Social = ({ lang }: SocialProps) => {
   const [pendingGoogle, setPendingGoogle] = useState(false);
   const [pendingFacebook, setPendingFacebook] = useState(false);
   const searchParams = useSearchParams();
 
-  const redirectUrl = searchParams.get("redirect") || "/";
+  const redirectUrl = searchParams.get("redirect") || `/${lang}`;
+
+  console.log("Redirect URL:", redirectUrl);
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -32,6 +39,12 @@ export const Social = () => {
     }
 
     try {
+      console.log(
+        "Signing in with provider:",
+        provider,
+        "Redirecting to:",
+        redirectUrl,
+      );
       await signIn(provider, { callbackUrl: redirectUrl });
     } catch (error) {
       console.log(error);

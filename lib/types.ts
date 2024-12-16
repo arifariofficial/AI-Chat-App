@@ -78,6 +78,23 @@ export interface ChatPage {
   description: string;
 }
 
+export interface TeamMember {
+  name: string;
+  jobTitle: string;
+  email: string;
+  mobile: string;
+  description: string;
+  image: {
+    src: string;
+    alt: string;
+    className?: string;
+  };
+  socialLinks: {
+    href: string;
+    icon: string;
+  }[];
+}
+
 export interface Dictionary {
   navigation: {
     home: string;
@@ -116,6 +133,22 @@ export interface Dictionary {
     twoFactorConfirmButtonLabel: string;
     orContinueButtonLabel: string;
   };
+  registerForm: {
+    headerLabel: string;
+    emailAddress: string;
+    password: string;
+    confirmPassword: string;
+    agreeToTerms: string;
+    termsAndConditions: string;
+    submit: string;
+    alreadyHaveAccount: string;
+    login: string;
+    successMessage: string;
+    errorMessage: string;
+  };
+  logout: {
+    headerLabel: string;
+  };
   resetPassword: {
     headerLabel: string;
     resetButtonLabel: string;
@@ -146,6 +179,11 @@ export interface Dictionary {
     noName: string;
     account: string;
   };
+  notFound: {
+    title: string;
+    description: string;
+    returnHome: string;
+  };
   profile: {
     account: {
       header: string;
@@ -157,7 +195,7 @@ export interface Dictionary {
       emailButtonConfirm: string;
       emailButtonConfirmation: string;
     };
-    balance: {
+    subscription: {
       header: string;
       description: string;
       selectHeader: string;
@@ -174,6 +212,12 @@ export interface Dictionary {
     };
   };
   chatPage: ChatPage;
+  chatModal: {
+    signIn: string;
+    okButton: string;
+    createAccount: string;
+    clickHere: string;
+  };
   hero: {
     heading: string;
     description: string;
@@ -250,6 +294,35 @@ export interface Dictionary {
       };
     }[];
   };
+  aboutUs: {
+    tagline: string;
+    heading: string;
+    description: string;
+    footer: {
+      heading: string;
+      description: string;
+      button: {
+        title: string;
+      };
+    };
+    teamMembers: TeamMember[];
+  };
+  contactForm: {
+    title: string;
+    description: string;
+    nameLabel: string;
+    namePlaceholder: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    messageLabel: string;
+    messagePlaceholder: string;
+    submitButton: string;
+    sendingButton: string;
+    successToastTitle: string;
+    successToastDescription: string;
+    errorToastTitle: string;
+    errorToastDescription: string;
+  };
   footer: {
     newsletterHeading: string;
     newsletterDescription: string;
@@ -264,7 +337,10 @@ export interface Dictionary {
       url: string;
     }[];
     footerText: string;
-    termsAndConditions: string;
+    termsAndConditions: {
+      text: string;
+      link: string;
+    };
     logo: {
       url: string;
       alt: string;

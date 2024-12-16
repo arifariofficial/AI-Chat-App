@@ -80,18 +80,24 @@ export const Footer = ({ dictionary, lang, routes }: FooterProps) => {
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
               />
-              <Button>{dictionary.footer.button.title}</Button>
+              <Button variant="outline">
+                {dictionary.footer.button.title}
+              </Button>
             </form>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: dictionary.footer.termsAndConditions,
-              }}
-            />
+            <div className="text-xs">
+              {dictionary.footer.termsAndConditions.text}
+              <Link
+                href={`/${lang}${routes.privacy}`}
+                className="ml-1 underline"
+              >
+                {dictionary.footer.termsAndConditions.link}
+              </Link>
+            </div>
           </div>
         </div>
         <div className="rb-12 md:mb-18 mb-12 grid grid-cols-1 items-start gap-x-8 gap-y-10 sm:grid-cols-3 md:grid-cols-3 md:gap-y-12 lg:mb-20 lg:grid-cols-6">
           <Link
-            href="/"
+            href={`/${lang}`}
             className="sm:col-start-1 sm:col-end-4 sm:row-start-1 sm:row-end-2 lg:col-start-auto lg:col-end-auto lg:row-start-auto lg:row-end-auto"
           >
             <Image
@@ -111,9 +117,12 @@ export const Footer = ({ dictionary, lang, routes }: FooterProps) => {
               <ul>
                 {column.links.map((link, linkIndex) => (
                   <li key={linkIndex} className="py-2 text-sm">
-                    <a href={link.url} className="flex items-center gap-3">
+                    <Link
+                      href={`${lang}${routes[link.url as keyof typeof routes]}`}
+                      className="flex items-center gap-3"
+                    >
                       {link.title}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -138,7 +147,12 @@ export const Footer = ({ dictionary, lang, routes }: FooterProps) => {
           </div>
           <div className="mb-8 flex items-center justify-center gap-3 lg:mb-0">
             {dictionary.footer.socialMediaLinks.map((link, index) => (
-              <Link key={index} href={`/${lang}/${link.url}`}>
+              <Link
+                key={index}
+                href={`${link.url}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {React.createElement(socialMediaIcons[index], {
                   className: "size-8",
                 })}

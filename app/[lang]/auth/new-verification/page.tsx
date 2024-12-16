@@ -1,4 +1,6 @@
 import VerificationForm from "@/components/auth/verification-form";
+import { Locale } from "@/i18n.config";
+import { getDictionary } from "@/lib/dictionary";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,6 +9,13 @@ export const metadata: Metadata = {
   icons: "/favicon.ico",
 };
 
-export default function NewVerificationPage() {
-  return <VerificationForm />;
+export default async function NewVerificationPage({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}) {
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang);
+
+  return <VerificationForm dictionary={dictionary} lang={lang} />;
 }

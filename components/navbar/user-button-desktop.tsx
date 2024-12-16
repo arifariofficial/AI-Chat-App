@@ -122,6 +122,8 @@ export default function UserButtonDesktop({
               <SignOutButton
                 className="flex h-[48px] w-full justify-between px-8 hover:cursor-pointer"
                 dictionary={dictionary}
+                lang={lang}
+                routes={routes}
               />
             </DropdownMenuGroup>
           </DropdownMenuContent>

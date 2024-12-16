@@ -1,4 +1,4 @@
-import Balance from "@/components/profile/balance";
+import Subscription from "@/components/profile/subscription";
 import { Locale } from "@/i18n.config";
 import { getDictionary } from "@/lib/dictionary";
 import { Metadata } from "next";
@@ -17,5 +17,5 @@ export default async function SubscriptionPage({
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
 
-  return <Balance dictionary={dictionary} />;
+  return <Subscription dictionary={dictionary} />;
 }

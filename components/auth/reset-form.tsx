@@ -59,6 +59,7 @@ export const ResetForm = ({ className, lang, dictionary }: ResetFormProps) => {
       backButtonLabel={dictionary.resetPassword.backButtonLabel}
       backButtonHref={`/${lang}${routes.auth.signIn}`}
       className={cn("bg-background", className)}
+      lang={lang}
     >
       <Form {...form}>
         <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
