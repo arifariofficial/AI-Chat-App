@@ -12,7 +12,7 @@ export function SidebarDesktop() {
   }
 
   return (
-    <Sidebar className="peer w-full -translate-x-full  ease-in-out data-[state=open]:translate-x-0">
+    <Sidebar className="peer w-full -translate-x-full ease-in-out data-[state=open]:translate-x-0">
       <ChatHistory session={session} />
     </Sidebar>
   );

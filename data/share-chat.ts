@@ -1,13 +1,14 @@
 "use server";
 
-import prisma from "@lib/prisma";
-import redis from "@lib/redis";
+import prisma from "@/lib/prisma";
 import { auth } from "@/auth";
 
+// Function to share a chat by generating a shareable path
 export async function shareChat(id: string) {
   try {
     const session = await auth();
 
+    // Check if the user is authorized
     if (!session?.user?.id) {
       return {
         error: "Unauthorized",
@@ -20,6 +21,7 @@ export async function shareChat(id: string) {
       include: { messages: true },
     });
 
+    // Check if the chat exists and if it belongs to the user
     if (!chat || chat.userId !== session.user.id) {
       return {
         error: "Chat not found",
@@ -33,13 +35,7 @@ export async function shareChat(id: string) {
       include: { messages: true },
     });
 
-    // Update the cache with the new chat data
-    const cacheKey = `chat:${id}`;
-    await redis?.set(cacheKey, JSON.stringify(updatedChat), "EX", 60 * 30); // Cache for 30 minutes
-    // Optionally, update a shared chats listing if applicable
-    const sharedChatsKey = `sharedChats:${session.user.id}`;
-    await redis?.del(sharedChatsKey); // Invalidate the cache of shared chats list
-
+    // Return the updated chat with the new share path
     return updatedChat;
   } catch (error) {
     console.error("Error sharing chat:", error);

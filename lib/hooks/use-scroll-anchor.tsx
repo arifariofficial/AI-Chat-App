@@ -52,6 +52,7 @@ export const useScrollAnchor = () => {
         current.removeEventListener("scroll", handleScroll);
       };
     }
+    return undefined;
   }, []);
 
   useEffect(() => {
@@ -77,7 +78,8 @@ export const useScrollAnchor = () => {
         observer.disconnect();
       };
     }
-  });
+    return undefined;
+  }, []); // Empty dependency array to run only once
 
   return {
     messagesRef,

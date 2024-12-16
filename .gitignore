@@ -1,5 +1,5 @@
 # dependencies
-node_modules
+node_modules/
 .pnp
 .pnp.js
 
@@ -24,7 +24,7 @@ yarn-error.log*
 # local env files
 .env
 .env.local
-.env.development.local
+.env.development
 .env.test.local
 .env.production
 
@@ -36,3 +36,11 @@ yarn-error.log*
 
 
 downloads
+
+security.groovy
+inventory.ini
+
+.idea/
+backup.sql
+
+.venv

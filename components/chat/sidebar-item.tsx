@@ -53,7 +53,7 @@ export function SidebarItem({ index, chat, children }: SidebarItemProps) {
         ease: "easeIn",
       }}
     >
-      <div className="absolute left-2 top-1 flex size-6 items-center justify-center">
+      <div className="absolute left-2 top-1 flex size-6 items-center justify-center overflow-scroll">
         {chat.sharePath ? (
           <Tooltip delayDuration={500}>
             <TooltipTrigger
@@ -62,7 +62,7 @@ export function SidebarItem({ index, chat, children }: SidebarItemProps) {
             >
               <IconUsers className="mr-2 mt-1 text-zinc-500" />
             </TooltipTrigger>
-            <TooltipContent>This is a shared chat.</TooltipContent>
+            <TooltipContent>Tämä on jaettu keskustelu</TooltipContent>
           </Tooltip>
         ) : (
           <IconMessage className="mr-2 mt-1 text-zinc-500" />

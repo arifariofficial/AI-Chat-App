@@ -1,5 +1,5 @@
 "use server";
-import prisma from "@lib/prisma";
+import prisma from "@/lib/prisma";
 
 export const twoFactor = async (userId: string | undefined, value: boolean) => {
   try {

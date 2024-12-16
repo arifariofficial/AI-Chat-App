@@ -12,7 +12,7 @@ const LOCAL_STORAGE_KEY = "sidebar";
 
 interface SidebarContext {
   isSidebarOpen: boolean;
-  toggleSidebar: () => void;
+  toggleSidebar: (isOpen?: boolean) => void;
   isLoading: boolean;
 }
 
@@ -35,16 +35,18 @@ export function SidebarProvider({ children }: SidebarProviderProps) {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    const value = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (value) {
-      setSidebarOpen(JSON.parse(value));
+    let value = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (!value) {
+      value = JSON.stringify(false); // Default to closed
+      localStorage.setItem(LOCAL_STORAGE_KEY, value);
     }
+    setSidebarOpen(JSON.parse(value));
     setLoading(false);
   }, []);
 
-  const toggleSidebar = () => {
-    setSidebarOpen((value) => {
-      const newState = !value;
+  const toggleSidebar = (isOpen?: boolean) => {
+    setSidebarOpen((prev) => {
+      const newState = isOpen !== undefined ? isOpen : !prev;
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newState));
       return newState;
     });

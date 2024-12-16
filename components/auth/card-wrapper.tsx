@@ -5,15 +5,20 @@ import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { BackBotton } from "./back-button";
 import { Header } from "./header";
 import { Social } from "./social";
-import { cn } from "@lib/utils";
+import { cn } from "@/lib/utils";
+import React from "react";
+import { Dictionary } from "@/lib/types";
+import { Locale } from "@/i18n.config";
 
 interface CardWrapperProps {
   children: React.ReactNode;
   headerLabel: string;
-  backButtonLabel: string;
-  backButtonHref: string;
+  backButtonLabel?: string;
+  backButtonHref?: string;
   showLocal?: boolean;
   className?: string;
+  dictionary?: Dictionary;
+  lang: Locale;
 }
 
 export const CardWrapper = ({
@@ -23,11 +28,13 @@ export const CardWrapper = ({
   backButtonHref,
   showLocal,
   className,
+  dictionary,
+  lang,
 }: CardWrapperProps) => {
   return (
     <Card
       className={cn(
-        "w-full max-w-sm rounded-md p-5 brightness-100 filter sm:bg-backgroundSecondary md:border md:border-border md:p-7 md:shadow-xl",
+        "mt-[100px] w-full max-w-sm rounded-md p-5 brightness-100 filter sm:border sm:border-border sm:bg-backgroundSecondary sm:p-7 sm:shadow-xl",
         className,
       )}
     >
@@ -43,19 +50,24 @@ export const CardWrapper = ({
             </Grid>
             <Grid item>
               <Typography variant="body2" px={2}>
-                Tai jatka käyttäen
+                {dictionary?.login.orContinueButtonLabel}
               </Typography>
             </Grid>
             <Grid item xs>
               <hr />
             </Grid>
           </Grid>
-          <Social />
+          <Social lang={lang} />
         </CardFooter>
       )}
-      <CardFooter>
-        <BackBotton label={backButtonLabel} href={backButtonHref}></BackBotton>
-      </CardFooter>
+      {backButtonLabel && backButtonHref && (
+        <CardFooter>
+          <BackBotton
+            label={backButtonLabel}
+            href={backButtonHref}
+          ></BackBotton>
+        </CardFooter>
+      )}
     </Card>
   );
 };

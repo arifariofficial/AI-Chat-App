@@ -1,7 +1,7 @@
 "use server";
 
-import { auth } from "@auth";
-import { checkBalance } from "@data/balance";
+import { auth } from "@/auth";
+import { checkBalance } from "@/data/balance";
 import axios from "axios";
 
 const username = process.env.USERNAME;

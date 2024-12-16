@@ -1,6 +1,6 @@
-import { auth } from "@auth";
-import { stripe } from "@lib/stripe";
-import { absoluteUrl } from "@lib/utils";
+import { auth } from "@/auth";
+import { stripe } from "@/lib/stripe";
+import { absoluteUrl } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
 const subscriptionUrl = absoluteUrl("/profile/balance");

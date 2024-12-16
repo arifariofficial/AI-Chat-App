@@ -2,9 +2,9 @@
 
 import { Poppins } from "next/font/google";
 import { Typography } from "@mui/material";
-import { cn } from "@lib/utils";
-import { Avatar } from "@components/ui/avatar";
-import { LockIcon } from "@components/ui/icons";
+import { cn } from "@/lib/utils";
+import { Avatar } from "@/components/ui/avatar";
+import { LockIcon } from "@/components/ui/icons";
 
 const font = Poppins({
   subsets: ["latin"],

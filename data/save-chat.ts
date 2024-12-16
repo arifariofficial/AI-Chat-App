@@ -1,89 +1,83 @@
 "use server";
 
-import { auth } from "@auth";
-import prisma from "@lib/prisma";
-import redis from "@lib/redis";
-import { Chat } from "@lib/types";
+import { auth } from "@/auth";
+import prisma from "@/lib/prisma";
+import { Chat } from "@/lib/types";
+
+// Helper function to format message data for Prisma
+const formatMessages = (messages: Chat["messages"]) =>
+  messages.map((message) => ({
+    id: message.id,
+    role: message.role,
+    content:
+      typeof message.content === "string"
+        ? message.content
+        : JSON.stringify(message.content),
+    createdAt: message.createdAt || new Date().toISOString(),
+  }));
 
 export async function saveChat(chat: Chat) {
   const session = await auth();
 
   if (!session || !session.user) {
-    console.log("No valid session available.");
+    console.error("No valid session available.");
     return;
   }
 
-  const userExists = await prisma.user.findUnique({
-    where: { id: chat.userId },
-  });
-
-  if (!userExists) {
-    console.error("User does not exist, cannot save chat.");
+  if (session.user.id !== chat.userId) {
+    console.error("Unauthorized access attempt detected.");
     return;
   }
 
   try {
+    const now = new Date().toISOString();
+
     await prisma.$transaction(async (prisma) => {
-      // Fetch existing chat to compare messages
       const existingChat = await prisma.chat.findUnique({
         where: { id: chat.id },
         include: { messages: true },
       });
 
-      const newMessages = chat.messages.filter(
-        (msg) => !existingChat?.messages.some((exMsg) => exMsg.id === msg.id),
-      );
+      if (existingChat) {
+        // Delete all existing messages for the chat
+        await prisma.message.deleteMany({
+          where: { chatId: chat.id },
+        });
+      }
 
-      const updatedChat = await prisma.chat.upsert({
+      // Prepare new messages
+      const formattedMessages = formatMessages(chat.messages);
+
+      // Upsert the chat
+      await prisma.chat.upsert({
         where: { id: chat.id },
-        include: { messages: true },
         update: {
           title: chat.title,
-          updatedAt: chat.createdAt,
+          updatedAt: now,
           userId: chat.userId,
           path: chat.path,
           messages: {
-            create: newMessages.map((message) => ({
-              id: message.id,
-              role: message.role,
-              content:
-                typeof message.content === "string"
-                  ? message.content
-                  : JSON.stringify(message.content),
-              createdAt: new Date().toISOString(),
-            })),
+            create: formattedMessages,
           },
         },
         create: {
           id: chat.id,
           title: chat.title,
-          createdAt: chat.createdAt,
+          createdAt: chat.createdAt || now,
           userId: chat.userId,
           path: chat.path,
           messages: {
-            create: chat.messages.map((message) => ({
-              id: message.id,
-              role: message.role,
-              content:
-                typeof message.content === "string"
-                  ? message.content
-                  : JSON.stringify(message.content),
-              createdAt: new Date().toISOString(),
-            })),
+            create: formattedMessages,
           },
         },
       });
-
-      const chatKey = `chat:${chat.id}`;
-      const pipeline = redis?.pipeline();
-      pipeline?.hset(chatKey, "details", JSON.stringify(updatedChat));
-      await redis?.expire(chatKey, 5);
-      pipeline?.zadd(`user:chat:${chat.userId}`, Date.now(), chatKey);
-
-      await pipeline?.exec();
     });
   } catch (error) {
-    console.error(`Failed to save chat: ${error}`);
-    throw error;
+    console.error(
+      `Failed to save chat: ${error instanceof Error ? error.message : "Unknown error"}`,
+    );
+    throw error instanceof Error
+      ? error
+      : new Error("Unknown error occurred while saving chat.");
   }
 }

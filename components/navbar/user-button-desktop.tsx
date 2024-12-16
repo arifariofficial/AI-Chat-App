@@ -16,19 +16,28 @@ import { Session } from "next-auth";
 import SignOutButton from "@/components/auth/signout-client";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
+import { Locale } from "@/i18n.config";
+import { localizedRoutes } from "@/lib/localized-routes";
+
+import { Dictionary } from "@/lib/types";
 
 interface UserButtonDesktopProps {
   session?: Session | null;
   className?: string;
   style?: React.CSSProperties;
+  iconColor?: string;
+  lang: Locale;
+  dictionary: Dictionary;
   variant?:
     | "nav"
     | "outline"
     | "default"
     | "destructive"
-    | "secondary"
     | "ghost"
-    | "link";
+    | "link"
+    | "inherit"
+    | "black"
+    | "navMobile";
 }
 
 export default function UserButtonDesktop({
@@ -36,8 +45,12 @@ export default function UserButtonDesktop({
   className,
   variant,
   style,
+  iconColor,
+  lang,
+  dictionary,
 }: UserButtonDesktopProps) {
   const { theme } = useTheme();
+  const routes = localizedRoutes[lang];
 
   if (session) {
     return (
@@ -53,13 +66,19 @@ export default function UserButtonDesktop({
                 {session.user.image && (
                   <AvatarImage
                     src={session.user.image}
-                    alt={session.user.name || "Name not available"}
+                    alt={session.user.name || dictionary.image.imageAlt}
                   />
                 )}
                 <AvatarFallback className="size-full border text-3xl">
                   <AccountCircleIcon
                     fontSize="inherit"
-                    htmlColor={theme === "light" ? "#0164c2" : "#cbcbcb"}
+                    htmlColor={
+                      theme === "dark"
+                        ? "#fff"
+                        : iconColor
+                          ? iconColor
+                          : "#00a6fa"
+                    }
                   />
                 </AvatarFallback>
               </Avatar>
@@ -71,15 +90,17 @@ export default function UserButtonDesktop({
                 {session.user.image && (
                   <AvatarImage
                     src={session.user.image}
-                    alt={session.user.name || "Name not available"}
+                    alt={session.user.name || dictionary.image.imageAlt}
                   />
                 )}
                 <AvatarFallback className="size-32 rounded-none">
-                  No Image
+                  {dictionary.image.imageError}
                 </AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-xl">{session.user.name || "No Name"}</p>
+                <p className="text-xl">
+                  {session.user.name || dictionary.userButton.noName}
+                </p>
                 <p>{session.user.email}</p>
               </div>
             </DropdownMenuLabel>
@@ -90,15 +111,20 @@ export default function UserButtonDesktop({
                 asChild
               >
                 <Link
-                  className="flex h-[48px] w-full items-center justify-evenly"
-                  href="/profile"
+                  className="flex h-[48px] w-full items-center justify-between px-8"
+                  href={`/${lang}${routes.account}`}
                 >
-                  <p>Account</p>
+                  <p>{dictionary.userButton.account}</p>
                   <UserIcon />
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <SignOutButton className="flex h-[48px] w-full justify-evenly hover:cursor-pointer" />
+              <SignOutButton
+                className="flex h-[48px] w-full justify-between px-8 hover:cursor-pointer"
+                dictionary={dictionary}
+                lang={lang}
+                routes={routes}
+              />
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -109,11 +135,11 @@ export default function UserButtonDesktop({
   return (
     <Button variant="nav" className={cn(className, "h-full")}>
       <Link
-        href={"/auth/login"}
+        href={`/${lang}${routes.auth.signIn}`}
         className="flex h-full flex-row items-center gap-2 font-bold"
       >
-        <LockIcon className="text-foregroundNav" />
-        <p className="text-foregroundNav">Log In</p>
+        <LockIcon />
+        <p className="text-lg">{dictionary.auth.signin}</p>
       </Link>
     </Button>
   );

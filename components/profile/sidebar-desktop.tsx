@@ -1,12 +1,21 @@
-import { cn } from "@lib/utils";
+import { cn } from "@/lib/utils";
 import NavLinks from "./nav-links";
+import { Locale } from "@/i18n.config";
+import { Dictionary } from "@/lib/types";
+import { LocalizedRoutes } from "@/lib/localized-routes";
 
 interface ProfileLayoutDeskopProps {
   className?: string;
+  lang: Locale;
+  dictionary: Dictionary;
+  routes: LocalizedRoutes[Locale];
 }
 
 export default function ProfileSideBarDeskop({
   className,
+  lang,
+  dictionary,
+  routes,
 }: ProfileLayoutDeskopProps) {
   return (
     <div
@@ -16,7 +25,7 @@ export default function ProfileSideBarDeskop({
       )}
     >
       <div className="md:mt-2">
-        <NavLinks />
+        <NavLinks lang={lang} dictionary={dictionary} routes={routes} />
       </div>
     </div>
   );

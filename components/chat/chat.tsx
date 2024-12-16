@@ -1,49 +1,57 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Session } from "next-auth";
 import { EmptyScreen } from "./empty-screen";
 import { ChatPanel } from "./chat-panel";
 import { useAIState, useUIState } from "ai/rsc";
-import { useLocalStorage } from "@lib/hooks/use-local-storage";
-import { useScrollAnchor } from "@lib/hooks/use-scroll-anchor";
-import { Message } from "@lib/types";
-import { useChats } from "@lib/hooks/useChats";
+import { useLocalStorage } from "@/lib/hooks/use-local-storage";
+import { useScrollAnchor } from "@/lib/hooks/use-scroll-anchor";
 import { ChatList } from "./chat-list";
+import { useAppDispatch } from "@/lib/store/hook";
+import { startChat } from "@/lib/store/chatSlice";
+import { Locale } from "@/i18n.config";
 
 export interface ChatProps extends React.ComponentProps<"div"> {
-  initialMessages?: Message[];
-  id?: string;
+  chatId?: string;
   session?: Session;
+  lang: Locale;
 }
 
-function Chat({ id, session }: ChatProps) {
-  const router = useRouter();
+const Chat: React.FC<ChatProps> = ({ chatId, lang, session, ...props }) => {
   const path = usePathname();
   const [input, setInput] = useState("");
   const [messages] = useUIState();
   const [aiState] = useAIState();
-  const [, setNewChatId] = useLocalStorage("newChatId", id);
-  const { loadChats } = useChats();
+  const [, setNewChatId] = useLocalStorage("newChatId", chatId);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
   useEffect(() => {
-    if (session?.user) {
-      if (!path.includes("/chat/") && messages.length === 1) {
-        window.history.replaceState({}, "/chat", `/chat/${id}`);
-      }
+    const messageCount = aiState.messages?.length || 0;
+    if (messageCount === 2) {
+      dispatch(startChat());
+      router.refresh();
     }
-  }, [id, path, session?.user, messages.length]);
+  }, [aiState.messages?.length, dispatch, router]);
 
+  // Update browser history to the current chat URL if conditions are met
   useEffect(() => {
-    if (aiState.messages?.length === 2 && session?.user?.id) {
-      loadChats(session.user.id);
+    if (
+      session?.user &&
+      chatId &&
+      !path.includes(`/${lang}/chat/`) &&
+      messages?.length === 1
+    ) {
+      window.history.replaceState({}, "", `/${lang}/chat/${chatId}`);
     }
-  }, [aiState.messages, router, session?.user?.id]);
+  }, [chatId, path, session?.user, messages?.length, lang]);
 
+  // Store the chat ID in local storage when it changes
   useEffect(() => {
-    setNewChatId(id);
-  }, [id, setNewChatId]);
+    if (chatId) setNewChatId(chatId);
+  }, [chatId, setNewChatId]);
 
   const { messagesRef, scrollRef, visibilityRef, isAtBottom, scrollToBottom } =
     useScrollAnchor();
@@ -52,11 +60,12 @@ function Chat({ id, session }: ChatProps) {
     <div
       className="relative z-10 mx-auto flex size-full sm:max-w-screen-md lg:max-w-screen-lg"
       ref={scrollRef}
+      {...props}
     >
       <div className="mx-auto flex size-full flex-col" ref={messagesRef}>
         <div className="relative flex size-full justify-center">
           {messages?.length ? (
-            <ChatList messages={messages} className="" />
+            <ChatList messages={messages} />
           ) : (
             <EmptyScreen />
           )}
@@ -69,11 +78,11 @@ function Chat({ id, session }: ChatProps) {
             setInput={setInput}
             isAtBottom={isAtBottom}
             scrollToBottom={scrollToBottom}
-            className=""
           />
         </div>
       </div>
     </div>
   );
-}
+};
+
 export default Chat;

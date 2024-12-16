@@ -1,10 +1,8 @@
 "use client";
 
-import * as React from "react";
-
 import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/components/ui/button";
-import { IconArrowDown } from "@components/ui/icons";
+import { IconArrowDown } from "@/components/ui/icons";
 
 interface ButtonScrollToBottomProps extends ButtonProps {
   isAtBottom: boolean;

@@ -1,16 +1,7 @@
+// .eslintrc.json
+
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
-  "extends": [
-    "next/core-web-vitals",
-    "prettier",
-    "plugin:tailwindcss/recommended",
-    "plugin:jest-dom/recommended",
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module",
@@ -18,13 +9,18 @@
       "jsx": true
     }
   },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "next/core-web-vitals",
+    "next/typescript"
+  ],
+  "plugins": ["react", "react-hooks", "@typescript-eslint"],
   "rules": {
-    "tailwindcss/no-custom-classname": "off",
-    "tailwindcss/classnames-order": "off",
-    "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off",
-    "@typescript-eslint/no-unused-vars": "error"
+    "react-hooks/exhaustive-deps": "error",
+    "@typescript-eslint/no-explicit-any": "off"
   },
   "settings": {
     "react": {

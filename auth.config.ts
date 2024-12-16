@@ -1,3 +1,5 @@
+// auth.config.ts
+
 import Credentials from "next-auth/providers/credentials";
 import type { NextAuthConfig } from "next-auth";
 import { LoginSchema } from "./lib/Schema";
@@ -8,7 +10,7 @@ import { getStringFromBuffer } from "./lib/utils";
 
 export const authConfig = {
   pages: {
-    signIn: "/auth/login",
+    signIn: "/lang/auth/login",
     signOut: "/auth/logout",
     newUser: "/auth/register",
     error: "/auth/error",
@@ -26,29 +28,48 @@ export const authConfig = {
 
     Credentials({
       async authorize(credentials) {
-        const parsedCredentials = LoginSchema.safeParse(credentials);
-        if (parsedCredentials.success) {
+        try {
+          // Validate the input using Zod schema (LoginSchema)
+          const parsedCredentials = LoginSchema.safeParse(credentials);
+          if (!parsedCredentials.success) {
+            return null; // Validation failed
+          }
+
           const { email, password } = parsedCredentials.data;
+
+          // Fetch the user by email
           const user = await getUserByEmail(email);
+          if (!user) {
+            return null; // No user found
+          }
 
-          if (!user) return null;
-
+          // Prepare salted password
           const encoder = new TextEncoder();
           const saltedPassword = encoder.encode(password + user.salt);
+
+          // Hash the salted password using SHA-256
           const hashedPasswordBuffer = await crypto.subtle.digest(
             "SHA-256",
             saltedPassword,
           );
           const hashedPassword = getStringFromBuffer(hashedPasswordBuffer);
 
+          // Compare hashed password with stored password
           if (hashedPassword === user.password) {
-            return user;
+            // Authentication successful, return user object
+            return {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              role: user.role, // Include any other necessary fields
+            };
           } else {
-            return null;
+            return null; // Password mismatch
           }
+        } catch (error) {
+          console.error("Error during authorization:", error);
+          return null; // Handle unexpected errors
         }
-
-        return null;
       },
     }),
   ],

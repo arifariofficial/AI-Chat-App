@@ -4,12 +4,13 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DOCKER_POSTGRES_URL")
+  url      = env("DATABASE_URL")
 }
 
 enum UserRole {
   ADMIN
   USER
+  EDITOR
 }
 
 model User {
@@ -116,6 +117,13 @@ model UserPayment {
   @@map(name: "user_payments")
 }
 
+
+enum Role {
+  user
+  system
+  assistant
+}
+
 model Chat {
   id        String    @id @default(uuid())
   title     String
@@ -132,17 +140,14 @@ model Chat {
   @@map("chats")
 }
 
-enum Role {
-  user
-  system
-  assistant
-}
 
 model Message {
-  id      String @id @default(uuid())
-  role    Role   @default(user)
-  content String
-  chatId  String
+  id              String @id @default(uuid())
+  role            Role   @default(user)
+  content         String
+  edited          String? 
+  chatId          String
+  
 
   chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
 
@@ -150,4 +155,25 @@ model Message {
 
   @@index([chatId]) // Improve query performance for messages by chatId
   @@map("messages")
+}
+
+model Prompt {
+  id                         String   @id @default(cuid()) 
+  temperature                Float?
+  roleDefinition             String?
+  roleDefinitionPurpose      String?
+  userContext                String?
+  userContextPurpose         String?
+  guidelines                 String?
+  guidelinesPurpose          String?
+  instructions               String?
+  instructionsPurpose        String?
+  keyPointers                String?
+  keyPointersPurpose         String?
+  responseLimitations        String?
+  responseLimitationsPurpose String?
+  createdAt                  DateTime @default(now())    
+  updatedAt                  DateTime @updatedAt         
+
+  @@map("prompts") // Maps the Prisma model to the database table "prompts"
 }

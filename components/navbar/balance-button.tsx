@@ -1,13 +1,13 @@
 "use client";
 
-import { Button } from "@components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
-} from "@components/ui/dropdown-menu";
-import { IconSpinner } from "@components/ui/icons";
-import { fetchBalance } from "@lib/store/balanceSlice";
-import { useAppDispatch, useAppSelector } from "@lib/store/hook";
+} from "@/components/ui/dropdown-menu";
+import { IconSpinner } from "@/components/ui/icons";
+import { fetchBalance } from "@/lib/store/balanceSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hook";
 import { Session } from "next-auth";
 import Link from "next/link";
 import { useEffect, useState } from "react";

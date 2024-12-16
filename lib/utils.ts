@@ -45,6 +45,8 @@ export const getMessageFromCode = (resultCode: string) => {
       return "Logged in!";
     case ResultCode.TwoFactorRequired:
       return "Two-factor authentication required!";
+    default:
+      return "Unknown result code.";
   }
 };
 

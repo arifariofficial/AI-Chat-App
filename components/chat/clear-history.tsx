@@ -15,9 +15,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { IconSpinner } from "@components/ui/icons";
+import { IconSpinner } from "@/components/ui/icons";
 import { useRouter } from "next/navigation";
-import { useChats } from "@lib/hooks/useChats";
 import { Session } from "next-auth";
 
 interface ClearHistoryProps {
@@ -29,45 +28,43 @@ interface ClearHistoryProps {
 export function ClearHistory({
   isEnabled = false,
   clearChats,
-  session,
 }: ClearHistoryProps) {
   const [open, setOpen] = React.useState(false);
   const [isPending, startTransition] = React.useTransition();
   const router = useRouter();
-  const { loadChats } = useChats();
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild className="flex w-full self-center">
         <Button variant="outline" disabled={!isEnabled || isPending}>
           {isPending && <IconSpinner className="mr-2" />}
-          Clear history
+          Delete Chat History
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className="w-[300px] rounded-lg">
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently delete your chat history and remove your data
-            from our servers.
+            This will permanently delete your conversation message.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>
           <AlertDialogAction
             disabled={isPending}
+            variant="outline"
             onClick={(event) => {
               event.preventDefault();
-              startTransition(async () => {
-                const result = await clearChats();
-                if (result && "error" in result) {
-                  toast.error(result.error);
-                  return;
-                }
-
-                setOpen(false);
-                router.push("/chat");
-                loadChats(session?.user?.id ?? "");
+              startTransition(() => {
+                clearChats().then((result) => {
+                  if (result && "error" in result) {
+                    toast.error(result.error);
+                    return;
+                  }
+                  setOpen(false);
+                  // Ensure navigation and chat loading happen sequentially
+                  router.push("/chat");
+                });
               });
             }}
           >

@@ -2,43 +2,71 @@
 
 import * as React from "react";
 import { useTheme } from "next-themes";
-import { Button } from "./ui/button";
 import { IconMoon, IconSun } from "./ui/icons";
-import { cn } from "@lib/utils";
+import { cn } from "@/lib/utils";
+import MyButton from "./my-button";
 
 interface ThemeToggleProps {
   className?: string;
-  variant?: "ghost" | "outline" | "secondary" | "link" | "nav" | "default";
+  style?: React.CSSProperties;
   iconClassName?: string;
+  buttonClassName?: string;
+  spanClassName?: string;
+  buttonText?: string;
+  variant?:
+    | "nav"
+    | "outline"
+    | "default"
+    | "destructive"
+    | "ghost"
+    | "link"
+    | "inherit"
+    | "black"
+    | "navMobile";
 }
 
 export function ThemeToggle({
-  className,
+  buttonClassName,
   variant,
   iconClassName,
+  spanClassName,
+  buttonText,
+  style,
 }: ThemeToggleProps) {
-  const { setTheme, theme } = useTheme();
-  const [, startTransition] = React.useTransition();
+  const { setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  // Ensure the component is mounted before rendering
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // If not mounted, return null to prevent mismatches
+  if (!mounted) {
+    return null;
+  }
 
   return (
-    <Button
-      style={{ zIndex: 10 }}
-      className={cn(className)}
+    <MyButton
+      style={style}
+      className={cn(buttonClassName)}
+      spanClassName={spanClassName}
       variant={variant}
+      iconRight={
+        <div>
+          {resolvedTheme === "dark" ? (
+            <IconMoon className={cn("size-6 transition-all", iconClassName)} />
+          ) : (
+            <IconSun className={cn("size-6 transition-all", iconClassName)} />
+          )}
+          <span className="sr-only">Toggle theme</span>
+        </div>
+      }
       onClick={() => {
-        startTransition(() => {
-          setTheme(theme === "light" ? "dark" : "light");
-        });
+        setTheme(resolvedTheme === "light" ? "dark" : "light");
       }}
     >
-      <div>
-        {!theme ? null : theme === "dark" ? (
-          <IconMoon className={cn(iconClassName, "size-7 transition-all")} />
-        ) : (
-          <IconSun className={cn(iconClassName, "size-7 transition-all")} />
-        )}
-        <span className="sr-only">Toggle theme</span>
-      </div>
-    </Button>
+      {buttonText && <p>{buttonText}</p>}
+    </MyButton>
   );
 }

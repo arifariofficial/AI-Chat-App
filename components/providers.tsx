@@ -1,23 +1,34 @@
 "use client";
 
-import * as React from "react";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { ThemeProviderProps } from "next-themes/dist/types";
+import {
+  ThemeProvider as NextThemesProvider,
+  ThemeProviderProps,
+} from "next-themes";
 import { SidebarProvider } from "@/lib/hooks/use-sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import MUIThemeProvider from "../styles/mui-theme-provider";
 import { Provider as RuduxProvider } from "react-redux";
-import { store } from "@lib/store/store";
-import { ChatProvider } from "@lib/hooks/useChats";
+import { store } from "@/lib/store/store";
+import { ChatProvider } from "@/lib/hooks/use-chat";
+import { Chat } from "@/lib/types";
+import { LangProvider } from "@/lib/chat/lang-context";
+import { Locale } from "@/i18n.config";
 
-export function Providers({ children, ...props }: ThemeProviderProps) {
+type ProvidersProps = ThemeProviderProps & {
+  chats?: Chat[] | undefined;
+  lang: Locale;
+};
+
+export function Providers({ children, lang, chats, ...props }: ProvidersProps) {
   return (
     <RuduxProvider store={store}>
       <NextThemesProvider {...props}>
         <MUIThemeProvider>
-          <ChatProvider>
+          <ChatProvider initialChats={chats}>
             <SidebarProvider>
-              <TooltipProvider>{children}</TooltipProvider>
+              <LangProvider lang={lang}>
+                <TooltipProvider>{children}</TooltipProvider>
+              </LangProvider>
             </SidebarProvider>
           </ChatProvider>
         </MUIThemeProvider>

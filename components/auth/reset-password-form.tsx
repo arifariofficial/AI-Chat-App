@@ -27,9 +27,23 @@ import {
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { FormSucccess } from "@components/form-success";
+import { FormSucccess } from "@/components/form-success";
+import { Dictionary } from "@/lib/types";
+import { Locale } from "@/i18n.config";
+import { LocalizedRoutes } from "@/lib/localized-routes";
 
-export const ResetPasswordForm = () => {
+interface ResetPasswordFormProps {
+  className?: string;
+  dictionary: Dictionary;
+  lang: Locale;
+  routes: LocalizedRoutes[Locale];
+}
+
+export const ResetPasswordForm = ({
+  dictionary,
+  lang,
+  routes,
+}: ResetPasswordFormProps) => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -37,7 +51,7 @@ export const ResetPasswordForm = () => {
 
   const searchParams = useSearchParams();
 
-  const token = searchParams.get("token");
+  const token = searchParams?.get("token");
 
   const form = useForm<z.infer<typeof ResetPasswordSchema>>({
     resolver: zodResolver(ResetPasswordSchema),
@@ -56,7 +70,7 @@ export const ResetPasswordForm = () => {
         if (data) {
           setError(data.error);
           setSuccess(data.success);
-          window.location.href = "/auth/login";
+          window.location.href = `/${lang}${routes.auth.signIn}`;
         }
       });
     });
@@ -67,6 +81,8 @@ export const ResetPasswordForm = () => {
       headerLabel="Reset your password"
       backButtonLabel="Back to login"
       backButtonHref="/auth/login"
+      dictionary={dictionary}
+      lang={lang}
     >
       <Form {...form}>
         <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
