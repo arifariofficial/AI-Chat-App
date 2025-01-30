@@ -19,17 +19,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { ThemeToggle } from "../theme-toggle-mobile";
 import Link from "next/link";
 import { useSidebar } from "@/lib/hooks/use-sidebar";
+import { LocalizedRoutes } from "@/lib/localized-routes";
+import { Locale } from "@/i18n.config";
 
 interface ChatHistoryProps {
   session: Session | null;
   buttonClassName?: string;
   onShareClick: () => void;
+  routes: LocalizedRoutes[Locale];
+  lang: Locale;
 }
 
 export function ChatHistoryMobile({
   session,
   buttonClassName,
   onShareClick,
+  routes,
+  lang,
 }: ChatHistoryProps) {
   const { loadChats } = useChat();
   const router = useRouter();
@@ -62,7 +68,11 @@ export function ChatHistoryMobile({
         dispatch={dispatch}
         onShareClick={onShareClick}
       />
-      <HistorySection buttonClassName={buttonClassName} />
+      <HistorySection
+        buttonClassName={buttonClassName}
+        lang={lang}
+        routes={routes}
+      />
     </div>
   ) : null;
 }
@@ -146,7 +156,17 @@ function Menu({ chatStarted, router, dispatch, onShareClick }: MenuProps) {
   );
 }
 
-function HistorySection({ buttonClassName }: { buttonClassName?: string }) {
+interface HistorySectionProps {
+  buttonClassName?: string;
+  routes: LocalizedRoutes[Locale];
+  lang: Locale;
+}
+
+function HistorySection({
+  buttonClassName,
+  routes,
+  lang,
+}: HistorySectionProps) {
   return (
     <div className="mt-6 border-t-2 border-foreground/40">
       <div className="mb-2 flex w-full items-center justify-between bg-background px-4 shadow-md">
@@ -176,7 +196,7 @@ function HistorySection({ buttonClassName }: { buttonClassName?: string }) {
           </div>
         }
       >
-        <SidebarList />
+        <SidebarList lang={lang} routes={routes} />
       </Suspense>
     </div>
   );

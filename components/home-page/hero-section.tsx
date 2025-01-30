@@ -138,9 +138,9 @@ export const HeroSection = (props: HeroSectionProps) => {
         </div>
         <div className="w-full overflow-hidden rounded-lg">
           <Image
-            src="/assets/family-legal-advice.jpg"
+            src="/assets/team_work.jpeg"
             className="w-full rounded-lg object-cover opacity-80"
-            alt="Family Legal Advice"
+            alt="Team Work"
             width={600}
             height={600}
             priority

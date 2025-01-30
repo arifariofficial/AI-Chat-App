@@ -3,11 +3,9 @@ import { Footer } from "../footer";
 import { BenefitSection } from "./benefit";
 import { ContactSection } from "./contact";
 import { CtaSection } from "./cta-section";
-import { FaqSection } from "./faq";
 import { FeatureSectionList } from "./feature-list";
 import { FeatureSection } from "./features";
 import { HeroSection } from "./hero-section";
-import { TestimonialSection } from "./testimonial";
 import { auth } from "@/auth";
 import { Locale } from "@/i18n.config";
 import { localizedRoutes } from "@/lib/localized-routes";
@@ -39,9 +37,7 @@ export default async function HomePage({ lang }: HomePageProps) {
       />
 
       <BenefitSection dictionary={dictionary} />
-      <FaqSection dictionary={dictionary} lang={lang} />
       <CtaSection dictionary={dictionary} lang={lang} />
-      <TestimonialSection dictionary={dictionary} />
       <ContactSection dictionary={dictionary} />
       <Footer dictionary={dictionary} lang={lang} routes={routes} />
     </div>

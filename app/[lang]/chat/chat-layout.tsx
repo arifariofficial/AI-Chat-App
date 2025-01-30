@@ -74,7 +74,7 @@ export default function ChatLayout({
             isSidebarOpen ? "w-96" : "w-0"
           } overflow-hidden`}
         >
-          <SidebarDesktop />
+          <SidebarDesktop lang={lang} routes={routes} />
         </div>
         <div className="flex w-full flex-row duration-300 ease-in-out">
           <div className="hidden items-center border-l border-border/20 sm:flex">
@@ -86,6 +86,7 @@ export default function ChatLayout({
               setShowPromptModal={setShowPromptModal}
               lang={lang}
               dictionary={dictionary}
+              routes={routes}
             />
             {showPromptModal && (
               <PromptModal

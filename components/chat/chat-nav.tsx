@@ -20,11 +20,13 @@ import { useChat } from "@/lib/hooks/use-chat";
 import { Locale } from "@/i18n.config";
 import { Dictionary } from "@/lib/types";
 import React from "react";
+import { LocalizedRoutes } from "@/lib/localized-routes";
 
 interface ChatNavProps {
   session: Session;
   lang: Locale;
   dictionary: Dictionary;
+  routes: LocalizedRoutes[Locale];
   setShowPromptModal: (value: boolean) => void;
 }
 
@@ -33,6 +35,7 @@ const ChatNav: React.FC<ChatNavProps> = ({
   setShowPromptModal,
   lang,
   dictionary,
+  routes,
 }) => {
   const chatStarted = useSelector(selectChatStarted);
   const { handleShare } = useChat();
@@ -51,7 +54,12 @@ const ChatNav: React.FC<ChatNavProps> = ({
   return (
     <div className="mb-4 flex h-14 w-full flex-row items-center justify-between">
       <SidebarMobile className="z-50 border-none focus:border-none">
-        <ChatHistoryMobile session={session} onShareClick={onShareClick} />
+        <ChatHistoryMobile
+          session={session}
+          onShareClick={onShareClick}
+          lang={lang}
+          routes={routes}
+        />
       </SidebarMobile>
       <div className="flex">
         <Tooltip>
@@ -59,7 +67,7 @@ const ChatNav: React.FC<ChatNavProps> = ({
             <Button
               variant="inherit"
               onClick={() => {
-                router.push(`/${lang}/new`);
+                router.push(`/${lang}${routes.new}`);
                 dispatch(resetChat());
               }}
               className="z-50 my-0 border-border/40 p-0 px-1 font-bold text-foreground hover:bg-accent hover:text-foreground/80 active:text-foreground sm:ml-1 sm:border"
@@ -100,7 +108,7 @@ const ChatNav: React.FC<ChatNavProps> = ({
       </div>
 
       <div className="ml-auto hidden items-center sm:inline-flex">
-        <Link href="/" style={{ zIndex: 50 }}>
+        <Link href={`/${lang}`} style={{ zIndex: 50 }}>
           <Button variant="inherit" className="text-foreground">
             <IconHome className="size-7" />
           </Button>

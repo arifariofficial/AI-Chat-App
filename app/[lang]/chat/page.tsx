@@ -6,11 +6,9 @@ import { Locale } from "@/i18n.config";
 import { AI } from "@/lib/chat/actions";
 import { LangProvider } from "@/lib/chat/lang-context";
 import { getDictionary } from "@/lib/dictionary";
-import { localizedRoutes } from "@/lib/localized-routes";
 import { nanoid } from "nanoid";
 import { Metadata } from "next";
 import { Session } from "next-auth";
-import { redirect } from "next/navigation";
 
 // Metadata will be dynamically generated based on the localizedRoutes
 export async function generateMetadata({
@@ -37,12 +35,6 @@ export default async function ChatPage({
   const chatId = nanoid();
   const session = (await auth()) as Session;
   const lang = (await params).lang;
-
-  const routes = localizedRoutes[lang];
-
-  if (!session?.user) {
-    redirect(`/${lang}${routes.auth.signIn}?next=/${lang}${routes.chat}`);
-  }
 
   // Await the AI component logic
   const aiComponent = await AI({

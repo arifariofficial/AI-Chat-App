@@ -6,8 +6,15 @@ import { SidebarItems } from "./sidebar-items";
 import { useChat } from "@/lib/hooks/use-chat";
 import { clearChats } from "@/data/chat";
 import { useSession } from "next-auth/react";
+import { Locale } from "@/i18n.config";
+import { LocalizedRoutes } from "@/lib/localized-routes";
 
-export function SidebarList() {
+interface SidebarListProps {
+  lang: Locale;
+  routes: LocalizedRoutes[Locale];
+}
+
+export function SidebarList({ lang, routes }: SidebarListProps) {
   const { chats, loadChats } = useChat();
 
   const { data: session } = useSession();
@@ -32,7 +39,7 @@ export function SidebarList() {
       <div className="flex-1">
         {chats?.length ? (
           <div className="mx-2 h-full space-y-2 overflow-y-auto pb-[400px]">
-            <SidebarItems chats={chats} />
+            <SidebarItems chats={chats} lang={lang} routes={routes} />
           </div>
         ) : (
           <div className="p-8 text-center">

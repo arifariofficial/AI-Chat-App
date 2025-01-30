@@ -13,7 +13,7 @@ export const CtaSection = ({ dictionary, lang }: CtaSectionProps) => {
   return (
     <section className="py-16 md:py-24 lg:py-28">
       <div className="container mx-auto">
-        <div className="grid auto-cols-fr grid-cols-1 rounded-lg border border-border/40 p-1 shadow-md lg:grid-cols-2">
+        <div className="grid auto-cols-fr grid-cols-1 rounded-lg border border-border/40 p-1 shadow-md">
           <div className="flex flex-col justify-center p-8 md:p-12">
             <h2 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
               {dictionary.ctaSection.heading}

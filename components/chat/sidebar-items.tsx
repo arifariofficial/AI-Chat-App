@@ -5,12 +5,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import { SidebarItem } from "./sidebar-item";
 import { SidebarActions } from "./sidebar-actions";
 import { removeChat } from "@/data/chat";
+import { Locale } from "@/i18n.config";
+import { LocalizedRoutes } from "@/lib/localized-routes";
 
 interface SidebarItemsProps {
   chats?: Chat[];
+  lang: Locale;
+  routes: LocalizedRoutes[Locale];
 }
 
-export function SidebarItems({ chats }: SidebarItemsProps) {
+export function SidebarItems({ chats, lang, routes }: SidebarItemsProps) {
   //  Return early if no chats are provided.
   if (!chats?.length) return null;
 
@@ -26,7 +30,12 @@ export function SidebarItems({ chats }: SidebarItemsProps) {
                 height: 0,
               }}
             >
-              <SidebarItem index={index} chat={chat}>
+              <SidebarItem
+                index={index}
+                chat={chat}
+                lang={lang}
+                routes={routes}
+              >
                 <SidebarActions chat={chat} removeChat={removeChat} />
               </SidebarItem>
             </motion.div>

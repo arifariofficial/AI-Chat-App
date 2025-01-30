@@ -27,17 +27,17 @@ export const TeamMember = ({ member }: TeamMemberProps) => {
           className={imageClasses}
         />
       </div>
-      <div className="mb-3 md:mb-4">
+      <div className="mb-1 md:mb-2">
         <h5 className="text-md font-semibold md:text-lg">{member.name}</h5>
         <h6 className="md:text-md">{member.jobTitle}</h6>
         <p className="md:text-md text-foreground/80">
           {member.email}
-          {member.mobile && <br />}
-          {member.mobile}
+          {/* {member.mobile && <br />}
+          {member.mobile} */}
         </p>
       </div>
-      <p>{member.description}</p>
-      <div className="mt-6 grid grid-flow-col grid-cols-[max-content] gap-3.5 self-center">
+      {/* <p>{member.description}</p> */}
+      <div className="grid grid-flow-col grid-cols-[max-content] self-center">
         {member.socialLinks.map((link, index) => (
           <Link
             key={index}

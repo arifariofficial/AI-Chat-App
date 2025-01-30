@@ -131,8 +131,8 @@
     "clickHere": "Klikkaa tästä"
   },
   "hero": {
-    "heading": "Valjastamme tiedon voimasi oikeuksistasi",
-    "description": "Startup-yrityksemme tarjoaa olennaista tietoa oikeuksistasi eri tilanteissa. Tutustu innovatiiviseen tekoälysovellukseemme, joka ohjaa sinua tapauskohtaisesti ja varmistaa, että saat ansaitsemasi tuen.",
+    "heading": "Innovating the Future with Intelligent Solutions",
+    "description": "Olemme vuonna 2024 perustettu yhtiö, joka pohjautuu tekoälyn avulla tehtävään tiedonhakuun. Meidän tavoitteena on auttaa ihmisiä löytämään tietoa ja hyödyntämään heidän oikeuksiaan tehokkaammin.",
     "inputPlaceholder": "Anna sähköpostiosoitteesi",
     "button": { "title": "Rekisteröidy" },
     "termsAndConditions": {
@@ -236,7 +236,7 @@
   },
   "ctaSection": {
     "heading": "Voimaannu työkalullamme",
-    "description": "Tutustu oikeuksiisi ja etuihisi vaivattomasti. Kokeile sovellustamme ja saat välitöntä pääsyä tärkeään tietoon.",
+    "description": "Tutustu oikeuksiisi ja etuihisi vaivattomasti. Kokeile sovellustamme ja saat välittömästi tärkeää etujasi koskevaa tietoa.",
     "button1": "Kokeile SipeChatia",
     "button2": "Lisätietoja"
   },
@@ -294,14 +294,14 @@
         "title": "Puhelin",
         "description": "Soita meille milloin tahansa",
         "link": {
-          "label": "+358440000500",
-          "url": "tel:+358440000500"
+          "label": "+358407798881",
+          "url": "tel:+358407798881"
         }
       },
       {
         "icon": "BiMap",
         "title": "Toimisto",
-        "description": "123 Postiljooninkatu, Helsinki, Suomi",
+        "description": "Postiljooninkatu 3A 8, Helsinki 00240, Suomi",
         "button": {
           "title": "Hae reittiohjeet"
         }
@@ -378,7 +378,7 @@
         "mobile": "+358 40 3012289",
         "description": "Kokenut ohjelmistoinsinööri, jolla on vahva intohimo innovaatioihin ja tekoälyyn.",
         "image": {
-          "src": "/assets/Amir.jpeg",
+          "src": "/assets/Amir.jpg",
           "alt": "Amir Ingher"
         },
         "socialLinks": [
@@ -508,7 +508,7 @@
       },
       { "url": "#", "icon": "BiLogoYoutube" }
     ],
-    "footerText": "© 2024 SipeAI. Kaikki oikeudet pidätetään.",
+    "footerText": "© 2025 SipeAI. Kaikki oikeudet pidätetään.",
     "footerLinks": [
       { "title": "Tietosuojakäytäntö", "url": "privacy" },
       { "title": "Käyttöehdot", "url": "terms" },

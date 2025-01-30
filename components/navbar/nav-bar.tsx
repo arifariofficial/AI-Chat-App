@@ -55,10 +55,10 @@ const NavBar: React.FC<NavBarProps> = ({
       <div className="mx-auto flex h-[60px] max-w-screen-2xl justify-between sm:h-[80px]">
         {/* Logo Section */}
         <section className="flex items-center">
-          <Link href="/" aria-label="Home">
+          <Link href={`/${lang}`} aria-label="Home">
             <div className="mx-4 flex w-[100px]">
               <Image
-                src="/assets/Logo-main.svg"
+                src="/assets/sipe_company_logo.png"
                 alt="Logo"
                 width={120}
                 height={100}

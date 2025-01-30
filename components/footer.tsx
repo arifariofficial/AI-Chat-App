@@ -15,14 +15,21 @@ import { Dictionary } from "@/lib/types";
 import { Locale } from "@/i18n.config";
 import Link from "next/link";
 import { LocalizedRoutes } from "@/lib/localized-routes";
+import { cn } from "@/lib/utils";
 
 interface FooterProps {
+  className?: string;
   dictionary: Dictionary;
   lang: Locale;
   routes: LocalizedRoutes[Locale];
 }
 
-export const Footer = ({ dictionary, lang, routes }: FooterProps) => {
+export const Footer = ({
+  dictionary,
+  lang,
+  routes,
+  className,
+}: FooterProps) => {
   const [emailInput, setEmailInput] = useState<string>("");
 
   if (!dictionary || !lang) {
@@ -59,7 +66,12 @@ export const Footer = ({ dictionary, lang, routes }: FooterProps) => {
     setEmailInput(""); // Clear input field
   };
   return (
-    <footer className="md:py-18 container mx-auto flex max-w-screen-2xl flex-col px-[5%] py-12 md:px-[10%] lg:py-20">
+    <footer
+      className={cn(
+        "md:py-18 container mx-auto flex max-w-screen-2xl flex-col py-12 lg:py-20",
+        className,
+      )}
+    >
       <div className="container mx-auto">
         <div className="rb-12 md:mb-18 mb-12 block items-start justify-between lg:mb-20 lg:flex">
           <div className="rb-6 mb-6 lg:mb-0">
@@ -96,12 +108,13 @@ export const Footer = ({ dictionary, lang, routes }: FooterProps) => {
           </div>
         </div>
         <div className="rb-12 md:mb-18 mb-12 grid grid-cols-1 items-start gap-x-8 gap-y-10 sm:grid-cols-3 md:grid-cols-3 md:gap-y-12 lg:mb-20 lg:grid-cols-6">
+          {/* Company logo */}
           <Link
             href={`/${lang}`}
             className="sm:col-start-1 sm:col-end-4 sm:row-start-1 sm:row-end-2 lg:col-start-auto lg:col-end-auto lg:row-start-auto lg:row-end-auto"
           >
             <Image
-              src="/assets/Logo-main.svg"
+              src="/assets/sipe_company_logo.png"
               alt="Logo image"
               width={100}
               height={100}

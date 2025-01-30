@@ -14,9 +14,14 @@ const AboutUsPage = async ({
   const routes = localizedRoutes[lang];
 
   return (
-    <div className="mx-auto flex w-full flex-col">
+    <div className="container mx-auto flex w-full max-w-screen-2xl flex-col">
       <AboutUs dictionary={dictionary} />
-      <Footer dictionary={dictionary} lang={lang} routes={routes} />
+      <Footer
+        dictionary={dictionary}
+        lang={lang}
+        routes={routes}
+        className="px-[5%] md:px-[10%]"
+      />
     </div>
   );
 };

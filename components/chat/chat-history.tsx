@@ -9,13 +9,22 @@ import { toast } from "../ui/use-toast";
 import MyButton from "../my-button";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/lib/hooks/use-sidebar";
+import { Locale } from "@/i18n.config";
+import { LocalizedRoutes } from "@/lib/localized-routes";
 
 interface ChatHistoryProps {
   session: Session | null;
   buttonClassName?: string;
+  lang: Locale;
+  routes: LocalizedRoutes[Locale];
 }
 
-export function ChatHistory({ session, buttonClassName }: ChatHistoryProps) {
+export function ChatHistory({
+  session,
+  buttonClassName,
+  lang,
+  routes,
+}: ChatHistoryProps) {
   const { loadChats } = useChat();
   const { isSidebarOpen } = useSidebar();
 
@@ -78,7 +87,7 @@ export function ChatHistory({ session, buttonClassName }: ChatHistoryProps) {
           </div>
         }
       >
-        <SidebarList />
+        <SidebarList lang={lang} routes={routes} />
       </Suspense>
     </div>
   );
