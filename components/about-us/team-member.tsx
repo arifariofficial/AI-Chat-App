@@ -29,7 +29,7 @@ export const TeamMember = ({ member }: TeamMemberProps) => {
       </div>
       <div className="mb-1 md:mb-2">
         <h5 className="text-md font-semibold md:text-lg">{member.name}</h5>
-        <h6 className="md:text-md">{member.jobTitle}</h6>
+   {/*     <h6 className="md:text-md">{member.jobTitle}</h6> */ }
         <p className="md:text-md text-foreground/80">
           {member.email}
           {/* {member.mobile && <br />}
