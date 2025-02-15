@@ -1,12 +1,12 @@
 # Use an official Node.js runtime as a parent image
-FROM node:20-alpine3.17 AS base
+FROM node:20-alpine AS base
 
 # Set the working directory
 WORKDIR /app
 
 # Update package lists and install curl and OpenSSL 1.1 compatibility libraries
 RUN apk update && \
-    apk add --no-cache curl openssl1.1-compat
+    apk add --no-cache curl openssl
 
 # Update npm to the latest version
 RUN npm install -g npm@latest
@@ -27,7 +27,7 @@ WORKDIR /app
 # Copy package files again (only if they change)
 COPY package.json package-lock.json* ./
 # Install all dependencies (including devDependencies)
-RUN npm ci
+RUN npm ci --verbose
 
 # Copy the rest of the project files
 COPY . .

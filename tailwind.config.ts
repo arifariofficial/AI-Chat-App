@@ -8,7 +8,7 @@ const config = {
   prefix: "",
   theme: {
     extend: {
-      scrollBehaviou: "smooth",
+      scrollBehavior: "smooth",
       fontFamily: {
         sans: ["Arial", "ui-sans-serif", "system-ui", "sans-serif"],
       },

@@ -49,7 +49,9 @@ const NavBar: React.FC<NavBarProps> = ({
     <nav
       className={cn(
         roboto.className,
-        "sticky top-0 z-50 rounded-b-md border-b bg-primary",
+        "sticky top-0 z-50 rounded-b-md border-b", 
+        "dark:bg-primary dark:bg-none", 
+        "bg-gradient-to-r from-[#0056b3] to-[#00aaff]",
       )}
     >
       <div className="mx-auto flex h-[60px] max-w-screen-2xl justify-between sm:h-[80px]">
