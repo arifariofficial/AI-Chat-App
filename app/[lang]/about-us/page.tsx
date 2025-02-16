@@ -1,4 +1,3 @@
-import { AboutUs } from "@/components/about-us/about-us";
 import { Footer } from "@/components/footer";
 import { Locale } from "@/i18n.config";
 import { getDictionary } from "@/lib/dictionary";
@@ -14,14 +13,7 @@ const AboutUsPage = async ({
   const routes = localizedRoutes[lang];
 
   return (
-    <div className="grid h-[100vh] place-content-center">
-      <h1>This page is under maintenance</h1>
-    </div>
-  );
-
-  return (
     <div className="container mx-auto flex w-full max-w-screen-2xl flex-col">
-      <AboutUs dictionary={dictionary} />
       <Footer
         dictionary={dictionary}
         lang={lang}

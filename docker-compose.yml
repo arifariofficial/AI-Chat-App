@@ -1,7 +1,7 @@
 services:
   frontend:
     platform: linux/amd64
-    image: arifariofficial/sipe:latest
+    image: sipeai/sipeai:latest
     env_file:
       - .env.production
     ports:

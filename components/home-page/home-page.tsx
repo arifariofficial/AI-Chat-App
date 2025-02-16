@@ -5,7 +5,6 @@ import { ContactSection } from "./contact";
 import { CtaSection } from "./cta-section";
 import { FeatureSectionList } from "./feature-list";
 import { FeatureSection } from "./features";
-import { HeroSection } from "./hero-section";
 import { auth } from "@/auth";
 import { Locale } from "@/i18n.config";
 import { localizedRoutes } from "@/lib/localized-routes";
@@ -27,9 +26,8 @@ export default async function HomePage({ lang }: HomePageProps) {
 
   return (
     <div className="container mx-auto flex max-w-screen-2xl flex-col px-[5%] md:px-[10%]">
-      <HeroSection session={session} dictionary={dictionary} lang={lang} />
       <FeatureSection dictionary={dictionary} />
-
+      {/*  <HeroSection session={session} dictionary={dictionary} lang={lang} /> this will go to about us*/}
       <FeatureSectionList
         session={session}
         dictionary={dictionary}

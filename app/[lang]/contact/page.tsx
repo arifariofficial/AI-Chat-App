@@ -11,7 +11,7 @@ const ContactPage = async ({
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
   const routes = localizedRoutes[lang];
-
+  // add elinas email
   return <ContactForm dictionary={dictionary} lang={lang} routes={routes} />;
 };
 export default ContactPage;

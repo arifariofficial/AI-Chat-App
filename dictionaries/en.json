@@ -288,15 +288,6 @@
         }
       },
       {
-        "icon": "BiPhone",
-        "title": "Phone",
-        "description": "Call us anytime",
-        "link": {
-          "label": "+358440000500",
-          "url": "tel:+358440000500"
-        }
-      },
-      {
         "icon": "BiMap",
         "title": "Office",
         "description": "123 Postiljooninkatu, Helsinki, Finland",

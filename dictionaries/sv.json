@@ -289,15 +289,6 @@
         }
       },
       {
-        "icon": "BiPhone",
-        "title": "Telefon",
-        "description": "Ring oss när som helst",
-        "link": {
-          "label": "+358440000500",
-          "url": "tel:+358440000500"
-        }
-      },
-      {
         "icon": "BiMap",
         "title": "Kontor",
         "description": "123 Postiljooninkatu, Helsingfors, Finland",

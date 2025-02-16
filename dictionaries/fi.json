@@ -1,9 +1,9 @@
 {
   "navigation": {
-    "home": "Koti",
+    "home": "Kotisivu",
     "sipeChat": "SipeChat",
     "aboutUs": "Meistä",
-    "contact": "Yhteys"
+    "contact": "Ota yhteyttä"
   },
   "theme": {
     "theme": "Teema",
@@ -289,15 +289,7 @@
           "url": "mailto:info@sipe.ai"
         }
       },
-      {
-        "icon": "BiPhone",
-        "title": "Puhelin",
-        "description": "Soita meille milloin tahansa",
-        "link": {
-          "label": "+358407798881",
-          "url": "tel:+358407798881"
-        }
-      },
+
       {
         "icon": "BiMap",
         "title": "Toimisto",
@@ -449,8 +441,7 @@
           { "title": "Meistä", "url": "aboutUs" },
           { "title": "Ota yhteyttä", "url": "contact" },
           { "title": "Usein kysytyt kysymykset", "url": "/FAQs" },
-          { "title": "Blogi", "url": "/blog" },
-          { "title": "Tuki", "url": "/support" }
+          { "title": "Blogi", "url": "/blog" }
         ]
       },
       {
@@ -469,32 +460,24 @@
           { "title": "Tietosuojakäytäntö", "url": "privacy" },
           { "title": "Käyttöehdot", "url": "terms" },
           { "title": "Evästekäytäntö", "url": "cookiePolicy" },
-          { "title": "Käyttäjäsopimus", "url": "userAgreement" },
-          { "title": "Sivukartta", "url": "#" }
+          { "title": "Käyttäjäsopimus", "url": "userAgreement" }
         ]
       },
       {
         "title": "Seuraa meitä",
         "links": [
           { "title": "Facebook", "url": "#" },
-          { "title": "Twitter", "url": "#" },
+
           {
             "title": "LinkedIn",
             "url": "https://www.linkedin.com/company/sipeai/posts/?feedView=all"
           },
-          { "title": "Instagram", "url": "https://www.instagram.com/sipe.ai/" },
-          { "title": "YouTube", "url": "#" }
+          { "title": "Instagram", "url": "https://www.instagram.com/sipe.ai/" }
         ]
       },
       {
         "title": "Yhteystiedot",
-        "links": [
-          { "title": "Lähetä sähköpostia", "url": "info@sipe.ai" },
-          { "title": "Soita tänään", "url": "#" },
-          { "title": "Käy toimistollamme", "url": "#" },
-          { "title": "Palaute", "url": "/feedback" },
-          { "title": "Ohjekeskus", "url": "/help-center" }
-        ]
+        "links": [{ "title": "Lähetä sähköpostia", "url": "info@sipe.ai" }]
       }
     ],
     "socialMediaLinks": [
@@ -505,8 +488,7 @@
 
       {
         "url": "https://www.linkedin.com/company/sipeai/posts/?feedView=all"
-      },
-      { "url": "#", "icon": "BiLogoYoutube" }
+      }
     ],
     "footerText": "© 2025 SipeAI. Kaikki oikeudet pidätetään.",
     "footerLinks": [
