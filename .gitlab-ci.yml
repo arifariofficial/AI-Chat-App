@@ -1,5 +1,4 @@
-image: ubuntu:latest # Change to Ubuntu for full SSH support
-
+image: alpine/ssh:latest
 variables:
   DOCKER_IMAGE: sipeai/sipeai
   DOCKER_TAG: latest
@@ -11,15 +10,13 @@ stages:
   - deploy
 
 before_script:
-  - apt-get update && apt-get install -y openssh-client
+  - mkdir -p ~/.ssh
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - ssh-keyscan -H $GCP_VM_IP >> ~/.ssh/known_hosts
 
 deploy:
   stage: deploy
-  before_script:
-    - mkdir -p ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - ssh-keyscan -H $GCP_VM_IP >> ~/.ssh/known_hosts
   script:
     - |
       ssh -o StrictHostKeyChecking=no $SSH_USER@$GCP_VM_IP << 'EOF'
