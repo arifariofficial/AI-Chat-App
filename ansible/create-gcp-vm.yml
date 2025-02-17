@@ -1,0 +1,104 @@
+- name: Reserve a static IP and create a VM instance on GCP
+  hosts: localhost
+  gather_facts: no
+  vars:
+    project_id: "euphoric-world-442315-a5"
+    region: "europe-north1"
+    zone: "europe-north1-a"
+    instance_name: "sipeai"
+    machine_type: "e2-medium"
+    source_image: "projects/debian-cloud/global/images/family/debian-12"
+    network_selflink: "https://www.googleapis.com/compute/v1/projects/euphoric-world-442315-a5/global/networks/default"
+    service_account_file: "./service-account-file.json"
+    ssh_key_file: "~/.ssh/id_rsa.pub"
+    ssh_user: "sipeai8"
+    disk_size_gb: 30
+    static_ip_name: "sipeai"
+  tasks:
+    - name: Read the local SSH public key
+      ansible.builtin.slurp:
+        src: "{{ ssh_key_file }}"
+      register: ssh_key
+
+    - name: Decode the SSH public key
+      ansible.builtin.set_fact:
+        public_key: "{{ ssh_key['content'] | b64decode }}"
+
+    - name: Reserve a static external IP address
+      google.cloud.gcp_compute_address:
+        name: "{{ static_ip_name }}"
+        region: "{{ region }}"
+        project: "{{ project_id }}"
+        auth_kind: "serviceaccount"
+        service_account_file: "{{ service_account_file }}"
+      register: reserved_ip
+
+    - name: Debug reserved IP
+      ansible.builtin.debug:
+        var: reserved_ip
+
+    - name: Create a VM instance with SSH access and 30 GB boot disk
+      google.cloud.gcp_compute_instance:
+        name: "{{ instance_name }}"
+        machine_type: "{{ machine_type }}"
+        zone: "{{ zone }}"
+        disks:
+          - auto_delete: true
+            boot: true
+            initialize_params:
+              source_image: "{{ source_image }}"
+              disk_size_gb: "{{ disk_size_gb }}"
+        network_interfaces:
+          - network:
+              selfLink: "{{ network_selflink }}"
+            access_configs:
+              - name: "External NAT"
+                type: "ONE_TO_ONE_NAT"
+                nat_ip:
+                  selfLink: "{{ reserved_ip.selfLink }}"
+
+        metadata:
+          ssh-keys: "{{ ssh_user }}:{{ public_key }}"
+        tags:
+          items:
+            - "http-server"
+            - "https-server"
+            - "port-8080"
+        state: present
+        project: "{{ project_id }}"
+        auth_kind: "serviceaccount"
+        service_account_file: "{{ service_account_file }}"
+      register: instance_info
+
+    - name: Allow HTTP and HTTPS traffic
+      google.cloud.gcp_compute_firewall:
+        name: "allow-http-https"
+        network:
+          selfLink: "{{ network_selflink }}"
+        allowed:
+          - ip_protocol: "tcp"
+            ports: ["80", "443"]
+        source_ranges: ["0.0.0.0/0"]
+        target_tags: ["http-server", "https-server"]
+        state: present
+        project: "{{ project_id }}" # Ensure the project ID is specified
+        auth_kind: "serviceaccount"
+        service_account_file: "{{ service_account_file }}"
+
+    - name: Allow port 8080 traffic
+      google.cloud.gcp_compute_firewall:
+        name: "allow-port-8080"
+        network:
+          selfLink: "{{ network_selflink }}"
+        allowed:
+          - ip_protocol: "tcp"
+            ports: ["8080"]
+        source_ranges: ["0.0.0.0/0"]
+        state: present
+        project: "{{ project_id }}" # Ensure the project ID is specified
+        auth_kind: "serviceaccount"
+        service_account_file: "{{ service_account_file }}"
+
+    - name: Display the instance information
+      ansible.builtin.debug:
+        var: instance_info

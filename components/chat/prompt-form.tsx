@@ -10,13 +10,13 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useEnterSubmit } from "@/lib/hooks/use-enter-submit";
-import { useRouter } from "next/navigation";
-import { IconArrowElbow, IconPlus } from "@components/ui/icons";
-import { UserMessage } from "./message";
+import { IconArrowElbow } from "@/components/ui/icons";
 import { CircularProgress, InputAdornment, TextField } from "@mui/material";
-import { nanoid } from "@lib/utils";
-import { decrement } from "@lib/store/balanceSlice";
-import { useAppDispatch } from "@lib/store/hook";
+import { nanoid } from "@/lib/utils";
+import { decrement } from "@/lib/store/balanceSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hook";
+import { useTheme } from "next-themes";
+import UserMessage from "./user-message";
 
 export function PromptForm({
   input,
@@ -29,13 +29,14 @@ export function PromptForm({
   isLoading: boolean;
   setIsLoading: (value: boolean) => void;
 }) {
-  const router = useRouter();
   const { formRef, onKeyDown, handleButtonClick } = useEnterSubmit();
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
   const { submitUserMessage } = useActions();
   const [, setMessages] = useUIState<typeof AI>();
 
   const dispatch = useAppDispatch();
+  const model = useAppSelector((state) => state.model);
+  const theme = useTheme();
 
   React.useEffect(() => {
     if (inputRef.current) {
@@ -50,6 +51,8 @@ export function PromptForm({
       inputElement.setAttribute("lang", "fi-FI");
     }
   }, []);
+
+  const userMessageId = nanoid();
 
   return (
     <form
@@ -76,13 +79,20 @@ export function PromptForm({
         setMessages((currentMessages) => [
           ...currentMessages,
           {
-            id: nanoid(),
-            display: <UserMessage>{value}</UserMessage>,
+            id: userMessageId,
+            role: "user",
+            display: (
+              <UserMessage content={value} userMessageId={userMessageId} />
+            ),
           },
         ]);
 
         // Submit and get response message
-        const responseMessage = await submitUserMessage(value);
+        const responseMessage = await submitUserMessage({
+          userMessageId: userMessageId,
+          content: value,
+          model: model.model,
+        });
         setMessages((currentMessages) => [...currentMessages, responseMessage]);
         setIsLoading(false);
         dispatch(decrement());
@@ -103,35 +113,31 @@ export function PromptForm({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={onKeyDown}
-          placeholder="Write a Message to SIPE..."
+          placeholder="Kirjoita viesti..."
           helperText={`${input.length}/5000`}
           inputProps={{
             maxLength: 5000,
             spellCheck: true,
             lang: "fi-FI",
           }}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: `${theme.theme === "light" ? "lightgray" : "gray"}`,
+                borderWidth: "1px",
+              },
+              "&:hover:not(.Mui-focused) fieldset": {
+                // Explicitly targeting hover and not-focused state
+                borderColor: theme.theme === "light" ? "darkgray" : "gray",
+                borderWidth: "1px",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: `${theme.theme === "light" ? "gray" : "gray"}`,
+                borderWidth: "1px",
+              },
+            },
+          }}
           InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => {
-                        router.push("/new");
-                      }}
-                      className="hidden drop-shadow-sm sm:block"
-                    >
-                      <IconPlus />
-                      <span className="sr-only">New Chat</span>
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>New Chat</TooltipContent>
-                </Tooltip>
-              </InputAdornment>
-            ),
-
             endAdornment: (
               <InputAdornment position="end">
                 <Tooltip>
@@ -153,10 +159,10 @@ export function PromptForm({
                           className="text-foreground"
                         />
                       )}
-                      <span className="sr-only">Send message</span>
+                      <span className="sr-only">Lähetä viesti</span>
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>Send message</TooltipContent>
+                  <TooltipContent>Lähetä viesti</TooltipContent>
                 </Tooltip>
               </InputAdornment>
             ),

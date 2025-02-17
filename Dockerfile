@@ -1,10 +1,14 @@
 # Use an official Node.js runtime as a parent image
-FROM node:22-alpine AS base
+FROM node:20-alpine AS base
 
 # Set the working directory
 WORKDIR /app
 
-# Update npm to the desired version (optional, or remove if not needed)
+# Update package lists and install curl and OpenSSL 1.1 compatibility libraries
+RUN apk update && \
+    apk add --no-cache curl openssl
+
+# Update npm to the latest version
 RUN npm install -g npm@latest
 
 # Base image to install dependencies
@@ -14,7 +18,7 @@ FROM base AS deps
 COPY package.json package-lock.json* ./
 
 # Install only production dependencies to optimize image size
-RUN npm ci 
+RUN npm ci
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -23,12 +27,12 @@ WORKDIR /app
 # Copy package files again (only if they change)
 COPY package.json package-lock.json* ./
 # Install all dependencies (including devDependencies)
-RUN npm ci
+RUN npm ci --verbose
 
 # Copy the rest of the project files
 COPY . .
 
-# Generate Prisma client
+# Generate Prisma Client
 RUN npx prisma generate
 
 # Build the application
@@ -52,6 +56,9 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
+
+# Install tsx globally in the runner stage
+RUN npm install -g tsx
 
 # Ensure proper permissions for prerender cache
 RUN mkdir -p .next && chown nextjs:nodejs .next

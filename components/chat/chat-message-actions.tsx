@@ -9,6 +9,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import React from "react";
 
 interface ChatMessageActionsProps extends React.ComponentProps<"div"> {
   message: string;
@@ -30,13 +31,17 @@ export function ChatMessageActions({
     <div className={cn("flex w-fit", className)} {...props}>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon" onClick={onCopy}>
+          <Button
+            variant="inherit"
+            onClick={onCopy}
+            className="p-0 text-secondary"
+          >
             {isCopied ? <IconCheck /> : <IconCopy />}
-            <span className="sr-only">Copy message</span>
+            <span className="sr-only">Kopioi viesti</span>
           </Button>
         </TooltipTrigger>
         <TooltipContent side="bottom">
-          <p>Copy</p>
+          <p>Kopioi</p>
         </TooltipContent>
       </Tooltip>
     </div>

@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+    triggers {
+        GenericTrigger(
+            genericVariables: [
+                [key: 'DOCKER_REPO', value: '$.repository.repo_name'],
+            ],
+            causeString: 'Triggered by Docker Hub webhook: $DOCKER_REPO',
+        )
+    }
+
+    environment {
+        PROJECT_PATH = '/home/sipeai9/sipe-frontend'
+    }
+
+    stages {
+        stage('Deploy Docker Image') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'gitlab', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                        sh '''
+                            set -e
+                            cd ${PROJECT_PATH}
+                            git config pull.rebase false  # Set default pull strategy to merge
+                            git checkout ai-sdk
+                            git pull https://${GIT_USERNAME}:${GIT_PASSWORD}@gitlab.com/sipe3/sipe-frontend.git ai-sdk
+                            docker compose down
+                            docker compose pull frontend
+                            docker system prune -f
+                            docker volume prune -f
+                            docker image prune -f
+                            docker compose up -d
+                        '''
+                    }
+                }
+            }
+        }
+    }
+}

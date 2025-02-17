@@ -4,8 +4,8 @@ import * as z from "zod";
 import { RegisterSchema } from "@/lib/Schema";
 import prisma from "@/lib/prisma";
 import { getUserByEmail } from "../data/user";
-import { ResultCode, getStringFromBuffer } from "@lib/utils";
-import { signIn } from "@auth";
+import { ResultCode, getStringFromBuffer } from "@/lib/utils";
+import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 
 export async function createUser(

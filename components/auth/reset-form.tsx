@@ -10,15 +10,26 @@ import { FormError } from "../form-error";
 import { useState, useTransition } from "react";
 import { reset } from "@/actions/reset";
 import { Box, TextField } from "@mui/material";
-import { FormSucccess } from "@components/form-success";
-import { Button } from "@components/ui/button";
-import { IconSpinner } from "@components/ui/icons";
+import { FormSucccess } from "@/components/form-success";
+import { Button } from "@/components/ui/button";
+import { IconSpinner } from "@/components/ui/icons";
+import { cn } from "@/lib/utils";
+import { localizedRoutes } from "@/lib/localized-routes";
+import { Locale } from "@/i18n.config";
+import { Dictionary } from "@/lib/types";
 
-export const ResetForm = () => {
+interface ResetFormProps {
+  className?: string;
+  lang: Locale;
+  dictionary: Dictionary;
+}
+export const ResetForm = ({ className, lang, dictionary }: ResetFormProps) => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isDisable, setIsDisable] = useState(false);
+
+  const routes = localizedRoutes[lang];
 
   const form = useForm<z.infer<typeof ResetSchema>>({
     resolver: zodResolver(ResetSchema),
@@ -44,10 +55,11 @@ export const ResetForm = () => {
 
   return (
     <CardWrapper
-      headerLabel="Password Reset"
-      backButtonLabel="Back to login"
-      backButtonHref="/auth/login"
-      className="bg-background"
+      headerLabel={dictionary.resetPassword.headerLabel}
+      backButtonLabel={dictionary.resetPassword.backButtonLabel}
+      backButtonHref={`/${lang}${routes.auth.signIn}`}
+      className={cn("bg-background", className)}
+      lang={lang}
     >
       <Form {...form}>
         <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
@@ -66,7 +78,7 @@ export const ResetForm = () => {
                       size="small"
                       id="email"
                       name="email"
-                      label="Email Address"
+                      label={dictionary.resetPassword.emailLabel}
                       autoFocus
                       autoComplete="current-email"
                       value={value}
@@ -102,7 +114,11 @@ export const ResetForm = () => {
               type="submit"
               className="w-full disabled:bg-muted disabled:text-muted-foreground"
             >
-              {isPending ? <IconSpinner /> : "Send a recovery link"}
+              {isPending ? (
+                <IconSpinner />
+              ) : (
+                dictionary.resetPassword.sendLinkLabel
+              )}
             </Button>
           )}
         </Box>

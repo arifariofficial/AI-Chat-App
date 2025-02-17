@@ -1,51 +1,94 @@
 "use client";
 
 import Link from "next/link";
-import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
-import { SidebarMobile } from "@components/chat/sidebar-mobile";
-import { ChatHistory } from "@components/chat/chat-history";
-import UserButtonMobile from "./user-button-mobile";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
 import NavItemsRight from "./nav-items-right";
 import NavItemsMiddle from "./nav-items-middle";
+import { Locale } from "@/i18n.config";
+import { Dictionary } from "@/lib/types";
 import { Session } from "next-auth";
-import { usePathname } from "next/navigation";
-import { ThemeToggle } from "@components/theme-toggle-mobile";
+import { cn } from "@/lib/utils";
+import { Roboto } from "next/font/google";
+import { LocalizedRoutes } from "@/lib/localized-routes";
+import HamburgerButton from "./hamburger-button";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
 
 interface NavBarProps {
   session?: Session | null;
+  lang: Locale;
+  dictionary: Dictionary;
+  routes: LocalizedRoutes[Locale];
 }
 
-const NavBar = ({ session }: NavBarProps) => {
+const NavBar: React.FC<NavBarProps> = ({
+  session = null,
+  lang,
+  dictionary,
+  routes,
+}) => {
   const pathname = usePathname();
 
-  if (pathname.startsWith("/chat") || pathname.startsWith("/new")) {
+  // Define paths to hide the navbar
+  // Define paths to hide the navbar
+  const hiddenPaths = [
+    `/${lang}/chat`,
+    `/${lang}/keskustelu`,
+    `/${lang}/chatt`,
+    `/${lang}/new`,
+  ];
+  if (hiddenPaths.some((path) => pathname?.startsWith(path))) {
     return null;
   }
 
   return (
-    <nav className="sticky top-0 z-50 rounded-b-md border-b border-b-border/20 bg-navBarGradient-light dark:bg-navBarGradient-dark">
+    <nav
+      className={cn(
+        roboto.className,
+        "sticky top-0 z-50 rounded-b-md border-b", 
+        "dark:bg-primary dark:bg-none", 
+        "bg-gradient-to-r from-[#0056b3] to-[#00aaff]",
+      )}
+    >
       <div className="mx-auto flex h-[60px] max-w-screen-2xl justify-between sm:h-[80px]">
-        <section className="flex items-center text-foregroundNav">
-          <Link href={`/`}>
-            <div className="flex gap-2 px-4 text-2xl font-extrabold tracking-wide">
-              <LocalLibraryIcon fontSize="large" aria-label="Library Icon" />
-              <p className="mt-1">SIPE</p>
+        {/* Logo Section */}
+        <section className="flex items-center">
+          <Link href={`/${lang}`} aria-label="Home">
+            <div className="mx-4 flex w-[100px]">
+              <Image
+                src="/assets/sipe_company_logo.png"
+                alt="Logo"
+                width={120}
+                height={100}
+                priority
+              />
             </div>
           </Link>
         </section>
-        <NavItemsMiddle />
+
+        {/* Middle Nav Items */}
+        <NavItemsMiddle lang={lang} dictionary={dictionary} />
+
+        {/* Right Nav Items */}
         <section className="mr-1 flex items-center justify-center text-xl font-semibold hover:opacity-90">
-          <div className="flex size-full flex-row items-center p-px">
-            <div className="flex size-full items-center justify-center">
-              <SidebarMobile className="flex size-full items-center justify-center">
-                {session && <ChatHistory session={session} />}
-              </SidebarMobile>
-            </div>
-            <NavItemsRight session={session} />
-            <ThemeToggle className="flex size-full sm:hidden" variant="nav" />
-            <UserButtonMobile
+          <div className="flex h-full flex-row items-center p-px">
+            <NavItemsRight
+              session={session}
+              lang={lang}
+              dictionary={dictionary}
+            />
+            <HamburgerButton
+              variant="nav"
               session={session}
               className="flex size-full sm:hidden"
+              buttonClassName="h-full text-foregroundNav hover:opacity-90"
+              lang={lang}
+              dictionary={dictionary}
+              routes={routes}
             />
           </div>
         </section>

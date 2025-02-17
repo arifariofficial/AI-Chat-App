@@ -1,0 +1,644 @@
+{
+  "navigation": {
+    "home": "Home",
+    "sipeChat": "SipeChat",
+    "aboutUs": "About us",
+    "contact": "Contact"
+  },
+  "theme": {
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "language": {
+    "en": "English",
+    "fi": "Suomi",
+    "sv": "Svenska"
+  },
+  "metadata": {
+    "homePage": {
+      "title": "Innovating the Future",
+      "description": "Sipe AI provides intelligent solutions to help people find and utilize their rights effectively."
+    }
+  },
+  "notifications": {
+    "loading": "Loading..."
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "signup": "Sign Up",
+    "signin": "Sign In",
+    "signout": "Sign Out"
+  },
+  "login": {
+    "headerLabel": "Welcome",
+    "backButtonLabel": "Don't have an account?",
+    "ariaLabelPasswordToggle": "Toggle password visibility",
+    "forgotPassword": "Forgot password?",
+    "twoFactorConfirmButtonLabel": "Confirm",
+    "orContinueButtonLabel": "Or continue with"
+  },
+  "registerForm": {
+    "headerLabel": "Create an account",
+    "emailAddress": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "agreeToTerms": "I agree to the",
+    "termsAndConditions": "terms and conditions",
+    "submit": "Register",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Login",
+    "successMessage": "Registration successful!",
+    "errorMessage": "Something went wrong. Please try again."
+  },
+  "logout": {
+    "headerLabel": "You have been logged out"
+  },
+  "resetPassword": {
+    "headerLabel": "Password Reset",
+    "resetButtonLabel": "Reset Password",
+    "backButtonLabel": "Back to Sign In",
+    "emailLabel": "Email Address",
+    "sendLinkLabel": "Send a Recovery Link"
+  },
+  "validation": {
+    "emailRequired": "No email entered",
+    "emailInvalidTitle": "Invalid Email",
+    "emailInvalid": "Please enter a valid email address.",
+    "emailExists": "You have already signed up with this email.",
+    "emailAlreadyLoggedIn": "You are already logged in. Please sign out to register with a new email."
+  },
+  "input": {
+    "cancelButtonLabel": "Cancel",
+    "saveButtonLabel": "Save",
+    "updateButtonLabel": "Update",
+    "email": "Email",
+    "emailAddress": "Email Address",
+    "emailPlaceholder": "Enter your email address"
+  },
+  "image": {
+    "imageAlt": "Name not available",
+    "imageError": "No Image"
+  },
+  "userButton": {
+    "noName": "No Name",
+    "account": "Account"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "Sorry, we couldn't find the resource you were looking for.",
+    "returnHome": "Return Home"
+  },
+  "profile": {
+    "account": {
+      "header": "Account",
+      "description": "Manage your account settings and information.",
+      "profile": "Profile",
+      "name": "Name",
+      "nameNotAvailable": "Name not available",
+      "email": "Email",
+      "emailButtonConfirm": "Confirm Email",
+      "emailButtonConfirmation": "Confirmed"
+    },
+    "subscription": {
+      "header": "Subscription",
+      "description": "Manage your payment settings",
+      "selectHeader": "Buy credits",
+      "selectAmount": "Amount",
+      "selectBuy": "Buy"
+    },
+    "security": {
+      "header": "Security",
+      "description": "Manage your security settings",
+      "twoFactorTitle": "Two-Factor Authentication",
+      "twoFactorTooltip": "When this feature is activated, a one-time password (OTP) will be sent to the user's email address to enable secure login.",
+      "twoFactorEnable": "Enable",
+      "twoFactorDisable": "Disable"
+    }
+  },
+  "chatPage": {
+    "header": "Chat",
+    "description": "Legal AI Assistant"
+  },
+  "chatModal": {
+    "signIn": "Sign In",
+    "okButton": "Ok!",
+    "createAccount": "Create a free account",
+    "clickHere": "Click here"
+  },
+  "hero": {
+    "heading": "Empowering You with Knowledge of Your Rights",
+    "description": "At our startup, we are dedicated to providing you with essential information about your rights in various situations. Discover how our innovative AI app can guide you through your specific case and ensure you receive the support you deserve.",
+    "inputPlaceholder": "Enter your email",
+    "button": { "title": "Sign up" },
+    "termsAndConditions": {
+      "text": "By signing up, you agree to our",
+      "link": "Terms and Conditions"
+    }
+  },
+  "features": {
+    "heading": "Discover Your Rights with Our Innovative AI App",
+    "description": "Our cutting-edge AI app simplifies the process of understanding your rights across various situations. With just a few taps, you can access tailored information that ensures you know exactly what you're entitled to."
+  },
+  "featuresList": {
+    "heading": "Unlock the Benefits of Our AI App",
+    "description": "Our AI app simplifies the process of understanding your rights. With just a few taps, you can access crucial information tailored to your specific case.",
+    "buttonText": "Learn More",
+    "notification": "You are already logged in.",
+    "features": [
+      {
+        "title": "Effortless Access to Essential Information",
+        "description": "Get instant access to vital information at your fingertips.",
+        "imageAlt": "Features 1 placeholder image"
+      },
+      {
+        "title": "Tailored Analysis for Your Unique Situation",
+        "description": "Our app provides personalized insights based on your circumstances.",
+        "imageAlt": "Features 2 placeholder image"
+      },
+      {
+        "title": "Stay Informed with Current Data",
+        "description": "Access reliable and up-to-date information whenever you need it.",
+        "imageAlt": "Features 3 placeholder image"
+      }
+    ]
+  },
+  "faqSection": {
+    "heading": "FAQs",
+    "description": "Find answers to common questions about our services and AI app.",
+    "contactUs": "Contact Us",
+    "questions": [
+      {
+        "title": "What is your service?",
+        "answer": "We provide information on rights related to various cases. Our AI app simplifies this process by delivering tailored insights. Whether it's a car accident or another issue, we guide you through your rights."
+      },
+      {
+        "title": "Can I get support?",
+        "answer": "Absolutely! We offer support through our customer service team. You can reach out via the app or our website for assistance at any time."
+      },
+      {
+        "title": "How does the app work?",
+        "answer": "Our app collects relevant information about your case. It analyses the data to inform you of your rights. This ensures you have the knowledge needed to make informed decisions."
+      },
+      {
+        "title": "What if I have more questions?",
+        "answer": "If you have additional questions, don’t hesitate to contact us. We are here to provide clarity and support. Your understanding is our priority."
+      },
+      {
+        "title": "Is the service free?",
+        "answer": "Yes, our initial consultation and access to the AI app are free. We believe in empowering individuals with knowledge without financial barriers. Additional services may incur charges, which will be clearly communicated."
+      },
+      {
+        "title": "Is my data secure?",
+        "answer": "Yes, we take data security very seriously. Your information is protected with industry-standard encryption and privacy measures. We do not share your data without your consent."
+      },
+      {
+        "title": "Who can use it?",
+        "answer": "Our services are designed for anyone seeking information about their rights. Whether you're involved in a car accident or facing other legal issues, we are here to help. Our app is user-friendly and accessible to all."
+      },
+      {
+        "title": "How often is information updated?",
+        "answer": "Our app regularly updates its information to ensure accuracy. We monitor legal changes and adjust our content accordingly. This guarantees you receive the most current advice."
+      },
+      {
+        "title": "How do I start?",
+        "answer": "Getting started is simple! Download our app and create an account to begin. Follow the prompts to enter your case details and discover your rights."
+      },
+      {
+        "title": "Can I provide feedback?",
+        "answer": "We welcome your feedback! It helps us improve our services and app functionality. You can submit your thoughts through the app or our website."
+      }
+    ],
+    "footerHeading": "Still have questions?",
+    "footerDescription": "Reach out to us anytime for assistance.",
+    "button": {
+      "title": "Contact",
+      "variant": "outline"
+    }
+  },
+  "benefits": {
+    "heading": "Discover the transformative benefits of our AI-powered rights information app.",
+    "description": "Our AI app streamlines the process of understanding your rights, saving you valuable time. With precise information at your fingertips, you can navigate your case with confidence.",
+    "subHeadings": [
+      {
+        "title": "Time-Saving",
+        "description": "Get instant access to essential information without the hassle of extensive research."
+      },
+      {
+        "title": "Accurate Insights",
+        "description": "Rely on our AI for accurate, up-to-date information tailored to your specific situation."
+      }
+    ]
+  },
+  "ctaSection": {
+    "heading": "Empower Yourself with Our App",
+    "description": "Discover your rights and benefits effortlessly. Try our app for instant access to vital information.",
+    "button1": "Try SipeChat",
+    "button2": "Learn More"
+  },
+
+  "testimonialSection": {
+    "heading": "Customer Testimonials",
+    "description": "This app transformed my understanding of my rights.",
+    "testimonials": [
+      {
+        "numberOfStars": 5,
+        "quote": "\"With the AI app, I felt empowered and informed.\"",
+        "avatar": {
+          "src": "/assets/testimonial-1.webp",
+          "alt": "Testimonial avatar 1"
+        },
+        "name": "Sami Mäkinen",
+        "position": "Doctor, GreenLife",
+        "logo": {
+          "src": "/assets/company-1.webp",
+          "alt": "Webflow logo 1"
+        }
+      },
+      {
+        "numberOfStars": 5,
+        "quote": "\"I never knew I had so many options available!\"",
+        "avatar": {
+          "src": "/assets/testimonial-2.webp",
+          "alt": "Testimonial avatar 2"
+        },
+        "name": "Juuso Montonen",
+        "position": "Guitar Teacher, Kitarakoutsi, Inc.",
+        "logo": {
+          "src": "/assets/company-2.webp",
+          "alt": "Webflow logo 2"
+        }
+      }
+    ]
+  },
+  "contactSection": {
+    "tagline": "Connect",
+    "heading": "Contact Us",
+    "description": "We're here to assist you with your inquiries.",
+    "contacts": [
+      {
+        "icon": "BiEnvelope",
+        "title": "Email",
+        "description": "Reach us at",
+        "link": {
+          "label": "info@sipe.ai",
+          "url": "mailto:info@sipe.ai"
+        }
+      },
+      {
+        "icon": "BiMap",
+        "title": "Office",
+        "description": "123 Postiljooninkatu, Helsinki, Finland",
+        "button": {
+          "title": "Get Directions"
+        }
+      }
+    ]
+  },
+  "aboutUs": {
+    "tagline": "Innovate",
+    "heading": "Our team",
+    "description": "Meet the brilliant minds behind our innovative solutions.",
+    "footer": {
+      "heading": "We're hiring!",
+      "description": "Join our dynamic team and shape the future.",
+      "button": {
+        "title": "Open positions"
+      }
+    },
+    "teamMembers": [
+      {
+        "name": "Elina Eriksson",
+        "jobTitle": "CEO & Founder",
+        "email": "eriksson.elina@sipe.ai",
+        "mobile": "+358 40 7798881",
+        "description": "Passionate about leveraging AI to solve real-world challenges and drive innovation.",
+        "image": {
+          "src": "/assets/Elina.jpeg",
+          "alt": "Elina Eriksson"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/elina-eriksson/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Sampo Kaarenmaa",
+        "jobTitle": "Product Manager & Developer",
+        "email": "kaarenmaa.sampo@sipe.ai",
+        "mobile": "+358 40 5800869",
+        "description": "Focused on creating user-centric products that enhance customer experience.",
+        "image": {
+          "src": "/assets/Sampo.jpeg",
+          "alt": "Sampo Kaarenmaa"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/sampo-kaarenmaa-75a76587/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Mia Almgren",
+        "jobTitle": "Marketing Director",
+        "email": "almgren.mia@sipe.ai",
+        "mobile": "+358 40 8296048",
+        "description": "Committed to building our brand and engaging with our community.",
+        "image": {
+          "src": "/assets/Mia.jpeg",
+          "alt": "Mia Almgren"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/mia-almgren-1327a9b8/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Amir Ingher",
+        "jobTitle": "Software Engineer",
+        "email": "ingher.amir@sipe.ai",
+        "mobile": "+358 40 3012289",
+        "description": "Experienced in software engineering with a strong passion for innovation and expertise in AI-driven solutions.",
+        "image": {
+          "src": "/assets/Amir.jpg",
+          "alt": "Amir Ingher"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/amir-ingher-ba24a7129/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Ariful Islam",
+        "jobTitle": "Full Stack Engineer",
+        "email": "islam.ariful@sipe.ai",
+        "mobile": "+358 40 555699",
+        "description": "Full Stack Engineer with expertise in AI and a passion for creating scalable, intelligent solutions.",
+        "image": {
+          "src": "/assets/Ariful.jpeg",
+          "alt": "Ariful Islam",
+          "className": "scale-[1.4]"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/arifariofficial/",
+            "icon": "linkedin"
+          }
+        ]
+      }
+    ]
+  },
+  "contactForm": {
+    "title": "Contact Us",
+    "description": "We'd love to hear from you. Fill out the form below and we’ll get back to you as soon as possible.",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your Name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Your Email",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Your Message",
+    "submitButton": "Send Message",
+    "sendingButton": "Sending...",
+    "successToastTitle": "Message sent successfully!",
+    "successToastDescription": "We will get back to you soon.",
+    "errorToastTitle": "Error",
+    "errorToastDescription": "Something went wrong. Please try again later."
+  },
+  "footer": {
+    "logo": {
+      "url": "#",
+      "src": "/assets/Logo-main.svg",
+      "alt": "Logo image"
+    },
+    "newsletterHeading": "Join our newsletter",
+    "newsletterDescription": "We're here to assist you with your inquiries.",
+    "inputPlaceholder": "Enter your email",
+    "button": {
+      "title": "Subscribe",
+      "variant": "outline",
+      "size": "sm"
+    },
+    "termsAndConditions": {
+      "text": "By subscribing you agree to with our",
+      "link": "Privacy Policy"
+    },
+
+    "columnLinks": [
+      {
+        "title": "Quick Links",
+        "links": [
+          { "title": "About Us", "url": "aboutUs" },
+          { "title": "Contact Us", "url": "contact" },
+          { "title": "FAQs", "url": "/FAQs" },
+          { "title": "Blog", "url": "/blog" },
+          { "title": "Support", "url": "/support" }
+        ]
+      },
+      {
+        "title": "Resources",
+        "links": [
+          { "title": "Guides", "url": "#" },
+          { "title": "Updates", "url": "#" },
+          { "title": "Testimonials", "url": "#" },
+          { "title": "Careers", "url": "#" },
+          { "title": "Partnerships", "url": "#" }
+        ]
+      },
+      {
+        "title": "Legal",
+        "links": [
+          { "title": "Privacy Policy", "url": "privacy" },
+          { "title": "Terms of Use", "url": "terms" },
+          { "title": "Cookie Policy", "url": "cookiePolicy" },
+          { "title": "User Agreement", "url": "userAgreement" },
+          { "title": "Site Map", "url": "#" }
+        ]
+      },
+      {
+        "title": "Follow Us",
+        "links": [
+          { "title": "Facebook", "url": "#" },
+          { "title": "Twitter", "url": "#" },
+          {
+            "title": "LinkedIn",
+            "url": "https://www.linkedin.com/company/sipeai/posts/?feedView=all"
+          },
+          {
+            "title": "Instagram",
+            "url": "https://www.instagram.com/sipe.ai/"
+          },
+          { "title": "YouTube", "url": "#" }
+        ]
+      },
+      {
+        "title": "Contact Info",
+        "links": [
+          { "title": "Email Us Here ", "url": "info@sipe.ai" },
+          { "title": "Call Us Today", "url": "#" },
+          { "title": "Visit Our Office ", "url": "#" },
+          { "title": "Feedback Form", "url": "/feedback" },
+          { "title": "Help Center", "url": "/help-center" }
+        ]
+      }
+    ],
+    "socialMediaLinks": [
+      { "url": "#", "icon": "BiLogoFacebookCircle" },
+      {
+        "url": "https://www.instagram.com/sipe.ai/"
+      },
+
+      {
+        "url": "https://www.linkedin.com/company/sipeai/posts/?feedView=all"
+      },
+      { "url": "#", "icon": "BiLogoYoutube" }
+    ],
+    "footerText": "© 2024 SipeAI. All rights reserved.",
+    "footerLinks": [
+      { "title": "Privacy Policy", "url": "privacy" },
+      { "title": "Terms of Service", "url": "terms" },
+      { "title": "Cookies Settings", "url": "cookiePolicy" }
+    ]
+  },
+  "cookieConsent": {
+    "message": "We use cookies to improve the website, analyze usage, and assist with marketing.",
+    "manageSettings": "Manage settings",
+    "deleteCookies": "Delete all cookies",
+    "acceptAllCookies": "Accept all cookies",
+    "cookieSettings": "Cookie settings",
+    "cookieSettingsDescription": "Customize your cookie settings. Essential cookies are always enabled to ensure the website functions properly.",
+    "readMore": "Read more",
+    "essential": "Essential",
+    "alwaysOn": "Always on",
+    "personalized": "Personalized",
+    "marketing": "Marketing",
+    "analytics": "Analytics"
+  },
+  "cookiePolicy": {
+    "title": "Cookie Policy",
+    "at": "At",
+    "introduction": ", we are committed to protecting your privacy and ensuring transparency about the data we collect through cookies. This Cookie Policy explains how and why we use cookies, the types of cookies we use, and your choices regarding cookie management.",
+    "whatAreCookies": {
+      "title": "What Are Cookies?",
+      "description": "Cookies are small text files stored on your device when you visit a website. They are widely used to make websites work efficiently, enhance your user experience, and provide analytical data to website owners. Cookies can store information such as your preferences, login status, and browsing activities."
+    },
+    "typesOfCookies": {
+      "title": "Types of Cookies We Use",
+      "necessary": "<strong>Necessary Cookies:</strong> These cookies are essential for the website to function properly. They enable core functionalities such as security, authentication, and accessibility.",
+      "performance": "<strong>Performance Cookies:</strong> These cookies help us analyze website performance and improve your experience by collecting anonymized data about how users interact with the site.",
+      "functional": "<strong>Functional Cookies:</strong> These cookies allow us to remember your preferences, such as language selection and other customizable features, to provide a more personalized experience.",
+      "advertising": "<strong>Advertising Cookies:</strong> These cookies track your online activity to provide you with relevant advertisements based on your interests."
+    },
+    "howWeUseCookies": {
+      "title": "How We Use Cookies",
+      "list": [
+        "Ensure the proper functioning of our website.",
+        "Improve website performance and user experience.",
+        "Analyze user behavior and website traffic to optimize content.",
+        "Provide personalized recommendations and advertisements."
+      ]
+    },
+    "managingCookies": {
+      "title": "Managing Cookies",
+      "description": "You have the right to manage or disable cookies as per your preferences. Most browsers allow you to control cookies through their settings. However, disabling certain cookies may affect the functionality of the website.",
+      "learnMore": "To learn more about managing cookies, visit the help section of your browser:",
+      "browsers": {
+        "chrome": "Google Chrome",
+        "firefox": "Mozilla Firefox",
+        "safari": "Safari",
+        "edge": "Microsoft Edge"
+      }
+    },
+    "changesToPolicy": {
+      "title": "Changes to This Policy",
+      "description": "We may update this Cookie Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. Please review this policy periodically to stay informed about our use of cookies."
+    },
+    "contactUs": {
+      "title": "Contact Us",
+      "description": "If you have any questions or concerns about this Cookie Policy, please contact us at:",
+      "email": "Email: support@sipeai.com",
+      "phone": "Phone: +358 123 456 789"
+    }
+  },
+  "terms_modal": {
+    "title": "Terms and Conditions",
+    "welcome": "Welcome to {companyName}! These terms and conditions outline the rules and regulations for the use of our website.",
+    "definitions_title": "1. Definitions",
+    "definitions_content": "“Company” refers to {companyName}, its employees, agents, and affiliates. “User” refers to any person accessing our website or using our services.",
+    "services_title": "2. Use of Our Services",
+    "services_content": {
+      "item1": "Users must be at least 18 years old or have parental consent to use our services.",
+      "item2": "Users agree not to use the website in any way that may damage or impair its functionality.",
+      "item3": "Users agree not to use our services for illegal activities."
+    },
+    "intellectual_property_title": "3. Intellectual Property",
+    "intellectual_property_content": "All content on this website, including text, images, and software, is owned by {companyName} or its licensors. Users are prohibited from reproducing or redistributing any content without prior written permission.",
+    "privacy_policy_title": "4. Privacy Policy",
+    "privacy_policy_content": "We are committed to protecting your privacy. Please review our Privacy Policy.",
+    "limitation_liability_title": "5. Limitation of Liability",
+    "limitation_liability_content": "{companyName} is not liable for any direct, indirect, or consequential damages arising from the use of our website.",
+    "governing_law_title": "6. Governing Law",
+    "governing_law_content": "These terms and conditions are governed by and construed in accordance with the laws of {countryName}.",
+    "changes_terms_title": "7. Changes to Terms",
+    "changes_terms_content": "We may update these terms from time to time. Users are encouraged to review them regularly.",
+    "close_button": "Close"
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated",
+    "description": "At <strong>{companyName}</strong>, we are committed to protecting your privacy and ensuring the safety of your personal data. This policy explains how we collect, use, and safeguard your information when you use our services.",
+    "sections": {
+      "informationWeCollect": {
+        "title": "1. Information We Collect",
+        "content": "We may collect the following types of information:",
+        "list": [
+          "Personal Information: Information you provide when creating an account or contacting us, such as your name, email address, and phone number.",
+          "Usage Data: Data about how you use our website and services, including IP address, browser type, and interactions.",
+          "Machine Learning Insights: Information generated by our AI models based on your inputs, limited to publicly available data."
+        ]
+      },
+      "howWeUseYourInformation": {
+        "title": "2. How We Use Your Information",
+        "list": [
+          "To provide, improve, and personalize our AI services.",
+          "To communicate updates, new features, or support-related matters.",
+          "To ensure security and detect fraudulent or unauthorized activity."
+        ]
+      },
+      "dataSecurity": {
+        "title": "3. Data Security",
+        "content": "Your data's security is our priority. We use industry-standard encryption and secure storage solutions to protect your information from unauthorized access, alteration, or disclosure.",
+        "note": "However, please note that no online platform can guarantee 100% security. We continuously strive to improve our security practices."
+      },
+      "useOfAI": {
+        "title": "4. Use of AI and Machine Learning",
+        "content": "Our services rely on AI and machine learning models to provide information and insights. While we strive for accuracy, {companyName} cannot guarantee that all AI-generated responses will be free from errors or inaccuracies.",
+        "note": "We primarily use publicly available information to train our models and generate outputs."
+      },
+      "sharingInformation": {
+        "title": "5. Sharing of Information",
+        "content": "We do not sell, rent, or trade your personal information to third parties. However, we may share data with trusted partners for the purposes of providing or improving our services, with strict adherence to confidentiality agreements."
+      },
+      "yourRights": {
+        "title": "6. Your Rights",
+        "content": "You have the right to access, modify, or delete your personal information at any time. If you have any concerns about how we handle your data, please contact us at privacy@{companyWebsite}."
+      },
+      "changesToPolicy": {
+        "title": "7. Changes to this Policy",
+        "content": "We may update this Privacy Policy periodically to reflect changes in our practices or regulatory requirements. Users are encouraged to review this policy regularly."
+      },
+      "contactUs": {
+        "title": "8. Contact Us",
+        "content": "If you have any questions or concerns regarding our Privacy Policy, feel free to reach out to us at privacy@{companyWebsite}."
+      }
+    }
+  }
+}

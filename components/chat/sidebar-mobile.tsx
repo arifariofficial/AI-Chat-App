@@ -3,10 +3,11 @@
 import { Button } from "@/components/ui/button";
 
 import { IconSidebar } from "@/components/ui/icons";
-import { Sheet, SheetContent, SheetTrigger } from "@components/ui/sheet";
-import { cn } from "@lib/utils";
-import { usePathname } from "next/navigation";
-import { SidebarMobileContainer } from "./sidebar-mobile-container";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
+import React from "react";
+import { DialogDescription, DialogTitle } from "../ui/dialog";
+import { useSidebar } from "@/lib/hooks/use-sidebar";
 
 interface SidebarMobileProps {
   children: React.ReactNode;
@@ -14,28 +15,29 @@ interface SidebarMobileProps {
 }
 
 export function SidebarMobile({ children, className }: SidebarMobileProps) {
-  const path = usePathname();
-
-  if (!path.includes("/chat")) return null;
+  const { toggleSidebar } = useSidebar();
 
   return (
-    <Sheet>
-      <SheetTrigger
-        asChild
-        className="text-foregroundNav focus-visible:border-none focus-visible:ring-0"
-      >
-        <Button variant="nav" className={cn("sm:hidden", className)}>
-          <IconSidebar className="size-6" />
-          <span className="sr-only">Toggle Sidebar</span>
+    <Sheet onOpenChange={(isOpen) => toggleSidebar(isOpen)}>
+      <SheetTrigger asChild>
+        <Button
+          variant="inherit"
+          className={cn("focus:border-none sm:hidden", className)}
+        >
+          <IconSidebar className="size-7" />
+          <span className="sr-only">Toggle the sidebar</span>
         </Button>
       </SheetTrigger>
       <SheetContent
         side="left"
-        className="inset-y-0 flex h-auto w-full flex-col border p-0 sm:hidden"
+        className="inset-y-0 flex h-auto flex-col p-0 sm:hidden"
+        tabIndex={-1} // Prevent focusing on the first element
       >
-        <SidebarMobileContainer className="flex ">
-          {children}
-        </SidebarMobileContainer>
+        <DialogTitle className="sr-only">Mobile navigation menu</DialogTitle>
+        <DialogDescription className="sr-only">
+          Navigate through the menu options using the buttons.
+        </DialogDescription>
+        {children}
       </SheetContent>
     </Sheet>
   );

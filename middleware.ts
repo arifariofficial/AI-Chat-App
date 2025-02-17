@@ -1,29 +1,14 @@
-import { NextResponse, NextRequest } from "next/server";
-import { getToken } from "next-auth/jwt";
+// middlewares.ts
 
-export async function middleware(req: NextRequest) {
-  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  const { pathname } = req.nextUrl;
+import { chain } from "@/middlewares/chain";
+import { withAuthMiddleware } from "@/middlewares/auth-middleware";
+import { withI18nMiddleware } from "@/middlewares/i18n-middleware";
 
-  // Allow unauthenticated access to "/", "/miesta", and login page "/auth/login"
-  const publicPaths = ["/", "/meista", "/yhteystiedot", "/chat", "/auth/login"];
-  if (publicPaths.includes(pathname)) {
-    return NextResponse.next();
-  }
-
-  // If user is not authenticated and trying to access a protected route
-  if (!token) {
-    return NextResponse.redirect(new URL("/auth/login", req.url));
-  }
-
-  // If user is authenticated and tries to access the login page, redirect them to "/chat"
-  if (token && pathname === "/auth/login") {
-    return NextResponse.redirect(new URL("/chat", req.url));
-  }
-
-  return NextResponse.next();
-}
+export default chain([withI18nMiddleware, withAuthMiddleware]);
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+  matcher: [
+    "/:path((?!api|_next/static|_next/image|assets).*)",
+    "/:path*{!.(png|jpg|jpeg|webp|svg|gif|ico|tiff|bmp)}",
+  ],
 };

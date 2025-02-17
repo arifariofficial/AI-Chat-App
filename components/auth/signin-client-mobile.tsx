@@ -1,37 +1,30 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { signIn } from "next-auth/react";
 import LoginIcon from "@mui/icons-material/Login";
 import { cn } from "@/lib/utils";
+import { Dictionary } from "@/lib/types";
 
 interface SignInButtonMobileProps {
   className?: string;
-  variant?:
-    | "nav"
-    | "outline"
-    | "default"
-    | "destructive"
-    | "secondary"
-    | "ghost"
-    | "link"
-    | "navMobile"
-    | null
-    | undefined;
+  spanClassName?: string;
+  dictionary: Dictionary;
 }
 
 const SignInButtonMobile = ({
   className,
-  variant,
+  spanClassName,
+  dictionary,
 }: SignInButtonMobileProps) => {
-  const handleSignOut = async () => {
-    await signIn();
-  };
-
   return (
-    <Button variant={variant} onClick={handleSignOut} className={cn(className)}>
-      <p className="text-2xl font-bold">Kirjaudu sisään</p>
-      <LoginIcon />
+    <Button
+      asChild
+      variant="navMobile"
+      className={cn(className)}
+      spanClassName={spanClassName}
+      iconRight={<LoginIcon />}
+    >
+      <p className="text-2xl font-bold">{dictionary.auth.signin}</p>
     </Button>
   );
 };

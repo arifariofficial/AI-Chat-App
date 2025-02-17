@@ -4,22 +4,11 @@ import typography from "@tailwindcss/typography";
 
 const config = {
   darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-  ],
+  content: ["./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
-    container: {
-      center: true,
-      padding: "0rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
+      scrollBehavior: "smooth",
       fontFamily: {
         sans: ["Arial", "ui-sans-serif", "system-ui", "sans-serif"],
       },
@@ -35,15 +24,14 @@ const config = {
         backgroundSecondary: "hsl(var(--background-secondary))",
         foreground: "hsl(var(--foreground))",
         foregroundNav: "hsl(var(--foreground-nav))",
+        navHover: "hsl(var(--nav-hover))",
         text: "hsl(var(--text))",
         boldBlue: "hsl(var(--bold-blue))",
-
         title: "hsl(var(--title))",
         subtitle: "hsl(var(--subtitle))",
         sectionTitle: "hsl(var(--section-title))",
         ctaTitle: "hsl(var(--cta-title))",
         link: "hsl(var(--link))",
-
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -75,32 +63,76 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
       keyframes: {
         "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
         },
         "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
         },
         "caret-blink": {
-          "0%,70%,100%": { opacity: "1" },
-          "20%,50%": { opacity: "0" },
+          "0%,70%,100%": {
+            opacity: "1",
+          },
+          "20%,50%": {
+            opacity: "0",
+          },
+        },
+        slideLeftToRight: {
+          "0%": {
+            transform: "translateX(-100%)",
+          },
+          "100%": {
+            transform: "translateX(0)",
+          },
+        },
+        slideRightToLeft: {
+          "0%": {
+            transform: "translateX(100%)",
+          },
+          "100%": {
+            transform: "translateX(0)",
+          },
+        },
+        slideUp: {
+          "0%": {
+            transform: "translateY(100%)",
+            opacity: "0",
+          },
+          "100%": {
+            transform: "translateY(0)",
+            opacity: "1",
+          },
+        },
+
+        loadingBar: {
+          "0%": { left: "-100%" },
+          "50%": { left: "0%" },
+          "100%": { left: "100%" },
         },
       },
       animation: {
+        "loading-bar": "loadingBar 2s ease-in-out infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
+        "slide-left-to-right": "slideLeftToRight 1s ease-in-out",
+        "slide-right-to-left": "slideRightToLeft 1s ease-in-out",
+        slideUp: "slideUp 0.5s ease-out",
       },
     },
   },
+
   plugins: [tailwindcssAnimate, typography],
 } satisfies Config;
 

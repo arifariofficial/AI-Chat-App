@@ -11,62 +11,122 @@ import { useState, useTransition } from "react";
 import { register } from "@/actions/register";
 import {
   Box,
+  Checkbox,
   CircularProgress,
+  FormControlLabel,
   IconButton,
   InputAdornment,
   TextField,
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { getMessageFromCode } from "@lib/utils";
-import { FormSucccess } from "@components/form-success";
-import { Button } from "@components/ui/button";
+import { getMessageFromCode } from "@/lib/utils";
+import { FormSucccess } from "@/components/form-success";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Dictionary } from "@/lib/types";
+import { Locale } from "@/i18n.config";
+import { LocalizedRoutes } from "@/lib/localized-routes";
+import { useSearchParams } from "next/navigation";
 
-export const RegisterForm = () => {
+interface RegisterFormProps {
+  className: string;
+  dictionary: Dictionary;
+  lang: Locale;
+  routes: LocalizedRoutes[Locale];
+}
+
+export const RegisterForm = ({
+  className,
+  dictionary,
+  lang,
+  routes,
+}: RegisterFormProps) => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const searchParams = useSearchParams();
+
+  const redirectEmail = searchParams?.get("email") || "";
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     mode: "onChange",
     defaultValues: {
-      email: "",
+      email: redirectEmail,
       password: "",
       confirmPassword: "",
     },
   });
 
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+    console.log("button clicked");
+    if (!agreedToTerms) {
+      setError("You must agree to the terms and conditions.");
+      return;
+    }
+
     setError("");
     setSuccess("");
 
     startTransition(() => {
       register(values)
         .then((result) => {
-          if (result?.type === "error") {
-            setError(getMessageFromCode(result.resultCode));
+          if (!result) {
+            setError("Unexpected error: No response from server.");
+            return;
           }
-          if (result?.type === "success") {
-            setSuccess(getMessageFromCode(result.resultCode));
-            window.location.href = "/";
+
+          if (result.type === "error") {
+            handleError(result.resultCode);
+            if (result.resultCode === "USER_ALREADY_EXISTS") {
+              setTimeout(() => {
+                window.location.href = `/${lang}${routes.auth.register}`;
+              }, 1000);
+            }
+            return;
+          }
+
+          if (result.type === "success") {
+            handleSuccess(result.resultCode);
           }
         })
         .catch((error) => {
+          console.error("Error during registration:", error);
           const message =
-            error.response?.data?.message || "Something went wrong";
+            error.response?.data?.message || "An unexpected error occurred.";
           setError(message);
         });
     });
   };
 
+  // Centralized success handler
+  const handleSuccess = (code: string) => {
+    const message = getMessageFromCode(code);
+    setSuccess(message);
+    // Notify the user and redirect after a short delay
+    setTimeout(() => {
+      window.location.href = `/${lang}${routes.home}`;
+    }, 1500);
+  };
+
+  // Centralized error handler
+  const handleError = (code: string) => {
+    const message = getMessageFromCode(code);
+    setError(message);
+  };
+
   return (
     <CardWrapper
-      headerLabel="Create an account"
-      backButtonLabel="Already have an account?"
-      backButtonHref="/auth/login"
+      className={className}
+      headerLabel={dictionary.registerForm.headerLabel}
       showLocal
+      backButtonLabel={dictionary.registerForm.alreadyHaveAccount}
+      backButtonHref={`/${lang}${routes.auth.signIn}`}
+      dictionary={dictionary}
+      lang={lang}
     >
       <Form {...form}>
         <Box component="form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
@@ -84,7 +144,7 @@ export const RegisterForm = () => {
                     size="small"
                     id="email"
                     name={name}
-                    label="Email Address"
+                    label={dictionary.registerForm.emailAddress}
                     autoFocus
                     autoComplete="current-email"
                     value={value}
@@ -121,7 +181,7 @@ export const RegisterForm = () => {
                     size="small"
                     id="password"
                     name="password"
-                    label="Password"
+                    label={dictionary.registerForm.password}
                     value={value}
                     onChange={onChange}
                     onBlur={onBlur}
@@ -144,6 +204,7 @@ export const RegisterForm = () => {
                         <InputAdornment position="end">
                           <IconButton
                             aria-label="toggle password visibility"
+                            className="hover:bg-inherit hover:text-inherit"
                             onClick={() => setShowPassword(!showPassword)}
                           >
                             {showPassword ? (
@@ -174,8 +235,8 @@ export const RegisterForm = () => {
                     size="small"
                     id="confirmPassword"
                     name="confirmPassword"
-                    label="Confirm Password"
-                    autoComplete="current-password"
+                    type="password"
+                    label={dictionary.registerForm.confirmPassword}
                     value={value}
                     onChange={onChange}
                     onBlur={onBlur}
@@ -187,22 +248,39 @@ export const RegisterForm = () => {
                     }
                     helperText={
                       form.getFieldState("confirmPassword").isTouched &&
-                      form.formState.errors.confirmPassword
-                        ? form.formState.errors.confirmPassword.message
-                        : null
+                      form.formState.errors.confirmPassword?.message
                     }
                   />
                 </FormControl>
               </FormItem>
             )}
           />
-          <FormError message={error} />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={agreedToTerms}
+                onChange={(e) => setAgreedToTerms(e.target.checked)}
+              />
+            }
+            label={
+              <div className="text-sm">
+                {dictionary.registerForm.agreeToTerms}
+                <Link
+                  href={`/${lang}${routes.terms}`}
+                  className="ml-1 underline"
+                >
+                  {dictionary.registerForm.termsAndConditions}
+                </Link>
+              </div>
+            }
+          />
+          <FormError message={error} className="mt-2" />
           <FormSucccess message={success} />
           <Button variant="outline" type="submit" className="mt-4 w-full">
             {isPending ? (
               <CircularProgress size="20px" className="text-[#f5efd1]" />
             ) : (
-              "Create"
+              dictionary.registerForm.submit
             )}
           </Button>
         </Box>

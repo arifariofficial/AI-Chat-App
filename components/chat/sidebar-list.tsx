@@ -1,14 +1,21 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { ClearHistory } from "./clear-history";
 import { SidebarItems } from "./sidebar-items";
-import { useChats } from "@lib/hooks/useChats";
-import { clearChats } from "@data/chat";
+import { useChat } from "@/lib/hooks/use-chat";
+import { clearChats } from "@/data/chat";
 import { useSession } from "next-auth/react";
+import { Locale } from "@/i18n.config";
+import { LocalizedRoutes } from "@/lib/localized-routes";
 
-export function SidebarList() {
-  const { chats, loadChats } = useChats();
+interface SidebarListProps {
+  lang: Locale;
+  routes: LocalizedRoutes[Locale];
+}
+
+export function SidebarList({ lang, routes }: SidebarListProps) {
+  const { chats, loadChats } = useChat();
 
   const { data: session } = useSession();
 
@@ -27,19 +34,20 @@ export function SidebarList() {
   }
 
   return (
-    <div className="flex flex-1 flex-col overflow-hidden">
-      <div className="flex-1 overflow-auto">
+    <div className="flex h-screen flex-col overflow-scroll">
+      {/* Chat list section */}
+      <div className="flex-1">
         {chats?.length ? (
-          <div className="space-y-2 px-2">
-            <SidebarItems chats={chats} />
+          <div className="mx-2 h-full space-y-2 overflow-y-auto pb-[400px]">
+            <SidebarItems chats={chats} lang={lang} routes={routes} />
           </div>
         ) : (
           <div className="p-8 text-center">
-            <p className="text-sm text-muted-foreground">No chat history</p>
+            <p className="text-sm text-muted-foreground">NO Chat History</p>
           </div>
         )}
       </div>
-      <div className="flex items-center justify-between p-4">
+      <div className="absolute bottom-0 flex w-full items-center justify-between bg-backgroundSecondary p-4">
         <ClearHistory
           session={session}
           clearChats={clearChats}

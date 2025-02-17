@@ -1,0 +1,329 @@
+---
+- name: Install Docker, Docker Compose, Git, Jenkins, GitLab, and Java on Debian GCP VM
+  hosts: gcp-vm
+  become: true
+  vars:
+    # Set the release codename for Debian
+    release_codename: bullseye
+
+  tasks:
+    # Update apt repository cache
+    - name: Update apt repository cache
+      apt:
+        update_cache: yes
+        force_apt_get: yes
+
+    # Install required packages
+    - name: Install required packages
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - git
+          - gnupg
+          - lsb-release
+        state: present
+        update_cache: yes
+
+    # Install Java
+    - name: Install Java
+      apt:
+        name: openjdk-17-jdk
+        state: present
+
+    # Verify Java installation
+    - name: Verify Java installation
+      command: java -version
+      register: java_version_output
+
+    - name: Print Java version
+      debug:
+        msg: "Java Version Installed: {{ java_version_output.stderr_lines }}"
+
+    # Ensure keyrings directory exists
+    - name: Create keyrings directory
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: "0755"
+
+    # Add Docker repository
+    - name: Add Docker repository
+      copy:
+        dest: /etc/apt/sources.list.d/docker.list
+        content: |
+          deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian {{ release_codename }} stable
+
+    # Add Docker GPG Key
+    - name: Add Docker GPG Key
+      shell: |
+        curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+      args:
+        creates: /etc/apt/keyrings/docker.gpg
+
+    # Update APT cache
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+        force_apt_get: yes
+
+    # Install Docker Engine
+    - name: Install Docker Engine
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: latest
+
+    # Add user to Docker group
+    - name: Add user to the Docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+
+    # Enable and start Docker service
+    - name: Enable and start Docker service
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+
+    # Install Docker Compose
+    - name: Download Docker Compose
+      get_url:
+        url: "https://github.com/docker/compose/releases/download/v2.25.0/docker-compose-linux-{{ ansible_architecture }}"
+        dest: /usr/local/bin/docker-compose
+        mode: "0755"
+
+    - name: Verify Docker Compose installation
+      shell: docker-compose --version
+      register: docker_compose_version
+
+    - name: Print Docker Compose version
+      debug:
+        msg: "{{ docker_compose_version.stdout }}"
+
+- name: Set up Jenkins with custom user
+  hosts: all
+  become: yes
+  vars:
+    jenkins_user: "sipeai8" # Change Jenkins user to sipeai8
+  tasks:
+    # Download Jenkins GPG key in ASCII format
+    - name: Download Jenkins GPG key
+      ansible.builtin.get_url:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+        dest: /usr/share/keyrings/jenkins-keyring.asc
+        mode: "0644"
+
+    # Add Jenkins repository
+    - name: Add Jenkins repository
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
+        filename: "jenkins.list"
+        state: present
+        update_cache: yes
+
+    # Install Jenkins
+    - name: Install Jenkins
+      ansible.builtin.apt:
+        name: jenkins
+        state: latest
+
+    # Stop Jenkins service
+    - name: Stop Jenkins service
+      ansible.builtin.systemd:
+        name: jenkins
+        state: stopped
+
+    # Change ownership of Jenkins directories to the custom user
+    - name: Update Jenkins file permissions
+      ansible.builtin.file:
+        path: "{{ item }}"
+        owner: "{{ jenkins_user }}"
+        group: "{{ jenkins_user }}"
+        recurse: yes
+      loop:
+        - /var/lib/jenkins
+        - /var/cache/jenkins
+        - /var/log/jenkins
+
+    # Update Jenkins service configuration to use the custom user
+    - name: Update Jenkins service configuration
+      ansible.builtin.lineinfile:
+        path: /lib/systemd/system/jenkins.service
+        regexp: "^User=.*"
+        line: "User={{ jenkins_user }}"
+        backup: yes
+
+    - name: Update Jenkins service group configuration
+      ansible.builtin.lineinfile:
+        path: /lib/systemd/system/jenkins.service
+        regexp: "^Group=.*"
+        line: "Group={{ jenkins_user }}"
+        backup: yes
+
+    # Reload systemd daemon
+    - name: Reload systemd
+      ansible.builtin.command:
+        cmd: systemctl daemon-reload
+
+    # Enable and start Jenkins service
+    - name: Enable and start Jenkins service
+      ansible.builtin.systemd:
+        name: jenkins
+        enabled: yes
+        state: started
+
+    # Add Jenkins user to Docker group
+    - name: Add Jenkins user to Docker group
+      ansible.builtin.user:
+        name: "{{ jenkins_user }}"
+        groups: docker
+        append: yes
+
+    # Install GitLab dependencies
+    - name: Install GitLab dependencies
+      apt:
+        name:
+          - curl
+          - tzdata
+          - openssh-server
+        state: present
+
+    # Download GitLab GPG key
+    - name: Download GitLab GPG key and store in keyrings
+      shell: |
+        curl -fsSL https://packages.gitlab.com/gitlab/gitlab-ce/gpgkey | gpg --dearmor -o /etc/apt/keyrings/gitlab.gpg
+      args:
+        creates: /etc/apt/keyrings/gitlab.gpg
+
+    # Add GitLab repository
+    - name: Add GitLab repository
+      copy:
+        dest: /etc/apt/sources.list.d/gitlab-ce.list
+        content: |
+          deb [signed-by=/etc/apt/keyrings/gitlab.gpg] https://packages.gitlab.com/gitlab/gitlab-ce/debian/ bullseye main
+
+    # Update APT cache
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+        force_apt_get: yes
+
+    # Install GitLab
+    - name: Install GitLab CE
+      apt:
+        name: gitlab-ce
+        state: present
+        force_apt_get: yes
+        allow_unauthenticated: no
+      environment:
+        DEBIAN_FRONTEND: noninteractive
+
+    - name: Install glab CLI
+      shell: |
+        curl -fsSL https://raw.githubusercontent.com/profclems/glab/trunk/scripts/install.sh | bash
+      args:
+        creates: /usr/bin/glab
+
+    # Reconfigure GitLab
+    - name: Reconfigure GitLab
+      command: gitlab-ctl reconfigure
+      args:
+        creates: /etc/gitlab/gitlab.rb
+
+# Install pexpect library
+- name: Install pexpect library
+  hosts: all
+  become: true
+  tasks:
+    # Step 1: Ensure Python and pip are installed
+    - name: Ensure Python 3 and pip are installed
+      apt:
+        name:
+          - python3
+          - python3-pip
+        state: present
+        update_cache: yes
+
+    # Step 2: Install the pexpect library
+    - name: Install pexpect
+      pip:
+        name: pexpect
+        executable: pip3
+
+# Galb CLI Authentication
+- name: Authenticate glab CLI
+  hosts: all
+  become: true
+  become_user: sipeai8 # Switch to the sipeai8 user
+  tasks:
+    - name: Debug .env variables
+      debug:
+        msg: "The personal access token is {{ PERSONAL_ACCESS_TOKEN }}"
+
+    - name: Log in to glab CLI non-interactively
+      shell: glab auth login --hostname gitlab.com --token "{{ PERSONAL_ACCESS_TOKEN }}"
+      register: glab_auth_result
+
+    - name: Print Authentication Result
+      debug:
+        msg: "glab Authentication Result: {{ glab_auth_result.stdout }}"
+
+    #  Clone the repository
+    - name: Clone the repository
+      shell: |
+        git clone https://oauth2:{{ PERSONAL_ACCESS_TOKEN }}@gitlab.com/sipe3/sipe-frontend.git /home/{{ ansible_user }}/sipe-frontend
+
+# Git identity configuration
+- name: Configure Git user settings
+  hosts: all
+  become: yes
+  become_user: sipeai8 # Switch to the sipeai8 user
+  vars:
+    git_user_email: "ariful6@yahoo.com"
+    git_user_name: "Ariful Islam"
+  tasks:
+    - name: Set global Git user email
+      ansible.builtin.command:
+        cmd: git config --global user.email "{{ git_user_email }}"
+
+    - name: Set global Git user name
+      ansible.builtin.command:
+        cmd: git config --global user.name "{{ git_user_name }}"
+    - name: Copy environment file to the remote server
+      ansible.builtin.copy:
+        src: "{{ local_env_file }}"
+        dest: "{{ remote_env_path }}"
+        owner: sipeai8
+        group: sipeai8
+        mode: "0644"
+
+# Install SSL certificate
+- name: Install Certbot and Obtain SSL Certificate
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure Certbot is installed
+      apt:
+        name: certbot
+        state: present
+        update_cache: yes
+
+    - name: Obtain SSL certificate using Certbot
+      command: >
+        certbot certonly --standalone
+        -d {{ domain }}
+        --email {{ email }}
+        --non-interactive
+        --agree-tos
+      register: certbot_output
+
+    - name: Debug Certbot output
+      debug:
+        var: certbot_output.stdout

@@ -17,14 +17,24 @@ import {
 import { useLocalStorage } from "@/lib/hooks/use-local-storage";
 import { type Chat } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { Locale } from "@/i18n.config";
+import { LocalizedRoutes } from "@/lib/localized-routes";
 
 interface SidebarItemProps {
   index: number;
   chat: Chat;
   children: React.ReactNode;
+  lang: Locale;
+  routes: LocalizedRoutes[Locale];
 }
 
-export function SidebarItem({ index, chat, children }: SidebarItemProps) {
+export function SidebarItem({
+  index,
+  chat,
+  children,
+  lang,
+  routes,
+}: SidebarItemProps) {
   const pathname = usePathname();
 
   const isActive = pathname === chat.path;
@@ -32,6 +42,8 @@ export function SidebarItem({ index, chat, children }: SidebarItemProps) {
   const shouldAnimate = index === 0 && isActive && newChatId;
 
   if (!chat?.id) return null;
+
+  console.log(`/${lang}${routes.chat}/${chat.id}`);
 
   return (
     <motion.div
@@ -53,7 +65,7 @@ export function SidebarItem({ index, chat, children }: SidebarItemProps) {
         ease: "easeIn",
       }}
     >
-      <div className="absolute left-2 top-1 flex size-6 items-center justify-center">
+      <div className="absolute left-2 top-1 flex size-6 items-center justify-center overflow-scroll">
         {chat.sharePath ? (
           <Tooltip delayDuration={500}>
             <TooltipTrigger
@@ -62,14 +74,14 @@ export function SidebarItem({ index, chat, children }: SidebarItemProps) {
             >
               <IconUsers className="mr-2 mt-1 text-zinc-500" />
             </TooltipTrigger>
-            <TooltipContent>This is a shared chat.</TooltipContent>
+            <TooltipContent>Tämä on jaettu keskustelu</TooltipContent>
           </Tooltip>
         ) : (
           <IconMessage className="mr-2 mt-1 text-zinc-500" />
         )}
       </div>
       <Link
-        href={chat.path}
+        href={`/${lang}${routes.chat}/${chat.id}`}
         className={cn(
           buttonVariants({ variant: "ghost" }),
           "group w-full px-8 transition-colors hover:bg-zinc-200/40 dark:hover:bg-zinc-300/10",

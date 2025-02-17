@@ -1,0 +1,633 @@
+{
+  "navigation": {
+    "home": "Kotisivu",
+    "sipeChat": "SipeChat",
+    "aboutUs": "Meistä",
+    "contact": "Ota yhteyttä"
+  },
+  "theme": {
+    "theme": "Teema",
+    "light": "Vaalea",
+    "dark": "Tumma",
+    "system": "Järjestelmä"
+  },
+  "language": {
+    "en": "English",
+    "fi": "Suomi",
+    "sv": "Svenska"
+  },
+  "metadata": {
+    "homePage": {
+      "title": "Innovoimassa tulevaisuutta",
+      "description": "Sipe AI tarjoaa älykkäitä ratkaisuja auttamaan ihmisiä löytämään ja hyödyntämään oikeuksiaan tehokkaasti."
+    }
+  },
+  "notifications": {
+    "loading": "Ladataan..."
+  },
+  "auth": {
+    "email": "Sähköposti",
+    "password": "Salasana",
+    "signup": "Rekisteröidy",
+    "signin": "Kirjaudu",
+    "signout": "Kirjaudu ulos"
+  },
+  "login": {
+    "headerLabel": "Tervetuloa",
+    "backButtonLabel": "Eikö sinulla ole tiliä?",
+    "ariaLabelPasswordToggle": "Vaihda salasanan näkyvyyttä",
+    "forgotPassword": "Unohditko salasanan?",
+    "twoFactorConfirmButtonLabel": "Vahvista",
+    "orContinueButtonLabel": "Tai jatka seuraavilla"
+  },
+  "registerForm": {
+    "headerLabel": "Luo tili",
+    "emailAddress": "Sähköpostiosoite",
+    "password": "Salasana",
+    "confirmPassword": "Vahvista salasana",
+    "agreeToTerms": "Hyväksyn",
+    "termsAndConditions": "ehdot ja edellytykset",
+    "submit": "Luo",
+    "alreadyHaveAccount": "Onko sinulla jo tili?",
+    "login": "Kirjaudu sisään",
+    "successMessage": "Rekisteröinti onnistui!",
+    "errorMessage": "Jotain meni pieleen. Yritä uudelleen."
+  },
+  "logout": {
+    "headerLabel": "Olet kirjautunut ulos"
+  },
+  "resetPassword": {
+    "headerLabel": "Salasanan nollaus",
+    "resetButtonLabel": "Nollaa salasana",
+    "backButtonLabel": "Takaisin kirjautumiseen",
+    "emailLabel": "Sähköpostiosoite",
+    "sendLinkLabel": "Lähetä palautuslinkki"
+  },
+  "validation": {
+    "emailRequired": "Sähköpostiosoitetta ei ole syötetty",
+    "emailInvalidTitle": "Virheellinen sähköposti",
+    "emailInvalid": "Anna kelvollinen sähköpostiosoite.",
+    "emailExists": "Olet jo rekisteröitynyt tällä sähköpostilla.",
+    "emailAlreadyLoggedIn": "Olet jo kirjautunut sisään. Kirjaudu ulos rekisteröityäksesi uudella sähköpostilla."
+  },
+
+  "input": {
+    "cancelButtonLabel": "Peruuta",
+    "saveButtonLabel": "Tallenna",
+    "updateButtonLabel": "Päivitä",
+    "email": "Sähköposti",
+    "emailAddress": "Sähköpostiosoite",
+    "emailPlaceholder": "Anna sähköpostiosoitteesi"
+  },
+  "image": {
+    "imageAlt": "Nimi ei saatavilla",
+    "imageError": "Ei kuvaa"
+  },
+  "userButton": {
+    "noName": "Ei nimeä",
+    "account": "Tili"
+  },
+  "notFound": {
+    "title": "Sivua ei löytynyt",
+    "description": "Valitettavasti emme löytäneet etsimääsi resurssia.",
+    "returnHome": "Palaa kotiin"
+  },
+  "profile": {
+    "account": {
+      "header": "Tili",
+      "description": "Hallitse tilisi asetuksia ja tietoja.",
+      "profile": "Profiili",
+      "name": "Nimi",
+      "nameNotAvailable": "Nimi ei saatavilla",
+      "email": "Sähköposti",
+      "emailButtonConfirm": "Vahvista sähköposti",
+      "emailButtonConfirmation": "Vahvistettu"
+    },
+    "subscription": {
+      "header": "Tilaukset",
+      "description": "Hallitse maksuasetuksiasi",
+      "selectHeader": "Osta hyvityksiä",
+      "selectAmount": "Määrä",
+      "selectBuy": "Osta"
+    },
+    "security": {
+      "header": "Turvallisuus",
+      "description": "Hallitse turvallisuusasetuksiasi",
+      "twoFactorTitle": "Kaksivaiheinen tunnistautuminen",
+      "twoFactorTooltip": "Kun tämä toiminto on aktivoitu, kertakäyttöinen salasana (OTP) lähetetään käyttäjän sähköpostiosoitteeseen turvallisen kirjautumisen mahdollistamiseksi.",
+      "twoFactorEnable": "Ota käyttöön",
+      "twoFactorDisable": "Poista käytöstä"
+    }
+  },
+
+  "chatPage": {
+    "header": "Keskustelu",
+    "description": "Lakisääteinen tekoälyassistentti"
+  },
+  "chatModal": {
+    "signIn": "Kirjaudu sisään",
+    "okButton": "Ok!",
+    "createAccount": "Luo ilmainen tili",
+    "clickHere": "Klikkaa tästä"
+  },
+  "hero": {
+    "heading": "Innovating the Future with Intelligent Solutions",
+    "description": "Olemme vuonna 2024 perustettu yhtiö, joka pohjautuu tekoälyn avulla tehtävään tiedonhakuun. Meidän tavoitteena on auttaa ihmisiä löytämään tietoa ja hyödyntämään heidän oikeuksiaan tehokkaammin.",
+    "inputPlaceholder": "Anna sähköpostiosoitteesi",
+    "button": { "title": "Rekisteröidy" },
+    "termsAndConditions": {
+      "text": "Rekisteröitymällä hyväksyt",
+      "link": "Käyttöehdot"
+    }
+  },
+  "features": {
+    "heading": "Tutustu oikeuksiisi innovatiivisella tekoälymme avulla",
+    "description": "Kehittynyt tekoälysovelluksemme helpottaa oikeuksiesi ymmärtämistä eri tilanteissa. Vain muutamalla napautuksella saat juuri sinun tarpeisiisi räätälöityä tietoa."
+  },
+  "featuresList": {
+    "heading": "Löydä tekoälymme hyödyt",
+    "description": "Tekoälysovelluksemme yksinkertaistaa oikeuksiesi ymmärtämistä. Vain muutamalla napautuksella voit saada tärkeää tietoa, joka on räätälöity tilanteeseesi.",
+    "buttonText": "Lisätietoja",
+    "notification": "Olet jo kirjautunut sisään.",
+    "features": [
+      {
+        "title": "Vaivaton pääsy tärkeään tietoon",
+        "description": "Saat välittömän pääsyn elintärkeään tietoon helposti.",
+        "imageAlt": "Ominaisuus 1 paikkakuva"
+      },
+      {
+        "title": "Räätälöity analyysi ainutlaatuiseen tilanteeseesi",
+        "description": "Sovelluksemme tarjoaa henkilökohtaisia oivalluksia tilanteesi perusteella.",
+        "imageAlt": "Ominaisuus 2 paikkakuva"
+      },
+      {
+        "title": "Pysy ajan tasalla ajankohtaisilla tiedoilla",
+        "description": "Pääsy luotettavaan ja ajankohtaiseen tietoon aina tarvittaessa.",
+        "imageAlt": "Ominaisuus 3 paikkakuva"
+      }
+    ]
+  },
+  "faqSection": {
+    "heading": "UKK",
+    "description": "Löydä vastauksia yleisiin kysymyksiin palveluistamme ja AI-sovelluksesta.",
+    "contactUs": "Ota yhteyttä",
+    "questions": [
+      {
+        "title": "Mikä on palvelunne?",
+        "answer": "Tarjoamme tietoa oikeuksista erilaisissa tapauksissa. AI-sovelluksemme yksinkertaistaa prosessia toimittamalla räätälöityjä näkemyksiä. Olipa kyseessä liikenneonnettomuus tai jokin muu tilanne, autamme sinua ymmärtämään oikeutesi."
+      },
+      {
+        "title": "Voinko saada tukea?",
+        "answer": "Ehdottomasti! Asiakaspalvelutiimimme tarjoaa tukea. Voit ottaa yhteyttä sovelluksen tai verkkosivustomme kautta milloin tahansa."
+      },
+      {
+        "title": "Miten sovellus toimii?",
+        "answer": "Sovelluksemme kerää asiaan liittyviä tietoja tapauksestasi. Se analysoi tiedot ja tiedottaa sinulle oikeuksistasi. Tämä varmistaa, että sinulla on tarvittavat tiedot tehdäksesi tietoon perustuvia päätöksiä."
+      },
+      {
+        "title": "Entä jos minulla on lisää kysymyksiä?",
+        "answer": "Jos sinulla on lisäkysymyksiä, älä epäröi ottaa meihin yhteyttä. Olemme täällä auttamassa ja selventämässä asioita. Ymmärryksesi on meille tärkeintä."
+      },
+      {
+        "title": "Onko palvelu ilmainen?",
+        "answer": "Kyllä, ensimmäinen konsultaatio ja AI-sovelluksen käyttö ovat ilmaisia. Uskomme, että tiedon tarjoaminen ei saa olla taloudellinen este. Lisäpalveluista voi aiheutua kustannuksia, jotka ilmoitamme selkeästi."
+      },
+      {
+        "title": "Onko tietoni turvassa?",
+        "answer": "Kyllä, otamme tietoturvan erittäin vakavasti. Tietosi on suojattu alan standardin mukaisilla salaustoimenpiteillä ja yksityisyydensuojalla. Emme jaa tietojasi ilman suostumustasi."
+      },
+      {
+        "title": "Kuka voi käyttää palvelua?",
+        "answer": "Palvelumme on suunnattu kaikille, jotka etsivät tietoa oikeuksistaan. Olipa kyseessä liikenneonnettomuus tai muu oikeudellinen asia, olemme apunasi. Sovelluksemme on käyttäjäystävällinen ja kaikkien saatavilla."
+      },
+      {
+        "title": "Kuinka usein tietoja päivitetään?",
+        "answer": "Sovelluksemme päivittää tietoja säännöllisesti varmistaakseen ajantasaisuuden. Seuraamme lakimuutoksia ja mukautamme sisältöämme tarpeen mukaan. Näin varmistamme, että saat aina ajankohtaista tietoa."
+      },
+      {
+        "title": "Kuinka pääsen alkuun?",
+        "answer": "Aloittaminen on helppoa! Lataa sovelluksemme ja luo tili. Seuraa ohjeita, lisää tapaustietosi ja löydä oikeutesi."
+      },
+      {
+        "title": "Voinko antaa palautetta?",
+        "answer": "Otamme mielellämme vastaan palautetta! Se auttaa meitä parantamaan palveluitamme ja sovelluksen toimivuutta. Voit lähettää palautetta sovelluksen tai verkkosivustomme kautta."
+      }
+    ],
+    "footerHeading": "Onko vielä kysyttävää?",
+    "footerDescription": "Ota yhteyttä milloin tahansa saadaksesi apua.",
+    "button": {
+      "title": "Ota yhteyttä",
+      "variant": "outline"
+    }
+  },
+  "benefits": {
+    "heading": "Tutustu tekoälyn tarjoamiin mullistaviin oikeusetuihin.",
+    "description": "Tekoälysovelluksemme yksinkertaistaa oikeuksiesi ymmärtämistä ja säästää arvokasta aikaa. Tarkalla tiedolla voit edetä tapaukseesi luottavaisesti.",
+    "subHeadings": [
+      {
+        "title": "Ajansäästö",
+        "description": "Saat välittömän pääsyn tärkeään tietoon ilman laajaa tutkimusta."
+      },
+      {
+        "title": "Tarkat tiedot",
+        "description": "Luota tekoälyymme saadaksesi tarkkaa, ajan tasalla olevaa tietoa, joka on räätälöity tilanteeseesi."
+      }
+    ]
+  },
+  "ctaSection": {
+    "heading": "Voimaannu työkalullamme",
+    "description": "Tutustu oikeuksiisi ja etuihisi vaivattomasti. Kokeile sovellustamme ja saat välittömästi tärkeää etujasi koskevaa tietoa.",
+    "button1": "Kokeile SipeChatia",
+    "button2": "Lisätietoja"
+  },
+
+  "testimonialSection": {
+    "heading": "Asiakaspalautteet",
+    "description": "Tämä sovellus mullisti oikeuksieni ymmärtämisen.",
+    "testimonials": [
+      {
+        "numberOfStars": 5,
+        "quote": "\"Tekoälysovelluksen avulla tunsin itseni voimaantuneeksi ja informoiduksi.\"",
+        "avatar": {
+          "src": "/assets/testimonial-1.webp",
+          "alt": "Testimonialin avatar 1"
+        },
+        "name": "Sami Mäkinen",
+        "position": "Lääkäri, GreenLife",
+        "logo": {
+          "src": "/assets/company-1.webp",
+          "alt": "Webflow-logo 1"
+        }
+      },
+      {
+        "numberOfStars": 5,
+        "quote": "\"En tiennyt, että minulla oli niin paljon vaihtoehtoja!\"",
+        "avatar": {
+          "src": "/assets/testimonial-2.webp",
+          "alt": "Testimonialin avatar 2"
+        },
+        "name": "Juuso Montonen",
+        "position": "Kitaransoiton opettaja, Kitarakoutsi, Inc.",
+        "logo": {
+          "src": "/assets/company-2.webp",
+          "alt": "Webflow-logo 2"
+        }
+      }
+    ]
+  },
+  "contactSection": {
+    "tagline": "Ota yhteyttä",
+    "heading": "Yhteystiedot",
+    "description": "Olemme täällä auttamassa sinua kysymyksissäsi.",
+    "contacts": [
+      {
+        "icon": "BiEnvelope",
+        "title": "Sähköposti",
+        "description": "Ota yhteyttä osoitteessa",
+        "link": {
+          "label": "info@sipe.ai",
+          "url": "mailto:info@sipe.ai"
+        }
+      },
+
+      {
+        "icon": "BiMap",
+        "title": "Toimisto",
+        "description": "Postiljooninkatu 3A 8, Helsinki 00240, Suomi",
+        "button": {
+          "title": "Hae reittiohjeet"
+        }
+      }
+    ]
+  },
+  "aboutUs": {
+    "tagline": "Innovoi",
+    "heading": "Tiimimme",
+    "description": "Tutustu innovatiivisten ratkaisujemme nerokkaisiin mieliin.",
+    "footer": {
+      "heading": "Etsimme tekijöitä!",
+      "description": "Liity dynaamiseen tiimiimme ja muovaa tulevaisuutta.",
+      "button": {
+        "title": "Avoimet paikat"
+      }
+    },
+    "teamMembers": [
+      {
+        "name": "Elina Eriksson",
+        "jobTitle": "Toimitusjohtaja & Perustaja",
+        "email": "elina.eriksson@sipe.ai",
+        "mobile": "+358 40 7798881",
+        "description": "Innokas hyödyntämään tekoälyä ratkaisemaan todellisia haasteita ja edistämään innovaatioita.",
+        "image": {
+          "src": "/assets/Elina.jpeg",
+          "alt": "Elina Eriksson"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/elina-eriksson/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Sampo Kaarenmaa",
+        "jobTitle": "Tuotepäällikkö & Kehittäjä",
+        "email": "sampo.kaarenmaa@sipe.ai",
+        "mobile": "+358 40 5800869",
+        "description": "Keskittynyt luomaan käyttäjäystävällisiä tuotteita, jotka parantavat asiakaskokemusta.",
+        "image": {
+          "src": "/assets/Sampo.jpeg",
+          "alt": "Sampo Kaarenmaa"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/sampo-kaarenmaa-75a76587/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Mia Almgren",
+        "jobTitle": "Markkinointijohtaja",
+        "email": "mia.almgren@sipe.ai",
+        "mobile": "+358 40 8296048",
+        "description": "Omistautunut brändin rakentamiseen ja yhteisön sitouttamiseen.",
+        "image": {
+          "src": "/assets/Mia.jpeg",
+          "alt": "Mia Almgren"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/mia-almgren-1327a9b8/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Amir Ingher",
+        "jobTitle": "Ohjelmistoinsinööri",
+        "email": "amir.ingher@sipe.ai",
+        "mobile": "+358 40 3012289",
+        "description": "Kokenut ohjelmistoinsinööri, jolla on vahva intohimo innovaatioihin ja tekoälyyn.",
+        "image": {
+          "src": "/assets/Amir.jpg",
+          "alt": "Amir Ingher"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/amir-ingher-ba24a7129/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Ariful Islam",
+        "jobTitle": "Full Stack -insinööri",
+        "email": "ariful.islam@sipe.ai",
+        "mobile": "+358 40 555699",
+        "description": "Full Stack -insinööri, jolla on asiantuntemusta tekoälystä ja intohimoa skaalautuvien, älykkäiden ratkaisujen luomiseen.",
+        "image": {
+          "src": "/assets/Ariful.jpeg",
+          "alt": "Ariful Islam",
+          "className": "scale-[1.4]"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/arifariofficial/",
+            "icon": "linkedin"
+          }
+        ]
+      }
+    ]
+  },
+  "contactForm": {
+    "title": "Ota yhteyttä",
+    "description": "Haluamme kuulla sinusta. Täytä alla oleva lomake, niin otamme sinuun yhteyttä mahdollisimman pian.",
+    "nameLabel": "Nimi",
+    "namePlaceholder": "Nimesi",
+    "emailLabel": "Sähköposti",
+    "emailPlaceholder": "Sähköpostisi",
+    "messageLabel": "Viesti",
+    "messagePlaceholder": "Viesti",
+    "submitButton": "Lähetä viesti",
+    "sendingButton": "Lähetetään...",
+    "successToastTitle": "Viesti lähetetty onnistuneesti!",
+    "successToastDescription": "Otamme sinuun pian yhteyttä.",
+    "errorToastTitle": "Virhe",
+    "errorToastDescription": "Jokin meni pieleen. Yritä uudelleen myöhemmin."
+  },
+  "footer": {
+    "logo": {
+      "url": "#",
+      "src": "/assets/Logo-main.svg",
+      "alt": "Logokuva"
+    },
+    "newsletterHeading": "Liity uutiskirjeeseemme",
+    "newsletterDescription": "Olemme täällä auttamassa sinua kysymyksissäsi.",
+    "inputPlaceholder": "Syötä sähköpostiosoitteesi",
+    "button": {
+      "title": "Tilaa",
+      "variant": "outline",
+      "size": "sm"
+    },
+    "termsAndConditions": {
+      "text": "Tilaamalla hyväksyt",
+      "link": "Tietosuojakäytäntömme"
+    },
+    "columnLinks": [
+      {
+        "title": "Pikalinkit",
+        "links": [
+          { "title": "Meistä", "url": "aboutUs" },
+          { "title": "Ota yhteyttä", "url": "contact" },
+          { "title": "Usein kysytyt kysymykset", "url": "/FAQs" },
+          { "title": "Blogi", "url": "/blog" }
+        ]
+      },
+      {
+        "title": "Resurssit",
+        "links": [
+          { "title": "Oppaat", "url": "#" },
+          { "title": "Päivitykset", "url": "#" },
+          { "title": "Asiakaspalautteet", "url": "#" },
+          { "title": "Urat", "url": "#" },
+          { "title": "Yhteistyö", "url": "#" }
+        ]
+      },
+      {
+        "title": "Laillisuus",
+        "links": [
+          { "title": "Tietosuojakäytäntö", "url": "privacy" },
+          { "title": "Käyttöehdot", "url": "terms" },
+          { "title": "Evästekäytäntö", "url": "cookiePolicy" },
+          { "title": "Käyttäjäsopimus", "url": "userAgreement" }
+        ]
+      },
+      {
+        "title": "Seuraa meitä",
+        "links": [
+          { "title": "Facebook", "url": "#" },
+
+          {
+            "title": "LinkedIn",
+            "url": "https://www.linkedin.com/company/sipeai/posts/?feedView=all"
+          },
+          { "title": "Instagram", "url": "https://www.instagram.com/sipe.ai/" }
+        ]
+      },
+      {
+        "title": "Yhteystiedot",
+        "links": [{ "title": "Lähetä sähköpostia", "url": "info@sipe.ai" }]
+      }
+    ],
+    "socialMediaLinks": [
+      { "url": "#", "icon": "BiLogoFacebookCircle" },
+      {
+        "url": "https://www.instagram.com/sipe.ai/"
+      },
+
+      {
+        "url": "https://www.linkedin.com/company/sipeai/posts/?feedView=all"
+      }
+    ],
+    "footerText": "© 2025 SipeAI. Kaikki oikeudet pidätetään.",
+    "footerLinks": [
+      { "title": "Tietosuojakäytäntö", "url": "privacy" },
+      { "title": "Käyttöehdot", "url": "terms" },
+      { "title": "Evästeasetukset", "url": "cookiePolicy" }
+    ]
+  },
+  "cookieConsent": {
+    "message": "Käytämme evästeitä parantaaksemme verkkosivustoa, analysoidaksemme käyttöä ja tukeaksemme markkinointia.",
+    "manageSettings": "Hallinnoi asetuksia",
+    "deleteCookies": "Poista kaikki evästeet",
+    "acceptAllCookies": "Hyväksy kaikki evästeet",
+    "cookieSettings": "Evästeasetukset",
+    "cookieSettingsDescription": "Mukauta evästeasetuksia. Välttämättömät evästeet ovat aina käytössä, jotta verkkosivusto toimii oikein.",
+    "readMore": "Lue lisää",
+    "essential": "Välttämättömät",
+    "alwaysOn": "Aina päällä",
+    "personalized": "Personoidut",
+    "marketing": "Markkinointi",
+    "analytics": "Analytiikka"
+  },
+  "cookiePolicy": {
+    "title": "Evästekäytäntö",
+    "introduction": "on sitoutunut suojaamaan yksityisyyttäsi ja varmistamaan läpinäkyvyyden keräämämme evästedatan osalta. Tämä evästekäytäntö selittää, miten ja miksi käytämme evästeitä, minkä tyyppisiä evästeitä käytämme ja valintasi evästeiden hallintaan liittyen.",
+    "whatAreCookies": {
+      "title": "Mitä evästeet ovat?",
+      "description": "Evästeet ovat pieniä tekstitiedostoja, jotka tallennetaan laitteellesi, kun vierailet verkkosivustolla. Niitä käytetään yleisesti verkkosivustojen tehokkaaseen toimintaan, käyttökokemuksen parantamiseen ja analyyttisten tietojen tarjoamiseen verkkosivuston omistajille. Evästeet voivat tallentaa tietoja, kuten mieltymyksesi, kirjautumistilanteesi ja selaustoimintasi."
+    },
+    "typesOfCookies": {
+      "title": "Käyttämämme evästetyypit",
+      "necessary": "<strong>Välttämättömät evästeet:</strong> Nämä evästeet ovat välttämättömiä verkkosivuston asianmukaiselle toiminnalle. Ne mahdollistavat ydintoiminnot, kuten turvallisuuden, todentamisen ja saavutettavuuden.",
+      "performance": "<strong>Suorituskykyevästeet:</strong> Näiden evästeiden avulla analysoimme verkkosivuston suorituskykyä ja parannamme käyttökokemusta keräämällä anonymisoituja tietoja siitä, miten käyttäjät ovat vuorovaikutuksessa sivuston kanssa.",
+      "functional": "<strong>Toiminnalliset evästeet:</strong> Näiden evästeiden avulla voimme muistaa mieltymyksesi, kuten kielivalinnat ja muut mukautettavat ominaisuudet, tarjotaksemme henkilökohtaisemman käyttökokemuksen.",
+      "advertising": "<strong>Mainosevästeet:</strong> Nämä evästeet seuraavat verkkotoimintaasi tarjotakseen sinulle kiinnostuksesi mukaisia mainoksia."
+    },
+    "howWeUseCookies": {
+      "title": "Miten käytämme evästeitä",
+      "list": [
+        "Varmistaa verkkosivuston asianmukaisen toiminnan.",
+        "Parantaa verkkosivuston suorituskykyä ja käyttökokemusta.",
+        "Analysoida käyttäytymistä ja verkkosivuston liikennettä sisällön optimoimiseksi.",
+        "Tarjota henkilökohtaisia suosituksia ja mainoksia."
+      ]
+    },
+    "managingCookies": {
+      "title": "Evästeiden hallinta",
+      "description": "Sinulla on oikeus hallita tai poistaa evästeitä mieltymystesi mukaisesti. Useimmat selaimet sallivat evästeiden hallinnan niiden asetuksista. Tiettyjen evästeiden poistaminen käytöstä voi kuitenkin vaikuttaa verkkosivuston toimivuuteen.",
+      "learnMore": "Lisätietoja evästeiden hallinnasta löydät selaimesi ohjeosioista:",
+      "browsers": {
+        "chrome": "Google Chrome",
+        "firefox": "Mozilla Firefox",
+        "safari": "Safari",
+        "edge": "Microsoft Edge"
+      }
+    },
+    "changesToPolicy": {
+      "title": "Muutokset tähän käytäntöön",
+      "description": "Saatamme päivittää tätä evästekäytäntöä ajoittain heijastaaksemme muutoksia käytännöissämme tai muista toiminnallisista, oikeudellisista tai sääntelysyistä. Tarkista tämä käytäntö säännöllisesti pysyäksesi ajan tasalla evästeiden käytöstämme."
+    },
+    "contactUs": {
+      "title": "Ota yhteyttä",
+      "description": "Jos sinulla on kysyttävää tai huolenaiheita tähän evästekäytäntöön liittyen, ota meihin yhteyttä:",
+      "email": "Sähköposti: support@sipeai.com",
+      "phone": "Puhelin: +358 123 456 789"
+    }
+  },
+
+  "terms_modal": {
+    "title": "Käyttöehdot",
+    "welcome": "Tervetuloa {companyName}-sivustolle! Nämä käyttöehdot määrittävät säännöt ja määräykset verkkosivustomme käytölle.",
+    "definitions_title": "1. Määritelmät",
+    "definitions_content": "“Yritys” viittaa {companyName}, sen työntekijöihin, edustajiin ja tytäryhtiöihin. “Käyttäjä” viittaa kehen tahansa, joka käyttää verkkosivustoamme tai palveluitamme.",
+    "services_title": "2. Palveluidemme käyttö",
+    "services_content": {
+      "item1": "Käyttäjän tulee olla vähintään 18-vuotias tai saada vanhempien suostumus käyttää palveluitamme.",
+      "item2": "Käyttäjät sitoutuvat olemaan käyttämättä verkkosivustoa tavalla, joka voi vahingoittaa tai heikentää sen toimivuutta.",
+      "item3": "Käyttäjät sitoutuvat olemaan käyttämättä palveluitamme laittomiin tarkoituksiin."
+    },
+    "intellectual_property_title": "3. Immateriaalioikeudet",
+    "intellectual_property_content": "Kaikki tämän verkkosivuston sisältö, mukaan lukien teksti, kuvat ja ohjelmistot, ovat {companyName}:n tai sen lisenssinhaltijoiden omistamia. Sisällön kopiointi tai jakaminen ilman etukäteen annettua kirjallista lupaa on kielletty.",
+    "privacy_policy_title": "4. Tietosuojakäytäntö",
+    "privacy_policy_content": "Olemme sitoutuneet suojaamaan yksityisyyttäsi. Tutustu tietosuojakäytäntöömme.",
+    "limitation_liability_title": "5. Vastuunrajoitus",
+    "limitation_liability_content": "{companyName} ei ole vastuussa suorista, epäsuorista tai välillisistä vahingoista, jotka johtuvat verkkosivustomme käytöstä.",
+    "governing_law_title": "6. Sovellettava laki",
+    "governing_law_content": "Näitä käyttöehtoja hallitaan ja tulkitaan {countryName}:n lakien mukaisesti.",
+    "changes_terms_title": "7. Käyttöehtojen muutokset",
+    "changes_terms_content": "Saatamme päivittää näitä ehtoja ajoittain. Käyttäjiä kehotetaan tarkistamaan ne säännöllisesti.",
+    "close_button": "Sulje"
+  },
+  "privacyPolicy": {
+    "title": "Tietosuojakäytäntö",
+    "lastUpdated": "Viimeksi päivitetty",
+    "description": "Me <strong>{companyName}</strong>-yrityksessä sitoudumme suojelemaan yksityisyyttäsi ja varmistamaan henkilötietojesi turvallisuuden. Tämä käytäntö selittää, kuinka keräämme, käytämme ja suojaamme tietojasi, kun käytät palvelujamme.",
+    "sections": {
+      "informationWeCollect": {
+        "title": "1. Mitä tietoja keräämme",
+        "content": "Saatamme kerätä seuraavanlaisia tietoja:",
+        "list": [
+          "Henkilötiedot: Tiedot, jotka annat luodessasi tilin tai ottaessasi yhteyttä, kuten nimesi, sähköpostiosoitteesi ja puhelinnumerosi.",
+          "Käyttötiedot: Tiedot siitä, miten käytät verkkosivustoamme ja palveluitamme, mukaan lukien IP-osoite, selaintyyppi ja vuorovaikutukset.",
+          "Koneoppimisesta saadut tiedot: AI-malleidemme tuottamat tiedot syötteidesi perusteella, rajoittuen julkisesti saatavilla oleviin tietoihin."
+        ]
+      },
+      "howWeUseYourInformation": {
+        "title": "2. Miten käytämme tietojasi",
+        "list": [
+          "Palveluidemme tarjoamiseen, parantamiseen ja yksilöintiin.",
+          "Päivityksistä, uusista ominaisuuksista tai tukiasioista tiedottamiseen.",
+          "Turvallisuuden varmistamiseen ja vilpillisen tai luvattoman toiminnan havaitsemiseen."
+        ]
+      },
+      "dataSecurity": {
+        "title": "3. Tietoturva",
+        "content": "Tietoturvasi on ensisijainen tavoitteemme. Käytämme alan standardien mukaista salausta ja turvallisia tallennusratkaisuja suojataksemme tietojasi luvattomalta pääsyltä, muokkaukselta tai julkistamiselta.",
+        "note": "Huomaa kuitenkin, että mikään verkkoympäristö ei voi taata 100 % turvallisuutta. Pyrimme jatkuvasti parantamaan turvallisuuskäytäntöjämme."
+      },
+      "useOfAI": {
+        "title": "4. AI:n ja koneoppimisen käyttö",
+        "content": "Palvelumme perustuvat tekoälyyn ja koneoppimismalleihin tarjotakseen tietoa ja näkemyksiä. Pyrimme tarkkuuteen, mutta {companyName} ei voi taata, että kaikki tekoälyn tuottamat vastaukset olisivat virheettömiä tai täysin oikeita.",
+        "note": "Käytämme ensisijaisesti julkisesti saatavilla olevia tietoja malliemme koulutukseen ja tulosten tuottamiseen."
+      },
+      "sharingInformation": {
+        "title": "5. Tietojen jakaminen",
+        "content": "Emme myy, vuokraa tai vaihda henkilötietojasi kolmansille osapuolille. Saatamme kuitenkin jakaa tietoja luotettujen kumppaneiden kanssa palveluidemme tarjoamista tai parantamista varten, tiukasti luottamuksellisuussopimusten mukaisesti."
+      },
+      "yourRights": {
+        "title": "6. Oikeutesi",
+        "content": "Sinulla on oikeus tarkastella, muokata tai poistaa henkilötietojasi milloin tahansa. Jos sinulla on huolenaiheita siitä, miten käsittelemme tietojasi, ota meihin yhteyttä sähköpostitse osoitteessa privacy@{companyWebsite}."
+      },
+      "changesToPolicy": {
+        "title": "7. Muutokset tähän käytäntöön",
+        "content": "Saatamme päivittää tätä tietosuojakäytäntöä ajoittain heijastamaan käytäntöjemme tai säädösten muutoksia. Käyttäjiä kannustetaan tarkistamaan tämä käytäntö säännöllisesti."
+      },
+      "contactUs": {
+        "title": "8. Ota yhteyttä",
+        "content": "Jos sinulla on kysymyksiä tai huolenaiheita tietosuojakäytännöstämme, ota meihin yhteyttä sähköpostitse osoitteessa privacy@{companyWebsite}."
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
-import ChatPageSkeleton from "@components/skeletons/ChatSkeleton";
-import { Button } from "@components/ui/button";
+import ChatPageSkeleton from "@/components/skeletons/ChatSkeleton";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 interface ChatModalProps {
@@ -17,17 +17,17 @@ export default function ChatModal({
       {showModal && (
         <div className="absolute inset-x-0 flex h-[calc(100vh-70px)] w-full items-center justify-center font-semibold md:mt-auto">
           <div className="flex w-[300px] max-w-[400px] flex-col items-center justify-center rounded-xl border border-border/20 bg-backgroundSecondary p-4 text-foreground shadow-2xl sm:h-[180px] sm:w-[350px]">
-            <p className="p-4 text-foreground">Please Sign In </p>
+            <p className="p-4 text-foreground">Sign In</p>
             <Button
-              variant="outline"
-              className="mb-6 w-[150px]"
+              variant="default"
+              className="mb-6 w-[150px] font-bold"
               onClick={handleModalClose}
             >
-              OK
+              Ok!
             </Button>
             <div>
               <p className="text-sm">
-                Create a free Account.{" "}
+                Luo ilmainen tili{" "}
                 <Link
                   href="/auth/register"
                   className="text-foreground hover:text-foreground/60"

@@ -1,14 +1,35 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { getSession, signIn } from "next-auth/react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FacebookIcon, GoogleIcon, IconSpinner } from "@/components/ui/icons";
 import { Typography } from "@mui/material";
+import { useSearchParams } from "next/navigation";
+import { Locale } from "@/i18n.config";
 
-export const Social = () => {
+interface SocialProps {
+  lang: Locale;
+}
+
+export const Social = ({ lang }: SocialProps) => {
   const [pendingGoogle, setPendingGoogle] = useState(false);
   const [pendingFacebook, setPendingFacebook] = useState(false);
+  const searchParams = useSearchParams();
+
+  const redirectUrl = searchParams.get("redirect") || `/${lang}`;
+
+  console.log("Redirect URL:", redirectUrl);
+
+  useEffect(() => {
+    const fetchSession = async () => {
+      const session = await getSession();
+      if (session) {
+        window.location.href = redirectUrl;
+      }
+    };
+    fetchSession();
+  }, [redirectUrl]);
 
   const onClick = async (provider: "facebook" | "google") => {
     if (provider === "facebook") {
@@ -18,7 +39,13 @@ export const Social = () => {
     }
 
     try {
-      await signIn(provider, { callbackUrl: "/" });
+      console.log(
+        "Signing in with provider:",
+        provider,
+        "Redirecting to:",
+        redirectUrl,
+      );
+      await signIn(provider, { callbackUrl: redirectUrl });
     } catch (error) {
       console.log(error);
     }
@@ -30,8 +57,9 @@ export const Social = () => {
         variant="outline"
         className="w-full bg-background text-foreground"
         onClick={() => onClick("google")}
+        iconRight={<GoogleIcon />}
+        spanClassName="flex"
       >
-        <GoogleIcon />
         <Typography variant="inherit" sx={{ mx: 3 }}>
           Google
         </Typography>
@@ -42,8 +70,9 @@ export const Social = () => {
         variant="outline"
         className="w-full bg-background text-foreground"
         onClick={() => onClick("facebook")}
+        iconRight={<FacebookIcon />}
+        spanClassName="flex"
       >
-        <FacebookIcon />
         <Typography variant="inherit" sx={{ mx: 2 }}>
           Facebook
         </Typography>

@@ -23,27 +23,48 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   session: { strategy: "jwt" },
   callbacks: {
     async signIn({ user, account }) {
-      if (typeof user.id === "undefined") {
-        console.error("User ID is undefined");
-        return false;
-      }
-      const existingUser = await getUserById(user.id);
-      if (account?.provider === "credentials") {
-        if (existingUser?.isTwoFactorEnabled) {
+      try {
+        // Skip 2FA for OAuth providers
+        if (account?.provider !== "credentials") {
+          return true;
+        }
+        if (typeof user.id === "undefined") {
+          console.error("User ID is undefined");
+          return false;
+        }
+
+        const existingUser = await getUserById(user.id);
+
+        if (!existingUser) {
+          console.error(`User with ID ${user.id} does not exist`);
+          return false;
+        }
+        // Only enforce 2FA if user has it enabled and is signing in with credentials
+        if (existingUser.isTwoFactorEnabled) {
           const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
             existingUser.id,
           );
-          if (!twoFactorConfirmation) return false;
 
-          // Delete two factor confirmation for next sign in
+          if (!twoFactorConfirmation) {
+            console.error(
+              `No two-factor confirmation found for user ${existingUser.id}`,
+            );
+            return false;
+          }
+
+          // Delete two-factor confirmation for next sign-in
           await prisma.twoFactorConfirmation.delete({
             where: {
               id: twoFactorConfirmation.id,
             },
           });
         }
+
+        return true;
+      } catch (error) {
+        console.error("Error during signIn:", error);
+        return false; // You can adjust this behavior based on your application's needs
       }
-      return true;
     },
     async session({ session, token }) {
       if (token.sub && session.user) {

@@ -1,11 +1,14 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { UIState } from "@/lib/chat/actions";
-import { cn } from "@lib/utils";
+import { cn } from "@/lib/utils";
 
 export interface ChatListProps {
   messages: UIState;
   className?: string;
+  isShared?: boolean;
 }
 
 export function ChatList({ messages, className }: ChatListProps) {
@@ -61,16 +64,19 @@ export function ChatList({ messages, className }: ChatListProps) {
       ref={containerRef}
       className={cn(
         className,
-        "absolute flex size-full flex-col items-start overflow-y-auto px-2 text-foreground sm:max-w-screen-md sm:px-10 md:max-w-screen-lg",
+        "absolute flex size-full flex-col items-start overflow-y-auto px-2 pb-20 text-foreground sm:max-w-screen-md sm:px-10 md:max-w-screen-lg",
       )}
       style={{
         scrollbarColor: "transparent transparent",
       }}
     >
-      <div className="">
+      <div className="w-full">
         {messages.map((message, index) => (
           <div key={message.id}>
-            <div className="mr-10 flex flex-col">{message.display}</div>
+            {/* Only render display if it's not null */}
+            {message.display && (
+              <div className="mr-10 flex flex-col">{message.display}</div>
+            )}
             {index < messages.length - 1 && (
               <Separator className="my-8 h-0 border-none" />
             )}

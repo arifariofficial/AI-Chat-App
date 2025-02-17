@@ -1,16 +1,37 @@
-// components/navbar/nav-bar-server.tsx
+"use server";
+
+import { Locale } from "@/i18n.config";
 import NavBar from "./nav-bar";
-import { auth } from "@auth";
+import { auth } from "@/auth";
+import { getDictionary } from "@/lib/dictionary";
+import { localizedRoutes } from "@/lib/localized-routes";
 
-const NavBarServer = async () => {
-  const session = await auth();
+const NavBarServer = async ({ lang }: { lang: Locale }) => {
+  try {
+    const [session, dictionary] = await Promise.all([
+      auth(),
+      getDictionary(lang),
+    ]);
 
-  // Handle the case where there is no session
-  if (!session) {
-    return <NavBar session={null} />;
+    const routes = localizedRoutes[lang];
+
+    return (
+      <NavBar
+        session={session || null} // Explicitly handle null fallback
+        lang={lang}
+        dictionary={dictionary}
+        routes={routes}
+      />
+    );
+  } catch (error) {
+    console.error("Error loading navbar data:", error);
+
+    return (
+      <div className="text-red-500">
+        Error loading navigation bar. Please try again later.
+      </div>
+    );
   }
-
-  return <NavBar session={session} />;
 };
 
 export default NavBarServer;

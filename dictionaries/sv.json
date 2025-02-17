@@ -1,0 +1,640 @@
+{
+  "navigation": {
+    "home": "Hem",
+    "sipeChat": "SipeChat",
+    "aboutUs": "Om oss",
+    "contact": "Kontakt"
+  },
+  "theme": {
+    "theme": "Tema",
+    "light": "Ljus",
+    "dark": "Mörk",
+    "system": "System"
+  },
+  "language": {
+    "en": "English",
+    "fi": "Suomi",
+    "sv": "Svenska"
+  },
+  "metadata": {
+    "homePage": {
+      "title": "Innovativa framtiden",
+      "description": "Sipe AI erbjuder intelligenta lösningar för att hjälpa människor att hitta och utnyttja sina rättigheter effektivt."
+    }
+  },
+  "notifications": {
+    "loading": "Laddar..."
+  },
+  "auth": {
+    "email": "E-post",
+    "password": "Lösenord",
+    "signup": "Registrera dig",
+    "signin": "Logga in",
+    "signout": "Logga ut"
+  },
+  "login": {
+    "headerLabel": "Välkommen",
+    "backButtonLabel": "Har du inget konto?",
+    "ariaLabelPasswordToggle": "Växla lösenordets synlighet",
+    "forgotPassword": "Glömt lösenordet?",
+    "twoFactorConfirmButtonLabel": "Bekräfta",
+    "orContinueButtonLabel": "Eller fortsätt med"
+  },
+  "registerForm": {
+    "headerLabel": "Skapa ett konto",
+    "emailAddress": "E-postadress",
+    "password": "Lösenord",
+    "confirmPassword": "Bekräfta lösenord",
+    "agreeToTerms": "Jag godkänner",
+    "termsAndConditions": "Villkor & regler",
+    "submit": "Registrera",
+    "alreadyHaveAccount": "Har du redan ett konto?",
+    "login": "Logga in",
+    "successMessage": "Registreringen lyckades!",
+    "errorMessage": "Något gick fel. Försök igen."
+  },
+  "logout": {
+    "headerLabel": "Du har loggats ut"
+  },
+  "resetPassword": {
+    "headerLabel": "Återställ lösenord",
+    "resetButtonLabel": "Återställ lösenordet",
+    "backButtonLabel": "Tillbaka till inloggning",
+    "emailLabel": "E-postadress",
+    "sendLinkLabel": "Skicka en återställningslänk"
+  },
+  "validation": {
+    "emailRequired": "Ingen e-postadress angiven",
+    "emailInvalidTitle": "Ogiltig e-post",
+    "emailInvalid": "Ange en giltig e-postadress.",
+    "emailExists": "Du har redan registrerat dig med denna e-postadress.",
+    "emailAlreadyLoggedIn": "Du är redan inloggad. Logga ut för att registrera dig med en ny e-postadress."
+  },
+
+  "input": {
+    "cancelButtonLabel": "Avbryt",
+    "saveButtonLabel": "Spara",
+    "updateButtonLabel": "Uppdatera",
+    "email": "E-post",
+    "emailAddress": "E-postadress",
+    "emailPlaceholder": "Ange din e-postadress"
+  },
+  "image": {
+    "imageAlt": "Namn inte tillgängligt",
+    "imageError": "Ingen bild"
+  },
+  "userButton": {
+    "noName": "Inget namn",
+    "account": "Konto"
+  },
+  "notFound": {
+    "title": "Sidan hittades inte",
+    "description": "Tyvärr kunde vi inte hitta resursen du letade efter.",
+    "returnHome": "Gå hem"
+  },
+  "profile": {
+    "account": {
+      "header": "Konto",
+      "description": "Hantera dina kontoinställningar och information.",
+      "profile": "Profil",
+      "name": "Namn",
+      "nameNotAvailable": "Namn inte tillgängligt",
+      "email": "E-post",
+      "emailButtonConfirm": "Bekräfta e-post",
+      "emailButtonConfirmation": "Bekräftad"
+    },
+    "subscription": {
+      "header": "Prenumeration",
+      "description": "Hantera dina betalningsinställningar",
+      "selectHeader": "Köp krediter",
+      "selectAmount": "Belopp",
+      "selectBuy": "Köp"
+    },
+    "security": {
+      "header": "Säkerhet",
+      "description": "Hantera dina säkerhetsinställningar",
+      "twoFactorTitle": "Tvåfaktorsautentisering",
+      "twoFactorTooltip": "När denna funktion är aktiverad skickas ett engångslösenord (OTP) till användarens e-postadress för att möjliggöra säker inloggning.",
+      "twoFactorEnable": "Aktivera",
+      "twoFactorDisable": "Inaktivera"
+    }
+  },
+  "chatPage": {
+    "header": "Chatt",
+    "description": "Juridisk AI-assistent"
+  },
+  "chatModal": {
+    "signIn": "Logga in",
+    "okButton": "Ok!",
+    "createAccount": "Skapa ett gratis konto",
+    "clickHere": "Klicka här"
+  },
+  "hero": {
+    "heading": "Ge dig kunskap om dina rättigheter",
+    "description": "På vårt startup är vi dedikerade till att ge dig viktig information om dina rättigheter i olika situationer. Upptäck hur vår innovativa AI-app kan vägleda dig genom din specifika situation och säkerställa att du får det stöd du förtjänar.",
+    "inputPlaceholder": "Ange din e-postadress",
+    "button": { "title": "Registrera dig" },
+    "termsAndConditions": {
+      "text": "Genom att registrera dig godkänner du våra",
+      "link": "Villkor"
+    }
+  },
+  "features": {
+    "heading": "Upptäck dina rättigheter med vår innovativa AI-app",
+    "description": "Vår avancerade AI-app förenklar processen att förstå dina rättigheter i olika situationer. Med bara några få klick kan du få skräddarsydd information som säkerställer att du vet exakt vad du har rätt till."
+  },
+  "featuresList": {
+    "heading": "Utforska fördelarna med vår AI-app",
+    "description": "Vår AI-app gör det enkelt att förstå dina rättigheter. Med bara några klick kan du få viktig information som är anpassad till din specifika situation.",
+    "buttonText": "Läs mer",
+    "notification": "Du är redan inloggad.",
+    "features": [
+      {
+        "title": "Enkel åtkomst till viktig information",
+        "description": "Få omedelbar tillgång till viktig information när som helst.",
+        "imageAlt": "Egenskap 1 platshållarbild"
+      },
+      {
+        "title": "Skräddarsydd analys för din unika situation",
+        "description": "Vår app ger personliga insikter baserade på dina omständigheter.",
+        "imageAlt": "Egenskap 2 platshållarbild"
+      },
+      {
+        "title": "Håll dig uppdaterad med aktuell information",
+        "description": "Få tillgång till pålitlig och uppdaterad information när du behöver den.",
+        "imageAlt": "Egenskap 3 platshållarbild"
+      }
+    ]
+  },
+  "faqSection": {
+    "heading": "Vanliga frågor",
+    "description": "Hitta svar på vanliga frågor om våra tjänster och AI-appen.",
+    "contactUs": "Kontakta oss",
+    "questions": [
+      {
+        "title": "Vad är er tjänst?",
+        "answer": "Vi erbjuder information om rättigheter i olika fall. Vår AI-app förenklar processen genom att leverera skräddarsydda insikter. Oavsett om det handlar om en bilolycka eller något annat, guidar vi dig genom dina rättigheter."
+      },
+      {
+        "title": "Kan jag få support?",
+        "answer": "Absolut! Vi erbjuder support genom vårt kundtjänstteam. Du kan nå oss via appen eller vår webbplats när som helst."
+      },
+      {
+        "title": "Hur fungerar appen?",
+        "answer": "Vår app samlar in relevant information om ditt fall. Den analyserar uppgifterna för att informera dig om dina rättigheter. Detta säkerställer att du har kunskapen som behövs för att fatta välgrundade beslut."
+      },
+      {
+        "title": "Vad gör jag om jag har fler frågor?",
+        "answer": "Om du har fler frågor, tveka inte att kontakta oss. Vi är här för att ge tydlighet och stöd. Din förståelse är vår prioritet."
+      },
+      {
+        "title": "Är tjänsten gratis?",
+        "answer": "Ja, vår första konsultation och tillgång till AI-appen är gratis. Vi tror på att ge individer kunskap utan ekonomiska hinder. Ytterligare tjänster kan innebära kostnader som tydligt kommuniceras."
+      },
+      {
+        "title": "Är mina uppgifter säkra?",
+        "answer": "Ja, vi tar datasäkerhet på största allvar. Din information skyddas med branschstandardkryptering och sekretessåtgärder. Vi delar inte dina uppgifter utan ditt samtycke."
+      },
+      {
+        "title": "Vem kan använda det?",
+        "answer": "Våra tjänster är utformade för alla som söker information om sina rättigheter. Oavsett om du varit med om en bilolycka eller står inför andra juridiska frågor, är vi här för att hjälpa. Vår app är användarvänlig och tillgänglig för alla."
+      },
+      {
+        "title": "Hur ofta uppdateras informationen?",
+        "answer": "Vår app uppdaterar regelbundet information för att säkerställa korrekthet. Vi övervakar lagändringar och justerar vårt innehåll därefter. Detta garanterar att du får de senaste råden."
+      },
+      {
+        "title": "Hur kommer jag igång?",
+        "answer": "Det är enkelt att komma igång! Ladda ner vår app och skapa ett konto. Följ instruktionerna för att ange dina falluppgifter och upptäck dina rättigheter."
+      },
+      {
+        "title": "Kan jag lämna feedback?",
+        "answer": "Vi välkomnar din feedback! Det hjälper oss att förbättra våra tjänster och appens funktionalitet. Du kan skicka dina tankar via appen eller vår webbplats."
+      }
+    ],
+    "footerHeading": "Har du fortfarande frågor?",
+    "footerDescription": "Kontakta oss när som helst för hjälp.",
+    "button": {
+      "title": "Kontakta oss",
+      "variant": "outline"
+    }
+  },
+  "benefits": {
+    "heading": "Upptäck de transformativa fördelarna med vår AI-drivna app för information om rättigheter.",
+    "description": "Vår AI-app förenklar processen att förstå dina rättigheter och sparar värdefull tid. Med korrekt information vid dina fingertoppar kan du navigera ditt fall med självförtroende.",
+    "subHeadings": [
+      {
+        "title": "Tidseffektivt",
+        "description": "Få omedelbar åtkomst till viktig information utan krångliga efterforskningar."
+      },
+      {
+        "title": "Exakta insikter",
+        "description": "Lita på vår AI för att få korrekt, uppdaterad information anpassad till din specifika situation."
+      }
+    ]
+  },
+  "ctaSection": {
+    "heading": "Stärk dig själv med vår app",
+    "description": "Upptäck dina rättigheter och fördelar enkelt. Prova vår app för omedelbar åtkomst till viktig information.",
+    "button1": "Prova SipeChat",
+    "button2": "Läs mer"
+  },
+
+  "testimonialSection": {
+    "heading": "Kundomdömen",
+    "description": "Den här appen förändrade min förståelse för mina rättigheter.",
+    "testimonials": [
+      {
+        "numberOfStars": 5,
+        "quote": "\"Med AI-appen kände jag mig stärkt och välinformerad.\"",
+        "avatar": {
+          "src": "/assets/testimonial-1.webp",
+          "alt": "Testimonial-avatar 1"
+        },
+        "name": "Sami Mäkinen",
+        "position": "Läkare, GreenLife",
+        "logo": {
+          "src": "/assets/company-1.webp",
+          "alt": "Webflow-logo 1"
+        }
+      },
+      {
+        "numberOfStars": 5,
+        "quote": "\"Jag visste inte att jag hade så många alternativ!\"",
+        "avatar": {
+          "src": "/assets/testimonial-2.webp",
+          "alt": "Testimonial-avatar 2"
+        },
+        "name": "Juuso Montonen",
+        "position": "Gitarrlärare, Kitarakoutsi, Inc.",
+        "logo": {
+          "src": "/assets/company-2.webp",
+          "alt": "Webflow-logo 2"
+        }
+      }
+    ]
+  },
+  "contactSection": {
+    "tagline": "Kontakta oss",
+    "heading": "Kontakt",
+    "description": "Vi är här för att hjälpa dig med dina frågor.",
+    "contacts": [
+      {
+        "icon": "BiEnvelope",
+        "title": "E-post",
+        "description": "Kontakta oss på",
+        "link": {
+          "label": "info@sipe.ai",
+          "url": "mailto:info@sipe.ai"
+        }
+      },
+      {
+        "icon": "BiMap",
+        "title": "Kontor",
+        "description": "123 Postiljooninkatu, Helsingfors, Finland",
+        "button": {
+          "title": "Hämta vägbeskrivning"
+        }
+      }
+    ]
+  },
+  "aboutUs": {
+    "tagline": "Innovera",
+    "heading": "Vårt team",
+    "description": "Möt de briljanta hjärnorna bakom våra innovativa lösningar.",
+    "footer": {
+      "heading": "Vi rekryterar!",
+      "description": "Gå med i vårt dynamiska team och forma framtiden.",
+      "button": {
+        "title": "Lediga tjänster"
+      }
+    },
+    "teamMembers": [
+      {
+        "name": "Elina Eriksson",
+        "jobTitle": "VD & Grundare",
+        "email": "eriksson.elina@sipe.ai",
+        "mobile": "+358 40 7798881",
+        "description": "Brinner för att använda AI för att lösa verkliga problem och driva innovation.",
+        "image": {
+          "src": "/assets/Elina.jpeg",
+          "alt": "Elina Eriksson"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/elina-eriksson/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Sampo Kaarenmaa",
+        "jobTitle": "Produktchef & Utvecklare",
+        "email": "kaarenmaa.sampo@sipe.ai",
+        "mobile": "+358 40 5800869",
+        "description": "Fokuserad på att skapa användarvänliga produkter som förbättrar kundupplevelsen.",
+        "image": {
+          "src": "/assets/Sampo.jpeg",
+          "alt": "Sampo Kaarenmaa"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/sampo-kaarenmaa-75a76587/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Mia Almgren",
+        "jobTitle": "Marknadsföringschef",
+        "email": "almgren.mia@sipe.ai",
+        "mobile": "+358 40 8296048",
+        "description": "Engagerad i att bygga vårt varumärke och engagera vår gemenskap.",
+        "image": {
+          "src": "/assets/Mia.jpeg",
+          "alt": "Mia Almgren"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/mia-almgren-1327a9b8/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Amir Ingher",
+        "jobTitle": "Mjukvaruingenjör",
+        "email": "ingher.amir@sipe.ai",
+        "mobile": "+358 40 3012289",
+        "description": "Erfaren mjukvaruingenjör med stark passion för innovation och AI-drivna lösningar.",
+        "image": {
+          "src": "/assets/Amir.jpg",
+          "alt": "Amir Ingher"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/amir-ingher-ba24a7129/",
+            "icon": "linkedin"
+          }
+        ]
+      },
+      {
+        "name": "Ariful Islam",
+        "jobTitle": "Fullstackutvecklare",
+        "email": "islam.ariful@sipe.ai",
+        "mobile": "+358 40 555699",
+        "description": "Fullstackutvecklare med expertis inom AI och en passion för att skapa skalbara, intelligenta lösningar.",
+        "image": {
+          "src": "/assets/Ariful.jpeg",
+          "alt": "Ariful Islam",
+          "className": "scale-[1.4]"
+        },
+        "socialLinks": [
+          {
+            "href": "https://www.linkedin.com/in/arifariofficial/",
+            "icon": "linkedin"
+          }
+        ]
+      }
+    ]
+  },
+  "contactForm": {
+    "title": "Kontakta oss",
+    "description": "Vi vill gärna höra från dig. Fyll i formuläret nedan så återkommer vi så snart som möjligt.",
+    "nameLabel": "Namn",
+    "namePlaceholder": "Ditt namn",
+    "emailLabel": "E-post",
+    "emailPlaceholder": "Din e-post",
+    "messageLabel": "Meddelande",
+    "messagePlaceholder": "Ditt meddelande",
+    "submitButton": "Skicka meddelande",
+    "sendingButton": "Skickar...",
+    "successToastTitle": "Meddelandet skickades framgångsrikt!",
+    "successToastDescription": "Vi kommer att återkomma till dig snart.",
+    "errorToastTitle": "Fel",
+    "errorToastDescription": "Något gick fel. Försök igen senare."
+  },
+  "footer": {
+    "logo": {
+      "url": "#",
+      "src": "/assets/Logo-main.svg",
+      "alt": "Logobild"
+    },
+    "newsletterHeading": "Prenumerera på vårt nyhetsbrev",
+    "newsletterDescription": "Vi är här för att hjälpa dig med dina frågor.",
+    "inputPlaceholder": "Ange din e-postadress",
+    "button": {
+      "title": "Prenumerera",
+      "variant": "outline",
+      "size": "sm"
+    },
+    "termsAndConditions": {
+      "text": "Genom att prenumerera godkänner du",
+      "link": "Vår integritetspolicy"
+    },
+    "columnLinks": [
+      {
+        "title": "Snabblänkar",
+        "links": [
+          { "title": "Om oss", "url": "aboutUs" },
+          { "title": "Kontakta oss", "url": "contact" },
+          { "title": "Vanliga frågor", "url": "/FAQs" },
+          { "title": "Blogg", "url": "/blog" },
+          { "title": "Support", "url": "/support" }
+        ]
+      },
+      {
+        "title": "Resurser",
+        "links": [
+          { "title": "Guider", "url": "#" },
+          { "title": "Uppdateringar", "url": "#" },
+          { "title": "Kundomdömen", "url": "#" },
+          { "title": "Karriär", "url": "#" },
+          { "title": "Partnerskap", "url": "#" }
+        ]
+      },
+      {
+        "title": "Juridik",
+        "links": [
+          { "title": "Integritetspolicy", "url": "privacy" },
+          { "title": "Villkor", "url": "terms" },
+          { "title": "Cookiepolicy", "url": "cookiePolicy" },
+          { "title": "Användaravtal", "url": "userAgreement" },
+          { "title": "Webbplatskarta", "url": "#" }
+        ]
+      },
+      {
+        "title": "Följ oss",
+        "links": [
+          { "title": "Facebook", "url": "#" },
+          { "title": "Twitter", "url": "#" },
+          {
+            "title": "LinkedIn",
+            "url": "https://www.linkedin.com/company/sipeai/posts/?feedView=all"
+          },
+          { "title": "Instagram", "url": "https://www.instagram.com/sipe.ai/" },
+          { "title": "YouTube", "url": "#" }
+        ]
+      },
+      {
+        "title": "Kontaktinformation",
+        "links": [
+          { "title": "Maila oss här", "url": "info@sipe.ai" },
+          { "title": "Ring oss idag", "url": "#" },
+          { "title": "Besök vårt kontor", "url": "#" },
+          { "title": "Feedback", "url": "/feedback" },
+          { "title": "Hjälpcenter", "url": "/help-center" }
+        ]
+      }
+    ],
+    "socialMediaLinks": [
+      { "url": "#", "icon": "BiLogoFacebookCircle" },
+      {
+        "url": "https://www.instagram.com/sipe.ai/"
+      },
+
+      {
+        "url": "https://www.linkedin.com/company/sipeai/posts/?feedView=all"
+      },
+      { "url": "#", "icon": "BiLogoYoutube" }
+    ],
+    "footerText": "© 2024 SipeAI. Alla rättigheter förbehållna.",
+    "footerLinks": [
+      { "title": "Integritetspolicy", "url": "privacy" },
+      { "title": "Villkor", "url": "terms" },
+      { "title": "Cookie-inställningar", "url": "cookiePolicy" }
+    ]
+  },
+  "cookieConsent": {
+    "message": "Vi använder cookies för att förbättra webbplatsen, analysera användning och stödja marknadsföring.",
+    "manageSettings": "Hantera inställningar",
+    "deleteCookies": "Ta bort alla cookies",
+    "acceptAllCookies": "Acceptera alla cookies",
+    "cookieSettings": "Cookie-inställningar",
+    "cookieSettingsDescription": "Anpassa dina cookie-inställningar. Nödvändiga cookies är alltid aktiverade för att webbplatsen ska fungera korrekt.",
+    "readMore": "Läs mer",
+    "essential": "Nödvändiga",
+    "alwaysOn": "Alltid på",
+    "personalized": "Personliga",
+    "marketing": "Marknadsföring",
+    "analytics": "Analys"
+  },
+  "cookiePolicy": {
+    "title": "Cookiepolicy",
+    "at": "På",
+    "introduction": "är vi engagerade i att skydda din integritet och säkerställa transparens om den data vi samlar in via cookies. Denna cookiepolicy förklarar hur och varför vi använder cookies, vilka typer av cookies vi använder och dina val när det gäller hantering av cookies.",
+    "whatAreCookies": {
+      "title": "Vad är cookies?",
+      "description": "Cookies är små textfiler som lagras på din enhet när du besöker en webbplats. De används ofta för att få webbplatser att fungera effektivt, förbättra användarupplevelsen och ge analytiska data till webbplatsägare. Cookies kan lagra information som dina preferenser, inloggningsstatus och surfaktiviteter."
+    },
+    "typesOfCookies": {
+      "title": "Typer av cookies vi använder",
+      "necessary": "<strong>Nödvändiga cookies:</strong> Dessa cookies är avgörande för att webbplatsen ska fungera korrekt. De möjliggör grundläggande funktioner som säkerhet, autentisering och tillgänglighet.",
+      "performance": "<strong>Prestandacookies:</strong> Dessa cookies hjälper oss att analysera webbplatsens prestanda och förbättra din upplevelse genom att samla in anonymiserad data om hur användare interagerar med webbplatsen.",
+      "functional": "<strong>Funktionella cookies:</strong> Dessa cookies gör att vi kan komma ihåg dina preferenser, som språkval och andra anpassningsbara funktioner, för att ge en mer personlig upplevelse.",
+      "advertising": "<strong>Reklamcookies:</strong> Dessa cookies spårar din onlineaktivitet för att ge dig relevanta annonser baserade på dina intressen."
+    },
+    "howWeUseCookies": {
+      "title": "Hur vi använder cookies",
+      "list": [
+        "Säkerställa att vår webbplats fungerar korrekt.",
+        "Förbättra webbplatsens prestanda och användarupplevelse.",
+        "Analysera användarbeteende och webbplatstrafik för att optimera innehållet.",
+        "Ge personliga rekommendationer och annonser."
+      ]
+    },
+    "managingCookies": {
+      "title": "Hantera cookies",
+      "description": "Du har rätt att hantera eller inaktivera cookies enligt dina preferenser. De flesta webbläsare tillåter dig att kontrollera cookies via deras inställningar. Att inaktivera vissa cookies kan dock påverka webbplatsens funktionalitet.",
+      "learnMore": "Läs mer om att hantera cookies i hjälpsektionen i din webbläsare:",
+      "browsers": {
+        "chrome": "Google Chrome",
+        "firefox": "Mozilla Firefox",
+        "safari": "Safari",
+        "edge": "Microsoft Edge"
+      }
+    },
+    "changesToPolicy": {
+      "title": "Ändringar i denna policy",
+      "description": "Vi kan uppdatera denna cookiepolicy från tid till annan för att återspegla ändringar i våra metoder eller av andra operativa, juridiska eller regulatoriska skäl. Läs igenom denna policy regelbundet för att hålla dig informerad om vår användning av cookies."
+    },
+    "contactUs": {
+      "title": "Kontakta oss",
+      "description": "Om du har några frågor eller funderingar om denna cookiepolicy, vänligen kontakta oss:",
+      "email": "E-post: support@sipeai.com",
+      "phone": "Telefon: +358 123 456 789"
+    }
+  },
+  "terms_modal": {
+    "title": "Användarvillkor",
+    "welcome": "Välkommen till {companyName}! Dessa användarvillkor beskriver reglerna och föreskrifterna för användning av vår webbplats.",
+    "definitions_title": "1. Definitioner",
+    "definitions_content": "“Företaget” avser {companyName}, dess anställda, agenter och dotterbolag. “Användare” avser alla personer som använder vår webbplats eller våra tjänster.",
+    "services_title": "2. Användning av våra tjänster",
+    "services_content": {
+      "item1": "Användare måste vara minst 18 år gamla eller ha förälders samtycke för att använda våra tjänster.",
+      "item2": "Användare godkänner att inte använda webbplatsen på ett sätt som kan skada eller försämra dess funktionalitet.",
+      "item3": "Användare godkänner att inte använda våra tjänster för olagliga aktiviteter."
+    },
+    "intellectual_property_title": "3. Immateriella rättigheter",
+    "intellectual_property_content": "Allt innehåll på denna webbplats, inklusive text, bilder och programvara, ägs av {companyName} eller dess licensgivare. Användare är förbjudna att reproducera eller distribuera innehåll utan skriftligt tillstånd i förväg.",
+    "privacy_policy_title": "4. Sekretesspolicy",
+    "privacy_policy_content": "Vi är engagerade i att skydda din integritet. Läs vår sekretesspolicy.",
+    "limitation_liability_title": "5. Ansvarsbegränsning",
+    "limitation_liability_content": "{companyName} är inte ansvarigt för direkta, indirekta eller följdskador som uppstår vid användning av vår webbplats.",
+    "governing_law_title": "6. Tillämplig lag",
+    "governing_law_content": "Dessa användarvillkor styrs av och tolkas i enlighet med lagarna i {countryName}.",
+    "changes_terms_title": "7. Ändringar av villkoren",
+    "changes_terms_content": "Vi kan uppdatera dessa villkor från tid till annan. Användare uppmanas att granska dem regelbundet.",
+    "close_button": "Stäng"
+  },
+  "privacyPolicy": {
+    "title": "Integritetspolicy",
+    "lastUpdated": "Senast uppdaterad",
+    "description": "På <strong>{companyName}</strong> är vi engagerade i att skydda din integritet och säkerställa säkerheten för dina personuppgifter. Denna policy förklarar hur vi samlar in, använder och skyddar din information när du använder våra tjänster.",
+    "sections": {
+      "informationWeCollect": {
+        "title": "1. Information vi samlar in",
+        "content": "Vi kan samla in följande typer av information:",
+        "list": [
+          "Personuppgifter: Information du tillhandahåller när du skapar ett konto eller kontaktar oss, såsom ditt namn, din e-postadress och ditt telefonnummer.",
+          "Användningsdata: Data om hur du använder vår webbplats och våra tjänster, inklusive IP-adress, webbläsartyp och interaktioner.",
+          "Maskininlärningsinsikter: Information som genereras av våra AI-modeller baserat på dina inmatningar, begränsad till offentligt tillgänglig information."
+        ]
+      },
+      "howWeUseYourInformation": {
+        "title": "2. Hur vi använder din information",
+        "list": [
+          "För att tillhandahålla, förbättra och anpassa våra AI-tjänster.",
+          "För att kommunicera uppdateringar, nya funktioner eller supportrelaterade frågor.",
+          "För att säkerställa säkerhet och upptäcka bedräglig eller obehörig aktivitet."
+        ]
+      },
+      "dataSecurity": {
+        "title": "3. Datasäkerhet",
+        "content": "Säkerheten för dina data är vår prioritet. Vi använder industristandard för kryptering och säkra lagringslösningar för att skydda din information från obehörig åtkomst, ändring eller avslöjande.",
+        "note": "Observera dock att ingen onlineplattform kan garantera 100 % säkerhet. Vi strävar ständigt efter att förbättra våra säkerhetsrutiner."
+      },
+      "useOfAI": {
+        "title": "4. Användning av AI och maskininlärning",
+        "content": "Våra tjänster förlitar sig på AI och maskininlärningsmodeller för att tillhandahålla information och insikter. Även om vi strävar efter noggrannhet kan {companyName} inte garantera att alla AI-genererade svar är felfria eller korrekta."
+      },
+      "sharingInformation": {
+        "title": "5. Delning av information",
+        "content": "Vi säljer, hyr ut eller byter inte din personliga information till tredje part. Däremot kan vi dela data med betrodda partners för att tillhandahålla eller förbättra våra tjänster, med strikt efterlevnad av sekretessavtal."
+      },
+      "yourRights": {
+        "title": "6. Dina rättigheter",
+        "content": "Du har rätt att när som helst få tillgång till, ändra eller ta bort din personliga information. Om du har några bekymmer över hur vi hanterar dina data, vänligen kontakta oss på privacy@{companyWebsite}."
+      },
+      "changesToPolicy": {
+        "title": "7. Ändringar i denna policy",
+        "content": "Vi kan uppdatera denna integritetspolicy regelbundet för att återspegla ändringar i våra metoder eller regelverk. Användare uppmuntras att granska denna policy regelbundet."
+      },
+      "contactUs": {
+        "title": "8. Kontakta oss",
+        "content": "Om du har några frågor eller funderingar angående vår integritetspolicy, kontakta oss gärna på privacy@{companyWebsite}."
+      }
+    }
+  }
+}
