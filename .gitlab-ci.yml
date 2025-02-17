@@ -5,7 +5,7 @@ variables:
   DOCKER_TAG: latest
   GCP_VM_IP: 34.88.134.163
   SSH_USER: sipeai9
-  DEPLOY_DIR: /home/sipeai9/sipe-frontend
+  DEPLOY_DIR: /home/sipeai9/sipe-frontend/
 
 stages:
   - deploy
