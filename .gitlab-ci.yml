@@ -1,21 +1,15 @@
 image: google/cloud-sdk:latest
 
 variables:
-  PROJECT_ID: "prismatic-rock-451120-d9"
-  GCP_REGION: "europe-north1-b"
-  GCP_WORKLOAD_IDENTITY_PROVIDER: "principal://iam.googleapis.com/projects/637578382119/locations/global/workloadIdentityPools/gitlab-pool/subject/SUBJECT_ATTRIBUTE_VALUE"
-  GCP_SERVICE_ACCOUNT: "prismatic-rock-451120-d9.iam.gserviceaccount.com"
+  GOOGLE_PROJECT_ID: "prismatic-rock-451120-d9"
 
 stages:
-  - deploy
+  - setup
 
-before_script:
-  - gcloud auth login --brief --impersonate-service-account=$GCP_SERVICE_ACCOUNT
-
-deploy:
-  stage: deploy
+setup_grit:
+  stage: setup
   script:
-    - gcloud auth configure-docker
-    - gcloud compute ssh $SSH_USER@$GCP_VM_IP --command="cd $DEPLOY_DIR && docker-compose pull && docker-compose up -d"
+    - chmod +x grit-setup.sh
+    - ./grit-setup.sh --debug
   only:
     - main
