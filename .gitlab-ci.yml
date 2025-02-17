@@ -1,4 +1,4 @@
-image: alpine/ssh:latest
+image: kroniak/alpine-ssh-client:latest
 variables:
   DOCKER_IMAGE: sipeai/sipeai
   DOCKER_TAG: latest
