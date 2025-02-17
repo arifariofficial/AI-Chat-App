@@ -1,4 +1,4 @@
-image: alpine:latest
+image: ubuntu:latest # Change to Ubuntu for full SSH support
 
 variables:
   DOCKER_IMAGE: sipeai/sipeai
@@ -11,7 +11,7 @@ stages:
   - deploy
 
 before_script:
-  - apk update && apk add --no-cache openssh-client
+  - apt-get update && apt-get install -y openssh-client
 
 deploy:
   stage: deploy
