@@ -17,7 +17,7 @@ pipeline {
         stage('Deploy Docker Image') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'fc5b7186-e4b3-484d-afd4-be43b7ddecae', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: 'gitlab', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                         sh '''
                             set -e
                             cd ${PROJECT_PATH}
