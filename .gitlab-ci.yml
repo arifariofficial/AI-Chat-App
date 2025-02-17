@@ -1,5 +1,14 @@
-deploy-prod:
+deploy:
   stage: deploy
+  image: alpine
+  before_script:
+    - apk add --no-cache openssh # Install SSH client
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H sipe.ai >> ~/.ssh/known_hosts # Avoid manual SSH prompt
   script:
-    - npm run docker:push
+    - ssh -o StrictHostKeyChecking=no sipeai9@sipe.ai "echo 'SSH Connection Successful'"
   environment: production
+  only:
+    - main
