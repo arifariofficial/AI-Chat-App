@@ -1,4 +1,5 @@
-image: kroniak/alpine-ssh-client:latest
+image: alpine:latest
+
 variables:
   DOCKER_IMAGE: sipeai/sipeai
   DOCKER_TAG: latest
@@ -10,14 +11,15 @@ stages:
   - deploy
 
 before_script:
-  - mkdir -p ~/.ssh
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-  - chmod 600 ~/.ssh/id_rsa
-  - ssh-keyscan -H $GCP_VM_IP >> ~/.ssh/known_hosts
+  - apk update && apk add --no-cache openssh-client bash
 
 deploy:
   stage: deploy
   script:
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H $GCP_VM_IP >> ~/.ssh/known_hosts
     - |
       ssh -o StrictHostKeyChecking=no $SSH_USER@$GCP_VM_IP << 'EOF'
       cd $DEPLOY_DIR
