@@ -1,15 +1,8 @@
-image: google/cloud-sdk:latest
-
-variables:
-  GOOGLE_PROJECT_ID: "prismatic-rock-451120-d9"
-
-stages:
-  - setup
-
-setup_grit:
-  stage: setup
+test_auth:
+  stage: test
   script:
-    - chmod +x grit-setup.sh
-    - ./grit-setup.sh --debug
+    - echo "Testing Google Cloud IAM Authentication..."
+    - gcloud auth list
+    - gcloud projects list
   only:
     - main
