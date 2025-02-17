@@ -1,8 +1,5 @@
-test_auth:
-  stage: test
+deploy-prod:
+  stage: deploy
   script:
-    - echo "Testing Google Cloud IAM Authentication..."
-    - gcloud auth list
-    - gcloud projects list
-  only:
-    - main
+    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+  environment: production
