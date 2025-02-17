@@ -1,43 +1,21 @@
+image: google/cloud-sdk:latest
+
+variables:
+  PROJECT_ID: "prismatic-rock-451120-d9"
+  GCP_REGION: "europe-north1-b"
+  GCP_WORKLOAD_IDENTITY_PROVIDER: "principal://iam.googleapis.com/projects/637578382119/locations/global/workloadIdentityPools/gitlab-pool/subject/SUBJECT_ATTRIBUTE_VALUE"
+  GCP_SERVICE_ACCOUNT: "gitlab-ci@your-gcp-project-id.iam.gserviceaccount.com"
+
 stages:
-  - build
-  - test
   - deploy
 
-default:
-  image: alpine
+before_script:
+  - gcloud auth login --brief --impersonate-service-account=$GCP_SERVICE_ACCOUNT
 
-build_a:
-  stage: build
-  script:
-    - echo "This job builds something."
-
-build_b:
-  stage: build
-  script:
-    - echo "This job builds something else."
-
-test_a:
-  stage: test
-  script:
-    - echo "This job tests something. It will only run when all jobs in the"
-    - echo "build stage are complete."
-
-test_b:
-  stage: test
-  script:
-    - echo "This job tests something else. It will only run when all jobs in the"
-    - echo "build stage are complete too. It will start at about the same time as test_a."
-
-deploy_a:
+deploy:
   stage: deploy
   script:
-    - echo "This job deploys something. It will only run when all jobs in the"
-    - echo "test stage complete."
-  environment: production
-
-deploy_b:
-  stage: deploy
-  script:
-    - echo "This job deploys something else. It will only run when all jobs in the"
-    - echo "test stage complete. It will start at about the same time as deploy_a."
-  environment: production
+    - gcloud auth configure-docker
+    - gcloud compute ssh $SSH_USER@$GCP_VM_IP --command="cd $DEPLOY_DIR && docker-compose pull && docker-compose up -d"
+  only:
+    - main
