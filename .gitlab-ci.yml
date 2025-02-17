@@ -22,10 +22,12 @@ deploy:
     - ssh-keyscan -H $GCP_VM_IP >> ~/.ssh/known_hosts
     - |
       ssh -o StrictHostKeyChecking=no $SSH_USER@$GCP_VM_IP << 'EOF'
-      cd $DEPLOY_DIR || exit 1
-      ls -lah  # Debug: List files to verify docker-compose.yml exists
+      set -e  # Exit on error
+      cd $DEPLOY_DIR || { echo "Error: Directory $DEPLOY_DIR does not exist"; exit 1; }
+      echo "Current directory: $(pwd)"
+      ls -lah  # Debugging: List files in the directory
       if [ ! -f "docker-compose.yml" ]; then
-        echo "Error: docker-compose.yml not found in $DEPLOY_DIR"
+        echo "Error: docker-compose.yml not found in $(pwd)"
         exit 1
       fi
       docker-compose down
