@@ -4,7 +4,7 @@ variables:
   PROJECT_ID: "prismatic-rock-451120-d9"
   GCP_REGION: "europe-north1-b"
   GCP_WORKLOAD_IDENTITY_PROVIDER: "principal://iam.googleapis.com/projects/637578382119/locations/global/workloadIdentityPools/gitlab-pool/subject/SUBJECT_ATTRIBUTE_VALUE"
-  GCP_SERVICE_ACCOUNT: "gitlab-ci@your-gcp-project-id.iam.gserviceaccount.com"
+  GCP_SERVICE_ACCOUNT: "prismatic-rock-451120-d9.iam.gserviceaccount.com"
 
 stages:
   - deploy
