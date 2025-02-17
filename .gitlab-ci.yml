@@ -8,8 +8,14 @@ deploy:
     - chmod 600 ~/.ssh/id_rsa
     - ssh-keyscan -H sipe.ai >> ~/.ssh/known_hosts # Avoid manual SSH prompt
   script:
-    - ssh -o StrictHostKeyChecking=no sipeai9@sipe.ai "echo 'SSH Connection Successful'"
-    - cd /home/sipeai9/sipe-frontend "echo pwd"
+    - ssh -o StrictHostKeyChecking=no sipeai9@sipe.ai "
+      echo 'SSH Connection Successful'
+      cd /home/sipeai9/sipe-frontend &&
+      git pull origin main &&
+      docker-compose down &&
+      docker-compose pull frontend
+      docker-compose up -d
+      "
   environment: production
   only:
     - main
