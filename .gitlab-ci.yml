@@ -10,7 +10,7 @@ deploy:
   script:
     - ssh -o StrictHostKeyChecking=no sipeai9@sipe.ai "
       echo 'SSH Connection Successful' &&
-      echo pwd &&
+      pwd &&
       git status &&
       cd /home/sipeai9/sipe-frontend &&
       git pull origin main &&
