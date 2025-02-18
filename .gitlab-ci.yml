@@ -9,7 +9,9 @@ deploy:
     - ssh-keyscan -H sipe.ai >> ~/.ssh/known_hosts # Avoid manual SSH prompt
   script:
     - ssh -o StrictHostKeyChecking=no sipeai9@sipe.ai "
-      echo 'SSH Connection Successful'
+      echo 'SSH Connection Successful' &&
+      echo pwd &&
+      git status &&
       cd /home/sipeai9/sipe-frontend &&
       git pull origin main &&
       docker-compose down &&
