@@ -11,8 +11,6 @@ deploy:
     - ssh -o StrictHostKeyChecking=no sipeai9@sipe.ai "
       echo 'SSH Connection Successful' &&
       cd /home/sipeai9/sipe-frontend &&
-      pwd &&
-      git status &&
       git pull origin main &&
       docker-compose down &&
       docker-compose pull frontend &&
