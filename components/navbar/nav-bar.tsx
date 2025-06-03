@@ -34,12 +34,13 @@ const NavBar: React.FC<NavBarProps> = ({
   const pathname = usePathname();
 
   // Define paths to hide the navbar
-  // Define paths to hide the navbar
   const hiddenPaths = [
     `/${lang}/chat`,
     `/${lang}/keskustelu`,
     `/${lang}/chatt`,
     `/${lang}/new`,
+    `/${lang}/uusi`,
+    `/${lang}/ny`,
   ];
   if (hiddenPaths.some((path) => pathname?.startsWith(path))) {
     return null;
@@ -49,8 +50,8 @@ const NavBar: React.FC<NavBarProps> = ({
     <nav
       className={cn(
         roboto.className,
-        "sticky top-0 z-50 rounded-b-md border-b", 
-        "dark:bg-primary dark:bg-none", 
+        "sticky top-0 z-50 rounded-b-md border-b",
+        "dark:bg-primary dark:bg-none",
         "bg-gradient-to-r from-[#0056b3] to-[#00aaff]",
       )}
     >
