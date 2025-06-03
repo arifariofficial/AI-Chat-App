@@ -16,7 +16,7 @@ This project is an AI-powered chatbot built using Next.js, TypeScript, PostgreSQ
 
 ### Prerequisites
 
-- **Node.js** (version 14 or higher)
+- **Node.js** (version 20 or higher)
 - **Docker** (for containerization)
 - **PostgreSQL** (local or remote database setup)
 - **Supabase account** (for vector-db setup)
@@ -79,21 +79,21 @@ This project supports multilingual content using the Next.js App Router with loc
 
 ---
 
-### 📁 Directory Structure Overview
+## 📁 Directory Structure
 
+```txt
 app/
-├── [lang]/ # Localized page directories (e.g., /fi/, /en/, /sv/)
-│ ├── about-us/ # Example route
-│ ├── chat/ # Chat interface
-│ ├── contact/ # Contact form
-│ ├── ... # More localized routes
-│ └── page.tsx # Main localized homepage
-├── api/ # API endpoints
-├── layout.tsx # Global layout (theme, auth, navbar, localization)
+├── [lang]/               # Localized page directories (e.g., /fi/, /en/, /sv/)
+│   ├── about-us/         # Example route
+│   ├── chat/             # Chat interface
+│   ├── contact/          # Contact form
+│   ├── ...               # More localized routes
+│   └── page.tsx          # Main localized homepage
+├── api/                  # API endpoints
+├── layout.tsx            # Global layout (theme, auth, navbar, localization)
 ├── favicon.ico
-├── global-error.tsx # Error boundary
-
----
+├── global-error.tsx      # Error boundary
+```
 
 ### 🏡 Homepage Rendering (`[lang]/page.tsx`)
 
@@ -154,8 +154,9 @@ export type Locale = (typeof i18n)["locales"][number];
 
 All localized text content is loaded using the language parameter (`lang`):
 
-````ts
+```ts
 const dictionary = await getDictionary(lang);
+```
 
 ### 🧱 Global Layout (`layout.tsx`)
 
@@ -168,7 +169,7 @@ The global layout is responsible for setting up the overall application shell. I
 - 🍪 Displaying cookie consent
 - 🌍 Wrapping all content with the correct localization
 
-#### Layout Structure:
+### Layout Structure:
 
 ```tsx
 <html lang={lang}>
@@ -186,7 +187,7 @@ The global layout is responsible for setting up the overall application shell. I
     </Providers>
   </body>
 </html>
-````
+```
 
 ### 🧾 Metadata Generation
 
